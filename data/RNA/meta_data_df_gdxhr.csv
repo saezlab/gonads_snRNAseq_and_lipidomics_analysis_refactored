@@ -1,0 +1,191 @@
+sample,sample_name,cell_type,group
+csb177_1_Hepatocytes_m_s_v,csb177_1,Hepatocytes,m-s-v
+csb177_1_Endothelial cells_m_s_v,csb177_1,Endothelial cells,m-s-v
+csb177_1_Immune cells_m_s_v,csb177_1,Immune cells,m-s-v
+csb177_1_Stellate cells_m_s_v,csb177_1,Stellate cells,m-s-v
+csb177_1_Cholangiocytes_m_s_v,csb177_1,Cholangiocytes,m-s-v
+csb177_10_Hepatocytes_f_g_t,csb177_10,Hepatocytes,f-g-t
+csb177_10_Endothelial cells_f_g_t,csb177_10,Endothelial cells,f-g-t
+csb177_10_Immune cells_f_g_t,csb177_10,Immune cells,f-g-t
+csb177_10_Stellate cells_f_g_t,csb177_10,Stellate cells,f-g-t
+csb177_10_Cholangiocytes_f_g_t,csb177_10,Cholangiocytes,f-g-t
+csb177_11_Hepatocytes_f_s_v,csb177_11,Hepatocytes,f-s-v
+csb177_11_Endothelial cells_f_s_v,csb177_11,Endothelial cells,f-s-v
+csb177_11_Immune cells_f_s_v,csb177_11,Immune cells,f-s-v
+csb177_11_Stellate cells_f_s_v,csb177_11,Stellate cells,f-s-v
+csb177_11_Cholangiocytes_f_s_v,csb177_11,Cholangiocytes,f-s-v
+csb177_12_Hepatocytes_f_g_e,csb177_12,Hepatocytes,f-g-e
+csb177_12_Endothelial cells_f_g_e,csb177_12,Endothelial cells,f-g-e
+csb177_12_Immune cells_f_g_e,csb177_12,Immune cells,f-g-e
+csb177_12_Stellate cells_f_g_e,csb177_12,Stellate cells,f-g-e
+csb177_12_Cholangiocytes_f_g_e,csb177_12,Cholangiocytes,f-g-e
+csb177_13_Hepatocytes_m_g_v,csb177_13,Hepatocytes,m-g-v
+csb177_13_Endothelial cells_m_g_v,csb177_13,Endothelial cells,m-g-v
+csb177_13_Immune cells_m_g_v,csb177_13,Immune cells,m-g-v
+csb177_13_Stellate cells_m_g_v,csb177_13,Stellate cells,m-g-v
+csb177_13_Cholangiocytes_m_g_v,csb177_13,Cholangiocytes,m-g-v
+csb177_14_Hepatocytes_f_g_v,csb177_14,Hepatocytes,f-g-v
+csb177_14_Endothelial cells_f_g_v,csb177_14,Endothelial cells,f-g-v
+csb177_14_Immune cells_f_g_v,csb177_14,Immune cells,f-g-v
+csb177_14_Stellate cells_f_g_v,csb177_14,Stellate cells,f-g-v
+csb177_14_Cholangiocytes_f_g_v,csb177_14,Cholangiocytes,f-g-v
+csb177_15_Hepatocytes_m_g_t,csb177_15,Hepatocytes,m-g-t
+csb177_15_Endothelial cells_m_g_t,csb177_15,Endothelial cells,m-g-t
+csb177_15_Immune cells_m_g_t,csb177_15,Immune cells,m-g-t
+csb177_15_Stellate cells_m_g_t,csb177_15,Stellate cells,m-g-t
+csb177_15_Cholangiocytes_m_g_t,csb177_15,Cholangiocytes,m-g-t
+csb177_16_Hepatocytes_f_g_t,csb177_16,Hepatocytes,f-g-t
+csb177_16_Endothelial cells_f_g_t,csb177_16,Endothelial cells,f-g-t
+csb177_16_Immune cells_f_g_t,csb177_16,Immune cells,f-g-t
+csb177_16_Stellate cells_f_g_t,csb177_16,Stellate cells,f-g-t
+csb177_16_Cholangiocytes_f_g_t,csb177_16,Cholangiocytes,f-g-t
+csb177_17_Hepatocytes_m_g_e,csb177_17,Hepatocytes,m-g-e
+csb177_17_Endothelial cells_m_g_e,csb177_17,Endothelial cells,m-g-e
+csb177_17_Immune cells_m_g_e,csb177_17,Immune cells,m-g-e
+csb177_17_Stellate cells_m_g_e,csb177_17,Stellate cells,m-g-e
+csb177_17_Cholangiocytes_m_g_e,csb177_17,Cholangiocytes,m-g-e
+csb177_18_Hepatocytes_f_g_e,csb177_18,Hepatocytes,f-g-e
+csb177_18_Endothelial cells_f_g_e,csb177_18,Endothelial cells,f-g-e
+csb177_18_Immune cells_f_g_e,csb177_18,Immune cells,f-g-e
+csb177_18_Stellate cells_f_g_e,csb177_18,Stellate cells,f-g-e
+csb177_18_Cholangiocytes_f_g_e,csb177_18,Cholangiocytes,f-g-e
+csb177_2_Hepatocytes_f_g_v,csb177_2,Hepatocytes,f-g-v
+csb177_2_Endothelial cells_f_g_v,csb177_2,Endothelial cells,f-g-v
+csb177_2_Immune cells_f_g_v,csb177_2,Immune cells,f-g-v
+csb177_2_Stellate cells_f_g_v,csb177_2,Stellate cells,f-g-v
+csb177_2_Cholangiocytes_f_g_v,csb177_2,Cholangiocytes,f-g-v
+csb177_20_Hepatocytes_f_s_v,csb177_20,Hepatocytes,f-s-v
+csb177_20_Endothelial cells_f_s_v,csb177_20,Endothelial cells,f-s-v
+csb177_20_Immune cells_f_s_v,csb177_20,Immune cells,f-s-v
+csb177_20_Stellate cells_f_s_v,csb177_20,Stellate cells,f-s-v
+csb177_20_Cholangiocytes_f_s_v,csb177_20,Cholangiocytes,f-s-v
+csb177_21_Hepatocytes_m_g_t,csb177_21,Hepatocytes,m-g-t
+csb177_21_Endothelial cells_m_g_t,csb177_21,Endothelial cells,m-g-t
+csb177_21_Immune cells_m_g_t,csb177_21,Immune cells,m-g-t
+csb177_21_Stellate cells_m_g_t,csb177_21,Stellate cells,m-g-t
+csb177_21_Cholangiocytes_m_g_t,csb177_21,Cholangiocytes,m-g-t
+csb177_22_Hepatocytes_f_g_e,csb177_22,Hepatocytes,f-g-e
+csb177_22_Endothelial cells_f_g_e,csb177_22,Endothelial cells,f-g-e
+csb177_22_Immune cells_f_g_e,csb177_22,Immune cells,f-g-e
+csb177_22_Stellate cells_f_g_e,csb177_22,Stellate cells,f-g-e
+csb177_22_Cholangiocytes_f_g_e,csb177_22,Cholangiocytes,f-g-e
+csb177_23_Hepatocytes_m_s_v,csb177_23,Hepatocytes,m-s-v
+csb177_23_Endothelial cells_m_s_v,csb177_23,Endothelial cells,m-s-v
+csb177_23_Immune cells_m_s_v,csb177_23,Immune cells,m-s-v
+csb177_23_Stellate cells_m_s_v,csb177_23,Stellate cells,m-s-v
+csb177_23_Cholangiocytes_m_s_v,csb177_23,Cholangiocytes,m-s-v
+csb177_24_Hepatocytes_f_s_v,csb177_24,Hepatocytes,f-s-v
+csb177_24_Endothelial cells_f_s_v,csb177_24,Endothelial cells,f-s-v
+csb177_24_Immune cells_f_s_v,csb177_24,Immune cells,f-s-v
+csb177_24_Stellate cells_f_s_v,csb177_24,Stellate cells,f-s-v
+csb177_24_Cholangiocytes_f_s_v,csb177_24,Cholangiocytes,f-s-v
+csb177_25_Hepatocytes_f_g_e,csb177_25,Hepatocytes,f-g-e
+csb177_25_Endothelial cells_f_g_e,csb177_25,Endothelial cells,f-g-e
+csb177_25_Immune cells_f_g_e,csb177_25,Immune cells,f-g-e
+csb177_25_Stellate cells_f_g_e,csb177_25,Stellate cells,f-g-e
+csb177_25_Cholangiocytes_f_g_e,csb177_25,Cholangiocytes,f-g-e
+csb177_27_Hepatocytes_m_g_v,csb177_27,Hepatocytes,m-g-v
+csb177_27_Endothelial cells_m_g_v,csb177_27,Endothelial cells,m-g-v
+csb177_27_Immune cells_m_g_v,csb177_27,Immune cells,m-g-v
+csb177_27_Stellate cells_m_g_v,csb177_27,Stellate cells,m-g-v
+csb177_27_Cholangiocytes_m_g_v,csb177_27,Cholangiocytes,m-g-v
+csb177_28_Hepatocytes_f_g_v,csb177_28,Hepatocytes,f-g-v
+csb177_28_Endothelial cells_f_g_v,csb177_28,Endothelial cells,f-g-v
+csb177_28_Immune cells_f_g_v,csb177_28,Immune cells,f-g-v
+csb177_28_Stellate cells_f_g_v,csb177_28,Stellate cells,f-g-v
+csb177_28_Cholangiocytes_f_g_v,csb177_28,Cholangiocytes,f-g-v
+csb177_3_Hepatocytes_m_g_t,csb177_3,Hepatocytes,m-g-t
+csb177_3_Endothelial cells_m_g_t,csb177_3,Endothelial cells,m-g-t
+csb177_3_Immune cells_m_g_t,csb177_3,Immune cells,m-g-t
+csb177_3_Stellate cells_m_g_t,csb177_3,Stellate cells,m-g-t
+csb177_3_Cholangiocytes_m_g_t,csb177_3,Cholangiocytes,m-g-t
+csb177_30_Hepatocytes_f_g_t,csb177_30,Hepatocytes,f-g-t
+csb177_30_Endothelial cells_f_g_t,csb177_30,Endothelial cells,f-g-t
+csb177_30_Immune cells_f_g_t,csb177_30,Immune cells,f-g-t
+csb177_30_Stellate cells_f_g_t,csb177_30,Stellate cells,f-g-t
+csb177_30_Cholangiocytes_f_g_t,csb177_30,Cholangiocytes,f-g-t
+csb177_32_Hepatocytes_f_g_e,csb177_32,Hepatocytes,f-g-e
+csb177_32_Endothelial cells_f_g_e,csb177_32,Endothelial cells,f-g-e
+csb177_32_Immune cells_f_g_e,csb177_32,Immune cells,f-g-e
+csb177_32_Stellate cells_f_g_e,csb177_32,Stellate cells,f-g-e
+csb177_32_Cholangiocytes_f_g_e,csb177_32,Cholangiocytes,f-g-e
+csb177_33_Hepatocytes_m_s_v,csb177_33,Hepatocytes,m-s-v
+csb177_33_Endothelial cells_m_s_v,csb177_33,Endothelial cells,m-s-v
+csb177_33_Immune cells_m_s_v,csb177_33,Immune cells,m-s-v
+csb177_33_Stellate cells_m_s_v,csb177_33,Stellate cells,m-s-v
+csb177_33_Cholangiocytes_m_s_v,csb177_33,Cholangiocytes,m-s-v
+csb177_34_Hepatocytes_f_s_v,csb177_34,Hepatocytes,f-s-v
+csb177_34_Endothelial cells_f_s_v,csb177_34,Endothelial cells,f-s-v
+csb177_34_Immune cells_f_s_v,csb177_34,Immune cells,f-s-v
+csb177_34_Stellate cells_f_s_v,csb177_34,Stellate cells,f-s-v
+csb177_34_Cholangiocytes_f_s_v,csb177_34,Cholangiocytes,f-s-v
+csb177_36_Hepatocytes_f_g_v,csb177_36,Hepatocytes,f-g-v
+csb177_36_Endothelial cells_f_g_v,csb177_36,Endothelial cells,f-g-v
+csb177_36_Immune cells_f_g_v,csb177_36,Immune cells,f-g-v
+csb177_36_Stellate cells_f_g_v,csb177_36,Stellate cells,f-g-v
+csb177_36_Cholangiocytes_f_g_v,csb177_36,Cholangiocytes,f-g-v
+csb177_38_Hepatocytes_f_g_t,csb177_38,Hepatocytes,f-g-t
+csb177_38_Endothelial cells_f_g_t,csb177_38,Endothelial cells,f-g-t
+csb177_38_Immune cells_f_g_t,csb177_38,Immune cells,f-g-t
+csb177_38_Stellate cells_f_g_t,csb177_38,Stellate cells,f-g-t
+csb177_38_Cholangiocytes_f_g_t,csb177_38,Cholangiocytes,f-g-t
+csb177_39_Hepatocytes_m_g_e,csb177_39,Hepatocytes,m-g-e
+csb177_39_Endothelial cells_m_g_e,csb177_39,Endothelial cells,m-g-e
+csb177_39_Immune cells_m_g_e,csb177_39,Immune cells,m-g-e
+csb177_39_Stellate cells_m_g_e,csb177_39,Stellate cells,m-g-e
+csb177_39_Cholangiocytes_m_g_e,csb177_39,Cholangiocytes,m-g-e
+csb177_4_Hepatocytes_f_g_t,csb177_4,Hepatocytes,f-g-t
+csb177_4_Endothelial cells_f_g_t,csb177_4,Endothelial cells,f-g-t
+csb177_4_Immune cells_f_g_t,csb177_4,Immune cells,f-g-t
+csb177_4_Stellate cells_f_g_t,csb177_4,Stellate cells,f-g-t
+csb177_4_Cholangiocytes_f_g_t,csb177_4,Cholangiocytes,f-g-t
+csb177_40_Hepatocytes_f_g_e,csb177_40,Hepatocytes,f-g-e
+csb177_40_Endothelial cells_f_g_e,csb177_40,Endothelial cells,f-g-e
+csb177_40_Immune cells_f_g_e,csb177_40,Immune cells,f-g-e
+csb177_40_Stellate cells_f_g_e,csb177_40,Stellate cells,f-g-e
+csb177_40_Cholangiocytes_f_g_e,csb177_40,Cholangiocytes,f-g-e
+csb177_41_Hepatocytes_m_s_v,csb177_41,Hepatocytes,m-s-v
+csb177_41_Endothelial cells_m_s_v,csb177_41,Endothelial cells,m-s-v
+csb177_41_Immune cells_m_s_v,csb177_41,Immune cells,m-s-v
+csb177_41_Stellate cells_m_s_v,csb177_41,Stellate cells,m-s-v
+csb177_41_Cholangiocytes_m_s_v,csb177_41,Cholangiocytes,m-s-v
+csb177_42_Hepatocytes_f_s_v,csb177_42,Hepatocytes,f-s-v
+csb177_42_Endothelial cells_f_s_v,csb177_42,Endothelial cells,f-s-v
+csb177_42_Immune cells_f_s_v,csb177_42,Immune cells,f-s-v
+csb177_42_Stellate cells_f_s_v,csb177_42,Stellate cells,f-s-v
+csb177_42_Cholangiocytes_f_s_v,csb177_42,Cholangiocytes,f-s-v
+csb177_43_Hepatocytes_f_g_v,csb177_43,Hepatocytes,f-g-v
+csb177_43_Endothelial cells_f_g_v,csb177_43,Endothelial cells,f-g-v
+csb177_43_Immune cells_f_g_v,csb177_43,Immune cells,f-g-v
+csb177_43_Stellate cells_f_g_v,csb177_43,Stellate cells,f-g-v
+csb177_43_Cholangiocytes_f_g_v,csb177_43,Cholangiocytes,f-g-v
+csb177_44_Hepatocytes_f_g_t,csb177_44,Hepatocytes,f-g-t
+csb177_44_Endothelial cells_f_g_t,csb177_44,Endothelial cells,f-g-t
+csb177_44_Immune cells_f_g_t,csb177_44,Immune cells,f-g-t
+csb177_44_Stellate cells_f_g_t,csb177_44,Stellate cells,f-g-t
+csb177_44_Cholangiocytes_f_g_t,csb177_44,Cholangiocytes,f-g-t
+csb177_5_Hepatocytes_m_g_e,csb177_5,Hepatocytes,m-g-e
+csb177_5_Endothelial cells_m_g_e,csb177_5,Endothelial cells,m-g-e
+csb177_5_Immune cells_m_g_e,csb177_5,Immune cells,m-g-e
+csb177_5_Stellate cells_m_g_e,csb177_5,Stellate cells,m-g-e
+csb177_5_Cholangiocytes_m_g_e,csb177_5,Cholangiocytes,m-g-e
+csb177_6_Hepatocytes_m_g_v,csb177_6,Hepatocytes,m-g-v
+csb177_6_Endothelial cells_m_g_v,csb177_6,Endothelial cells,m-g-v
+csb177_6_Immune cells_m_g_v,csb177_6,Immune cells,m-g-v
+csb177_6_Stellate cells_m_g_v,csb177_6,Stellate cells,m-g-v
+csb177_6_Cholangiocytes_m_g_v,csb177_6,Cholangiocytes,m-g-v
+csb177_7_Hepatocytes_f_s_v,csb177_7,Hepatocytes,f-s-v
+csb177_7_Endothelial cells_f_s_v,csb177_7,Endothelial cells,f-s-v
+csb177_7_Immune cells_f_s_v,csb177_7,Immune cells,f-s-v
+csb177_7_Stellate cells_f_s_v,csb177_7,Stellate cells,f-s-v
+csb177_7_Cholangiocytes_f_s_v,csb177_7,Cholangiocytes,f-s-v
+csb177_8_Hepatocytes_m_g_v,csb177_8,Hepatocytes,m-g-v
+csb177_8_Endothelial cells_m_g_v,csb177_8,Endothelial cells,m-g-v
+csb177_8_Immune cells_m_g_v,csb177_8,Immune cells,m-g-v
+csb177_8_Stellate cells_m_g_v,csb177_8,Stellate cells,m-g-v
+csb177_8_Cholangiocytes_m_g_v,csb177_8,Cholangiocytes,m-g-v
+csb177_9_Hepatocytes_m_g_t,csb177_9,Hepatocytes,m-g-t
+csb177_9_Endothelial cells_m_g_t,csb177_9,Endothelial cells,m-g-t
+csb177_9_Immune cells_m_g_t,csb177_9,Immune cells,m-g-t
+csb177_9_Stellate cells_m_g_t,csb177_9,Stellate cells,m-g-t
+csb177_9_Cholangiocytes_m_g_t,csb177_9,Cholangiocytes,m-g-t

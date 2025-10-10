@@ -1,0 +1,11 @@
+Source,Target
+Triacylglycerols (TAGs),Diacylglycerols (DAGs)
+Diacylglycerols (DAGs),Monoacylglycerols (MAGs)
+Monoacylglycerols (MAGs),Free Fatty Acids (FFAs) + Glycerol
+Diacylglycerols (DAGs),Triacylglycerols (TAGs)
+DAGs,Phosphatidic Acid (PA)
+Phosphatidic Acid (PA),Diacylglycerols (DAGs)
+Phosphatidic Acid (PA),Phospholipids
+Cholesterol Esters (CEs),Free Cholesterol (FC)
+Phospholipids,Lysophospholipids
+Sphingomyelin,Ceramides

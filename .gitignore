@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+omnipathr-log/**
+**.rds
+.RDataTmp
+**MOFA_RNA_data.csv
+**/rna_until_pseudobulking/**
+data/mofa/**
+Fig_panels/Fig1_umap_sample.pdf
+GSE90277/GSE90277_RAW.tar

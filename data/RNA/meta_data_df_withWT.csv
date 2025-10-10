@@ -1,0 +1,241 @@
+sample,sample_name,cell_type,group
+sx42_1_Hepatocytes_XXO,sx42_1,Hepatocytes,XXO
+sx42_1_Endothelial cells_XXO,sx42_1,Endothelial cells,XXO
+sx42_1_Immune cells_XXO,sx42_1,Immune cells,XXO
+sx42_1_Stellate cells_XXO,sx42_1,Stellate cells,XXO
+sx42_1_Cholangiocytes_XXO,sx42_1,Cholangiocytes,XXO
+sx42_10_Hepatocytes_XYT,sx42_10,Hepatocytes,XYT
+sx42_10_Endothelial cells_XYT,sx42_10,Endothelial cells,XYT
+sx42_10_Immune cells_XYT,sx42_10,Immune cells,XYT
+sx42_10_Stellate cells_XYT,sx42_10,Stellate cells,XYT
+sx42_10_Cholangiocytes_XYT,sx42_10,Cholangiocytes,XYT
+sx42_11_Hepatocytes_XXO,sx42_11,Hepatocytes,XXO
+sx42_11_Endothelial cells_XXO,sx42_11,Endothelial cells,XXO
+sx42_11_Immune cells_XXO,sx42_11,Immune cells,XXO
+sx42_11_Stellate cells_XXO,sx42_11,Stellate cells,XXO
+sx42_11_Cholangiocytes_XXO,sx42_11,Cholangiocytes,XXO
+sx42_12_Hepatocytes_XYO,sx42_12,Hepatocytes,XYO
+sx42_12_Endothelial cells_XYO,sx42_12,Endothelial cells,XYO
+sx42_12_Immune cells_XYO,sx42_12,Immune cells,XYO
+sx42_12_Stellate cells_XYO,sx42_12,Stellate cells,XYO
+sx42_12_Cholangiocytes_XYO,sx42_12,Cholangiocytes,XYO
+sx42_13_Hepatocytes_XXT,sx42_13,Hepatocytes,XXT
+sx42_13_Endothelial cells_XXT,sx42_13,Endothelial cells,XXT
+sx42_13_Immune cells_XXT,sx42_13,Immune cells,XXT
+sx42_13_Stellate cells_XXT,sx42_13,Stellate cells,XXT
+sx42_13_Cholangiocytes_XXT,sx42_13,Cholangiocytes,XXT
+sx42_14_Hepatocytes_XYT,sx42_14,Hepatocytes,XYT
+sx42_14_Endothelial cells_XYT,sx42_14,Endothelial cells,XYT
+sx42_14_Immune cells_XYT,sx42_14,Immune cells,XYT
+sx42_14_Stellate cells_XYT,sx42_14,Stellate cells,XYT
+sx42_14_Cholangiocytes_XYT,sx42_14,Cholangiocytes,XYT
+sx42_15_Hepatocytes_XYT_WT,sx42_15,Hepatocytes,XYT-WT
+sx42_15_Endothelial cells_XYT_WT,sx42_15,Endothelial cells,XYT-WT
+sx42_15_Immune cells_XYT_WT,sx42_15,Immune cells,XYT-WT
+sx42_15_Stellate cells_XYT_WT,sx42_15,Stellate cells,XYT-WT
+sx42_15_Cholangiocytes_XYT_WT,sx42_15,Cholangiocytes,XYT-WT
+sx42_16_Hepatocytes_XXO,sx42_16,Hepatocytes,XXO
+sx42_16_Endothelial cells_XXO,sx42_16,Endothelial cells,XXO
+sx42_16_Immune cells_XXO,sx42_16,Immune cells,XXO
+sx42_16_Stellate cells_XXO,sx42_16,Stellate cells,XXO
+sx42_16_Cholangiocytes_XXO,sx42_16,Cholangiocytes,XXO
+sx42_17_Hepatocytes_XXT,sx42_17,Hepatocytes,XXT
+sx42_17_Endothelial cells_XXT,sx42_17,Endothelial cells,XXT
+sx42_17_Immune cells_XXT,sx42_17,Immune cells,XXT
+sx42_17_Stellate cells_XXT,sx42_17,Stellate cells,XXT
+sx42_17_Cholangiocytes_XXT,sx42_17,Cholangiocytes,XXT
+sx42_18_Hepatocytes_XYO,sx42_18,Hepatocytes,XYO
+sx42_18_Endothelial cells_XYO,sx42_18,Endothelial cells,XYO
+sx42_18_Immune cells_XYO,sx42_18,Immune cells,XYO
+sx42_18_Stellate cells_XYO,sx42_18,Stellate cells,XYO
+sx42_18_Cholangiocytes_XYO,sx42_18,Cholangiocytes,XYO
+sx42_19_Hepatocytes_XYT,sx42_19,Hepatocytes,XYT
+sx42_19_Endothelial cells_XYT,sx42_19,Endothelial cells,XYT
+sx42_19_Immune cells_XYT,sx42_19,Immune cells,XYT
+sx42_19_Stellate cells_XYT,sx42_19,Stellate cells,XYT
+sx42_19_Cholangiocytes_XYT,sx42_19,Cholangiocytes,XYT
+sx42_2_Hepatocytes_XYO,sx42_2,Hepatocytes,XYO
+sx42_2_Endothelial cells_XYO,sx42_2,Endothelial cells,XYO
+sx42_2_Immune cells_XYO,sx42_2,Immune cells,XYO
+sx42_2_Stellate cells_XYO,sx42_2,Stellate cells,XYO
+sx42_2_Cholangiocytes_XYO,sx42_2,Cholangiocytes,XYO
+sx42_20_Hepatocytes_XYT_WT,sx42_20,Hepatocytes,XYT-WT
+sx42_20_Endothelial cells_XYT_WT,sx42_20,Endothelial cells,XYT-WT
+sx42_20_Immune cells_XYT_WT,sx42_20,Immune cells,XYT-WT
+sx42_20_Stellate cells_XYT_WT,sx42_20,Stellate cells,XYT-WT
+sx42_20_Cholangiocytes_XYT_WT,sx42_20,Cholangiocytes,XYT-WT
+sx42_21_Hepatocytes_XXO,sx42_21,Hepatocytes,XXO
+sx42_21_Endothelial cells_XXO,sx42_21,Endothelial cells,XXO
+sx42_21_Immune cells_XXO,sx42_21,Immune cells,XXO
+sx42_21_Stellate cells_XXO,sx42_21,Stellate cells,XXO
+sx42_21_Cholangiocytes_XXO,sx42_21,Cholangiocytes,XXO
+sx42_22_Hepatocytes_XYO,sx42_22,Hepatocytes,XYO
+sx42_22_Endothelial cells_XYO,sx42_22,Endothelial cells,XYO
+sx42_22_Immune cells_XYO,sx42_22,Immune cells,XYO
+sx42_22_Stellate cells_XYO,sx42_22,Stellate cells,XYO
+sx42_22_Cholangiocytes_XYO,sx42_22,Cholangiocytes,XYO
+sx42_23_Hepatocytes_XYT,sx42_23,Hepatocytes,XYT
+sx42_23_Endothelial cells_XYT,sx42_23,Endothelial cells,XYT
+sx42_23_Immune cells_XYT,sx42_23,Immune cells,XYT
+sx42_23_Stellate cells_XYT,sx42_23,Stellate cells,XYT
+sx42_23_Cholangiocytes_XYT,sx42_23,Cholangiocytes,XYT
+sx42_24_Hepatocytes_XXT,sx42_24,Hepatocytes,XXT
+sx42_24_Endothelial cells_XXT,sx42_24,Endothelial cells,XXT
+sx42_24_Immune cells_XXT,sx42_24,Immune cells,XXT
+sx42_24_Stellate cells_XXT,sx42_24,Stellate cells,XXT
+sx42_24_Cholangiocytes_XXT,sx42_24,Cholangiocytes,XXT
+sx42_25_Hepatocytes_XXO,sx42_25,Hepatocytes,XXO
+sx42_25_Endothelial cells_XXO,sx42_25,Endothelial cells,XXO
+sx42_25_Immune cells_XXO,sx42_25,Immune cells,XXO
+sx42_25_Stellate cells_XXO,sx42_25,Stellate cells,XXO
+sx42_25_Cholangiocytes_XXO,sx42_25,Cholangiocytes,XXO
+sx42_26_Hepatocytes_XYT_WT,sx42_26,Hepatocytes,XYT-WT
+sx42_26_Endothelial cells_XYT_WT,sx42_26,Endothelial cells,XYT-WT
+sx42_26_Immune cells_XYT_WT,sx42_26,Immune cells,XYT-WT
+sx42_26_Stellate cells_XYT_WT,sx42_26,Stellate cells,XYT-WT
+sx42_26_Cholangiocytes_XYT_WT,sx42_26,Cholangiocytes,XYT-WT
+sx42_27_Hepatocytes_XYO,sx42_27,Hepatocytes,XYO
+sx42_27_Endothelial cells_XYO,sx42_27,Endothelial cells,XYO
+sx42_27_Immune cells_XYO,sx42_27,Immune cells,XYO
+sx42_27_Stellate cells_XYO,sx42_27,Stellate cells,XYO
+sx42_27_Cholangiocytes_XYO,sx42_27,Cholangiocytes,XYO
+sx42_28_Hepatocytes_XXT,sx42_28,Hepatocytes,XXT
+sx42_28_Endothelial cells_XXT,sx42_28,Endothelial cells,XXT
+sx42_28_Immune cells_XXT,sx42_28,Immune cells,XXT
+sx42_28_Stellate cells_XXT,sx42_28,Stellate cells,XXT
+sx42_28_Cholangiocytes_XXT,sx42_28,Cholangiocytes,XXT
+sx42_29_Hepatocytes_XYT,sx42_29,Hepatocytes,XYT
+sx42_29_Endothelial cells_XYT,sx42_29,Endothelial cells,XYT
+sx42_29_Immune cells_XYT,sx42_29,Immune cells,XYT
+sx42_29_Stellate cells_XYT,sx42_29,Stellate cells,XYT
+sx42_29_Cholangiocytes_XYT,sx42_29,Cholangiocytes,XYT
+sx42_3_Hepatocytes_XXT,sx42_3,Hepatocytes,XXT
+sx42_3_Endothelial cells_XXT,sx42_3,Endothelial cells,XXT
+sx42_3_Immune cells_XXT,sx42_3,Immune cells,XXT
+sx42_3_Stellate cells_XXT,sx42_3,Stellate cells,XXT
+sx42_3_Cholangiocytes_XXT,sx42_3,Cholangiocytes,XXT
+sx42_30_Hepatocytes_XXO,sx42_30,Hepatocytes,XXO
+sx42_30_Endothelial cells_XXO,sx42_30,Endothelial cells,XXO
+sx42_30_Immune cells_XXO,sx42_30,Immune cells,XXO
+sx42_30_Stellate cells_XXO,sx42_30,Stellate cells,XXO
+sx42_30_Cholangiocytes_XXO,sx42_30,Cholangiocytes,XXO
+sx42_31_Hepatocytes_XYO,sx42_31,Hepatocytes,XYO
+sx42_31_Endothelial cells_XYO,sx42_31,Endothelial cells,XYO
+sx42_31_Immune cells_XYO,sx42_31,Immune cells,XYO
+sx42_31_Stellate cells_XYO,sx42_31,Stellate cells,XYO
+sx42_31_Cholangiocytes_XYO,sx42_31,Cholangiocytes,XYO
+sx42_32_Hepatocytes_XXT,sx42_32,Hepatocytes,XXT
+sx42_32_Endothelial cells_XXT,sx42_32,Endothelial cells,XXT
+sx42_32_Immune cells_XXT,sx42_32,Immune cells,XXT
+sx42_32_Stellate cells_XXT,sx42_32,Stellate cells,XXT
+sx42_32_Cholangiocytes_XXT,sx42_32,Cholangiocytes,XXT
+sx42_33_Hepatocytes_XYT,sx42_33,Hepatocytes,XYT
+sx42_33_Endothelial cells_XYT,sx42_33,Endothelial cells,XYT
+sx42_33_Immune cells_XYT,sx42_33,Immune cells,XYT
+sx42_33_Stellate cells_XYT,sx42_33,Stellate cells,XYT
+sx42_33_Cholangiocytes_XYT,sx42_33,Cholangiocytes,XYT
+sx42_34_Hepatocytes_XXO,sx42_34,Hepatocytes,XXO
+sx42_34_Endothelial cells_XXO,sx42_34,Endothelial cells,XXO
+sx42_34_Immune cells_XXO,sx42_34,Immune cells,XXO
+sx42_34_Stellate cells_XXO,sx42_34,Stellate cells,XXO
+sx42_34_Cholangiocytes_XXO,sx42_34,Cholangiocytes,XXO
+sx42_35_Hepatocytes_XYO,sx42_35,Hepatocytes,XYO
+sx42_35_Endothelial cells_XYO,sx42_35,Endothelial cells,XYO
+sx42_35_Immune cells_XYO,sx42_35,Immune cells,XYO
+sx42_35_Stellate cells_XYO,sx42_35,Stellate cells,XYO
+sx42_35_Cholangiocytes_XYO,sx42_35,Cholangiocytes,XYO
+sx42_36_Hepatocytes_XXT,sx42_36,Hepatocytes,XXT
+sx42_36_Endothelial cells_XXT,sx42_36,Endothelial cells,XXT
+sx42_36_Immune cells_XXT,sx42_36,Immune cells,XXT
+sx42_36_Stellate cells_XXT,sx42_36,Stellate cells,XXT
+sx42_36_Cholangiocytes_XXT,sx42_36,Cholangiocytes,XXT
+sx42_37_Hepatocytes_XXO,sx42_37,Hepatocytes,XXO
+sx42_37_Endothelial cells_XXO,sx42_37,Endothelial cells,XXO
+sx42_37_Immune cells_XXO,sx42_37,Immune cells,XXO
+sx42_37_Stellate cells_XXO,sx42_37,Stellate cells,XXO
+sx42_37_Cholangiocytes_XXO,sx42_37,Cholangiocytes,XXO
+sx42_38_Hepatocytes_XYT,sx42_38,Hepatocytes,XYT
+sx42_38_Endothelial cells_XYT,sx42_38,Endothelial cells,XYT
+sx42_38_Immune cells_XYT,sx42_38,Immune cells,XYT
+sx42_38_Stellate cells_XYT,sx42_38,Stellate cells,XYT
+sx42_38_Cholangiocytes_XYT,sx42_38,Cholangiocytes,XYT
+sx42_39_Hepatocytes_XYO,sx42_39,Hepatocytes,XYO
+sx42_39_Endothelial cells_XYO,sx42_39,Endothelial cells,XYO
+sx42_39_Immune cells_XYO,sx42_39,Immune cells,XYO
+sx42_39_Stellate cells_XYO,sx42_39,Stellate cells,XYO
+sx42_39_Cholangiocytes_XYO,sx42_39,Cholangiocytes,XYO
+sx42_4_Hepatocytes_XYT,sx42_4,Hepatocytes,XYT
+sx42_4_Endothelial cells_XYT,sx42_4,Endothelial cells,XYT
+sx42_4_Immune cells_XYT,sx42_4,Immune cells,XYT
+sx42_4_Stellate cells_XYT,sx42_4,Stellate cells,XYT
+sx42_4_Cholangiocytes_XYT,sx42_4,Cholangiocytes,XYT
+sx42_40_Hepatocytes_XXT,sx42_40,Hepatocytes,XXT
+sx42_40_Endothelial cells_XXT,sx42_40,Endothelial cells,XXT
+sx42_40_Immune cells_XXT,sx42_40,Immune cells,XXT
+sx42_40_Stellate cells_XXT,sx42_40,Stellate cells,XXT
+sx42_40_Cholangiocytes_XXT,sx42_40,Cholangiocytes,XXT
+sx42_41_Hepatocytes_XYT,sx42_41,Hepatocytes,XYT
+sx42_41_Endothelial cells_XYT,sx42_41,Endothelial cells,XYT
+sx42_41_Immune cells_XYT,sx42_41,Immune cells,XYT
+sx42_41_Stellate cells_XYT,sx42_41,Stellate cells,XYT
+sx42_41_Cholangiocytes_XYT,sx42_41,Cholangiocytes,XYT
+sx42_42_Hepatocytes_XXO,sx42_42,Hepatocytes,XXO
+sx42_42_Endothelial cells_XXO,sx42_42,Endothelial cells,XXO
+sx42_42_Immune cells_XXO,sx42_42,Immune cells,XXO
+sx42_42_Stellate cells_XXO,sx42_42,Stellate cells,XXO
+sx42_42_Cholangiocytes_XXO,sx42_42,Cholangiocytes,XXO
+sx42_43_Hepatocytes_XYO,sx42_43,Hepatocytes,XYO
+sx42_43_Endothelial cells_XYO,sx42_43,Endothelial cells,XYO
+sx42_43_Immune cells_XYO,sx42_43,Immune cells,XYO
+sx42_43_Stellate cells_XYO,sx42_43,Stellate cells,XYO
+sx42_43_Cholangiocytes_XYO,sx42_43,Cholangiocytes,XYO
+sx42_44_Hepatocytes_XXT,sx42_44,Hepatocytes,XXT
+sx42_44_Endothelial cells_XXT,sx42_44,Endothelial cells,XXT
+sx42_44_Immune cells_XXT,sx42_44,Immune cells,XXT
+sx42_44_Stellate cells_XXT,sx42_44,Stellate cells,XXT
+sx42_44_Cholangiocytes_XXT,sx42_44,Cholangiocytes,XXT
+sx42_45_Hepatocytes_XYT,sx42_45,Hepatocytes,XYT
+sx42_45_Endothelial cells_XYT,sx42_45,Endothelial cells,XYT
+sx42_45_Immune cells_XYT,sx42_45,Immune cells,XYT
+sx42_45_Stellate cells_XYT,sx42_45,Stellate cells,XYT
+sx42_45_Cholangiocytes_XYT,sx42_45,Cholangiocytes,XYT
+sx42_46_Hepatocytes_XYO,sx42_46,Hepatocytes,XYO
+sx42_46_Endothelial cells_XYO,sx42_46,Endothelial cells,XYO
+sx42_46_Immune cells_XYO,sx42_46,Immune cells,XYO
+sx42_46_Stellate cells_XYO,sx42_46,Stellate cells,XYO
+sx42_46_Cholangiocytes_XYO,sx42_46,Cholangiocytes,XYO
+sx42_47_Hepatocytes_XXT,sx42_47,Hepatocytes,XXT
+sx42_47_Endothelial cells_XXT,sx42_47,Endothelial cells,XXT
+sx42_47_Immune cells_XXT,sx42_47,Immune cells,XXT
+sx42_47_Stellate cells_XXT,sx42_47,Stellate cells,XXT
+sx42_47_Cholangiocytes_XXT,sx42_47,Cholangiocytes,XXT
+sx42_48_Hepatocytes_XYT,sx42_48,Hepatocytes,XYT
+sx42_48_Endothelial cells_XYT,sx42_48,Endothelial cells,XYT
+sx42_48_Immune cells_XYT,sx42_48,Immune cells,XYT
+sx42_48_Stellate cells_XYT,sx42_48,Stellate cells,XYT
+sx42_48_Cholangiocytes_XYT,sx42_48,Cholangiocytes,XYT
+sx42_5_Hepatocytes_XYT_WT,sx42_5,Hepatocytes,XYT-WT
+sx42_5_Endothelial cells_XYT_WT,sx42_5,Endothelial cells,XYT-WT
+sx42_5_Immune cells_XYT_WT,sx42_5,Immune cells,XYT-WT
+sx42_5_Stellate cells_XYT_WT,sx42_5,Stellate cells,XYT-WT
+sx42_5_Cholangiocytes_XYT_WT,sx42_5,Cholangiocytes,XYT-WT
+sx42_6_Hepatocytes_XXO,sx42_6,Hepatocytes,XXO
+sx42_6_Endothelial cells_XXO,sx42_6,Endothelial cells,XXO
+sx42_6_Immune cells_XXO,sx42_6,Immune cells,XXO
+sx42_6_Stellate cells_XXO,sx42_6,Stellate cells,XXO
+sx42_6_Cholangiocytes_XXO,sx42_6,Cholangiocytes,XXO
+sx42_7_Hepatocytes_XYO,sx42_7,Hepatocytes,XYO
+sx42_7_Endothelial cells_XYO,sx42_7,Endothelial cells,XYO
+sx42_7_Immune cells_XYO,sx42_7,Immune cells,XYO
+sx42_7_Stellate cells_XYO,sx42_7,Stellate cells,XYO
+sx42_7_Cholangiocytes_XYO,sx42_7,Cholangiocytes,XYO
+sx42_8_Hepatocytes_XXT,sx42_8,Hepatocytes,XXT
+sx42_8_Endothelial cells_XXT,sx42_8,Endothelial cells,XXT
+sx42_8_Immune cells_XXT,sx42_8,Immune cells,XXT
+sx42_8_Stellate cells_XXT,sx42_8,Stellate cells,XXT
+sx42_8_Cholangiocytes_XXT,sx42_8,Cholangiocytes,XXT
+sx42_9_Hepatocytes_XYT_WT,sx42_9,Hepatocytes,XYT-WT
+sx42_9_Endothelial cells_XYT_WT,sx42_9,Endothelial cells,XYT-WT
+sx42_9_Immune cells_XYT_WT,sx42_9,Immune cells,XYT-WT
+sx42_9_Stellate cells_XYT_WT,sx42_9,Stellate cells,XYT-WT
+sx42_9_Cholangiocytes_XYT_WT,sx42_9,Cholangiocytes,XYT-WT

@@ -1,0 +1,13 @@
+col.name,condition,rep,file,ctrl,ID,ctrl.ID
+channel_126,male,rep1,P3225_fractionated_protein.tsv,male,male_rep1,male_rep1
+channel_127N,female,rep1,P3225_fractionated_protein.tsv,male,female_rep1,male_rep1
+channel_127C,male,rep2,P3225_fractionated_protein.tsv,male,male_rep2,male_rep2
+channel_128N,female,rep2,P3225_fractionated_protein.tsv,male,female_rep2,male_rep2
+channel_128C,male,rep3,P3225_fractionated_protein.tsv,male,male_rep3,male_rep3
+channel_129N,female,rep3,P3225_fractionated_protein.tsv,male,female_rep3,male_rep3
+channel_129C,male,rep4,P3225_fractionated_protein.tsv,male,male_rep4,male_rep4
+channel_130N,female,rep4,P3225_fractionated_protein.tsv,male,female_rep4,male_rep4
+channel_130C,male,rep5,P3225_fractionated_protein.tsv,male,male_rep5,male_rep5
+channel_131N,female,rep5,P3225_fractionated_protein.tsv,male,female_rep5,male_rep5
+channel_131C,male,rep6,P3225_fractionated_protein.tsv,male,male_rep6,male_rep6
+channel_132N,female,rep6,P3225_fractionated_protein.tsv,male,female_rep6,male_rep6

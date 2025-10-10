@@ -1,0 +1,488 @@
+---
+title: "7. Analysis of lipidomics"
+---
+
+## Initialization
+
+```{r init_}
+#| output: false
+#| warning: false
+#| message: false
+
+# Import libraries ----
+library(dplyr)
+library(ggfortify)
+library(patchwork)
+
+# Source color palette.
+source("/omics/odcf/analysis/OE0538_projects/DO-0012/fcgl_sci/theme_color_palette.R")
+source("/omics/odcf/analysis/OE0538_projects/DO-0012/fcgl_sci/misc_functions.R")
+
+# Set seed.
+base::set.seed(708813)
+
+# Initialize lists to store the plots and statistical tests.
+plots <- list()
+tests <- list()
+```
+
+## Import data.
+
+```{r import_lipidomics}
+#| output: false
+#| warning: false
+metadata <- readxl::read_xlsx("/omics/groups/OE0538/internal/projects/liver_fcg/tables/Suppl_Table_1_OverviewData.xlsx", sheet = "Sample overview", trim_ws = TRUE)
+data_lipids <- readxl::read_xlsx("/omics/groups/OE0538/internal/projects/liver_fcg/tables/Suppl_Table_1_OverviewData.xlsx", sheet = "Lipidomics", trim_ws = TRUE)
+
+# Transform data into long format.
+data_lipids <- data_lipids %>% 
+    dplyr::select(Lipid, Class, Category, Adduct_type, Ion_mode, starts_with("sx42_")) %>%
+    tidyr::pivot_longer(cols = starts_with("sx42_"), names_to = "sample", values_to = "intensity") %>% 
+    dplyr::mutate(intensity = as.numeric(intensity))
+
+# Add metadata.
+data_lipids <- data_lipids %>% 
+    dplyr::inner_join(metadata, by = c("sample" = "sequencing_name")) %>% 
+    dplyr::select(Lipid, Class, Category, Adduct_type, Ion_mode, sample, group, allosome_type, gonadal_type, intensity)
+
+# Select only FCG samples.
+data_FCG <- data_lipids %>% dplyr::filter(group != "XYT-WT")
+```
+
+## Visualize overall variance between FCG groups.
+
+```{r plot_pca}
+#| message: false
+#| warning: false
+#| label: fig-pca
+#| fig-cap: "Principal component analysis of the lipidomics data."
+#| cap-location: margin
+#| fig-align: center
+#| fig-width: 7
+#| fig-height: 5
+#| fig-dpi: 720
+# Determine variable lipids.
+data_lipids <- data_lipids %>% 
+    dplyr::group_by(Lipid) %>% 
+    dplyr::mutate(
+        mean = mean(intensity),
+        sd = sd(intensity),
+        cv = sd / mean,
+        'CV ≥ 0.5' = dplyr::if_else(cv >= 0.5, "Yes", "No")
+    ) %>% 
+    dplyr::ungroup()
+
+var_lipids <- data_lipids %>% dplyr::distinct(Lipid, cv) %>% dplyr::filter(cv >= 0.5) %>% dplyr::pull(Lipid)
+
+plots$variance <- data_lipids %>% dplyr::distinct(Lipid, mean, cv, `CV ≥ 0.5`) %>% 
+    ggplot2::ggplot(., ggplot2::aes(x = mean, y = cv, fill = `CV ≥ 0.5`)) +
+    ggplot2::scale_x_continuous(trans = scales::log10_trans()) +
+    ggplot2::geom_point(shape = 21, color = "black") +
+    ggplot2::geom_hline(yintercept = .5, lty = "11", lwd = .5, color = "black") +
+    ggplot2::scale_fill_manual(values = c("Yes" = "red", "No" = "grey80")) +
+    ggplot2::labs(x = "Mean intensity (log<sub>10</sub>)", y = "CV", caption = sprintf("%s variable lipids.", length(var_lipids))) +
+    scir::theme_ggplot()
+
+# Perform PCA on variable lipids.
+data_pca <- data_lipids %>% 
+    dplyr::filter(`CV ≥ 0.5` == "Yes") %>% 
+    dplyr::distinct(sample, Lipid, intensity) %>%
+    tidyr::pivot_wider(names_from = Lipid, values_from = intensity) %>% 
+    dplyr::select(where(is.numeric)) %>%
+    stats::prcomp(center = TRUE, scale. = TRUE)
+
+# Plot scree.
+plots$scree <- data_pca %>% 
+    broom::tidy(matrix = "eigenvalues") %>% 
+    dplyr::filter(PC <= 20) %>% 
+    dplyr::mutate(PC = paste0("PC", PC)) %>%
+    ggplot2::ggplot(aes(x = reorder(PC, -percent), y = percent)) +
+    ggplot2::geom_bar(stat = "identity", fill = "grey80", color = "black", lwd = .2, size = .8) +
+    ggplot2::scale_x_discrete(expand = c(0, 0)) +
+    ggplot2::scale_y_continuous(expand = c(0, 0), limits = c(0, .3), labels = scales::percent_format()) +
+    ggplot2::labs(x = "Principal components", y = "Var. explained") +
+    scir::theme_ggplot() +
+    ggplot2::theme(
+        axis.text.x = ggplot2::element_text(angle = 90, hjust = 1, vjust = .5, size = 6), 
+        panel.grid.major.x = ggplot2::element_blank()
+    )
+
+# Plot PCA.
+plots$pca <- data_pca %>% 
+    broom::augment(data_lipids %>% dplyr::distinct(sample, group, gonadal_type, allosome_type)) %>% 
+    ggplot2::ggplot(., aes(x = .fittedPC1, y = .fittedPC2, color = group, fill = group, label = gonadal_type)) + 
+    ggforce::geom_mark_ellipse(expand = unit(1, "mm"), alpha = .05, color = "black", mapping = aes(fill = gonadal_type)) +
+    ggplot2::geom_point(shape = 21, color = "black", size = 2.5) +
+    ggplot2::scale_x_continuous(limits = c(-25, 25)) +
+    ggplot2::scale_y_continuous(limits = c(-25, 25)) +
+    ggplot2::labs(x = "PC1", y = "PC2") +
+    ggplot2::scale_fill_manual(values = color_palette) +
+    ggplot2::guides(fill = ggplot2::guide_legend(title = "Group", nrow = 1, title.position = "top", title.hjust = .5)) +
+    scir::theme_ggplot()
+
+design = "
+ABB
+ACC"
+plots$variance + plots$scree + plots$pca + patchwork::plot_layout(design = design, ncol = 1, heights = c(1, 1, 4))
+```
+
+## Statistics.
+
+### Normality test.
+
+Prior to any statistical testing, we will check if the data is normally distributed to determine which statistical test to use.
+
+```{r determine_normality}
+#| message: false
+#| label: tbl-normality
+#| tbl-cap: Shapiro-Wilk; log2 lipid measurements
+# For each lipid, check if it follows a normal distribution.
+# Shapiro-Wilk test; null hypothesis is that the data is normally distributed.
+# Therefore, p < 0.05 indicates non-normal distribution.
+tests$normality <- data_lipids %>% 
+    dplyr::group_by(Lipid) %>%
+    dplyr::summarise(
+        shapiro_test = shapiro.test(log2(intensity))$p.value,
+        distribution = ifelse(shapiro_test < 0.05, "Non-normal distribution", "Normal distribution")
+    ) %>%
+    dplyr::ungroup()
+
+knitr::kable(table(tests$normality$distribution)) %>% 
+    kableExtra::kable_styling(bootstrap_options = "striped", full_width = TRUE)
+```
+
+```{r show_density}
+#| label: fig-density
+#| fig-cap: "Distribution of the log2 measurements of 10 random lipids."
+#| cap-location: margin
+#| fig-align: center
+#| fig-width: 10
+#| fig-height: 6
+#| fig-dpi: 720
+# Generate density plot of three random lipids.
+plots$density <- data_lipids %>% 
+    dplyr::filter(Lipid %in% sample(data_lipids$Lipid, 12)) %>%
+    ggplot2::ggplot(aes(x = log2(intensity), fill = group)) +
+    ggplot2::geom_density(alpha = .5) +
+    ggplot2::scale_fill_manual(values = color_palette) +
+    ggplot2::labs(x = "log2(intensity)", y = "Density") +
+    scir::theme_ggplot() +
+    facet_wrap(~Lipid, ncol = 4, scales = "free")
+
+plots$density
+```
+
+
+### Sanity check - XYT-WT vs. XYT
+
+```{r statistics_lipidomics_XYT}
+# Pairwise Wilcoxon test to determine significant differences between XYT and XYT-WT.
+data_WT <- data_lipids %>% dplyr::filter(group %in% c("XYT", "XYT-WT"))
+
+tests$XYTvsWT <- data_WT %>%
+    dplyr::group_by(Lipid, Class, Category, Adduct_type, Ion_mode) %>%
+    rstatix::wilcox_test(intensity ~ group, paired = FALSE, ref.group = "XYT", detailed = TRUE, exact = TRUE, alternative = "two.sided", p.adjust.method = "none") %>%
+    dplyr::ungroup() %>%
+    rstatix::adjust_pvalue(method = "BH")
+
+# Add the log2 fold change and effect-size.
+tests$XYTvsWT <- data_WT %>% 
+    dplyr::group_by(Lipid) %>% 
+    dplyr::summarise(
+        log2FoldChange = mean(log2(intensity[group == "XYT"])) - mean(log2(intensity[group != "XYT"]))
+    ) %>% 
+    dplyr::inner_join(tests$XYTvsWT, by = "Lipid") %>% 
+    dplyr::mutate(
+        Significance = dplyr::case_when(
+            p.adj < 0.05 & log2FoldChange >= 0 ~ "XYT",
+            p.adj < 0.05 & log2FoldChange <= -0 ~ "XYT-WT",
+            TRUE ~ "n.s."
+        ),
+        q = -log10(p.adj)
+    )
+```
+
+```{r}
+#| label: tbl-sig-WT
+#| tbl-cap: (XYT vs. XYT-WT) No. of sig. lipids.
+knitr::kable(table("Significance" = tests$XYTvsWT$Significance)) %>%
+    kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+```
+
+```{r plot_XYT}
+#| message: false
+#| label: fig-XYT
+#| fig-cap: "Overview of the significant differences between XYT and XYT-WT."
+#| cap-location: margin
+#| fig-align: center
+#| fig-width: 12
+#| fig-height: 8
+#| fig-dpi: 720
+
+# Perform Fisher"s exact test to determine if the significant differences are enriched in certain lipid categories.
+tests$XYTvsWT.CatClass <- tests$XYTvsWT %>% dplyr::mutate(group = sprintf("(%s) %s", Category, Class)) %>% test_Fisher()
+tests$XYTvsWT.Cat <- tests$XYTvsWT %>% dplyr::mutate(group = Category) %>% test_Fisher()
+
+# Generate the plots.
+plots$XYTvsWT.volcano <- generate_volcanoplot_lipid(tests$XYTvsWT)
+
+# Between categories.
+plots$XYTvsWT.Cat <- generate_lipid_grouped_barplot(tests$XYTvsWT %>% dplyr::mutate(group = Category), tests$XYTvsWT.Cat, "XYT", nudge = 5,  ytitle = "Lipid categories")
+plots$XYTvsWT.CatFC <- generate_lipid_grouped_barplot_FC(
+    data_lipids %>% dplyr::filter(group %in% c("XYT", "XYT-WT")) %>%  dplyr::mutate(groupFC = group, group = Category),
+    tests$XYTvsWT.Cat, "XYT"
+)
+
+# Between categories + classes.
+plots$XYTvsWT.CatClass <- generate_lipid_grouped_barplot(tests$XYTvsWT %>% dplyr::mutate(group = sprintf("(%s) %s", Category, Class)), tests$XYTvsWT.CatClass, "XYT", nudge = 5, "Lipid classes")
+plots$XYTvsWT.CatClassFC <- generate_lipid_grouped_barplot_FC(
+    data_lipids %>% dplyr::filter(group %in% c("XYT", "XYT-WT")) %>%  dplyr::mutate(groupFC = group, group = sprintf("(%s) %s", Category, Class)),
+    tests$XYTvsWT.CatClass, "XYT"
+)
+
+design = "ABC
+ADE
+"
+plots$XYTvsWT.volcano + plots$XYTvsWT.Cat + plots$XYTvsWT.CatFC + plots$XYTvsWT.CatClass + plots$XYTvsWT.CatClassFC + 
+    patchwork::plot_layout(design = design, widths = c(1.25, .75, .4), heights = c(.45, 1), guides = "collect")
+```
+
+
+### Test for significant difference between XX vs. XY.
+
+```{r statistics_lipidomics_allosomes}
+#| warning: false
+#| message: false
+tests$XYvsXX <- data_FCG %>% 
+    dplyr::group_by(Lipid, Class, Category, Adduct_type, Ion_mode) %>%
+    rstatix::wilcox_test(intensity ~ allosome_type, paired = FALSE, ref.group = "XY", detailed = TRUE, exact = TRUE, alternative = "two.sided") %>%
+    dplyr::ungroup() %>%
+    rstatix::adjust_pvalue(method = "BH")
+
+# Add the log2 fold change.
+tests$XYvsXX <- data_FCG %>% 
+    dplyr::group_by(Lipid) %>% 
+    dplyr::summarise(
+        log2FoldChange = mean(log2(intensity[allosome_type == "XY"])) - mean(log2(intensity[allosome_type == "XX"]))
+    ) %>% 
+    dplyr::inner_join(tests$XYvsXX, by = "Lipid") %>% 
+    dplyr::mutate(
+        Significance = dplyr::case_when(
+            p.adj < 0.05 & log2FoldChange >= 0 ~ "XY",
+            p.adj < 0.05 & log2FoldChange <= -0 ~ "XX",
+            TRUE ~ "n.s."
+        ),
+        q = -log10(p.adj)
+    )
+```
+
+```{r}
+#| label: tbl-sig-allosomes
+#| tbl-cap: (XY vs. XX) No. of sig. lipids.
+knitr::kable(table("Significance" = tests$XYvsXX$Significance)) %>% 
+    kableExtra::kable_styling(bootstrap_options = "striped", full_width = TRUE)
+```
+
+### Test for significant difference between Testes vs. Ovaries.
+
+```{r statistics_lipidomics_gonads}
+#| warning: false
+tests$TvsO <- data_FCG %>% 
+    dplyr::group_by(Lipid, Class, Category, Adduct_type, Ion_mode) %>%
+    rstatix::wilcox_test(intensity ~ gonadal_type, paired = FALSE, ref.group = "Testes", detailed = TRUE, exact = TRUE, alternative = "two.sided") %>%
+    dplyr::ungroup() %>%
+    rstatix::adjust_pvalue(method = "BH")
+
+# Add the log2 fold change.
+tests$TvsO <- data_FCG %>% 
+    dplyr::group_by(Lipid) %>% 
+    dplyr::summarise(
+        log2FoldChange = mean(log2(intensity[gonadal_type == "Testes"])) - mean(log2(intensity[gonadal_type == "Ovaries"]))
+    ) %>% 
+    dplyr::inner_join(tests$TvsO, by = "Lipid") %>% 
+    dplyr::mutate(
+        Significance = dplyr::case_when(
+            p.adj < 0.05 & log2FoldChange >= 0 ~ "Testes",
+            p.adj < 0.05 & log2FoldChange <= -0 ~ "Ovaries",
+            TRUE ~ "n.s."
+        ),
+        q = -log10(p.adj)
+    )
+```
+
+```{r}
+#| label: tbl-sig-TvO
+#| tbl-cap: (Testes vs. Ovaries) No. of sig. lipids.
+knitr::kable(table("Significance" = tests$TvsO$Significance)) %>% 
+    kableExtra::kable_styling(bootstrap_options = "striped", full_width = TRUE)
+```
+
+```{r test_categories}
+# Test whether the significant differences are enriched in certain lipid categories.
+tests$TvsO.Cat <- tests$TvsO %>% dplyr::mutate(group = Category) %>%  test_Fisher()
+tests$TvsO.CatClass <- tests$TvsO %>% dplyr::mutate(group = sprintf("(%s) %s", Category, Class)) %>% test_Fisher()
+```
+
+```{r}
+#| label: tbl-sig-TvO-cat
+#| tbl-cap: (Testes vs. Ovaries) Differences in lipid categories.
+knitr::kable(tests$TvsO.Cat %>% dplyr::filter(p.adj < 0.05)) %>% 
+    kableExtra::kable_styling(bootstrap_options = "striped", full_width = TRUE)
+```
+
+```{r}
+#| label: tbl-sig-TvO-class
+#| tbl-cap: (Testes vs. Ovaries) Differences in lipid classes.
+knitr::kable(tests$TvsO.CatClass %>% dplyr::filter(p.adj < 0.05)) %>% 
+    kableExtra::kable_styling(bootstrap_options = "striped", full_width = TRUE)
+```
+
+```{r plot_gonads}
+#| message: false
+#| label: fig-TvsO
+#| fig-cap: "Overview of the significant differences between T vs. O"
+#| cap-location: margin
+#| fig-align: center
+#| fig-width: 12
+#| fig-height: 8
+#| fig-dpi: 720
+
+# Generate the plots.
+plots$TvsO.volcano <- generate_volcanoplot_lipid(tests$TvsO)
+plots$XYvsXX.volcano <- generate_volcanoplot_lipid(tests$XYvsXX)
+
+# Between categories.
+plots$TvsO.Cat <- generate_lipid_grouped_barplot(tests$TvsO %>% dplyr::mutate(group = Category), tests$TvsO.Cat, "Testes", nudge = 55,  ytitle = "Lipid categories", xlimit = c(-400, 400))
+plots$TvsO.CatFC <- generate_lipid_grouped_barplot_FC(
+    data_FCG %>% dplyr::mutate(groupFC = gonadal_type, group = Category),
+    tests$TvsO.Cat, "Testes", xlimits = c(-2.5, 2.5)
+)
+
+# Between categories + classes.
+plots$TvsO.CatClass <- generate_lipid_grouped_barplot(tests$TvsO %>% dplyr::mutate(group = sprintf("(%s) %s", Category, Class)), tests$TvsO.CatClass, "Testes", nudge = 15, "Lipid classes", xlimit = c(-125, 125))
+plots$TvsO.CatClassFC <- generate_lipid_grouped_barplot_FC(
+    data_FCG %>%  dplyr::mutate(groupFC = gonadal_type, group = sprintf("(%s) %s", Category, Class)),
+    tests$TvsO.CatClass, "Testes", xlimits = c(-2.5, 2.5)
+)
+
+
+plots$XYvsXX.volcano + plots$TvsO.volcano
+plots$TvsO.CatClass + plots$TvsO.CatClassFC
+
+
+```
+
+
+### Test for significant difference between FCG groups
+
+Using the Kruskal-Wallis one-way ANOVA with post-hoc Dunn tests, we will determine statistically-significant differences between FCG groups (excl. XYT-WT).
+
+```{r statistics_lipidomics_FCG}
+#| message: false
+#| warning: false
+#| label: tbl-fcg
+#| tbl-cap: "Significant differences between FCG groups."
+# Perform Kruskal-Wallis test across FCG types
+tests$FCG.Anova <- data_FCG %>%
+    dplyr::group_by(Lipid, Class, Category, Adduct_type, Ion_mode) %>%
+    rstatix::kruskal_test(intensity ~ group) %>% 
+    dplyr::ungroup() %>% 
+    rstatix::adjust_pvalue(method = "BH")
+
+# Determine post-hoc significance between group using Dunn’s test for the significant lipids.
+tests$FCG.Dunn <- data_FCG %>%
+    dplyr::filter(Lipid %in% (tests$FCG.Anova %>% dplyr::filter(p.adj < 0.05) %>% dplyr::pull(Lipid))) %>% 
+    dplyr::group_by(Lipid, Class, Category, Adduct_type, Ion_mode) %>%
+    rstatix::dunn_test(intensity ~ group) %>% 
+    dplyr::ungroup() %>% 
+    rstatix::adjust_pvalue(method = "BH") %>% 
+    dplyr::mutate(
+        q = -log10(p.adj)
+    )
+```
+
+```{r}
+#| label: tbl-sig-FCG
+#| tbl-cap: (FCG) No. of sig. lipids.
+knitr::kable(
+    x = table(tests$FCG.Dunn %>% dplyr::filter(p.adj < 0.05) %>% dplyr::select(group1, group2))
+) %>% 
+    kableExtra::kable_styling(bootstrap_options = "striped", full_width = FALSE)
+```
+
+```{r heatmap_lipids}
+#| label: fig-heatmap
+#| fig-cap: "Heatmap of the significant differences between FCG groups."
+#| cap-location: margin
+#| fig-align: center
+#| fig-width: 12
+#| fig-height: 4
+#| fig-dpi: 720
+# Retrieve the lipid measurements.
+data_heat <- data_FCG %>% 
+    dplyr::mutate(
+        `(Gonad) Testes vs. Ovaries` = dplyr::if_else(Lipid %in% (tests$TvsO %>% dplyr::filter(p.adj < 0.05) %>% dplyr::pull(Lipid)), 1, 0),
+        `(Allosome) XY vs. XX` = 0,
+        `(Allosome) XXO vs. XYO` = dplyr::if_else(Lipid %in% (tests$FCG.Dunn %>% dplyr::filter(p.adj < 0.05 & group1 %in% c("XXO", "XYO") & group2 %in% c("XXO", "XYO")) %>% dplyr::pull(Lipid)), 1, 0),
+        `(Allosome) XYT vs. XXT` = dplyr::if_else(Lipid %in% (tests$FCG.Dunn %>% dplyr::filter(p.adj < 0.05 & group1 %in% c("XYT", "XXT") & group2 %in% c("XYT", "XXT")) %>% dplyr::pull(Lipid)), 1, 0),
+        `(Gonad) XXO vs. XXT` = dplyr::if_else(Lipid %in% (tests$FCG.Dunn %>% dplyr::filter(p.adj < 0.05 & group1 %in% c("XXO", "XXT") & group2 %in% c("XXO", "XXT")) %>% dplyr::pull(Lipid)), 1, 0),
+        `(Gonad) XYT vs. XYO` = dplyr::if_else(Lipid %in% (tests$FCG.Dunn %>% dplyr::filter(p.adj < 0.05 & group1 %in% c("XYT", "XYO") & group2 %in% c("XYT", "XYO")) %>% dplyr::pull(Lipid)), 1, 0),
+        `(Allosome) XY vs. XX` = dplyr::if_else(Lipid %in% (tests$XYvsXX %>% dplyr::filter(p.adj < 0.05) %>% dplyr::pull(Lipid)), 1, 0),
+    ) %>% 
+    # Select only significant lipids.
+    dplyr::filter(Lipid %in% (tests$FCG.Dunn %>% dplyr::filter(p.adj < 0.05) %>% dplyr::pull(Lipid)) | `(Gonad) Testes vs. Ovaries` == 1) %>%
+    dplyr::mutate(
+        `Gonad` = gonadal_type,
+        `Allosome` = allosome_type
+    )
+
+# Plot heatmap.
+tidyheatmaps::tidyheatmap(
+    df = data_heat,
+    row = sample,
+    column = Lipid,
+    value = intensity,
+    scale = "column", 
+    show_rownames = FALSE, 
+    cluster_rows = TRUE,
+    cluster_cols = TRUE, cellheight = 3, cellwidth = .5,
+    show_colnames = FALSE, 
+    clustering_distance_cols = "euclidean", 
+    clustering_distance_rows = "euclidean", 
+    clustering_method = "ward.D2", 
+    treeheight_col = 20, treeheight_row = 20,
+    colors = grDevices::colorRampPalette(c("#0072B2", "white", "#A51122"))(100), color_legend_n = 100,
+    annotation_row = c(Allosome, Gonad), 
+    annotation_col = c(`(Allosome) XXO vs. XYO`, `(Allosome) XYT vs. XXT`, `(Gonad) XXO vs. XXT`, `(Gonad) XYT vs. XYO`, `(Allosome) XY vs. XX`, `(Gonad) Testes vs. Ovaries`),
+)
+```
+
+### Visualize significant lipid classes per FCG group.
+
+```{r plot_lipid_classes}
+#| label: fig-lipid_classes_FCG
+#| fig-cap: "Significant lipid classes per FCG group."
+#| cap-location: margin
+#| fig-align: center
+#| fig-width: 6
+#| fig-height: 5
+#| fig-dpi: 720
+data_classes <- tests$FCG.Dunn %>% 
+    dplyr::filter(p.adj < 0.05) %>%
+    dplyr::group_by(Category, group1, group2) %>%
+    dplyr::count() %>%
+    dplyr::ungroup() 
+
+data_classes %>% 
+    ggplot2::ggplot(aes(x = group1, y = Category, size = n, fill = Category)) +
+    ggplot2::geom_point(shape = 21, alpha = .4) +
+    ggplot2::geom_text(ggplot2::aes(label = n), size = 4, color = "black") +
+    ggplot2::facet_grid(~group2, scales = "free") +
+    ggplot2::labs(x = "Comparison", y = "Lipid classes") +
+    ggplot2::guides(
+        fill = ggplot2::guide_legend(title = "Lipid classes", nrow = 3, title.position = "top", title.hjust = .5),
+        size = ggplot2::guide_legend(title = "No. lipids", nrow = 3, title.position = "top", title.hjust = .5)
+    ) +
+    scir::theme_ggplot()
+```
+

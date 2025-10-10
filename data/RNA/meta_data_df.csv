@@ -1,0 +1,216 @@
+sample,sample_name,cell_type,gonadal_type
+sx42_1_Hepatocytes_Ovaries,sx42_1,Hepatocytes,Ovaries
+sx42_1_Endothelial cells_Ovaries,sx42_1,Endothelial cells,Ovaries
+sx42_1_Immune cells_Ovaries,sx42_1,Immune cells,Ovaries
+sx42_1_Stellate cells_Ovaries,sx42_1,Stellate cells,Ovaries
+sx42_1_Cholangiocytes_Ovaries,sx42_1,Cholangiocytes,Ovaries
+sx42_10_Hepatocytes_Testes,sx42_10,Hepatocytes,Testes
+sx42_10_Endothelial cells_Testes,sx42_10,Endothelial cells,Testes
+sx42_10_Immune cells_Testes,sx42_10,Immune cells,Testes
+sx42_10_Stellate cells_Testes,sx42_10,Stellate cells,Testes
+sx42_10_Cholangiocytes_Testes,sx42_10,Cholangiocytes,Testes
+sx42_11_Hepatocytes_Ovaries,sx42_11,Hepatocytes,Ovaries
+sx42_11_Endothelial cells_Ovaries,sx42_11,Endothelial cells,Ovaries
+sx42_11_Immune cells_Ovaries,sx42_11,Immune cells,Ovaries
+sx42_11_Stellate cells_Ovaries,sx42_11,Stellate cells,Ovaries
+sx42_11_Cholangiocytes_Ovaries,sx42_11,Cholangiocytes,Ovaries
+sx42_12_Hepatocytes_Ovaries,sx42_12,Hepatocytes,Ovaries
+sx42_12_Endothelial cells_Ovaries,sx42_12,Endothelial cells,Ovaries
+sx42_12_Immune cells_Ovaries,sx42_12,Immune cells,Ovaries
+sx42_12_Stellate cells_Ovaries,sx42_12,Stellate cells,Ovaries
+sx42_12_Cholangiocytes_Ovaries,sx42_12,Cholangiocytes,Ovaries
+sx42_13_Hepatocytes_Testes,sx42_13,Hepatocytes,Testes
+sx42_13_Endothelial cells_Testes,sx42_13,Endothelial cells,Testes
+sx42_13_Immune cells_Testes,sx42_13,Immune cells,Testes
+sx42_13_Stellate cells_Testes,sx42_13,Stellate cells,Testes
+sx42_13_Cholangiocytes_Testes,sx42_13,Cholangiocytes,Testes
+sx42_14_Hepatocytes_Testes,sx42_14,Hepatocytes,Testes
+sx42_14_Endothelial cells_Testes,sx42_14,Endothelial cells,Testes
+sx42_14_Immune cells_Testes,sx42_14,Immune cells,Testes
+sx42_14_Stellate cells_Testes,sx42_14,Stellate cells,Testes
+sx42_14_Cholangiocytes_Testes,sx42_14,Cholangiocytes,Testes
+sx42_16_Hepatocytes_Ovaries,sx42_16,Hepatocytes,Ovaries
+sx42_16_Endothelial cells_Ovaries,sx42_16,Endothelial cells,Ovaries
+sx42_16_Immune cells_Ovaries,sx42_16,Immune cells,Ovaries
+sx42_16_Stellate cells_Ovaries,sx42_16,Stellate cells,Ovaries
+sx42_16_Cholangiocytes_Ovaries,sx42_16,Cholangiocytes,Ovaries
+sx42_17_Hepatocytes_Testes,sx42_17,Hepatocytes,Testes
+sx42_17_Endothelial cells_Testes,sx42_17,Endothelial cells,Testes
+sx42_17_Immune cells_Testes,sx42_17,Immune cells,Testes
+sx42_17_Stellate cells_Testes,sx42_17,Stellate cells,Testes
+sx42_17_Cholangiocytes_Testes,sx42_17,Cholangiocytes,Testes
+sx42_18_Hepatocytes_Ovaries,sx42_18,Hepatocytes,Ovaries
+sx42_18_Endothelial cells_Ovaries,sx42_18,Endothelial cells,Ovaries
+sx42_18_Immune cells_Ovaries,sx42_18,Immune cells,Ovaries
+sx42_18_Stellate cells_Ovaries,sx42_18,Stellate cells,Ovaries
+sx42_18_Cholangiocytes_Ovaries,sx42_18,Cholangiocytes,Ovaries
+sx42_19_Hepatocytes_Testes,sx42_19,Hepatocytes,Testes
+sx42_19_Endothelial cells_Testes,sx42_19,Endothelial cells,Testes
+sx42_19_Immune cells_Testes,sx42_19,Immune cells,Testes
+sx42_19_Stellate cells_Testes,sx42_19,Stellate cells,Testes
+sx42_19_Cholangiocytes_Testes,sx42_19,Cholangiocytes,Testes
+sx42_2_Hepatocytes_Ovaries,sx42_2,Hepatocytes,Ovaries
+sx42_2_Endothelial cells_Ovaries,sx42_2,Endothelial cells,Ovaries
+sx42_2_Immune cells_Ovaries,sx42_2,Immune cells,Ovaries
+sx42_2_Stellate cells_Ovaries,sx42_2,Stellate cells,Ovaries
+sx42_2_Cholangiocytes_Ovaries,sx42_2,Cholangiocytes,Ovaries
+sx42_21_Hepatocytes_Ovaries,sx42_21,Hepatocytes,Ovaries
+sx42_21_Endothelial cells_Ovaries,sx42_21,Endothelial cells,Ovaries
+sx42_21_Immune cells_Ovaries,sx42_21,Immune cells,Ovaries
+sx42_21_Stellate cells_Ovaries,sx42_21,Stellate cells,Ovaries
+sx42_21_Cholangiocytes_Ovaries,sx42_21,Cholangiocytes,Ovaries
+sx42_22_Hepatocytes_Ovaries,sx42_22,Hepatocytes,Ovaries
+sx42_22_Endothelial cells_Ovaries,sx42_22,Endothelial cells,Ovaries
+sx42_22_Immune cells_Ovaries,sx42_22,Immune cells,Ovaries
+sx42_22_Stellate cells_Ovaries,sx42_22,Stellate cells,Ovaries
+sx42_22_Cholangiocytes_Ovaries,sx42_22,Cholangiocytes,Ovaries
+sx42_23_Hepatocytes_Testes,sx42_23,Hepatocytes,Testes
+sx42_23_Endothelial cells_Testes,sx42_23,Endothelial cells,Testes
+sx42_23_Immune cells_Testes,sx42_23,Immune cells,Testes
+sx42_23_Stellate cells_Testes,sx42_23,Stellate cells,Testes
+sx42_23_Cholangiocytes_Testes,sx42_23,Cholangiocytes,Testes
+sx42_24_Hepatocytes_Testes,sx42_24,Hepatocytes,Testes
+sx42_24_Endothelial cells_Testes,sx42_24,Endothelial cells,Testes
+sx42_24_Immune cells_Testes,sx42_24,Immune cells,Testes
+sx42_24_Stellate cells_Testes,sx42_24,Stellate cells,Testes
+sx42_24_Cholangiocytes_Testes,sx42_24,Cholangiocytes,Testes
+sx42_25_Hepatocytes_Ovaries,sx42_25,Hepatocytes,Ovaries
+sx42_25_Endothelial cells_Ovaries,sx42_25,Endothelial cells,Ovaries
+sx42_25_Immune cells_Ovaries,sx42_25,Immune cells,Ovaries
+sx42_25_Stellate cells_Ovaries,sx42_25,Stellate cells,Ovaries
+sx42_25_Cholangiocytes_Ovaries,sx42_25,Cholangiocytes,Ovaries
+sx42_27_Hepatocytes_Ovaries,sx42_27,Hepatocytes,Ovaries
+sx42_27_Endothelial cells_Ovaries,sx42_27,Endothelial cells,Ovaries
+sx42_27_Immune cells_Ovaries,sx42_27,Immune cells,Ovaries
+sx42_27_Stellate cells_Ovaries,sx42_27,Stellate cells,Ovaries
+sx42_27_Cholangiocytes_Ovaries,sx42_27,Cholangiocytes,Ovaries
+sx42_28_Hepatocytes_Testes,sx42_28,Hepatocytes,Testes
+sx42_28_Endothelial cells_Testes,sx42_28,Endothelial cells,Testes
+sx42_28_Immune cells_Testes,sx42_28,Immune cells,Testes
+sx42_28_Stellate cells_Testes,sx42_28,Stellate cells,Testes
+sx42_28_Cholangiocytes_Testes,sx42_28,Cholangiocytes,Testes
+sx42_29_Hepatocytes_Testes,sx42_29,Hepatocytes,Testes
+sx42_29_Endothelial cells_Testes,sx42_29,Endothelial cells,Testes
+sx42_29_Immune cells_Testes,sx42_29,Immune cells,Testes
+sx42_29_Stellate cells_Testes,sx42_29,Stellate cells,Testes
+sx42_29_Cholangiocytes_Testes,sx42_29,Cholangiocytes,Testes
+sx42_3_Hepatocytes_Testes,sx42_3,Hepatocytes,Testes
+sx42_3_Endothelial cells_Testes,sx42_3,Endothelial cells,Testes
+sx42_3_Immune cells_Testes,sx42_3,Immune cells,Testes
+sx42_3_Stellate cells_Testes,sx42_3,Stellate cells,Testes
+sx42_3_Cholangiocytes_Testes,sx42_3,Cholangiocytes,Testes
+sx42_30_Hepatocytes_Ovaries,sx42_30,Hepatocytes,Ovaries
+sx42_30_Endothelial cells_Ovaries,sx42_30,Endothelial cells,Ovaries
+sx42_30_Immune cells_Ovaries,sx42_30,Immune cells,Ovaries
+sx42_30_Stellate cells_Ovaries,sx42_30,Stellate cells,Ovaries
+sx42_30_Cholangiocytes_Ovaries,sx42_30,Cholangiocytes,Ovaries
+sx42_31_Hepatocytes_Ovaries,sx42_31,Hepatocytes,Ovaries
+sx42_31_Endothelial cells_Ovaries,sx42_31,Endothelial cells,Ovaries
+sx42_31_Immune cells_Ovaries,sx42_31,Immune cells,Ovaries
+sx42_31_Stellate cells_Ovaries,sx42_31,Stellate cells,Ovaries
+sx42_31_Cholangiocytes_Ovaries,sx42_31,Cholangiocytes,Ovaries
+sx42_32_Hepatocytes_Testes,sx42_32,Hepatocytes,Testes
+sx42_32_Endothelial cells_Testes,sx42_32,Endothelial cells,Testes
+sx42_32_Immune cells_Testes,sx42_32,Immune cells,Testes
+sx42_32_Stellate cells_Testes,sx42_32,Stellate cells,Testes
+sx42_32_Cholangiocytes_Testes,sx42_32,Cholangiocytes,Testes
+sx42_33_Hepatocytes_Testes,sx42_33,Hepatocytes,Testes
+sx42_33_Endothelial cells_Testes,sx42_33,Endothelial cells,Testes
+sx42_33_Immune cells_Testes,sx42_33,Immune cells,Testes
+sx42_33_Stellate cells_Testes,sx42_33,Stellate cells,Testes
+sx42_33_Cholangiocytes_Testes,sx42_33,Cholangiocytes,Testes
+sx42_34_Hepatocytes_Ovaries,sx42_34,Hepatocytes,Ovaries
+sx42_34_Endothelial cells_Ovaries,sx42_34,Endothelial cells,Ovaries
+sx42_34_Immune cells_Ovaries,sx42_34,Immune cells,Ovaries
+sx42_34_Stellate cells_Ovaries,sx42_34,Stellate cells,Ovaries
+sx42_34_Cholangiocytes_Ovaries,sx42_34,Cholangiocytes,Ovaries
+sx42_35_Hepatocytes_Ovaries,sx42_35,Hepatocytes,Ovaries
+sx42_35_Endothelial cells_Ovaries,sx42_35,Endothelial cells,Ovaries
+sx42_35_Immune cells_Ovaries,sx42_35,Immune cells,Ovaries
+sx42_35_Stellate cells_Ovaries,sx42_35,Stellate cells,Ovaries
+sx42_35_Cholangiocytes_Ovaries,sx42_35,Cholangiocytes,Ovaries
+sx42_36_Hepatocytes_Testes,sx42_36,Hepatocytes,Testes
+sx42_36_Endothelial cells_Testes,sx42_36,Endothelial cells,Testes
+sx42_36_Immune cells_Testes,sx42_36,Immune cells,Testes
+sx42_36_Stellate cells_Testes,sx42_36,Stellate cells,Testes
+sx42_36_Cholangiocytes_Testes,sx42_36,Cholangiocytes,Testes
+sx42_37_Hepatocytes_Ovaries,sx42_37,Hepatocytes,Ovaries
+sx42_37_Endothelial cells_Ovaries,sx42_37,Endothelial cells,Ovaries
+sx42_37_Immune cells_Ovaries,sx42_37,Immune cells,Ovaries
+sx42_37_Stellate cells_Ovaries,sx42_37,Stellate cells,Ovaries
+sx42_37_Cholangiocytes_Ovaries,sx42_37,Cholangiocytes,Ovaries
+sx42_38_Hepatocytes_Testes,sx42_38,Hepatocytes,Testes
+sx42_38_Endothelial cells_Testes,sx42_38,Endothelial cells,Testes
+sx42_38_Immune cells_Testes,sx42_38,Immune cells,Testes
+sx42_38_Stellate cells_Testes,sx42_38,Stellate cells,Testes
+sx42_38_Cholangiocytes_Testes,sx42_38,Cholangiocytes,Testes
+sx42_39_Hepatocytes_Ovaries,sx42_39,Hepatocytes,Ovaries
+sx42_39_Endothelial cells_Ovaries,sx42_39,Endothelial cells,Ovaries
+sx42_39_Immune cells_Ovaries,sx42_39,Immune cells,Ovaries
+sx42_39_Stellate cells_Ovaries,sx42_39,Stellate cells,Ovaries
+sx42_39_Cholangiocytes_Ovaries,sx42_39,Cholangiocytes,Ovaries
+sx42_4_Hepatocytes_Testes,sx42_4,Hepatocytes,Testes
+sx42_4_Endothelial cells_Testes,sx42_4,Endothelial cells,Testes
+sx42_4_Immune cells_Testes,sx42_4,Immune cells,Testes
+sx42_4_Stellate cells_Testes,sx42_4,Stellate cells,Testes
+sx42_4_Cholangiocytes_Testes,sx42_4,Cholangiocytes,Testes
+sx42_40_Hepatocytes_Testes,sx42_40,Hepatocytes,Testes
+sx42_40_Endothelial cells_Testes,sx42_40,Endothelial cells,Testes
+sx42_40_Immune cells_Testes,sx42_40,Immune cells,Testes
+sx42_40_Stellate cells_Testes,sx42_40,Stellate cells,Testes
+sx42_40_Cholangiocytes_Testes,sx42_40,Cholangiocytes,Testes
+sx42_41_Hepatocytes_Testes,sx42_41,Hepatocytes,Testes
+sx42_41_Endothelial cells_Testes,sx42_41,Endothelial cells,Testes
+sx42_41_Immune cells_Testes,sx42_41,Immune cells,Testes
+sx42_41_Stellate cells_Testes,sx42_41,Stellate cells,Testes
+sx42_41_Cholangiocytes_Testes,sx42_41,Cholangiocytes,Testes
+sx42_42_Hepatocytes_Ovaries,sx42_42,Hepatocytes,Ovaries
+sx42_42_Endothelial cells_Ovaries,sx42_42,Endothelial cells,Ovaries
+sx42_42_Immune cells_Ovaries,sx42_42,Immune cells,Ovaries
+sx42_42_Stellate cells_Ovaries,sx42_42,Stellate cells,Ovaries
+sx42_42_Cholangiocytes_Ovaries,sx42_42,Cholangiocytes,Ovaries
+sx42_43_Hepatocytes_Ovaries,sx42_43,Hepatocytes,Ovaries
+sx42_43_Endothelial cells_Ovaries,sx42_43,Endothelial cells,Ovaries
+sx42_43_Immune cells_Ovaries,sx42_43,Immune cells,Ovaries
+sx42_43_Stellate cells_Ovaries,sx42_43,Stellate cells,Ovaries
+sx42_43_Cholangiocytes_Ovaries,sx42_43,Cholangiocytes,Ovaries
+sx42_44_Hepatocytes_Testes,sx42_44,Hepatocytes,Testes
+sx42_44_Endothelial cells_Testes,sx42_44,Endothelial cells,Testes
+sx42_44_Immune cells_Testes,sx42_44,Immune cells,Testes
+sx42_44_Stellate cells_Testes,sx42_44,Stellate cells,Testes
+sx42_44_Cholangiocytes_Testes,sx42_44,Cholangiocytes,Testes
+sx42_45_Hepatocytes_Testes,sx42_45,Hepatocytes,Testes
+sx42_45_Endothelial cells_Testes,sx42_45,Endothelial cells,Testes
+sx42_45_Immune cells_Testes,sx42_45,Immune cells,Testes
+sx42_45_Stellate cells_Testes,sx42_45,Stellate cells,Testes
+sx42_45_Cholangiocytes_Testes,sx42_45,Cholangiocytes,Testes
+sx42_46_Hepatocytes_Ovaries,sx42_46,Hepatocytes,Ovaries
+sx42_46_Endothelial cells_Ovaries,sx42_46,Endothelial cells,Ovaries
+sx42_46_Immune cells_Ovaries,sx42_46,Immune cells,Ovaries
+sx42_46_Stellate cells_Ovaries,sx42_46,Stellate cells,Ovaries
+sx42_46_Cholangiocytes_Ovaries,sx42_46,Cholangiocytes,Ovaries
+sx42_47_Hepatocytes_Testes,sx42_47,Hepatocytes,Testes
+sx42_47_Endothelial cells_Testes,sx42_47,Endothelial cells,Testes
+sx42_47_Immune cells_Testes,sx42_47,Immune cells,Testes
+sx42_47_Stellate cells_Testes,sx42_47,Stellate cells,Testes
+sx42_47_Cholangiocytes_Testes,sx42_47,Cholangiocytes,Testes
+sx42_48_Hepatocytes_Testes,sx42_48,Hepatocytes,Testes
+sx42_48_Endothelial cells_Testes,sx42_48,Endothelial cells,Testes
+sx42_48_Immune cells_Testes,sx42_48,Immune cells,Testes
+sx42_48_Stellate cells_Testes,sx42_48,Stellate cells,Testes
+sx42_48_Cholangiocytes_Testes,sx42_48,Cholangiocytes,Testes
+sx42_6_Hepatocytes_Ovaries,sx42_6,Hepatocytes,Ovaries
+sx42_6_Endothelial cells_Ovaries,sx42_6,Endothelial cells,Ovaries
+sx42_6_Immune cells_Ovaries,sx42_6,Immune cells,Ovaries
+sx42_6_Stellate cells_Ovaries,sx42_6,Stellate cells,Ovaries
+sx42_6_Cholangiocytes_Ovaries,sx42_6,Cholangiocytes,Ovaries
+sx42_7_Hepatocytes_Ovaries,sx42_7,Hepatocytes,Ovaries
+sx42_7_Endothelial cells_Ovaries,sx42_7,Endothelial cells,Ovaries
+sx42_7_Immune cells_Ovaries,sx42_7,Immune cells,Ovaries
+sx42_7_Stellate cells_Ovaries,sx42_7,Stellate cells,Ovaries
+sx42_7_Cholangiocytes_Ovaries,sx42_7,Cholangiocytes,Ovaries
+sx42_8_Hepatocytes_Testes,sx42_8,Hepatocytes,Testes
+sx42_8_Endothelial cells_Testes,sx42_8,Endothelial cells,Testes
+sx42_8_Immune cells_Testes,sx42_8,Immune cells,Testes
+sx42_8_Stellate cells_Testes,sx42_8,Stellate cells,Testes
+sx42_8_Cholangiocytes_Testes,sx42_8,Cholangiocytes,Testes
