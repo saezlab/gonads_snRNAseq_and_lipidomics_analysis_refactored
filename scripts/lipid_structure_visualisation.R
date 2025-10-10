@@ -191,6 +191,21 @@ if (!is.null(p)) {
   )
   
   cat("\nPlot saved as:", paste0("results/multi-omic/structural_model/gene_lipid_structure_", gene_of_interest, ".pdf\n"))
+
+  # Save plot data for testing
+  if (Sys.getenv("TESTING_MODE") == "TRUE") {
+    plot_data_for_gene <- lipid_data %>%
+      mutate(gene_correlation = gene_lipid_cor[[gene_of_interest]]) %>%
+      filter(!is.na(gene_correlation)) %>%
+      filter(lipid_class %in% (sig_associations %>%
+                                filter(gene == gene_of_interest) %>%
+                                distinct(lipid_class) %>%
+                                pull(lipid_class)))
+
+    write_csv(plot_data_for_gene,
+              paste0("tests/outputs/lipid_structure_vis_", gene_of_interest, "_data.csv"))
+    cat("Test data saved to: tests/outputs/lipid_structure_vis_", gene_of_interest, "_data.csv\n")
+  }
 }
 
 # Function to generate plots for multiple genes

@@ -63,4 +63,9 @@ for(lipid_class_file in all_lipid_class_files)
     theme_minimal()
   
   ggsave(filename = paste("results/lipidomic/bubbles_DBC/",paste(lipid_class,".pdf", sep = ""), sep = ""),bubbleplot, width = 8.42, height = 5.53)
+
+  # Save plot data for testing
+  if (Sys.getenv("TESTING_MODE") == "TRUE") {
+    write.csv(df, paste0("tests/outputs/lipidomic_bubbles_", lipid_class, "_data.csv"), row.names = FALSE)
+  }
 }

@@ -11,3 +11,8 @@ omnipathr-log/**
 data/mofa/**
 Fig_panels/Fig1_umap_sample.pdf
 GSE90277/GSE90277_RAW.tar
+
+# Testing outputs (generated during test runs)
+tests/outputs/**
+tests/logs/**
+Rplots.pdf

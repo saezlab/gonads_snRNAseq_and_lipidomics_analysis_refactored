@@ -1,0 +1,3 @@
+script_path,test_type,expected_output,timeout_min,description
+scripts/lipid_structure_visualisation.R,visualization,tests/outputs/lipid_structure_vis_*.csv,5,Lipid structural analysis visualization
+scripts/lipidomic_bubbles.R,visualization,tests/outputs/lipidomic_bubbles_*.csv,5,Lipidomic bubble plots for all lipid classes
