@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Rscript:*)",
+      "Bash(1)",
+      "Bash(git log:*)",
+      "Bash(awk:*)",
+      "Bash(xargs:*)",
+      "Bash(where Rscript)",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" test_gdx_validation.R)",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" test_gdx_analysis.R)",
+      "Bash(git checkout:*)",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e \"library(readxl); sheets <- excel_sheets(''results/Doublets_and_Sex_DEG_results_all_hepatocytes.xlsx''); cat(''Sheets:'', paste(sheets, collapse='', ''), ''\\n'')\")",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e \"library(readxl); library(readr); ttop <- as.data.frame(read_excel(''results/Doublets_and_Sex_DEG_results_all_hepatocytes.xlsx'', sheet=''All_Hepatocytes_Sex'')); cat(''Columns:'', paste(names(ttop), collapse='', ''), ''\\n''); cat(''Rows:'', nrow(ttop), ''\\n''); print(head(ttop, 3))\")",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" test_xenium_volcano.R)",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\":*)",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" test_xenium_function.R)",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" workflows/03_fcg_lipidomic_analysis.R)",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e \"library(readr); data <- read_csv(''data/metabolomics/lipidomics_gdxhr.csv'', show_col_types=FALSE); cat(''Total columns:'', ncol(data), ''\\n''); cat(''Column names 30-40:\\n''); print(names(data)[30:40]); cat(''\\nColumn names 35-45:\\n''); print(names(data)[35:45])\")",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e \"load(''results/lipidomic/enrichment/lipid_class_enrichment_scores.RData''); cat(''Column names:\\n''); print(names(lipid_class_results)); cat(''\\nUnique conditions:\\n''); print(unique(lipid_class_results$condition)); cat(''\\nFirst few rows:\\n''); print(head(lipid_class_results, 10))\")",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e \"load(''results/lipidomic/enrichment/lipid_class_enrichment_scores.RData''); cat(''Unique conditions:\\n''); print(unique(lipid_class_results[[''condition'']])); cat(''\\nFirst 10 rows:\\n''); print(head(lipid_class_results, 10))\")",
+      "Bash(\"C:/Program Files/R/R-4.4.1/bin/Rscript.exe\" -e \"source(''workflows/04_mofa_integration.R'')\")",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e \"parse(''workflows/04_mofa_integration.R'')\")",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e \"parse(''''workflows/04_mofa_integration.R'''')\")",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" workflows/05_zonation_analysis.R)",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e \"load(''results/lipidomic/ttop_full_list.RData''); cat(''Structure of ttop_full_list:\\n''); str(ttop_full_list, max.level = 2)\")",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e:*)",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e \"df <- read.csv(''results/zonation/lipid_class_category_summary.csv''); cat(''Total entries:'', nrow(df), ''\\nUnique categories:'', length(unique(df[[''category'']])), ''\\nUnique lipid classes:'', length(unique(df[[''lipid_class'']])), ''\\n\\nSample entries:\\n''); print(head(df, 15)); cat(''\\n\\nSummary by category:\\n''); print(table(df[[''category'']]));\")",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" -e \"source(''''workflows/05_zonation_analysis.R'''')\")",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" workflows/06_structural_analysis.R)",
+      "Bash(\"C:\\Program Files\\R\\R-4.4.1\\bin\\Rscript.exe\" workflows/07_create_summary_figure.R)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
