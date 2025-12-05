@@ -361,7 +361,7 @@ For questions or issues:
 
 ## License
 
-[License information to be added]
+GNU General Public License v3.0 - see details in the Licence file.
 
 ## Acknowledgments
 
