@@ -41,8 +41,8 @@
 #' - results/mofa/main_model_RNA_lipid_weight.RData: Weights + TF scores (computed from model)
 #' - results/mofa/factor_analysis/: Factor enrichment and publication figures
 #' - results/mofa/networks/: Gene-lipid correlation networks
-#'   - hepatocyte_gene_lipid_network_full_SIF.csv: Full (non-sparse) gene-lipid network
-#'   - hepatocyte_TF_gene_lipid_network_full_SIF.csv: Sparse TF-gene-lipid network
+#'   - hepatocyte_gene_lipid_network_full_SIF.csv: Full (non-sparse) gene-lipid network (top 33% MOFA features)
+#'   - hepatocyte_TF_gene_lipid_network_full_SIF.csv: Sparse TF-gene-lipid network (top 2.5% MOFA features)
 
 library(dplyr)
 library(tidyr)
@@ -889,15 +889,99 @@ if (!is.null(hepatocyte_genes) && !is.null(lipid_features) &&
   cat("Creating full (non-sparse) gene-lipid network in SIF format...\n")
   cat(paste(rep("-", 80), collapse = ""), "\n\n")
 
-  cat("Converting full correlation matrix to SIF network format...\n")
-  cat("  - No filtering by correlation threshold\n")
-  cat("  - No filtering to top N genes per lipid\n")
-  cat("  - Includes ALL gene-lipid pairs\n\n")
+  cat("For the non-sparse network, using more permissive MOFA feature filtering...\n")
+  cat("  Sparse network: top 2.5% features (5% total)\n")
+  cat("  Non-sparse network: top 33% features (66% total)\n\n")
 
-  # Convert correlation matrix to long format (SIF: node1=gene, node2=lipid, mor=correlation)
+  # Extract features with 33% threshold specifically for non-sparse network
+  top_percent_permissive <- 0.33
+  cat("Extracting top 33% features from Factor 1 for non-sparse network...\n")
+
+  factor1_features_permissive <- list()
+  for (view_name in names(weights)) {
+    if (view_name == "Hepatocytes_TFs") next
+
+    view_weights <- weights[[view_name]][, "Factor1"]
+    n_top_permissive <- ceiling(length(view_weights) * top_percent_permissive)
+
+    # Get top positive and negative weights
+    top_positive <- names(sort(view_weights, decreasing = TRUE)[1:n_top_permissive])
+    top_negative <- names(sort(view_weights, decreasing = FALSE)[1:n_top_permissive])
+
+    factor1_features_permissive[[view_name]] <- unique(c(top_positive, top_negative))
+  }
+
+  cat("  Permissive features selected:\n")
+  for (view_name in names(factor1_features_permissive)) {
+    n_features <- length(factor1_features_permissive[[view_name]])
+    cat("    ", view_name, ":", n_features, "features\n")
+  }
+  cat("\n")
+
+  # Extract and clean permissive features
+  hepatocyte_genes_permissive <- factor1_features_permissive$Hepatocytes
+  if (!is.null(hepatocyte_genes_permissive)) {
+    hepatocyte_genes_permissive <- gsub("_Hepatocytes", "", hepatocyte_genes_permissive)
+  }
+
+  lipid_features_permissive <- factor1_features_permissive$lipidomic
+  if (!is.null(lipid_features_permissive)) {
+    lipid_features_permissive <- gsub("_lipidomic", "", lipid_features_permissive)
+  }
+
+  cat("Preparing permissive data matrices...\n")
+  cat("  Hepatocyte genes:", length(hepatocyte_genes_permissive), "\n")
+  cat("  Lipid features:", length(lipid_features_permissive), "\n\n")
+
+  # Prepare data matrices with permissive features
+  hepatocyte_data_full_permissive <- scaled_RNA[hepatocyte_genes_permissive,
+                                                  grep("Hepatocytes", colnames(scaled_RNA))]
+
+  colnames(hepatocyte_data_full_permissive) <- gsub("_Hepatocytes|_Testes|_Ovaries", "",
+                                                     colnames(hepatocyte_data_full_permissive))
+  colnames(hepatocyte_data_full_permissive) <- gsub("-", "_", colnames(hepatocyte_data_full_permissive))
+
+  # Match samples
+  common_samples_permissive <- intersect(colnames(hepatocyte_data_full_permissive), colnames(lipidomic))
+  hepatocyte_data_permissive <- hepatocyte_data_full_permissive[, common_samples_permissive]
+  lipid_data_permissive <- lipidomic[lipid_features_permissive, common_samples_permissive]
+
+  # Filter to lipid metabolism genes
+  cat("Filtering to lipid metabolism genes...\n")
+  hepatocyte_genes_lipid_permissive <- intersect(rownames(hepatocyte_data_permissive), lipid_genes)
+
+  if (length(hepatocyte_genes_lipid_permissive) == 0) {
+    cat("  WARNING: No overlap! Using all genes.\n")
+    hepatocyte_genes_lipid_permissive <- rownames(hepatocyte_data_permissive)
+  }
+
+  hepatocyte_data_lipid_permissive <- hepatocyte_data_permissive[hepatocyte_genes_lipid_permissive, ]
+  cat("  Final permissive matrix:", nrow(hepatocyte_data_lipid_permissive),
+      "genes x", nrow(lipid_data_permissive), "lipids\n\n")
+
+  # Compute correlations with permissive features
+  cat("Computing Pearson correlations with permissive features...\n")
+  hepatocyte_cor_mat_RNA_lip_permissive <- cor(t(hepatocyte_data_lipid_permissive),
+                                                 t(lipid_data_permissive),
+                                                 method = "pearson",
+                                                 use = "pairwise.complete.obs")
+
+  cat("✓ Permissive correlation matrix computed:\n")
+  cat("  Dimensions:", nrow(hepatocyte_cor_mat_RNA_lip_permissive), "genes x",
+      ncol(hepatocyte_cor_mat_RNA_lip_permissive), "lipids\n")
+  cat("  Range: [", round(min(hepatocyte_cor_mat_RNA_lip_permissive, na.rm = TRUE), 3), ",",
+      round(max(hepatocyte_cor_mat_RNA_lip_permissive, na.rm = TRUE), 3), "]\n\n")
+
+  cat("Converting permissive correlation matrix to SIF network format...\n")
+  cat("  - Using top 33% MOFA features (vs. 2.5% for sparse network)\n")
+  cat("  - No correlation threshold filtering\n")
+  cat("  - No top N genes per lipid filtering\n")
+  cat("  - Includes ALL gene-lipid pairs from permissive feature set\n\n")
+
+  # Convert permissive correlation matrix to long format
   hepatocyte_cor_mat_RNA_lip_full_network <- reshape2::melt(
-    cbind(gene = rownames(hepatocyte_cor_mat_RNA_lip),
-          as.data.frame(hepatocyte_cor_mat_RNA_lip)),
+    cbind(gene = rownames(hepatocyte_cor_mat_RNA_lip_permissive),
+          as.data.frame(hepatocyte_cor_mat_RNA_lip_permissive)),
     id.vars = "gene"
   )
 
@@ -1331,9 +1415,9 @@ cat("    - results/mofa/factor_analysis/variance_explained_pheatmap.pdf\n")
 cat("    - results/mofa/factor_analysis/gonadal_enrichment_pheatmap.pdf\n")
 cat("    - results/mofa/factor_analysis/mofa_variance_explained_with_gonadal_enrichment.pdf\n")
 cat("  Networks:\n")
-cat("    - results/mofa/networks/gene_lipid_correlations_factor1.csv (full correlation matrix)\n")
-cat("    - results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv (Gene→Lipid edges, non-sparse, no filtering)\n")
-cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv (TF→Gene→Lipid edges, sparse)\n")
+cat("    - results/mofa/networks/gene_lipid_correlations_factor1.csv (full correlation matrix, top 2.5%)\n")
+cat("    - results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv (Gene→Lipid, non-sparse, top 33%)\n")
+cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv (TF→Gene→Lipid, sparse, top 2.5%)\n")
 cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv (node attributes)\n")
 cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv (lipid classes)\n")
 cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv (compressed nodes)\n")
