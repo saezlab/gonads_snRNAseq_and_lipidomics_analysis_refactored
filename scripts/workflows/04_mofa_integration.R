@@ -41,6 +41,8 @@
 #' - results/mofa/main_model_RNA_lipid_weight.RData: Weights + TF scores (computed from model)
 #' - results/mofa/factor_analysis/: Factor enrichment and publication figures
 #' - results/mofa/networks/: Gene-lipid correlation networks
+#'   - hepatocyte_gene_lipid_network_full_SIF.csv: Full (non-sparse) gene-lipid network
+#'   - hepatocyte_TF_gene_lipid_network_full_SIF.csv: Sparse TF-gene-lipid network
 
 library(dplyr)
 library(tidyr)
@@ -881,6 +883,54 @@ if (!is.null(hepatocyte_genes) && !is.null(lipid_features) &&
   cat("  results/mofa/networks/gene_lipid_correlations_factor1.csv\n\n")
 
   # ==============================================================================
+  # STEP 7b2: Create Full (Non-Sparse) Gene-Lipid Network in SIF Format
+  # ==============================================================================
+  cat(paste(rep("-", 80), collapse = ""), "\n")
+  cat("Creating full (non-sparse) gene-lipid network in SIF format...\n")
+  cat(paste(rep("-", 80), collapse = ""), "\n\n")
+
+  cat("Converting full correlation matrix to SIF network format...\n")
+  cat("  - No filtering by correlation threshold\n")
+  cat("  - No filtering to top N genes per lipid\n")
+  cat("  - Includes ALL gene-lipid pairs\n\n")
+
+  # Convert correlation matrix to long format (SIF: node1=gene, node2=lipid, mor=correlation)
+  hepatocyte_cor_mat_RNA_lip_full_network <- reshape2::melt(
+    cbind(gene = rownames(hepatocyte_cor_mat_RNA_lip),
+          as.data.frame(hepatocyte_cor_mat_RNA_lip)),
+    id.vars = "gene"
+  )
+
+  # Rename columns to match SIF format
+  names(hepatocyte_cor_mat_RNA_lip_full_network) <- c("node1", "node2", "mor")
+
+  # Convert factor columns to character
+  hepatocyte_cor_mat_RNA_lip_full_network$node1 <- as.character(hepatocyte_cor_mat_RNA_lip_full_network$node1)
+  hepatocyte_cor_mat_RNA_lip_full_network$node2 <- as.character(hepatocyte_cor_mat_RNA_lip_full_network$node2)
+
+  # Remove any rows with NA correlations (if present)
+  hepatocyte_cor_mat_RNA_lip_full_network <- hepatocyte_cor_mat_RNA_lip_full_network[
+    complete.cases(hepatocyte_cor_mat_RNA_lip_full_network),
+  ]
+
+  cat("✓ Full gene-lipid network created (non-sparse):\n")
+  cat("  Total edges:", nrow(hepatocyte_cor_mat_RNA_lip_full_network), "\n")
+  cat("  Unique genes:", length(unique(hepatocyte_cor_mat_RNA_lip_full_network$node1)), "\n")
+  cat("  Unique lipids:", length(unique(hepatocyte_cor_mat_RNA_lip_full_network$node2)), "\n")
+  cat("  Correlation range: [",
+      round(min(hepatocyte_cor_mat_RNA_lip_full_network$mor, na.rm = TRUE), 3), ", ",
+      round(max(hepatocyte_cor_mat_RNA_lip_full_network$mor, na.rm = TRUE), 3), "]\n\n")
+
+  # Save full network in SIF format
+  write_csv(hepatocyte_cor_mat_RNA_lip_full_network,
+            file = "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv")
+
+  cat("✓ Saved full (non-sparse) gene-lipid network:\n")
+  cat("  results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv\n")
+  cat("  Format: node1 (gene), node2 (lipid), mor (correlation)\n")
+  cat("  This network contains ALL gene-lipid correlations without filtering\n\n")
+
+  # ==============================================================================
   # STEP 7c: TF-Gene Correlations with Sparse Network
   # ==============================================================================
   cat(paste(rep("-", 80), collapse = ""), "\n")
@@ -1282,7 +1332,8 @@ cat("    - results/mofa/factor_analysis/gonadal_enrichment_pheatmap.pdf\n")
 cat("    - results/mofa/factor_analysis/mofa_variance_explained_with_gonadal_enrichment.pdf\n")
 cat("  Networks:\n")
 cat("    - results/mofa/networks/gene_lipid_correlations_factor1.csv (full correlation matrix)\n")
-cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv (TF→Gene→Lipid edges)\n")
+cat("    - results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv (Gene→Lipid edges, non-sparse, no filtering)\n")
+cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv (TF→Gene→Lipid edges, sparse)\n")
 cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv (node attributes)\n")
 cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv (lipid classes)\n")
 cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv (compressed nodes)\n")
