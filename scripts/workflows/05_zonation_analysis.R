@@ -489,7 +489,9 @@ cat("10. GENERATING ZONATION-SPECIFIC CORRELATION NETWORKS\n")
 cat(strrep("-", 80), "\n\n")
 
 cat("Building correlation networks for each zonation × gonad combination...\n")
-cat("Correlation threshold: 0.65\n\n")
+cat("Two versions will be generated:\n")
+cat("  1. Standard networks: correlation threshold = 0.65 (for visualization)\n")
+cat("  2. Full networks: correlation threshold = 0 (all correlations, lipid species only)\n\n")
 
 threshold_cor <- 0.65
 
@@ -522,6 +524,20 @@ cormat_testes_portal_ATT$type <- ifelse(cormat_testes_portal_ATT$gene %in% rowna
 
 write.csv(cormat_testes_portal, file = file.path(multiomics_dir, "cormat_testes_portal_SIF.csv"), row.names = FALSE)
 write.csv(cormat_testes_portal_ATT, file = file.path(multiomics_dir, "cormat_testes_portal_ATT.csv"), row.names = FALSE)
+
+# Generate full correlation network (threshold = 0) for non-compressed lipid species
+cat("  Generating full correlation network (threshold = 0)...\n")
+cormat_testes_portal_full <- as.data.frame(rbind(
+  make_cor_network(lipidomic_testes, scaled_RNA_testes_portal, theshold_cor = 0),
+  make_cor_network(scaled_RNA_testes_portal, TF_scores_df_testes_portal, theshold_cor = 0, TF = TRUE)
+))
+names(cormat_testes_portal_full) <- c("node1", "node2", "weight")
+cormat_testes_portal_full_ATT <- expand_attributes(cormat_testes_portal_full, t_table, TF_scores_df)
+cormat_testes_portal_full_ATT$type <- ifelse(cormat_testes_portal_full_ATT$gene %in% rownames(TF_scores_df), "TF",
+                                              ifelse(cormat_testes_portal_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
+
+write.csv(cormat_testes_portal_full, file = file.path(multiomics_dir, "cormat_testes_portal_full_SIF.csv"), row.names = FALSE)
+write.csv(cormat_testes_portal_full_ATT, file = file.path(multiomics_dir, "cormat_testes_portal_full_ATT.csv"), row.names = FALSE)
 
 # Create compressed version (aggregate by lipid class)
 cormat_testes_portal$node2 <- gsub("[(].*", "", cormat_testes_portal$node2)
@@ -564,6 +580,20 @@ cormat_testes_central_ATT$type <- ifelse(cormat_testes_central_ATT$gene %in% row
 write.csv(cormat_testes_central, file = file.path(multiomics_dir, "cormat_testes_central_SIF.csv"), row.names = FALSE)
 write.csv(cormat_testes_central_ATT, file = file.path(multiomics_dir, "cormat_testes_central_ATT.csv"), row.names = FALSE)
 
+# Generate full correlation network (threshold = 0) for non-compressed lipid species
+cat("  Generating full correlation network (threshold = 0)...\n")
+cormat_testes_central_full <- as.data.frame(rbind(
+  make_cor_network(lipidomic_testes, scaled_RNA_testes_central, theshold_cor = 0),
+  make_cor_network(scaled_RNA_testes_central, TF_scores_df_testes_central, theshold_cor = 0, TF = TRUE)
+))
+names(cormat_testes_central_full) <- c("node1", "node2", "weight")
+cormat_testes_central_full_ATT <- expand_attributes(cormat_testes_central_full, t_table, TF_scores_df)
+cormat_testes_central_full_ATT$type <- ifelse(cormat_testes_central_full_ATT$gene %in% rownames(TF_scores_df), "TF",
+                                               ifelse(cormat_testes_central_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
+
+write.csv(cormat_testes_central_full, file = file.path(multiomics_dir, "cormat_testes_central_full_SIF.csv"), row.names = FALSE)
+write.csv(cormat_testes_central_full_ATT, file = file.path(multiomics_dir, "cormat_testes_central_full_ATT.csv"), row.names = FALSE)
+
 # Create compressed version
 cormat_testes_central$node2 <- gsub("[(].*", "", cormat_testes_central$node2)
 cormat_testes_central$sign <- sign(cormat_testes_central$weight)
@@ -604,6 +634,20 @@ cormat_Ovaries_portal_ATT$type <- ifelse(cormat_Ovaries_portal_ATT$gene %in% row
 
 write.csv(cormat_Ovaries_portal, file = file.path(multiomics_dir, "cormat_Ovaries_portal_SIF.csv"), row.names = FALSE)
 write.csv(cormat_Ovaries_portal_ATT, file = file.path(multiomics_dir, "cormat_Ovaries_portal_ATT.csv"), row.names = FALSE)
+
+# Generate full correlation network (threshold = 0) for non-compressed lipid species
+cat("  Generating full correlation network (threshold = 0)...\n")
+cormat_Ovaries_portal_full <- as.data.frame(rbind(
+  make_cor_network(lipidomic_Ovaries, scaled_RNA_ovaries_portal, theshold_cor = 0),
+  make_cor_network(scaled_RNA_ovaries_portal, TF_scores_df_Ovaries_portal, theshold_cor = 0, TF = TRUE)
+))
+names(cormat_Ovaries_portal_full) <- c("node1", "node2", "weight")
+cormat_Ovaries_portal_full_ATT <- expand_attributes(cormat_Ovaries_portal_full, t_table, TF_scores_df)
+cormat_Ovaries_portal_full_ATT$type <- ifelse(cormat_Ovaries_portal_full_ATT$gene %in% rownames(TF_scores_df), "TF",
+                                               ifelse(cormat_Ovaries_portal_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
+
+write.csv(cormat_Ovaries_portal_full, file = file.path(multiomics_dir, "cormat_Ovaries_portal_full_SIF.csv"), row.names = FALSE)
+write.csv(cormat_Ovaries_portal_full_ATT, file = file.path(multiomics_dir, "cormat_Ovaries_portal_full_ATT.csv"), row.names = FALSE)
 
 # Create compressed version
 cormat_Ovaries_portal$node2 <- gsub("[(].*", "", cormat_Ovaries_portal$node2)
@@ -646,6 +690,20 @@ cormat_ova_central_ATT$type <- ifelse(cormat_ova_central_ATT$gene %in% rownames(
 write.csv(cormat_ova_central, file = file.path(multiomics_dir, "cormat_ova_central_SIF.csv"), row.names = FALSE)
 write.csv(cormat_ova_central_ATT, file = file.path(multiomics_dir, "cormat_ova_central_ATT.csv"), row.names = FALSE)
 
+# Generate full correlation network (threshold = 0) for non-compressed lipid species
+cat("  Generating full correlation network (threshold = 0)...\n")
+cormat_ova_central_full <- as.data.frame(rbind(
+  make_cor_network(lipidomic_Ovaries, scaled_RNA_ova_central, theshold_cor = 0),
+  make_cor_network(scaled_RNA_ova_central, TF_scores_df_ova_central, theshold_cor = 0, TF = TRUE)
+))
+names(cormat_ova_central_full) <- c("node1", "node2", "weight")
+cormat_ova_central_full_ATT <- expand_attributes(cormat_ova_central_full, t_table, TF_scores_df)
+cormat_ova_central_full_ATT$type <- ifelse(cormat_ova_central_full_ATT$gene %in% rownames(TF_scores_df), "TF",
+                                            ifelse(cormat_ova_central_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
+
+write.csv(cormat_ova_central_full, file = file.path(multiomics_dir, "cormat_ova_central_full_SIF.csv"), row.names = FALSE)
+write.csv(cormat_ova_central_full_ATT, file = file.path(multiomics_dir, "cormat_ova_central_full_ATT.csv"), row.names = FALSE)
+
 # Create compressed version
 cormat_ova_central$node2 <- gsub("[(].*", "", cormat_ova_central$node2)
 cormat_ova_central$sign <- sign(cormat_ova_central$weight)
@@ -664,12 +722,19 @@ write.csv(cormat_ova_central_ATT, file = file.path(multiomics_dir, "compressed_c
 cat("  ✓ Saved ovaries pericentral networks\n\n")
 
 cat("✓ All 4 zonation-specific correlation networks generated\n")
-cat("  Output files (8 files per network = 32 total):\n")
-cat("    - cormat_testes_portal_SIF.csv / ATT.csv\n")
-cat("    - cormat_testes_central_SIF.csv / ATT.csv\n")
-cat("    - cormat_Ovaries_portal_SIF.csv / ATT.csv\n")
-cat("    - cormat_ova_central_SIF.csv / ATT.csv\n")
-cat("    - compressed_* versions (aggregated by lipid class)\n\n")
+cat("  Output files (12 files per network = 48 total):\n")
+cat("    Standard networks (threshold = 0.65):\n")
+cat("      - cormat_testes_portal_SIF.csv / ATT.csv\n")
+cat("      - cormat_testes_central_SIF.csv / ATT.csv\n")
+cat("      - cormat_Ovaries_portal_SIF.csv / ATT.csv\n")
+cat("      - cormat_ova_central_SIF.csv / ATT.csv\n")
+cat("    Full networks (threshold = 0, lipid species only):\n")
+cat("      - cormat_testes_portal_full_SIF.csv / ATT.csv\n")
+cat("      - cormat_testes_central_full_SIF.csv / ATT.csv\n")
+cat("      - cormat_Ovaries_portal_full_SIF.csv / ATT.csv\n")
+cat("      - cormat_ova_central_full_SIF.csv / ATT.csv\n")
+cat("    Compressed networks (threshold = 0.65, lipid classes only):\n")
+cat("      - compressed_cormat_* (8 files, aggregated by lipid class)\n\n")
 
 ################################################################################
 # 11. LIPID-GENE ASSOCIATION HEATMAP BY ZONATION/GONAD CATEGORY
