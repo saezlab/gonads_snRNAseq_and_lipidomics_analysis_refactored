@@ -2,9 +2,13 @@ library(Seurat)
 library(readr)
 library(ggplot2)
 
+# Load compatibility functions for Seurat v4/v5
+source("scripts/seurat_compatibility.R")
+
 fcgl_pseudobulk_gonad <- readRDS("data/RNA/fcgl_pseudobulks_gonad_withxytwt.rds")
 
-scaled_RNA <- as.data.frame(fcgl_pseudobulk_gonad@assays$RNA@layers$scale.data)
+# Extract scaled data (compatible with both Seurat v4 and v5)
+scaled_RNA <- as.data.frame(get_layer_data(fcgl_pseudobulk_gonad, assay = "RNA", layer = "scale.data"))
 
 row.names(scaled_RNA) <- Features(fcgl_pseudobulk_gonad[["RNA"]])
 
@@ -21,4 +25,6 @@ write_csv(scaled_RNA[,c(1:80)], file = "data/RNA/scaled_RNA_withWT_1.csv")
 write_csv(scaled_RNA[,c(1,81:160)], file = "data/RNA/scaled_withWT_RNA_2.csv")
 write_csv(scaled_RNA[,c(1,161:241)], file = "data/RNA/scaled_withWT_RNA_3.csv")
 
+# Save metadata without row names to preserve column structure
+rownames(meta_data_df) <- NULL
 write_csv(meta_data_df, file = "data/RNA/meta_data_df_withWT.csv")

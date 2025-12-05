@@ -8,10 +8,13 @@ library(readr)
 library(readxl)
 library(dplyr)
 
-#' Load RNA Expression Data
+#' Load RNA Expression Data (Pseudobulk)
 #'
 #' Loads scaled RNA expression data, handling split files if necessary.
 #' The RNA data may be split across multiple CSV files due to GitHub size constraints.
+#'
+#' IMPORTANT: The data is ALREADY PSEUDOBULK. Each column represents one
+#' pseudobulk sample (one mouse × one cell type combination), NOT individual cells.
 #'
 #' @param data_dir Character. Path to directory containing RNA data files.
 #'                 Default: "data/RNA"
@@ -23,7 +26,9 @@ library(dplyr)
 #'                    Default: "scaled_RNA.csv"
 #' @param verbose Logical. Print progress messages. Default: TRUE
 #'
-#' @return Matrix with genes as rows and samples as columns. Row names are gene symbols.
+#' @return Matrix with genes as rows and pseudobulk samples as columns.
+#'         Row names are gene symbols.
+#'         Column names are pseudobulk sample IDs (e.g., "sx42_1_Hepatocytes_Ovaries").
 #'
 #' @details
 #' The function handles two scenarios:
@@ -31,9 +36,13 @@ library(dplyr)
 #' - Single file: Reads one CSV file
 #'
 #' Split files are expected to have:
-#' - File 1: gene column + samples 1 to n
-#' - File 2: gene column + samples n+1 to m
-#' - File 3: gene column + samples m+1 to end
+#' - File 1: gene column + pseudobulk samples 1 to n
+#' - File 2: gene column + pseudobulk samples n+1 to m
+#' - File 3: gene column + pseudobulk samples m+1 to end
+#'
+#' For the main FCG analysis:
+#' - ~215 pseudobulk samples (43 mice × 5 cell types)
+#' - Data is scaled (z-scored)
 #'
 #' @examples
 #' rna_data <- load_rna_data()  # Default: load from data/RNA, 3 split files
@@ -166,12 +175,22 @@ load_lipidomic_data <- function(file_path = "data/metabolomics/Lipid_data_file_J
 #' @return Data frame with sample metadata.
 #'
 #' @details
-#' When rna_metadata_file is provided:
-#' - Loads RNA metadata from CSV
-#' - Merges with overview data by sample_name (RNA) and sequencing_name (overview)
-#' - Removes 4th column from overview data (column without header in Excel)
+#' IMPORTANT: The Seurat objects in this project are ALREADY PSEUDOBULK.
+#' Each "cell" in the Seurat object represents one pseudobulk sample
+#' (one mouse × one cell type combination).
 #'
-#' When rna_metadata_file is NULL:
+#' When rna_metadata_file is provided (for RNA analysis):
+#' - Loads RNA metadata from CSV (pseudobulk level: ~215 samples)
+#'   - Columns: sample, sample_name, cell_type, gonadal_type
+#'   - Each row = one pseudobulk sample (e.g., "sx42-1_Hepatocytes_Ovaries")
+#' - Merges with overview data (mouse level: ~48 mice) to add:
+#'   - group (XXO, XXT, XYO, XYT, XYT-WT)
+#'   - allosome_type (XX, XY)
+#'   - body weight, liver weight, etc.
+#' - Merge is by sample_name (RNA) = sequencing_name (overview)
+#' - Handles dash/underscore conversion (RNA uses dashes, data uses underscores)
+#'
+#' When rna_metadata_file is NULL (for lipidomic analysis):
 #' - Only loads overview data
 #' - Renames first column to "sample"
 #'
@@ -200,9 +219,19 @@ load_metadata <- function(overview_file = "data/Suppl_Table_1_OverviewData.xlsx"
     if (verbose) cat("  Loading RNA metadata from:", rna_metadata_file, "\n")
     rna_metadata <- as.data.frame(read_csv(rna_metadata_file, show_col_types = FALSE))
 
-    # Merge by sample names
+    # Standardize sample names: convert dashes to underscores for matching
+    # RNA metadata has "sx42-1" while overview has "sx42_1"
+    # IMPORTANT: Only normalize for MERGING, don't modify the "sample" column
+    # because it needs to match the RNA data column names which use dashes
+    rna_metadata$sample_name_normalized <- gsub("-", "_", rna_metadata$sample_name)
+    overview_data$sequencing_name_normalized <- gsub("-", "_", overview_data$sequencing_name)
+
+    # Merge by normalized sample names
     metadata <- merge(rna_metadata, overview_data,
-                     by.x = "sample_name", by.y = "sequencing_name")
+                     by.x = "sample_name_normalized", by.y = "sequencing_name_normalized")
+
+    # Remove temporary normalized columns
+    metadata$sample_name_normalized <- NULL
   } else {
     # For lipidomic analysis: select columns directly (don't remove column 4 first)
     metadata <- overview_data[, c(2, 3, 4, 5)]  # Select relevant columns
@@ -227,26 +256,41 @@ load_metadata <- function(overview_file = "data/Suppl_Table_1_OverviewData.xlsx"
 }
 
 
-#' Prepare Pseudobulk Data for a Specific Cell Type
+#' Filter Pseudobulk Data by Cell Type
 #'
-#' Subsets RNA expression data to samples of a specific cell type.
+#' Subsets already-pseudobulk RNA expression data to samples of a specific cell type.
 #'
-#' @param rna_data Matrix. RNA expression data (genes x samples).
-#' @param metadata Data frame. Sample metadata with columns "sample" and "cell_type".
+#' IMPORTANT: The input data is ALREADY PSEUDOBULK. This function does NOT create
+#' pseudobulk from single-cell data. It simply filters the pseudobulk samples to
+#' keep only those from a specific cell type.
+#'
+#' @param rna_data Matrix. Pseudobulk RNA expression data (genes x pseudobulk samples).
+#'                 Each column is one pseudobulk sample (mouse × cell type).
+#' @param metadata Data frame. Pseudobulk sample metadata with columns "sample" and "cell_type".
+#'                 Each row is one pseudobulk sample.
 #' @param cell_type Character. Cell type to extract (e.g., "Hepatocytes").
 #' @param verbose Logical. Print progress messages. Default: TRUE
 #'
-#' @return Matrix with genes as rows and samples of the specified cell type as columns.
+#' @return List with two components:
+#'   - data: Matrix with genes as rows and pseudobulk samples of the specified
+#'           cell type as columns
+#'   - targets: Data frame with metadata for the selected pseudobulk samples
 #'
 #' @examples
+#' # Filter to hepatocyte pseudobulk samples only
 #' hepatocyte_data <- prepare_pseudobulk(rna_data, metadata, "Hepatocytes")
+#' expr_matrix <- hepatocyte_data$data  # Genes x hepatocyte samples
+#' sample_info <- hepatocyte_data$targets  # Metadata for hepatocyte samples
 prepare_pseudobulk <- function(rna_data, metadata, cell_type, verbose = TRUE) {
 
   if (verbose) cat("Preparing pseudobulk data for:", cell_type, "\n")
 
-  # Get samples for this cell type
-  samples_in_celltype <- metadata %>%
-    filter(cell_type == !!cell_type) %>%
+  # Get metadata for this cell type
+  targets_filtered <- metadata %>%
+    filter(cell_type == !!cell_type)
+
+  # Get sample identifiers
+  samples_in_celltype <- targets_filtered %>%
     pull(sample)
 
   # Subset RNA data
@@ -256,7 +300,11 @@ prepare_pseudobulk <- function(rna_data, metadata, cell_type, verbose = TRUE) {
     cat("  Samples in", cell_type, ":", ncol(pseudobulk_data), "\n")
   }
 
-  return(pseudobulk_data)
+  # Return list with data and targets
+  return(list(
+    data = pseudobulk_data,
+    targets = targets_filtered
+  ))
 }
 
 

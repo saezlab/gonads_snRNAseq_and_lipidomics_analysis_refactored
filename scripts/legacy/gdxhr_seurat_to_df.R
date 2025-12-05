@@ -1,9 +1,13 @@
 library(Seurat)
 library(readr)
 
+# Load compatibility functions for Seurat v4/v5
+source("scripts/seurat_compatibility.R")
+
 gdxhr_heps_zonationsubclustered <- readRDS("data/RNA/gdxhr_pseudobulks.rds")
 
-scaled_RNA <- as.data.frame(gdxhr_heps_zonationsubclustered@assays$RNA@layers$scale.data)
+# Extract scaled data (compatible with both Seurat v4 and v5)
+scaled_RNA <- as.data.frame(get_layer_data(gdxhr_heps_zonationsubclustered, assay = "RNA", layer = "scale.data"))
 
 row.names(scaled_RNA) <- Features(gdxhr_heps_zonationsubclustered[["RNA"]])
 
@@ -20,4 +24,6 @@ write_csv(scaled_RNA[,c(1:70)], file = "data/RNA/scaled_RNA_gdxhr_1.csv")
 write_csv(scaled_RNA[,c(1,71:140)], file = "data/RNA/scaled_RNA_gdxhr_2.csv")
 write_csv(scaled_RNA[,c(1,141:191)], file = "data/RNA/scaled_RNA_gdxhr_3.csv")
 
+# Save metadata without row names to preserve column structure
+rownames(meta_data_df) <- NULL
 write_csv(meta_data_df, file = "data/RNA/meta_data_df_gdxhr.csv")

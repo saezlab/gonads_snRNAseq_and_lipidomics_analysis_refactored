@@ -55,7 +55,7 @@ CONTRASTS <- list(
   allosome_type = list(
     name = "XY vs XX",
     group_variable = "allosome_type",
-    vector = c(-1, 2),
+    vector = c(2, -1),
     description = "Effect of sex chromosomes (Y chromosome vs. second X)",
     interpretation = "Positive logFC = higher in XY, negative logFC = higher in XX",
     colors = list(

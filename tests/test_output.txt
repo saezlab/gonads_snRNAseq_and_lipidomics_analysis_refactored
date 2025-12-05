@@ -1,0 +1,637 @@
+
+================================================================================
+INTERACTIVE WORKFLOW TESTING
+================================================================================
+
+
+================================================================================
+WORKFLOW 1: Data Preparation & QC
+================================================================================
+
+Script: workflows/01_data_preparation_qc.R 
+
+Running workflow...
+================================================================================ 
+WORKFLOW 1: DATA PREPARATION AND QUALITY CONTROL
+================================================================================ 
+
+Analysis configuration loaded successfully.
+  - Statistical thresholds: adj.P.Val < 0.05 
+  - MOFA optimal factors: 12 
+  - Random seed: 42 
+
+-------------------------------------------------------------------------------- 
+2. LOADING SEURAT OBJECT
+-------------------------------------------------------------------------------- 
+
+Loading Seurat object from: data/RNA/fcgl_pseudobulk_gonad_20241023.rds 
+This may take several minutes for large datasets...
+
+Seurat object loaded successfully!
+
+Seurat object information:
+  NOTE: This is a PSEUDOBULK object (not single-cell data)
+  Pseudobulk samples (sample × cell type): 215 
+  Genes: 20123 
+  Assays: RNA 
+
+  Available data slots:
+    Assay class: Assay5 
+    Available layers: counts, data, scale.data 
+    - counts: ✓ 
+    - data: ✓ 
+    - scale.data: ✓ 
+
+  Metadata columns:
+    orig.ident, sample_name, cell_type, gonadal_type 
+
+-------------------------------------------------------------------------------- 
+3. EXTRACTING METADATA
+-------------------------------------------------------------------------------- 
+
+Metadata extracted:
+  NOTE: Each row is a pseudobulk SAMPLE (not individual cells)
+  Rows (pseudobulk samples): 215 
+  Columns: 4 
+
+Checking for expected metadata columns in raw Seurat object:
+  ✓ cell_type found
+  ✓ gonadal_type found
+  ✗ sample column NOT FOUND
+    → Creating 'sample' column from rownames
+
+NOTE: Additional columns (group, allosome_type, etc.) will be added
+      by merging with overview data in downstream workflows.
+
+Pseudobulk sample summary:
+  Total pseudobulk samples: 215 
+
+  Cell types represented:
+
+   Cholangiocytes Endothelial cells       Hepatocytes      Immune cells 
+               43                43                43                43 
+   Stellate cells 
+               43 
+
+  Unique biological samples (mice): 43 
+  Expected pseudobulk samples: 43 × 5 = 215 
+  Actual pseudobulk samples: 215 
+
+  Gonadal types:
+
+Ovaries  Testes 
+    105     110 
+
+
+Saving metadata to: data/RNA/meta_data_df.csv 
+
+-------------------------------------------------------------------------------- 
+4. QUALITY CONTROL METRICS
+-------------------------------------------------------------------------------- 
+
+Computing quality control metrics for pseudobulk data...
+
+Pseudobulk samples per biological sample:
+  Total biological samples: 43 
+  Mean pseudobulk samples per bio sample: 5 
+  Median: 5 
+  Range: 5 - 5 
+
+  Saved: results/qc/pseudobulk_per_biosample.pdf
+
+Pseudobulk samples per cell type:
+# A tibble: 5 × 2
+  cell_type         n_pseudobulk
+  <chr>                    <int>
+1 Cholangiocytes              43
+2 Endothelial cells           43
+3 Hepatocytes                 43
+4 Immune cells                43
+5 Stellate cells              43
+
+  Saved: results/qc/pseudobulk_per_celltype.pdf
+
+Biological sample (mouse) × cell type design matrix (first 10 rows):
+# A tibble: 10 × 6
+   sample_name Cholangiocytes `Endothelial cells` Hepatocytes `Immune cells`
+   <chr>                <int>               <int>       <int>          <int>
+ 1 sx42-1                   1                   1           1              1
+ 2 sx42-10                  1                   1           1              1
+ 3 sx42-11                  1                   1           1              1
+ 4 sx42-12                  1                   1           1              1
+ 5 sx42-13                  1                   1           1              1
+ 6 sx42-14                  1                   1           1              1
+ 7 sx42-16                  1                   1           1              1
+ 8 sx42-17                  1                   1           1              1
+ 9 sx42-18                  1                   1           1              1
+10 sx42-19                  1                   1           1              1
+# ℹ 1 more variable: `Stellate cells` <int>
+
+  Saved: results/qc/sample_celltype_design.csv
+
+-------------------------------------------------------------------------------- 
+5. EXTRACTING SCALED EXPRESSION DATA
+-------------------------------------------------------------------------------- 
+
+Extracting scaled expression matrix...
+  Genes: 20123 
+  Pseudobulk samples: 215 
+  Matrix size: 34.3 Mb 
+
+Converting to data frame...
+  Samples matching metadata: 215 / 215 
+
+-------------------------------------------------------------------------------- 
+6. VERIFYING PSEUDOBULK DATA STRUCTURE
+-------------------------------------------------------------------------------- 
+
+NOTE: Data is already in pseudobulk format (no aggregation needed).
+Each column represents a biological sample × cell type combination.
+
+Pseudobulk sample naming format: [MouseID]_[CellType]_[GonadType]
+Example: sx42-1_Hepatocytes_Ovaries sx42-1_Endothelial cells_Ovaries sx42-1_Immune cells_Ovaries 
+
+Pseudobulk data summary:
+  Genes: 20123 
+  Pseudobulk samples: 215 
+  Cell types: 5 
+  Biological samples (mice): 43 
+  Expected total: 43 × 5 = 215 
+
+-------------------------------------------------------------------------------- 
+7. SAVING DATA FILES
+-------------------------------------------------------------------------------- 
+
+Splitting data into 3 files (GitHub size constraint)...
+
+File 1: 6708 genes
+File 2: 6708 genes
+File 3: 6707 genes
+
+Saving data files...
+  Saved: data/RNA/scaled_RNA_1.csv ( 25 MB)
+  Saved: data/RNA/scaled_RNA_2.csv ( 25 MB)
+  Saved: data/RNA/scaled_RNA_3.csv ( 25 MB)
+
+-------------------------------------------------------------------------------- 
+8. EXPLORATORY ANALYSIS
+-------------------------------------------------------------------------------- 
+
+Creating PCA plots for quality control...
+
+  Processing Hepatocytes ...
+                                  pc1        pc2       pc3 condition
+sx42-1_Hepatocytes_Ovaries  -18.14578 -27.614564 -25.22963   Ovaries
+sx42-10_Hepatocytes_Testes   55.27109 -44.304704 -13.04855    Testes
+sx42-11_Hepatocytes_Ovaries -30.60104  20.280230 -10.43477   Ovaries
+sx42-12_Hepatocytes_Ovaries -15.33733   6.579668 -10.55208   Ovaries
+sx42-13_Hepatocytes_Testes   44.22167  12.063101  12.46960    Testes
+sx42-14_Hepatocytes_Testes   30.03762  15.864711  27.61847    Testes
+                                                 sample
+sx42-1_Hepatocytes_Ovaries   sx42-1_Hepatocytes_Ovaries
+sx42-10_Hepatocytes_Testes   sx42-10_Hepatocytes_Testes
+sx42-11_Hepatocytes_Ovaries sx42-11_Hepatocytes_Ovaries
+sx42-12_Hepatocytes_Ovaries sx42-12_Hepatocytes_Ovaries
+sx42-13_Hepatocytes_Testes   sx42-13_Hepatocytes_Testes
+sx42-14_Hepatocytes_Testes   sx42-14_Hepatocytes_Testes
+    Saved: results/qc/PCA_Hepatocytes.pdf
+  Processing Endothelial cells ...
+                                         pc1        pc2         pc3 condition
+sx42-1_Endothelial cells_Ovaries  -80.532945 -20.953880  75.4468503   Ovaries
+sx42-10_Endothelial cells_Testes  -57.595858  11.075354 -50.2148510    Testes
+sx42-11_Endothelial cells_Ovaries -27.202101  -8.542294  10.1986450   Ovaries
+sx42-12_Endothelial cells_Ovaries  13.815909 -13.426922   0.4887637   Ovaries
+sx42-13_Endothelial cells_Testes    1.644381 -41.202929 -15.6694859    Testes
+sx42-14_Endothelial cells_Testes   13.104202 -10.672721  -2.3212960    Testes
+                                                             sample
+sx42-1_Endothelial cells_Ovaries   sx42-1_Endothelial cells_Ovaries
+sx42-10_Endothelial cells_Testes   sx42-10_Endothelial cells_Testes
+sx42-11_Endothelial cells_Ovaries sx42-11_Endothelial cells_Ovaries
+sx42-12_Endothelial cells_Ovaries sx42-12_Endothelial cells_Ovaries
+sx42-13_Endothelial cells_Testes   sx42-13_Endothelial cells_Testes
+sx42-14_Endothelial cells_Testes   sx42-14_Endothelial cells_Testes
+    Saved: results/qc/PCA_Endothelial_cells.pdf
+  Processing Immune cells ...
+                                   pc1        pc2       pc3 condition
+sx42-1_Immune cells_Ovaries  -74.21406  -6.713775 10.580690   Ovaries
+sx42-10_Immune cells_Testes  -34.37922 -45.982355 26.641973    Testes
+sx42-11_Immune cells_Ovaries -21.10788   7.784313 -4.985291   Ovaries
+sx42-12_Immune cells_Ovaries  16.17661  16.938982  9.704061   Ovaries
+sx42-13_Immune cells_Testes   10.58580 -28.791742 -2.864623    Testes
+sx42-14_Immune cells_Testes   32.51658 -13.869693 -3.898529    Testes
+                                                   sample
+sx42-1_Immune cells_Ovaries   sx42-1_Immune cells_Ovaries
+sx42-10_Immune cells_Testes   sx42-10_Immune cells_Testes
+sx42-11_Immune cells_Ovaries sx42-11_Immune cells_Ovaries
+sx42-12_Immune cells_Ovaries sx42-12_Immune cells_Ovaries
+sx42-13_Immune cells_Testes   sx42-13_Immune cells_Testes
+sx42-14_Immune cells_Testes   sx42-14_Immune cells_Testes
+    Saved: results/qc/PCA_Immune_cells.pdf
+  Processing Stellate cells ...
+                                     pc1       pc2       pc3 condition
+sx42-1_Stellate cells_Ovaries  -61.54776 -20.12373  50.20731   Ovaries
+sx42-10_Stellate cells_Testes  -69.96456  40.58510 -82.12218    Testes
+sx42-11_Stellate cells_Ovaries -26.72784 -37.57575  20.91629   Ovaries
+sx42-12_Stellate cells_Ovaries  13.35334 -13.15819 -10.95082   Ovaries
+sx42-13_Stellate cells_Testes    1.99126 -41.80623 -21.12221    Testes
+sx42-14_Stellate cells_Testes   12.65429 -18.46039 -11.37829    Testes
+                                                       sample
+sx42-1_Stellate cells_Ovaries   sx42-1_Stellate cells_Ovaries
+sx42-10_Stellate cells_Testes   sx42-10_Stellate cells_Testes
+sx42-11_Stellate cells_Ovaries sx42-11_Stellate cells_Ovaries
+sx42-12_Stellate cells_Ovaries sx42-12_Stellate cells_Ovaries
+sx42-13_Stellate cells_Testes   sx42-13_Stellate cells_Testes
+sx42-14_Stellate cells_Testes   sx42-14_Stellate cells_Testes
+    Saved: results/qc/PCA_Stellate_cells.pdf
+  Processing Cholangiocytes ...
+                                       pc1        pc2         pc3 condition
+sx42-1_Cholangiocytes_Ovaries    -8.471864   2.003198  -16.831568   Ovaries
+sx42-10_Cholangiocytes_Testes   -57.181790  33.277772   21.195203    Testes
+sx42-11_Cholangiocytes_Ovaries -103.910896  70.125449 -114.315703   Ovaries
+sx42-12_Cholangiocytes_Ovaries   -5.340248  -9.297168    1.556309   Ovaries
+sx42-13_Cholangiocytes_Testes    -6.963644  -7.332506   11.204944    Testes
+sx42-14_Cholangiocytes_Testes    -1.814223 -14.833337   -1.094573    Testes
+                                                       sample
+sx42-1_Cholangiocytes_Ovaries   sx42-1_Cholangiocytes_Ovaries
+sx42-10_Cholangiocytes_Testes   sx42-10_Cholangiocytes_Testes
+sx42-11_Cholangiocytes_Ovaries sx42-11_Cholangiocytes_Ovaries
+sx42-12_Cholangiocytes_Ovaries sx42-12_Cholangiocytes_Ovaries
+sx42-13_Cholangiocytes_Testes   sx42-13_Cholangiocytes_Testes
+sx42-14_Cholangiocytes_Testes   sx42-14_Cholangiocytes_Testes
+    Saved: results/qc/PCA_Cholangiocytes.pdf
+
+Exploratory analysis complete.
+
+-------------------------------------------------------------------------------- 
+9. DATA VALIDATION
+-------------------------------------------------------------------------------- 
+
+Performing data validation checks...
+
+  Missing values: 0 % ✓ 
+  Infinite values: 0 ✓ 
+  Zero-variance genes: 521 / 20123 (2.59%) 
+  Complete samples (no NAs): 215 / 215 
+  Data range: -6.171 to 10 
+  Duplicated gene names: 0 ✓ 
+  Duplicated sample names: 0 ✓ 
+
+  ✓✓✓ ALL VALIDATION CHECKS PASSED ✓✓✓
+
+-------------------------------------------------------------------------------- 
+10. GENERATING QC REPORT
+-------------------------------------------------------------------------------- 
+
+QC report saved to: results/qc/data_quality_report.txt 
+
+================================================================================ 
+DATA PREPARATION AND QC WORKFLOW COMPLETE
+================================================================================ 
+
+Summary:
+  ✓ Pseudobulk Seurat object loaded and processed
+  ✓ Metadata extracted and saved
+  ✓ Pseudobulk data verified (already aggregated)
+  ✓ Data split into 3 files for GitHub
+  ✓ Quality control plots generated
+  ✓ Data validation completed
+  ✓ QC report generated
+
+Output files:
+  - data/RNA/scaled_RNA_1.csv
+  - data/RNA/scaled_RNA_2.csv
+  - data/RNA/scaled_RNA_3.csv
+  - data/RNA/meta_data_df.csv
+  - results/qc/ (QC plots and reports)
+
+Next steps:
+  Run workflow 02: Pseudobulk differential analysis
+  source('workflows/02_fcg_pseudobulk_analysis.R')
+
+This workflow provides the foundation data for all subsequent analyses.
+
+================================================================================ 
+
+
+Completed in 20.9 seconds
+✓ Workflow completed successfully
+
+Checking outputs:
+  [✗] Data summary report
+      Missing: results/qc/data_summary.txt
+  [✓] RNA data part 1
+      File: data/RNA/scaled_RNA_1.csv (26,299,945 bytes)
+  [✓] RNA data part 2
+      File: data/RNA/scaled_RNA_2.csv (25,955,455 bytes)
+  [✓] RNA data part 3
+      File: data/RNA/scaled_RNA_3.csv (25,973,141 bytes)
+  [✓] RNA metadata
+      File: data/RNA/meta_data_df.csv (28,598 bytes)
+[1] TRUE
+
+================================================================================
+WORKFLOW 2: FCG Pseudobulk RNA-seq Analysis
+================================================================================
+
+Script: workflows/02_fcg_pseudobulk_analysis.R 
+
+Running workflow...
+
+================================================================================ 
+FCG PSEUDOBULK RNA-SEQ ANALYSIS - REFACTORED WORKFLOW
+================================================================================ 
+
+This workflow replicates pseudobulk_DA.R using refactored modular functions.
+All results are IDENTICAL to the original analysis.
+
+================================================================================ 
+STEP 1: Loading Data
+================================================================================ 
+
+Loading RNA expression data...
+Loading split RNA data files...
+  Loading: data/RNA/scaled_RNA_1.csv 
+  Loading: data/RNA/scaled_RNA_2.csv 
+  Loading: data/RNA/scaled_RNA_3.csv 
+RNA data loaded successfully:
+  Genes: 0 
+  Samples: 645 
+
+Loading metadata...
+Loading sample metadata...
+  Loading overview data from: data/Suppl_Table_1_OverviewData.xlsx 
+  Loading RNA metadata from: data/RNA/meta_data_df.csv 
+Metadata loaded successfully:
+  Samples: 215 
+  Cell types: Hepatocytes, Endothelial cells, Immune cells, Stellate cells, Cholangiocytes 
+
+Data loaded successfully!
+  RNA: 0 genes x 645 samples
+  Metadata: 215 samples
+  Cell types: Hepatocytes, Endothelial cells, Immune cells, Stellate cells, Cholangiocytes 
+
+================================================================================ 
+STEP 2: Exploratory PCA Analysis
+================================================================================ 
+
+Creating PCA plots for all cell types to assess data quality...
+
+  Processing: Hepatocytes ...
+
+Completed in 13.8 seconds
+✗ Workflow FAILED with error:
+   arguments imply differing number of rows: 0, 43 
+
+================================================================================
+WORKFLOW 3: FCG Lipidomic Analysis
+================================================================================
+
+Script: workflows/03_fcg_lipidomic_analysis.R 
+
+Running workflow...
+
+================================================================================ 
+FCG LIPIDOMIC ANALYSIS - REFACTORED WORKFLOW
+================================================================================ 
+
+This workflow replicates lipidomic_DA.R using refactored modular functions.
+All results are IDENTICAL to the original analysis.
+
+================================================================================ 
+STEP 1: Loading Lipidomic Data
+================================================================================ 
+
+Loading lipidomic data...
+Loading lipidomic data from: data/metabolomics/Lipid_data_file_JPC_cleaned.csv 
+  Applying log2 transformation...
+  Cleaning sample names...
+Lipidomic data loaded successfully:
+  Lipids: 1254 
+  Samples: 48 
+
+Loading metadata...
+Loading sample metadata...
+  Loading overview data from: data/Suppl_Table_1_OverviewData.xlsx 
+Metadata loaded successfully:
+  Samples: 48 
+
+Data loaded successfully!
+  Lipids: 1254 features x 48 samples
+  Metadata: 48 samples
+  Groups: XXO, XYT, XYO, XXT, XYT-WT 
+
+================================================================================ 
+STEP 2: Exploratory PCA Analysis
+================================================================================ 
+
+Creating PCA plot to assess data structure...
+
+  Running PCA...
+               pc1        pc2        pc3 condition  sample
+sx42_5  -14.326295  -8.649270 -14.970354    Testes  sx42_5
+sx42_9  -18.338394 -15.883847  -5.235537    Testes  sx42_9
+sx42_15 -15.962274   2.913018 -11.804140    Testes sx42_15
+sx42_20  -6.427128   6.554739 -13.388054    Testes sx42_20
+sx42_26 -16.729604   5.915723 -14.051629    Testes sx42_26
+sx42_1   26.045365 -15.566289  -8.239891   Ovaries  sx42_1
+PCA grid saved to: results/lipidomic/pca/pca_lipidomic_gonadal_type.pdf 
+PCA analysis complete! Plot saved to results/lipidomic/pca/
+  Key observation: PC1 (~40% variance) separates by gonadal type
+
+================================================================================ 
+STEP 3: Differential Analysis
+================================================================================ 
+
+Running differential analysis for 3 contrasts...
+
+
+Completed in 6.0 seconds
+✗ Workflow FAILED with error:
+   unable to find an inherited method for function 'select' for signature 'x = "data.frame"' 
+
+================================================================================
+WORKFLOW 4: MOFA Multi-Omic Integration
+================================================================================
+
+Script: workflows/04_mofa_integration.R 
+
+Running workflow...
+
+================================================================================ 
+FCG MULTI-OMIC INTEGRATION WITH MOFA - REFACTORED WORKFLOW
+================================================================================ 
+
+⚠️  CRITICAL WORKFLOW - Most innovative analysis in manuscript ⚠️
+
+This workflow integrates RNA (5 cell types) + Lipidomics (1,254 lipids)
+to identify coordinated hormone-dependent multi-omic patterns.
+
+================================================================================ 
+STEP 1: Preparing MOFA Input
+================================================================================ 
+
+Loading data and preparing MOFA input format...
+
+Loading RNA expression data...
+Loading lipidomic data...
+
+Data loaded:
+  RNA: 0 genes x 645 samples
+  Lipidomic: 1254 lipids x 48 samples
+
+Preparing MOFA input (long format)...
+  This creates 6 views: 5 RNA (cell types) + 1 lipidomic
+
+Preparing MOFA input data...
+  RNA data: 0 genes x 645 samples
+  Lipidomic data: 1254 lipids x 48 samples
+  RNA long format: 0 rows
+  RNA views:  
+  Lipidomic long format: 60192 rows
+  Combined MOFA data: 60192 rows
+  Samples: 48 
+  Features: 1254 
+  Views: lipidomic 
+
+✓ MOFA input prepared!
+  Format: Long (sample, feature, view, value)
+  Total data points: 60192 
+  This input is IDENTICAL to legacy code (validated)
+
+Saved: results/mofa/MOFA_data.RData
+
+================================================================================ 
+STEP 2: MOFA Model Training
+================================================================================ 
+
+NOTE: MOFA model training takes 1-2 hours for factor range 5-15.
+Options:
+  1. Use pre-trained models if available (recommended)
+  2. Train new models (requires MOFA2 package)
+
+No pre-trained models found.
+MOFA2 is available. Do you want to train models?
+  (This will take 1-2 hours)
+
+Skipping model training.
+
+================================================================================ 
+STEP 3: Model Selection
+================================================================================ 
+
+Optimal model selection (based on manuscript analysis):
+  Model: model12 (12 factors)
+  Rationale: Best balance of explained variance vs. interpretability
+  Selection based on:
+    - Total variance explained
+    - Factor interpretability
+    - Biological coherence
+
+⚠ Optimal model file not found: results/mofa/RNA/model12.hdf5 
+  Using pre-computed weights from legacy analysis.
+
+================================================================================ 
+STEP 4: Extract Factor Weights and Scores
+================================================================================ 
+
+Loading MOFA weights from: results/mofa/main_model_RNA_lipid_weight.RData 
+✓ Weights loaded!
+  Views: Cholangiocytes, Endothelial cells, Hepatocytes, Immune cells, Stellate cells, lipidomic, Hepatocytes_TFs 
+  This includes TF-enriched weights (Hepatocytes_TFs)
+
+================================================================================ 
+STEP 5: Factor Enrichment for Gonadal Type
+================================================================================ 
+
+Testing which factors are associated with gonadal hormone effects...
+
+
+Completed in 7.4 seconds
+✗ Workflow FAILED with error:
+   unable to find an inherited method for function 'select' for signature 'x = "data.frame"' 
+
+================================================================================
+WORKFLOW 5: Zonation-Specific Analysis
+================================================================================
+
+Script: workflows/05_zonation_analysis.R 
+
+Running workflow...
+================================================================================ 
+WORKFLOW 5: HEPATOCYTE ZONATION ANALYSIS
+================================================================================ 
+
+Analysis configuration loaded successfully.
+  - Statistical thresholds: adj.P.Val < 0.05 
+  - MOFA optimal factors: 12 
+  - Random seed: 42 
+
+-------------------------------------------------------------------------------- 
+2. LOADING DATA
+-------------------------------------------------------------------------------- 
+
+Loading RNA expression data...
+  Loaded 0 genes x 645 samples
+Loading sample metadata...
+  Loaded metadata for 215 cells
+
+Checking zonation marker genes:
+  Pericentral markers:
+    ✗ Cyp2e1 NOT FOUND
+    ✗ Glul NOT FOUND
+  Periportal markers:
+    ✗ Cyp2f2 NOT FOUND
+    ✗ Gls2 NOT FOUND
+    ✗ Hal NOT FOUND
+    ✗ Sds NOT FOUND
+
+-------------------------------------------------------------------------------- 
+3. DEFINING HEPATOCYTE ZONES
+-------------------------------------------------------------------------------- 
+
+Total hepatocytes: 43 
+
+Completed in 4.3 seconds
+✗ Workflow FAILED with error:
+   No pericentral markers found in data! 
+
+================================================================================
+WORKFLOW 6: Lipid Structural Analysis
+================================================================================
+
+Script: workflows/06_structural_analysis.R 
+
+Running workflow...
+================================================================================ 
+WORKFLOW 6: LIPID STRUCTURAL ANALYSIS
+================================================================================ 
+
+Analysis configuration loaded successfully.
+  - Statistical thresholds: adj.P.Val < 0.05 
+  - MOFA optimal factors: 12 
+  - Random seed: 42 
+
+Completed in 0.1 seconds
+✗ Workflow FAILED with error:
+   cannot open the connection 
+
+================================================================================
+TEST SUMMARY
+================================================================================
+
+Total workflows tested: 6
+Successful: 1
+Failed: 5
+
+Workflow Status:
+  Workflow 1: ✓ PASS
+  Workflow 2: ✗ FAIL
+  Workflow 3: ✗ FAIL
+  Workflow 4: ✗ FAIL
+  Workflow 5: ✗ FAIL
+  Workflow 6: ✗ FAIL
+
+✗ SOME WORKFLOWS FAILED - Please review errors above
+
+================================================================================
+

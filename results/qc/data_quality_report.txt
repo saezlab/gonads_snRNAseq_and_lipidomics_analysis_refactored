@@ -1,0 +1,56 @@
+================================================================================ 
+DATA QUALITY CONTROL REPORT
+================================================================================ 
+
+Generated: 2025-12-04 16:28:00 
+Workflow: 01_data_preparation_qc.R
+
+DATASET OVERVIEW
+-------------------------------------------------------------------------------- 
+NOTE: This is PSEUDOBULK data (sample × cell type combinations)
+Total pseudobulk samples: 215 
+Total genes: 20123 
+Biological samples (mice): 43 
+Cell types: 5 
+Experimental groups: (not available in raw metadata)
+
+PSEUDOBULK SAMPLES BY CELL TYPE
+-------------------------------------------------------------------------------- 
+# A tibble: 5 × 3
+  cell_type         n_pseudobulk   pct
+  <chr>                    <int> <dbl>
+1 Cholangiocytes              43    20
+2 Endothelial cells           43    20
+3 Hepatocytes                 43    20
+4 Immune cells                43    20
+5 Stellate cells              43    20
+
+PSEUDOBULK SAMPLES BY EXPERIMENTAL GROUP
+-------------------------------------------------------------------------------- 
+
+VALIDATION RESULTS
+-------------------------------------------------------------------------------- 
+Missing values:         0 %
+Infinite values:        0 
+Zero-variance genes:    521 
+Complete samples:       215 / 216 
+Data range:             -6.171 to 10 
+Duplicated genes:       0 
+Duplicated samples:     0 
+
+FILES GENERATED
+-------------------------------------------------------------------------------- 
+data/RNA/scaled_RNA_1.csv
+data/RNA/scaled_RNA_2.csv
+data/RNA/scaled_RNA_3.csv
+data/RNA/meta_data_df.csv
+results/qc/pseudobulk_per_biosample.pdf
+results/qc/pseudobulk_per_celltype.pdf
+results/qc/sample_celltype_design.csv
+results/qc/experimental_design.csv
+results/qc/PCA_all_samples_by_celltype.pdf
+results/qc/PCA_[celltype].pdf (for each cell type)
+
+================================================================================ 
+END OF REPORT
+================================================================================ 

@@ -24,6 +24,50 @@ This repository contains analysis code for **"Gonadal hormone coordination of se
 - How do gonadal hormones coordinate cell type-specific gene expression and tissue lipid abundance?
 - What is the role of liver spatial zonation in sex-specific physiology?
 
+## Development Best Practices for Claude Code
+
+**⚠️ CRITICAL: Always test scripts after modifications! ⚠️**
+
+When modifying any R script in this repository, you MUST:
+
+1. **Run the script immediately after making changes** to catch bugs early
+   - Use: `Rscript workflows/[script_name].R` or `source("workflows/[script_name].R")`
+   - Don't wait until multiple changes accumulate
+   - Small bugs compound quickly in data analysis pipelines
+
+2. **Use explicit namespace qualification for tidyverse functions** to avoid conflicts:
+   - `dplyr::select()`, `dplyr::filter()`, `dplyr::arrange()`, `dplyr::mutate()`
+   - `tidyr::pivot_longer()`, `tidyr::pivot_wider()`
+   - Common conflicts: `MASS::select()`, `stats::filter()`, Bioconductor packages
+
+3. **Add debug output liberally** when modifying functions:
+   - Print object classes: `cat("Class:", class(obj), "\n")`
+   - Print dimensions: `cat("Dimensions:", nrow(obj), "x", ncol(obj), "\n")`
+   - Print previews: `print(head(obj, 3))`
+   - Print sample names/IDs to catch matching issues
+   - These can be removed later if needed, but are invaluable during development
+
+4. **Check data format assumptions**:
+   - Matrix vs. data frame
+   - Wide vs. long format
+   - Row names vs. columns
+   - Sample name formatting (with/without suffixes like "_Testes", "_Hepatocytes")
+
+5. **Common pitfalls in this codebase**:
+   - MOFA functions return data frames, not lists (don't use `[[1]]` blindly)
+   - decoupleR expects matrices in specific orientations (features × samples)
+   - Sample names may have gonad or cell type suffixes that need cleaning
+   - CSV files split into multiple parts need careful merging
+   - Large matrices can cause memory issues - use `rm()` to free memory
+
+6. **When errors occur**:
+   - Read the full error message carefully
+   - Check sample name matching issues first (very common)
+   - Verify data dimensions match expectations
+   - Use debug output to trace where data format changes
+
+**Remember:** Testing immediately saves debugging time later. A small bug caught early is trivial; the same bug discovered after 10 more changes is a nightmare.
+
 ## Repository Structure
 
 ```
@@ -408,11 +452,13 @@ The FCG model allows separation of:
 
 ## Tips for Working with This Codebase
 
-1. **Always source `support_functions.R` first** - it contains essential utilities
-2. **Check sample metadata** in `Suppl_Table_1_OverviewData.xlsx` to understand group assignments
-3. **PCA plots are diagnostic** - samples should separate by gonadal type (not sex chromosome)
-4. **Limma contrasts follow order** in unique(targets$condition) - verify with `print(unique(targets$condition))`
-5. **MOFA factor selection** - model12 (12 factors) was chosen after comparing models 5-15
-6. **Correlation networks** - Pearson r > 0.65 used as threshold for significant associations
-7. **Zonation markers** - Cyp2e1 = pericentral, Cyp2f2 = periportal (Halpern et al. 2017)
-8. **View() calls in code** - Remove or comment out `View()` calls when running non-interactively
+1. **⚠️ ALWAYS TEST IMMEDIATELY after modifying any script** - Run it to catch bugs before they compound (see "Development Best Practices" section above)
+2. **Always use explicit namespacing** - `dplyr::select()`, `dplyr::filter()`, etc. to avoid package conflicts
+3. **Always source `support_functions.R` first** - it contains essential utilities
+4. **Check sample metadata** in `Suppl_Table_1_OverviewData.xlsx` to understand group assignments
+5. **PCA plots are diagnostic** - samples should separate by gonadal type (not sex chromosome)
+6. **Limma contrasts follow order** in unique(targets$condition) - verify with `print(unique(targets$condition))`
+7. **MOFA factor selection** - model12 (12 factors) was chosen after comparing models 5-15
+8. **Correlation networks** - Pearson r > 0.65 used as threshold for significant associations
+9. **Zonation markers** - Cyp2e1 = pericentral, Cyp2f2 = periportal (Halpern et al. 2017)
+10. **View() calls in code** - Remove or comment out `View()` calls when running non-interactively

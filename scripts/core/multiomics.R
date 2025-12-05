@@ -202,56 +202,109 @@ load_mofa_models <- function(model_dir = "results/mofa/RNA",
 
 #' Enrich MOFA Factors for Experimental Conditions
 #'
-#' Tests which MOFA factors are enriched for specific experimental conditions
-#' (e.g., gonadal type, allosome type).
+#' Tests which MOFA factors are associated with specific experimental conditions
+#' (e.g., gonadal type, allosome type) using linear regression.
 #'
-#' @param z_matrix Matrix. Z matrix from MOFA model (samples x factors).
+#' @param z_matrix Matrix. Z matrix from MOFA model (factors x samples).
+#'                 Rows = factors, Columns = samples.
 #' @param sample_info Data frame. Sample information with columns "sample" and condition columns.
 #' @param condition_column Character. Column name for condition to test.
 #'                         Default: "gonadal_type"
-#' @param method Character. decoupleR method. Default: "ulm"
+#' @param method Character. Analysis method. Default: "lm" (linear model)
 #' @param verbose Logical. Print progress messages. Default: TRUE
 #'
-#' @return Data frame with enrichment scores (long format: factor, condition, score)
+#' @return Data frame with columns: factor, r_squared, p_value
 #'
 #' @details
-#' Uses decoupleR to test if factor scores differ between conditions.
-#' Positive score = factor higher in that condition.
+#' For each factor, fits a linear model: factor_scores ~ condition_values
+#' Extracts R² (variance explained) and p-value from F-statistic.
+#' Higher R² indicates stronger association between factor and condition.
 #'
 #' @examples
-#' z_matrix <- get_factors(model)
+#' # z_matrix should be factors (rows) x samples (columns)
+#' z_matrix <- t(get_factors(model, as.data.frame = TRUE))
 #' enrichment <- enrich_factors_for_condition(z_matrix, metadata, "gonadal_type")
 enrich_factors_for_condition <- function(z_matrix,
                                         sample_info,
                                         condition_column = "gonadal_type",
-                                        method = "ulm",
+                                        method = "lm",
                                         verbose = TRUE) {
 
   if (verbose) {
     cat("Enriching MOFA factors for:", condition_column, "\n")
   }
 
-  # Prepare network (sample → condition mapping)
-  network <- sample_info[, c("sample", condition_column)]
-  names(network) <- c("target", "source")
-  network$mor <- 1
-  network <- unique(network)
+  # z_matrix should be factors (rows) x samples (columns)
+  # Debug: Show sample names to diagnose mismatches
+  if (verbose) {
+    cat("  Z matrix sample names (first 5):", paste(head(colnames(z_matrix), 5), collapse = ", "), "\n")
+    cat("  Sample info sample names (first 5):", paste(head(sample_info$sample, 5), collapse = ", "), "\n")
+  }
 
-  # Run enrichment
-  enrichment <- decoupleR::run_ulm(z_matrix, network)
+  # Ensure sample order matches between z_matrix columns and sample_info
+  common_samples <- intersect(colnames(z_matrix), sample_info$sample)
 
-  # Convert to wide format
-  enrichment_wide <- dcast(enrichment, source ~ condition, value.var = "score")
+  if (length(common_samples) == 0) {
+    # Try removing gonad suffix from z_matrix sample names
+    z_matrix_clean <- z_matrix
+    colnames(z_matrix_clean) <- gsub("_Testes|_Ovaries", "", colnames(z_matrix))
+    common_samples <- intersect(colnames(z_matrix_clean), sample_info$sample)
+
+    if (length(common_samples) > 0) {
+      if (verbose) {
+        cat("  ✓ Found", length(common_samples), "samples after removing gonad suffix\n")
+      }
+      z_matrix <- z_matrix_clean
+    } else {
+      stop("No common samples found between z_matrix and sample_info.\n",
+           "  Z matrix samples (first 5): ", paste(head(colnames(z_matrix), 5), collapse = ", "), "\n",
+           "  Sample info samples (first 5): ", paste(head(sample_info$sample, 5), collapse = ", "))
+    }
+  }
+
+  # Subset and match order
+  z_matrix <- z_matrix[, common_samples, drop = FALSE]
+  sample_info <- sample_info[match(common_samples, sample_info$sample), ]
+
+  # Get condition values
+  condition_values <- sample_info[[condition_column]]
+
+  if (verbose) {
+    cat("  Samples:", length(common_samples), "\n")
+    cat("  Factors:", nrow(z_matrix), "\n")
+    cat("  Condition levels:", paste(unique(condition_values), collapse = ", "), "\n")
+  }
+
+  # Calculate R² for each factor
+  results <- data.frame(
+    factor = rownames(z_matrix),
+    r_squared = NA,
+    p_value = NA,
+    stringsAsFactors = FALSE
+  )
+
+  for (i in 1:nrow(z_matrix)) {
+    factor_scores <- z_matrix[i, ]
+
+    # Fit linear model
+    model <- lm(factor_scores ~ condition_values)
+    model_summary <- summary(model)
+
+    # Extract R² and p-value
+    results$r_squared[i] <- model_summary$r.squared
+
+    # Get p-value from F-statistic
+    f_stat <- model_summary$fstatistic
+    if (!is.null(f_stat)) {
+      results$p_value[i] <- pf(f_stat[1], f_stat[2], f_stat[3], lower.tail = FALSE)
+    }
+  }
 
   if (verbose) {
     cat("  ✓ Enrichment complete\n")
-    cat("  Conditions tested:", paste(unique(enrichment$source), collapse = ", "), "\n")
   }
 
-  return(list(
-    long = enrichment,
-    wide = enrichment_wide
-  ))
+  return(results)
 }
 
 
