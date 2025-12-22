@@ -35,6 +35,60 @@ The Sry gene (normally on Y chromosome) is translocated to chromosome 3, enablin
 - **Gonadal effect**: Testes vs. Ovaries (across all chromosome backgrounds) - **PRIMARY COMPARISON**
 - **Chromosomal effect**: XY vs. XX (across both gonadal backgrounds)
 
+## AI-Assisted Data Exploration (MCP Server)
+
+This repository includes an MCP (Model Context Protocol) server that allows Claude or other AI assistants to dynamically query the analysis results. This enables natural language questions about the data without writing code.
+
+### Features
+- Query differential expression for specific genes/lipids
+- Explore pathway and TF enrichment
+- Query MOFA integration results and gene-lipid networks
+- Get summary statistics and compare across cell types
+
+### Setup for Claude Code
+
+```bash
+# Install Python dependencies
+pip install mcp pandas pyreadr
+
+# Add the MCP server to Claude Code
+claude mcp add --transport stdio fcgl-analysis -- python mcp/fcgl_server.py
+```
+
+### Setup for Claude Desktop
+
+Add to your Claude Desktop configuration file:
+
+**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "fcgl-analysis": {
+      "command": "python",
+      "args": ["C:/path/to/gonads_snRNAseq_and_lipidomics_analysis_refactored/mcp/fcgl_server.py"],
+      "env": {
+        "FCGL_DATA_PATH": "C:/path/to/gonads_snRNAseq_and_lipidomics_analysis_refactored"
+      }
+    }
+  }
+}
+```
+
+**Note**: Replace `C:/path/to/` with the actual path to your repository.
+
+### Example Questions
+
+Once connected, you can ask Claude questions like:
+- *"What is the differential expression of Cyp2b9 in hepatocytes?"*
+- *"Show me the top 20 upregulated genes for the gonadal effect"*
+- *"Which lipid classes are enriched in males vs females?"*
+- *"What genes are correlated with triglycerides in the MOFA network?"*
+- *"Compare Esr1 expression across all liver cell types"*
+
+See `mcp/README.md` for full documentation of available tools.
+
 ## Repository Structure
 
 ```
@@ -409,28 +463,6 @@ Raw data files required to run these analyses:
 
 3. **Metadata**: Available in `data/`
    - `Suppl_Table_1_OverviewData.xlsx` - Sample metadata with group assignments
-
-## MCP Server for AI-Assisted Data Exploration
-
-This repository includes an MCP (Model Context Protocol) server that allows Claude or other AI assistants to dynamically query the analysis results.
-
-### Features
-- Query differential expression for specific genes/lipids
-- Explore pathway and TF enrichment
-- Query MOFA integration results and gene-lipid networks
-- Get summary statistics
-
-### Quick Setup
-
-```bash
-# Install dependencies
-pip install mcp pandas pyreadr
-
-# Add to Claude Code
-claude mcp add --transport stdio fcgl-analysis -- python mcp/fcgl_server.py
-```
-
-See `mcp/README.md` for detailed documentation.
 
 ## Citation
 
