@@ -93,58 +93,83 @@ See `mcp/README.md` for full documentation of available tools.
 
 ```
 .
-├── data/                           # Raw and processed data files
-│   ├── RNA/                        # snRNA-seq data (pseudobulk, split into 3 parts)
-│   ├── metabolomics/               # Lipidomics data
+├── data/                              # Raw and processed data files
+│   ├── RNA/                           # snRNA-seq data (pseudobulk CSVs + Seurat objects)
+│   ├── metabolomics/                  # Lipidomics data and structural annotations
+│   │   └── for_bubbles_with_names/    # Lipid structural data by class
+│   ├── proteomics/                    # Proteomics data
 │   └── Suppl_Table_1_OverviewData.xlsx  # Sample metadata
 ├── scripts/
-│   ├── workflows/                  # Main analysis workflows (00-07)
-│   ├── core/                       # Core analysis functions
-│   │   ├── data_loading.R          # Data loading utilities
-│   │   ├── differential_analysis.R # Differential expression/abundance
-│   │   ├── enrichment_analysis.R   # Pathway and TF enrichment
-│   │   ├── multiomics.R            # MOFA integration functions
-│   │   └── structural_analysis.R   # Lipid structural analysis
-│   ├── visualization/              # Plotting functions
-│   │   ├── volcano_plots.R         # Volcano plot utilities
-│   │   ├── dimred_plots.R          # PCA and dimensionality reduction
-│   │   └── heatmaps.R              # Heatmap generation
-│   ├── config/                     # Configuration files
-│   │   ├── analysis_config.R       # Global analysis settings
-│   │   ├── contrasts.R             # Experimental contrasts
-│   │   ├── datasets.R              # Dataset paths
-│   │   └── plotting_themes.R       # Visualization themes
-│   ├── support_functions.R         # Core utility functions
-│   └── legacy/                     # Original scripts (for reference)
-├── support/                        # Reference files
+│   ├── workflows/                     # Main analysis workflows (00-07)
+│   │   ├── 00_snrnaseq_preprocessing.R   # Raw data processing (requires HPC)
+│   │   ├── 01_data_preparation_qc.R      # Data prep and QC
+│   │   ├── 02_fcg_pseudobulk_analysis.R  # RNA-seq differential analysis
+│   │   ├── 03_fcg_lipidomic_analysis.R   # Lipidomic differential analysis
+│   │   ├── 04_mofa_integration.R         # Multi-omic MOFA integration
+│   │   ├── 05_zonation_analysis.R        # Hepatocyte zonation analysis
+│   │   ├── 06_structural_analysis.R      # Lipid structural preferences
+│   │   └── 07_validation_experiments.R   # Knockdown validation
+│   ├── core/                          # Core analysis functions
+│   │   ├── data_loading.R             # Data loading utilities
+│   │   ├── differential_analysis.R    # Differential expression/abundance
+│   │   ├── enrichment_analysis.R      # Pathway and TF enrichment
+│   │   ├── multiomics.R               # MOFA integration functions
+│   │   └── structural_analysis.R      # Lipid structural analysis
+│   ├── visualization/                 # Plotting functions
+│   │   ├── volcano_plots.R            # Volcano plot utilities
+│   │   ├── dimred_plots.R             # PCA and dimensionality reduction
+│   │   └── heatmaps.R                 # Heatmap generation
+│   ├── config/                        # Configuration files
+│   │   ├── analysis_config.R          # Global analysis settings
+│   │   ├── contrasts.R                # Experimental contrasts
+│   │   ├── datasets.R                 # Dataset paths
+│   │   └── plotting_themes.R          # Visualization themes
+│   ├── support_functions.R            # Core utility functions
+│   ├── seurat_compatibility.R         # Seurat v4/v5 compatibility layer
+│   └── legacy/                        # Original scripts (for reference)
+├── support/                           # Reference files
 │   ├── m5.all.v2023.2.Mm.symbols.gmt  # MSigDB GO gene sets (mouse)
-│   ├── TF_regulons.RData           # CollecTRI TF target gene sets
-│   ├── Gonadal_Hormone_Genes.csv   # ESR1/AR target genes
-│   ├── linex2_adjacency_matrix_OT.csv  # LINEX2 lipid network
-│   └── FCGL_Xenium_Panel.csv       # Spatial validation gene panel (100 genes)
-├── results/                        # Analysis outputs
-│   ├── qc/                         # Quality control
-│   ├── pseudobulk/                 # RNA-seq differential analysis
-│   │   ├── ttop_full_list.RData    # All DE results
-│   │   ├── volcanos/               # Volcano plots
-│   │   ├── pca/                    # PCA visualizations
-│   │   └── pathways/               # Pathway and TF enrichment
-│   ├── lipidomic/                  # Lipidomic differential analysis
-│   │   ├── ttop_full_list.RData    # All lipid DE results
-│   │   ├── volcanos/               # Lipid volcano plots
-│   │   ├── enrichment/             # Lipid class enrichment
-│   │   ├── network/                # LINEX2 lipid networks
-│   │   └── bubbles_DBC/            # Structural bubble plots
-│   ├── mofa/                       # Multi-omic integration
-│   │   ├── MOFA_data.RData         # MOFA input data
-│   │   ├── RNA/                    # Trained MOFA models
-│   │   ├── factor_analysis/        # Factor enrichment analysis
-│   │   └── networks/               # Gene-lipid correlation networks
-│   ├── zonation/                   # Hepatocyte zonation analysis
-│   └── multi-omic/structural_model/  # Lipid structural preferences
-└── tests/                          # Validation and testing
-    ├── TESTING_GUIDE.md            # Testing documentation
-    └── test_*.R                    # Test scripts
+│   ├── TF_regulons.RData              # CollecTRI TF target gene sets
+│   ├── Gonadal_Hormone_Genes.csv      # ESR1/AR target genes
+│   ├── linex2_adjacency_matrix_OT.csv # LINEX2 lipid network
+│   ├── lipid_classification.csv       # Lipid class hierarchy
+│   └── FCGL_Xenium_Panel.csv          # Spatial validation gene panel (100 genes)
+├── results/                           # Analysis outputs
+│   ├── qc/                            # Quality control plots and reports
+│   ├── pseudobulk/                    # RNA-seq differential analysis
+│   │   ├── ttop_full_list.RData       # All DE results (6 contrasts × 5 cell types)
+│   │   ├── volcanos/                  # Volcano plots
+│   │   ├── pca/                       # PCA visualizations
+│   │   ├── pathways/                  # Pathway enrichment
+│   │   ├── TFs/                       # Transcription factor activity
+│   │   └── gdxrh/                     # Gonadectomy validation results
+│   ├── lipidomic/                     # Lipidomic differential analysis
+│   │   ├── ttop_full_list.RData       # All lipid DE results
+│   │   ├── volcanos/                  # Lipid volcano plots
+│   │   ├── enrichment/                # Lipid class enrichment
+│   │   ├── network/                   # LINEX2 lipid networks
+│   │   ├── pca/                       # Lipidomic PCA plots
+│   │   └── bubbles_DBC/               # Structural bubble plots
+│   ├── mofa/                          # Multi-omic integration
+│   │   ├── MOFA_data.RData            # MOFA input data
+│   │   ├── RNA/                       # Trained MOFA models (.hdf5)
+│   │   ├── factor_analysis/           # Factor enrichment analysis
+│   │   ├── networks/                  # Gene-lipid correlation networks
+│   │   └── TF/                        # TF enrichment on MOFA weights
+│   ├── zonation/                      # Hepatocyte zonation analysis
+│   │   └── volcanos/                  # Zonation-specific volcano plots
+│   ├── multi-omic/                    # Cross-omic integration
+│   │   └── structural_model/          # Lipid structural preferences
+│   │       └── gene_plots/            # Per-gene structural association plots
+│   ├── validation/                    # Knockdown validation results
+│   │   ├── knockdown_heatmap.pdf      # Overview of knockdown effects
+│   │   ├── *_validation_scatter.pdf   # Per-gene validation plots
+│   │   └── *_validation_scores.csv    # Validation scores
+│   └── xenium/                        # Spatial transcriptomics validation
+└── mcp/                               # MCP server for AI-assisted exploration
+    ├── fcgl_server.py                 # MCP server implementation
+    ├── README.md                      # MCP documentation
+    └── requirements.txt               # Python dependencies
 ```
 
 ## Analysis Workflows
