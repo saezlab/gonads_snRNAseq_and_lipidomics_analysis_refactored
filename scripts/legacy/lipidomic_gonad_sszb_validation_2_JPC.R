@@ -12,7 +12,6 @@ library(grid)
 library(scales)
 library(Cairo)
 
-setwd("~/Dropbox/postdoc/Manuscripts/MS_FourCoreGenotypesLiver/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis")
 source("scripts/support_functions.R")
 
 lipidomic <- as.data.frame(

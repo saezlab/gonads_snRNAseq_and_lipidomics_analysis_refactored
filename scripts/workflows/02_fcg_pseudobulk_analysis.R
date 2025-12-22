@@ -494,6 +494,8 @@ for (contrast_name in names(ttop_full_list)) {
 
     tryCatch({
       ttop <- ttop_full_list[[contrast_name]][[cell_type]]
+      
+      ttop$P.Value <- ifelse(-log10(ttop$P.Value) > 25, 10^-25, ttop$P.Value)
 
       # Create volcano plot
       p <- volcano_nice(
@@ -501,7 +503,7 @@ for (contrast_name in names(ttop_full_list)) {
         FCIndex = which(names(ttop) == "logFC"),
         pValIndex = which(names(ttop) == "P.Value"),
         IDIndex = which(names(ttop) == "ID"),
-        label = TRUE,
+        label = F,
         nlabels = 40
       )
 
@@ -517,7 +519,7 @@ for (contrast_name in names(ttop_full_list)) {
       filename <- paste0("volcano_", gsub(" ", "_", contrast_name), "_",
                         gsub(" ", "_", cell_type), ".pdf")
       filepath <- file.path("results/pseudobulk/volcanos", filename)
-      ggsave(filepath, plot = p, width = 9, height = 9)
+      ggsave(filepath, plot = p, width = 4, height = 5.5)
     }, error = function(e) {
       cat("    WARNING: Error generating volcano plot for", contrast_name, "-", cell_type, "\n")
       cat("    Error message:", conditionMessage(e), "\n")

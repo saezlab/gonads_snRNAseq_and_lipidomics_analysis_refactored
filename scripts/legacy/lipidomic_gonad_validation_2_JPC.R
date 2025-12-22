@@ -12,7 +12,6 @@ library(grid)
 library(scales)
 library(Cairo)
 
-setwd("~/Dropbox/postdoc/Manuscripts/MS_FourCoreGenotypesLiver/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis")
 source("scripts/support_functions.R")
 
 lipidomic <- as.data.frame(
@@ -35,7 +34,9 @@ unique(targets$condition)
 
 comparisons <- list("cyp2d9" = c(4,-1),
                     "cyp2b9" = c(2,-1),
-                    "cyp2c38" = c(3,-1))
+                    "cyp2c38" = c(3,-1),
+                    "mtmr11" = c(6,-1),
+                    "sult3a1" = c(5,-1))
 
 limmaRes <- runLimma(lipidomic, targets, comparisons = comparisons)
 
@@ -64,7 +65,7 @@ validation_scores <- decoupleR::run_ulm(t_table[,-1], network = lipid_network, m
 validation_set_only <- validation_scores[tolower(validation_scores$source) == validation_scores$condition,]
 validation_scores_df <- dcast(validation_scores, source~condition, value.var = "score")
 
-KO_index <- 2
+KO_index <- 4
 lipid_scoring_Scatter <- merge(t_table[,c(1,KO_index)], lipid_network, by.x = "ID", by.y = "target")
 lipid_scoring_Scatter$mor <- ifelse(tolower(lipid_scoring_Scatter$source) == names(lipid_scoring_Scatter)[2],lipid_scoring_Scatter$mor,0)
 

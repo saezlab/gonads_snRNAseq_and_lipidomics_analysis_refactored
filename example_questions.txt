@@ -1,0 +1,9 @@
+what is the lipid species that is the most significantly associated with Cyp2D9 expression ?
+
+What are the top 5 most significant female biased genes in immune cells ?
+
+Is cyp2c38 periportal biased ? 
+
+Is cyp2c38 associated with short chain lipids ?
+
+Which are the male biased lipids species that are associated with periportal zonation ?

@@ -51,8 +51,10 @@ palette <- c(palette1, palette2)
 pheatmap::pheatmap(t_table[,-1], show_rownames = F, cluster_cols = T, cluster_rows = T,color = palette, angle_col = 315, display_numbers = F)
 dev.off()
 
-lipid_network <- read_csv(file = "results/multi-omic/hepatocyte_TF_spec_gene_lipid_network_mofa_full_largenet.csv")
-names(lipid_network) <- c("target","source","mor")
+
+# lipid_network <- read_csv(file = "results/multi-omic/hepatocyte_TF_spec_gene_lipid_network_mofa_full_largenet.csv")
+lipid_network <- read_csv(file = "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv")
+names(lipid_network) <- c("source","target","mor")
 lipid_network <- lipid_network[which(grepl("[(]",lipid_network$target)),]
 # lipid_network <- lipid_network[which(abs(lipid_network$mor) > 0.7),]
 # View(lipid_network[lipid_network$source == "Cyp2b13" & lipid_network$target %in% t_table$ID,])

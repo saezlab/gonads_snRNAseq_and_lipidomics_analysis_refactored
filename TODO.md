@@ -1,0 +1,3 @@
+refactor:
+lipidomic_gonad_validation_2.R
+lipidomic_gonad_sszb_validation_2.R

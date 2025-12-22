@@ -16,3 +16,5 @@ GSE90277/GSE90277_RAW.tar
 tests/outputs/**
 tests/logs/**
 Rplots.pdf
+.mcp.json
+__pycache__/

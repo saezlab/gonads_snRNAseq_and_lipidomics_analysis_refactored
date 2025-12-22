@@ -878,6 +878,259 @@ cat("     key regulators of specific lipid subclasses\n")
 cat("   - Priority candidates for validation experiments\n\n")
 
 ################################################################################
+# 13. CREATE SUMMARY FIGURE PANELS
+################################################################################
+
+cat("\n")
+cat(strrep("-", 80), "\n")
+cat("13. CREATING SUMMARY FIGURE PANELS\n")
+cat(strrep("-", 80), "\n\n")
+
+cat("Generating publication-ready summary figures...\n\n")
+
+# Suppress messages from pheatmap
+suppressPackageStartupMessages({
+  library(pheatmap)
+  library(RColorBrewer)
+  library(gridExtra)
+})
+
+#===============================================================================
+# PANEL A: Heatmap of Chain Length Structural Specificity
+#===============================================================================
+
+cat("Creating Panel A: Structural specificity heatmap...\n")
+
+# Create matrix for chain_length significance
+chain_data <- class_results %>%
+  dplyr::filter(term == "chain_length", gene %in% key_genes_to_plot, p_value < 0.05) %>%
+  dplyr::mutate(sig_value = estimate) %>%
+  dplyr::select(gene, lipid_class, sig_value)
+
+if (nrow(chain_data) > 0) {
+  # Clean lipid class names
+  chain_data$lipid_class <- gsub("_with_name", "", chain_data$lipid_class)
+
+  # Pivot to wide format
+  chain_wide <- chain_data %>%
+    tidyr::pivot_wider(names_from = lipid_class, values_from = sig_value, values_fill = NA)
+
+  chain_matrix <- as.matrix(chain_wide[, -1])
+  rownames(chain_matrix) <- chain_wide$gene
+
+  # Order columns by median association
+  col_order <- order(colMeans(chain_matrix, na.rm = TRUE), decreasing = TRUE)
+  chain_matrix <- chain_matrix[, col_order, drop = FALSE]
+
+  # Plot heatmap
+  pdf(file.path(structural_dir, "summary_figure_panelA.pdf"), width = 10, height = 4)
+  pheatmap(chain_matrix,
+           cluster_rows = FALSE,
+           cluster_cols = FALSE,
+           display_numbers = FALSE,
+           color = colorRampPalette(c("#2166AC", "white", "#B2182B"))(100),
+           breaks = seq(-0.1, 0.1, length.out = 101),
+           na_col = "grey90",
+           main = "Chain Length Structural Specificity",
+           fontsize = 10,
+           fontsize_row = 11,
+           fontsize_col = 10,
+           angle_col = 45)
+  dev.off()
+
+  cat("  Panel A saved: summary_figure_panelA.pdf\n")
+} else {
+  cat("  WARNING: No significant chain length associations found for Panel A\n")
+}
+
+#===============================================================================
+# PANEL B: Cyp2c38-BMP Detailed Example (Raw vs Partial)
+#===============================================================================
+
+cat("\nCreating Panel B: Cyp2c38-BMP example...\n")
+
+# Check if Cyp2c38 is in the correlation matrix
+if ("Cyp2c38" %in% rownames(cor_matrix)) {
+  # Get BMP data
+  bmp_lipids <- lipid_structure %>%
+    dplyr::filter(lipid_class == "BMP_with_name")
+
+  if (nrow(bmp_lipids) > 0) {
+    common_lipids <- intersect(bmp_lipids$lipid_name, colnames(cor_matrix))
+
+    if (length(common_lipids) > 5) {
+      bmp_data <- bmp_lipids %>%
+        dplyr::filter(lipid_name %in% common_lipids)
+      bmp_data$gene_correlation <- as.numeric(cor_matrix["Cyp2c38", bmp_data$lipid_name])
+
+      # Get p-values for coloring
+      cyp_bmp_pvals <- class_results %>%
+        dplyr::filter(gene == "Cyp2c38", lipid_class == "BMP_with_name") %>%
+        dplyr::select(term, p_value)
+
+      if (nrow(cyp_bmp_pvals) > 0) {
+        fc_color <- ifelse(any(cyp_bmp_pvals$term == "logfc" & cyp_bmp_pvals$p_value < 0.05),
+                           "#00BA38", "black")
+        chain_color <- ifelse(any(cyp_bmp_pvals$term == "chain_length" & cyp_bmp_pvals$p_value < 0.05),
+                              "#00BA38", "black")
+        db_color <- ifelse(any(cyp_bmp_pvals$term == "db_position" & cyp_bmp_pvals$p_value < 0.05),
+                           "#00BA38", "black")
+      } else {
+        fc_color <- chain_color <- db_color <- "black"
+      }
+
+      # Compute partial residuals
+      model_without_fc <- lm(gene_correlation ~ chain_length + db_position, data = bmp_data)
+      model_fc_on_others <- lm(logfc ~ chain_length + db_position, data = bmp_data)
+      partial_gene_cor_fc <- residuals(model_without_fc)
+      partial_fc <- residuals(model_fc_on_others)
+
+      model_without_chain <- lm(gene_correlation ~ logfc + db_position, data = bmp_data)
+      model_chain_on_others <- lm(chain_length ~ logfc + db_position, data = bmp_data)
+      partial_gene_cor_chain <- residuals(model_without_chain)
+      partial_chain <- residuals(model_chain_on_others)
+
+      model_without_db <- lm(gene_correlation ~ logfc + chain_length, data = bmp_data)
+      model_db_on_others <- lm(db_position ~ logfc + chain_length, data = bmp_data)
+      partial_gene_cor_db <- residuals(model_without_db)
+      partial_db <- residuals(model_db_on_others)
+
+      partial_data <- data.frame(
+        partial_gene_cor_fc, partial_fc,
+        partial_gene_cor_chain, partial_chain,
+        partial_gene_cor_db, partial_db
+      )
+
+      # Raw plots
+      p1_raw <- ggplot(bmp_data, aes(x = gene_correlation, y = logfc)) +
+        geom_point(alpha = 0.6, size = 2.5, color = "#2E86AB") +
+        geom_smooth(method = "lm", se = TRUE, color = fc_color, linewidth = 1.2) +
+        labs(title = "RAW: Fold Change", x = "Gene-Lipid Correlation", y = "LogFC") +
+        theme_minimal(base_size = 12) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5),
+              axis.title.y = element_text(color = fc_color, face = "bold"))
+
+      p2_raw <- ggplot(bmp_data, aes(x = gene_correlation, y = chain_length)) +
+        geom_point(alpha = 0.6, size = 2.5, color = "#2E86AB") +
+        geom_smooth(method = "lm", se = TRUE, color = chain_color, linewidth = 1.2) +
+        labs(title = "RAW: Chain Length", x = "Gene-Lipid Correlation", y = "Chain Length (C)") +
+        theme_minimal(base_size = 12) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5),
+              axis.title.y = element_text(color = chain_color, face = "bold"))
+
+      p3_raw <- ggplot(bmp_data, aes(x = gene_correlation, y = db_position)) +
+        geom_point(alpha = 0.6, size = 2.5, color = "#2E86AB") +
+        geom_smooth(method = "lm", se = TRUE, color = db_color, linewidth = 1.2) +
+        labs(title = "RAW: DB Position", x = "Gene-Lipid Correlation", y = "Double Bonds") +
+        theme_minimal(base_size = 12) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5),
+              axis.title.y = element_text(color = db_color, face = "bold"))
+
+      # Partial plots
+      p1_partial <- ggplot(partial_data, aes(x = partial_gene_cor_fc, y = partial_fc)) +
+        geom_point(alpha = 0.6, size = 2.5, color = "#2E86AB") +
+        geom_smooth(method = "lm", se = TRUE, color = fc_color, linewidth = 1.2) +
+        labs(title = "PARTIAL: Fold Change", x = "Gene Correlation | others", y = "LogFC | others") +
+        theme_minimal(base_size = 12) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5),
+              axis.title.y = element_text(color = fc_color, face = "bold"))
+
+      p2_partial <- ggplot(partial_data, aes(x = partial_gene_cor_chain, y = partial_chain)) +
+        geom_point(alpha = 0.6, size = 2.5, color = "#2E86AB") +
+        geom_smooth(method = "lm", se = TRUE, color = chain_color, linewidth = 1.2) +
+        labs(title = "PARTIAL: Chain Length", x = "Gene Correlation | others", y = "Chain Length | others") +
+        theme_minimal(base_size = 12) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5),
+              axis.title.y = element_text(color = chain_color, face = "bold"))
+
+      p3_partial <- ggplot(partial_data, aes(x = partial_gene_cor_db, y = partial_db)) +
+        geom_point(alpha = 0.6, size = 2.5, color = "#2E86AB") +
+        geom_smooth(method = "lm", se = TRUE, color = db_color, linewidth = 1.2) +
+        labs(title = "PARTIAL: DB Position", x = "Gene Correlation | others", y = "DB Position | others") +
+        theme_minimal(base_size = 12) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5),
+              axis.title.y = element_text(color = db_color, face = "bold"))
+
+      # Combine
+      combined <- (p1_raw | p2_raw | p3_raw) / (p1_partial | p2_partial | p3_partial) +
+        plot_annotation(
+          title = "Cyp2c38 - BMP Lipid Structural Specificity",
+          subtitle = "Raw bivariate relationships (top) vs. Partial effects controlling for other predictors (bottom)\nGreen = p < 0.05, Black = not significant",
+          theme = theme(plot.title = element_text(size = 16, face = "bold"),
+                        plot.subtitle = element_text(size = 11))
+        )
+
+      ggsave(file.path(structural_dir, "summary_figure_panelB.pdf"),
+             combined, width = 15, height = 8)
+
+      cat("  Panel B saved: summary_figure_panelB.pdf\n")
+    } else {
+      cat("  WARNING: Insufficient BMP lipids for Panel B\n")
+    }
+  } else {
+    cat("  WARNING: No BMP lipids found for Panel B\n")
+  }
+} else {
+  cat("  WARNING: Cyp2c38 not found in correlation matrix for Panel B\n")
+}
+
+#===============================================================================
+# PANEL C: Summary Statistics
+#===============================================================================
+
+cat("\nCreating Panel C: Summary statistics...\n")
+
+# Count associations by lipid class
+summary_by_class <- class_results %>%
+  dplyr::filter(term == "chain_length", p_value < 0.05) %>%
+  dplyr::mutate(lipid_class = gsub("_with_name", "", lipid_class)) %>%
+  dplyr::group_by(lipid_class) %>%
+  dplyr::summarise(
+    n_genes = length(unique(gene)),
+    mean_effect = mean(abs(estimate)),
+    .groups = "drop"
+  ) %>%
+  dplyr::arrange(dplyr::desc(n_genes)) %>%
+  dplyr::slice_head(n = 15)
+
+if (nrow(summary_by_class) > 0) {
+  p_summary <- ggplot(summary_by_class, aes(x = reorder(lipid_class, n_genes), y = n_genes)) +
+    geom_bar(stat = "identity", fill = "#2E86AB", alpha = 0.8) +
+    coord_flip() +
+    labs(
+      title = "Genes with Chain Length Structural Specificity",
+      subtitle = "Number of genes per lipid class (p < 0.05)",
+      x = "Lipid Class",
+      y = "Number of Genes"
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(
+      plot.title = element_text(face = "bold", size = 14),
+      axis.title = element_text(face = "bold")
+    )
+
+  ggsave(file.path(structural_dir, "summary_figure_panelC.pdf"),
+         p_summary, width = 8, height = 6)
+
+  cat("  Panel C saved: summary_figure_panelC.pdf\n")
+} else {
+  cat("  WARNING: No significant chain length associations for Panel C\n")
+}
+
+cat("\nSummary figure panels complete!\n")
+cat("  Recommended figure layout for publication:\n")
+cat("  ----------------------------------------\n")
+cat("  |  Panel A        |  Panel C          |\n")
+cat("  |  (Heatmap)      |  (Summary bars)   |\n")
+cat("  |                 |                   |\n")
+cat("  |---------------------------------------|\n")
+cat("  |                                       |\n")
+cat("  |  Panel B: Cyp2c38-BMP Example        |\n")
+cat("  |  (6-panel: Raw top, Partial bottom)  |\n")
+cat("  |                                       |\n")
+cat("  -----------------------------------------\n")
+
+################################################################################
 # WORKFLOW COMPLETE
 ################################################################################
 
@@ -898,17 +1151,22 @@ cat("  - results/multi-omic/structural_model/genes_with_significant_interactions
 cat("  - results/multi-omic/structural_model/genes_multiple_structural_associations.csv\n")
 cat("  - results/multi-omic/structural_model/significant_gene_lipid_class_associations.csv\n")
 cat("  - results/multi-omic/structural_model/analysis_summary.csv\n")
-cat("  - results/multi-omic/structural_model/gene_plots/gene_lipid_structure_[gene]_[class].pdf\n")
+cat("  - results/multi-omic/structural_model/gene_plots/[gene]_lipid_structure.pdf\n")
+cat("  - results/multi-omic/structural_model/summary_figure_panelA.pdf\n")
+cat("  - results/multi-omic/structural_model/summary_figure_panelB.pdf\n")
+cat("  - results/multi-omic/structural_model/summary_figure_panelC.pdf\n")
 
 cat("\nKey findings:\n")
 cat("  - Identified genes with lipid structural preferences\n")
 cat("  - Revealed substrate specificity patterns\n")
 cat("  - Connected gene expression to lipid composition at structural level\n")
+cat("  - Generated publication-ready summary figure panels\n")
 
 cat("\nThis refactored workflow replaces:\n")
 cat("  - scripts/lipid_rna_correaltion_for_structural_analysis.R\n")
 cat("  - scripts/lipid_structure_analysis.R\n")
 cat("  - scripts/lipid_structure_visualisation.R\n")
+cat("  - scripts/workflows/07_create_summary_figure.R\n")
 
 cat("\nVALIDATION STATUS:\n")
 cat("  ✓ Core functions tested: 7/7 tests PASSED\n")

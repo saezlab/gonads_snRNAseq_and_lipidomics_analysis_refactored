@@ -91,6 +91,42 @@ When modifying any R script in this repository, you MUST:
 
 ## Key Analysis Workflows
 
+### 0. snRNA-seq Pre-processing Pipeline
+
+**Main script:** `scripts/workflows/00_snrnaseq_preprocessing.R`
+
+⚠️ **NOTE**: This workflow requires access to raw sci-RNA-seq alignment data. Most users should start with workflow 01.
+
+**Workflow:**
+1. Import raw sci-RNA-seq data from alignment output (custom import function)
+2. Quality control: UMI filtering (min 500, max = mean + 3*SD)
+3. Standard Seurat workflow (NormalizeData → FindVariableFeatures → ScaleData → RunPCA)
+4. Clustering (FindNeighbors, FindClusters at resolution 0.03, RunUMAP)
+5. Doublet detection and removal using scDblFinder (2% expected rate)
+6. Cell type annotation based on known marker expression
+7. Pseudobulk aggregation by sample and cell type
+8. Hepatocyte zonation annotation (periportal vs pericentral)
+
+**Datasets processed:**
+- **FCG (Four Core Genotypes)**: 43 samples + 5 wild-type males
+- **GDX (Gonadectomy Hormone Replacement)**: Validation cohort
+
+**Cell type markers:**
+- Hepatocytes: Mlxipl, Apoa2, Hnf4a
+- Immune cells: Ptprc, Vsig4, Adgre1
+- Endothelial cells: Btnl9, Clec4g, Pecam1
+- Stellate cells: Lrat, Des, Reln
+- Cholangiocytes: Krt19, Ankrd1, Epcam
+
+**Zonation markers:**
+- Pericentral: Cyp2e1 > 1 AND Cyp2f2 < 1
+- Periportal: Cyp2e1 < 1 AND Cyp2f2 > 1
+
+**Key outputs:**
+- `annotated.rds` - Cell type annotated Seurat object
+- `pseudobulks_scc.rds` - Main pseudobulk data (used as input for workflow 01)
+- `heps_zonationsubsetted_pseudobulks_gonad.rds` - Zonation-annotated hepatocyte pseudobulk
+
 ### 1. RNA-seq Pseudobulk Analysis
 
 **Main script:** `scripts/pseudobulk_DA.R`

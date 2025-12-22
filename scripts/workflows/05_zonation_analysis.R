@@ -866,131 +866,17 @@ if (nrow(binary_matrix) > max_lipids) {
   barplot_data <- barplot_data[1:max_lipids, ]
 }
 
-# Create barplot (top panel) - sorted by t-value
+# Load required libraries for plotting
 library(ggplot2)
 library(gridExtra)
 library(grid)
 library(tidyr)
 
-p_bar <- ggplot(barplot_data, aes(x = factor(1:nrow(barplot_data)), y = abs_t, fill = gonad_bias)) +
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values = c("Testes" = "royalblue", "Ovaries" = "red"),
-                   name = "Gonadal Bias") +
-  theme_minimal() +
-  theme(axis.text.x = element_blank(),
-        axis.title.x = element_blank(),
-        axis.ticks.x = element_blank(),
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor = element_blank(),
-        legend.position = "top") +
-  labs(y = "Absolute t-value\n(Testes vs Ovaries)")
-
-# Create heatmap (bottom panel) - sorted by t-value
-heatmap_long <- as.data.frame(heatmap_data) %>%
-  tibble::rownames_to_column("category") %>%
-  tidyr::pivot_longer(cols = -category, names_to = "lipid", values_to = "associated")
-
-# Create lipid order factor to match barplot
-heatmap_long$lipid <- factor(heatmap_long$lipid, levels = barplot_data$lipid)
-heatmap_long$category <- factor(heatmap_long$category, levels = c("OPP", "OPC", "TPP", "TPC"))
-
-p_heatmap <- ggplot(heatmap_long, aes(x = lipid, y = category, fill = factor(associated))) +
-  geom_tile(color = "white", linewidth = 0.5) +
-  scale_fill_manual(values = c("0" = "white", "1" = "black"),
-                   name = "Associated",
-                   labels = c("No", "Yes")) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
-        axis.text.y = element_text(size = 10),
-        axis.title = element_blank(),
-        panel.grid = element_blank(),
-        legend.position = "right") +
-  labs(y = "Category")
-
-# Combine plots - version 1 (sorted by t-value)
-pdf(file.path(zonation_dir, "lipid_zonation_association_heatmap.pdf"), width = 16, height = 8)
-grid.newpage()
-grid.draw(rbind(
-  ggplotGrob(p_bar),
-  ggplotGrob(p_heatmap),
-  size = "last"
-))
-dev.off()
-
-cat("  ✓ Saved t-value sorted plot:", file.path(zonation_dir, "lipid_zonation_association_heatmap.pdf"), "\n")
-
 #===============================================================================
-# VERSION 2: Hierarchical clustering (no dendrogram shown)
+# Prepare lipid class level data for visualization
 #===============================================================================
 
-cat("  Creating hierarchical clustering version...\n")
-
-# Perform hierarchical clustering on lipids based on binary association pattern
-heatmap_data_dist <- dist(t(heatmap_data), method = "binary")
-heatmap_data_hclust <- hclust(heatmap_data_dist, method = "complete")
-
-# Reorder lipids by clustering
-lipid_order_clustered <- colnames(heatmap_data)[heatmap_data_hclust$order]
-
-# Reorder barplot data
-barplot_data_clustered <- barplot_data[match(lipid_order_clustered, barplot_data$lipid), ]
-
-# Create barplot with clustered order
-p_bar_clustered <- ggplot(barplot_data_clustered,
-                          aes(x = factor(1:nrow(barplot_data_clustered)), y = abs_t, fill = gonad_bias)) +
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values = c("Testes" = "royalblue", "Ovaries" = "red"),
-                   name = "Gonadal Bias") +
-  theme_minimal() +
-  theme(axis.text.x = element_blank(),
-        axis.title.x = element_blank(),
-        axis.ticks.x = element_blank(),
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor = element_blank(),
-        legend.position = "top") +
-  labs(y = "Absolute t-value\n(Testes vs Ovaries)")
-
-# Create heatmap with clustered order
-heatmap_long_clustered <- heatmap_long
-heatmap_long_clustered$lipid <- factor(heatmap_long_clustered$lipid, levels = lipid_order_clustered)
-
-p_heatmap_clustered <- ggplot(heatmap_long_clustered, aes(x = lipid, y = category, fill = factor(associated))) +
-  geom_tile(color = "white", linewidth = 0.5) +
-  scale_fill_manual(values = c("0" = "white", "1" = "black"),
-                   name = "Associated",
-                   labels = c("No", "Yes")) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
-        axis.text.y = element_text(size = 10),
-        axis.title = element_blank(),
-        panel.grid = element_blank(),
-        legend.position = "right") +
-  labs(y = "Category")
-
-# Combine plots - version 2a (clustered with barplot)
-pdf(file.path(zonation_dir, "lipid_zonation_association_heatmap_clustered_with_bars.pdf"), width = 16, height = 8)
-grid.newpage()
-grid.draw(rbind(
-  ggplotGrob(p_bar_clustered),
-  ggplotGrob(p_heatmap_clustered),
-  size = "last"
-))
-dev.off()
-
-cat("  ✓ Saved clustered plot with bars:", file.path(zonation_dir, "lipid_zonation_association_heatmap_clustered_with_bars.pdf"), "\n")
-
-# Version 2b: Heatmap only (no barplot) - clustered
-pdf(file.path(zonation_dir, "lipid_zonation_association_heatmap_clustered.pdf"), width = 16, height = 4)
-print(p_heatmap_clustered)
-dev.off()
-
-cat("  ✓ Saved clustered heatmap only:", file.path(zonation_dir, "lipid_zonation_association_heatmap_clustered.pdf"), "\n")
-
-#===============================================================================
-# VERSION 3: Lipid class level (aggregated)
-#===============================================================================
-
-cat("  Creating lipid class-level version...\n")
+cat("  Preparing lipid class-level data...\n")
 
 # Extract lipid class from lipid names
 binary_matrix_class <- binary_matrix
@@ -1019,129 +905,700 @@ cat("    Aggregated to", nrow(lipid_class_summary), "lipid classes\n")
 heatmap_data_class <- as.matrix(t(lipid_class_summary[, c("TPC", "TPP", "OPC", "OPP")]))
 colnames(heatmap_data_class) <- lipid_class_summary$lipid_class
 
-# Prepare data for barplot
-barplot_data_class <- data.frame(
-  lipid_class = lipid_class_summary$lipid_class,
-  mean_abs_t = lipid_class_summary$mean_abs_t,
-  gonad_bias = lipid_class_summary$gonad_bias
-)
-
-# Create barplot for lipid classes
-p_bar_class <- ggplot(barplot_data_class,
-                      aes(x = factor(1:nrow(barplot_data_class)), y = mean_abs_t, fill = gonad_bias)) +
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values = c("Testes" = "royalblue", "Ovaries" = "red"),
-                   name = "Gonadal Bias") +
-  theme_minimal() +
-  theme(axis.text.x = element_blank(),
-        axis.title.x = element_blank(),
-        axis.ticks.x = element_blank(),
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor = element_blank(),
-        legend.position = "top") +
-  labs(y = "Mean Absolute t-value\n(Testes vs Ovaries)")
-
-# Create heatmap for lipid classes
-heatmap_long_class <- as.data.frame(heatmap_data_class) %>%
-  tibble::rownames_to_column("category") %>%
-  tidyr::pivot_longer(cols = -category, names_to = "lipid_class", values_to = "associated")
-
-heatmap_long_class$lipid_class <- factor(heatmap_long_class$lipid_class, levels = barplot_data_class$lipid_class)
-heatmap_long_class$category <- factor(heatmap_long_class$category, levels = c("OPP", "OPC", "TPP", "TPC"))
-
-p_heatmap_class <- ggplot(heatmap_long_class, aes(x = lipid_class, y = category, fill = factor(associated))) +
-  geom_tile(color = "white", linewidth = 0.5) +
-  scale_fill_manual(values = c("0" = "white", "1" = "black"),
-                   name = "Associated",
-                   labels = c("No", "Yes")) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 10),
-        axis.text.y = element_text(size = 10),
-        axis.title = element_blank(),
-        panel.grid = element_blank(),
-        legend.position = "right") +
-  labs(y = "Category")
-
-# Combine plots - version 3 (lipid class level, sorted by t-value)
-pdf(file.path(zonation_dir, "lipid_class_zonation_association_heatmap.pdf"), width = 12, height = 8)
-grid.newpage()
-grid.draw(rbind(
-  ggplotGrob(p_bar_class),
-  ggplotGrob(p_heatmap_class),
-  size = "last"
-))
-dev.off()
-
-cat("  ✓ Saved lipid class-level plot (t-value sorted):", file.path(zonation_dir, "lipid_class_zonation_association_heatmap.pdf"), "\n")
-
 # Save lipid class summary
 write.csv(lipid_class_summary, file.path(zonation_dir, "lipid_class_association_summary.csv"), row.names = FALSE)
 cat("  ✓ Saved lipid class summary table\n")
 
 #===============================================================================
-# VERSION 4: Lipid class level with hierarchical clustering
+# Lipid class level visualization with jitter plot
+# Uses the same lipid classes and ordering as 03_fcg_lipidomic_analysis.R
 #===============================================================================
 
-cat("  Creating lipid class-level clustered version...\n")
+cat("  Creating lipid class-level jitter plot version...\n")
 
-# Perform hierarchical clustering on lipid classes based on binary association pattern
-heatmap_data_class_dist <- dist(t(heatmap_data_class), method = "binary")
-heatmap_data_class_hclust <- hclust(heatmap_data_class_dist, method = "complete")
+# Load lipid class enrichment scores (same as used in 03_fcg_lipidomic_analysis.R)
+cat("    Loading lipid class enrichment scores...\n")
+load("results/lipidomic/enrichment/lipid_class_enrichment_scores.RData")
 
-# Reorder lipid classes by clustering
-lipid_class_order_clustered <- colnames(heatmap_data_class)[heatmap_data_class_hclust$order]
+# Extract enrichment scores for gonadal comparison (testes vs ovaries)
+# Condition names in enrichment results are formatted as "Testes vs Ovaries_tval_Lipids"
+lipid_enrichment_gonade <- lipid_class_results %>%
+  dplyr::filter(grepl("^Testes vs Ovaries", condition)) %>%
+  dplyr::select(source, enrichment = score) %>%
+  dplyr::mutate(direction = ifelse(enrichment < 0, "negative", "positive"))
 
-# Reorder barplot data
-barplot_data_class_clustered <- barplot_data_class[match(lipid_class_order_clustered, barplot_data_class$lipid_class), ]
+# Apply enrichment threshold (same as 03_fcg_lipidomic_analysis.R)
+lipid_enrichment_gonade$direction <- ifelse(
+  abs(lipid_enrichment_gonade$enrichment) > 1.8,
+  lipid_enrichment_gonade$direction,
+  "non-significant"
+)
 
-# Create barplot with clustered order
-p_bar_class_clustered <- ggplot(barplot_data_class_clustered,
-                                aes(x = factor(1:nrow(barplot_data_class_clustered)),
-                                    y = mean_abs_t, fill = gonad_bias)) +
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values = c("Testes" = "royalblue", "Ovaries" = "red"),
-                   name = "Gonadal Bias") +
-  theme_minimal() +
-  theme(axis.text.x = element_blank(),
-        axis.title.x = element_blank(),
-        axis.ticks.x = element_blank(),
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor = element_blank(),
-        legend.position = "top") +
-  labs(y = "Mean Absolute t-value\n(Testes vs Ovaries)")
+cat("    Found enrichment scores for", nrow(lipid_enrichment_gonade), "lipid classes\n")
 
-# Create heatmap with clustered order
-heatmap_long_class_clustered <- heatmap_long_class
-heatmap_long_class_clustered$lipid_class <- factor(heatmap_long_class_clustered$lipid_class,
-                                                   levels = lipid_class_order_clustered)
+# Create jitter data from FULL lipidomic analysis (same approach as 03_fcg_lipidomic_analysis.R)
+# This uses lipid_ttop which was loaded earlier (line ~753)
+lipid_classes_map <- data.frame(
+  ID = lipid_ttop$ID,
+  source = gsub("[(].*", "", lipid_ttop$ID),  # Extract lipid class from name
+  testes_vs_ova = lipid_ttop$t,
+  stringsAsFactors = FALSE
+)
 
-p_heatmap_class_clustered <- ggplot(heatmap_long_class_clustered,
-                                    aes(x = lipid_class, y = category, fill = factor(associated))) +
-  geom_tile(color = "white", linewidth = 0.5) +
-  scale_fill_manual(values = c("0" = "white", "1" = "black"),
-                   name = "Associated",
-                   labels = c("No", "Yes")) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 10),
-        axis.text.y = element_text(size = 10),
-        axis.title = element_blank(),
-        panel.grid = element_blank(),
-        legend.position = "right") +
-  labs(y = "Category")
+# Join individual lipid t-values with enrichment scores (same as 03_fcg_lipidomic_analysis.R)
+# This uses ALL lipid classes with enrichment scores - NO filtering to heatmap classes
+jitter_data <- lipid_classes_map %>%
+  dplyr::inner_join(lipid_enrichment_gonade, by = "source")
 
-# Combine plots - version 4 (lipid class level, clustered)
-pdf(file.path(zonation_dir, "lipid_class_zonation_association_heatmap_clustered_with_bars.pdf"),
-    width = 12, height = 8)
-grid.newpage()
-grid.draw(rbind(
-  ggplotGrob(p_bar_class_clustered),
-  ggplotGrob(p_heatmap_class_clustered),
-  size = "last"
-))
-dev.off()
+cat("    Jitter data: ", nrow(jitter_data), " individual lipids across ",
+    length(unique(jitter_data$source)), " lipid classes\n")
 
-cat("  ✓ Saved lipid class-level clustered plot:",
-    file.path(zonation_dir, "lipid_class_zonation_association_heatmap_clustered_with_bars.pdf"), "\n\n")
+# Order lipid classes by enrichment score (descending, like 03_fcg_lipidomic_analysis.R)
+# Use ALL classes with enrichment - same as workflow 03
+classes_with_enrichment <- lipid_enrichment_gonade %>%
+  dplyr::arrange(desc(enrichment)) %>%
+  dplyr::pull(source)
+
+cat("    Classes ordered by enrichment:", length(classes_with_enrichment), "\n")
+
+# Apply enrichment-based order to jitter data
+jitter_data$source <- factor(jitter_data$source, levels = classes_with_enrichment)
+
+#===============================================================================
+# Helper function and sample subsets (used by threshold analysis)
+#===============================================================================
+
+# Helper function to get lipids correlated with genes
+get_correlated_lipids <- function(gene_list, rna_data, lipid_data, cor_threshold = 0.65) {
+  if (length(gene_list) == 0) return(character(0))
+
+  # Filter to available genes
+  available_genes <- intersect(gene_list, rownames(rna_data))
+  if (length(available_genes) == 0) return(character(0))
+
+  # Compute correlations
+  cor_mat <- cor(t(rna_data[available_genes, , drop = FALSE]), t(lipid_data), use = "pairwise.complete.obs")
+
+  # Get lipids with high correlation to any gene
+  max_cors <- apply(abs(cor_mat), 2, max, na.rm = TRUE)
+  lipids_passing <- names(max_cors[max_cors >= cor_threshold])
+
+  return(lipids_passing)
+}
+
+# Get sample subsets for each condition
+testes_portal_samples <- grep("Periportal_Testes", colnames(scaled_RNA), value = TRUE)
+testes_central_samples <- grep("Pericentral_Testes", colnames(scaled_RNA), value = TRUE)
+ovaries_portal_samples <- grep("Periportal_Ovaries", colnames(scaled_RNA), value = TRUE)
+ovaries_central_samples <- grep("Pericentral_Ovaries", colnames(scaled_RNA), value = TRUE)
+
+# Get matching lipidomic samples
+lip_testes_samples <- gsub("_Peri.*_Testes", "", testes_portal_samples)
+lip_ovaries_samples <- gsub("_Peri.*_Ovaries", "", ovaries_portal_samples)
+
+#===============================================================================
+# Threshold sensitivity analysis
+# Shows how lipid class proportions change across zonation categories
+# as the interaction threshold varies from 0 to 10
+#===============================================================================
+
+cat("  Creating threshold sensitivity analysis...\n")
+
+# Define threshold range
+threshold_range <- seq(0, 10, by = 0.1)
+cat("    Testing", length(threshold_range), "thresholds from 0 to 10\n")
+
+# Function to compute zonation assignments for a given threshold
+compute_zonation_at_threshold <- function(thresh, t_table, scaled_RNA, lipidomic,
+                                          testes_portal_samples, testes_central_samples,
+                                          ovaries_portal_samples, ovaries_central_samples,
+                                          lip_testes_samples, lip_ovaries_samples,
+                                          cor_threshold = 0.65) {
+
+  # Get genes at this threshold
+  testes_genes <- t_table[abs(t_table$testes_effect_zonation) > thresh &
+                           abs(t_table$portalova_vs_centralova) < 1, ]
+  ovaries_genes <- t_table[abs(t_table$testes_effect_zonation) > thresh &
+                            abs(t_table$portaltestes_vs_centraltestes) < 1, ]
+
+  # Split by zone
+  tpc_genes <- testes_genes[testes_genes$portaltestes_vs_centraltestes < 0, ]$gene
+  tpp_genes <- testes_genes[testes_genes$portaltestes_vs_centraltestes > 0, ]$gene
+  opc_genes <- ovaries_genes[ovaries_genes$portalova_vs_centralova < 0, ]$gene
+  opp_genes <- ovaries_genes[ovaries_genes$portalova_vs_centralova > 0, ]$gene
+
+  # Get correlated lipids for each category
+  tpc_lipids <- get_correlated_lipids(tpc_genes, scaled_RNA[, testes_central_samples],
+                                       lipidomic[, lip_testes_samples], cor_threshold)
+  tpp_lipids <- get_correlated_lipids(tpp_genes, scaled_RNA[, testes_portal_samples],
+                                       lipidomic[, lip_testes_samples], cor_threshold)
+  opc_lipids <- get_correlated_lipids(opc_genes, scaled_RNA[, ovaries_central_samples],
+                                       lipidomic[, lip_ovaries_samples], cor_threshold)
+  opp_lipids <- get_correlated_lipids(opp_genes, scaled_RNA[, ovaries_portal_samples],
+                                       lipidomic[, lip_ovaries_samples], cor_threshold)
+
+  # Determine zonation for each lipid
+  all_lipids <- rownames(lipidomic)
+  periportal_lipids <- unique(c(tpp_lipids, opp_lipids))
+  pericentral_lipids <- unique(c(tpc_lipids, opc_lipids))
+
+  zonation <- dplyr::case_when(
+    all_lipids %in% periportal_lipids & all_lipids %in% pericentral_lipids ~ "both",
+    all_lipids %in% periportal_lipids ~ "periportal",
+    all_lipids %in% pericentral_lipids ~ "pericentral",
+    TRUE ~ "no_association"
+  )
+
+  data.frame(
+    lipid = all_lipids,
+    lipid_class = gsub("[(].*", "", all_lipids),
+    zonation = zonation,
+    stringsAsFactors = FALSE
+  )
+}
+
+# Compute zonation at each threshold
+cat("    Computing zonation assignments across thresholds...\n")
+sensitivity_results <- lapply(threshold_range, function(thresh) {
+  result <- compute_zonation_at_threshold(
+    thresh, t_table, scaled_RNA, lipidomic,
+    testes_portal_samples, testes_central_samples,
+    ovaries_portal_samples, ovaries_central_samples,
+    lip_testes_samples, lip_ovaries_samples
+  )
+  result$threshold <- thresh
+  result
+})
+
+sensitivity_df <- do.call(rbind, sensitivity_results)
+cat("    Generated", nrow(sensitivity_df), "lipid × threshold combinations\n")
+
+# Calculate proportions by lipid class and zonation category for each threshold
+cat("    Calculating proportions by lipid class...\n")
+
+proportion_by_class <- sensitivity_df %>%
+  dplyr::group_by(threshold, lipid_class, zonation) %>%
+  dplyr::summarise(count = dplyr::n(), .groups = "drop") %>%
+  dplyr::group_by(threshold, lipid_class) %>%
+  dplyr::mutate(
+    total = sum(count),
+    proportion = count / total
+  ) %>%
+  dplyr::ungroup()
+
+# Order zonation factor (bottom to top: green, purple, orange, grey)
+proportion_by_class$zonation <- factor(
+  proportion_by_class$zonation,
+  levels = c("periportal", "both", "pericentral", "no_association")
+)
+
+# Get lipid classes ordered by enrichment (same as jitter plot)
+proportion_by_class$lipid_class <- factor(
+  proportion_by_class$lipid_class,
+  levels = classes_with_enrichment
+)
+
+# Filter to classes that exist in our data
+proportion_by_class <- proportion_by_class %>%
+  dplyr::filter(!is.na(lipid_class))
+
+cat("    Lipid classes:", length(unique(proportion_by_class$lipid_class)), "\n")
+
+# Note: Per-class stacked bar plot will be created after optimal_threshold is determined
+
+# Also create a summary plot showing total proportions across all lipids
+proportion_total <- sensitivity_df %>%
+  dplyr::group_by(threshold, zonation) %>%
+  dplyr::summarise(count = dplyr::n(), .groups = "drop") %>%
+  dplyr::group_by(threshold) %>%
+  dplyr::mutate(
+    total = sum(count),
+    proportion = count / total
+  ) %>%
+  dplyr::ungroup()
+
+proportion_total$zonation <- factor(
+  proportion_total$zonation,
+  levels = c("periportal", "both", "pericentral", "no_association")
+)
+
+# Note: p_sensitivity_total will be created and saved after optimal_threshold is determined
+# so we can add the threshold line to the plot
+
+# Save sensitivity data
+write.csv(proportion_by_class,
+          file.path(zonation_dir, "threshold_sensitivity_by_class.csv"),
+          row.names = FALSE)
+write.csv(proportion_total,
+          file.path(zonation_dir, "threshold_sensitivity_total.csv"),
+          row.names = FALSE)
+
+cat("  ✓ Saved sensitivity data to CSV files\n\n")
+
+#===============================================================================
+# Version 5: Optimal threshold detection (Entropy + Stability)
+# Combines information content (entropy) with stability analysis
+#===============================================================================
+
+cat("  Finding optimal threshold using entropy + stability...\n")
+
+# Function to calculate Shannon entropy (normalized to 0-1)
+calc_entropy <- function(proportions) {
+  # Remove zeros to avoid log(0)
+  p <- proportions[proportions > 0]
+  if (length(p) <= 1) return(0)
+  # Shannon entropy, normalized by max possible entropy (log of number of categories)
+  entropy <- -sum(p * log(p))
+  max_entropy <- log(length(proportions))
+  return(entropy / max_entropy)
+}
+
+# Calculate entropy at each threshold (excluding no_association from entropy calc
+# since we want to maximize info in the ASSOCIATED categories)
+entropy_by_threshold <- proportion_total %>%
+  dplyr::group_by(threshold) %>%
+  dplyr::summarise(
+    # Entropy of all categories
+    entropy_all = calc_entropy(proportion),
+    # Entropy of associated categories only (periportal, pericentral, both)
+    entropy_associated = {
+      assoc_props <- proportion[zonation != "no_association"]
+      if (sum(assoc_props) > 0) {
+        calc_entropy(assoc_props / sum(assoc_props))
+      } else {
+        0
+      }
+    },
+    # Proportion of lipids with any association
+    prop_associated = 1 - proportion[zonation == "no_association"],
+    # Proportion of "both" lipids (among all lipids) - we want to minimize this
+    prop_both = ifelse(any(zonation == "both"), proportion[zonation == "both"], 0),
+    .groups = "drop"
+  )
+
+# Calculate stability: how much do classifications change between adjacent thresholds?
+# Lower change = more stable
+stability_data <- sensitivity_df %>%
+  dplyr::arrange(lipid, threshold) %>%
+  dplyr::group_by(lipid) %>%
+  dplyr::mutate(
+    prev_zonation = dplyr::lag(zonation),
+    changed = zonation != prev_zonation
+  ) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(!is.na(prev_zonation)) %>%
+  dplyr::group_by(threshold) %>%
+  dplyr::summarise(
+    n_changed = sum(changed),
+    prop_changed = mean(changed),
+    .groups = "drop"
+  )
+
+# Merge entropy and stability data
+optimal_metrics <- entropy_by_threshold %>%
+  dplyr::left_join(stability_data, by = "threshold") %>%
+  dplyr::mutate(
+    # Stability score: inverse of change rate (1 = perfectly stable, 0 = everything changes)
+    stability = 1 - prop_changed,
+    # Specificity score: penalize having many "both" lipids (we want clear zonation)
+    specificity = 1 - prop_both,
+    # Combined score: balance entropy, stability, coverage, and specificity
+    # We want HIGH entropy (diverse associations), HIGH stability, and LOW "both" proportion
+    # Using cubed specificity to strongly penalize shared lipids
+    combined_score = entropy_associated * stability * prop_associated * specificity^3
+  )
+
+# Find optimal threshold (maximum combined score)
+optimal_idx <- which.max(optimal_metrics$combined_score)
+optimal_threshold <- optimal_metrics$threshold[optimal_idx]
+
+cat("    Optimal threshold:", optimal_threshold, "\n")
+cat("    At this threshold:\n")
+cat("      - Entropy (associated):", round(optimal_metrics$entropy_associated[optimal_idx], 3), "\n")
+cat("      - Stability:", round(optimal_metrics$stability[optimal_idx], 3), "\n")
+cat("      - Proportion associated:", round(optimal_metrics$prop_associated[optimal_idx], 3), "\n")
+cat("      - Proportion 'both':", round(optimal_metrics$prop_both[optimal_idx], 3), "\n")
+cat("      - Specificity (1-both):", round(optimal_metrics$specificity[optimal_idx], 3), "\n")
+cat("      - Combined score:", round(optimal_metrics$combined_score[optimal_idx], 3), "\n")
+
+# Create visualization of the optimization
+p_optimal <- ggplot(optimal_metrics, aes(x = threshold)) +
+  # Entropy of associated categories
+  geom_line(aes(y = entropy_associated, color = "Entropy (associated)"), linewidth = 1) +
+  # Stability
+  geom_line(aes(y = stability, color = "Stability"), linewidth = 1) +
+  # Proportion associated
+  geom_line(aes(y = prop_associated, color = "Prop. associated"), linewidth = 1, linetype = "dashed") +
+  # Specificity (1 - prop_both)
+  geom_line(aes(y = specificity, color = "Specificity (1-both)"), linewidth = 1, linetype = "dashed") +
+  # Combined score
+  geom_line(aes(y = combined_score, color = "Combined score"), linewidth = 1.5) +
+  # Mark optimal threshold
+  geom_vline(xintercept = optimal_threshold, linetype = "dashed", color = "red", linewidth = 1) +
+  annotate("text", x = optimal_threshold + 0.3, y = 0.95,
+           label = paste0("Optimal: ", optimal_threshold),
+           hjust = 0, color = "red", size = 4) +
+  scale_color_manual(
+    name = "Metric",
+    values = c("Entropy (associated)" = "blue", "Stability" = "darkgreen",
+               "Prop. associated" = "grey50", "Specificity (1-both)" = "orange",
+               "Combined score" = "red")
+  ) +
+  scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+  scale_y_continuous(limits = c(0, 1), labels = scales::percent_format()) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  ) +
+  labs(
+    x = "Interaction threshold (|t| for zonation × gonad)",
+    y = "Score (normalized 0-1)",
+    title = "Optimal threshold detection: Entropy × Stability × Coverage × Specificity",
+    subtitle = paste0("Optimal threshold = ", optimal_threshold,
+                      " (penalizes shared 'both' lipids)")
+  )
+
+ggsave(file.path(zonation_dir, "optimal_threshold_detection.pdf"),
+       plot = p_optimal,
+       width = 10, height = 6)
+
+cat("  ✓ Saved optimal threshold plot:",
+    file.path(zonation_dir, "optimal_threshold_detection.pdf"), "\n")
+
+# Save the metrics data
+write.csv(optimal_metrics,
+          file.path(zonation_dir, "optimal_threshold_metrics.csv"),
+          row.names = FALSE)
+
+cat("  ✓ Saved optimal threshold metrics to CSV\n\n")
+
+# Now create the total sensitivity plot with the optimal threshold line
+p_sensitivity_total <- ggplot(proportion_total,
+                              aes(x = threshold, y = proportion, fill = zonation)) +
+  geom_area(alpha = 0.8) +
+  geom_vline(xintercept = optimal_threshold, linetype = "dashed", color = "red", linewidth = 1) +
+  annotate("text", x = optimal_threshold + 0.2, y = 0.5,
+           label = paste0("Optimal: ", optimal_threshold),
+           hjust = 0, color = "red", size = 4, fontface = "bold") +
+  scale_fill_manual(
+    name = "Zonation Association",
+    values = c("periportal" = "lightgreen", "both" = "mediumpurple",
+               "pericentral" = "orange", "no_association" = "grey70"),
+    labels = c("Periportal", "Both", "Pericentral", "No association")
+  ) +
+  scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "right",
+    panel.grid.minor = element_blank()
+  ) +
+  labs(
+    x = "Interaction threshold (|t| for zonation × gonad)",
+    y = "Proportion of all lipid species",
+    title = "Overall lipid zonation associations across interaction thresholds"
+  )
+
+ggsave(file.path(zonation_dir, "lipid_zonation_threshold_sensitivity_total.pdf"),
+       plot = p_sensitivity_total,
+       width = 10, height = 6)
+
+cat("  ✓ Saved total sensitivity plot with optimal threshold:",
+    file.path(zonation_dir, "lipid_zonation_threshold_sensitivity_total.pdf"), "\n\n")
+
+# Print summary of zonation at optimal threshold
+cat("  Zonation distribution at optimal threshold (", optimal_threshold, "):\n", sep = "")
+optimal_zonation <- sensitivity_df %>%
+  dplyr::filter(threshold == optimal_threshold) %>%
+  dplyr::count(zonation) %>%
+  dplyr::mutate(percent = round(100 * n / sum(n), 1))
+
+for (i in 1:nrow(optimal_zonation)) {
+  cat("    ", optimal_zonation$zonation[i], ": ", optimal_zonation$n[i],
+      " (", optimal_zonation$percent[i], "%)\n", sep = "")
+}
+cat("\n")
+
+#===============================================================================
+# Lipid class proportions at optimal threshold (stacked bar chart)
+# Split by gonad bias (Testes vs Ovaries)
+#===============================================================================
+
+cat("  Creating lipid class proportions at optimal threshold...\n")
+
+# Get gonad bias for each lipid from lipid_ttop
+lipid_gonad_bias <- data.frame(
+  lipid = lipid_ttop$ID,
+  gonad_bias = ifelse(lipid_ttop$logFC > 0, "Testes", "Ovaries"),
+  stringsAsFactors = FALSE
+)
+
+# Get zonation for each lipid at optimal threshold and add gonad bias
+lipid_zonation_optimal <- sensitivity_df %>%
+  dplyr::filter(threshold == optimal_threshold) %>%
+  dplyr::left_join(lipid_gonad_bias, by = "lipid")
+
+# Calculate proportions by lipid class, gonad bias, and zonation
+class_proportions_by_gonad <- lipid_zonation_optimal %>%
+  dplyr::group_by(lipid_class, gonad_bias, zonation) %>%
+  dplyr::summarise(count = dplyr::n(), .groups = "drop") %>%
+  dplyr::group_by(lipid_class, gonad_bias) %>%
+  dplyr::mutate(
+    total = sum(count),
+    proportion = count / total
+  ) %>%
+  dplyr::ungroup()
+
+# Order lipid classes by enrichment (same as jitter plot)
+# Reverse order for facet_grid with coord_flip to match jitter plot orientation
+class_proportions_by_gonad$lipid_class <- factor(
+  class_proportions_by_gonad$lipid_class,
+  levels = rev(classes_with_enrichment)
+)
+
+# Filter to classes that exist
+class_proportions_by_gonad <- class_proportions_by_gonad %>%
+  dplyr::filter(!is.na(lipid_class))
+
+# Order zonation factor
+class_proportions_by_gonad$zonation <- factor(
+  class_proportions_by_gonad$zonation,
+  levels = c("periportal", "both", "pericentral", "no_association")
+)
+
+# Order gonad_bias factor
+class_proportions_by_gonad$gonad_bias <- factor(
+  class_proportions_by_gonad$gonad_bias,
+  levels = c("Testes", "Ovaries")
+)
+
+cat("    Lipid classes with data:", length(unique(class_proportions_by_gonad$lipid_class)), "\n")
+cat("    Testes-biased lipids:", sum(lipid_gonad_bias$gonad_bias == "Testes"), "\n")
+cat("    Ovaries-biased lipids:", sum(lipid_gonad_bias$gonad_bias == "Ovaries"), "\n")
+
+# Create stacked bar chart with gonad bias stacked vertically within each lipid class
+# Use faceting by lipid class so T/O bars are touching within each class
+p_class_proportions <- ggplot(class_proportions_by_gonad,
+                               aes(x = gonad_bias, y = proportion, fill = zonation)) +
+  geom_bar(stat = "identity", width = 1, position = "stack") +
+  facet_grid(lipid_class ~ ., switch = "y") +
+  scale_fill_manual(
+    name = "Zonation\nAssociation",
+    values = c("periportal" = "lightgreen", "both" = "mediumpurple",
+               "pericentral" = "orange", "no_association" = "grey70"),
+    labels = c("Periportal", "Both", "Pericentral", "No association")
+  ) +
+  scale_y_continuous(labels = scales::percent_format(), expand = c(0, 0)) +
+  scale_x_discrete(labels = c("Testes" = "T", "Ovaries" = "O")) +
+  coord_flip() +
+  theme_minimal(base_size = 10) +
+  theme(
+    axis.text.y = element_text(size = 8),
+    axis.title.y = element_blank(),
+    legend.position = "right",
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.spacing.y = unit(0.15, "lines"),
+    strip.text.y.left = element_text(angle = 0, hjust = 1, size = 8),
+    strip.placement = "outside"
+  ) +
+  labs(
+    x = NULL,
+    y = "Proportion of lipid species",
+    title = paste0("Lipid class zonation proportions at optimal threshold (", optimal_threshold, ")"),
+    subtitle = "T = Testes-biased, O = Ovaries-biased"
+  )
+
+ggsave(file.path(zonation_dir, "lipid_class_zonation_proportions.pdf"),
+       plot = p_class_proportions,
+       width = 4, height = 8)
+
+cat("  ✓ Saved lipid class proportions plot:",
+    file.path(zonation_dir, "lipid_class_zonation_proportions.pdf"), "\n\n")
+
+#===============================================================================
+# Standalone vertical jitter plot (like workflow 03)
+# Uses the OPTIMAL THRESHOLD determined above
+# Duplicates points that are in "both" categories into periportal and pericentral
+#===============================================================================
+
+cat("  Creating standalone vertical jitter plot using optimal threshold...\n")
+cat("    Using optimal interaction threshold:", optimal_threshold, "\n")
+
+# Get gene sets at optimal threshold
+v3_testes_zonation_genes <- t_table[abs(t_table$testes_effect_zonation) > optimal_threshold &
+                                     abs(t_table$portalova_vs_centralova) < 1, ]
+v3_ovaries_zonation_genes <- t_table[abs(t_table$testes_effect_zonation) > optimal_threshold &
+                                      abs(t_table$portaltestes_vs_centraltestes) < 1, ]
+
+# Split by zone
+v3_testes_pericentral <- v3_testes_zonation_genes[v3_testes_zonation_genes$portaltestes_vs_centraltestes < 0, ]$gene
+v3_testes_periportal <- v3_testes_zonation_genes[v3_testes_zonation_genes$portaltestes_vs_centraltestes > 0, ]$gene
+v3_ovaries_pericentral <- v3_ovaries_zonation_genes[v3_ovaries_zonation_genes$portalova_vs_centralova < 0, ]$gene
+v3_ovaries_periportal <- v3_ovaries_zonation_genes[v3_ovaries_zonation_genes$portalova_vs_centralova > 0, ]$gene
+
+cat("    Gene counts at optimal threshold (", optimal_threshold, "):\n", sep = "")
+cat("      Testes pericentral:", length(v3_testes_pericentral), "\n")
+cat("      Testes periportal:", length(v3_testes_periportal), "\n")
+cat("      Ovaries pericentral:", length(v3_ovaries_pericentral), "\n")
+cat("      Ovaries periportal:", length(v3_ovaries_periportal), "\n")
+
+# Compute lipid correlations at optimal threshold
+v3_TPC_lipids <- get_correlated_lipids(
+  v3_testes_pericentral,
+  scaled_RNA[, testes_central_samples],
+  lipidomic[, lip_testes_samples]
+)
+v3_TPP_lipids <- get_correlated_lipids(
+  v3_testes_periportal,
+  scaled_RNA[, testes_portal_samples],
+  lipidomic[, lip_testes_samples]
+)
+v3_OPC_lipids <- get_correlated_lipids(
+  v3_ovaries_pericentral,
+  scaled_RNA[, ovaries_central_samples],
+  lipidomic[, lip_ovaries_samples]
+)
+v3_OPP_lipids <- get_correlated_lipids(
+  v3_ovaries_periportal,
+  scaled_RNA[, ovaries_portal_samples],
+  lipidomic[, lip_ovaries_samples]
+)
+
+cat("    Lipid associations at optimal threshold:\n")
+cat("      TPC lipids:", length(v3_TPC_lipids), "\n")
+cat("      TPP lipids:", length(v3_TPP_lipids), "\n")
+cat("      OPC lipids:", length(v3_OPC_lipids), "\n")
+cat("      OPP lipids:", length(v3_OPP_lipids), "\n")
+
+# Create zonation mapping
+v3_lipid_zonation <- data.frame(
+  lipid = unique(c(v3_TPC_lipids, v3_TPP_lipids, v3_OPC_lipids, v3_OPP_lipids)),
+  stringsAsFactors = FALSE
+)
+v3_lipid_zonation$is_periportal <- v3_lipid_zonation$lipid %in% c(v3_TPP_lipids, v3_OPP_lipids)
+v3_lipid_zonation$is_pericentral <- v3_lipid_zonation$lipid %in% c(v3_TPC_lipids, v3_OPC_lipids)
+v3_lipid_zonation$zonation_direction <- dplyr::case_when(
+  v3_lipid_zonation$is_periportal & v3_lipid_zonation$is_pericentral ~ "both",
+  v3_lipid_zonation$is_periportal ~ "periportal",
+  v3_lipid_zonation$is_pericentral ~ "pericentral",
+  TRUE ~ "no_association"
+)
+
+cat("    Zonation breakdown:\n")
+cat("      Periportal only:", sum(v3_lipid_zonation$zonation_direction == "periportal"), "\n")
+cat("      Pericentral only:", sum(v3_lipid_zonation$zonation_direction == "pericentral"), "\n")
+cat("      Both:", sum(v3_lipid_zonation$zonation_direction == "both"), "\n")
+
+# Create jitter data with zonation coloring
+jitter_data_v3 <- jitter_data %>%
+  dplyr::left_join(
+    v3_lipid_zonation[, c("lipid", "zonation_direction")],
+    by = c("ID" = "lipid")
+  ) %>%
+  dplyr::mutate(
+    zonation_direction = ifelse(is.na(zonation_direction), "no_network_data", zonation_direction)
+  )
+
+cat("    Total lipids colored:", sum(jitter_data_v3$zonation_direction != "no_network_data"), "\n")
+
+# Split "both" into two rows: one periportal, one pericentral
+both_rows <- jitter_data_v3 %>% dplyr::filter(zonation_direction == "both")
+
+if (nrow(both_rows) > 0) {
+  # Duplicated points go into their respective zonation groups but get "both" color
+  both_as_periportal <- both_rows %>% dplyr::mutate(zonation_direction = "periportal", color_group = "both")
+  both_as_pericentral <- both_rows %>% dplyr::mutate(zonation_direction = "pericentral", color_group = "both")
+
+  # Non-duplicated points: color matches their zonation
+  jitter_data_v3 <- jitter_data_v3 %>%
+    dplyr::filter(zonation_direction != "both") %>%
+    dplyr::mutate(color_group = as.character(zonation_direction)) %>%
+    dplyr::bind_rows(both_as_periportal, both_as_pericentral)
+
+  cat("    Duplicated", nrow(both_rows), "lipids from 'both' into periportal and pericentral (colored purple)\n")
+} else {
+  jitter_data_v3$color_group <- as.character(jitter_data_v3$zonation_direction)
+}
+
+# Reorder zonation groups: green (periportal), grey (no_network_data), orange (pericentral)
+jitter_data_v3$zonation_direction <- factor(
+  jitter_data_v3$zonation_direction,
+  levels = c("periportal", "no_network_data", "pericentral")
+)
+
+# Reorder color groups for legend
+jitter_data_v3$color_group <- factor(
+  jitter_data_v3$color_group,
+  levels = c("periportal", "no_network_data", "pericentral", "both")
+)
+
+# Set point sizes: orange/green = 2, purple (both) = 1, grey = 1
+jitter_data_v3$point_size <- dplyr::case_when(
+  jitter_data_v3$color_group %in% c("periportal", "pericentral") ~ 2,
+  jitter_data_v3$color_group == "both" ~ 1,
+  TRUE ~ 1  # no_network_data
+)
+
+# Create alternating background shading for lipid classes
+n_classes <- length(levels(jitter_data_v3$source))
+shade_data <- data.frame(
+  xmin = seq(0.5, n_classes - 0.5, by = 2),
+  xmax = seq(1.5, n_classes + 0.5, by = 2)
+)
+# Ensure we don't exceed the number of classes
+shade_data <- shade_data[shade_data$xmin < n_classes + 0.5, ]
+shade_data$xmax <- pmin(shade_data$xmax, n_classes + 0.5)
+
+# Create vertical jitter plot with coord_flip (like workflow 03)
+# Use dodged positions for side-by-side groups (3 groups), 4 colors
+# Duplicated points (originally "both") are purple
+p_jitter_vertical <- ggplot(jitter_data_v3,
+                            aes(x = source, y = testes_vs_ova,
+                                fill = color_group, color = color_group,
+                                group = zonation_direction)) +
+  # Add alternating background shading (before points so it's behind)
+  geom_rect(data = shade_data,
+            aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE,
+            fill = "grey95", alpha = 0.8) +
+  geom_point(
+    aes(size = point_size),
+    position = position_jitterdodge(jitter.width = 0.15, dodge.width = 0.8),
+    alpha = 0.6
+  ) +
+  scale_size_identity() +  # Use actual size values, no legend
+  scale_fill_manual(
+    name   = "Zonation\nAssociation",
+    values = c("periportal" = "lightgreen", "no_network_data" = "grey70",
+               "pericentral" = "orange", "both" = "mediumpurple"),
+    labels = c("Periportal only", "No network data", "Pericentral only", "Both zones")
+  ) +
+  scale_color_manual(
+    name   = "Zonation\nAssociation",
+    values = c("periportal" = "darkgreen", "no_network_data" = "grey50",
+               "pericentral" = "darkorange", "both" = "purple4"),
+    labels = c("Periportal only", "No network data", "Pericentral only", "Both zones")
+  ) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey30") +
+  coord_flip() +
+  theme_minimal(base_size = 10) +
+  theme(
+    axis.text.y = element_text(hjust = 1),
+    legend.position = "right",
+    panel.grid.major.y = element_blank(),  # Remove horizontal grid lines (cleaner with shading)
+    plot.margin = margin(10, 10, 10, 10, unit = "pt")
+  ) +
+  labs(x = "Lipid Class", y = "t-value (Testes vs Ovaries)",
+       title = paste0("Lipid zonation associations (threshold = ", optimal_threshold, ")"))
+
+ggsave(file.path(zonation_dir, "lipid_class_zonation_jitter_vertical.pdf"),
+       plot = p_jitter_vertical,
+       width = 5, height = 8)
+
+cat("  ✓ Saved standalone vertical jitter plot:",
+    file.path(zonation_dir, "lipid_class_zonation_jitter_vertical.pdf"), "\n\n")
 
 # Print summary statistics
 cat("Summary statistics:\n")
@@ -1156,7 +1613,7 @@ for (cat_name in c("TPC", "TPP", "OPC", "OPP")) {
 }
 cat("\n")
 
-cat("✓ Lipid-gene association heatmap complete\n\n")
+cat("✓ Lipid-gene association visualization complete\n\n")
 
 ################################################################################
 # 12. SAVE RESULTS
@@ -1210,6 +1667,7 @@ cat("  - ", file.path(zonation_dir, "PCA_*.pdf"), "\n")
 cat("  - ", file.path(zonation_dir, "volcanos/"), "\n")
 cat("  - ", file.path(zonation_dir, "lipid_class_by_category.pdf"), "\n")
 cat("  - ", file.path(zonation_dir, "lipid_class_category_summary.csv"), "\n")
+cat("  - ", file.path(zonation_dir, "lipid_class_zonation_association_heatmap*.pdf"), " (5 versions)\n")
 cat("  - ", file.path(multiomics_dir, "cormat_*_SIF.csv / ATT.csv"), " (8 networks)\n\n")
 
 cat("Expected biological findings (from manuscript):\n")

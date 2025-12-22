@@ -51,19 +51,19 @@ palette <- c(palette1, palette2)
 pheatmap::pheatmap(t_table[,-1], show_rownames = F, cluster_cols = T, cluster_rows = T,color = palette, angle_col = 315, display_numbers = F)
 dev.off()
 
-testes_portal <- as.data.frame(read_csv("results/multi-omic/cormat_testes_portal_SIF.csv")) 
+testes_portal <- as.data.frame(read_csv("results/multi-omic/cormat_testes_portal_full_SIF.csv")) 
 testes_portal <- testes_portal[grepl("[()]",testes_portal$node2),]
 testes_portal$node1 <- paste(testes_portal$node1,"testes_portal",sep = "_")
 
-testes_central <- as.data.frame(read_csv("results/multi-omic/cormat_testes_central_SIF.csv")) 
+testes_central <- as.data.frame(read_csv("results/multi-omic/cormat_testes_central_full_SIF.csv")) 
 testes_central <- testes_central[grepl("[()]",testes_central$node2),]
 testes_central$node1 <- paste(testes_central$node1,"testes_central",sep = "_")
 
-ova_portal <- as.data.frame(read_csv("results/multi-omic/cormat_Ovaries_portal_SIF.csv")) 
+ova_portal <- as.data.frame(read_csv("results/multi-omic/cormat_Ovaries_portal_full_SIF.csv")) 
 ova_portal <- ova_portal[grepl("[()]",ova_portal$node2),]
 ova_portal$node1 <- paste(ova_portal$node1,"ova_portal",sep = "_")
 
-ova_central <- as.data.frame(read_csv("results/multi-omic/cormat_ova_central_SIF.csv")) 
+ova_central <- as.data.frame(read_csv("results/multi-omic/cormat_ova_central_full_SIF.csv")) 
 ova_central <- ova_central[grepl("[()]",ova_central$node2),]
 ova_central$node1 <- paste(ova_central$node1,"ova_central",sep = "_")
 

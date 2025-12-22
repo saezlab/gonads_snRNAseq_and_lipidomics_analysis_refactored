@@ -44,7 +44,7 @@ The Sry gene (normally on Y chromosome) is translocated to chromosome 3, enablin
 │   ├── metabolomics/               # Lipidomics data
 │   └── Suppl_Table_1_OverviewData.xlsx  # Sample metadata
 ├── scripts/
-│   ├── workflows/                  # Main analysis workflows (01-07)
+│   ├── workflows/                  # Main analysis workflows (00-07)
 │   ├── core/                       # Core analysis functions
 │   │   ├── data_loading.R          # Data loading utilities
 │   │   ├── differential_analysis.R # Differential expression/abundance
@@ -95,7 +95,43 @@ The Sry gene (normally on Y chromosome) is translocated to chromosome 3, enablin
 
 ## Analysis Workflows
 
-The analysis is organized into **7 sequential workflows** that can be run independently:
+The analysis is organized into **8 sequential workflows** (00-07) that can be run independently:
+
+### Workflow 0: snRNA-seq Pre-processing Pipeline
+**Script**: `scripts/workflows/00_snrnaseq_preprocessing.R`
+
+⚠️ **NOTE**: This workflow requires access to raw sci-RNA-seq alignment data. Most users should start with Workflow 1.
+
+Documents the raw data processing pipeline that produces the pseudobulk Seurat objects:
+
+**Datasets processed**:
+- **FCG (Four Core Genotypes)**: 43 samples + 5 wild-type males
+- **GDX (Gonadectomy Hormone Replacement)**: Validation cohort
+
+**Pipeline steps**:
+1. Import raw sci-RNA-seq data from alignment output
+2. Quality control: UMI filtering (remove outliers)
+3. Standard Seurat workflow (normalize, scale, PCA, cluster, UMAP)
+4. Doublet detection and removal (scDblFinder)
+5. Cell type annotation using known markers
+6. Pseudobulk aggregation by sample and cell type
+7. Hepatocyte zonation annotation (periportal vs pericentral)
+
+**Key outputs**:
+- `annotated.rds` - Cell type annotated Seurat object
+- `pseudobulks_scc.rds` - Main pseudobulk data
+- `heps_zonationsubsetted_pseudobulks_gonad.rds` - Zonation-annotated hepatocyte pseudobulk
+
+**Cell type markers used**:
+- Hepatocytes: Mlxipl, Apoa2, Hnf4a
+- Immune cells: Ptprc, Vsig4, Adgre1
+- Endothelial cells: Btnl9, Clec4g, Pecam1
+- Stellate cells: Lrat, Des, Reln
+- Cholangiocytes: Krt19, Ankrd1, Epcam
+
+**Zonation markers**:
+- Pericentral: Cyp2e1 > 1 AND Cyp2f2 < 1
+- Periportal: Cyp2e1 < 1 AND Cyp2f2 > 1
 
 ### Workflow 1: Data Preparation and Quality Control
 **Script**: `scripts/workflows/01_data_preparation_qc.R`
@@ -230,16 +266,39 @@ gene_correlation ~ lipid_class + lipid_abundance + chain_length + db_position +
 **Key outputs**:
 - `results/multi-omic/structural_model/` - Regression results and summary tables
 - `results/multi-omic/structural_model/gene_plots/` - Structural preference plots
+- `results/multi-omic/structural_model/summary_figure_panel[A-C].pdf` - Publication-ready summary figures
 
 **Key findings**:
 - Identifies substrate specificity (chain length and saturation preferences)
 - Example: Cyp2c38 shows structural preferences in lipid associations
 - Reveals coordination between enzyme expression and lipid composition
+- Generates integrated multi-panel summary figures for manuscript
 
-### Workflow 7: Create Summary Figure
-**Script**: `scripts/workflows/07_create_summary_figure.R`
+### Workflow 7: Validation of Gene-Lipid Correlations
+**Script**: `scripts/workflows/07_validation_experiments.R`
 
-Generates integrated multi-panel summary figures for manuscript.
+Validates gene-lipid correlations from MOFA integration using in vitro knockdown experiments.
+
+**Analysis steps**:
+- Load knockdown lipidomic data from primary hepatocytes
+- Differential analysis comparing knockdown vs control
+- Score consistency between predictions (correlations) and observations (knockdown effects)
+- Validate both global and zonation-specific networks
+
+**Genes validated**:
+- **Global hepatocyte network**: Cyp2d9, Cyp2b9, Cyp2c38
+- **Zonation-specific network**: Sult3a1, Mtmr11 (spatially biased genes)
+
+**Key outputs**:
+- `results/validation/knockdown_heatmap.pdf` - Overview of all knockdown effects
+- `results/validation/[gene]_validation_scatter.pdf` - Consistency plots per gene
+- `results/validation/global_network_validation_scores.csv` - Validation scores
+- `results/validation/zonation_network_validation_scores.csv` - Zonation-specific scores
+
+**Key findings**:
+- Confirms that predicted gene-lipid correlations match experimental knockdown effects
+- Quantifies consistency between FCGL mouse observations and in vitro experiments
+- Validates zonation-specific effects for spatially biased genes
 
 ## Installation and Requirements
 
@@ -281,14 +340,18 @@ Run all workflows sequentially:
 # Set working directory to repository root
 setwd("/path/to/gonads_snRNAseq_and_lipidomics_analysis_refactored")
 
-# Run workflows in order
+# Workflow 00 requires raw alignment data (HPC environment)
+# Most users should start with Workflow 01
+# source("scripts/workflows/00_snrnaseq_preprocessing.R")  # Optional: raw data processing
+
+# Run workflows in order (starting from pre-processed data)
 source("scripts/workflows/01_data_preparation_qc.R")
 source("scripts/workflows/02_fcg_pseudobulk_analysis.R")
 source("scripts/workflows/03_fcg_lipidomic_analysis.R")
 source("scripts/workflows/04_mofa_integration.R")
 source("scripts/workflows/05_zonation_analysis.R")
 source("scripts/workflows/06_structural_analysis.R")
-source("scripts/workflows/07_create_summary_figure.R")
+source("scripts/workflows/07_validation_experiments.R")
 ```
 
 ### Running Individual Workflows
@@ -308,8 +371,8 @@ source("scripts/workflows/02_fcg_pseudobulk_analysis.R")
 - **Workflow 3** (Lipidomics): ~10-15 minutes
 - **Workflow 4** (MOFA): ~2 hours (if training models) or ~10 minutes (pre-trained)
 - **Workflow 5** (Zonation): ~10-15 minutes
-- **Workflow 6** (Structural): ~20-30 minutes
-- **Workflow 7** (Summary): ~5 minutes
+- **Workflow 6** (Structural + Summary Figures): ~25-35 minutes
+- **Workflow 7** (Validation): ~5-10 minutes
 
 **Total runtime**: ~3 hours (with MOFA training) or ~1.5 hours (pre-trained models)
 
@@ -346,6 +409,28 @@ Raw data files required to run these analyses:
 
 3. **Metadata**: Available in `data/`
    - `Suppl_Table_1_OverviewData.xlsx` - Sample metadata with group assignments
+
+## MCP Server for AI-Assisted Data Exploration
+
+This repository includes an MCP (Model Context Protocol) server that allows Claude or other AI assistants to dynamically query the analysis results.
+
+### Features
+- Query differential expression for specific genes/lipids
+- Explore pathway and TF enrichment
+- Query MOFA integration results and gene-lipid networks
+- Get summary statistics
+
+### Quick Setup
+
+```bash
+# Install dependencies
+pip install mcp pandas pyreadr
+
+# Add to Claude Code
+claude mcp add --transport stdio fcgl-analysis -- python mcp/fcgl_server.py
+```
+
+See `mcp/README.md` for detailed documentation.
 
 ## Citation
 
