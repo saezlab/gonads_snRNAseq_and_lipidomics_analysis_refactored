@@ -386,27 +386,43 @@ Validates gene-lipid correlations from MOFA integration using in vitro knockdown
 
 ### Required R Packages
 
-**Core analysis**:
 ```r
+# Install BiocManager if not already installed
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
 # Data manipulation
-install.packages(c("dplyr", "tidyr", "tibble", "readr", "readxl"))
+install.packages(c("dplyr", "tidyr", "tibble", "readr", "readxl",
+                   "reshape2", "forcats", "stringr"))
 
 # Visualization
-install.packages(c("ggplot2", "ggrepel", "pheatmap", "ComplexHeatmap",
-                   "cowplot", "patchwork", "gridExtra", "circlize", "ggridges"))
+install.packages(c("ggplot2", "ggrepel", "pheatmap", "cowplot",
+                   "patchwork", "gridExtra", "circlize", "ggridges",
+                   "RColorBrewer", "scales"))
+BiocManager::install("ComplexHeatmap")
 
 # Statistics
 BiocManager::install("limma")
 install.packages("decoupleR")
 
-# Single-cell
+# Single-cell analysis
 install.packages("Seurat")
+BiocManager::install("glmGamPoi")  # Optional: faster SCTransform
 
 # Multi-omic integration
 BiocManager::install("MOFA2")
 
 # Gene sets
-BiocManager::install(c("GSEABase", "org.Mm.eg.db", "AnnotationDbi"))
+BiocManager::install("GSEABase")
+
+# Doublet detection (optional, for Workflow 00 only)
+BiocManager::install("scDblFinder")
+```
+
+### Python Dependencies (for MCP server only)
+
+```bash
+pip install mcp pandas pyreadr
 ```
 
 ## Running the Analyses
