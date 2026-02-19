@@ -7,3 +7,5 @@ Is cyp2c38 periportal biased ?
 Is cyp2c38 associated with short chain lipids ?
 
 Which are the male biased lipids species that are associated with periportal zonation ?
+
+What is the sex related lipid classe enrichment for Triglycerides, diglycerides, phosphatidylinositols, phosphatidylethanolamines, lysophosphatidylethanolamines, sphingomyelins, ceramides and hexosylceramides ?

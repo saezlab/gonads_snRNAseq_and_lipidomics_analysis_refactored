@@ -449,7 +449,7 @@ if (file.exists(gdx_tval_file)) {
                             aes(x = fcgl, y = testes_gonadosectomy,
                                 label = labels, color = color)) +
       geom_point(alpha = 0.5) +
-      scale_color_manual(values = c("red", "royalblue"),
+      scale_color_manual(values = c("#e54141", "#4173d8"),
                          labels = c("Female-biased (Ovaries)", "Male-biased (Testes)"),
                          name = "FCG Direction") +
       geom_smooth(method = "lm", se = TRUE, color = "black") +
@@ -537,6 +537,23 @@ save(lipid_class_results,
      file = "results/lipidomic/enrichment/lipid_class_enrichment_scores.RData")
 cat("Saved: results/lipidomic/enrichment/lipid_class_enrichment_scores.RData\n\n")
 
+# Export full enrichment results to CSV (including p-values)
+# Extract gonadal comparison for the main enrichment table
+gonadal_pattern <- grep("Testes.*Ovaries|gonadal", unique(lipid_class_results$condition), value = TRUE)[1]
+if (!is.na(gonadal_pattern)) {
+  lipid_class_enrichment_gonadal <- lipid_class_results %>%
+    dplyr::filter(grepl(gonadal_pattern, condition)) %>%
+    dplyr::select(lipid_class = source, enrichment_score = score,
+                  statistic, p_value) %>%
+    dplyr::arrange(desc(enrichment_score))
+
+  write.csv(lipid_class_enrichment_gonadal,
+            file = "results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv",
+            row.names = FALSE)
+  cat("Saved: results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv\n")
+  cat("  (Contains enrichment scores with p-values for gonadal comparison)\n\n")
+}
+
 # ==============================================================================
 # STEP 6: Lipid Class Enrichment Plot (Paper Figure)
 # ==============================================================================
@@ -601,12 +618,12 @@ if (!is.null(gonadal_comparison)) {
     ) +
     scale_fill_manual(
       name   = "Enrichment\nDirection",
-      values = c("negative" = "red", "positive" = "royalblue", "non-significant" = "grey"),
+      values = c("negative" = "#e54141", "positive" = "#4173d8", "non-significant" = "grey"),
       labels = c("Up in ovaries", "non-significant", "Up in testes")
     ) +
     scale_color_manual(
       name   = "Enrichment\nDirection",
-      values = c("negative" = "red", "positive" = "royalblue", "non-significant" = "grey"),
+      values = c("negative" = "#e54141", "positive" = "#4173d8", "non-significant" = "grey"),
       labels = c("Up in ovaries", "non-significant", "Up in testes")
     ) +
     labs(
@@ -782,9 +799,9 @@ if (dir.exists(bubble_data_dir)) {
     bubbleplot <- ggplot(df, aes(x = C, y = DB)) +
       geom_point(size = 6, aes(color = LogFC), shape = 15) + #square shape 15 / circle 19
       scale_color_gradient2(
-        low = "royalblue",
+        low = "#4173d8",
         mid = "white",
-        high = "red",
+        high = "#e54141",
         midpoint = 0,
         name = "log2 FC\n(T vs O)"
       ) +

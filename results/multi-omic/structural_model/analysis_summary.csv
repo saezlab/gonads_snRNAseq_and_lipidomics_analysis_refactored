@@ -2,11 +2,11 @@
 "Total gene-lipid correlations",995879
 "Genes analyzed",809
 "Lipids analyzed",1231
-"Global regression tests",4045
-"Significant global associations (p < 0.05)",2440
-"Genes with chain length associations",685
-"Genes with DB position associations",1051
-"Genes with interaction effects",724
-"Genes with multiple associations",763
-"Class-specific regression tests",64720
-"Significant class-specific associations (p < 0.05)",13261
+"Global regression tests",4854
+"Significant global associations (p < 0.05)",3123
+"Genes with chain length associations",1162
+"Genes with DB position associations",1077
+"Genes with interaction effects",1471
+"Genes with multiple associations",785
+"Class-specific regression tests",77664
+"Significant class-specific associations (p < 0.05)",22757

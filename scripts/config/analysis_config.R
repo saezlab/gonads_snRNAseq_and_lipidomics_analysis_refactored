@@ -145,8 +145,8 @@ ZONATION_SETTINGS <- list(
 VISUALIZATION_SETTINGS <- list(
   # Default colors
   colors = list(
-    gonadal = c(Ovaries = "red", Testes = "royalblue"),
-    allosome = c(XX = "red", XY = "royalblue"),
+    gonadal = c(Ovaries = "#e54141", Testes = "#4173d8"),
+    allosome = c(XX = "#e54141", XY = "#4173d8"),
     cell_types = c(
       Hepatocytes = "#ca3659",
       `Endothelial cells` = "#8f7b2f",
@@ -154,7 +154,7 @@ VISUALIZATION_SETTINGS <- list(
       `Stellate cells` = "#1892b1",
       Cholangiocytes = "#834f9f"
     ),
-    heatmap_diverging = c("red", "white", "royalblue")
+    heatmap_diverging = c("#e54141", "white", "#4173d8")
   ),
 
   # Figure dimensions (inches)

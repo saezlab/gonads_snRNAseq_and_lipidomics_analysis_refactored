@@ -372,15 +372,20 @@ comparisons <- list("XXT_vs_XXO" = c(1,-4))  # Comparing specific groups
 ### Color Schemes
 
 Consistent colors used across analyses:
-- **Gonadal type:** Ovaries = "red", Testes = "royalblue"
-- **Allosome type:** XX = "red", XY = "royalblue" (or brown/cyan for specific comparisons)
+- **Gonadal type:** Ovaries = "#e54141", Testes = "#4173d8"
+- **Allosome type:** XX = "#e54141", XY = "#4173d8" (or brown/cyan for specific comparisons)
+- **Zonation x Gonad:**
+  - Testes Pericentral = "#2b64d6"
+  - Testes Periportal = "#5f8dff"
+  - Ovaries Pericentral = "#d32f2f"
+  - Ovaries Periportal = "#ff5555"
 - **Cell types:**
   - Hepatocytes = "#ca3659"
   - Endothelial cells = "#8f7b2f"
   - Immune cells = "#0d934d"
   - Stellate cells = "#1892b1"
   - Cholangiocytes = "#834f9f"
-- **Heatmaps:** Red-white-blue or red-grey-blue diverging palettes
+- **Heatmaps:** Red-white-blue or red-grey-blue diverging palettes (using #e54141 and #4173d8)
 
 ### Naming Conventions
 
@@ -486,6 +491,38 @@ The FCG model allows separation of:
 4. **Proteomics:** Bulk liver tissue proteomics (33% of gonad-dependent genes show protein-level changes)
 5. **GDX experiments:** Gonadectomy in wild-type mice confirms activational hormone effects
 
+## Workflow Plan Files — MANDATORY Reading Before Modifying
+
+Detailed plan documents for each workflow are in `docs/workflow_plans/`.
+
+**MANDATORY PROTOCOL: Before modifying any workflow script (`scripts/workflows/NN_*.R`), you MUST:**
+1. **Read the corresponding plan file** (`docs/workflow_plans/NN_*.md`) to understand section structure, key variables, data dependencies, and known vulnerabilities
+2. **Read the meta overview** (`docs/workflow_plans/_meta_cross_workflow_overview.md`) if the change affects cross-workflow data files
+3. **After completing modifications**, update the plan file to reflect any changes to sections, outputs, variables, or vulnerabilities
+
+| Plan File | Workflow | Status | Vulnerabilities |
+|-----------|----------|--------|-----------------|
+| `_meta_cross_workflow_overview.md` | All | - | Cross-workflow dependency graph, coherence status, shared files |
+| `00_snrnaseq_preprocessing.md` | 00 | GOOD | 5 (HPC paths, placeholder import, cluster mappings, setwd, optional packages) |
+| `01_data_preparation_qc.md` | 01 | GOOD | 0 |
+| `02_fcg_pseudobulk_analysis.md` | 02 | GOOD | 0 |
+| `03_fcg_lipidomic_analysis.md` | 03 | GOOD | 0 |
+| `04_mofa_integration.md` | 04 | GOOD | 0 |
+| `05_zonation_analysis.md` | 05 | GOOD | 4 (pathway caching, long-distance deps, sample regex, local helper) |
+| `06_structural_analysis.md` | 06 | GOOD | 2 (hardcoded focus genes, structural file matching) |
+| `07_validation_experiments.md` | 07 | GOOD | 1 (inconsistent but matched network filenames) |
+| `08_variance_analysis.md` | 08 | GOOD | 0 |
+
+### Cross-Workflow Data Flow
+
+```
+00 -> 01 (Seurat -> CSVs)
+01 -> 02 (RNA DE) -> 05 (zonation)
+01 -> 03 (lipid DE) -> 05, 08
+01 -> 04 (MOFA) -> 05, 06, 07
+05 -> 07 (validation networks)
+```
+
 ## Tips for Working with This Codebase
 
 1. **⚠️ ALWAYS TEST IMMEDIATELY after modifying any script** - Run it to catch bugs before they compound (see "Development Best Practices" section above)
@@ -498,3 +535,4 @@ The FCG model allows separation of:
 8. **Correlation networks** - Pearson r > 0.65 used as threshold for significant associations
 9. **Zonation markers** - Cyp2e1 = pericentral, Cyp2f2 = periportal (Halpern et al. 2017)
 10. **View() calls in code** - Remove or comment out `View()` calls when running non-interactively
+11. **Before modifying a workflow** - ALWAYS read its plan file in `docs/workflow_plans/` first, and update the plan file after making changes (see "Workflow Plan Files" section above)

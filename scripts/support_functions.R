@@ -715,7 +715,7 @@ progenyScatter <- function(df,weight_matrix,dfID = 1, weightID = 1, statName = "
 #'
 #'@return a ggplot object of the volcano plot
 volcano_nice <- function (df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = NULL,
-                          label = FALSE, straight = FALSE, nlabels, manual_labels = NA, col_high_neut_low = c("red","grey30","royalblue"))
+                          label = FALSE, straight = FALSE, nlabels, manual_labels = NA, col_high_neut_low = c("#e54141","grey30","#4173d8"))
 {
   df <- df[complete.cases(df), ]
   names(df)[1] <- "X1"

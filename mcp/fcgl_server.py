@@ -88,6 +88,24 @@ class FCGLDataLoader:
         """Get validation experiment scores."""
         return self._load_csv("results/validation/validation_summary.csv")
 
+    def get_lipid_class_enrichment(self) -> pd.DataFrame:
+        """Get lipid class enrichment scores from gonadal comparison.
+
+        First tries the new file with p-values, falls back to legacy file.
+        """
+        try:
+            # Try new file with p-values first
+            return self._load_csv("results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv")
+        except FileNotFoundError:
+            # Fall back to legacy file (average scores only, no p-values)
+            df = self._load_csv("results/lipidomic/lipid_weights_classes.csv")
+            # Rename columns to match new format
+            df = df.rename(columns={
+                'Lipid Class': 'lipid_class',
+                'average_value': 'enrichment_score'
+            })
+            return df
+
 
 # Initialize server
 server = Server("fcgl-analysis")
@@ -270,6 +288,21 @@ async def list_tools():
             name="get_validation_results",
             description="Get siRNA knockdown validation results comparing predictions to experiments.",
             inputSchema={"type": "object", "properties": {}, "required": []}
+        ),
+        Tool(
+            name="query_lipid_class_enrichment",
+            description="Get lipid class enrichment scores for the gonadal comparison (Testes vs Ovaries). Shows which lipid classes are male-biased (positive) or female-biased (negative). Lipid classes include: TG (Triglycerides), DG (Diglycerides), PI (Phosphatidylinositols), PE (Phosphatidylethanolamines), LPE (Lysophosphatidylethanolamines), PC (Phosphatidylcholines), SM (Sphingomyelins), Cer (Ceramides), HexCer (Hexosylceramides), and more.",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "lipid_classes": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "List of lipid class abbreviations to query (e.g., ['TG', 'DG', 'SM']). Leave empty for all classes."
+                    }
+                },
+                "required": []
+            }
         )
     ]
 
@@ -302,6 +335,8 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
             return handle_lipid_zonation(loader, arguments)
         elif name == "get_validation_results":
             return handle_validation(loader)
+        elif name == "query_lipid_class_enrichment":
+            return handle_lipid_class_enrichment(loader, arguments)
         else:
             return [TextContent(type="text", text=f"Unknown tool: {name}")]
 
@@ -856,6 +891,134 @@ def handle_validation(loader: FCGLDataLoader) -> list[TextContent]:
         return [TextContent(type="text", text=text)]
     except Exception as e:
         return [TextContent(type="text", text=f"Error loading validation data: {str(e)}")]
+
+
+def handle_lipid_class_enrichment(loader: FCGLDataLoader, args: dict) -> list[TextContent]:
+    """Query lipid class enrichment scores from gonadal comparison."""
+    lipid_classes = args.get("lipid_classes", [])
+
+    try:
+        df = loader.get_lipid_class_enrichment()
+
+        # Check if we have the new format with p-values
+        has_pvalues = 'p_value' in df.columns
+
+        # Rename columns for clarity (handle both old and new formats)
+        if 'Lipid Class' in df.columns:
+            df = df.rename(columns={
+                'Lipid Class': 'lipid_class',
+                'average_value': 'enrichment_score'
+            })
+
+        # Map abbreviations to full names
+        lipid_class_names = {
+            'Cer': 'Ceramides',
+            'DG': 'Diglycerides',
+            'FA': 'Fatty Acids',
+            'HexCer': 'Hexosylceramides',
+            'LPE': 'Lysophosphatidylethanolamines',
+            'LPC': 'Lysophosphatidylcholines',
+            'PA': 'Phosphatidic Acids',
+            'PC': 'Phosphatidylcholines',
+            'PE': 'Phosphatidylethanolamines',
+            'PG': 'Phosphatidylglycerols',
+            'PI': 'Phosphatidylinositols',
+            'PS': 'Phosphatidylserines',
+            'SHexCer': 'Sulfatides',
+            'SM': 'Sphingomyelins',
+            'ST': 'Sterols',
+            'TG': 'Triglycerides'
+        }
+
+        # Add full names column
+        df['full_name'] = df['lipid_class'].map(lipid_class_names).fillna(df['lipid_class'])
+
+        # Filter by requested classes if specified
+        if lipid_classes and len(lipid_classes) > 0:
+            # Case-insensitive matching
+            classes_upper = [c.upper() for c in lipid_classes]
+            df = df[df['lipid_class'].str.upper().isin(classes_upper)]
+
+            if len(df) == 0:
+                available = loader.get_lipid_class_enrichment()['Lipid Class'].tolist()
+                return [TextContent(type="text",
+                    text=f"No matching lipid classes found. Available classes: {', '.join(available)}")]
+
+        # Sort by enrichment score (most male-biased first)
+        df = df.sort_values('enrichment_score', ascending=False)
+
+        # Add interpretation
+        def interpret_score(score):
+            if score > 1.5:
+                return "Strongly male-biased (Testes)"
+            elif score > 0.5:
+                return "Moderately male-biased (Testes)"
+            elif score > 0:
+                return "Weakly male-biased (Testes)"
+            elif score > -0.5:
+                return "Weakly female-biased (Ovaries)"
+            elif score > -1.5:
+                return "Moderately female-biased (Ovaries)"
+            else:
+                return "Strongly female-biased (Ovaries)"
+
+        df['sex_bias'] = df['enrichment_score'].apply(interpret_score)
+
+        text = "# Lipid Class Enrichment Analysis\n\n"
+        text += "## Gonadal Comparison: Testes vs Ovaries\n\n"
+        text += "**Interpretation:**\n"
+        text += "- Positive enrichment score = Male-biased (higher in Testes)\n"
+        text += "- Negative enrichment score = Female-biased (higher in Ovaries)\n\n"
+
+        if has_pvalues:
+            text += "| Lipid Class | Full Name | Enrichment Score | p-value | Sex Bias |\n"
+            text += "|-------------|-----------|-----------------|---------|----------|\n"
+
+            for _, row in df.iterrows():
+                pval = row['p_value']
+                pval_str = f"{pval:.2e}" if pval < 0.001 else f"{pval:.4f}"
+                sig_marker = "***" if pval < 0.001 else "**" if pval < 0.01 else "*" if pval < 0.05 else ""
+                text += f"| {row['lipid_class']} | {row['full_name']} | {row['enrichment_score']:.3f} | {pval_str}{sig_marker} | {row['sex_bias']} |\n"
+        else:
+            text += "| Lipid Class | Full Name | Enrichment Score | Sex Bias |\n"
+            text += "|-------------|-----------|-----------------|----------|\n"
+
+            for _, row in df.iterrows():
+                text += f"| {row['lipid_class']} | {row['full_name']} | {row['enrichment_score']:.3f} | {row['sex_bias']} |\n"
+
+        text += "\n## Summary\n\n"
+
+        male_biased = df[df['enrichment_score'] > 0]
+        female_biased = df[df['enrichment_score'] < 0]
+
+        if len(male_biased) > 0:
+            text += "**Male-biased lipid classes (Testes):**\n"
+            for _, row in male_biased.iterrows():
+                if has_pvalues:
+                    pval = row['p_value']
+                    pval_str = f"p = {pval:.2e}" if pval < 0.001 else f"p = {pval:.4f}"
+                    text += f"- {row['full_name']} ({row['lipid_class']}): ES = {row['enrichment_score']:.3f}, {pval_str}\n"
+                else:
+                    text += f"- {row['full_name']} ({row['lipid_class']}): ES = {row['enrichment_score']:.3f}\n"
+
+        if len(female_biased) > 0:
+            text += "\n**Female-biased lipid classes (Ovaries):**\n"
+            for _, row in female_biased.iterrows():
+                if has_pvalues:
+                    pval = row['p_value']
+                    pval_str = f"p = {pval:.2e}" if pval < 0.001 else f"p = {pval:.4f}"
+                    text += f"- {row['full_name']} ({row['lipid_class']}): ES = {row['enrichment_score']:.3f}, {pval_str}\n"
+                else:
+                    text += f"- {row['full_name']} ({row['lipid_class']}): ES = {row['enrichment_score']:.3f}\n"
+
+        text += "\n*Enrichment scores from decoupleR run_ulm() on lipid t-statistics (workflow 03, step 5)*"
+        if has_pvalues:
+            text += "\n*Significance: *** p<0.001, ** p<0.01, * p<0.05*"
+
+        return [TextContent(type="text", text=text)]
+
+    except Exception as e:
+        return [TextContent(type="text", text=f"Error: {str(e)}")]
 
 
 async def main():

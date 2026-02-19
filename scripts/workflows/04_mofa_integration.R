@@ -584,7 +584,7 @@ if (!is.null(model)) {
       "Gonad\nEnrichment" = anno_barplot(
         mat_gonad,
         gp = gpar(
-          fill = c("red", "royalblue"),  # ovaries, testes
+          fill = c("#e54141", "#4173d8"),  # ovaries, testes
           alpha = 0.7                      # 70% opacity
         ),
         border = FALSE,

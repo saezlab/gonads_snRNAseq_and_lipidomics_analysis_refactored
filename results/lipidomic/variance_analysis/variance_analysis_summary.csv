@@ -1,0 +1,24 @@
+Metric,Value
+--- LIPID-LEVEL ANALYSIS ---,
+Total lipids analyzed,1254
+Ovaries samples (n),21
+Testes samples (n),27
+Mean CV - Ovaries (%),3.724
+Mean CV - Testes (%),3.567
+Median CV - Ovaries (%),3.005
+Median CV - Testes (%),2.798
+Mean CV difference (Testes - Ovaries),-0.157
+Median CV difference (Testes - Ovaries),-0.098
+Paired Wilcoxon p-value,2.202e-07
+Paired t-test p-value,0.001704
+Lipids with sig. diff. variance (FDR < 0.05),2
+  - More variable in Testes,0
+  - More variable in Ovaries,2
+--- CLASS-LEVEL ANALYSIS ---,
+Total lipid classes analyzed,26
+"Mean CV - Ovaries (class-level, %)",2.324
+"Mean CV - Testes (class-level, %)",2.077
+Paired Wilcoxon p-value (class-level),0.4082
+Paired t-test p-value (class-level),0.08618
+Classes with sig. diff. variance (FDR < 0.05),1
+Classes with nominal sig. (p < 0.05),2

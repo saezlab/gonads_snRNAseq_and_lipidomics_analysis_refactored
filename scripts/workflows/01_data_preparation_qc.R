@@ -599,7 +599,7 @@ for (cell_type in cell_types) {
   cell_type_targets <- cell_type_targets[common_samples, , drop = FALSE]
 
   # Create color mapping for gonadal type
-  color_mapping <- setNames(c("red", "royalblue"),
+  color_mapping <- setNames(c("#e54141", "#4173d8"),
                             c("Ovaries", "Testes"))
 
   # Create PCA plot

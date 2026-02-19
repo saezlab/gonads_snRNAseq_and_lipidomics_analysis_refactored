@@ -289,6 +289,15 @@ global_genes <- c("cyp2d9", "cyp2b9", "cyp2c38")
 available_global <- intersect(tolower(names(comparisons)), global_genes)
 
 for (gene_name in available_global) {
+  consistency_color <- "black"
+  if(gene_name == "cyp2d9")
+  {
+    consistency_color <- "#4173d8"
+  }
+  if(gene_name == "cyp2c38")
+  {
+    consistency_color <- "#e54141"
+  }
   cat("  Plotting", gene_name, "...\n")
 
   # Find column index in t_table
@@ -317,6 +326,10 @@ for (gene_name in available_global) {
   lipid_scoring_Scatter$consistency <-
     lipid_scoring_Scatter$KO_tval * lipid_scoring_Scatter$predicted_association_weight * -1
 
+  # Rescale consistency to 0-1 range (0.5 = no consistency, symmetric around 0.5)
+  max_abs_consistency <- max(abs(lipid_scoring_Scatter$consistency), na.rm = TRUE)
+  lipid_scoring_Scatter$consistency_scaled <- 0.5 + lipid_scoring_Scatter$consistency / (2 * max_abs_consistency)
+
   lipid_scoring_Scatter <- lipid_scoring_Scatter %>%
     dplyr::arrange(dplyr::desc(consistency))
 
@@ -334,10 +347,10 @@ for (gene_name in available_global) {
   )
 
   # Create scatter plot
-  # NOTE: colour = consistency is in main aes() so all geoms inherit it
+  # NOTE: colour = consistency_scaled is in main aes() so all geoms inherit it
   p <- ggplot(
     lipid_scoring_Scatter,
-    aes(x = predicted_association_weight, y = KO_tval, label = label, colour = consistency)
+    aes(x = predicted_association_weight, y = KO_tval, label = label, colour = consistency_scaled)
   ) +
     geom_point() +
     geom_smooth(
@@ -349,16 +362,15 @@ for (gene_name in available_global) {
     stat_summary(fun.data = mean_cl_normal) +
     scale_colour_gradient(
       name   = "Consistency",
-      low    = "black",    # darkest end
-      high   = "chartreuse3",# brightest end
-      limits = c(-5, 5),
-      oob = squish
+      low    = "white",
+      high   = consistency_color,
+      limits = c(0, 1)
     ) +
     ggtitle(paste0(toupper(gene_name), " Knockdown Validation")) +
     xlab("Predicted Association\n(Correlation in FCGL mice hepatocytes)") +
     ylab("Observed Lipid Change\n(t-statistic in knockdown experiment)") +
     geom_label_repel(max.overlaps = 20, size = 2.5) +
-    theme_minimal(base_size = 12) +
+    theme_classic(base_size = 12) +
     theme(
       plot.title = element_text(face = "bold", size = 14),
       axis.title = element_text(face = "bold")
@@ -472,6 +484,11 @@ if (length(available_networks) == 0) {
   available_zonation <- intersect(tolower(names(comparisons)), zonation_genes)
 
   for (gene_name in available_zonation) {
+    consistency_color <- "black"
+    if(gene_name == "mtmr11")
+    {
+      consistency_color <- "#5f8dff"
+    }
     cat("  Plotting", gene_name, "...\n")
 
     # Find column index in t_table
@@ -521,6 +538,10 @@ if (length(available_networks) == 0) {
     lipid_scoring_Scatter$consistency <-
       lipid_scoring_Scatter$KO_tval * lipid_scoring_Scatter$predicted_association_weight * -1
 
+    # Rescale consistency to 0-1 range (0.5 = no consistency, symmetric around 0.5)
+    max_abs_consistency <- max(abs(lipid_scoring_Scatter$consistency), na.rm = TRUE)
+    lipid_scoring_Scatter$consistency_scaled <- 0.5 + lipid_scoring_Scatter$consistency / (2 * max_abs_consistency)
+
     lipid_scoring_Scatter <- lipid_scoring_Scatter %>%
       dplyr::arrange(dplyr::desc(consistency))
 
@@ -541,10 +562,10 @@ if (length(available_networks) == 0) {
     context_label <- paste0("(", gsub("_", " ", best_context), " specific)")
 
     # Create scatter plot
-    # NOTE: colour = consistency is in main aes() so all geoms inherit it
+    # NOTE: colour = consistency_scaled is in main aes() so all geoms inherit it
     p <- ggplot(
       lipid_scoring_Scatter,
-      aes(x = predicted_association_weight, y = KO_tval, label = label, colour = consistency)
+      aes(x = predicted_association_weight, y = KO_tval, label = label, colour = consistency_scaled)
     ) +
       geom_point() +
       geom_smooth(
@@ -556,16 +577,15 @@ if (length(available_networks) == 0) {
       stat_summary(fun.data = mean_cl_normal) +
       scale_colour_gradient(
         name   = "Consistency",
-        low    = "black",    # darkest end
-        high   = "chartreuse3",# brightest end
-        limits = c(-5, 5),
-        oob = squish
+        low    = "white",
+        high   = consistency_color,
+        limits = c(0, 1)
       ) +
       ggtitle(paste0(toupper(gene_name), " Knockdown Validation\n", context_label)) +
       xlab("Predicted Association\n(Zonation-specific correlation in FCGL mice)") +
       ylab("Observed Lipid Change\n(t-statistic in knockdown experiment)") +
       geom_label_repel(max.overlaps = 20, size = 2.5) +
-      theme_minimal(base_size = 12) +
+      theme_classic(base_size = 12) +
       theme(
         plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
         axis.title = element_text(face = "bold")
@@ -578,9 +598,8 @@ if (length(available_networks) == 0) {
       height = 8
     )
   }
-
-  cat("\nZonation-specific scatter plots saved to: results/validation/\n")
 }
+  cat("\nZonation-specific scatter plots saved to: results/validation/\n")
 
 ################################################################################
 # 10. SUMMARY STATISTICS

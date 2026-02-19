@@ -43,7 +43,7 @@ library(ggrepel)
 #' @param nlabels Integer. Number of top hits to label (default: 20).
 #' @param manual_labels Character vector. Specific labels to include regardless of ranking.
 #' @param col_high_neut_low Character vector of 3 colors for c(high, neutral, low).
-#'   Default: c("red", "grey30", "royalblue")
+#'   Default: c("#e54141", "grey30", "#4173d8")
 #'
 #' @return ggplot object
 #'
@@ -68,7 +68,7 @@ library(ggrepel)
 volcano_nice <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = NULL,
                          label = FALSE, straight = FALSE, nlabels = 20,
                          manual_labels = NA,
-                         col_high_neut_low = c("red", "grey30", "royalblue")) {
+                         col_high_neut_low = c("#e54141", "grey30", "#4173d8")) {
 
   # Remove incomplete cases
   df <- df[complete.cases(df), ]
@@ -468,7 +468,7 @@ customize_volcano <- function(plot, title = NULL, xlab = "log2 Fold Change",
 #' @param nlabels Integer. Unused in this function (kept for compatibility).
 #' @param manual_labels Character vector. Specific labels to include. Only these will be shown.
 #' @param col_high_neut_low Character vector of 3 colors for c(high, neutral, low).
-#'   Default: c("red", "grey30", "royalblue")
+#'   Default: c("#e54141", "grey30", "#4173d8")
 #'
 #' @return ggplot object
 #'
@@ -493,7 +493,7 @@ customize_volcano <- function(plot, title = NULL, xlab = "log2 Fold Change",
 volcano_nice_xenium <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = NULL,
                                 label = FALSE, straight = FALSE, nlabels = 100,
                                 manual_labels = NA,
-                                col_high_neut_low = c("red", "grey30", "royalblue")) {
+                                col_high_neut_low = c("#e54141", "grey30", "#4173d8")) {
 
   # Remove incomplete cases
   df <- df[complete.cases(df), ]

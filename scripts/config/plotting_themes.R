@@ -29,14 +29,14 @@ CELLTYPE_COLORS <- c(
 
 # Gonadal Type Colors
 GONADAL_COLORS <- c(
-  "Ovaries" = "red",
-  "Testes" = "royalblue"
+  "Ovaries" = "#e54141",
+  "Testes" = "#4173d8"
 )
 
 # Allosome Type Colors
 ALLOSOME_COLORS <- c(
-  "XX" = "red",
-  "XY" = "royalblue"
+  "XX" = "#e54141",
+  "XY" = "#4173d8"
 )
 
 # Alternative allosome colors (for specific comparisons)
@@ -53,10 +53,55 @@ GROUP_COLORS <- c(
   "XYT" = "#9B59B6"     # Purple
 )
 
-# Zonation Colors
+# Zonation Colors (simple)
 ZONATION_COLORS <- c(
   "Periportal" = "#8B4513",     # Brown
   "Pericentral" = "#4169E1"     # Royal blue
+)
+
+# Zonation x Gonad Colors (harmonized scheme)
+# Uses darker shades for pericentral, lighter shades for periportal
+# Red tones for Ovaries, Blue tones for Testes
+ZONATION_GONAD_COLORS <- c(
+  # Testes (blue tones)
+  "TPC" = "#2b64d6",            # Testes Pericentral - Dark blue
+  "TPP" = "#5f8dff",            # Testes Periportal - Light blue
+  # Ovaries (red tones)
+  "OPC" = "#d32f2f",            # Ovaries Pericentral - Dark red
+  "OPP" = "#ff5555"             # Ovaries Periportal - Light red
+)
+
+# Full names version
+ZONATION_GONAD_COLORS_FULL <- c(
+  "Testes_Pericentral" = "#2b64d6",
+  "Testes_Periportal" = "#5f8dff",
+  "Ovaries_Pericentral" = "#d32f2f",
+  "Ovaries_Periportal" = "#ff5555"
+)
+
+# Lipid-Zonation Association Colors (by gonad x zonation)
+# For plots showing lipid associations with zonation-biased genes
+# Combines gonad (red=Ovaries, blue=Testes) with zonation (dark=pericentral, light=periportal)
+LIPID_ZONATION_ASSOC_COLORS <- c(
+  # Testes (blue tones)
+  "TPC" = "#2b64d6",            # Testes Pericentral - Dark blue
+  "TPP" = "#5f8dff",            # Testes Periportal - Light blue
+  # Ovaries (red tones)
+  "OPC" = "#d32f2f",            # Ovaries Pericentral - Dark red
+  "OPP" = "#ff5555",            # Ovaries Periportal - Light red
+  # Mixed/None
+  "both" = "#808080",           # Grey for both pericentral and periportal
+  "no_association" = "#FFFFFF"  # White for no association
+)
+
+# Border colors for lipid-zonation associations (darker versions)
+LIPID_ZONATION_ASSOC_BORDER_COLORS <- c(
+  "TPC" = "#1c4da8",            # Darker blue
+  "TPP" = "#3d6fd6",            # Medium blue
+  "OPC" = "#a62424",            # Darker red
+  "OPP" = "#d63939",            # Medium red
+  "both" = "#505050",           # Darker grey
+  "no_association" = "#cccccc"  # Light grey border for white fill
 )
 
 
@@ -65,10 +110,10 @@ ZONATION_COLORS <- c(
 # For heatmaps with negative and positive values
 
 # Red-White-Blue palette (standard)
-DIVERGING_PALETTE_RWB <- c("red", "white", "royalblue3")
+DIVERGING_PALETTE_RWB <- c("#e54141", "white", "#4173d8")
 
 # Red-Grey-Blue palette (alternative)
-DIVERGING_PALETTE_RGB <- c("red", "grey90", "royalblue3")
+DIVERGING_PALETTE_RGB <- c("#e54141", "grey90", "#4173d8")
 
 
 # Plot Dimensions
@@ -150,7 +195,8 @@ theme_clean <- function(base_size = 12) {
 #' Get color palette for a specific condition type
 #'
 #' @param condition_type Character. Type of condition: "gonadal", "allosome",
-#'                       "group", "celltype", "zonation"
+#'                       "group", "celltype", "zonation", "zonation_gonad",
+#'                       "lipid_zonation_assoc"
 #' @param alternative Logical. Use alternative color scheme? Default: FALSE
 #'
 #' @return Named vector of colors
@@ -158,6 +204,8 @@ theme_clean <- function(base_size = 12) {
 #' @examples
 #' get_color_palette("gonadal")
 #' get_color_palette("allosome", alternative = TRUE)
+#' get_color_palette("zonation_gonad")  # TPC, TPP, OPC, OPP
+#' get_color_palette("lipid_zonation_assoc")  # pericentral, periportal, both, no_association
 get_color_palette <- function(condition_type, alternative = FALSE) {
 
   color_palette <- switch(
@@ -167,6 +215,9 @@ get_color_palette <- function(condition_type, alternative = FALSE) {
     "group" = GROUP_COLORS,
     "celltype" = CELLTYPE_COLORS,
     "zonation" = ZONATION_COLORS,
+    "zonation_gonad" = if (alternative) ZONATION_GONAD_COLORS_FULL else ZONATION_GONAD_COLORS,
+    "lipid_zonation_assoc" = LIPID_ZONATION_ASSOC_COLORS,
+    "lipid_zonation_assoc_border" = LIPID_ZONATION_ASSOC_BORDER_COLORS,
     stop("Unknown condition type: ", condition_type)
   )
 
@@ -372,8 +423,18 @@ list_color_schemes <- function() {
   print(GROUP_COLORS)
   cat("\n")
 
-  cat("Zonation Colors:\n")
+  cat("Zonation Colors (simple):\n")
   print(ZONATION_COLORS)
+  cat("\n")
+
+  cat("Zonation x Gonad Colors (harmonized):\n")
+  cat("  Dark shades = Pericentral, Light shades = Periportal\n")
+  cat("  Blue tones = Testes, Red tones = Ovaries\n")
+  print(ZONATION_GONAD_COLORS)
+  cat("\n")
+
+  cat("Lipid-Zonation Association Colors:\n")
+  print(LIPID_ZONATION_ASSOC_COLORS)
   cat("\n")
 
   cat(paste(rep("=", 80), collapse = ""), "\n")

@@ -16,7 +16,7 @@
 #' Regression model:
 #'   gene_correlation ~ lipid_class + lipid_abundance + chain_length +
 #'                      db_position + lipid_abundance:chain_length +
-#'                      lipid_abundance:db_position
+#'                      lipid_abundance:db_position + chain_length:db_position
 #'
 #' Consolidates code from:
 #' - lipid_rna_correaltion_for_structural_analysis.R
@@ -26,6 +26,538 @@
 library(dplyr)
 library(tidyr)
 library(readr)
+
+
+#' ==============================================================================
+#' LIPID NAME PARSING FUNCTIONS
+#' ==============================================================================
+#'
+#' Functions to extract structural features (chain length, double bonds) from
+#' lipid names following standard nomenclature.
+#'
+#' Examples of lipid name formats:
+#'   - TG(16:0_18:1_22:6) -> C = 56, DB = 7
+#'   - PC(16:0/18:1) -> C = 34, DB = 1
+#'   - Cer(18:1;O2/18:0) -> C = 36, DB = 1
+#'   - LPC(18:0) -> C = 18, DB = 0
+
+
+#' Parse Lipid Name to Extract Chain Length and Double Bonds
+#'
+#' Extracts total carbon chain length (C) and total double bonds (DB) from
+#' lipid names following standard nomenclature (e.g., "PC(16:0/18:1)").
+#'
+#' @param lipid_name Character. A lipid name containing fatty acid specifications
+#'   in the format "X:Y" where X is carbon count and Y is double bond count.
+#'
+#' @return Named list with elements:
+#'   - chain_length: Total carbon atoms across all fatty acid chains
+#'   - db_position: Total double bonds across all fatty acid chains
+#'   - lipid_class: Extracted lipid class (e.g., "PC", "TG", "Cer")
+#'   Returns NA values if parsing fails.
+#'
+#' @examples
+#' parse_lipid_name("TG(16:0_18:1_22:6)")
+#' # Returns: list(chain_length = 56, db_position = 7, lipid_class = "TG")
+#'
+#' parse_lipid_name("PC(16:0/18:1)")
+#' # Returns: list(chain_length = 34, db_position = 1, lipid_class = "PC")
+#'
+#' @export
+parse_lipid_name <- function(lipid_name) {
+
+  # Default return values
+  result <- list(
+    chain_length = NA_real_,
+    db_position = NA_real_,
+    lipid_class = NA_character_
+  )
+
+  if (is.na(lipid_name) || lipid_name == "") {
+    return(result)
+  }
+
+  # Extract lipid class (everything before the first parenthesis)
+
+  # This matches the lipid class extraction in run_lipid_class_enrichment()
+  # from scripts/core/enrichment_analysis.R for consistency across workflows
+  lipid_class_extracted <- gsub("\\(.*", "", lipid_name)
+  if (nchar(lipid_class_extracted) > 0) {
+    result$lipid_class <- lipid_class_extracted
+  }
+
+  # Find all fatty acid specifications in format "X:Y"
+  # Pattern: one or more digits, colon, one or more digits
+  fa_pattern <- "([0-9]+):([0-9]+)"
+  fa_matches <- gregexpr(fa_pattern, lipid_name, perl = TRUE)
+  matched_strings <- regmatches(lipid_name, fa_matches)[[1]]
+
+  if (length(matched_strings) == 0) {
+    return(result)
+  }
+
+  # Parse each fatty acid specification
+  total_c <- 0
+  total_db <- 0
+
+  for (fa in matched_strings) {
+    parts <- strsplit(fa, ":")[[1]]
+    if (length(parts) == 2) {
+      c_val <- as.numeric(parts[1])
+      db_val <- as.numeric(parts[2])
+      if (!is.na(c_val)) total_c <- total_c + c_val
+      if (!is.na(db_val)) total_db <- total_db + db_val
+    }
+  }
+
+  result$chain_length <- total_c
+  result$db_position <- total_db
+
+  return(result)
+}
+
+
+#' Parse Multiple Lipid Names to Data Frame
+#'
+#' Applies parse_lipid_name() to a vector of lipid names and returns a data frame.
+#'
+#' @param lipid_names Character vector. Lipid names to parse.
+#' @param verbose Logical. Print progress messages?
+#'
+#' @return Data frame with columns:
+#'   - lipid_name: Original lipid name
+#'   - lipid_class: Extracted lipid class
+#'   - chain_length: Total carbon atoms
+#'   - db_position: Total double bonds
+#'
+#' @examples
+#' lipids <- c("TG(16:0_18:1_22:6)", "PC(16:0/18:1)", "Cer(18:1;O2/18:0)")
+#' parse_lipid_names_to_df(lipids)
+#'
+#' @export
+parse_lipid_names_to_df <- function(lipid_names, verbose = TRUE) {
+
+  if (verbose) {
+    cat("Parsing", length(lipid_names), "lipid names...\n")
+  }
+
+  # Parse each lipid name
+  parsed_list <- lapply(lipid_names, parse_lipid_name)
+
+  # Convert to data frame
+  result_df <- data.frame(
+    lipid_name = lipid_names,
+    lipid_class = sapply(parsed_list, function(x) x$lipid_class),
+    chain_length = sapply(parsed_list, function(x) x$chain_length),
+    db_position = sapply(parsed_list, function(x) x$db_position),
+    stringsAsFactors = FALSE
+  )
+
+  # Report parsing success
+  n_parsed <- sum(!is.na(result_df$chain_length))
+  n_failed <- sum(is.na(result_df$chain_length))
+
+  if (verbose) {
+    cat("  Successfully parsed:", n_parsed, "lipids\n")
+    if (n_failed > 0) {
+      cat("  Failed to parse:", n_failed, "lipids\n")
+      failed_names <- head(lipid_names[is.na(result_df$chain_length)], 5)
+      cat("  Examples of failed names:", paste(failed_names, collapse = ", "), "\n")
+    }
+  }
+
+  return(result_df)
+}
+
+
+#' Generate Lipid Structural Data from Limma Results
+#'
+#' Extracts structural features (C, DB) from lipid names in limma results
+#' and combines them with fold change values. This generates the full dataset
+#' needed for structural analysis (not filtered by |logFC| threshold).
+#'
+#' @param ttop Data frame. Limma topTable results with columns:
+#'   - ID or rownames: Lipid names
+#'   - logFC: Log fold change values
+#' @param verbose Logical. Print progress messages?
+#'
+#' @return Data frame with columns:
+#'   - lipid_name: Lipid identifier
+#'   - lipid_class: Extracted lipid class
+#'   - chain_length: Total carbon atoms
+#'   - db_position: Total double bonds
+#'   - logfc: Log fold change from limma
+#'
+#' @examples
+#' load("results/lipidomic/ttop_full_list.RData")
+#' ttop <- ttop_full_list[["Testes vs Ovaries"]][["Testes vs Ovaries"]]
+#' lipid_structure <- generate_lipid_structural_data(ttop)
+#'
+#' @export
+generate_lipid_structural_data <- function(ttop, verbose = TRUE) {
+
+  if (verbose) {
+    cat("\n")
+    cat(paste(rep("=", 80), collapse = ""), "\n")
+    cat("Generating Lipid Structural Data from Limma Results\n")
+    cat(paste(rep("=", 80), collapse = ""), "\n\n")
+  }
+
+  # Extract lipid names
+  if ("ID" %in% colnames(ttop)) {
+    lipid_names <- ttop$ID
+  } else {
+    lipid_names <- rownames(ttop)
+  }
+
+  if (verbose) {
+    cat("Total lipids in limma results:", length(lipid_names), "\n")
+  }
+
+  # Parse lipid names
+  structural_df <- parse_lipid_names_to_df(lipid_names, verbose = verbose)
+
+  # Add logFC values
+  structural_df$logfc <- ttop$logFC
+
+  # Remove lipids that failed parsing
+  n_before <- nrow(structural_df)
+  structural_df <- structural_df[!is.na(structural_df$chain_length), ]
+  n_after <- nrow(structural_df)
+
+  if (verbose) {
+    cat("\nLipids with valid structural data:", n_after, "/", n_before, "\n")
+    cat("LogFC range:", round(min(structural_df$logfc), 3), "to",
+        round(max(structural_df$logfc), 3), "\n")
+    cat("Lipid classes:", length(unique(structural_df$lipid_class)), "\n")
+    cat("  Classes:", paste(head(sort(unique(structural_df$lipid_class)), 10), collapse = ", "))
+    if (length(unique(structural_df$lipid_class)) > 10) cat(", ...")
+    cat("\n\n")
+    cat(paste(rep("=", 80), collapse = ""), "\n\n")
+  }
+
+  return(structural_df)
+}
+
+
+#' ==============================================================================
+#' LIPID-ONLY STRUCTURAL ANALYSIS FUNCTIONS
+#' ==============================================================================
+#'
+#' These functions analyze how lipid structural features (chain length, double
+#' bond position) predict lipid differential abundance (logFC from gonad comparison)
+#' WITHOUT involving gene expression data.
+#'
+#' This is a simpler analysis that characterizes lipid properties before the
+#' more complex gene-lipid correlation analysis.
+#'
+#' PRIMARY APPROACH: Class-specific models
+#' For each lipid class: logfc ~ chain_length + db_position + chain_length:db_position
+#'
+#' This approach allows each lipid class to have its own structural effects,
+#' reflecting that different lipid classes may have distinct structure-abundance
+#' relationships.
+
+
+#' Run Lipid-Only Class-Specific Structural Regression
+#'
+#' Tests how structural features predict differential abundance within each lipid class.
+#'
+#' Class-specific regression model:
+#'   logfc ~ chain_length + db_position + chain_length:db_position
+#'
+#' @param lipid_structure Data frame. Lipid structural features.
+#' @param min_lipids_per_class Numeric. Minimum lipids per class (default: 10).
+#' @param verbose Logical. Print progress messages?
+#'
+#' @return Data frame with columns:
+#'   - lipid_class: Lipid class analyzed
+#'   - term: Regression term
+#'   - estimate: Coefficient
+#'   - std_error: Standard error
+#'   - t_value: t-statistic
+#'   - p_value: P-value
+#'   - significant: Logical, TRUE if p < 0.05
+#'   - r_squared: Model R-squared for that class
+#'   - n_lipids: Number of lipids in the class
+#'
+#' @examples
+#' class_results <- run_lipid_only_class_regression(lipid_structure)
+#'
+#' @export
+run_lipid_only_class_regression <- function(lipid_structure,
+                                            min_lipids_per_class = 10,
+                                            verbose = TRUE) {
+
+  if (verbose) {
+    cat("\n")
+    cat(paste(rep("=", 80), collapse = ""), "\n")
+    cat("Running Lipid-Only Class-Specific Structural Regression\n")
+    cat(paste(rep("=", 80), collapse = ""), "\n\n")
+    cat("Model: logfc ~ chain_length + db_position + chain_length:db_position\n\n")
+  }
+
+  # Get valid lipid classes
+  class_counts <- table(lipid_structure$lipid_class)
+  valid_classes <- names(class_counts)[class_counts >= min_lipids_per_class]
+
+  if (verbose) {
+    cat("Valid lipid classes (n >=", min_lipids_per_class, "):\n")
+    for (cls in valid_classes) {
+      cat("  ", cls, ":", class_counts[cls], "lipids\n")
+    }
+    cat("\n")
+  }
+
+  # Run analysis for each class
+  all_class_results <- list()
+  class_summaries <- list()
+
+  for (cls in valid_classes) {
+    if (verbose) cat("Processing", cls, "...\n")
+
+    # Filter to this class
+    class_data <- lipid_structure %>%
+      dplyr::filter(lipid_class == cls) %>%
+      dplyr::filter(!is.na(chain_length) & !is.na(db_position) & !is.na(logfc))
+
+    n_lipids <- nrow(class_data)
+
+    if (n_lipids < 5) {
+      if (verbose) cat("  Skipping - insufficient data after NA removal\n")
+      next
+    }
+
+    # Check for variance in predictors
+    if (sd(class_data$chain_length) == 0 || sd(class_data$db_position) == 0) {
+      if (verbose) cat("  Skipping - no variance in structural features\n")
+      next
+    }
+
+    # Run regression
+    tryCatch({
+      model <- lm(logfc ~ chain_length + db_position + chain_length:db_position,
+                  data = class_data)
+
+      model_summary <- summary(model)
+
+      # Extract coefficients
+      coef_df <- as.data.frame(model_summary$coefficients)
+      coef_df$term <- rownames(coef_df)
+
+      terms_of_interest <- c("chain_length", "db_position", "chain_length:db_position")
+
+      coef_df <- coef_df %>%
+        dplyr::filter(term %in% terms_of_interest) %>%
+        dplyr::mutate(
+          lipid_class = cls,
+          estimate = Estimate,
+          std_error = `Std. Error`,
+          t_value = `t value`,
+          p_value = `Pr(>|t|)`,
+          significant = p_value < 0.05,
+          r_squared = model_summary$r.squared,
+          n_lipids = n_lipids
+        ) %>%
+        dplyr::select(lipid_class, term, estimate, std_error, t_value, p_value,
+                      significant, r_squared, n_lipids)
+
+      all_class_results[[cls]] <- coef_df
+
+      # Store class summary
+      class_summaries[[cls]] <- data.frame(
+        lipid_class = cls,
+        n_lipids = n_lipids,
+        r_squared = model_summary$r.squared,
+        adj_r_squared = model_summary$adj.r.squared,
+        model_p_value = pf(model_summary$fstatistic[1],
+                           model_summary$fstatistic[2],
+                           model_summary$fstatistic[3],
+                           lower.tail = FALSE)
+      )
+
+    }, error = function(e) {
+      if (verbose) cat("  Error fitting model:", conditionMessage(e), "\n")
+    })
+  }
+
+  # Combine results
+  combined_results <- dplyr::bind_rows(all_class_results)
+  class_summary_df <- dplyr::bind_rows(class_summaries)
+
+  if (verbose) {
+    cat("\n")
+    cat("Class-specific results summary:\n")
+    cat("  Total class-term combinations:", nrow(combined_results), "\n")
+    cat("  Significant associations (p < 0.05):",
+        sum(combined_results$significant, na.rm = TRUE), "\n\n")
+
+    cat("Classes with significant structural effects:\n")
+    sig_summary <- combined_results %>%
+      dplyr::filter(significant) %>%
+      dplyr::arrange(lipid_class, term)
+
+    if (nrow(sig_summary) > 0) {
+      print(sig_summary %>% dplyr::select(lipid_class, term, estimate, p_value))
+    } else {
+      cat("  None\n")
+    }
+
+    cat("\nModel fit by class:\n")
+    print(class_summary_df %>%
+            dplyr::arrange(dplyr::desc(r_squared)) %>%
+            dplyr::mutate(r_squared = round(r_squared, 3),
+                          adj_r_squared = round(adj_r_squared, 3),
+                          model_p_value = format.pval(model_p_value)))
+
+    cat("\n")
+    cat(paste(rep("=", 80), collapse = ""), "\n\n")
+  }
+
+  return(list(
+    coefficients = combined_results,
+    class_summaries = class_summary_df
+  ))
+}
+
+
+#' Extract Significant Lipid Structural Associations
+#'
+#' Summarizes which lipid classes show significant structural effects.
+#'
+#' @param class_results Output from run_lipid_only_class_regression().
+#' @param p_cutoff Numeric. P-value cutoff (default: 0.05).
+#'
+#' @return List with elements:
+#'   - classes_with_chain_effect: Classes where chain length predicts logFC
+#'   - classes_with_db_effect: Classes where DB position predicts logFC
+#'   - classes_with_interaction: Classes with chain_length:db_position interaction
+#'   - summary_table: Summary of effects by class
+#'
+#' @export
+extract_lipid_structural_associations <- function(class_results,
+                                                  p_cutoff = 0.05) {
+
+  cat("\n")
+  cat(paste(rep("=", 80), collapse = ""), "\n")
+  cat("Extracting Significant Lipid Structural Associations\n")
+  cat(paste(rep("=", 80), collapse = ""), "\n\n")
+
+  coef_df <- class_results$coefficients
+
+  if (nrow(coef_df) == 0) {
+    cat("WARNING: No results to extract.\n\n")
+    return(list(
+      classes_with_chain_effect = character(),
+      classes_with_db_effect = character(),
+      classes_with_interaction = character(),
+      summary_table = data.frame()
+    ))
+  }
+
+  # Filter to significant
+  sig_results <- coef_df %>%
+    dplyr::filter(p_value < p_cutoff)
+
+  # Classes with chain length effect
+  chain_classes <- sig_results %>%
+    dplyr::filter(term == "chain_length") %>%
+    dplyr::select(lipid_class, estimate, p_value) %>%
+    dplyr::arrange(p_value)
+
+  # Classes with DB position effect
+  db_classes <- sig_results %>%
+    dplyr::filter(term == "db_position") %>%
+    dplyr::select(lipid_class, estimate, p_value) %>%
+    dplyr::arrange(p_value)
+
+  # Classes with interaction effect
+  interaction_classes <- sig_results %>%
+    dplyr::filter(term == "chain_length:db_position") %>%
+    dplyr::select(lipid_class, estimate, p_value) %>%
+    dplyr::arrange(p_value)
+
+  # Create summary table
+  summary_table <- coef_df %>%
+    dplyr::select(lipid_class, term, estimate, p_value, significant, r_squared) %>%
+    tidyr::pivot_wider(
+      id_cols = c(lipid_class, r_squared),
+      names_from = term,
+      values_from = c(estimate, p_value, significant),
+      names_glue = "{term}_{.value}"
+    )
+
+  cat("Classes with chain length effect (p <", p_cutoff, "):", nrow(chain_classes), "\n")
+  if (nrow(chain_classes) > 0) {
+    cat("  Positive effect (longer chains → higher logFC):\n")
+    pos_chain <- chain_classes %>% dplyr::filter(estimate > 0)
+    if (nrow(pos_chain) > 0) {
+      for (i in seq_len(nrow(pos_chain))) {
+        cat("    ", pos_chain$lipid_class[i], " (est = ", round(pos_chain$estimate[i], 4),
+            ", p = ", format.pval(pos_chain$p_value[i]), ")\n", sep = "")
+      }
+    } else {
+      cat("    None\n")
+    }
+    cat("  Negative effect (longer chains → lower logFC):\n")
+    neg_chain <- chain_classes %>% dplyr::filter(estimate < 0)
+    if (nrow(neg_chain) > 0) {
+      for (i in seq_len(nrow(neg_chain))) {
+        cat("    ", neg_chain$lipid_class[i], " (est = ", round(neg_chain$estimate[i], 4),
+            ", p = ", format.pval(neg_chain$p_value[i]), ")\n", sep = "")
+      }
+    } else {
+      cat("    None\n")
+    }
+  }
+
+  cat("\nClasses with double bond effect (p <", p_cutoff, "):", nrow(db_classes), "\n")
+  if (nrow(db_classes) > 0) {
+    cat("  Positive effect (more unsaturation → higher logFC):\n")
+    pos_db <- db_classes %>% dplyr::filter(estimate > 0)
+    if (nrow(pos_db) > 0) {
+      for (i in seq_len(nrow(pos_db))) {
+        cat("    ", pos_db$lipid_class[i], " (est = ", round(pos_db$estimate[i], 4),
+            ", p = ", format.pval(pos_db$p_value[i]), ")\n", sep = "")
+      }
+    } else {
+      cat("    None\n")
+    }
+    cat("  Negative effect (more unsaturation → lower logFC):\n")
+    neg_db <- db_classes %>% dplyr::filter(estimate < 0)
+    if (nrow(neg_db) > 0) {
+      for (i in seq_len(nrow(neg_db))) {
+        cat("    ", neg_db$lipid_class[i], " (est = ", round(neg_db$estimate[i], 4),
+            ", p = ", format.pval(neg_db$p_value[i]), ")\n", sep = "")
+      }
+    } else {
+      cat("    None\n")
+    }
+  }
+
+  cat("\nClasses with interaction effect (p <", p_cutoff, "):", nrow(interaction_classes), "\n")
+  if (nrow(interaction_classes) > 0) {
+    for (i in seq_len(nrow(interaction_classes))) {
+      cat("  ", interaction_classes$lipid_class[i], " (est = ", round(interaction_classes$estimate[i], 4),
+          ", p = ", format.pval(interaction_classes$p_value[i]), ")\n", sep = "")
+    }
+  }
+
+  cat("\n")
+  cat(paste(rep("=", 80), collapse = ""), "\n\n")
+
+  return(list(
+    classes_with_chain_effect = chain_classes,
+    classes_with_db_effect = db_classes,
+    classes_with_interaction = interaction_classes,
+    summary_table = summary_table
+  ))
+}
+
+
+#' ==============================================================================
+#' GENE-LIPID CORRELATION ANALYSIS FUNCTIONS
+#' ==============================================================================
 
 
 #' Compute Gene-Lipid Correlations for Structural Analysis
@@ -525,7 +1057,7 @@ run_structural_regression <- function(cor_matrix,
     # Run regression
     tryCatch({
       model <- lm(gene_correlation ~ lipid_class + logfc + chain_length + db_position +
-                    logfc:chain_length + logfc:db_position,
+                    logfc:chain_length + logfc:db_position + chain_length:db_position,
                   data = model_df)
 
       # Extract coefficients
@@ -533,7 +1065,8 @@ run_structural_regression <- function(cor_matrix,
 
       # Keep only structural terms (not lipid class indicators)
       terms_of_interest <- c("logfc", "chain_length", "db_position",
-                             "logfc:chain_length", "logfc:db_position")
+                             "logfc:chain_length", "logfc:db_position",
+                             "chain_length:db_position")
 
       coef_df <- as.data.frame(coef_summary)
       coef_df$term <- rownames(coef_df)
@@ -596,7 +1129,7 @@ run_structural_regression <- function(cor_matrix,
 #' For each lipid class, runs regression:
 #'   gene_correlation ~ lipid_abundance + chain_length + db_position +
 #'                      lipid_abundance:chain_length +
-#'                      lipid_abundance:db_position
+#'                      lipid_abundance:db_position + chain_length:db_position
 #'
 #' This reveals class-specific structural preferences.
 #'
@@ -692,13 +1225,14 @@ run_class_specific_regression <- function(cor_matrix,
       # Run regression (without lipid_class term since it's constant)
       tryCatch({
         model <- lm(gene_correlation ~ logfc + chain_length + db_position +
-                      logfc:chain_length + logfc:db_position,
+                      logfc:chain_length + logfc:db_position + chain_length:db_position,
                     data = model_df)
 
         coef_summary <- summary(model)$coefficients
 
         terms_of_interest <- c("logfc", "chain_length", "db_position",
-                               "logfc:chain_length", "logfc:db_position")
+                               "logfc:chain_length", "logfc:db_position",
+                               "chain_length:db_position")
 
         coef_df <- as.data.frame(coef_summary)
         coef_df$term <- rownames(coef_df)
@@ -820,7 +1354,7 @@ extract_significant_associations <- function(regression_results,
   # Categorize by term type
   chain_length_terms <- c("chain_length", "logfc:chain_length")
   db_position_terms <- c("db_position", "logfc:db_position")
-  interaction_terms <- c("logfc:chain_length", "logfc:db_position")
+  interaction_terms <- c("logfc:chain_length", "logfc:db_position", "chain_length:db_position")
 
   # Genes with chain length associations
   chain_length_genes <- sig_results %>%

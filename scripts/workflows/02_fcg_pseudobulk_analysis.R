@@ -179,12 +179,12 @@ pca_combined$cell_type <- factor(pca_combined$cell_type, levels = unique(pca_com
 # Joyplot 1: PC1 distribution colored by gonadal_type
 cat("  Creating joyplot colored by gonadal type...\n")
 joyplot_gonadal <- ggplot(pca_combined, aes(x = PC1, y = cell_type, fill = gonadal_type, color = NULL)) +
-  geom_density_ridges(scale = 2, alpha = 0.7) +
-  labs(x = "PC1 Scores",
+  geom_density_ridges(scale = 0.9, alpha = 0.7) +
+  labs(x = "Samples distribution over PC1",
        y = "Density (per cell type)",
        fill = "Gonadal Type") +
   theme_ridges() +
-  scale_fill_manual(values = c("Ovaries" = "red", "Testes" = "royalblue")) +
+  scale_fill_manual(values = c("Ovaries" = "#e54141", "Testes" = "#4173d8")) +
   theme(legend.position = "right")
 
 # Save joyplot 1
@@ -198,12 +198,12 @@ ggsave(
 # Joyplot 2: PC1 distribution colored by allosome_type
 cat("  Creating joyplot colored by allosome type...\n")
 joyplot_allosome <- ggplot(pca_combined, aes(x = PC1, y = cell_type, fill = allosome_type, color = NULL)) +
-  geom_density_ridges(scale = 2, alpha = 0.7) +
-  labs(x = "PC1 Scores",
+  geom_density_ridges(scale = 0.9, alpha = 0.7) +
+  labs(x = "Samples distribution over PC1",
        y = "Density (per cell type)",
        fill = "Allosome Type") +
   theme_ridges() +
-  scale_fill_manual(values = c("XX" = "red", "XY" = "royalblue")) +
+  scale_fill_manual(values = c("XX" = "#e54141", "XY" = "#4173d8")) +
   theme(legend.position = "right")
 
 # Save joyplot 2
@@ -585,7 +585,14 @@ cat("\n")
 
 # Save t-value matrix
 save(tval_full_df, file = "results/pseudobulk/tval_full_df.RData")
-cat("Saved: results/pseudobulk/tval_full_df.RData\n\n")
+cat("Saved: results/pseudobulk/tval_full_df.RData\n")
+
+# Also save as CSV (needed by Step 7C GDX validation comparison)
+tval_csv <- as.data.frame(tval_full_df)
+tval_csv$ID <- rownames(tval_full_df)
+tval_csv <- tval_csv[, c("ID", setdiff(names(tval_csv), "ID"))]
+readr::write_csv(tval_csv, "results/pseudobulk/tval_full_df.csv")
+cat("Saved: results/pseudobulk/tval_full_df.csv\n\n")
 
 # ==============================================================================
 # STEP 6: Pathway Enrichment Analysis
@@ -899,8 +906,8 @@ if (file.exists(gdx_file)) {
                y = max(comparison_df$gdx_tval, na.rm = TRUE) * 0.9,
                label = paste0("Pearson r = ", round(cor_value, 2)),
                size = 5, hjust = 0) +
-      scale_color_manual(values = c("Female-biased (Ovaries)" = "red",
-                                     "Male-biased (Testes)" = "royalblue")) +
+      scale_color_manual(values = c("Female-biased (Ovaries)" = "#e54141",
+                                     "Male-biased (Testes)" = "#4173d8")) +
       labs(
         title = "Hepatocytes",
         x = "Four Core Genotypes gonad effect size (t-value)",

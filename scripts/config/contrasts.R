@@ -46,8 +46,8 @@ CONTRASTS <- list(
     description = "Effect of gonadal hormones (primary comparison in FCG model)",
     interpretation = "Positive logFC = higher in testes, negative logFC = higher in ovaries",
     colors = list(
-      Ovaries = "red",
-      Testes = "royalblue"
+      Ovaries = "#e54141",
+      Testes = "#4173d8"
     ),
     notes = "This is the PRIMARY comparison. ~4000 DEGs in hepatocytes at FDR < 0.05"
   ),
@@ -59,8 +59,8 @@ CONTRASTS <- list(
     description = "Effect of sex chromosomes (Y chromosome vs. second X)",
     interpretation = "Positive logFC = higher in XY, negative logFC = higher in XX",
     colors = list(
-      XX = "red",
-      XY = "royalblue"
+      XX = "#e54141",
+      XY = "#4173d8"
     ),
     notes = "Minimal effect: few DEGs, mainly Y-linked genes (Ddx3y, Eif2s3y, Kdm5d) and X-escape genes"
   ),
@@ -76,8 +76,8 @@ CONTRASTS <- list(
     description = "Effect of testes vs ovaries in XX background",
     interpretation = "Isolates gonadal hormone effect with sex chromosomes held constant (XX)",
     colors = list(
-      XXO = "red",
-      XXT = "royalblue"
+      XXO = "#e54141",
+      XXT = "#4173d8"
     )
   ),
 
@@ -88,8 +88,8 @@ CONTRASTS <- list(
     description = "Effect of testes vs ovaries in XY background",
     interpretation = "Isolates gonadal hormone effect with sex chromosomes held constant (XY)",
     colors = list(
-      XYO = "red",
-      XYT = "royalblue"
+      XYO = "#e54141",
+      XYT = "#4173d8"
     )
   ),
 

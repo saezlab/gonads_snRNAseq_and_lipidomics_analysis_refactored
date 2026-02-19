@@ -29,10 +29,12 @@ suppressPackageStartupMessages({
   library(ggrepel)
   library(cowplot)
   library(gridExtra)
+  library(patchwork)
   library(decoupleR)
   library(reshape2)
   library(pheatmap)
   library(GSEABase)
+  library(readr)
 })
 
 ################################################################################
@@ -241,16 +243,40 @@ cat(strrep("-", 80), "\n")
 cat("6. GENERATING VOLCANO PLOTS\n")
 cat(strrep("-", 80), "\n\n")
 
+# Define color schemes for different comparison types
+# col_high_neut_low = c(DOWN_color, neutral, UP_color)
+# For volcano plots: negative logFC (left) uses DOWN_color, positive logFC (right) uses UP_color
+volcano_colors <- list(
+  # Gonad comparisons: red (ovaries/down) vs blue (testes/up)
+  "testes_vs_ova" = c("#e54141", "grey30", "#4173d8"),
+  "centraltestes_vs_centralova" = c("#e54141", "grey30", "#4173d8"),
+  "portaltestes_vs_portalova" = c("#e54141", "grey30", "#4173d8"),
+  # Zonation-only comparisons: dark grey (central/down) vs light grey (portal/up)
+  "portal_vs_Central" = c("#303030", "grey50", "#a0a0a0"),
+  "testes_effect_zonation" = c("#303030", "grey50", "#a0a0a0"),
+  # Zonation within Ovaries: dark red (central/down) vs light red (portal/up)
+  "portalova_vs_centralova" = c("#d32f2f", "grey30", "#ff5555"),
+  # Zonation within Testes: dark blue (central/down) vs light blue (portal/up)
+  "portaltestes_vs_centraltestes" = c("#2b64d6", "grey30", "#5f8dff")
+)
+
 for (k in 1:length(ttop_list)) {
   comp_name <- names(ttop_list)[k]
   cat("  Creating volcano plot:", comp_name, "\n")
+
+  # Get colors for this comparison (default to red/blue if not specified)
+  comp_colors <- volcano_colors[[comp_name]]
+  if (is.null(comp_colors)) {
+    comp_colors <- c("#e54141", "grey30", "#4173d8")
+  }
 
   volca_plt <- volcano_nice(ttop_list[[k]],
                            FCIndex = 2,
                            IDIndex = 1,
                            pValIndex = 5,
                            label = TRUE,
-                           nlabels = 40)
+                           nlabels = 40,
+                           col_high_neut_low = comp_colors)
 
   ggsave(file.path(zonation_dir, "volcanos", paste0("volcano_", comp_name, ".pdf")),
          plot = volca_plt,
@@ -412,28 +438,392 @@ cat("  Computed TF enrichment for ", nrow(TF_scores_contrasts_df), " TFs\n\n")
 cat("✓ Lipidomics and TF scores loaded\n\n")
 
 ################################################################################
-# 9. IDENTIFY ZONATION-BIASED GENES
+# 9. ZONATION BIAS VS SEX BIAS SCATTER PLOT
 ################################################################################
 
 cat(strrep("-", 80), "\n")
-cat("9. IDENTIFYING ZONATION-BIASED GENES\n")
+cat("9. ZONATION BIAS VS SEX BIAS SCATTER PLOT\n")
 cat(strrep("-", 80), "\n\n")
 
-cat("Identifying genes with zonation-specific effects...\n\n")
+cat("Creating zonation bias vs sex bias overview scatter plot...\n")
+cat("This plot shows ALL genes by their overall zonation bias (portal vs central)\n")
+cat("and overall sex bias (testes vs ovaries), regardless of specificity.\n\n")
+
+# Prepare data: overall zonation and sex bias t-values
+bias_data <- t_table[, c("gene", "portal_vs_Central", "testes_vs_ova")]
+names(bias_data) <- c("gene", "zonation_bias", "sex_bias")
+
+# Classify genes by bias type with appropriate color coding:
+# - Dual bias (both significant): quadrant colors (dark/light x blue/red)
+# - Sex bias only: base gonad color (blue=testes, red=ovaries)
+# - Zonation bias only: neutral grey (no meaningful sex direction)
+# - None: light grey
+sig_threshold <- 3
+zon_sig <- abs(bias_data$zonation_bias) > sig_threshold
+sex_sig <- abs(bias_data$sex_bias) > sig_threshold
+
+bias_data$category <- "None"
+# Dual bias: both significant -> quadrant colors
+bias_data$category[zon_sig & sex_sig & bias_data$zonation_bias <= 0 & bias_data$sex_bias > 0] <- "Testes Pericentral"
+bias_data$category[zon_sig & sex_sig & bias_data$zonation_bias > 0 & bias_data$sex_bias > 0]  <- "Testes Periportal"
+bias_data$category[zon_sig & sex_sig & bias_data$zonation_bias <= 0 & bias_data$sex_bias <= 0] <- "Ovaries Pericentral"
+bias_data$category[zon_sig & sex_sig & bias_data$zonation_bias > 0 & bias_data$sex_bias <= 0]  <- "Ovaries Periportal"
+# Sex bias only: base gonad colors
+bias_data$category[sex_sig & !zon_sig & bias_data$sex_bias > 0]  <- "Testes"
+bias_data$category[sex_sig & !zon_sig & bias_data$sex_bias <= 0] <- "Ovaries"
+# Zonation bias only: two shades of grey (darker=pericentral, lighter=periportal)
+bias_data$category[zon_sig & !sex_sig & bias_data$zonation_bias <= 0] <- "Pericentral only"
+bias_data$category[zon_sig & !sex_sig & bias_data$zonation_bias > 0]  <- "Periportal only"
+
+bias_data$category <- factor(bias_data$category,
+                              levels = c("Testes Pericentral", "Testes Periportal", "Testes",
+                                         "Ovaries Pericentral", "Ovaries Periportal", "Ovaries",
+                                         "Pericentral only", "Periportal only", "None"))
+
+cat("  Testes Pericentral:", sum(bias_data$category == "Testes Pericentral"), "\n")
+cat("  Testes Periportal:", sum(bias_data$category == "Testes Periportal"), "\n")
+cat("  Testes (sex only):", sum(bias_data$category == "Testes"), "\n")
+cat("  Ovaries Pericentral:", sum(bias_data$category == "Ovaries Pericentral"), "\n")
+cat("  Ovaries Periportal:", sum(bias_data$category == "Ovaries Periportal"), "\n")
+cat("  Ovaries (sex only):", sum(bias_data$category == "Ovaries"), "\n")
+cat("  Pericentral only:", sum(bias_data$category == "Pericentral only"), "\n")
+cat("  Periportal only:", sum(bias_data$category == "Periportal only"), "\n")
+cat("  Neither:", sum(bias_data$category == "None"), "\n\n")
+
+# Cap t-values at axis limits
+axis_limit_bias <- 20
+bias_data$zonation_cap <- pmax(pmin(bias_data$zonation_bias, axis_limit_bias), -axis_limit_bias)
+bias_data$sex_cap <- pmax(pmin(bias_data$sex_bias, axis_limit_bias), -axis_limit_bias)
+
+# Curated gene labels: key Cyp genes + Xenium-validated zonation genes (Fig panel D)
+genes_to_label_bias <- c("Cyp2c38", "Cyp2c29", "Cyp2b13", "Cyp2b9", "Cyp2d9",
+                          "Cyp2e1", "Cyp2f2", "Sult3a1",
+                          "Tox", "Nipal1", "Slco1a1", "Chrm3", "C8a",
+                          "Nt5e", "Tafa2", "Ugt2b1", "Abcg2")
+
+# Create scatter plot with standard color scheme (blue=testes, red=ovaries)
+bias_scatter <- ggplot(bias_data, aes(x = zonation_cap, y = sex_cap)) +
+  # Reference lines at zero
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray70", linewidth = 0.3) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "gray70", linewidth = 0.3) +
+  # Plot non-significant points first
+  geom_point(data = bias_data[bias_data$category == "None", ],
+             color = "#cccccc", alpha = 0.4, size = 1) +
+  # Zonation-only points (two grey shades, below colored points)
+  geom_point(data = bias_data[bias_data$category %in% c("Pericentral only", "Periportal only"), ],
+             aes(color = category), alpha = 0.5, size = 1.2) +
+  # Sex-bias-only and dual-bias points on top
+  geom_point(data = bias_data[!bias_data$category %in% c("None", "Pericentral only", "Periportal only"), ],
+             aes(color = category), alpha = 0.6, size = 1.5) +
+  # Label key genes with white background for readability
+  ggrepel::geom_label_repel(
+    data = bias_data[bias_data$gene %in% genes_to_label_bias, ],
+    aes(label = gene, color = category),
+    size = 4.5, fontface = "bold.italic",
+    fill = alpha("white", 0.85),
+    label.size = 0.2, label.padding = unit(0.15, "lines"),
+    max.overlaps = 30,
+    segment.size = 0.4, segment.alpha = 0.7,
+    force = 3, box.padding = 0.7, point.padding = 0.4,
+    show.legend = FALSE
+  ) +
+  scale_color_manual(
+    values = c("Testes Pericentral" = ZONATION_GONAD_COLORS[["TPC"]],
+               "Testes Periportal" = ZONATION_GONAD_COLORS[["TPP"]],
+               "Testes" = GONADAL_COLORS[["Testes"]],
+               "Ovaries Pericentral" = ZONATION_GONAD_COLORS[["OPC"]],
+               "Ovaries Periportal" = ZONATION_GONAD_COLORS[["OPP"]],
+               "Ovaries" = GONADAL_COLORS[["Ovaries"]],
+               "Pericentral only" = "#666666",
+               "Periportal only" = "#bbbbbb"),
+    name = NULL
+  ) +
+  scale_x_continuous(expand = expansion(mult = 0.02)) +
+  scale_y_reverse(expand = expansion(mult = 0.02)) +
+  labs(
+    x = "Zonation bias (t-value)\n<- Pericentral | Periportal ->",
+    y = "Sex bias (t-value)\n<- Testes | Ovaries ->"
+  ) +
+  guides(color = guide_legend(nrow = 3, byrow = TRUE)) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = "top",
+    legend.text = element_text(size = 13),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    aspect.ratio = 1
+  )
+
+ggsave(file.path(zonation_dir, "zonation_vs_sex_bias_scatter.pdf"),
+       plot = bias_scatter, width = 7, height = 7.5)
+
+cat("  Saved zonation vs sex bias scatter plot\n\n")
+
+################################################################################
+# 10. ZONE-SPECIFIC SEX BIAS SCATTER PLOT
+################################################################################
+
+cat(strrep("-", 80), "\n")
+cat("10. ZONE-SPECIFIC SEX BIAS SCATTER PLOT\n")
+cat(strrep("-", 80), "\n\n")
+
+cat("Creating PP vs PC sex bias scatter plot...\n")
+
+# Prepare data: sex bias t-values in each zone
+sex_bias_data <- t_table[, c("gene", "portaltestes_vs_portalova",
+                              "centraltestes_vs_centralova",
+                              "testes_effect_zonation")]
+names(sex_bias_data) <- c("gene", "pp_sex_bias", "pc_sex_bias", "interaction")
+
+# Classify genes by zone-specific sex bias using interaction threshold
+# Periportal-specific: significant interaction AND stronger sex effect in PP than PC
+# Pericentral-specific: significant interaction AND stronger sex effect in PC than PP
+sex_bias_data$category <- "None"
+
+sig_interaction <- abs(sex_bias_data$interaction) > sig_threshold
+pp_dominant <- abs(sex_bias_data$pp_sex_bias) > abs(sex_bias_data$pc_sex_bias)
+
+sex_bias_data$category[sig_interaction & pp_dominant] <- "Periportal-specific"
+sex_bias_data$category[sig_interaction & !pp_dominant] <- "Pericentral-specific"
+
+sex_bias_data$category <- factor(sex_bias_data$category,
+                                  levels = c("Pericentral-specific", "Periportal-specific", "None"))
+
+cat("  Pericentral-specific sex bias genes:", sum(sex_bias_data$category == "Pericentral-specific"), "\n")
+cat("  Periportal-specific sex bias genes:", sum(sex_bias_data$category == "Periportal-specific"), "\n")
+cat("  Non-specific:", sum(sex_bias_data$category == "None"), "\n\n")
+
+# Cap t-values at axis limits so outliers appear on the plot edges
+axis_limit <- 20
+sex_bias_data$pp_sex_bias_cap <- pmax(pmin(sex_bias_data$pp_sex_bias, axis_limit), -axis_limit)
+sex_bias_data$pc_sex_bias_cap <- pmax(pmin(sex_bias_data$pc_sex_bias, axis_limit), -axis_limit)
+
+# Curated gene labels matching key sex-specific zonation examples
+genes_to_label <- c("Cyp2a22", "Sult3a1", "Socs5", "Stambpl1", "Cyp2c29",
+                     "Tlr5", "Susd4", "Snhg11", "Tox", "Grm8", "Ncam2", "Aox3")
+
+# Create scatter plot using capped values
+# Note: interaction = x - y, so boundary |interaction| > threshold gives y = x ± threshold
+sex_bias_scatter <- ggplot(sex_bias_data, aes(x = pp_sex_bias_cap, y = pc_sex_bias_cap)) +
+  # Diagonal reference line (equal sex bias in both zones)
+  geom_abline(slope = -1, intercept = 0, linetype = "dashed", color = "gray60", linewidth = 0.5) +
+  # Plot all points (grey first, then colored on top)
+  geom_point(data = sex_bias_data[sex_bias_data$category == "None", ],
+             color = "#cccccc", alpha = 0.5, size = 1.2) +
+  geom_point(data = sex_bias_data[sex_bias_data$category != "None", ],
+             aes(color = category), alpha = 0.7, size = 1.8) +
+  # Label top genes
+  ggrepel::geom_text_repel(
+    data = sex_bias_data[sex_bias_data$gene %in% genes_to_label, ],
+    aes(label = gene, color = category),
+    size = 3.2, fontface = "italic",
+    max.overlaps = 20,
+    segment.size = 0.3,
+    segment.alpha = 0.6,
+    box.padding = 0.4,
+    point.padding = 0.3,
+    show.legend = FALSE
+  ) +
+  scale_color_manual(
+    values = c("Pericentral-specific" = "#e54141",
+               "Periportal-specific" = "#4173d8"),
+    name = NULL
+  ) +
+  scale_x_continuous(expand = expansion(mult = 0.02)) +
+  scale_y_reverse(expand = expansion(mult = 0.02)) +
+  labs(
+    x = "PP gene expression sex bias\n(t-value)",
+    y = "PC gene expression sex bias\n(t-value)"
+  ) +
+  theme_classic() +
+  theme(
+    legend.position = "top",
+    aspect.ratio = 1
+  )
+
+ggsave(file.path(zonation_dir, "zone_specific_sex_bias_scatter.pdf"),
+       plot = sex_bias_scatter, width = 6, height = 6.5)
+
+cat("  Saved zone-specific sex bias scatter plot\n\n")
+
+################################################################################
+# 11. OPTIMAL THRESHOLD DETECTION (must run before gene identification)
+################################################################################
+
+cat(strrep("-", 80), "\n")
+cat("11. OPTIMAL THRESHOLD DETECTION FOR ZONATION INTERACTION\n")
+cat(strrep("-", 80), "\n\n")
+
+cat("Finding optimal interaction threshold before identifying zonation-biased genes...\n")
+cat("This determines the |t| cutoff for the zonation x gonad interaction contrast.\n\n")
+
+# Helper function to get lipids correlated with genes
+get_correlated_lipids <- function(gene_list, rna_data, lipid_data, cor_threshold = 0.65) {
+  if (length(gene_list) == 0) return(character(0))
+  available_genes <- intersect(gene_list, rownames(rna_data))
+  if (length(available_genes) == 0) return(character(0))
+  cor_mat <- cor(t(rna_data[available_genes, , drop = FALSE]), t(lipid_data), use = "pairwise.complete.obs")
+  max_cors <- apply(abs(cor_mat), 2, max, na.rm = TRUE)
+  lipids_passing <- names(max_cors[max_cors >= cor_threshold])
+  return(lipids_passing)
+}
+
+# Get sample subsets for each condition
+testes_portal_samples <- grep("Periportal_Testes", colnames(scaled_RNA), value = TRUE)
+testes_central_samples <- grep("Pericentral_Testes", colnames(scaled_RNA), value = TRUE)
+ovaries_portal_samples <- grep("Periportal_Ovaries", colnames(scaled_RNA), value = TRUE)
+ovaries_central_samples <- grep("Pericentral_Ovaries", colnames(scaled_RNA), value = TRUE)
+
+lip_testes_samples <- gsub("_Peri.*_Testes", "", testes_portal_samples)
+lip_ovaries_samples <- gsub("_Peri.*_Ovaries", "", ovaries_portal_samples)
+
+# Define threshold range
+threshold_range <- seq(0, 10, by = 0.1)
+cat("  Testing", length(threshold_range), "thresholds from 0 to 10\n")
+
+# Function to compute zonation assignments for a given threshold
+compute_zonation_at_threshold <- function(thresh, t_table, scaled_RNA, lipidomic,
+                                          testes_portal_samples, testes_central_samples,
+                                          ovaries_portal_samples, ovaries_central_samples,
+                                          lip_testes_samples, lip_ovaries_samples,
+                                          cor_threshold = 0.65) {
+  testes_genes <- t_table[abs(t_table$testes_effect_zonation) > thresh &
+                           abs(t_table$portalova_vs_centralova) < 1, ]
+  ovaries_genes <- t_table[abs(t_table$testes_effect_zonation) > thresh &
+                            abs(t_table$portaltestes_vs_centraltestes) < 1, ]
+  tpc_genes <- testes_genes[testes_genes$portaltestes_vs_centraltestes < 0, ]$gene
+  tpp_genes <- testes_genes[testes_genes$portaltestes_vs_centraltestes > 0, ]$gene
+  opc_genes <- ovaries_genes[ovaries_genes$portalova_vs_centralova < 0, ]$gene
+  opp_genes <- ovaries_genes[ovaries_genes$portalova_vs_centralova > 0, ]$gene
+  tpc_lipids <- get_correlated_lipids(tpc_genes, scaled_RNA[, testes_central_samples],
+                                       lipidomic[, lip_testes_samples], cor_threshold)
+  tpp_lipids <- get_correlated_lipids(tpp_genes, scaled_RNA[, testes_portal_samples],
+                                       lipidomic[, lip_testes_samples], cor_threshold)
+  opc_lipids <- get_correlated_lipids(opc_genes, scaled_RNA[, ovaries_central_samples],
+                                       lipidomic[, lip_ovaries_samples], cor_threshold)
+  opp_lipids <- get_correlated_lipids(opp_genes, scaled_RNA[, ovaries_portal_samples],
+                                       lipidomic[, lip_ovaries_samples], cor_threshold)
+  all_lipids <- rownames(lipidomic)
+  periportal_lipids <- unique(c(tpp_lipids, opp_lipids))
+  pericentral_lipids <- unique(c(tpc_lipids, opc_lipids))
+  zonation <- dplyr::case_when(
+    all_lipids %in% periportal_lipids & all_lipids %in% pericentral_lipids ~ "both",
+    all_lipids %in% periportal_lipids ~ "periportal",
+    all_lipids %in% pericentral_lipids ~ "pericentral",
+    TRUE ~ "no_association"
+  )
+  data.frame(lipid = all_lipids, lipid_class = gsub("[(].*", "", all_lipids),
+             zonation = zonation, stringsAsFactors = FALSE)
+}
+
+# Compute zonation at each threshold
+cat("  Computing zonation assignments across thresholds...\n")
+sensitivity_results <- lapply(threshold_range, function(thresh) {
+  result <- compute_zonation_at_threshold(
+    thresh, t_table, scaled_RNA, lipidomic,
+    testes_portal_samples, testes_central_samples,
+    ovaries_portal_samples, ovaries_central_samples,
+    lip_testes_samples, lip_ovaries_samples
+  )
+  result$threshold <- thresh
+  result
+})
+
+sensitivity_df <- do.call(rbind, sensitivity_results)
+cat("  Generated", nrow(sensitivity_df), "lipid x threshold combinations\n")
+
+# Compute total proportions for optimization
+proportion_total <- sensitivity_df %>%
+  dplyr::group_by(threshold, zonation) %>%
+  dplyr::summarise(count = dplyr::n(), .groups = "drop") %>%
+  dplyr::group_by(threshold) %>%
+  dplyr::mutate(total = sum(count), proportion = count / total) %>%
+  dplyr::ungroup()
+
+proportion_total$zonation <- factor(proportion_total$zonation,
+  levels = c("periportal", "both", "pericentral", "no_association"))
+
+# Shannon entropy (normalized to 0-1)
+calc_entropy <- function(proportions) {
+  p <- proportions[proportions > 0]
+  if (length(p) <= 1) return(0)
+  entropy <- -sum(p * log(p))
+  max_entropy <- log(length(proportions))
+  return(entropy / max_entropy)
+}
+
+# Calculate entropy at each threshold
+entropy_by_threshold <- proportion_total %>%
+  dplyr::group_by(threshold) %>%
+  dplyr::summarise(
+    entropy_all = calc_entropy(proportion),
+    entropy_associated = {
+      assoc_props <- proportion[zonation != "no_association"]
+      if (sum(assoc_props) > 0) calc_entropy(assoc_props / sum(assoc_props)) else 0
+    },
+    prop_associated = 1 - proportion[zonation == "no_association"],
+    prop_both = ifelse(any(zonation == "both"), proportion[zonation == "both"], 0),
+    .groups = "drop"
+  )
+
+# Calculate stability
+stability_data <- sensitivity_df %>%
+  dplyr::arrange(lipid, threshold) %>%
+  dplyr::group_by(lipid) %>%
+  dplyr::mutate(prev_zonation = dplyr::lag(zonation), changed = zonation != prev_zonation) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(!is.na(prev_zonation)) %>%
+  dplyr::group_by(threshold) %>%
+  dplyr::summarise(n_changed = sum(changed), prop_changed = mean(changed), .groups = "drop")
+
+# Compute combined score and find optimal threshold
+optimal_metrics <- entropy_by_threshold %>%
+  dplyr::left_join(stability_data, by = "threshold") %>%
+  dplyr::mutate(
+    stability = 1 - prop_changed,
+    specificity = 1 - prop_both,
+    combined_score = entropy_associated * stability * prop_associated * specificity^3
+  )
+
+optimal_idx <- which.max(optimal_metrics$combined_score)
+optimal_threshold <- optimal_metrics$threshold[optimal_idx]
+
+cat("\n  Optimal threshold:", optimal_threshold, "\n")
+cat("  At this threshold:\n")
+cat("    - Entropy (associated):", round(optimal_metrics$entropy_associated[optimal_idx], 3), "\n")
+cat("    - Stability:", round(optimal_metrics$stability[optimal_idx], 3), "\n")
+cat("    - Proportion associated:", round(optimal_metrics$prop_associated[optimal_idx], 3), "\n")
+cat("    - Proportion 'both':", round(optimal_metrics$prop_both[optimal_idx], 3), "\n")
+cat("    - Specificity (1-both):", round(optimal_metrics$specificity[optimal_idx], 3), "\n")
+cat("    - Combined score:", round(optimal_metrics$combined_score[optimal_idx], 3), "\n\n")
+
+cat("Using optimal threshold =", optimal_threshold, "for sex-specific zonation gene identification\n")
+cat("and network generation.\n\n")
+
+################################################################################
+# 12. IDENTIFY ZONATION-BIASED GENES
+################################################################################
+
+cat(strrep("-", 80), "\n")
+cat("12. IDENTIFYING ZONATION-BIASED GENES\n")
+cat(strrep("-", 80), "\n\n")
+
+cat("Identifying genes with zonation-specific effects...\n")
+cat("  Using optimal interaction threshold:", optimal_threshold, "\n\n")
 
 # Genes with testes-specific zonation bias (high zonation effect in testes, low in ovaries)
-testes_zonation_bias_genes <- t_table[abs(t_table$testes_effect_zonation) > 5 &
+testes_zonation_bias_genes <- t_table[abs(t_table$testes_effect_zonation) > optimal_threshold &
                                        abs(t_table$portalova_vs_centralova) < 1, ]
 cat("  Testes-specific zonation genes: ", nrow(testes_zonation_bias_genes), "\n")
 
 # Genes with ovaries-specific zonation bias (high zonation effect in ovaries, low in testes)
-ovaries_zonation_bias_genes <- t_table[abs(t_table$testes_effect_zonation) > 5 &
+ovaries_zonation_bias_genes <- t_table[abs(t_table$testes_effect_zonation) > optimal_threshold &
                                         abs(t_table$portaltestes_vs_centraltestes) < 1, ]
 cat("  Ovaries-specific zonation genes: ", nrow(ovaries_zonation_bias_genes), "\n")
 
 # Genes with general zonation bias (independent of gonad type)
 zonation_bias_genes <- t_table[abs(t_table$testes_effect_zonation) < 1 &
-                                abs(t_table$portal_vs_Central) > 5, ]
+                                abs(t_table$portal_vs_Central) > optimal_threshold, ]
 cat("  General zonation genes: ", nrow(zonation_bias_genes), "\n\n")
 
 # Split by zone
@@ -463,10 +853,10 @@ pdf(file.path(zonation_dir, "zonation_biased_genes_heatmap.pdf"), width = 12, he
 t <- as.vector(t(top_genes))
 palette1 <- createLinearColors(t[t < 0], withZero = FALSE,
                               maximum = abs(min(t, na.rm = TRUE)) * 10,
-                              my_colors = c("lightgreen", "white", "orange"))
+                              my_colors = c("#a0a0a0", "white", "#303030"))
 palette2 <- createLinearColors(t[t > 0], withZero = FALSE,
                               maximum = abs(max(t, na.rm = TRUE)) * 10,
-                              my_colors = c("lightgreen", "white", "orange"))
+                              my_colors = c("#a0a0a0", "white", "#303030"))
 palette <- c(palette1, palette2)
 pheatmap::pheatmap(t(top_genes),
                    display_numbers = TRUE,
@@ -477,15 +867,322 @@ pheatmap::pheatmap(t(top_genes),
                    angle_col = 0)
 dev.off()
 
-cat("  Saved zonation-biased genes heatmap\n\n")
+cat("  Saved zonation-biased genes heatmap\n")
+
+# ==============================================================================
+# QUADRANT SCATTER PLOT: Sex-specific zonation patterns
+# ==============================================================================
+cat("  Creating quadrant scatter plot for sex-specific zonation...\n")
+
+# Prepare data for scatter plot
+scatter_data <- t_table[, c("gene", "portalova_vs_centralova", "portaltestes_vs_centraltestes", "testes_effect_zonation")]
+names(scatter_data) <- c("gene", "zonation_ovaries", "zonation_testes", "interaction")
+
+# Classify genes by sex-specificity
+scatter_data$category <- "None"
+
+# Testes-specific: high interaction AND low ovary zonation
+testes_specific_idx <- abs(scatter_data$interaction) > optimal_threshold & abs(scatter_data$zonation_ovaries) < 1
+scatter_data$category[testes_specific_idx & scatter_data$zonation_testes > 0] <- "Testes periportal"
+scatter_data$category[testes_specific_idx & scatter_data$zonation_testes < 0] <- "Testes pericentral"
+
+# Ovaries-specific: high interaction AND low testes zonation
+ovaries_specific_idx <- abs(scatter_data$interaction) > optimal_threshold & abs(scatter_data$zonation_testes) < 1
+scatter_data$category[ovaries_specific_idx & scatter_data$zonation_ovaries > 0] <- "Ovaries periportal"
+scatter_data$category[ovaries_specific_idx & scatter_data$zonation_ovaries < 0] <- "Ovaries pericentral"
+
+# Set factor levels for plotting order
+scatter_data$category <- factor(scatter_data$category,
+                                levels = c("Testes pericentral", "Testes periportal",
+                                          "Ovaries pericentral", "Ovaries periportal", "None"))
+
+# Define colors matching the project color scheme
+category_colors <- c(
+  "Testes pericentral" = "#2b64d6",
+  "Testes periportal" = "#5f8dff",
+  "Ovaries pericentral" = "#d32f2f",
+  "Ovaries periportal" = "#ff5555",
+  "None" = "#cccccc"
+)
+
+# Identify genes to label: top by absolute zonation effect in relevant direction
+# Find threshold that includes Mtmr11
+mtmr11_stats <- scatter_data[scatter_data$gene == "Mtmr11", ]
+if (nrow(mtmr11_stats) > 0) {
+  mtmr11_max_zonation <- max(abs(mtmr11_stats$zonation_ovaries), abs(mtmr11_stats$zonation_testes))
+  label_threshold <- mtmr11_max_zonation * 0.95  # Slightly below Mtmr11 to ensure it's labeled
+  cat("    Mtmr11 zonation stats - Ovaries:", round(mtmr11_stats$zonation_ovaries, 2),
+      "Testes:", round(mtmr11_stats$zonation_testes, 2), "\n")
+  cat("    Label threshold set to:", round(label_threshold, 2), "\n")
+} else {
+  label_threshold <- 3  # Default fallback
+  cat("    Mtmr11 not found, using default label threshold:", label_threshold, "\n")
+}
+
+# Select genes to label: those with high zonation effect in any direction
+scatter_data$label_gene <- scatter_data$category != "None" &
+  (abs(scatter_data$zonation_ovaries) >= label_threshold | abs(scatter_data$zonation_testes) >= label_threshold)
+
+# Create selection region polygons for visualization
+# Region 1: Testes-specific (high interaction, low ovary zonation)
+# This is the band where |zonation_ovaries| < 1
+testes_region <- data.frame(
+  x = c(-1, 1, 1, -1),
+  y = c(-Inf, -Inf, Inf, Inf)
+)
+
+# Region 2: Ovaries-specific (high interaction, low testes zonation)
+# This is the band where |zonation_testes| < 1
+ovaries_region <- data.frame(
+  x = c(-Inf, Inf, Inf, -Inf),
+  y = c(-1, -1, 1, 1)
+)
+
+# Calculate axis limits based on labeled genes only (not all genes)
+labeled_genes_data <- scatter_data[scatter_data$label_gene, ]
+if (nrow(labeled_genes_data) > 0) {
+  x_range <- range(labeled_genes_data$zonation_ovaries, na.rm = TRUE)
+  y_range <- range(labeled_genes_data$zonation_testes, na.rm = TRUE)
+  # Add 15% padding
+  x_lim <- c(x_range[1] * 1.15, x_range[2] * 1.15)
+  y_lim <- c(y_range[1] * 1.15, y_range[2] * 1.15)
+  # Ensure we include the selection regions (-1, 1)
+  x_lim <- c(min(x_lim[1], -1.5), max(x_lim[2], 1.5))
+  y_lim <- c(min(y_lim[1], -1.5), max(y_lim[2], 1.5))
+} else {
+  x_lim <- c(-15, 15)
+  y_lim <- c(-15, 15)
+}
+
+cat("    Axis limits - X:", round(x_lim, 1), "Y:", round(y_lim, 1), "\n")
+
+# Create the quadrant scatter plot
+quadrant_plot <- ggplot(scatter_data, aes(x = zonation_ovaries, y = zonation_testes)) +
+  # Add shaded regions for selection criteria
+  annotate("rect", xmin = -1, xmax = 1, ymin = -Inf, ymax = Inf,
+           fill = "#4173d8", alpha = 0.08) +
+  annotate("rect", xmin = -Inf, xmax = Inf, ymin = -1, ymax = 1,
+           fill = "#e54141", alpha = 0.08) +
+  # Add reference lines
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray50", linewidth = 0.3) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "gray50", linewidth = 0.3) +
+  geom_hline(yintercept = c(-1, 1), linetype = "dotted", color = "#e54141", linewidth = 0.4) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dotted", color = "#4173d8", linewidth = 0.4) +
+  # Plot points
+  geom_point(aes(color = category), alpha = 0.7, size = 1.5) +
+  # Highlight selected genes with larger points
+  geom_point(data = scatter_data[scatter_data$category != "None", ],
+             aes(color = category), size = 2.5, alpha = 0.9) +
+  # Add labels for top genes
+  ggrepel::geom_text_repel(
+    data = scatter_data[scatter_data$label_gene, ],
+    aes(label = gene, color = category),
+    size = 3,
+    max.overlaps = 25,
+    segment.size = 0.3,
+    segment.alpha = 0.6,
+    box.padding = 0.4,
+    point.padding = 0.3,
+    show.legend = FALSE
+  ) +
+  scale_color_manual(values = category_colors, name = "Sex-specific\nzonation") +
+  labs(
+    x = "Zonation effect in Ovaries (t-statistic)\n← Pericentral | Periportal →",
+    y = "Zonation effect in Testes (t-statistic)\n← Pericentral | Periportal →",
+    title = "Sex-specific zonation patterns",
+    subtitle = paste0("Blue shading: |t| < 1 in ovaries (testes-specific region)\n",
+                     "Red shading: |t| < 1 in testes (ovaries-specific region)\n",
+                     "Interaction threshold: |t| > ", round(optimal_threshold, 2))
+  ) +
+  theme_classic() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 9, color = "gray40")
+  ) +
+  coord_cartesian(xlim = x_lim, ylim = y_lim)
+
+ggsave(file.path(zonation_dir, "sex_specific_zonation_quadrant.pdf"),
+       plot = quadrant_plot, width = 10, height = 9)
+
+cat("  Saved quadrant scatter plot\n")
+
+# ==============================================================================
+# HORIZONTAL SUMMARY BAR PLOT: Gene counts by category (Panel B companion)
+# ==============================================================================
+cat("  Creating horizontal summary bar plot...\n")
+
+# Count genes per category
+category_counts <- data.frame(
+  category = c("Testes pericentral", "Testes periportal",
+               "Ovaries pericentral", "Ovaries periportal"),
+  count = c(nrow(testes_pericentral_genes), nrow(testes_periportal_genes),
+            nrow(ovaries_pericentral_genes), nrow(ovaries_periportal_genes))
+)
+category_counts$category <- factor(category_counts$category,
+                                   levels = rev(c("Testes pericentral", "Testes periportal",
+                                                 "Ovaries pericentral", "Ovaries periportal")))
+
+# Create horizontal bar plot
+summary_bar_plot <- ggplot(category_counts, aes(x = count, y = category, fill = category)) +
+  geom_col(width = 0.7) +
+  geom_text(aes(label = count), hjust = -0.2, size = 3.5) +
+  scale_fill_manual(values = category_colors, guide = "none") +
+  scale_x_continuous(expand = expansion(mult = c(0, 0.15))) +
+  labs(
+    x = "Number of genes",
+    y = NULL,
+    title = "Sex-specific zonation genes"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 11),
+    axis.text.y = element_text(size = 9)
+  )
+
+ggsave(file.path(zonation_dir, "sex_specific_zonation_summary_bar.pdf"),
+       plot = summary_bar_plot, width = 4, height = 3)
+
+cat("  Saved summary bar plot\n")
+
+# ==============================================================================
+# COMBINED PANEL: Quadrant scatter (A) + Summary bar (B)
+# ==============================================================================
+cat("  Creating combined panel figure...\n")
+
+# Remove legend from quadrant plot for combined figure (legend will be in bar colors)
+quadrant_plot_nolegend <- quadrant_plot +
+  theme(legend.position = "none",
+        plot.subtitle = element_blank())
+
+# Combine using patchwork
+combined_panel <- quadrant_plot_nolegend + summary_bar_plot +
+  plot_layout(widths = c(3, 1)) +
+  plot_annotation(tag_levels = 'A')
+
+ggsave(file.path(zonation_dir, "sex_specific_zonation_panel_AB.pdf"),
+       plot = combined_panel, width = 12, height = 6)
+
+cat("  Saved combined panel figure\n")
+
+# ==============================================================================
+# FACETED HEATMAP: Selected genes organized by category
+# ==============================================================================
+cat("  Creating faceted heatmap by category...\n")
+
+# Prepare data for faceted heatmap
+# Combine all selected genes with their categories
+heatmap_genes <- rbind(
+  data.frame(gene = testes_pericentral_genes$gene, category = "Testes pericentral", stringsAsFactors = FALSE),
+  data.frame(gene = testes_periportal_genes$gene, category = "Testes periportal", stringsAsFactors = FALSE),
+  data.frame(gene = ovaries_pericentral_genes$gene, category = "Ovaries pericentral", stringsAsFactors = FALSE),
+  data.frame(gene = ovaries_periportal_genes$gene, category = "Ovaries periportal", stringsAsFactors = FALSE)
+)
+
+if (nrow(heatmap_genes) > 0) {
+  # Merge with t-statistics
+  heatmap_data <- merge(heatmap_genes, t_table, by = "gene")
+
+  # Select relevant columns for display
+  display_cols <- c("portalova_vs_centralova", "portaltestes_vs_centraltestes",
+                    "testes_effect_zonation", "testes_vs_ova")
+
+  # Rename for cleaner display
+  col_labels <- c("Zonation\n(Ovaries)", "Zonation\n(Testes)",
+                  "Zonation ×\nGonad", "Gonad\nEffect")
+
+  # Create annotation for categories
+  row_annotation <- data.frame(
+    Category = factor(heatmap_data$category,
+                     levels = c("Testes pericentral", "Testes periportal",
+                               "Ovaries pericentral", "Ovaries periportal"))
+  )
+  rownames(row_annotation) <- heatmap_data$gene
+
+  annotation_colors <- list(
+    Category = c(
+      "Testes pericentral" = "#2b64d6",
+      "Testes periportal" = "#5f8dff",
+      "Ovaries pericentral" = "#d32f2f",
+      "Ovaries periportal" = "#ff5555"
+    )
+  )
+
+  # Prepare matrix for heatmap
+  heatmap_matrix <- as.matrix(heatmap_data[, display_cols])
+  rownames(heatmap_matrix) <- heatmap_data$gene
+  colnames(heatmap_matrix) <- col_labels
+
+  # Order rows by category, then by zonation effect within category
+  # Order within ovaries categories: pericentral first (negative values), then periportal (positive)
+  # Order within testes categories: pericentral first (negative values), then periportal (positive)
+  heatmap_data$order_val <- ifelse(grepl("Testes", heatmap_data$category),
+                                   heatmap_data$portaltestes_vs_centraltestes,
+                                   heatmap_data$portalova_vs_centralova)
+  heatmap_data <- heatmap_data[order(heatmap_data$category, -heatmap_data$order_val), ]
+  heatmap_matrix <- heatmap_matrix[heatmap_data$gene, ]
+  row_annotation <- row_annotation[heatmap_data$gene, , drop = FALSE]
+
+  # Create color palette
+  t_vals <- as.vector(heatmap_matrix)
+  max_abs <- max(abs(t_vals), na.rm = TRUE)
+  color_breaks <- seq(-max_abs, max_abs, length.out = 101)
+  heatmap_colors <- colorRampPalette(c("#4173d8", "white", "#e54141"))(100)
+
+  # Determine appropriate figure height based on number of genes
+  fig_height <- max(8, min(20, 4 + nrow(heatmap_matrix) * 0.15))
+
+  # Calculate gaps based on actual row order after sorting
+  # Get counts in the order they appear in the sorted data
+  category_order_in_data <- unique(heatmap_data$category)
+  cat("    Category order in heatmap:", paste(category_order_in_data, collapse = " -> "), "\n")
+  category_counts_ordered <- sapply(category_order_in_data, function(cat) sum(heatmap_data$category == cat))
+  # Gaps should be placed after each category except the last
+  gaps_positions <- cumsum(category_counts_ordered[-length(category_counts_ordered)])
+  cat("    Gap positions:", paste(gaps_positions, collapse = ", "), "\n")
+
+  pdf(file.path(zonation_dir, "sex_specific_zonation_heatmap_faceted.pdf"),
+      width = 6, height = fig_height)
+  pheatmap::pheatmap(
+    heatmap_matrix,
+    annotation_row = row_annotation,
+    annotation_colors = annotation_colors,
+    cluster_rows = FALSE,
+    cluster_cols = FALSE,
+    color = heatmap_colors,
+    breaks = color_breaks,
+    display_numbers = TRUE,
+    number_format = "%.1f",
+    fontsize = 8,
+    fontsize_number = 6,
+    fontsize_row = 7,
+    main = "Sex-specific zonation genes",
+    gaps_row = gaps_positions,
+    angle_col = 0
+  )
+  dev.off()
+
+  cat("  Saved faceted heatmap with", nrow(heatmap_matrix), "genes\n")
+
+  # Also save a summary CSV
+  summary_df <- heatmap_data[, c("gene", "category", display_cols)]
+  names(summary_df)[3:6] <- c("zonation_ovaries_t", "zonation_testes_t", "interaction_t", "gonad_effect_t")
+  write.csv(summary_df, file.path(zonation_dir, "sex_specific_zonation_genes_summary.csv"), row.names = FALSE)
+  cat("  Saved gene summary CSV\n")
+
+} else {
+  cat("  No sex-specific zonation genes found to plot\n")
+}
+
+cat("\n")
 cat("✓ Zonation-biased genes identified\n\n")
 
 ################################################################################
-# 10. GENERATE ZONATION-SPECIFIC CORRELATION NETWORKS
+# 13. GENERATE ZONATION-SPECIFIC CORRELATION NETWORKS
 ################################################################################
 
 cat(strrep("-", 80), "\n")
-cat("10. GENERATING ZONATION-SPECIFIC CORRELATION NETWORKS\n")
+cat("13. GENERATING ZONATION-SPECIFIC CORRELATION NETWORKS\n")
 cat(strrep("-", 80), "\n\n")
 
 cat("Building correlation networks for each zonation × gonad combination...\n")
@@ -522,8 +1219,8 @@ cormat_testes_portal_ATT <- expand_attributes(cormat_testes_portal, t_table, TF_
 cormat_testes_portal_ATT$type <- ifelse(cormat_testes_portal_ATT$gene %in% rownames(TF_scores_df), "TF",
                                         ifelse(cormat_testes_portal_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_testes_portal, file = file.path(multiomics_dir, "cormat_testes_portal_SIF.csv"), row.names = FALSE)
-write.csv(cormat_testes_portal_ATT, file = file.path(multiomics_dir, "cormat_testes_portal_ATT.csv"), row.names = FALSE)
+write.csv(cormat_testes_portal, file = file.path(multiomics_dir, "cormat_testes_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_portal_ATT, file = file.path(multiomics_dir, "cormat_testes_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Generate full correlation network (threshold = 0) for non-compressed lipid species
 cat("  Generating full correlation network (threshold = 0)...\n")
@@ -536,8 +1233,8 @@ cormat_testes_portal_full_ATT <- expand_attributes(cormat_testes_portal_full, t_
 cormat_testes_portal_full_ATT$type <- ifelse(cormat_testes_portal_full_ATT$gene %in% rownames(TF_scores_df), "TF",
                                               ifelse(cormat_testes_portal_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_testes_portal_full, file = file.path(multiomics_dir, "cormat_testes_portal_full_SIF.csv"), row.names = FALSE)
-write.csv(cormat_testes_portal_full_ATT, file = file.path(multiomics_dir, "cormat_testes_portal_full_ATT.csv"), row.names = FALSE)
+write.csv(cormat_testes_portal_full, file = file.path(multiomics_dir, "cormat_testes_portal_full_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_portal_full_ATT, file = file.path(multiomics_dir, "cormat_testes_portal_full_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Create compressed version (aggregate by lipid class)
 cormat_testes_portal$node2 <- gsub("[(].*", "", cormat_testes_portal$node2)
@@ -551,8 +1248,8 @@ cormat_testes_portal_ATT <- aggregate(cbind(portal_vs_Central, testes_vs_ova, po
                                             portaltestes_vs_portalova, testes_effect_zonation) ~ gene + type,
                                      data = cormat_testes_portal_ATT, FUN = mean)
 
-write.csv(cormat_testes_portal, file = file.path(multiomics_dir, "compressed_cormat_testes_portal_SIF.csv"), row.names = FALSE)
-write.csv(cormat_testes_portal_ATT, file = file.path(multiomics_dir, "compressed_cormat_testes_portal_ATT.csv"), row.names = FALSE)
+write.csv(cormat_testes_portal, file = file.path(multiomics_dir, "compressed_cormat_testes_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_portal_ATT, file = file.path(multiomics_dir, "compressed_cormat_testes_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 cat("  ✓ Saved testes periportal networks\n")
 
@@ -577,8 +1274,8 @@ cormat_testes_central_ATT <- expand_attributes(cormat_testes_central, t_table, T
 cormat_testes_central_ATT$type <- ifelse(cormat_testes_central_ATT$gene %in% rownames(TF_scores_df), "TF",
                                          ifelse(cormat_testes_central_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_testes_central, file = file.path(multiomics_dir, "cormat_testes_central_SIF.csv"), row.names = FALSE)
-write.csv(cormat_testes_central_ATT, file = file.path(multiomics_dir, "cormat_testes_central_ATT.csv"), row.names = FALSE)
+write.csv(cormat_testes_central, file = file.path(multiomics_dir, "cormat_testes_central_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_central_ATT, file = file.path(multiomics_dir, "cormat_testes_central_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Generate full correlation network (threshold = 0) for non-compressed lipid species
 cat("  Generating full correlation network (threshold = 0)...\n")
@@ -591,8 +1288,8 @@ cormat_testes_central_full_ATT <- expand_attributes(cormat_testes_central_full, 
 cormat_testes_central_full_ATT$type <- ifelse(cormat_testes_central_full_ATT$gene %in% rownames(TF_scores_df), "TF",
                                                ifelse(cormat_testes_central_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_testes_central_full, file = file.path(multiomics_dir, "cormat_testes_central_full_SIF.csv"), row.names = FALSE)
-write.csv(cormat_testes_central_full_ATT, file = file.path(multiomics_dir, "cormat_testes_central_full_ATT.csv"), row.names = FALSE)
+write.csv(cormat_testes_central_full, file = file.path(multiomics_dir, "cormat_testes_central_full_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_central_full_ATT, file = file.path(multiomics_dir, "cormat_testes_central_full_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Create compressed version
 cormat_testes_central$node2 <- gsub("[(].*", "", cormat_testes_central$node2)
@@ -606,8 +1303,8 @@ cormat_testes_central_ATT <- aggregate(cbind(portal_vs_Central, testes_vs_ova, p
                                              portaltestes_vs_portalova, testes_effect_zonation) ~ gene + type,
                                       data = cormat_testes_central_ATT, FUN = mean)
 
-write.csv(cormat_testes_central, file = file.path(multiomics_dir, "compressed_cormat_testes_central_SIF.csv"), row.names = FALSE)
-write.csv(cormat_testes_central_ATT, file = file.path(multiomics_dir, "compressed_cormat_testes_central_ATT.csv"), row.names = FALSE)
+write.csv(cormat_testes_central, file = file.path(multiomics_dir, "compressed_cormat_testes_central_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_central_ATT, file = file.path(multiomics_dir, "compressed_cormat_testes_central_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 cat("  ✓ Saved testes pericentral networks\n")
 
@@ -632,8 +1329,8 @@ cormat_Ovaries_portal_ATT <- expand_attributes(cormat_Ovaries_portal, t_table, T
 cormat_Ovaries_portal_ATT$type <- ifelse(cormat_Ovaries_portal_ATT$gene %in% rownames(TF_scores_df), "TF",
                                          ifelse(cormat_Ovaries_portal_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_Ovaries_portal, file = file.path(multiomics_dir, "cormat_Ovaries_portal_SIF.csv"), row.names = FALSE)
-write.csv(cormat_Ovaries_portal_ATT, file = file.path(multiomics_dir, "cormat_Ovaries_portal_ATT.csv"), row.names = FALSE)
+write.csv(cormat_Ovaries_portal, file = file.path(multiomics_dir, "cormat_Ovaries_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_Ovaries_portal_ATT, file = file.path(multiomics_dir, "cormat_Ovaries_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Generate full correlation network (threshold = 0) for non-compressed lipid species
 cat("  Generating full correlation network (threshold = 0)...\n")
@@ -646,8 +1343,8 @@ cormat_Ovaries_portal_full_ATT <- expand_attributes(cormat_Ovaries_portal_full, 
 cormat_Ovaries_portal_full_ATT$type <- ifelse(cormat_Ovaries_portal_full_ATT$gene %in% rownames(TF_scores_df), "TF",
                                                ifelse(cormat_Ovaries_portal_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_Ovaries_portal_full, file = file.path(multiomics_dir, "cormat_Ovaries_portal_full_SIF.csv"), row.names = FALSE)
-write.csv(cormat_Ovaries_portal_full_ATT, file = file.path(multiomics_dir, "cormat_Ovaries_portal_full_ATT.csv"), row.names = FALSE)
+write.csv(cormat_Ovaries_portal_full, file = file.path(multiomics_dir, "cormat_Ovaries_portal_full_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_Ovaries_portal_full_ATT, file = file.path(multiomics_dir, "cormat_Ovaries_portal_full_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Create compressed version
 cormat_Ovaries_portal$node2 <- gsub("[(].*", "", cormat_Ovaries_portal$node2)
@@ -661,8 +1358,8 @@ cormat_Ovaries_portal_ATT <- aggregate(cbind(portal_vs_Central, testes_vs_ova, p
                                              portaltestes_vs_portalova, testes_effect_zonation) ~ gene + type,
                                       data = cormat_Ovaries_portal_ATT, FUN = mean)
 
-write.csv(cormat_Ovaries_portal, file = file.path(multiomics_dir, "compressed_cormat_Ovaries_portal_SIF.csv"), row.names = FALSE)
-write.csv(cormat_Ovaries_portal_ATT, file = file.path(multiomics_dir, "compressed_cormat_Ovaries_portal_ATT.csv"), row.names = FALSE)
+write.csv(cormat_Ovaries_portal, file = file.path(multiomics_dir, "compressed_cormat_Ovaries_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_Ovaries_portal_ATT, file = file.path(multiomics_dir, "compressed_cormat_Ovaries_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 cat("  ✓ Saved ovaries periportal networks\n")
 
@@ -687,8 +1384,8 @@ cormat_ova_central_ATT <- expand_attributes(cormat_ova_central, t_table, TF_scor
 cormat_ova_central_ATT$type <- ifelse(cormat_ova_central_ATT$gene %in% rownames(TF_scores_df), "TF",
                                       ifelse(cormat_ova_central_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_ova_central, file = file.path(multiomics_dir, "cormat_ova_central_SIF.csv"), row.names = FALSE)
-write.csv(cormat_ova_central_ATT, file = file.path(multiomics_dir, "cormat_ova_central_ATT.csv"), row.names = FALSE)
+write.csv(cormat_ova_central, file = file.path(multiomics_dir, "cormat_ova_central_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_ova_central_ATT, file = file.path(multiomics_dir, "cormat_ova_central_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Generate full correlation network (threshold = 0) for non-compressed lipid species
 cat("  Generating full correlation network (threshold = 0)...\n")
@@ -701,8 +1398,8 @@ cormat_ova_central_full_ATT <- expand_attributes(cormat_ova_central_full, t_tabl
 cormat_ova_central_full_ATT$type <- ifelse(cormat_ova_central_full_ATT$gene %in% rownames(TF_scores_df), "TF",
                                             ifelse(cormat_ova_central_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_ova_central_full, file = file.path(multiomics_dir, "cormat_ova_central_full_SIF.csv"), row.names = FALSE)
-write.csv(cormat_ova_central_full_ATT, file = file.path(multiomics_dir, "cormat_ova_central_full_ATT.csv"), row.names = FALSE)
+write.csv(cormat_ova_central_full, file = file.path(multiomics_dir, "cormat_ova_central_full_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_ova_central_full_ATT, file = file.path(multiomics_dir, "cormat_ova_central_full_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Create compressed version
 cormat_ova_central$node2 <- gsub("[(].*", "", cormat_ova_central$node2)
@@ -716,8 +1413,8 @@ cormat_ova_central_ATT <- aggregate(cbind(portal_vs_Central, testes_vs_ova, port
                                           portaltestes_vs_portalova, testes_effect_zonation) ~ gene + type,
                                    data = cormat_ova_central_ATT, FUN = mean)
 
-write.csv(cormat_ova_central, file = file.path(multiomics_dir, "compressed_cormat_ova_central_SIF.csv"), row.names = FALSE)
-write.csv(cormat_ova_central_ATT, file = file.path(multiomics_dir, "compressed_cormat_ova_central_ATT.csv"), row.names = FALSE)
+write.csv(cormat_ova_central, file = file.path(multiomics_dir, "compressed_cormat_ova_central_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_ova_central_ATT, file = file.path(multiomics_dir, "compressed_cormat_ova_central_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 cat("  ✓ Saved ovaries pericentral networks\n\n")
 
@@ -737,11 +1434,11 @@ cat("    Compressed networks (threshold = 0.65, lipid classes only):\n")
 cat("      - compressed_cormat_* (8 files, aggregated by lipid class)\n\n")
 
 ################################################################################
-# 11. LIPID-GENE ASSOCIATION HEATMAP BY ZONATION/GONAD CATEGORY
+# 14. LIPID-GENE ASSOCIATION HEATMAP BY ZONATION/GONAD CATEGORY
 ################################################################################
 
 cat(strrep("-", 80), "\n")
-cat("11. LIPID-GENE ASSOCIATION HEATMAP BY ZONATION/GONAD CATEGORY\n")
+cat("14. LIPID-GENE ASSOCIATION HEATMAP BY ZONATION/GONAD CATEGORY\n")
 cat(strrep("-", 80), "\n\n")
 
 cat("Creating binary heatmap of individual lipid associations with gene categories...\n")
@@ -785,11 +1482,12 @@ cat("  Loaded all 4 uncompressed networks\n\n")
 
 # Function to extract unique lipids from a network
 extract_lipids <- function(network_df) {
-  # Filter to lipid nodes only (node2, excluding TFs which are in TF_scores_df)
-  lipid_edges <- network_df[!network_df$node2 %in% rownames(TF_scores_df), ]
+  # Lipid names always contain parentheses, e.g. "Cer(18:0;O2/16:0)", "TG(16:0_18:1_22:6)"
+  # Use this to distinguish lipids from gene/TF nodes
+  lipid_nodes <- network_df$node2[grepl("\\(", network_df$node2)]
 
   # Return unique lipids
-  unique(lipid_edges$node2)
+  unique(lipid_nodes)
 }
 
 # Extract unique lipids from each network
@@ -804,6 +1502,64 @@ cat("  TPC:", length(TPC_lipids), "unique lipids\n")
 cat("  TPP:", length(TPP_lipids), "unique lipids\n")
 cat("  OPC:", length(OPC_lipids), "unique lipids\n")
 cat("  OPP:", length(OPP_lipids), "unique lipids\n\n")
+
+# For each lipid, keep the gene with the strongest absolute correlation (signed value)
+compute_lipid_correlations <- function(network_df) {
+  lipid_edges <- network_df[grepl("\\(", network_df$node2), ]
+  lipid_edges %>%
+    dplyr::mutate(abs_weight = abs(weight)) %>%
+    dplyr::group_by(lipid = node2) %>%
+    dplyr::slice_max(abs_weight, n = 1, with_ties = FALSE) %>%
+    dplyr::ungroup() %>%
+    dplyr::transmute(lipid, cor = weight, gene = node1)
+}
+
+cor_TPC <- compute_lipid_correlations(cormat_testes_central) %>% dplyr::rename(TPC = cor, gene_TPC = gene)
+cor_TPP <- compute_lipid_correlations(cormat_testes_portal) %>% dplyr::rename(TPP = cor, gene_TPP = gene)
+cor_OPC <- compute_lipid_correlations(cormat_ova_central) %>% dplyr::rename(OPC = cor, gene_OPC = gene)
+cor_OPP <- compute_lipid_correlations(cormat_Ovaries_portal) %>% dplyr::rename(OPP = cor, gene_OPP = gene)
+
+# Merge all categories
+lipid_zonation_heatmap <- cor_TPC %>%
+  dplyr::full_join(cor_TPP, by = "lipid") %>%
+  dplyr::full_join(cor_OPC, by = "lipid") %>%
+  dplyr::full_join(cor_OPP, by = "lipid")
+
+# Replace NA with 0 for correlation columns, "" for gene columns
+lipid_zonation_heatmap <- lipid_zonation_heatmap %>%
+  dplyr::mutate(dplyr::across(c(TPC, TPP, OPC, OPP), ~tidyr::replace_na(.x, 0)),
+                dplyr::across(c(gene_TPC, gene_TPP, gene_OPC, gene_OPP), ~tidyr::replace_na(.x, "")))
+
+# Count how many categories each lipid appears in and filter to single-category
+lipid_zonation_heatmap <- lipid_zonation_heatmap %>%
+  dplyr::mutate(n_categories = (TPC != 0) + (TPP != 0) + (OPC != 0) + (OPP != 0))
+
+cat("  Lipids before filtering multi-category:", nrow(lipid_zonation_heatmap), "\n")
+lipid_zonation_heatmap <- lipid_zonation_heatmap %>%
+  dplyr::filter(n_categories == 1) %>%
+  dplyr::select(-n_categories)
+cat("  Lipids after filtering (single category only):", nrow(lipid_zonation_heatmap), "\n")
+
+# Collapse gene columns into a single column (only one will be non-empty per row)
+lipid_zonation_heatmap <- lipid_zonation_heatmap %>%
+  dplyr::mutate(
+    gene = dplyr::case_when(
+      TPC != 0 ~ gene_TPC,
+      TPP != 0 ~ gene_TPP,
+      OPC != 0 ~ gene_OPC,
+      OPP != 0 ~ gene_OPP
+    ),
+    max_cor = pmax(abs(TPC), abs(TPP), abs(OPC), abs(OPP))
+  ) %>%
+  dplyr::select(lipid, TPC, TPP, OPC, OPP, gene, max_cor)
+
+lipid_zonation_heatmap <- lipid_zonation_heatmap[order(lipid_zonation_heatmap$max_cor),]
+# Cluster on the correlation values (TPC/TPP/OPC/OPP columns)
+# d <- dist(lipid_zonation_heatmap[, c("TPC", "TPP", "OPC", "OPP")])
+# hc <- hclust(d, method = "complete")
+# lipid_zonation_heatmap <- lipid_zonation_heatmap[hc$order, ]
+
+write_csv(lipid_zonation_heatmap, file = "results/zonation/lipid_species_zonation_association.csv")
 
 # Get all unique lipids across all networks
 all_lipids <- unique(c(TPC_lipids, TPP_lipids, OPC_lipids, OPP_lipids))
@@ -965,116 +1721,10 @@ cat("    Classes ordered by enrichment:", length(classes_with_enrichment), "\n")
 jitter_data$source <- factor(jitter_data$source, levels = classes_with_enrichment)
 
 #===============================================================================
-# Helper function and sample subsets (used by threshold analysis)
+# Threshold sensitivity: proportion by class (uses sensitivity_df from section 11)
 #===============================================================================
 
-# Helper function to get lipids correlated with genes
-get_correlated_lipids <- function(gene_list, rna_data, lipid_data, cor_threshold = 0.65) {
-  if (length(gene_list) == 0) return(character(0))
-
-  # Filter to available genes
-  available_genes <- intersect(gene_list, rownames(rna_data))
-  if (length(available_genes) == 0) return(character(0))
-
-  # Compute correlations
-  cor_mat <- cor(t(rna_data[available_genes, , drop = FALSE]), t(lipid_data), use = "pairwise.complete.obs")
-
-  # Get lipids with high correlation to any gene
-  max_cors <- apply(abs(cor_mat), 2, max, na.rm = TRUE)
-  lipids_passing <- names(max_cors[max_cors >= cor_threshold])
-
-  return(lipids_passing)
-}
-
-# Get sample subsets for each condition
-testes_portal_samples <- grep("Periportal_Testes", colnames(scaled_RNA), value = TRUE)
-testes_central_samples <- grep("Pericentral_Testes", colnames(scaled_RNA), value = TRUE)
-ovaries_portal_samples <- grep("Periportal_Ovaries", colnames(scaled_RNA), value = TRUE)
-ovaries_central_samples <- grep("Pericentral_Ovaries", colnames(scaled_RNA), value = TRUE)
-
-# Get matching lipidomic samples
-lip_testes_samples <- gsub("_Peri.*_Testes", "", testes_portal_samples)
-lip_ovaries_samples <- gsub("_Peri.*_Ovaries", "", ovaries_portal_samples)
-
-#===============================================================================
-# Threshold sensitivity analysis
-# Shows how lipid class proportions change across zonation categories
-# as the interaction threshold varies from 0 to 10
-#===============================================================================
-
-cat("  Creating threshold sensitivity analysis...\n")
-
-# Define threshold range
-threshold_range <- seq(0, 10, by = 0.1)
-cat("    Testing", length(threshold_range), "thresholds from 0 to 10\n")
-
-# Function to compute zonation assignments for a given threshold
-compute_zonation_at_threshold <- function(thresh, t_table, scaled_RNA, lipidomic,
-                                          testes_portal_samples, testes_central_samples,
-                                          ovaries_portal_samples, ovaries_central_samples,
-                                          lip_testes_samples, lip_ovaries_samples,
-                                          cor_threshold = 0.65) {
-
-  # Get genes at this threshold
-  testes_genes <- t_table[abs(t_table$testes_effect_zonation) > thresh &
-                           abs(t_table$portalova_vs_centralova) < 1, ]
-  ovaries_genes <- t_table[abs(t_table$testes_effect_zonation) > thresh &
-                            abs(t_table$portaltestes_vs_centraltestes) < 1, ]
-
-  # Split by zone
-  tpc_genes <- testes_genes[testes_genes$portaltestes_vs_centraltestes < 0, ]$gene
-  tpp_genes <- testes_genes[testes_genes$portaltestes_vs_centraltestes > 0, ]$gene
-  opc_genes <- ovaries_genes[ovaries_genes$portalova_vs_centralova < 0, ]$gene
-  opp_genes <- ovaries_genes[ovaries_genes$portalova_vs_centralova > 0, ]$gene
-
-  # Get correlated lipids for each category
-  tpc_lipids <- get_correlated_lipids(tpc_genes, scaled_RNA[, testes_central_samples],
-                                       lipidomic[, lip_testes_samples], cor_threshold)
-  tpp_lipids <- get_correlated_lipids(tpp_genes, scaled_RNA[, testes_portal_samples],
-                                       lipidomic[, lip_testes_samples], cor_threshold)
-  opc_lipids <- get_correlated_lipids(opc_genes, scaled_RNA[, ovaries_central_samples],
-                                       lipidomic[, lip_ovaries_samples], cor_threshold)
-  opp_lipids <- get_correlated_lipids(opp_genes, scaled_RNA[, ovaries_portal_samples],
-                                       lipidomic[, lip_ovaries_samples], cor_threshold)
-
-  # Determine zonation for each lipid
-  all_lipids <- rownames(lipidomic)
-  periportal_lipids <- unique(c(tpp_lipids, opp_lipids))
-  pericentral_lipids <- unique(c(tpc_lipids, opc_lipids))
-
-  zonation <- dplyr::case_when(
-    all_lipids %in% periportal_lipids & all_lipids %in% pericentral_lipids ~ "both",
-    all_lipids %in% periportal_lipids ~ "periportal",
-    all_lipids %in% pericentral_lipids ~ "pericentral",
-    TRUE ~ "no_association"
-  )
-
-  data.frame(
-    lipid = all_lipids,
-    lipid_class = gsub("[(].*", "", all_lipids),
-    zonation = zonation,
-    stringsAsFactors = FALSE
-  )
-}
-
-# Compute zonation at each threshold
-cat("    Computing zonation assignments across thresholds...\n")
-sensitivity_results <- lapply(threshold_range, function(thresh) {
-  result <- compute_zonation_at_threshold(
-    thresh, t_table, scaled_RNA, lipidomic,
-    testes_portal_samples, testes_central_samples,
-    ovaries_portal_samples, ovaries_central_samples,
-    lip_testes_samples, lip_ovaries_samples
-  )
-  result$threshold <- thresh
-  result
-})
-
-sensitivity_df <- do.call(rbind, sensitivity_results)
-cat("    Generated", nrow(sensitivity_df), "lipid × threshold combinations\n")
-
-# Calculate proportions by lipid class and zonation category for each threshold
-cat("    Calculating proportions by lipid class...\n")
+cat("  Calculating proportions by lipid class (using pre-computed sensitivity data)...\n")
 
 proportion_by_class <- sensitivity_df %>%
   dplyr::group_by(threshold, lipid_class, zonation) %>%
@@ -1104,28 +1754,7 @@ proportion_by_class <- proportion_by_class %>%
 
 cat("    Lipid classes:", length(unique(proportion_by_class$lipid_class)), "\n")
 
-# Note: Per-class stacked bar plot will be created after optimal_threshold is determined
-
-# Also create a summary plot showing total proportions across all lipids
-proportion_total <- sensitivity_df %>%
-  dplyr::group_by(threshold, zonation) %>%
-  dplyr::summarise(count = dplyr::n(), .groups = "drop") %>%
-  dplyr::group_by(threshold) %>%
-  dplyr::mutate(
-    total = sum(count),
-    proportion = count / total
-  ) %>%
-  dplyr::ungroup()
-
-proportion_total$zonation <- factor(
-  proportion_total$zonation,
-  levels = c("periportal", "both", "pericentral", "no_association")
-)
-
-# Note: p_sensitivity_total will be created and saved after optimal_threshold is determined
-# so we can add the threshold line to the plot
-
-# Save sensitivity data
+# Save sensitivity data (proportion_total and optimal_metrics already computed in section 11)
 write.csv(proportion_by_class,
           file.path(zonation_dir, "threshold_sensitivity_by_class.csv"),
           row.names = FALSE)
@@ -1133,95 +1762,9 @@ write.csv(proportion_total,
           file.path(zonation_dir, "threshold_sensitivity_total.csv"),
           row.names = FALSE)
 
-cat("  ✓ Saved sensitivity data to CSV files\n\n")
+cat("  Saved sensitivity data to CSV files\n\n")
 
-#===============================================================================
-# Version 5: Optimal threshold detection (Entropy + Stability)
-# Combines information content (entropy) with stability analysis
-#===============================================================================
-
-cat("  Finding optimal threshold using entropy + stability...\n")
-
-# Function to calculate Shannon entropy (normalized to 0-1)
-calc_entropy <- function(proportions) {
-  # Remove zeros to avoid log(0)
-  p <- proportions[proportions > 0]
-  if (length(p) <= 1) return(0)
-  # Shannon entropy, normalized by max possible entropy (log of number of categories)
-  entropy <- -sum(p * log(p))
-  max_entropy <- log(length(proportions))
-  return(entropy / max_entropy)
-}
-
-# Calculate entropy at each threshold (excluding no_association from entropy calc
-# since we want to maximize info in the ASSOCIATED categories)
-entropy_by_threshold <- proportion_total %>%
-  dplyr::group_by(threshold) %>%
-  dplyr::summarise(
-    # Entropy of all categories
-    entropy_all = calc_entropy(proportion),
-    # Entropy of associated categories only (periportal, pericentral, both)
-    entropy_associated = {
-      assoc_props <- proportion[zonation != "no_association"]
-      if (sum(assoc_props) > 0) {
-        calc_entropy(assoc_props / sum(assoc_props))
-      } else {
-        0
-      }
-    },
-    # Proportion of lipids with any association
-    prop_associated = 1 - proportion[zonation == "no_association"],
-    # Proportion of "both" lipids (among all lipids) - we want to minimize this
-    prop_both = ifelse(any(zonation == "both"), proportion[zonation == "both"], 0),
-    .groups = "drop"
-  )
-
-# Calculate stability: how much do classifications change between adjacent thresholds?
-# Lower change = more stable
-stability_data <- sensitivity_df %>%
-  dplyr::arrange(lipid, threshold) %>%
-  dplyr::group_by(lipid) %>%
-  dplyr::mutate(
-    prev_zonation = dplyr::lag(zonation),
-    changed = zonation != prev_zonation
-  ) %>%
-  dplyr::ungroup() %>%
-  dplyr::filter(!is.na(prev_zonation)) %>%
-  dplyr::group_by(threshold) %>%
-  dplyr::summarise(
-    n_changed = sum(changed),
-    prop_changed = mean(changed),
-    .groups = "drop"
-  )
-
-# Merge entropy and stability data
-optimal_metrics <- entropy_by_threshold %>%
-  dplyr::left_join(stability_data, by = "threshold") %>%
-  dplyr::mutate(
-    # Stability score: inverse of change rate (1 = perfectly stable, 0 = everything changes)
-    stability = 1 - prop_changed,
-    # Specificity score: penalize having many "both" lipids (we want clear zonation)
-    specificity = 1 - prop_both,
-    # Combined score: balance entropy, stability, coverage, and specificity
-    # We want HIGH entropy (diverse associations), HIGH stability, and LOW "both" proportion
-    # Using cubed specificity to strongly penalize shared lipids
-    combined_score = entropy_associated * stability * prop_associated * specificity^3
-  )
-
-# Find optimal threshold (maximum combined score)
-optimal_idx <- which.max(optimal_metrics$combined_score)
-optimal_threshold <- optimal_metrics$threshold[optimal_idx]
-
-cat("    Optimal threshold:", optimal_threshold, "\n")
-cat("    At this threshold:\n")
-cat("      - Entropy (associated):", round(optimal_metrics$entropy_associated[optimal_idx], 3), "\n")
-cat("      - Stability:", round(optimal_metrics$stability[optimal_idx], 3), "\n")
-cat("      - Proportion associated:", round(optimal_metrics$prop_associated[optimal_idx], 3), "\n")
-cat("      - Proportion 'both':", round(optimal_metrics$prop_both[optimal_idx], 3), "\n")
-cat("      - Specificity (1-both):", round(optimal_metrics$specificity[optimal_idx], 3), "\n")
-cat("      - Combined score:", round(optimal_metrics$combined_score[optimal_idx], 3), "\n")
-
-# Create visualization of the optimization
+# Create visualization of the optimal threshold detection (uses optimal_metrics from section 11)
 p_optimal <- ggplot(optimal_metrics, aes(x = threshold)) +
   # Entropy of associated categories
   geom_line(aes(y = entropy_associated, color = "Entropy (associated)"), linewidth = 1) +
@@ -1283,9 +1826,14 @@ p_sensitivity_total <- ggplot(proportion_total,
            hjust = 0, color = "red", size = 4, fontface = "bold") +
   scale_fill_manual(
     name = "Zonation Association",
-    values = c("periportal" = "lightgreen", "both" = "mediumpurple",
-               "pericentral" = "orange", "no_association" = "grey70"),
+    values = c("periportal" = "#a0a0a0", "both" = "#606060",
+               "pericentral" = "#303030", "no_association" = "#FFFFFF"),
     labels = c("Periportal", "Both", "Pericentral", "No association")
+  ) +
+  scale_color_manual(
+    values = c("periportal" = "#808080", "both" = "#404040",
+               "pericentral" = "#101010", "no_association" = "#cccccc"),
+    guide = "none"
   ) +
   scale_x_continuous(breaks = seq(0, 10, by = 1)) +
   scale_y_continuous(labels = scales::percent_format()) +
@@ -1377,24 +1925,63 @@ cat("    Lipid classes with data:", length(unique(class_proportions_by_gonad$lip
 cat("    Testes-biased lipids:", sum(lipid_gonad_bias$gonad_bias == "Testes"), "\n")
 cat("    Ovaries-biased lipids:", sum(lipid_gonad_bias$gonad_bias == "Ovaries"), "\n")
 
-# Create stacked bar chart with gonad bias stacked vertically within each lipid class
-# Use faceting by lipid class so T/O bars are touching within each class
+# Create combined gonad x zonation color category
+# Blue shades for Testes, Red shades for Ovaries
+# Dark = pericentral, Light = periportal, Grey = both, White = no_association
+class_proportions_by_gonad <- class_proportions_by_gonad %>%
+  dplyr::mutate(
+    color_category = dplyr::case_when(
+      zonation == "no_association" ~ "no_association",
+      zonation == "both" ~ "both",
+      gonad_bias == "Testes" & zonation == "pericentral" ~ "T_pericentral",
+      gonad_bias == "Testes" & zonation == "periportal" ~ "T_periportal",
+      gonad_bias == "Ovaries" & zonation == "pericentral" ~ "O_pericentral",
+      gonad_bias == "Ovaries" & zonation == "periportal" ~ "O_periportal",
+      TRUE ~ "no_association"
+    )
+  )
+
+# Order color categories for legend
+class_proportions_by_gonad$color_category <- factor(
+  class_proportions_by_gonad$color_category,
+  levels = c("T_pericentral", "T_periportal", "O_pericentral", "O_periportal", "both", "no_association")
+)
+
+# Create summary for x-axis labels with counts (one row per lipid_class + gonad_bias)
+count_labels <- class_proportions_by_gonad %>%
+  dplyr::select(lipid_class, gonad_bias, total) %>%
+  dplyr::distinct() %>%
+  dplyr::mutate(
+    x_label = dplyr::case_when(
+      gonad_bias == "Testes" ~ paste0("T (n = ", total, ")"),
+      gonad_bias == "Ovaries" ~ paste0("O (n = ", total, ")")
+    )
+  )
+
+# Create stacked bar chart with gonad-specific zonation colors
+# Blue shades for Testes (dark=pericentral, light=periportal)
+# Red shades for Ovaries (dark=pericentral, light=periportal)
 p_class_proportions <- ggplot(class_proportions_by_gonad,
-                               aes(x = gonad_bias, y = proportion, fill = zonation)) +
-  geom_bar(stat = "identity", width = 1, position = "stack") +
+                               aes(x = gonad_bias, y = proportion, fill = color_category)) +
+  geom_bar(stat = "identity", width = 1, position = "stack", color = "black", linewidth = 0.3) +
+  geom_text(data = count_labels,
+            aes(x = gonad_bias, y = -0.02, label = x_label),
+            inherit.aes = FALSE, hjust = 1, size = 2.5) +
   facet_grid(lipid_class ~ ., switch = "y") +
   scale_fill_manual(
     name = "Zonation\nAssociation",
-    values = c("periportal" = "lightgreen", "both" = "mediumpurple",
-               "pericentral" = "orange", "no_association" = "grey70"),
-    labels = c("Periportal", "Both", "Pericentral", "No association")
+    values = c("T_pericentral" = "#2b64d6", "T_periportal" = "#5f8dff",
+               "O_pericentral" = "#d32f2f", "O_periportal" = "#ff5555",
+               "both" = "#808080", "no_association" = "#FFFFFF"),
+    labels = c("Testes Pericentral", "Testes Periportal",
+               "Ovaries Pericentral", "Ovaries Periportal",
+               "Both zones", "No association")
   ) +
-  scale_y_continuous(labels = scales::percent_format(), expand = c(0, 0)) +
-  scale_x_discrete(labels = c("Testes" = "T", "Ovaries" = "O")) +
+  scale_y_continuous(labels = scales::percent_format(), expand = expansion(mult = c(0.15, 0))) +
   coord_flip() +
   theme_minimal(base_size = 10) +
   theme(
-    axis.text.y = element_text(size = 8),
+    axis.text.y = element_blank(),
     axis.title.y = element_blank(),
     legend.position = "right",
     panel.grid.major.y = element_blank(),
@@ -1406,18 +1993,262 @@ p_class_proportions <- ggplot(class_proportions_by_gonad,
   labs(
     x = NULL,
     y = "Proportion of lipid species",
-    title = paste0("Lipid class zonation proportions at optimal threshold (", optimal_threshold, ")"),
-    subtitle = "T = Testes-biased, O = Ovaries-biased"
+    title = paste0("Lipid class zonation proportions at optimal threshold (", optimal_threshold, ")")
   )
 
 ggsave(file.path(zonation_dir, "lipid_class_zonation_proportions.pdf"),
        plot = p_class_proportions,
-       width = 4, height = 8)
+       width = 6, height = 8)
 
 cat("  ✓ Saved lipid class proportions plot:",
     file.path(zonation_dir, "lipid_class_zonation_proportions.pdf"), "\n\n")
 
-#===============================================================================
+#-------------------------------------------------------------------------------
+# Butterfly chart: lipid class zonation proportions
+# Ovaries (red) grow upward, Testes (blue) grow downward from center
+#-------------------------------------------------------------------------------
+
+cat("  Creating butterfly chart of lipid class zonation proportions...\n")
+
+# Create gonad-specific color categories for ALL levels (including both/no_association)
+butterfly_data <- class_proportions_by_gonad %>%
+  dplyr::mutate(
+    color_cat = dplyr::case_when(
+      gonad_bias == "Testes" & zonation == "pericentral" ~ "T_pericentral",
+      gonad_bias == "Testes" & zonation == "periportal" ~ "T_periportal",
+      gonad_bias == "Testes" & zonation == "both" ~ "T_both",
+      gonad_bias == "Testes" & zonation == "no_association" ~ "T_no_association",
+      gonad_bias == "Ovaries" & zonation == "pericentral" ~ "O_pericentral",
+      gonad_bias == "Ovaries" & zonation == "periportal" ~ "O_periportal",
+      gonad_bias == "Ovaries" & zonation == "both" ~ "O_both",
+      gonad_bias == "Ovaries" & zonation == "no_association" ~ "O_no_association"
+    ),
+    # Negate Testes proportions so they grow downward
+    y_val = ifelse(gonad_bias == "Testes", -proportion, proportion)
+  )
+
+# Factor order: no_association at edges (stacked first), colors near center (stacked last, closest to 0)
+butterfly_data$color_cat <- factor(
+  butterfly_data$color_cat,
+  levels = c("O_no_association", "O_both", "O_periportal", "O_pericentral",
+             "T_no_association", "T_both", "T_periportal", "T_pericentral")
+)
+
+butterfly_data$lipid_class <- factor(
+  butterfly_data$lipid_class,
+  levels = classes_with_enrichment
+)
+
+# Build butterfly chart
+p_class_proportions_horizontal <- ggplot(butterfly_data,
+                                          aes(x = lipid_class, y = y_val, fill = color_cat)) +
+  geom_col(position = "stack", width = 0.65, color = "black", linewidth = 0.2) +
+  geom_hline(yintercept = 0, color = "black", linewidth = 0.3) +
+  scale_fill_manual(
+    name = "Zonation",
+    values = c("O_pericentral" = "#d32f2f", "O_periportal" = "#ff5555",
+               "O_both" = "#808080", "O_no_association" = "#FFFFFF",
+               "T_pericentral" = "#2b64d6", "T_periportal" = "#5f8dff",
+               "T_both" = "#808080", "T_no_association" = "#FFFFFF"),
+    breaks = c("O_pericentral", "O_periportal", "T_pericentral", "T_periportal",
+               "O_both", "O_no_association"),
+    labels = c("Ovaries Pericentral", "Ovaries Periportal",
+               "Testes Pericentral", "Testes Periportal",
+               "Both zones", "No association")
+  ) +
+  scale_y_continuous(
+    name = "Proportion of lipid species",
+    labels = function(x) abs(x),
+    limits = c(-1, 1),
+    breaks = c(-1, -0.5, 0, 0.5, 1)
+  ) +
+  scale_x_discrete(position = "top") +
+  theme_minimal(base_size = 10) +
+  theme(
+    axis.text.x.top = element_text(angle = 90, hjust = 0, vjust = 0.5, size = 8, face = "bold"),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 9),
+    legend.position = "right",
+    panel.grid = element_blank()
+  ) +
+  labs(
+    title = "Lipids associated with zonation-biased\ngene expression"
+  )
+
+ggsave(file.path(zonation_dir, "lipid_class_zonation_proportions_horizontal.pdf"),
+       plot = p_class_proportions_horizontal,
+       width = 12, height = 5)
+
+cat("  Saved butterfly chart:",
+    file.path(zonation_dir, "lipid_class_zonation_proportions_horizontal.pdf"), "\n\n")
+
+# Create minimal PG-only version (butterfly style, no labels/legend)
+pg_proportions_mini <- butterfly_data %>%
+  dplyr::filter(lipid_class == "PG")
+
+p_pg_mini <- ggplot(pg_proportions_mini, aes(x = lipid_class, y = y_val, fill = color_cat)) +
+  geom_col(position = "stack", width = 0.85, color = "black", linewidth = 0.2) +
+  geom_hline(yintercept = 0, color = "black", linewidth = 0.3) +
+  scale_fill_manual(
+    values = c("O_pericentral" = "#d32f2f", "O_periportal" = "#ff5555",
+               "O_both" = "#808080", "O_no_association" = "#FFFFFF",
+               "T_pericentral" = "#2b64d6", "T_periportal" = "#5f8dff",
+               "T_both" = "#808080", "T_no_association" = "#FFFFFF")
+  ) +
+  scale_y_continuous(limits = c(-1, 1), expand = expansion(mult = c(0, 0))) +
+  theme_void() +
+  theme(
+    legend.position = "none",
+    plot.margin = margin(t = 2, r = 2, b = 2, l = 2)
+  )
+
+ggsave(file.path(zonation_dir, "lipid_class_zonation_proportions_PG_mini.pdf"),
+       plot = p_pg_mini,
+       width = 1.5, height = 2)
+
+cat("  ✓ Saved PG mini plot:",
+    file.path(zonation_dir, "lipid_class_zonation_proportions_PG_mini.pdf"), "\n\n")
+
+#-------------------------------------------------------------------------------
+# Explanatory figure: From gonad bias to zonation bias (PG example)
+# Shows how lipids with gonad bias get classified into zonation categories
+#-------------------------------------------------------------------------------
+
+cat("  Creating explanatory figure for gonad-to-zonation flow (PG example)...\n")
+
+# Filter to PG lipids only
+pg_jitter <- jitter_data %>%
+  dplyr::filter(source == "PG")
+
+# Get zonation information for PG lipids
+pg_zonation <- lipid_zonation_optimal %>%
+  dplyr::filter(lipid_class == "PG") %>%
+  dplyr::select(lipid, zonation, gonad_bias)
+
+# Merge jitter data with zonation info
+pg_plot_data <- pg_jitter %>%
+  dplyr::left_join(pg_zonation, by = c("ID" = "lipid"))
+
+# Fill NA zonation as "no_association"
+pg_plot_data$zonation[is.na(pg_plot_data$zonation)] <- "no_association"
+
+cat("    PG lipids total:", nrow(pg_plot_data), "\n")
+cat("    Periportal:", sum(pg_plot_data$zonation == "periportal"), "\n")
+cat("    Pericentral:", sum(pg_plot_data$zonation == "pericentral"), "\n")
+cat("    Both:", sum(pg_plot_data$zonation == "both"), "\n")
+cat("    No association:", sum(pg_plot_data$zonation == "no_association"), "\n")
+
+# Create color categories based on gonad bias
+pg_plot_data <- pg_plot_data %>%
+  dplyr::mutate(
+    gonad_color = dplyr::case_when(
+      testes_vs_ova > 0 ~ "Testes",
+      testes_vs_ova < 0 ~ "Ovaries",
+      TRUE ~ "Neutral"
+    )
+  )
+
+# Common plot settings
+# Make x-axis symmetrical and centered on 0
+x_max <- max(abs(pg_plot_data$testes_vs_ova)) * 1.1
+y_range <- c(-x_max, x_max)
+common_theme <- theme_minimal(base_size = 10) +
+  theme(
+    axis.title.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(t = 5, r = 10, b = 5, l = 10)
+  )
+
+# Middle panel: All PG lipids showing gonad bias
+p_middle <- ggplot(pg_plot_data, aes(x = testes_vs_ova, y = 0, color = gonad_color)) +
+  geom_jitter(height = 0.3, width = 0, size = 4, alpha = 0.7) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
+  scale_color_manual(
+    name = "Gonad bias",
+    values = c("Ovaries" = "#e54141", "Testes" = "#4173d8", "Neutral" = "grey50")
+  ) +
+  scale_y_continuous(limits = c(-0.6, 0.6), breaks = NULL) +
+  scale_x_continuous(limits = y_range) +
+  labs(title = paste0("All PG lipids by gonad bias (n=", nrow(pg_plot_data), ")")) +
+  common_theme +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank()
+  )
+
+# Top panel: Periportal-associated lipids
+pg_periportal <- pg_plot_data %>%
+  dplyr::filter(zonation %in% c("periportal", "both"))
+
+p_top <- ggplot(pg_periportal, aes(x = testes_vs_ova, y = 0, color = gonad_color)) +
+  geom_jitter(height = 0.25, width = 0, size = 4, alpha = 0.7) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
+  scale_color_manual(
+    values = c("Ovaries" = "#ff5555", "Testes" = "#5f8dff", "Neutral" = "grey50")
+  ) +
+  scale_y_continuous(limits = c(-0.5, 0.5), breaks = NULL) +
+  scale_x_continuous(limits = y_range) +
+  labs(title = paste0("Periportal-associated (n=", nrow(pg_periportal), ")")) +
+  common_theme +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank()
+  )
+
+# Bottom panel: Pericentral-associated lipids
+pg_pericentral <- pg_plot_data %>%
+  dplyr::filter(zonation %in% c("pericentral", "both"))
+
+p_bottom <- ggplot(pg_pericentral, aes(x = testes_vs_ova, y = 0, color = gonad_color)) +
+  geom_jitter(height = 0.25, width = 0, size = 4, alpha = 0.7) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
+  scale_color_manual(
+    values = c("Ovaries" = "#d32f2f", "Testes" = "#2b64d6", "Neutral" = "grey50")
+  ) +
+  scale_y_continuous(limits = c(-0.5, 0.5), breaks = NULL) +
+  scale_x_continuous(limits = y_range) +
+  # Add Ovaries/Testes labels below x-axis
+  annotate("text", x = min(y_range) * 0.85, y = -0.85, label = "Ovaries",
+           color = "#e54141", fontface = "bold", size = 4.5, hjust = 0) +
+  annotate("text", x = max(y_range) * 0.85, y = -0.85, label = "Testes",
+           color = "#4173d8", fontface = "bold", size = 4.5, hjust = 1) +
+  labs(
+    title = paste0("Pericentral-associated (n=", nrow(pg_pericentral), ")"),
+    x = "t-value (Testes vs Ovaries)"
+  ) +
+  coord_cartesian(clip = "off") +
+  common_theme +
+  theme(
+    legend.position = "none",
+    plot.margin = margin(t = 5, r = 10, b = 25, l = 10)
+  )
+
+# Combine panels with patchwork
+# Layout: top panel, arrow space, middle panel, arrow space, bottom panel
+p_combined <- p_top /
+  plot_spacer() /
+  p_middle /
+  plot_spacer() /
+  p_bottom +
+  plot_layout(heights = c(1, 0.3, 1.5, 0.3, 1))
+
+# Add overall title and arrows annotation
+p_final <- p_combined +
+  plot_annotation(
+    title = "PG lipids: From gonad bias to zonation association",
+    subtitle = paste0("Optimal interaction threshold: ", optimal_threshold),
+    caption = "Arrows indicate flow from gonad-biased lipids to zonation-associated subsets"
+  )
+
+ggsave(file.path(zonation_dir, "gonad_to_zonation_explanation_PG.pdf"),
+       plot = p_final,
+       width = 8, height = 5)
+
+cat("  ✓ Saved explanatory figure:",
+    file.path(zonation_dir, "gonad_to_zonation_explanation_PG.pdf"), "\n\n")
+
 # Standalone vertical jitter plot (like workflow 03)
 # Uses the OPTIMAL THRESHOLD determined above
 # Duplicates points that are in "both" categories into periportal and pericentral
@@ -1472,13 +2303,42 @@ cat("      TPP lipids:", length(v3_TPP_lipids), "\n")
 cat("      OPC lipids:", length(v3_OPC_lipids), "\n")
 cat("      OPP lipids:", length(v3_OPP_lipids), "\n")
 
-# Create zonation mapping
+# Create zonation mapping with gonad information
+# Track which category each lipid belongs to: TPC, TPP, OPC, OPP
 v3_lipid_zonation <- data.frame(
   lipid = unique(c(v3_TPC_lipids, v3_TPP_lipids, v3_OPC_lipids, v3_OPP_lipids)),
   stringsAsFactors = FALSE
 )
-v3_lipid_zonation$is_periportal <- v3_lipid_zonation$lipid %in% c(v3_TPP_lipids, v3_OPP_lipids)
-v3_lipid_zonation$is_pericentral <- v3_lipid_zonation$lipid %in% c(v3_TPC_lipids, v3_OPC_lipids)
+
+# Track membership in each category
+v3_lipid_zonation$in_TPC <- v3_lipid_zonation$lipid %in% v3_TPC_lipids
+v3_lipid_zonation$in_TPP <- v3_lipid_zonation$lipid %in% v3_TPP_lipids
+v3_lipid_zonation$in_OPC <- v3_lipid_zonation$lipid %in% v3_OPC_lipids
+v3_lipid_zonation$in_OPP <- v3_lipid_zonation$lipid %in% v3_OPP_lipids
+
+# Determine if associated with Testes or Ovaries genes
+v3_lipid_zonation$is_testes <- v3_lipid_zonation$in_TPC | v3_lipid_zonation$in_TPP
+v3_lipid_zonation$is_ovaries <- v3_lipid_zonation$in_OPC | v3_lipid_zonation$in_OPP
+v3_lipid_zonation$is_periportal <- v3_lipid_zonation$in_TPP | v3_lipid_zonation$in_OPP
+v3_lipid_zonation$is_pericentral <- v3_lipid_zonation$in_TPC | v3_lipid_zonation$in_OPC
+
+# Assign color category based on gonad x zonation
+# Priority: specific gonad-zonation > both zonations > both gonads > no association
+v3_lipid_zonation$color_category <- dplyr::case_when(
+  # Both pericentral and periportal (regardless of gonad) = grey
+  v3_lipid_zonation$is_periportal & v3_lipid_zonation$is_pericentral ~ "both",
+  # Testes only (blue shades)
+  v3_lipid_zonation$is_testes & !v3_lipid_zonation$is_ovaries & v3_lipid_zonation$in_TPC ~ "TPC",
+  v3_lipid_zonation$is_testes & !v3_lipid_zonation$is_ovaries & v3_lipid_zonation$in_TPP ~ "TPP",
+  # Ovaries only (red shades)
+  v3_lipid_zonation$is_ovaries & !v3_lipid_zonation$is_testes & v3_lipid_zonation$in_OPC ~ "OPC",
+  v3_lipid_zonation$is_ovaries & !v3_lipid_zonation$is_testes & v3_lipid_zonation$in_OPP ~ "OPP",
+  # Both gonads = grey
+  v3_lipid_zonation$is_testes & v3_lipid_zonation$is_ovaries ~ "both",
+  TRUE ~ "no_association"
+)
+
+# Also keep simple zonation direction for grouping in plot
 v3_lipid_zonation$zonation_direction <- dplyr::case_when(
   v3_lipid_zonation$is_periportal & v3_lipid_zonation$is_pericentral ~ "both",
   v3_lipid_zonation$is_periportal ~ "periportal",
@@ -1487,18 +2347,21 @@ v3_lipid_zonation$zonation_direction <- dplyr::case_when(
 )
 
 cat("    Zonation breakdown:\n")
-cat("      Periportal only:", sum(v3_lipid_zonation$zonation_direction == "periportal"), "\n")
-cat("      Pericentral only:", sum(v3_lipid_zonation$zonation_direction == "pericentral"), "\n")
-cat("      Both:", sum(v3_lipid_zonation$zonation_direction == "both"), "\n")
+cat("      TPC (Testes Pericentral):", sum(v3_lipid_zonation$color_category == "TPC"), "\n")
+cat("      TPP (Testes Periportal):", sum(v3_lipid_zonation$color_category == "TPP"), "\n")
+cat("      OPC (Ovaries Pericentral):", sum(v3_lipid_zonation$color_category == "OPC"), "\n")
+cat("      OPP (Ovaries Periportal):", sum(v3_lipid_zonation$color_category == "OPP"), "\n")
+cat("      Both (mixed):", sum(v3_lipid_zonation$color_category == "both"), "\n")
 
-# Create jitter data with zonation coloring
+# Create jitter data with zonation coloring (gonad x zonation categories)
 jitter_data_v3 <- jitter_data %>%
   dplyr::left_join(
-    v3_lipid_zonation[, c("lipid", "zonation_direction")],
+    v3_lipid_zonation[, c("lipid", "zonation_direction", "color_category")],
     by = c("ID" = "lipid")
   ) %>%
   dplyr::mutate(
-    zonation_direction = ifelse(is.na(zonation_direction), "no_network_data", zonation_direction)
+    zonation_direction = ifelse(is.na(zonation_direction), "no_network_data", zonation_direction),
+    color_category = ifelse(is.na(color_category), "no_network_data", color_category)
   )
 
 cat("    Total lipids colored:", sum(jitter_data_v3$zonation_direction != "no_network_data"), "\n")
@@ -1507,37 +2370,34 @@ cat("    Total lipids colored:", sum(jitter_data_v3$zonation_direction != "no_ne
 both_rows <- jitter_data_v3 %>% dplyr::filter(zonation_direction == "both")
 
 if (nrow(both_rows) > 0) {
-  # Duplicated points go into their respective zonation groups but get "both" color
-  both_as_periportal <- both_rows %>% dplyr::mutate(zonation_direction = "periportal", color_group = "both")
-  both_as_pericentral <- both_rows %>% dplyr::mutate(zonation_direction = "pericentral", color_group = "both")
+  # Duplicated points go into their respective zonation groups but keep "both" color
+  both_as_periportal <- both_rows %>% dplyr::mutate(zonation_direction = "periportal")
+  both_as_pericentral <- both_rows %>% dplyr::mutate(zonation_direction = "pericentral")
 
-  # Non-duplicated points: color matches their zonation
+  # Non-duplicated points: keep their color_category
   jitter_data_v3 <- jitter_data_v3 %>%
     dplyr::filter(zonation_direction != "both") %>%
-    dplyr::mutate(color_group = as.character(zonation_direction)) %>%
     dplyr::bind_rows(both_as_periportal, both_as_pericentral)
 
-  cat("    Duplicated", nrow(both_rows), "lipids from 'both' into periportal and pericentral (colored purple)\n")
-} else {
-  jitter_data_v3$color_group <- as.character(jitter_data_v3$zonation_direction)
+  cat("    Duplicated", nrow(both_rows), "lipids from 'both' into periportal and pericentral (colored grey)\n")
 }
 
-# Reorder zonation groups: green (periportal), grey (no_network_data), orange (pericentral)
+# Reorder zonation groups for dodging: periportal, no_network_data, pericentral
 jitter_data_v3$zonation_direction <- factor(
   jitter_data_v3$zonation_direction,
   levels = c("periportal", "no_network_data", "pericentral")
 )
 
-# Reorder color groups for legend
-jitter_data_v3$color_group <- factor(
-  jitter_data_v3$color_group,
-  levels = c("periportal", "no_network_data", "pericentral", "both")
+# Reorder color categories for legend (Testes blue, Ovaries red, mixed grey, none white)
+jitter_data_v3$color_category <- factor(
+  jitter_data_v3$color_category,
+  levels = c("TPC", "TPP", "OPC", "OPP", "both", "no_network_data")
 )
 
-# Set point sizes: orange/green = 2, purple (both) = 1, grey = 1
+# Set point sizes: specific categories = 2, mixed/none = 1
 jitter_data_v3$point_size <- dplyr::case_when(
-  jitter_data_v3$color_group %in% c("periportal", "pericentral") ~ 2,
-  jitter_data_v3$color_group == "both" ~ 1,
+  jitter_data_v3$color_category %in% c("TPC", "TPP", "OPC", "OPP") ~ 2,
+  jitter_data_v3$color_category == "both" ~ 1.5,
   TRUE ~ 1  # no_network_data
 )
 
@@ -1552,11 +2412,11 @@ shade_data <- shade_data[shade_data$xmin < n_classes + 0.5, ]
 shade_data$xmax <- pmin(shade_data$xmax, n_classes + 0.5)
 
 # Create vertical jitter plot with coord_flip (like workflow 03)
-# Use dodged positions for side-by-side groups (3 groups), 4 colors
-# Duplicated points (originally "both") are purple
+# Use dodged positions for side-by-side groups (3 zonation groups)
+# Colors reflect gonad x zonation: blue=Testes, red=Ovaries, dark=pericentral, light=periportal
 p_jitter_vertical <- ggplot(jitter_data_v3,
                             aes(x = source, y = testes_vs_ova,
-                                fill = color_group, color = color_group,
+                                fill = color_category, color = color_category,
                                 group = zonation_direction)) +
   # Add alternating background shading (before points so it's behind)
   geom_rect(data = shade_data,
@@ -1571,15 +2431,21 @@ p_jitter_vertical <- ggplot(jitter_data_v3,
   scale_size_identity() +  # Use actual size values, no legend
   scale_fill_manual(
     name   = "Zonation\nAssociation",
-    values = c("periportal" = "lightgreen", "no_network_data" = "grey70",
-               "pericentral" = "orange", "both" = "mediumpurple"),
-    labels = c("Periportal only", "No network data", "Pericentral only", "Both zones")
+    values = c("TPC" = "#2b64d6", "TPP" = "#5f8dff",
+               "OPC" = "#d32f2f", "OPP" = "#ff5555",
+               "both" = "#808080", "no_network_data" = "#FFFFFF"),
+    labels = c("Testes Pericentral", "Testes Periportal",
+               "Ovaries Pericentral", "Ovaries Periportal",
+               "Both zones", "No network data")
   ) +
   scale_color_manual(
     name   = "Zonation\nAssociation",
-    values = c("periportal" = "darkgreen", "no_network_data" = "grey50",
-               "pericentral" = "darkorange", "both" = "purple4"),
-    labels = c("Periportal only", "No network data", "Pericentral only", "Both zones")
+    values = c("TPC" = "#1c4da8", "TPP" = "#3d6fd6",
+               "OPC" = "#a62424", "OPP" = "#d63939",
+               "both" = "#505050", "no_network_data" = "#cccccc"),
+    labels = c("Testes Pericentral", "Testes Periportal",
+               "Ovaries Pericentral", "Ovaries Periportal",
+               "Both zones", "No network data")
   ) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "grey30") +
   coord_flip() +
@@ -1616,11 +2482,11 @@ cat("\n")
 cat("✓ Lipid-gene association visualization complete\n\n")
 
 ################################################################################
-# 12. SAVE RESULTS
+# 15. SAVE RESULTS
 ################################################################################
 
 cat(strrep("-", 80), "\n")
-cat("12. SAVING RESULTS\n")
+cat("15. SAVING RESULTS\n")
 cat(strrep("-", 80), "\n\n")
 
 # Save differential analysis results
@@ -1644,7 +2510,7 @@ cat("  Saved differential analysis results\n")
 cat("  Saved summary statistics\n\n")
 
 ################################################################################
-# 13. WORKFLOW COMPLETE
+# 16. WORKFLOW COMPLETE
 ################################################################################
 
 cat(strrep("=", 80), "\n")
