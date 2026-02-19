@@ -100,7 +100,7 @@ See `mcp/README.md` for full documentation of available tools.
 │   ├── proteomics/                    # Proteomics data
 │   └── Suppl_Table_1_OverviewData.xlsx  # Sample metadata
 ├── scripts/
-│   ├── workflows/                     # Main analysis workflows (00-07)
+│   ├── workflows/                     # Main analysis workflows (00-08)
 │   │   ├── 00_snrnaseq_preprocessing.R   # Raw data processing (requires HPC)
 │   │   ├── 01_data_preparation_qc.R      # Data prep and QC
 │   │   ├── 02_fcg_pseudobulk_analysis.R  # RNA-seq differential analysis
@@ -108,7 +108,8 @@ See `mcp/README.md` for full documentation of available tools.
 │   │   ├── 04_mofa_integration.R         # Multi-omic MOFA integration
 │   │   ├── 05_zonation_analysis.R        # Hepatocyte zonation analysis
 │   │   ├── 06_structural_analysis.R      # Lipid structural preferences
-│   │   └── 07_validation_experiments.R   # Knockdown validation
+│   │   ├── 07_validation_experiments.R   # Knockdown validation
+│   │   └── 08_variance_analysis.R        # Lipidomic variance analysis
 │   ├── core/                          # Core analysis functions
 │   │   ├── data_loading.R             # Data loading utilities
 │   │   ├── differential_analysis.R    # Differential expression/abundance
@@ -134,6 +135,8 @@ See `mcp/README.md` for full documentation of available tools.
 │   ├── linex2_adjacency_matrix_OT.csv # LINEX2 lipid network
 │   ├── lipid_classification.csv       # Lipid class hierarchy
 │   └── FCGL_Xenium_Panel.csv          # Spatial validation gene panel (100 genes)
+├── docs/                              # Documentation
+│   └── workflow_plans/                # Per-workflow audit and plan files
 ├── results/                           # Analysis outputs
 │   ├── qc/                            # Quality control plots and reports
 │   ├── pseudobulk/                    # RNA-seq differential analysis
@@ -147,6 +150,7 @@ See `mcp/README.md` for full documentation of available tools.
 │   │   ├── ttop_full_list.RData       # All lipid DE results
 │   │   ├── volcanos/                  # Lipid volcano plots
 │   │   ├── enrichment/                # Lipid class enrichment
+│   │   ├── variance_analysis/         # Variance analysis results
 │   │   ├── network/                   # LINEX2 lipid networks
 │   │   ├── pca/                       # Lipidomic PCA plots
 │   │   └── bubbles_DBC/               # Structural bubble plots
@@ -157,10 +161,14 @@ See `mcp/README.md` for full documentation of available tools.
 │   │   ├── networks/                  # Gene-lipid correlation networks
 │   │   └── TF/                        # TF enrichment on MOFA weights
 │   ├── zonation/                      # Hepatocyte zonation analysis
-│   │   └── volcanos/                  # Zonation-specific volcano plots
+│   │   ├── volcanos/                  # Zonation-specific volcano plots
+│   │   ├── sex_specific_zonation_*    # Sex-specific zonation gene analysis
+│   │   ├── zonation_vs_sex_bias_scatter.pdf  # Zonation vs sex bias overview
+│   │   └── cor_networks_sszb*.cys     # Cytoscape correlation networks
 │   ├── multi-omic/                    # Cross-omic integration
 │   │   └── structural_model/          # Lipid structural preferences
-│   │       └── gene_plots/            # Per-gene structural association plots
+│   │       ├── gene_plots/            # Per-gene structural association plots
+│   │       └── lipid_only_plots/      # Lipid-only structural effects
 │   ├── validation/                    # Knockdown validation results
 │   │   ├── knockdown_heatmap.pdf      # Overview of knockdown effects
 │   │   ├── *_validation_scatter.pdf   # Per-gene validation plots
@@ -174,7 +182,7 @@ See `mcp/README.md` for full documentation of available tools.
 
 ## Analysis Workflows
 
-The analysis is organized into **8 sequential workflows** (00-07) that can be run independently:
+The analysis is organized into **9 sequential workflows** (00-08) that can be run independently:
 
 ### Workflow 0: snRNA-seq Pre-processing Pipeline
 **Script**: `scripts/workflows/00_snrnaseq_preprocessing.R`
@@ -309,21 +317,37 @@ Multi-Omics Factor Analysis (MOFA2) integrating RNA expression (5 cell types) an
 ### Workflow 5: Hepatocyte Zonation Analysis
 **Script**: `scripts/workflows/05_zonation_analysis.R`
 
-Spatial zonation analysis comparing periportal vs. pericentral hepatocytes:
+Spatial zonation analysis comparing periportal vs. pericentral hepatocytes, including sex-specific zonation effects:
 
 **Analyses**:
-- Differential expression between periportal and pericentral zones
+- Differential expression between periportal and pericentral zones (5 contrasts)
 - Zonation marker identification (Cyp2e1: pericentral, Cyp2f2: periportal)
 - Interaction between zonation and gonadal type
 - Pathway enrichment by zone
+- Zonation vs sex bias scatter plot (all genes colored by quadrant)
+- Zone-specific sex bias scatter plot (periportal vs pericentral t-values)
+- Sex-specific zonation gene identification using entropy-based threshold optimization
+- Lipid class zonation associations (lipid enrichment by zone)
+- Correlation networks for sex-specific zonation-biased genes (Cytoscape)
+- Threshold sensitivity analysis for zonation bias classification
 
 **Key outputs**:
-- `results/zonation/` - Zonation-specific DE results and PCA plots
+- `results/zonation/volcanos/` - Zonation-specific volcano plots
+- `results/zonation/zonation_vs_sex_bias_scatter.pdf` - Overview scatter (Xenium-validated gene labels)
+- `results/zonation/zone_specific_sex_bias_scatter.pdf` - PP vs PC sex bias scatter
+- `results/zonation/sex_specific_zonation_panel_AB.pdf` - Main figure (quadrant + bar chart)
+- `results/zonation/sex_specific_zonation_heatmap_faceted.pdf` - All 137 genes heatmap
+- `results/zonation/sex_specific_zonation_genes_summary.csv` - Gene list with statistics
+- `results/zonation/lipid_class_zonation_proportions.pdf` - Lipid zonation associations
+- `results/zonation/cor_networks_sszb*.cys` - Cytoscape network sessions
+- `results/multi-omic/cormat_*_full_SIF.csv` - Correlation network edge files (4 networks)
 
 **Key findings**:
 - **43% of gonad-dependent genes are pericentral-biased** (Cyp2e1+): includes Cyp2c38, Cyp2b13, Cyp2d9
 - **18% of gonad-dependent genes are periportal-biased** (Cyp2f2+): includes Cyp2b9
+- **137 sex-specific zonation genes** identified (100 testes-specific, 37 ovaries-specific)
 - Zonation modulates hormone responsiveness
+- Lipid classes show distinct zonation associations (e.g., PG enriched periportally)
 
 ### Workflow 6: Lipid Structural Analysis
 **Script**: `scripts/workflows/06_structural_analysis.R`
@@ -378,6 +402,21 @@ Validates gene-lipid correlations from MOFA integration using in vitro knockdown
 - Confirms that predicted gene-lipid correlations match experimental knockdown effects
 - Quantifies consistency between FCGL mouse observations and in vitro experiments
 - Validates zonation-specific effects for spatially biased genes
+
+### Workflow 8: Lipidomic Variance Analysis
+**Script**: `scripts/workflows/08_variance_analysis.R`
+
+Compares lipid variability between gonadal groups to determine whether lipid abundances are systematically more variable in one sex:
+
+**Statistical approaches**:
+- **Levene's Test** (Brown-Forsythe variant): Tests equality of variances per lipid using median (robust to outliers)
+- **Coefficient of Variation (CV)**: Relative variability measure (SD/|Mean|), with global paired test for systematic differences
+
+**Key outputs**:
+- `results/lipidomic/variance_analysis/variance_analysis_results.csv` - Per-lipid variance statistics
+- `results/lipidomic/variance_analysis/variance_analysis_by_class.csv` - Summary by lipid class
+- `results/lipidomic/variance_analysis/cv_difference_volcano.pdf` - Volcano-style differential variance plot
+- `results/lipidomic/variance_analysis/significant_differential_variance_lipids.csv` - Lipids with significant variance differences
 
 ## Installation and Requirements
 
@@ -447,6 +486,7 @@ source("scripts/workflows/04_mofa_integration.R")
 source("scripts/workflows/05_zonation_analysis.R")
 source("scripts/workflows/06_structural_analysis.R")
 source("scripts/workflows/07_validation_experiments.R")
+source("scripts/workflows/08_variance_analysis.R")
 ```
 
 ### Running Individual Workflows
@@ -468,6 +508,7 @@ source("scripts/workflows/02_fcg_pseudobulk_analysis.R")
 - **Workflow 5** (Zonation): ~10-15 minutes
 - **Workflow 6** (Structural + Summary Figures): ~25-35 minutes
 - **Workflow 7** (Validation): ~5-10 minutes
+- **Workflow 8** (Variance): ~5 minutes
 
 **Total runtime**: ~3 hours (with MOFA training) or ~1.5 hours (pre-trained models)
 
@@ -486,6 +527,16 @@ source("scripts/workflows/02_fcg_pseudobulk_analysis.R")
 - `results/pseudobulk/pathways/pathway_enrichment_heatmap.pdf` - GO pathway enrichment
 - `results/pseudobulk/pathways/tf_activity_heatmap.pdf` - TF activity scores
 - `results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf` - Lipid class enrichment
+
+### Zonation Analysis
+- `results/zonation/zonation_vs_sex_bias_scatter.pdf` - Overview of all genes by zonation and sex bias
+- `results/zonation/sex_specific_zonation_panel_AB.pdf` - Main figure: sex-specific zonation genes
+- `results/zonation/sex_specific_zonation_genes_summary.csv` - 137 sex-specific zonation genes with statistics
+- `results/zonation/lipid_class_zonation_proportions.pdf` - Lipid class zonation associations
+
+### Variance Analysis
+- `results/lipidomic/variance_analysis/variance_analysis_results.csv` - Per-lipid variance statistics
+- `results/lipidomic/variance_analysis/cv_difference_volcano.pdf` - Differential variance volcano plot
 
 ### Validation
 - `results/pseudobulk/gdx_validation_comparison.pdf` - FCG vs. gonadectomy correlation (r = -0.48)
