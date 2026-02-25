@@ -373,20 +373,17 @@ if (gdx_files_exist) {
   cat("  Group format: [sex]-[gonad status]-[treatment]\n")
   cat("    Sex: m (male) or f (female)\n")
   cat("    Gonad: s (sham/intact) or g (gonadectomy/removed)\n")
-  cat("    Treatment: v (vehicle), e (estrogen), t (testosterone)\n\n")
+  cat("    Treatment: v (vehicle)\n")
+  cat("  Groups: f-g-v, f-s-v, m-g-v, m-s-v\n\n")
 
   # Run differential analysis for each cell type
   cat("Running GDX differential expression analysis...\n\n")
 
-  # Define GDX contrasts (validated gonadal hormone effects)
-  # NOTE: Contrast indices depend on unique(targets$condition) order, which varies by cell type
+  # Define GDX contrasts (gonadectomy effects only)
+  # Condition order (first appearance): 1=m-s-v, 2=f-s-v, 3=m-g-v, 4=f-g-v
   gdx_contrasts <- list(
-    "testes_gonadosectomy" = c(5, -1),      # Effect of removing testes (m-g-v vs m-s-v)
-    "testes_oestro" = c(8, -5),             # Estrogen effect in males (m-g-e vs m-g-v)
-    "testes_testo" = c(7, -5),              # Testosterone effect in males (m-g-t vs m-g-v)
-    "ova_gonadosectomy" = c(6, -3),         # Effect of removing ovaries (f-g-v vs f-s-v)
-    "ova_oestro" = c(4, -6),                # Estrogen effect in females (f-g-e vs f-g-v)
-    "ova_testo" = c(2, -6)                  # Testosterone effect in females (f-g-t vs f-g-v)
+    "testes_gonadosectomy" = c(3, -1),      # Effect of removing testes (m-g-v vs m-s-v)
+    "ova_gonadosectomy" = c(4, -2)          # Effect of removing ovaries (f-g-v vs f-s-v)
   )
 
   # Run analysis for all cell types

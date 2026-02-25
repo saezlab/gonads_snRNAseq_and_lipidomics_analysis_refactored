@@ -242,7 +242,8 @@ if (file.exists(gdx_data_file)) {
   lipidomic_gdx <- read_csv(gdx_data_file, show_col_types = FALSE)
 
   # Select relevant columns (Lipid name + sample columns)
-  lipidomic_gdx <- lipidomic_gdx[, c(4, 35:72)]
+  # Column 4 = Metabolite name, columns 47:68 = 22 sample columns (4 groups, no hormone replacement)
+  lipidomic_gdx <- lipidomic_gdx[, c(4, 47:68)]
 
   # Clean lipid data using support function
   lipidomic_gdx <- as.data.frame(clean_lipid_data(lipidomic_gdx))
@@ -254,7 +255,7 @@ if (file.exists(gdx_data_file)) {
   cat("  GDX data loaded:", nrow(lipidomic_gdx), "lipids x", ncol(lipidomic_gdx), "samples\n\n")
 
   # Create targets from column names
-  # Sample names format: [ID]_[treatment]_[sex]
+  # Sample names format: [ID]_[sex]_[gonad_status]_[treatment]
   targets_gdx <- data.frame(
     sample = colnames(lipidomic_gdx),
     condition = colnames(lipidomic_gdx),
@@ -271,16 +272,11 @@ if (file.exists(gdx_data_file)) {
   }
   cat("\n")
 
-  # Define GDX contrasts
-  # Based on unique(targets$condition) order from original script:
-  # 1: oestro_f, 2: testo_f, 3: v_f, 4: vhrt_f, 5: oestro_m, 6: testo_m, 7: v_m, 8: vhrt_m
+  # Define GDX contrasts (gonadectomy effects only, 4 groups)
+  # Unique conditions sorted: 1=f_g_v, 2=f_s_v, 3=m_g_v, 4=m_s_v
   comparisons_gdx <- list(
-    "testes_gonadosectomy" = c(7, -8),  # v_m vs vhrt_m (intact vs castrated males)
-    "testes_oestro" = c(5, -7),          # oestro_m vs v_m
-    "testes_testo" = c(6, -7),           # testo_m vs v_m
-    "ova_gonadosectomy" = c(3, -4),      # v_f vs vhrt_f (intact vs ovariectomized females)
-    "ova_oestro" = c(1, -3),             # oestro_f vs v_f
-    "ova_testo" = c(2, -3)               # testo_f vs v_f
+    "testes_gonadosectomy" = c(3, -4),  # m_g_v vs m_s_v (castrated vs intact males)
+    "ova_gonadosectomy" = c(1, -2)      # f_g_v vs f_s_v (ovariectomized vs intact females)
   )
 
   cat("  Running differential analysis for GDX contrasts...\n")
