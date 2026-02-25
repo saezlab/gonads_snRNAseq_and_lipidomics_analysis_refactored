@@ -88,7 +88,7 @@ cat(strrep("-", 80), "\n")
 cat("2. LOADING SEURAT OBJECT\n")
 cat(strrep("-", 80), "\n\n")
 
-seurat_path <- "data/RNA/fcgl_pseudobulk_gonad_20241023.rds"
+seurat_path <- "data/RNA/fcg_pseudobulks.rds"
 
 if (!file.exists(seurat_path)) {
   cat("ERROR: Seurat object not found at:", seurat_path, "\n")

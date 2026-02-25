@@ -105,7 +105,7 @@ DATASETS <- list(
       metadata = "data/RNA/meta_data_df_zonation.csv",
       split = TRUE,
       n_splits = 3,
-      source_rds = "data/RNA/fcgl_heps_zonationsubclustered_pseudobulk_gonad_20241023.rds"
+      source_rds = "data/RNA/fcg_zonation_pseudobulks.rds"
     ),
     lipid = list(
       file = "data/metabolomics/Lipid_data_file_JPC_cleaned.csv",

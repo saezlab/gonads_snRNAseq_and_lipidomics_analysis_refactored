@@ -2,7 +2,7 @@
 DATA QUALITY CONTROL REPORT
 ================================================================================ 
 
-Generated: 2025-12-04 16:28:00 
+Generated: 2026-02-25 14:21:17 
 Workflow: 01_data_preparation_qc.R
 
 DATASET OVERVIEW
@@ -32,9 +32,9 @@ VALIDATION RESULTS
 -------------------------------------------------------------------------------- 
 Missing values:         0 %
 Infinite values:        0 
-Zero-variance genes:    521 
+Zero-variance genes:    519 
 Complete samples:       215 / 216 
-Data range:             -6.171 to 10 
+Data range:             -7.181 to 10 
 Duplicated genes:       0 
 Duplicated samples:     0 
 
