@@ -28,12 +28,14 @@ source("scripts/visualization/dimred_plots.R")
 | 8 | Exploratory PCA | 521-650 | PCA on all cell types, variance by experimental factors |
 | 9 | Data Validation | 651-750 | Cross-check metadata vs expression, sample matching |
 | 10 | QC Report | 751-824 | Print summary statistics, save QC plots |
-| 11 | Zonation CSV Conversion | 825-870 | Convert zonation Seurat RDS to `scaled_RNA_zonation.csv` + `meta_data_df_zonation.csv` |
+| 11 | Zonation CSV Conversion | 825-870 | Convert `fcg_zonation_pseudobulks.rds` to `scaled_RNA_zonation.csv` + `meta_data_df_zonation.csv` |
+| 12 | GDX CSV Conversion | 875-960 | Convert `gdx_pseudobulks.rds` to `scaled_RNA_gdxhr_{1,2,3}.csv` + `meta_data_df_gdxhr.csv` |
 
 ## Input Files
 
-- `data/RNA/fcgl_pseudobulk_gonad_20241023.rds` - Seurat pseudobulk object (main FCG)
-- `data/RNA/fcgl_heps_zonationsubsetted_pseudobulks_gonad_20241114.rds` - Zonation Seurat object (hepatocyte periportal/pericentral)
+- `data/RNA/fcg_pseudobulks.rds` - Seurat pseudobulk object (main FCG)
+- `data/RNA/fcg_zonation_pseudobulks.rds` - Zonation Seurat object (hepatocyte periportal/pericentral)
+- `data/RNA/gdx_pseudobulks.rds` - GDX Seurat pseudobulk object (gonadectomy validation)
 
 ## Output Files
 
@@ -41,6 +43,8 @@ source("scripts/visualization/dimred_plots.R")
 - `data/RNA/meta_data_df.csv` - Sample metadata
 - `data/RNA/scaled_RNA_zonation.csv` - Zonation scaled expression matrix (20,123 genes x 86 samples)
 - `data/RNA/meta_data_df_zonation.csv` - Zonation metadata (sample, sample_name, zonation_type, gonadal_type)
+- `data/RNA/scaled_RNA_gdxhr_{1,2,3}.csv` - GDX split expression matrices (20,123 genes x 110 samples)
+- `data/RNA/meta_data_df_gdxhr.csv` - GDX metadata (sample, sample_name, cell_type, group)
 - `results/qc/` - QC diagnostic plots
 
 ## Key Variables
@@ -66,4 +70,5 @@ When returning to this workflow:
 2. Downstream workflows (02-08) depend on the 3 CSV files this produces
 3. The gene split is arbitrary (by column index), not biological - just for file size management
 4. Sample names in the Seurat object determine naming convention for all downstream analyses
-5. Section 11 converts the zonation Seurat object to CSVs - used by workflow 05 (zonation analysis). Previously this was done by `scripts/legacy/seurat_to_df_zonation.R` which hardcoded the old 20241023 RDS path.
+5. Section 11 converts the zonation Seurat object (`fcg_zonation_pseudobulks.rds`) to CSVs - used by workflow 05.
+6. Section 12 converts the GDX Seurat object (`gdx_pseudobulks.rds`) to split CSVs - used by workflows 02 (step 3B) and 03.

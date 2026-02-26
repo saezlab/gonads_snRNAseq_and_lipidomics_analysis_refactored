@@ -79,7 +79,7 @@ DATASETS <- list(
       metadata = "data/RNA/meta_data_df_gdxhr.csv",
       split = TRUE,
       n_splits = 3,
-      source_rds = "data/RNA/gdxhr_pseudobulks.rds"
+      source_rds = "data/RNA/gdx_pseudobulks.rds"
     ),
     lipid = list(
       file = "data/metabolomics/lipidomics_gdxhr.csv",
@@ -99,12 +99,9 @@ DATASETS <- list(
 
   fcg_zonation = list(
     rna = list(
-      files = c("data/RNA/scaled_RNA_zonation_1.csv",
-                "data/RNA/scaled_RNA_zonation_2.csv",
-                "data/RNA/scaled_RNA_zonation_3.csv"),
+      files = "data/RNA/scaled_RNA_zonation.csv",
       metadata = "data/RNA/meta_data_df_zonation.csv",
-      split = TRUE,
-      n_splits = 3,
+      split = FALSE,
       source_rds = "data/RNA/fcg_zonation_pseudobulks.rds"
     ),
     lipid = list(

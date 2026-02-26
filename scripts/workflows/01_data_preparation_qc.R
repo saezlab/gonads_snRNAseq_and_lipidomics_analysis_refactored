@@ -804,7 +804,7 @@ cat(strrep("-", 80), "\n\n")
 cat("Converting zonation-annotated hepatocyte pseudobulk from Seurat to CSV.\n")
 cat("These CSVs are consumed by workflow 05 (zonation analysis).\n\n")
 
-zonation_rds_path <- "data/RNA/fcgl_heps_zonationsubsetted_pseudobulks_gonad_20241114.rds"
+zonation_rds_path <- "data/RNA/fcg_zonation_pseudobulks.rds"
 
 if (!file.exists(zonation_rds_path)) {
   cat("WARNING: Zonation Seurat object not found at:", zonation_rds_path, "\n")
@@ -873,6 +873,114 @@ if (!file.exists(zonation_rds_path)) {
 }
 
 ################################################################################
+# 12. GDX PSEUDOBULK: SEURAT TO CSV CONVERSION
+################################################################################
+
+cat("\n")
+cat(strrep("-", 80), "\n")
+cat("12. GDX PSEUDOBULK: SEURAT TO CSV CONVERSION\n")
+cat(strrep("-", 80), "\n\n")
+
+cat("Converting GDX (gonadectomy) pseudobulk from Seurat to split CSVs.\n")
+cat("These CSVs are consumed by workflow 02 (step 3B) and workflow 03.\n\n")
+
+gdx_rds_path <- "data/RNA/gdx_pseudobulks.rds"
+
+if (!file.exists(gdx_rds_path)) {
+  cat("WARNING: GDX Seurat object not found at:", gdx_rds_path, "\n")
+  cat("  Skipping GDX CSV generation.\n")
+  cat("  Workflows 02/03 will use existing CSVs if available.\n\n")
+} else {
+  cat("Loading GDX Seurat object:", gdx_rds_path, "\n")
+  gdx_obj <- readRDS(gdx_rds_path)
+
+  cat("  Pseudobulk samples:", ncol(gdx_obj), "\n")
+  cat("  Genes:", nrow(gdx_obj), "\n\n")
+
+  # Extract scaled data (compatible with Seurat v4 and v5)
+  cat("Extracting scaled expression data...\n")
+  gdx_scaled <- as.data.frame(
+    get_layer_data(gdx_obj, assay = "RNA", layer = "scale.data")
+  )
+  rownames(gdx_scaled) <- Features(gdx_obj[["RNA"]])
+
+  # Extract metadata
+  gdx_meta <- as.data.frame(gdx_obj@meta.data)
+  names(gdx_meta)[1] <- "sample"
+
+  # Normalize sample name separators (hyphens -> underscores)
+  gdx_meta$sample <- gsub("-", "_", gdx_meta$sample)
+  if ("sample_name" %in% colnames(gdx_meta)) {
+    gdx_meta$sample_name <- gsub("-", "_", gdx_meta$sample_name)
+  }
+
+  # Set column names to match metadata sample names
+  colnames(gdx_scaled) <- gdx_meta$sample
+
+  cat("  Scaled data:", nrow(gdx_scaled), "genes x", ncol(gdx_scaled), "samples\n")
+  cat("  Metadata:", nrow(gdx_meta), "rows x", ncol(gdx_meta), "columns\n")
+  cat("  Metadata columns:", paste(colnames(gdx_meta), collapse = ", "), "\n\n")
+
+  # Add gene column and reorder
+  gdx_scaled$gene <- rownames(gdx_scaled)
+  gdx_scaled <- gdx_scaled[, c("gene", setdiff(colnames(gdx_scaled), "gene"))]
+
+  # Split into 3 files (same pattern as FCG, for GitHub size constraint)
+  n_gdx_samples <- ncol(gdx_scaled) - 1  # exclude gene column
+  split_size <- ceiling(n_gdx_samples / 3)
+  sample_cols_1 <- 2:(1 + split_size)
+  sample_cols_2 <- (2 + split_size):(1 + 2 * split_size)
+  sample_cols_3 <- (2 + 2 * split_size):ncol(gdx_scaled)
+
+  gdx_rna_1 <- gdx_scaled[, c(1, sample_cols_1), drop = FALSE]
+  gdx_rna_2 <- gdx_scaled[, c(1, sample_cols_2), drop = FALSE]
+  gdx_rna_3 <- gdx_scaled[, c(1, sample_cols_3), drop = FALSE]
+
+  cat("Splitting GDX data into 3 files...\n")
+  cat("  File 1:", nrow(gdx_rna_1), "genes x", ncol(gdx_rna_1) - 1, "samples\n")
+  cat("  File 2:", nrow(gdx_rna_2), "genes x", ncol(gdx_rna_2) - 1, "samples\n")
+  cat("  File 3:", nrow(gdx_rna_3), "genes x", ncol(gdx_rna_3) - 1, "samples\n\n")
+
+  # Save split CSVs
+  cat("Saving GDX CSVs...\n")
+
+  readr::write_csv(gdx_rna_1, file.path(data_rna_dir, "scaled_RNA_gdxhr_1.csv"))
+  cat("  Saved:", file.path(data_rna_dir, "scaled_RNA_gdxhr_1.csv"),
+      "(", format(file.size(file.path(data_rna_dir, "scaled_RNA_gdxhr_1.csv")) / 1024^2, digits = 2), "MB)\n")
+
+  readr::write_csv(gdx_rna_2, file.path(data_rna_dir, "scaled_RNA_gdxhr_2.csv"))
+  cat("  Saved:", file.path(data_rna_dir, "scaled_RNA_gdxhr_2.csv"),
+      "(", format(file.size(file.path(data_rna_dir, "scaled_RNA_gdxhr_2.csv")) / 1024^2, digits = 2), "MB)\n")
+
+  readr::write_csv(gdx_rna_3, file.path(data_rna_dir, "scaled_RNA_gdxhr_3.csv"))
+  cat("  Saved:", file.path(data_rna_dir, "scaled_RNA_gdxhr_3.csv"),
+      "(", format(file.size(file.path(data_rna_dir, "scaled_RNA_gdxhr_3.csv")) / 1024^2, digits = 2), "MB)\n")
+
+  # Save metadata
+  rownames(gdx_meta) <- NULL
+  readr::write_csv(gdx_meta, file.path(data_rna_dir, "meta_data_df_gdxhr.csv"))
+  cat("  Saved:", file.path(data_rna_dir, "meta_data_df_gdxhr.csv"), "\n\n")
+
+  # Clean up split objects
+  rm(gdx_rna_1, gdx_rna_2, gdx_rna_3)
+
+  # Verify output
+  cat("Verification:\n")
+  cat("  Sample names (first 4):", paste(head(gdx_meta$sample, 4), collapse = ", "), "\n")
+  if ("cell_type" %in% colnames(gdx_meta)) {
+    cat("  Cell types:", paste(sort(unique(gdx_meta$cell_type)), collapse = ", "), "\n")
+  }
+  if ("group" %in% colnames(gdx_meta)) {
+    cat("  Groups:", paste(sort(unique(gdx_meta$group)), collapse = ", "), "\n")
+  }
+  cat("\n")
+
+  # Clean up
+  rm(gdx_obj, gdx_scaled, gdx_meta)
+  gc(verbose = FALSE)
+}
+
+################################################################################
 # WORKFLOW COMPLETE
 ################################################################################
 
@@ -889,7 +997,8 @@ cat("  ✓ Data split into 3 files for GitHub\n")
 cat("  ✓ Quality control plots generated\n")
 cat("  ✓ Data validation completed\n")
 cat("  ✓ QC report generated\n")
-cat("  ✓ Zonation pseudobulk CSVs generated\n\n")
+cat("  ✓ Zonation pseudobulk CSVs generated\n")
+cat("  ✓ GDX pseudobulk CSVs generated\n\n")
 
 cat("Output files:\n")
 cat("  - data/RNA/scaled_RNA_1.csv\n")
@@ -898,6 +1007,8 @@ cat("  - data/RNA/scaled_RNA_3.csv\n")
 cat("  - data/RNA/meta_data_df.csv\n")
 cat("  - data/RNA/scaled_RNA_zonation.csv\n")
 cat("  - data/RNA/meta_data_df_zonation.csv\n")
+cat("  - data/RNA/scaled_RNA_gdxhr_{1,2,3}.csv\n")
+cat("  - data/RNA/meta_data_df_gdxhr.csv\n")
 cat("  - results/qc/ (QC plots and reports)\n\n")
 
 cat("Next steps:\n")

@@ -30,11 +30,14 @@
 | Producing Workflow | File | Consuming Workflow(s) |
 |-------------------|------|----------------------|
 | 00 | `data/RNA/fcgl_pseudobulk_gonad_*.rds` | 01 |
-| 00 | `data/RNA/fcgl_heps_zonationsubsetted_pseudobulks_gonad_20241114.rds` | 01 (section 11) |
+| 00 | `data/RNA/fcg_zonation_pseudobulks.rds` | 01 (section 11) |
+| 00 | `data/RNA/gdx_pseudobulks.rds` | 01 (section 12) |
 | 01 | `data/RNA/scaled_RNA_{1,2,3}.csv` | 02, 04, 05, 06 |
 | 01 | `data/RNA/meta_data_df.csv` | 02, 04, 05 |
 | 01 | `data/RNA/scaled_RNA_zonation.csv` | 05 |
 | 01 | `data/RNA/meta_data_df_zonation.csv` | 05 |
+| 01 | `data/RNA/scaled_RNA_gdxhr_{1,2,3}.csv` | 02 |
+| 01 | `data/RNA/meta_data_df_gdxhr.csv` | 02, 03 |
 | 02 | `results/pseudobulk/ttop_full_list.RData` | 04, 05 |
 | 02 | `results/pseudobulk/tval_full_df.csv` | 02 (internal: step 7C) |
 | 03 | `results/lipidomic/ttop_full_list.RData` | 05 |
