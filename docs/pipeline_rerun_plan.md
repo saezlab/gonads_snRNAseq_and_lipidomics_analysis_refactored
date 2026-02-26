@@ -150,23 +150,23 @@ WF05-08 outputs currently on disk are stale (generated before lipidomic fix and 
 
 ### Metrics Comparison Table
 
-| Metric | Before (20241023) | After (new) | Acceptable range |
-|--------|-------------------|-------------|------------------|
-| Hepatocyte gonad DEGs (FDR<0.05) | ~4000 | ? | >3000 |
-| GDX RNA validation r | -0.534 | ? | < -0.3 |
-| GDX lipid validation r | -0.721 | ? | < -0.5 |
-| MOFA Factor 1 gonadal R² | ~0.8 | ? | > 0.6 |
-| Gonad-dependent lipids | 773 | ? | Should be identical (same input) |
-| Zonation sex-specific genes | ~137 | ? | > 100 |
-| Structural associations | 22,757 | ? | Same order of magnitude |
-| Validation genes (global) | 3 | ? | 3 |
-| Variance sig lipids (FDR<0.05) | 2 | ? | Identical |
+| Metric | Before (20241023) | After (new) | Acceptable range | Status |
+|--------|-------------------|-------------|------------------|--------|
+| Hepatocyte gonad DEGs (FDR<0.05) | ~4000 | 4,103 | >3000 | PASS |
+| GDX RNA validation r | -0.534 | -0.5351 | < -0.3 | PASS |
+| GDX lipid validation r | -0.721 | -0.7206 | < -0.5 | PASS |
+| MOFA Factor 1 gonadal R² | ~0.8 | ~0.8 (confirmed) | > 0.6 | PASS |
+| Gonad-dependent lipids | 773 | 773 | Should be identical | PASS |
+| Zonation sex-specific genes | ~137 | 138 | > 100 | PASS |
+| Structural associations | 22,757 | 21,989 (-3.4%) | Same order of magnitude | PASS |
+| Validation genes (global) | 3 | 3 | 3 | PASS |
+| Variance sig lipids (FDR<0.05) | 2 | 2 | Identical | PASS |
 
 ### Final actions
-1. Commit all WF05-08 regenerated results
-2. Produce final comparison table with filled-in values
-3. Review git log for complete branch history
-4. Merge `update-fcg-pseudobulk` branch into `main`
+1. Commit all WF05-08 regenerated results - DONE (commit `a849904`)
+2. Produce final comparison table with filled-in values - DONE (see above)
+3. Review git log for complete branch history - DONE
+4. Merge `update-fcg-pseudobulk` branch into `main` - PENDING (user decision)
 
 ---
 
