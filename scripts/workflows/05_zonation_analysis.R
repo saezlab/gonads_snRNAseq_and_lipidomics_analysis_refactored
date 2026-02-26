@@ -47,6 +47,7 @@ cat(strrep("=", 80), "\n\n")
 
 # Load configuration and functions
 source("scripts/config/analysis_config.R")
+source("scripts/config/plotting_themes.R")
 source("scripts/support_functions.R")
 
 # Define output directory
