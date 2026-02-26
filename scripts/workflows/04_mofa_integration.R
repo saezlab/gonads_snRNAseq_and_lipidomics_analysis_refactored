@@ -58,6 +58,7 @@ if (!requireNamespace("MOFA2", quietly = TRUE)) {
 
 # Source refactored modules
 # ==========================
+source("scripts/support_functions.R")
 source("scripts/core/data_loading.R")
 source("scripts/core/multiomics.R")
 source("scripts/core/enrichment_analysis.R")
@@ -125,45 +126,80 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 cat("NOTE: MOFA model training takes 1-2 hours for factor range 5-15.\n")
 cat("Options:\n")
 cat("  1. Use pre-trained models if available (recommended)\n")
-cat("  2. Train new models (requires MOFA2 package)\n\n")
+cat("  2. Train new models via Python mofapy2 (requires mofapy2 pip package)\n\n")
 
 # Check if pre-trained models exist
 model_dir <- "results/mofa/RNA"
-pretrained_models <- list.files(model_dir, pattern = "model.*\\.hdf5$", full.names = TRUE)
+dir.create(model_dir, recursive = TRUE, showWarnings = FALSE)
 
-if (length(pretrained_models) > 0) {
-  cat("✓ Found", length(pretrained_models), "pre-trained models in", model_dir, "\n")
+# Look for HDF5 models matching the expected naming pattern
+pretrained_models <- list.files(model_dir, pattern = "mofa_res_.*factor\\.hdf5$", full.names = TRUE)
+
+if (length(pretrained_models) >= 11) {
+  cat("Found", length(pretrained_models), "pre-trained models in", model_dir, "\n")
   cat("  Skipping training and using existing models.\n\n")
   skip_training <- TRUE
 } else {
-  cat("No pre-trained models found.\n")
-
-  if (requireNamespace("MOFA2", quietly = TRUE)) {
-    cat("MOFA2 is available. Do you want to train models?\n")
-    cat("  (This will take 1-2 hours)\n\n")
-    skip_training <- TRUE  # Set to FALSE to enable training
-  } else {
-    cat("MOFA2 not installed. Skipping training.\n")
-    cat("  Install with: BiocManager::install('MOFA2')\n\n")
-    skip_training <- TRUE
-  }
+  cat("No complete set of pre-trained models found (need 11 for factors 5-15).\n")
+  cat("  Found:", length(pretrained_models), "models\n")
+  cat("  Training new models via Python mofapy2...\n\n")
+  skip_training <- FALSE
 }
 
 if (!skip_training) {
-  cat("Training MOFA models for factor range 5-15...\n\n")
+  # Save MOFA input as CSV for Python consumption
+  mofa_csv_path <- "data/mofa/MOFA_RNA_data.csv"
+  dir.create("data/mofa", recursive = TRUE, showWarnings = FALSE)
+  readr::write_csv(MOFA_data, mofa_csv_path)
+  cat("Saved MOFA input CSV for Python:", mofa_csv_path, "\n\n")
 
-  library(MOFA2)
+  # Train models for factor range 5-15 using write_MOFA_options_file + mofa2.py
+  for (n_factors in 5:15) {
+    output_hdf5 <- file.path(model_dir, paste0("mofa_res_", n_factors, "factor.hdf5"))
 
-  # Train models
-  trained_models <- train_mofa_models(
-    mofa_data = MOFA_data,
-    factor_range = 5:15,
-    output_dir = model_dir,
-    verbose = TRUE
-  )
+    if (file.exists(output_hdf5)) {
+      cat("Model with", n_factors, "factors already exists, skipping.\n")
+      next
+    }
 
-  cat("\n✓ MOFA models trained!\n")
-  cat("  Models saved to:", model_dir, "\n\n")
+    cat("Training model with", n_factors, "factors...\n")
+
+    # Write options CSV (write_MOFA_options_file prepends getwd() to paths)
+    write_MOFA_options_file(
+      input_file = "/data/mofa/MOFA_RNA_data.csv",
+      output_file = paste0("/results/mofa/RNA/mofa_res_", n_factors, "factor.hdf5"),
+      factors = as.character(n_factors),
+      convergence_mode = "slow",
+      seed = "1",
+      gpu_mode = "True"
+    )
+
+    # Run Python mofapy2 training
+    exit_code <- system("python scripts/mofa/mofa2.py options_MOFA.csv", intern = FALSE)
+
+    if (exit_code != 0) {
+      cat("  GPU mode failed, retrying with gpu_mode = False...\n")
+      write_MOFA_options_file(
+        input_file = "/data/mofa/MOFA_RNA_data.csv",
+        output_file = paste0("/results/mofa/RNA/mofa_res_", n_factors, "factor.hdf5"),
+        factors = as.character(n_factors),
+        convergence_mode = "slow",
+        seed = "1",
+        gpu_mode = "False"
+      )
+      exit_code <- system("python scripts/mofa/mofa2.py options_MOFA.csv", intern = FALSE)
+      if (exit_code != 0) {
+        cat("  ERROR: Training failed for", n_factors, "factors\n")
+      }
+    }
+
+    cat("  Done!\n\n")
+  }
+
+  # Clean up temporary options file
+  if (file.exists("options_MOFA.csv")) file.remove("options_MOFA.csv")
+
+  cat("MOFA model training complete!\n\n")
 } else {
   cat("Skipping model training.\n\n")
 }

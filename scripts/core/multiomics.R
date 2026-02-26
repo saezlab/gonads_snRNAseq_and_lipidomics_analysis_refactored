@@ -96,6 +96,9 @@ prepare_mofa_input <- function(rna_data,
   # Extract sample base name - text before cell type
   rna_mofa_long$variable <- gsub("_[A-Z].*", "", rna_mofa_long$variable)
 
+  # Harmonize sample name format: hyphens → underscores to match lipidomic names
+  rna_mofa_long$variable <- gsub("-", "_", rna_mofa_long$variable)
+
   # Rename columns to MOFA format
   names(rna_mofa_long) <- c("feature", "sample", "value", "view")
 
