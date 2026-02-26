@@ -89,7 +89,7 @@ scaled_RNA <- load_rna_data(verbose = FALSE)
 
 # Load lipidomic data
 cat("Loading lipidomic data...\n")
-load("data/metabolomics/lipidomic.RData")
+lipidomic <- load_lipidomic_data(verbose = FALSE)
 
 cat("\nData loaded:\n")
 cat("  RNA:", nrow(scaled_RNA), "genes x", ncol(scaled_RNA), "samples\n")

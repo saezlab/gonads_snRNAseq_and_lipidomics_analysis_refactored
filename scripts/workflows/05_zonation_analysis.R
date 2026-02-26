@@ -49,6 +49,7 @@ cat(strrep("=", 80), "\n\n")
 source("scripts/config/analysis_config.R")
 source("scripts/config/plotting_themes.R")
 source("scripts/support_functions.R")
+source("scripts/core/data_loading.R")
 
 # Define output directory
 zonation_dir <- "results/zonation"
@@ -383,12 +384,8 @@ cat(strrep("-", 80), "\n\n")
 
 # Load lipidomics data
 cat("Loading lipidomics data...\n")
-if (file.exists("data/metabolomics/lipidomic.RData")) {
-  load("data/metabolomics/lipidomic.RData")
-  cat("  Loaded lipidomics data: ", nrow(lipidomic), " lipids x ", ncol(lipidomic), " samples\n\n")
-} else {
-  stop("Lipidomics data file not found: data/metabolomics/lipidomic.RData\n")
-}
+lipidomic <- load_lipidomic_data(verbose = FALSE)
+cat("  Loaded lipidomics data: ", nrow(lipidomic), " lipids x ", ncol(lipidomic), " samples\n\n")
 
 # Load TF regulons
 cat("Loading TF regulons...\n")
