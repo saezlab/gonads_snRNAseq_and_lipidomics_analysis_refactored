@@ -1,8 +1,8 @@
 # Workflow 01: Data Preparation & QC
 
 **Script:** `scripts/workflows/01_data_preparation_qc.R`
-**Lines:** ~824
-**Purpose:** Load Seurat pseudobulk object, extract metadata and scaled expression, perform QC, split data into 3 CSVs for downstream use.
+**Lines:** ~870
+**Purpose:** Load Seurat pseudobulk object, extract metadata and scaled expression, perform QC, split data into 3 CSVs for downstream use. Also converts zonation Seurat object to CSV.
 
 ## Source Dependencies
 
@@ -28,15 +28,19 @@ source("scripts/visualization/dimred_plots.R")
 | 8 | Exploratory PCA | 521-650 | PCA on all cell types, variance by experimental factors |
 | 9 | Data Validation | 651-750 | Cross-check metadata vs expression, sample matching |
 | 10 | QC Report | 751-824 | Print summary statistics, save QC plots |
+| 11 | Zonation CSV Conversion | 825-870 | Convert zonation Seurat RDS to `scaled_RNA_zonation.csv` + `meta_data_df_zonation.csv` |
 
 ## Input Files
 
-- `data/RNA/fcgl_pseudobulk_gonad_20241023.rds` - Seurat pseudobulk object
+- `data/RNA/fcgl_pseudobulk_gonad_20241023.rds` - Seurat pseudobulk object (main FCG)
+- `data/RNA/fcgl_heps_zonationsubsetted_pseudobulks_gonad_20241114.rds` - Zonation Seurat object (hepatocyte periportal/pericentral)
 
 ## Output Files
 
 - `data/RNA/scaled_RNA_1.csv`, `scaled_RNA_2.csv`, `scaled_RNA_3.csv` - Split expression matrices
 - `data/RNA/meta_data_df.csv` - Sample metadata
+- `data/RNA/scaled_RNA_zonation.csv` - Zonation scaled expression matrix (20,123 genes x 86 samples)
+- `data/RNA/meta_data_df_zonation.csv` - Zonation metadata (sample, sample_name, zonation_type, gonadal_type)
 - `results/qc/` - QC diagnostic plots
 
 ## Key Variables
@@ -62,3 +66,4 @@ When returning to this workflow:
 2. Downstream workflows (02-08) depend on the 3 CSV files this produces
 3. The gene split is arbitrary (by column index), not biological - just for file size management
 4. Sample names in the Seurat object determine naming convention for all downstream analyses
+5. Section 11 converts the zonation Seurat object to CSVs - used by workflow 05 (zonation analysis). Previously this was done by `scripts/legacy/seurat_to_df_zonation.R` which hardcoded the old 20241023 RDS path.

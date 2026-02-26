@@ -792,6 +792,90 @@ cat("QC report saved to:", report_file, "\n")
 # WORKFLOW COMPLETE
 ################################################################################
 
+################################################################################
+# 11. ZONATION PSEUDOBULK: SEURAT TO CSV CONVERSION
+################################################################################
+
+cat("\n")
+cat(strrep("-", 80), "\n")
+cat("11. ZONATION PSEUDOBULK: SEURAT TO CSV CONVERSION\n")
+cat(strrep("-", 80), "\n\n")
+
+cat("Converting zonation-annotated hepatocyte pseudobulk from Seurat to CSV.\n")
+cat("These CSVs are consumed by workflow 05 (zonation analysis).\n\n")
+
+zonation_rds_path <- "data/RNA/fcgl_heps_zonationsubsetted_pseudobulks_gonad_20241114.rds"
+
+if (!file.exists(zonation_rds_path)) {
+  cat("WARNING: Zonation Seurat object not found at:", zonation_rds_path, "\n")
+  cat("  Skipping zonation CSV generation.\n")
+  cat("  Workflow 05 will use existing CSVs if available.\n\n")
+} else {
+  cat("Loading zonation Seurat object:", zonation_rds_path, "\n")
+  zonation_obj <- readRDS(zonation_rds_path)
+
+  cat("  Pseudobulk samples:", ncol(zonation_obj), "\n")
+  cat("  Genes:", nrow(zonation_obj), "\n\n")
+
+  # Extract scaled data (compatible with Seurat v4 and v5)
+  cat("Extracting scaled expression data...\n")
+  zonation_scaled <- as.data.frame(
+    get_layer_data(zonation_obj, assay = "RNA", layer = "scale.data")
+  )
+  rownames(zonation_scaled) <- Features(zonation_obj[["RNA"]])
+
+  # Extract metadata
+  zonation_meta <- as.data.frame(zonation_obj@meta.data)
+  names(zonation_meta)[1] <- "sample"
+
+  # Normalize sample name separators (hyphens -> underscores)
+  zonation_meta$sample <- gsub("-", "_", zonation_meta$sample)
+  if ("sample_name" %in% colnames(zonation_meta)) {
+    zonation_meta$sample_name <- gsub("-", "_", zonation_meta$sample_name)
+  }
+
+  # Set column names to match metadata sample names
+  colnames(zonation_scaled) <- zonation_meta$sample
+
+  cat("  Scaled data:", nrow(zonation_scaled), "genes x", ncol(zonation_scaled), "samples\n")
+  cat("  Metadata:", nrow(zonation_meta), "rows x", ncol(zonation_meta), "columns\n")
+  cat("  Metadata columns:", paste(colnames(zonation_meta), collapse = ", "), "\n\n")
+
+  # Add gene column and reorder (gene first, then samples)
+  zonation_scaled$gene <- rownames(zonation_scaled)
+  zonation_scaled <- zonation_scaled[, c("gene", setdiff(colnames(zonation_scaled), "gene"))]
+
+  # Save CSVs
+  cat("Saving zonation CSVs...\n")
+
+  readr::write_csv(zonation_scaled, file.path(data_rna_dir, "scaled_RNA_zonation.csv"))
+  cat("  Saved:", file.path(data_rna_dir, "scaled_RNA_zonation.csv"),
+      "(", format(file.size(file.path(data_rna_dir, "scaled_RNA_zonation.csv")) / 1024^2, digits = 2), "MB)\n")
+
+  rownames(zonation_meta) <- NULL
+  readr::write_csv(zonation_meta, file.path(data_rna_dir, "meta_data_df_zonation.csv"))
+  cat("  Saved:", file.path(data_rna_dir, "meta_data_df_zonation.csv"), "\n\n")
+
+  # Verify output
+  cat("Verification:\n")
+  cat("  Sample names (first 4):", paste(head(zonation_meta$sample, 4), collapse = ", "), "\n")
+  if ("zonation_type" %in% colnames(zonation_meta)) {
+    cat("  Zonation types:", paste(unique(zonation_meta$zonation_type), collapse = ", "), "\n")
+  }
+  if ("gonadal_type" %in% colnames(zonation_meta)) {
+    cat("  Gonadal types:", paste(unique(zonation_meta$gonadal_type), collapse = ", "), "\n")
+  }
+  cat("\n")
+
+  # Clean up
+  rm(zonation_obj, zonation_scaled, zonation_meta)
+  gc(verbose = FALSE)
+}
+
+################################################################################
+# WORKFLOW COMPLETE
+################################################################################
+
 cat("\n")
 cat(strrep("=", 80), "\n")
 cat("DATA PREPARATION AND QC WORKFLOW COMPLETE\n")
@@ -804,13 +888,16 @@ cat("  ✓ Pseudobulk data verified (already aggregated)\n")
 cat("  ✓ Data split into 3 files for GitHub\n")
 cat("  ✓ Quality control plots generated\n")
 cat("  ✓ Data validation completed\n")
-cat("  ✓ QC report generated\n\n")
+cat("  ✓ QC report generated\n")
+cat("  ✓ Zonation pseudobulk CSVs generated\n\n")
 
 cat("Output files:\n")
 cat("  - data/RNA/scaled_RNA_1.csv\n")
 cat("  - data/RNA/scaled_RNA_2.csv\n")
 cat("  - data/RNA/scaled_RNA_3.csv\n")
 cat("  - data/RNA/meta_data_df.csv\n")
+cat("  - data/RNA/scaled_RNA_zonation.csv\n")
+cat("  - data/RNA/meta_data_df_zonation.csv\n")
 cat("  - results/qc/ (QC plots and reports)\n\n")
 
 cat("Next steps:\n")

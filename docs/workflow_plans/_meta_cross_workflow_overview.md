@@ -6,7 +6,7 @@
 00_preprocessing (raw data -> Seurat)  [if(FALSE) — requires HPC]
   |
   v
-01_data_preparation_qc (Seurat -> 3 CSVs + metadata)
+01_data_preparation_qc (Seurat -> 3 CSVs + metadata + zonation CSVs)
   |
   +---> 02_fcg_pseudobulk_analysis (RNA DE, pathways, TFs)
   |       |
@@ -30,9 +30,11 @@
 | Producing Workflow | File | Consuming Workflow(s) |
 |-------------------|------|----------------------|
 | 00 | `data/RNA/fcgl_pseudobulk_gonad_*.rds` | 01 |
-| 00 | `data/RNA/heps_zonationsubsetted_pseudobulks_gonad.rds` | 05 |
+| 00 | `data/RNA/fcgl_heps_zonationsubsetted_pseudobulks_gonad_20241114.rds` | 01 (section 11) |
 | 01 | `data/RNA/scaled_RNA_{1,2,3}.csv` | 02, 04, 05, 06 |
 | 01 | `data/RNA/meta_data_df.csv` | 02, 04, 05 |
+| 01 | `data/RNA/scaled_RNA_zonation.csv` | 05 |
+| 01 | `data/RNA/meta_data_df_zonation.csv` | 05 |
 | 02 | `results/pseudobulk/ttop_full_list.RData` | 04, 05 |
 | 02 | `results/pseudobulk/tval_full_df.csv` | 02 (internal: step 7C) |
 | 03 | `results/lipidomic/ttop_full_list.RData` | 05 |
