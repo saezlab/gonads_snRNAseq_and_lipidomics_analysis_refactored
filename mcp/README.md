@@ -7,10 +7,13 @@ A Model Context Protocol (MCP) server that provides tools for querying the Four 
 This MCP server allows Claude (or other MCP-compatible AI assistants) to dynamically query:
 
 - **Differential Expression Results**: RNA-seq and lipidomics DE results across contrasts and cell types
-- **Pathway Enrichment**: GO Biological Process pathway scores
-- **TF Activity**: Transcription factor activity inferred from target genes
-- **Lipid Class Enrichment**: Enrichment of lipid classes by condition
-- **MOFA Integration**: Factor weights and gene-lipid correlation networks
+- **Lipid Class Enrichment**: Enrichment of lipid classes by gonadal condition
+- **Lipid Conversion Network**: LINEX2 enzymatic conversion relationships between significant lipids
+- **MOFA Integration**: Gene-lipid correlation networks and TF→Gene→Lipid regulatory cascades
+- **Lipid Structural Preferences**: Chain length and saturation effects on gene-lipid associations
+- **Hepatocyte Zonation**: Periportal vs pericentral spatial differences, sex-specific zonation genes
+- **Validation**: siRNA knockdown experimental validation of network predictions
+- **Variance Analysis**: Lipid variance differences between gonadal groups
 
 ## Installation
 
@@ -32,104 +35,66 @@ Alternatively, add manually:
 claude mcp add --transport stdio fcgl-analysis -- python mcp/fcgl_server.py
 ```
 
-### 3. Configure for Claude Desktop
+## Available Tools (19 total)
 
-Add to your Claude Desktop configuration (`claude_desktop_config.json`):
+### Gene Expression (WF02)
 
-```json
-{
-  "mcpServers": {
-    "fcgl-analysis": {
-      "command": "python",
-      "args": ["/path/to/gonads_snRNAseq_and_lipidomics_analysis_refactored/mcp/fcgl_server.py"],
-      "env": {
-        "FCGL_DATA_PATH": "/path/to/gonads_snRNAseq_and_lipidomics_analysis_refactored"
-      }
-    }
-  }
-}
-```
+| Tool | Description |
+|------|-------------|
+| `query_gene` | DE stats for a gene across all contrasts and cell types |
+| `get_top_genes` | Top DE genes for a specific cell type and contrast |
+| `compare_gene_celltypes` | Compare a gene's effect across all 5 liver cell types |
+| `count_significant_features` | Count genes/lipids passing significance + FC thresholds (works for both) |
 
-## Available Tools
+### Lipidomics (WF03)
 
-### 1. `get_dataset_summary`
-Get an overview of the FCGL dataset including sample counts, cell types, contrasts analyzed, and key findings.
+| Tool | Description |
+|------|-------------|
+| `get_lipid_de_summary` | Comprehensive lipid DE summary (counts, enrichment, GDX correlation) |
+| `query_lipid` | DE stats for lipids (gonadal effect) |
+| `query_lipid_class_enrichment` | Lipid class enrichment scores (male vs female bias) |
+| `query_lipid_network` | LINEX2 lipid-lipid conversion network |
 
-### 2. `query_gene_de`
-Query differential expression results for a specific gene.
+### Multi-Omic Integration (WF04)
 
-**Parameters:**
-- `gene` (required): Gene symbol (e.g., "Cyp2b9", "Esr1")
-- `cell_type`: Cell type to query (default: "Hepatocytes")
-- `contrast`: Contrast to query (default: "testes_vs_ova")
+| Tool | Description |
+|------|-------------|
+| `query_gene_lipid_network` | MOFA Factor 1 gene-lipid correlations |
+| `query_tf_gene_lipid_network` | TF→Gene→Lipid regulatory network |
 
-**Example:**
-```
-Query the differential expression of Cyp2b9 in hepatocytes for the gonadal effect
-```
+### Lipid Structure (WF06)
 
-### 3. `query_lipid_de`
-Query differential abundance results for a lipid or lipid class.
+| Tool | Description |
+|------|-------------|
+| `get_structural_associations` | Gene-lipid structural preferences (chain length, saturation) |
 
-**Parameters:**
-- `lipid` (required): Lipid name or class (e.g., "PC", "TG", "Cer")
-- `contrast`: Contrast to query
-- `top_n`: Number of results to return
+### Zonation (WF05)
 
-### 4. `get_top_de_genes`
-Get the top differentially expressed genes for a contrast and cell type.
+| Tool | Description |
+|------|-------------|
+| `get_zonation_info` | Zonation analysis overview with pathway enrichment |
+| `query_gene_zonation` | Gene zonation bias (periportal vs pericentral) |
+| `query_lipid_zonation` | Lipid class zonation associations |
+| `query_sex_specific_zonation_genes` | 137 genes with sex-specific zonation |
+| `query_lipid_species_zonation` | Per-lipid species zonation associations |
 
-**Parameters:**
-- `cell_type` (required): Cell type to query
-- `contrast`: Contrast to query
-- `direction`: "up", "down", or "both"
-- `top_n`: Number of genes to return
-- `fdr_threshold`: Significance threshold
+### Validation (WF07)
 
-### 5. `query_pathway_enrichment`
-Query pathway enrichment scores for a specific pathway or keyword.
+| Tool | Description |
+|------|-------------|
+| `get_validation_results` | siRNA knockdown validation with per-gene scores |
 
-**Parameters:**
-- `pathway` (required): Pathway name or keyword (e.g., "lipid", "hormone")
-- `cell_type`: Filter by cell type
-- `top_n`: Number of results
+### Variance Analysis (WF08)
 
-### 6. `query_tf_activity`
-Query transcription factor activity scores.
+| Tool | Description |
+|------|-------------|
+| `query_variance_analysis` | Lipid variance differences (summary, class, or lipid level) |
 
-**Parameters:**
-- `tf` (required): TF name (e.g., "Esr1", "Ar", "Stat5a")
-- `cell_type`: Filter by cell type
+### Overview
 
-### 7. `query_lipid_class_enrichment`
-Query lipid class enrichment results.
-
-**Parameters:**
-- `lipid_class`: Lipid class to query (e.g., "TG", "PC", "Cer")
-- `contrast`: Filter by contrast
-
-### 8. `query_mofa_gene_lipid_network`
-Query gene-lipid correlations from MOFA Factor 1.
-
-**Parameters:**
-- `query` (required): Gene or lipid to search for
-- `correlation_threshold`: Minimum |r| (default: 0.5)
-- `top_n`: Number of correlations to return
-
-### 9. `query_mofa_factor_weights`
-Query MOFA factor weights for specific views and factors.
-
-**Parameters:**
-- `factor` (required): Factor number (1-12)
-- `view`: View to query (e.g., "Hepatocytes", "Lipidomic")
-- `top_n`: Number of features to return
-
-### 10. `compare_gene_across_celltypes`
-Compare a gene's differential expression across all cell types.
-
-**Parameters:**
-- `gene` (required): Gene symbol to compare
-- `contrast`: Contrast to query
+| Tool | Description |
+|------|-------------|
+| `get_dataset_summary` | Full dataset overview with key findings and available queries |
 
 ## Example Queries
 
@@ -140,20 +105,42 @@ Once connected to Claude, you can ask questions like:
 - "Which lipid classes are enriched in males vs females?"
 - "What genes are correlated with triglycerides in the MOFA network?"
 - "Compare Esr1 expression across all liver cell types"
-- "What pathways are enriched for lipid metabolism?"
-- "Show me the transcription factor activity for Stat5a"
+- "Which TFs regulate Cyp2d9 in the regulatory network?"
+- "Show me sex-specific zonation genes in testes pericentral hepatocytes"
+- "What lipids are connected to PE(19:0_20:3) in the conversion network?"
+- "Are testes or ovaries lipids more variable?"
+- "What validation scores did Cyp2b9 knockdown achieve?"
+- "How many genes with FDR <= 0.05 and |logFC| >= 0.4 in hepatocytes?"
+- "Count significant lipids with logFC above 0.5"
 
 ## Data Files Used
 
-The server reads from these RData files in the `results/` directory:
+The server reads CSV files from the `results/` directory:
 
-- `results/pseudobulk/ttop_full_list.RData` - RNA DE results
-- `results/lipidomic/ttop_full_list.RData` - Lipid DE results
-- `results/mofa/main_model_RNA_lipid_weight.RData` - MOFA weights
-- `results/mofa/networks/gene_lipid_correlations_factor1.RData` - Gene-lipid correlations
-- `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` - Lipid enrichment
-- `results/pseudobulk/pathways/pathway_scores_df_all.RData` - Pathway enrichment
-- `results/pseudobulk/pathways/tf_scores_df_all.RData` - TF enrichment
+| Workflow | File | Purpose |
+|----------|------|---------|
+| WF02 | `results/pseudobulk/tval_full_df.csv` | RNA t-statistics |
+| WF02 | `results/pseudobulk/ttop_full_long.csv` | Full RNA DE results (logFC, P.Value, adj.P.Val) |
+| WF03 | `results/lipidomic/gonade_type_ttop.csv` | Lipid DE results |
+| WF03 | `results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv` | Lipid class enrichment |
+| WF03 | `results/lipidomic/network/significant_lipids_network_SIF.csv` | LINEX2 network edges |
+| WF03 | `results/lipidomic/network/significant_lipids_network_ATT.csv` | LINEX2 node attributes |
+| WF04 | `results/mofa/networks/gene_lipid_correlations_factor1.csv` | Gene-lipid correlations |
+| WF04 | `results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv` | TF network edges |
+| WF04 | `results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv` | TF network attributes |
+| WF05 | `results/zonation/summary_statistics.csv` | Zonation summary |
+| WF05 | `results/zonation/t_table_zonation.csv` | Gene zonation t-values |
+| WF05 | `results/zonation/lipid_class_association_summary.csv` | Lipid class zonation |
+| WF05 | `results/zonation/sex_specific_zonation_genes_summary.csv` | Sex-specific zonation genes |
+| WF05 | `results/zonation/lipid_species_zonation_association.csv` | Per-lipid zonation |
+| WF05 | `results/pseudobulk/rna_zonation/pathway_scores_df.csv` | Zonation pathway scores |
+| WF06 | `results/multi-omic/structural_model/significant_gene_lipid_class_associations.csv` | Structural associations |
+| WF07 | `results/validation/validation_summary.csv` | Validation overview |
+| WF07 | `results/validation/global_network_validation_scores.csv` | Global validation scores |
+| WF07 | `results/validation/zonation_network_validation_scores.csv` | Zonation validation scores |
+| WF08 | `results/lipidomic/variance_analysis/variance_analysis_summary.csv` | Variance overview |
+| WF08 | `results/lipidomic/variance_analysis/variance_analysis_results.csv` | Per-lipid variance |
+| WF08 | `results/lipidomic/variance_analysis/variance_analysis_by_class.csv` | Per-class variance |
 
 ## Environment Variables
 
@@ -162,15 +149,7 @@ The server reads from these RData files in the `results/` directory:
 ## Troubleshooting
 
 ### "Data file not found" errors
-Ensure you have run the analysis workflows (01-06) to generate the required RData files.
-
-### pyreadr import errors
-Install pyreadr: `pip install pyreadr`
-
-On Windows, you may need to install the R runtime or use conda:
-```bash
-conda install -c conda-forge r-base pyreadr
-```
+Ensure you have run the analysis workflows (01-08) to generate the required CSV files.
 
 ### Testing the server
 Run the server directly to check for errors:
@@ -182,10 +161,10 @@ python mcp/fcgl_server.py
 
 To extend the server with new tools:
 
-1. Add a new tool definition in `list_tools()`
-2. Add the handler function (e.g., `handle_new_tool()`)
-3. Add the routing in `call_tool()`
-4. Add a new data loader method if needed in `FCGLDataLoader`
+1. Add a new data loader method in `FCGLDataLoader`
+2. Add a new tool definition in `list_tools()`
+3. Add the handler function (e.g., `handle_new_tool()`)
+4. Add the routing in `call_tool()`
 
 ## License
 
