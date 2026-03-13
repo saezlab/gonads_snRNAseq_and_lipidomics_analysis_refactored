@@ -58,21 +58,21 @@ nicePCA <- function(df, targets, components = c(1,2,3), centering = TRUE, scalin
   print(head(data.to.plot))
   
   comp1 <- ggplot(data.to.plot, aes(x = pc1, color = condition)) + 
-    geom_density() + theme_minimal() +
+    geom_density() + theme_classic() +
     xlab(paste(xCompLab, round(100 * explained[components[1]], digits = 2), '%)', sep = '')) +
     theme(legend.position = "none") +
     scale_x_continuous(position = "top", limits = c(-max(abs(pca$x[, components[1]])), max(abs(pca$x[, components[1]])))) +
     scale_y_continuous(position = "left")
   
   comp2 <- ggplot(data.to.plot, aes(x = pc2, color = condition)) + 
-    geom_density() + theme_minimal() +
+    geom_density() + theme_classic() +
     xlab(paste(yCompLab, round(100 * explained[components[2]], digits = 2), '%)', sep = '')) +
     theme(legend.position = "none") +
     scale_x_continuous(position = "top", limits = c(-max(abs(pca$x[, components[2]])), max(abs(pca$x[, components[2]])))) +
     scale_y_continuous(position = "right")
   
   comp3 <- ggplot(data.to.plot, aes(x = pc3, color = condition)) + 
-    geom_density() + theme_minimal() +
+    geom_density() + theme_classic() +
     xlab(paste(zCompLab, round(100 * explained[components[3]], digits = 2), '%)', sep = '')) +
     theme(legend.position = "none") +
     scale_x_continuous(position = "top", limits = c(-max(abs(pca$x[, components[3]])), max(abs(pca$x[, components[3]])))) +
@@ -82,7 +82,7 @@ nicePCA <- function(df, targets, components = c(1,2,3), centering = TRUE, scalin
     geom_point(size = pointSize, alpha = 0.3) +
     geom_text(aes(label = sample), nudge_y = 1.0, size = 6) +
     scale_alpha_discrete(range = c(0.3, 1.0)) +
-    theme_minimal() +
+    theme_classic() +
     xlab(paste(xCompLab, round(100 * explained[components[1]], digits = 2), '%)', sep = '')) +
     ylab(paste(yCompLab, round(100 * explained[components[2]], digits = 2), '%)', sep = '')) +
     xlim(c(-max(abs(pca$x[, components[1]])), max(abs(pca$x[, components[1]])))) +
@@ -100,7 +100,7 @@ nicePCA <- function(df, targets, components = c(1,2,3), centering = TRUE, scalin
       geom_point(size = pointSize, alpha = 0.6) +
       #geom_text_repel(aes(label = sample), size = 2) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab(paste(yCompLab,
                  round(100 * explained[components[2]], digits = 2), '%)', sep = '')) +
@@ -112,7 +112,7 @@ nicePCA <- function(df, targets, components = c(1,2,3), centering = TRUE, scalin
     comp1vcomp3 <- ggplot(data.to.plot, aes(x = pc1, y = pc3, color = condition)) +
       geom_point(size = pointSize, alpha = 0.3) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab(paste(zCompLab, round(100 * explained[components[3]], digits = 2), '%)', sep = '')) +
       ylim(c(-max(abs(pca$x[, components[3]])), max(abs(pca$x[, components[3]])))) + 
@@ -122,7 +122,7 @@ nicePCA <- function(df, targets, components = c(1,2,3), centering = TRUE, scalin
     comp2vcomp3 <- ggplot(data.to.plot, aes(x = pc2, y = pc3, color = condition)) +
       geom_point(size = pointSize, alpha = 0.3) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab("") +
       scale_y_continuous(position = "right", limits = c(-max(abs(pca$x[, components[3]])), max(abs(pca$x[, components[3]])))) +
@@ -133,7 +133,7 @@ nicePCA <- function(df, targets, components = c(1,2,3), centering = TRUE, scalin
       geom_point(size = pointSize, alpha = 0.3) +
       geom_text_repel(aes(label = sample), size = 2) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab(paste(yCompLab, round(100 * explained[components[2]], digits = 2), '%)', sep = '')) +
       ylim(c(-max(abs(pca$x[, components[2]])), max(abs(pca$x[, components[2]])))) + 
@@ -144,7 +144,7 @@ nicePCA <- function(df, targets, components = c(1,2,3), centering = TRUE, scalin
       geom_point(size = pointSize, alpha = 0.3) +
       geom_text_repel(aes(label = sample), size = 2) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab(paste(zCompLab, round(100 * explained[components[3]], digits = 2), '%)', sep = '')) +
       ylim(c(-max(abs(pca$x[, components[3]])), max(abs(pca$x[, components[3]])))) + 
@@ -155,7 +155,7 @@ nicePCA <- function(df, targets, components = c(1,2,3), centering = TRUE, scalin
       geom_point(size = pointSize, alpha = 0.3) +
       geom_text_repel(aes(label = sample), size = 2) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab("") +
       scale_y_continuous(position = "right", limits = c(-max(abs(pca$x[, components[3]])), max(abs(pca$x[, components[3]])))) +
@@ -169,7 +169,7 @@ nicePCA <- function(df, targets, components = c(1,2,3), centering = TRUE, scalin
   
   boulder <- ggplot(explained_df, aes(x = Components, y = `% of explained variance`, fill = "red")) +
     geom_col() +
-    theme_minimal() +
+    theme_classic() +
     scale_y_continuous(position = "right") +
     theme(legend.position = "none",
           axis.text.x = element_blank(),
@@ -285,9 +285,9 @@ magicPlotMaker <- function(df, outpath = ".", targets = NULL, no_pca_label = FAL
   ##                ggplots              ##
   #########################################
   
-  a <- ggplot(melted_df, aes(x = value, fill = variable)) + geom_density(alpha = 0.3) + theme_minimal()
-  b <- ggplot(melted_df, aes(x = index, y = value, group = variable, color = variable)) + geom_point() + theme_minimal()
-  c <- ggplot(melted_df, aes(x = index, y = value, group = variable, color = variable)) + geom_boxplot() + theme_minimal()
+  a <- ggplot(melted_df, aes(x = value, fill = variable)) + geom_density(alpha = 0.3) + theme_classic()
+  b <- ggplot(melted_df, aes(x = index, y = value, group = variable, color = variable)) + geom_point() + theme_classic()
+  c <- ggplot(melted_df, aes(x = index, y = value, group = variable, color = variable)) + geom_boxplot() + theme_classic()
   
   ggsave(paste(outpath,"densities.pdf",sep = ""), plot = a, width = width, height = height)
   ggsave(paste(outpath,"cloud_point.pdf", sep = ""), plot = b, width = width, height = height)
@@ -658,7 +658,7 @@ progenyScatter <- function(df,weight_matrix,dfID = 1, weightID = 1, statName = "
       
       minstat <- min(sub_df$stat)
       maxstat <- max(sub_df$stat)
-      histo <- ggplot(sub_df, aes(x = stat, fill = "blue")) + geom_density() + coord_flip() + scale_fill_manual( values = c("#00c5ff")) + xlim(minstat, maxstat) + theme_minimal() + theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+      histo <- ggplot(sub_df, aes(x = stat, fill = "blue")) + geom_density() + coord_flip() + scale_fill_manual( values = c("#00c5ff")) + xlim(minstat, maxstat) + theme_classic() + theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank())
       
       names(pathway_weights) <- c("ID","weight")
       pathway_weights <- pathway_weights[pathway_weights$weight != 0,]
@@ -682,8 +682,10 @@ progenyScatter <- function(df,weight_matrix,dfID = 1, weightID = 1, statName = "
       scatterplot <- ggplot(sub_df, aes(x = weight, y = stat, color = color)) + geom_point() +
         # scale_colour_manual(values = c("#15ff00","#ff0000","#c9c9c9")) + #green and red
         scale_colour_manual(values = c("red","royalblue3","grey")) +
-        geom_label_repel(aes(label = ID)) +
-        ylim(minstat, maxstat) + theme_minimal() + theme(legend.position = "none") + geom_vline(xintercept = 0, linetype = 'dotted') + geom_hline(yintercept = 0, linetype = 'dotted') + labs(x = title, y = statName)
+        geom_text_repel(aes(label = ID), segment.color = "grey30", segment.size = 0.4,
+                        min.segment.length = 0, box.padding = 0.5, point.padding = 0.3,
+                        arrow = arrow(length = unit(0.01, "npc"), type = "closed")) +
+        ylim(minstat, maxstat) + theme_classic() + theme(legend.position = "none") + geom_vline(xintercept = 0, linetype = 'dotted') + geom_hline(yintercept = 0, linetype = 'dotted') + labs(x = title, y = statName)
       
       lay <- t(as.matrix(c(1,1,1,1,2)))
       gg <- arrangeGrob(scatterplot, histo, nrow = 1, ncol = 2, layout_matrix = lay)
@@ -782,13 +784,16 @@ volcano_nice <- function (df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = N
   
   if (label) {
     a <- ggplot(df, aes(x = logFC, y = -log10(adj.P.Val), color = couleur)) +
-      geom_point(alpha = 0.5) + geom_label_repel(aes(label = condLabel)) +
+      geom_point(alpha = 0.5) +
+      geom_text_repel(aes(label = condLabel), segment.color = "grey30", segment.size = 0.4,
+                      min.segment.length = 0, box.padding = 0.5, point.padding = 0.3,
+                      arrow = arrow(length = unit(0.01, "npc"), type = "closed")) +
       stat_function(fun = xneg, xlim = c(-xlimAbs, -vAss),
                     color = "black", alpha = 0.7) + ylim(c(0, ylimAbs)) +
       xlim(c(-xlimAbs, xlimAbs)) + stat_function(fun = xpos,
                                                  xlim = c(vAss, xlimAbs), color = "black", alpha = 0.7) +
       scale_colour_manual(values = c(col_high_neut_low[2], col_high_neut_low[3],
-                                     col_high_neut_low[1])) + theme_minimal() + theme(legend.position = "none")
+                                     col_high_neut_low[1])) + theme_classic() + theme(legend.position = "none")
   }
   else {
     if (straight) {
@@ -799,7 +804,7 @@ volcano_nice <- function (df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = N
         ylim(c(0, ylimAbs)) + xlim(c(-xlimAbs, xlimAbs)) +
         geom_hline(yintercept = hAss, color = col_high_neut_low[1]) +
         scale_colour_manual(values = c(col_high_neut_low[2], col_high_neut_low[1],
-                                       col_high_neut_low[3])) + theme_minimal() + theme(legend.position = "none")
+                                       col_high_neut_low[3])) + theme_classic() + theme(legend.position = "none")
     }
     else {
       a <- ggplot(df, aes(x = logFC, y = -log10(adj.P.Val),
@@ -809,7 +814,7 @@ volcano_nice <- function (df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = N
                                                                                           ylimAbs)) + xlim(c(-xlimAbs, xlimAbs)) + stat_function(fun = xpos,
                                                                                                                                                  xlim = c(vAss, xlimAbs), color = "black", alpha = 0.7) +
         scale_colour_manual(values = c(col_high_neut_low[2], col_high_neut_low[1],
-                                       col_high_neut_low[3])) + theme_minimal() + theme(legend.position = "none")
+                                       col_high_neut_low[3])) + theme_classic() + theme(legend.position = "none")
     }
   }
   return(a)
@@ -848,7 +853,7 @@ magicPlotMakerLight <- function(df, targets = NULL, no_pca_label = FALSE)
   ##                ggplots              ##
   #########################################
   
-  violins <- ggplot(melted_df, aes(x = index, y = value, group = variable, color = variable)) + geom_violin() + theme_minimal()
+  violins <- ggplot(melted_df, aes(x = index, y = value, group = variable, color = variable)) + geom_violin() + theme_classic()
   
   # plot(violins)
   

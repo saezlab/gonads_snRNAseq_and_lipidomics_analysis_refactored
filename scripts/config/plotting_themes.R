@@ -143,7 +143,7 @@ PLOT_DIMS <- list(
 #'
 #' @return ggplot2 theme object
 theme_publication <- function(base_size = 12, base_family = "") {
-  theme_minimal(base_size = base_size, base_family = base_family) +
+  theme_classic(base_size = base_size, base_family = base_family) +
     theme(
       # Grid
       panel.grid.major = element_line(color = "grey90", size = 0.3),
@@ -179,7 +179,7 @@ theme_publication <- function(base_size = 12, base_family = "") {
 #'
 #' @return ggplot2 theme object
 theme_clean <- function(base_size = 12) {
-  theme_minimal(base_size = base_size) +
+  theme_classic(base_size = base_size) +
     theme(
       panel.grid.major = element_line(color = "grey95", size = 0.3),
       panel.grid.minor = element_blank(),

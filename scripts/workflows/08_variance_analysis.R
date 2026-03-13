@@ -402,7 +402,7 @@ p2 <- ggplot(cv_results, aes(x = cv_diff, y = -log10(levene_p))) +
     x = "CV Difference (Testes - Ovaries, %)",
     y = "-log10(p-value)"
   ) +
-  theme_minimal(base_size = 12) +
+  theme_classic(base_size = 12) +
   theme(
     plot.title = element_text(face = "bold"),
     legend.position = "bottom"
@@ -623,7 +623,7 @@ p_class_volcano <- ggplot(cv_class_results, aes(x = cv_diff, y = -log10(levene_p
     x = "CV Difference (Testes - Ovaries, %)",
     y = "-log10(p-value)"
   ) +
-  theme_minimal(base_size = 12) +
+  theme_classic(base_size = 12) +
   theme(
     plot.title = element_text(face = "bold"),
     legend.position = "right"

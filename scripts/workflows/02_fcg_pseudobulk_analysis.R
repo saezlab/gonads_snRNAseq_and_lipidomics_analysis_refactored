@@ -888,6 +888,10 @@ if (file.exists(gdx_file)) {
 
     cat("Creating validation comparison plot...\n")
 
+    # Cap values to axis limits
+    comparison_df$fcg_tval <- pmin(pmax(comparison_df$fcg_tval, -25), 25)
+    comparison_df$gdx_tval <- pmin(pmax(comparison_df$gdx_tval, -10), 10)
+
     # Create correlation plot
     p_validation <- ggplot(comparison_df,
                           aes(x = fcg_tval, y = gdx_tval,
@@ -896,11 +900,13 @@ if (file.exists(gdx_file)) {
       geom_smooth(method = "lm", se = TRUE, color = "grey40",
                   linewidth = 1.2, inherit.aes = FALSE,
                   aes(x = fcg_tval, y = gdx_tval)) +
-      geom_label_repel(size = 3.5, max.overlaps = 20,
+      geom_text_repel(size = 3.5, max.overlaps = 20,
                       box.padding = 0.5, point.padding = 0.3,
-                      segment.color = "grey50", show.legend = FALSE) +
-      annotate("text", x = min(comparison_df$fcg_tval, na.rm = TRUE) * 0.8,
-               y = max(comparison_df$gdx_tval, na.rm = TRUE) * 0.9,
+                      segment.color = "grey30", segment.size = 0.4,
+                      min.segment.length = 0, show.legend = FALSE,
+                      arrow = arrow(length = unit(0.01, "npc"), type = "closed")) +
+      xlim(-25, 25) + ylim(-10, 10) +
+      annotate("text", x = -20, y = 9,
                label = paste0("Pearson r = ", round(cor_value, 2)),
                size = 5, hjust = 0) +
       scale_color_manual(values = c("Female-biased (Ovaries)" = "#e54141",
@@ -911,7 +917,7 @@ if (file.exists(gdx_file)) {
         y = "Gonadectomy gonad effect size (t-value)",
         color = ""
       ) +
-      theme_minimal(base_size = 12) +
+      theme_classic(base_size = 12) +
       theme(
         plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
         legend.position = "bottom",

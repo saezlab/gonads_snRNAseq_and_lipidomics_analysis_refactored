@@ -191,6 +191,22 @@ cat(strrep("-", 80), "\n")
 cat("5. DIFFERENTIAL ANALYSIS\n")
 cat(strrep("-", 80), "\n\n")
 
+# NOTE: Each mouse contributes two pseudobulks (Pericentral + Periportal), which
+# are treated as independent samples here. Without duplicateCorrelation(), limma
+# does not account for within-mouse correlation between zones. This has opposite
+# effects depending on the contrast:
+#   - Between-gonad contrasts (testes_vs_ova, centraltestes_vs_centralova, etc.):
+#     each mouse counted twice as "independent" -> inflated effective N ->
+#     OVERESTIMATES significance. LogFC values are ~5x larger (median) than WF02,
+#     though directions are consistent (r = 0.81).
+#   - Within-mouse zonation contrasts (portalova_vs_centralova, etc.):
+#     paired measurements treated as independent -> between-mouse variability
+#     inflates residual variance -> UNDERESTIMATES significance.
+# Consider using limma's duplicateCorrelation() with mouse ID as blocking factor
+# to properly account for within-mouse correlation. This would decrease significance
+# for gonad contrasts (correct inflation) and increase significance for zonation
+# contrasts (leverage pairing).
+
 # Prepare targets
 targets <- meta_data_df[, c("sample", "condition")]
 names(targets)[2] <- "condition"
@@ -493,11 +509,12 @@ axis_limit_bias <- 20
 bias_data$zonation_cap <- pmax(pmin(bias_data$zonation_bias, axis_limit_bias), -axis_limit_bias)
 bias_data$sex_cap <- pmax(pmin(bias_data$sex_bias, axis_limit_bias), -axis_limit_bias)
 
-# Curated gene labels: key Cyp genes + Xenium-validated zonation genes (Fig panel D)
-genes_to_label_bias <- c("Cyp2c38", "Cyp2c29", "Cyp2b13", "Cyp2b9", "Cyp2d9",
-                          "Cyp2e1", "Cyp2f2", "Sult3a1",
-                          "Tox", "Nipal1", "Slco1a1", "Chrm3", "C8a",
-                          "Nt5e", "Tafa2", "Ugt2b1", "Abcg2")
+# Label genes with strong dual bias: |t| > 15 for BOTH zonation and sex bias
+label_threshold <- 12
+genes_to_label_bias <- bias_data$gene[abs(bias_data$zonation_bias) > label_threshold &
+                                       abs(bias_data$sex_bias) > label_threshold]
+cat("  Genes labeled (|t| >", label_threshold, "for both axes):", length(genes_to_label_bias), "\n")
+cat("   ", paste(genes_to_label_bias, collapse = ", "), "\n")
 
 # Create scatter plot with standard color scheme (blue=testes, red=ovaries)
 bias_scatter <- ggplot(bias_data, aes(x = zonation_cap, y = sex_cap)) +
@@ -514,15 +531,15 @@ bias_scatter <- ggplot(bias_data, aes(x = zonation_cap, y = sex_cap)) +
   geom_point(data = bias_data[!bias_data$category %in% c("None", "Pericentral only", "Periportal only"), ],
              aes(color = category), alpha = 0.6, size = 1.5) +
   # Label key genes with white background for readability
-  ggrepel::geom_label_repel(
+  ggrepel::geom_text_repel(
     data = bias_data[bias_data$gene %in% genes_to_label_bias, ],
     aes(label = gene, color = category),
     size = 4.5, fontface = "bold.italic",
-    fill = alpha("white", 0.85),
-    label.size = 0.2, label.padding = unit(0.15, "lines"),
     max.overlaps = 30,
-    segment.size = 0.4, segment.alpha = 0.7,
+    segment.color = "grey30", segment.size = 0.4, segment.alpha = 0.7,
+    min.segment.length = 0,
     force = 3, box.padding = 0.7, point.padding = 0.4,
+    arrow = arrow(length = unit(0.01, "npc"), type = "closed"),
     show.legend = FALSE
   ) +
   scale_color_manual(
@@ -537,10 +554,10 @@ bias_scatter <- ggplot(bias_data, aes(x = zonation_cap, y = sex_cap)) +
     name = NULL
   ) +
   scale_x_continuous(expand = expansion(mult = 0.02)) +
-  scale_y_reverse(expand = expansion(mult = 0.02)) +
+  scale_y_continuous(expand = expansion(mult = 0.02)) +
   labs(
     x = "Zonation bias (t-value)\n<- Pericentral | Periportal ->",
-    y = "Sex bias (t-value)\n<- Testes | Ovaries ->"
+    y = "Sex bias (t-value)\n<- Ovaries | Testes ->"
   ) +
   guides(color = guide_legend(nrow = 3, byrow = TRUE)) +
   theme_classic(base_size = 14) +
@@ -643,6 +660,123 @@ ggsave(file.path(zonation_dir, "zone_specific_sex_bias_scatter.pdf"),
        plot = sex_bias_scatter, width = 6, height = 6.5)
 
 cat("  Saved zone-specific sex bias scatter plot\n\n")
+
+################################################################################
+# 10b. ZONATION-SPECIFIC SEX DIFFERENCES QUADRANT PLOT
+################################################################################
+
+cat(strrep("-", 80), "\n")
+cat("10b. ZONATION-SPECIFIC SEX DIFFERENCES QUADRANT PLOT\n")
+cat(strrep("-", 80), "\n\n")
+
+cat("Creating quadrant plot: gonadal effect in pericentral vs periportal.\n")
+cat("This mirrors the sex-specific zonation quadrant (section 12) but with inverted axes:\n")
+cat("  x = Testes vs Ovaries in Pericentral hepatocytes\n")
+cat("  y = Testes vs Ovaries in Periportal hepatocytes\n")
+cat("  Blue band (|x| < 1): weak sex effect in PC -> periportal-specific\n")
+cat("  Red band (|y| < 1): weak sex effect in PP -> pericentral-specific\n\n")
+
+# Prepare data
+gonad_by_zone <- t_table[, c("gene", "centraltestes_vs_centralova",
+                               "portaltestes_vs_portalova",
+                               "testes_effect_zonation")]
+names(gonad_by_zone) <- c("gene", "gonad_pericentral", "gonad_periportal", "interaction")
+
+# Classify genes mirroring the quadrant plot logic:
+# Pericentral-specific: high interaction AND |gonad_periportal| < 1
+# Periportal-specific:  high interaction AND |gonad_pericentral| < 1
+gonad_by_zone$category <- "None"
+
+gonad_zone_threshold <- 4
+cat("  Using interaction threshold: |t| >", gonad_zone_threshold, "\n\n")
+
+pc_specific_idx <- abs(gonad_by_zone$interaction) > gonad_zone_threshold & abs(gonad_by_zone$gonad_periportal) < 1
+gonad_by_zone$category[pc_specific_idx & gonad_by_zone$gonad_pericentral > 0] <- "Testes pericentral"
+gonad_by_zone$category[pc_specific_idx & gonad_by_zone$gonad_pericentral < 0] <- "Ovaries pericentral"
+
+pp_specific_idx <- abs(gonad_by_zone$interaction) > gonad_zone_threshold & abs(gonad_by_zone$gonad_pericentral) < 1
+gonad_by_zone$category[pp_specific_idx & gonad_by_zone$gonad_periportal > 0] <- "Testes periportal"
+gonad_by_zone$category[pp_specific_idx & gonad_by_zone$gonad_periportal < 0] <- "Ovaries periportal"
+
+gonad_by_zone$category <- factor(gonad_by_zone$category,
+                                  levels = c("Testes pericentral", "Testes periportal",
+                                             "Ovaries pericentral", "Ovaries periportal", "None"))
+
+# Colors matching the project scheme
+gonad_zone_colors <- c(
+  "Testes pericentral" = "#2b64d6",
+  "Testes periportal" = "#5f8dff",
+  "Ovaries pericentral" = "#d32f2f",
+  "Ovaries periportal" = "#ff5555",
+  "None" = "#cccccc"
+)
+
+for (cat_name in levels(gonad_by_zone$category)[1:4]) {
+  cat("  ", cat_name, ":", sum(gonad_by_zone$category == cat_name), "\n")
+}
+cat("  None:", sum(gonad_by_zone$category == "None"), "\n\n")
+
+# Cap values
+gonad_by_zone$pc_cap <- pmin(pmax(gonad_by_zone$gonad_pericentral, -20), 20)
+gonad_by_zone$pp_cap <- pmin(pmax(gonad_by_zone$gonad_periportal, -15), 15)
+
+# Gene labels
+genes_to_label_gonad <- c("Cyp2c38", "Cyp2c29", "Cyp2b13", "Cyp2b9", "Cyp2d9",
+                           "Sult3a1", "Mtmr11", "Abcb1a",
+                           "Cyp2e1", "Cyp2f2", "Tox", "Slco1a1")
+
+# Only label classified (colored) genes — curated list OR high effect
+gonad_by_zone$label_gene <- FALSE
+gonad_by_zone$label_gene[gonad_by_zone$category != "None" & gonad_by_zone$gene %in% genes_to_label_gonad] <- TRUE
+gonad_by_zone$label_gene[gonad_by_zone$category != "None" &
+  (abs(gonad_by_zone$gonad_pericentral) >= 5 | abs(gonad_by_zone$gonad_periportal) >= 5)] <- TRUE
+
+# Create quadrant scatter plot
+gonad_zone_plot <- ggplot(gonad_by_zone, aes(x = pc_cap, y = pp_cap)) +
+  # Shaded bands for specificity regions
+  annotate("rect", xmin = -1, xmax = 1, ymin = -Inf, ymax = Inf,
+           fill = "#4173d8", alpha = 0.08) +
+  annotate("rect", xmin = -Inf, xmax = Inf, ymin = -1, ymax = 1,
+           fill = "#e54141", alpha = 0.08) +
+  # Reference lines
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray50", linewidth = 0.3) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "gray50", linewidth = 0.3) +
+  geom_hline(yintercept = c(-1, 1), linetype = "dotted", color = "#e54141", linewidth = 0.4) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dotted", color = "#4173d8", linewidth = 0.4) +
+  # All points
+  geom_point(aes(color = category), alpha = 0.7, size = 1.5) +
+  # Highlight classified genes
+  geom_point(data = gonad_by_zone[gonad_by_zone$category != "None", ],
+             aes(color = category), size = 2.5, alpha = 0.9) +
+  # Labels
+  ggrepel::geom_text_repel(
+    data = gonad_by_zone[gonad_by_zone$label_gene, ],
+    aes(label = gene, color = category),
+    size = 3, max.overlaps = 25,
+    segment.size = 0.3, segment.alpha = 0.6,
+    box.padding = 0.4, point.padding = 0.3,
+    show.legend = FALSE
+  ) +
+  scale_color_manual(values = gonad_zone_colors, name = "Zonation-specific\nsex bias") +
+  labs(
+    x = "Sex bias in Pericentral (t-statistic)\n\u2190 Ovaries | Testes \u2192",
+    y = "Sex bias in Periportal (t-statistic)\n\u2190 Ovaries | Testes \u2192",
+    title = "Zonation-specific sex differences",
+    subtitle = paste0("Blue shading: |t| < 1 in pericentral (periportal-specific region)\n",
+                     "Red shading: |t| < 1 in periportal (pericentral-specific region)")
+  ) +
+  coord_cartesian(xlim = c(-20, 20), ylim = c(-15, 15)) +
+  theme_classic() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 9, color = "gray40")
+  )
+
+ggsave(file.path(zonation_dir, "zonation_specific_sex_differences_quadrant.pdf"),
+       plot = gonad_zone_plot, width = 10, height = 9)
+
+cat("  Saved zonation-specific sex differences quadrant plot\n\n")
 
 ################################################################################
 # 11. OPTIMAL THRESHOLD DETECTION (must run before gene identification)
@@ -937,22 +1071,13 @@ ovaries_region <- data.frame(
 )
 
 # Calculate axis limits based on labeled genes only (not all genes)
-labeled_genes_data <- scatter_data[scatter_data$label_gene, ]
-if (nrow(labeled_genes_data) > 0) {
-  x_range <- range(labeled_genes_data$zonation_ovaries, na.rm = TRUE)
-  y_range <- range(labeled_genes_data$zonation_testes, na.rm = TRUE)
-  # Add 15% padding
-  x_lim <- c(x_range[1] * 1.15, x_range[2] * 1.15)
-  y_lim <- c(y_range[1] * 1.15, y_range[2] * 1.15)
-  # Ensure we include the selection regions (-1, 1)
-  x_lim <- c(min(x_lim[1], -1.5), max(x_lim[2], 1.5))
-  y_lim <- c(min(y_lim[1], -1.5), max(y_lim[2], 1.5))
-} else {
-  x_lim <- c(-15, 15)
-  y_lim <- c(-15, 15)
-}
+# Cap values and fix axis limits
+scatter_data$zonation_ovaries <- pmin(pmax(scatter_data$zonation_ovaries, -20), 20)
+scatter_data$zonation_testes  <- pmin(pmax(scatter_data$zonation_testes, -15), 15)
+x_lim <- c(-20, 20)
+y_lim <- c(-15, 15)
 
-cat("    Axis limits - X:", round(x_lim, 1), "Y:", round(y_lim, 1), "\n")
+cat("    Axis limits - X:", x_lim, "Y:", y_lim, "\n")
 
 # Create the quadrant scatter plot
 quadrant_plot <- ggplot(scatter_data, aes(x = zonation_ovaries, y = zonation_testes)) +
@@ -1787,7 +1912,7 @@ p_optimal <- ggplot(optimal_metrics, aes(x = threshold)) +
   ) +
   scale_x_continuous(breaks = seq(0, 10, by = 1)) +
   scale_y_continuous(limits = c(0, 1), labels = scales::percent_format()) +
-  theme_minimal(base_size = 12) +
+  theme_classic(base_size = 12) +
   theme(
     legend.position = "bottom",
     panel.grid.minor = element_blank()
@@ -1835,7 +1960,7 @@ p_sensitivity_total <- ggplot(proportion_total,
   ) +
   scale_x_continuous(breaks = seq(0, 10, by = 1)) +
   scale_y_continuous(labels = scales::percent_format()) +
-  theme_minimal(base_size = 12) +
+  theme_classic(base_size = 12) +
   theme(
     legend.position = "right",
     panel.grid.minor = element_blank()
@@ -1977,7 +2102,7 @@ p_class_proportions <- ggplot(class_proportions_by_gonad,
   ) +
   scale_y_continuous(labels = scales::percent_format(), expand = expansion(mult = c(0.15, 0))) +
   coord_flip() +
-  theme_minimal(base_size = 10) +
+  theme_classic(base_size = 10) +
   theme(
     axis.text.y = element_blank(),
     axis.title.y = element_blank(),
@@ -2061,7 +2186,7 @@ p_class_proportions_horizontal <- ggplot(butterfly_data,
     breaks = c(-1, -0.5, 0, 0.5, 1)
   ) +
   scale_x_discrete(position = "top") +
-  theme_minimal(base_size = 10) +
+  theme_classic(base_size = 10) +
   theme(
     axis.text.x.top = element_text(angle = 90, hjust = 0, vjust = 0.5, size = 8, face = "bold"),
     axis.title.x = element_blank(),
@@ -2150,7 +2275,7 @@ pg_plot_data <- pg_plot_data %>%
 # Make x-axis symmetrical and centered on 0
 x_max <- max(abs(pg_plot_data$testes_vs_ova)) * 1.1
 y_range <- c(-x_max, x_max)
-common_theme <- theme_minimal(base_size = 10) +
+common_theme <- theme_classic(base_size = 10) +
   theme(
     axis.title.y = element_blank(),
     panel.grid.minor = element_blank(),
@@ -2447,7 +2572,7 @@ p_jitter_vertical <- ggplot(jitter_data_v3,
   ) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "grey30") +
   coord_flip() +
-  theme_minimal(base_size = 10) +
+  theme_classic(base_size = 10) +
   theme(
     axis.text.y = element_text(hjust = 1),
     legend.position = "right",
@@ -2503,6 +2628,24 @@ summary_stats <- data.frame(
 )
 
 write.csv(summary_stats, file.path(zonation_dir, "summary_statistics.csv"), row.names = FALSE)
+
+# Export long-format ttop for MCP access (gene, contrast, logFC, P.Value, adj.P.Val, t)
+cat("  Exporting long-format ttop CSV for MCP queries...\n")
+ttop_long_list <- lapply(names(ttop_list), function(contrast_name) {
+  tt <- ttop_list[[contrast_name]]
+  data.frame(
+    gene = rownames(tt),
+    contrast = contrast_name,
+    logFC = tt$logFC,
+    t = tt$t,
+    P.Value = tt$P.Value,
+    adj.P.Val = tt$adj.P.Val,
+    stringsAsFactors = FALSE
+  )
+})
+ttop_long <- do.call(rbind, ttop_long_list)
+write.csv(ttop_long, file.path(zonation_dir, "ttop_full_long.csv"), row.names = FALSE)
+cat("  Saved: results/zonation/ttop_full_long.csv\n")
 
 cat("  Saved differential analysis results\n")
 cat("  Saved summary statistics\n\n")

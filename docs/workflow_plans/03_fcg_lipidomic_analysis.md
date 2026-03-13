@@ -22,7 +22,8 @@ source("scripts/visualization/dimred_plots.R")
 | # | Section | Lines (approx) | Description |
 |---|---------|----------------|-------------|
 | 1 | Data Loading | 1-80 | Load lipidomic CSV, log2 transform, load metadata |
-| 2 | PCA | 81-180 | PCA colored by gonad type and sex chromosome |
+| 1b | RNA Sample Filtering | ~103-112 | Load RNA metadata, filter lipidomic to 43 shared samples (drop 5 without RNA) |
+| 2 | PCA | ~115-190 | PCA colored by gonad type and sex chromosome |
 | 3 | DE Analysis (FCG) | 181-350 | limma for 6 contrasts on lipids |
 | 3.5 | DE Analysis (GDX) | 351-450 | GDX lipidomic DE for validation |
 | 4 | Volcano Plots | 451-530 | Volcano plots for all contrasts |
@@ -37,6 +38,7 @@ source("scripts/visualization/dimred_plots.R")
 
 - `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` - Raw lipidomic data (1,386 lipids)
 - `data/Suppl_Table_1_OverviewData.xlsx` - Sample metadata
+- `data/RNA/meta_data_df.csv` - RNA metadata (used to filter lipidomic to 43 shared samples)
 - `support/linex2_adjacency_matrix_OT.csv` - LINEX2 lipid reaction network
 - `support/lipid_classification.csv` - Lipid class hierarchy
 

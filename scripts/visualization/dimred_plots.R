@@ -105,7 +105,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
 
   comp1 <- ggplot(data.to.plot, aes(x = pc1, color = condition)) +
     geom_density() +
-    theme_minimal() +
+    theme_classic() +
     xlab(paste(xCompLab, round(100 * explained[components[1]], digits = 2), '%)', sep = '')) +
     theme(legend.position = "none") +
     scale_x_continuous(
@@ -116,7 +116,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
 
   comp2 <- ggplot(data.to.plot, aes(x = pc2, color = condition)) +
     geom_density() +
-    theme_minimal() +
+    theme_classic() +
     xlab(paste(yCompLab, round(100 * explained[components[2]], digits = 2), '%)', sep = '')) +
     theme(legend.position = "none") +
     scale_x_continuous(
@@ -127,7 +127,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
 
   comp3 <- ggplot(data.to.plot, aes(x = pc3, color = condition)) +
     geom_density() +
-    theme_minimal() +
+    theme_classic() +
     xlab(paste(zCompLab, round(100 * explained[components[3]], digits = 2), '%)', sep = '')) +
     theme(legend.position = "none") +
     scale_x_continuous(
@@ -143,7 +143,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
     geom_point(size = pointSize, alpha = 0.3) +
     geom_text(aes(label = sample), nudge_y = 1.0, size = 6) +
     scale_alpha_discrete(range = c(0.3, 1.0)) +
-    theme_minimal() +
+    theme_classic() +
     xlab(paste(xCompLab, round(100 * explained[components[1]], digits = 2), '%)', sep = '')) +
     ylab(paste(yCompLab, round(100 * explained[components[2]], digits = 2), '%)', sep = '')) +
     xlim(c(-max(abs(pca$x[, components[1]])), max(abs(pca$x[, components[1]])))) +
@@ -164,7 +164,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
     comp1vcomp2 <- ggplot(data.to.plot, aes(x = pc1, y = pc2, color = condition)) +
       geom_point(size = pointSize, alpha = 0.6) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab(paste(yCompLab, round(100 * explained[components[2]], digits = 2), '%)', sep = '')) +
       ylim(c(-max(abs(pca$x[, components[3]])), max(abs(pca$x[, components[3]])))) +
@@ -175,7 +175,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
     comp1vcomp3 <- ggplot(data.to.plot, aes(x = pc1, y = pc3, color = condition)) +
       geom_point(size = pointSize, alpha = 0.3) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab(paste(zCompLab, round(100 * explained[components[3]], digits = 2), '%)', sep = '')) +
       ylim(c(-max(abs(pca$x[, components[3]])), max(abs(pca$x[, components[3]])))) +
@@ -188,7 +188,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
     comp2vcomp3 <- ggplot(data.to.plot, aes(x = pc2, y = pc3, color = condition)) +
       geom_point(size = pointSize, alpha = 0.3) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab("") +
       scale_y_continuous(
@@ -206,7 +206,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
       geom_point(size = pointSize, alpha = 0.3) +
       geom_text_repel(aes(label = sample), size = 2) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab(paste(yCompLab, round(100 * explained[components[2]], digits = 2), '%)', sep = '')) +
       ylim(c(-max(abs(pca$x[, components[2]])), max(abs(pca$x[, components[2]])))) +
@@ -220,7 +220,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
       geom_point(size = pointSize, alpha = 0.3) +
       geom_text_repel(aes(label = sample), size = 2) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab(paste(zCompLab, round(100 * explained[components[3]], digits = 2), '%)', sep = '')) +
       ylim(c(-max(abs(pca$x[, components[3]])), max(abs(pca$x[, components[3]])))) +
@@ -234,7 +234,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
       geom_point(size = pointSize, alpha = 0.3) +
       geom_text_repel(aes(label = sample), size = 2) +
       scale_alpha_discrete(range = c(0.3, 1.0)) +
-      theme_minimal() +
+      theme_classic() +
       xlab("") +
       ylab("") +
       scale_y_continuous(
@@ -257,7 +257,7 @@ nicePCA <- function(df, targets, components = c(1, 2, 3), centering = TRUE,
 
   boulder <- ggplot(explained_df, aes(x = Components, y = `% of explained variance`, fill = "red")) +
     geom_col() +
-    theme_minimal() +
+    theme_classic() +
     scale_y_continuous(position = "right") +
     theme(
       legend.position = "none",
@@ -401,7 +401,7 @@ simple_pca <- function(df, targets, components = c(1, 2), centering = TRUE,
   # Create plot
   p <- ggplot(data.to.plot, aes(x = pc1, y = pc2, color = condition)) +
     geom_point(size = pointSize, alpha = 0.6) +
-    theme_minimal() +
+    theme_classic() +
     xlab(paste0("PC", components[1], " (",
                 round(100 * explained[components[1]], 1), "%)")) +
     ylab(paste0("PC", components[2], " (",

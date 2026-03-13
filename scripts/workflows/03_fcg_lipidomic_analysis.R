@@ -101,6 +101,17 @@ cat("  Lipids:", nrow(lipidomic), "features x", ncol(lipidomic), "samples\n")
 cat("  Metadata:", nrow(metadata_lipid), "samples\n")
 cat("  Groups:", paste(unique(metadata_lipid$group), collapse = ", "), "\n\n")
 
+# Filter lipidomic samples to match RNA samples (48 lipid -> 43 shared)
+cat("Filtering lipidomic samples to match RNA cohort...\n")
+rna_meta <- read.csv("data/RNA/meta_data_df.csv")
+rna_mice <- unique(gsub("-", "_", rna_meta$sample_name))
+keep <- colnames(lipidomic)[colnames(lipidomic) %in% rna_mice]
+dropped <- setdiff(colnames(lipidomic), keep)
+lipidomic <- lipidomic[, keep]
+metadata_lipid <- metadata_lipid %>% filter(sample %in% keep)
+cat("  Kept:", length(keep), "samples | Dropped:", length(dropped),
+    "(", paste(dropped, collapse = ", "), ")\n\n")
+
 # ==============================================================================
 # STEP 2: Exploratory PCA Visualization
 # ==============================================================================
@@ -449,8 +460,17 @@ if (file.exists(gdx_tval_file)) {
                          labels = c("Female-biased (Ovaries)", "Male-biased (Testes)"),
                          name = "FCG Direction") +
       geom_smooth(method = "lm", se = TRUE, color = "black") +
-      ggrepel::geom_label_repel(max.overlaps = 20, size = 3) +
-      theme_minimal() +
+      ggrepel::geom_text_repel(
+        max.overlaps = 20, size = 3,
+        segment.color = "grey30",
+        segment.size = 0.4,
+        segment.linetype = 1,
+        min.segment.length = 0,
+        box.padding = 0.5,
+        point.padding = 0.3,
+        arrow = arrow(length = unit(0.01, "npc"), type = "closed")
+      ) +
+      theme_classic() +
       labs(
         title = "FCG Model vs. Gonadectomy Validation",
         subtitle = paste0("Pearson r = ", round(cor_value, 3)),
@@ -628,7 +648,7 @@ if (!is.null(gonadal_comparison)) {
     ) +
     geom_hline(yintercept = 0, linetype = "dashed") +
     coord_flip() +
-    theme_minimal(base_size = 10) +
+    theme_classic(base_size = 10) +
     theme(
       axis.text.y = element_text(hjust = 1),
       legend.position = "right",
@@ -639,7 +659,7 @@ if (!is.null(gonadal_comparison)) {
   # Save plot
   ggsave("results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf",
          plot = p_enrichment,
-         width = 10,
+         width = 4,
          height = 8)
 
   cat("Lipid class enrichment plot saved!\n")
@@ -809,7 +829,7 @@ if (dir.exists(bubble_data_dir)) {
       ) +
       xlim(c_limits) +
       ylim(db_limits) +
-      theme_minimal() +
+      theme_classic() +
       theme(
         plot.title = element_text(face = "bold", size = 11),
         legend.position = "right"

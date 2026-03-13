@@ -159,7 +159,9 @@ volcano_nice <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = NU
     # With labels
     a <- ggplot(df, aes(x = logFC, y = -log10(adj.P.Val), color = couleur)) +
       geom_point(alpha = 0.5) +
-      geom_label_repel(aes(label = condLabel)) +
+      geom_text_repel(aes(label = condLabel), segment.color = "grey30", segment.size = 0.4,
+                      min.segment.length = 0, box.padding = 0.5, point.padding = 0.3,
+                      arrow = arrow(length = unit(0.01, "npc"), type = "closed")) +
       stat_function(fun = xneg, xlim = c(-xlimAbs, -vAss),
                     color = "black", alpha = 0.7) +
       ylim(c(0, ylimAbs)) +
@@ -169,7 +171,7 @@ volcano_nice <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = NU
       scale_colour_manual(values = c(col_high_neut_low[2],
                                      col_high_neut_low[3],
                                      col_high_neut_low[1])) +
-      theme_minimal() +
+      theme_classic() +
       theme(legend.position = "none")
   } else {
     # Without labels
@@ -185,7 +187,7 @@ volcano_nice <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = NU
         scale_colour_manual(values = c(col_high_neut_low[2],
                                        col_high_neut_low[1],
                                        col_high_neut_low[3])) +
-        theme_minimal() +
+        theme_classic() +
         theme(legend.position = "none")
     } else {
       # Asymptotic curves
@@ -200,7 +202,7 @@ volcano_nice <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = NU
         scale_colour_manual(values = c(col_high_neut_low[2],
                                        col_high_neut_low[1],
                                        col_high_neut_low[3])) +
-        theme_minimal() +
+        theme_classic() +
         theme(legend.position = "none")
     }
   }
@@ -578,7 +580,9 @@ volcano_nice_xenium <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vA
     # With labels
     a <- ggplot(df, aes(x = logFC, y = -log10(adj.P.Val), color = couleur)) +
       geom_point(alpha = 0.5) +
-      geom_label_repel(aes(label = condLabel)) +
+      geom_text_repel(aes(label = condLabel), segment.color = "grey30", segment.size = 0.4,
+                      min.segment.length = 0, box.padding = 0.5, point.padding = 0.3,
+                      arrow = arrow(length = unit(0.01, "npc"), type = "closed")) +
       stat_function(fun = xneg, xlim = c(-xlimAbs, -vAss),
                     color = "black", alpha = 0.7) +
       ylim(c(0, ylimAbs)) +
@@ -588,7 +592,7 @@ volcano_nice_xenium <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vA
       scale_colour_manual(values = c(col_high_neut_low[2],
                                      col_high_neut_low[3],
                                      col_high_neut_low[1])) +
-      theme_minimal() +
+      theme_classic() +
       theme(legend.position = "none")
   } else {
     # Without labels
@@ -604,7 +608,7 @@ volcano_nice_xenium <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vA
         scale_colour_manual(values = c(col_high_neut_low[2],
                                        col_high_neut_low[1],
                                        col_high_neut_low[3])) +
-        theme_minimal() +
+        theme_classic() +
         theme(legend.position = "none")
     } else {
       # Asymptotic curves
@@ -619,7 +623,7 @@ volcano_nice_xenium <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vA
         scale_colour_manual(values = c(col_high_neut_low[2],
                                        col_high_neut_low[1],
                                        col_high_neut_low[3])) +
-        theme_minimal() +
+        theme_classic() +
         theme(legend.position = "none")
     }
   }

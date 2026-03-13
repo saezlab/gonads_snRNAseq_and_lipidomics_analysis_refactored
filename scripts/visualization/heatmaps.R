@@ -523,7 +523,7 @@ create_bubble_heatmap <- function(data, size_column = "p_value",
       midpoint = 0,
       name = "Score"
     ) +
-    theme_minimal() +
+    theme_classic() +
     theme(
       axis.text.x = element_text(angle = 45, hjust = 1),
       axis.title = element_blank(),
