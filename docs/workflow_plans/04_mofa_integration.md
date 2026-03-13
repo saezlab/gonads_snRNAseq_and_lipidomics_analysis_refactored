@@ -57,6 +57,13 @@ source("scripts/visualization/heatmaps.R")
 | `cor_mat` | matrix | Gene-lipid Pearson correlations |
 | `threshold_cor` | numeric | Correlation threshold (0.65 for sparse, 0 for full) |
 
+## Sample Harmonization (2026-03-13)
+
+`prepare_mofa_input()` in `scripts/core/multiomics.R` now filters **both** RNA and lipidomic
+samples to their intersection (43 common samples). Previously, only RNA was filtered to match
+lipidomic, leaving 48 lipidomic samples (5 extra) in the MOFA input. Old models archived in
+`results/mofa/RNA/old_20260313/`.
+
 ## Coherence Assessment
 
 **Status: GOOD** — No real issues found. Notes on design patterns below.

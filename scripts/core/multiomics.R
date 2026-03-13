@@ -105,11 +105,21 @@ prepare_mofa_input <- function(rna_data,
   # Reorder columns: sample, feature, view, value (CRITICAL: exact order)
   rna_mofa_long <- rna_mofa_long[, c("sample", "feature", "view", "value")]
 
-  # Filter to samples present in lipidomic data (CRITICAL: exact filtering)
+  # Harmonize samples: keep only samples present in BOTH RNA and lipidomic data
   samples_in_lipid <- names(lipidomic_data)
-  rna_mofa_long <- rna_mofa_long[rna_mofa_long$sample %in% samples_in_lipid, ]
+  samples_in_rna <- unique(rna_mofa_long$sample)
+  common_samples <- intersect(samples_in_rna, samples_in_lipid)
+
+  rna_mofa_long <- rna_mofa_long[rna_mofa_long$sample %in% common_samples, ]
 
   if (verbose) {
+    cat("  RNA samples:", length(samples_in_rna), "\n")
+    cat("  Lipidomic samples:", length(samples_in_lipid), "\n")
+    cat("  Common samples (used for MOFA):", length(common_samples), "\n")
+    if (length(samples_in_lipid) != length(common_samples)) {
+      cat("  ⚠ Removed", length(samples_in_lipid) - length(common_samples),
+          "lipidomic-only samples\n")
+    }
     cat("  RNA long format:", nrow(rna_mofa_long), "rows\n")
     cat("  RNA views:", paste(unique(rna_mofa_long$view), collapse = ", "), "\n")
   }
@@ -118,8 +128,8 @@ prepare_mofa_input <- function(rna_data,
   # Step 2: Process lipidomic data
   # ============================================================================
 
-  # Make a copy
-  lipid_mofa <- as.data.frame(lipidomic_data)
+  # Make a copy — filter to common samples only
+  lipid_mofa <- as.data.frame(lipidomic_data[, common_samples])
 
   # Add feature column
   lipid_mofa$feature <- row.names(lipid_mofa)
@@ -136,6 +146,7 @@ prepare_mofa_input <- function(rna_data,
 
   if (verbose) {
     cat("  Lipidomic long format:", nrow(lipid_mofa_long), "rows\n")
+    cat("  Lipidomic samples:", length(unique(lipid_mofa_long$sample)), "\n")
   }
 
   # ============================================================================

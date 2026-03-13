@@ -645,7 +645,7 @@ if (nrow(lipid_only_results$coefficients) > 0) {
     fontsize = 10,
     fontsize_row = 9,
     fontsize_col = 11,
-    angle_col = 45
+    angle_col = "45"
   )
   dev.off()
 
@@ -1436,7 +1436,7 @@ if (nrow(chain_data) > 0) {
            fontsize = 10,
            fontsize_row = 11,
            fontsize_col = 10,
-           angle_col = 45)
+           angle_col = "45")
   dev.off()
 
   cat("  Panel A saved: summary_figure_panelA.pdf\n")

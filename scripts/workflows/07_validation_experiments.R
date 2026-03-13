@@ -213,7 +213,7 @@ pheatmap(
   cluster_cols = TRUE,
   cluster_rows = TRUE,
   color = palette,
-  angle_col = 315,
+  angle_col = "315",
   display_numbers = FALSE,
   main = "Lipid Changes Across Gene Knockdowns\n(t-statistics)"
 )
@@ -369,7 +369,10 @@ for (gene_name in available_global) {
     ggtitle(paste0(toupper(gene_name), " Knockdown Validation")) +
     xlab("Predicted Association\n(Correlation in FCGL mice hepatocytes)") +
     ylab("Observed Lipid Change\n(t-statistic in knockdown experiment)") +
-    geom_label_repel(max.overlaps = 20, size = 2.5) +
+    geom_text_repel(max.overlaps = 20, size = 2.5,
+                    segment.color = "grey30", segment.size = 0.4,
+                    min.segment.length = 0, box.padding = 0.5, point.padding = 0.3,
+                    arrow = arrow(length = unit(0.01, "npc"), type = "closed")) +
     theme_classic(base_size = 12) +
     theme(
       plot.title = element_text(face = "bold", size = 14),
@@ -584,7 +587,10 @@ if (length(available_networks) == 0) {
       ggtitle(paste0(toupper(gene_name), " Knockdown Validation\n", context_label)) +
       xlab("Predicted Association\n(Zonation-specific correlation in FCGL mice)") +
       ylab("Observed Lipid Change\n(t-statistic in knockdown experiment)") +
-      geom_label_repel(max.overlaps = 20, size = 2.5) +
+      geom_text_repel(max.overlaps = 20, size = 2.5,
+                      segment.color = "grey30", segment.size = 0.4,
+                      min.segment.length = 0, box.padding = 0.5, point.padding = 0.3,
+                      arrow = arrow(length = unit(0.01, "npc"), type = "closed")) +
       theme_classic(base_size = 12) +
       theme(
         plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
