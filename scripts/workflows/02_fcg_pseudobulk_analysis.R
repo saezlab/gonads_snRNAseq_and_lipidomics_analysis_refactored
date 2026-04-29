@@ -30,6 +30,7 @@
 #' 7D. Xenium spatial validation volcano plot (100-gene panel)
 #' 8. Transcription factor activity analysis
 #' 9. Save all results
+#' 10. Proteomics validation (WT male vs female bulk liver proteomics)
 #'
 #' Output:
 #' - results/pseudobulk/ttop_full_list.RData: FCG DE results
@@ -41,6 +42,7 @@
 #' - results/pseudobulk/pathways/: Pathway heatmaps
 #' - results/pseudobulk/gdx_validation_comparison.pdf: GDX validation plot
 #' - results/pseudobulk/xenium_validation_volcano.pdf: Xenium spatial validation
+#' - results/pseudobulk/proteo_validation_comparison.pdf: Proteomics validation plot
 
 library(dplyr)
 library(tidyr)
@@ -49,6 +51,7 @@ library(ggplot2)
 library(pheatmap)
 library(gridExtra)
 library(ggridges)
+library(vsn)
 
 # Source refactored modules
 # ==========================
@@ -482,6 +485,12 @@ cat("Creating volcano plots for all contrasts and cell types...\n\n")
 # Create output directory
 dir.create("results/pseudobulk/volcanos", recursive = TRUE, showWarnings = FALSE)
 
+# Define manual labels for specific contrast + cell type combinations
+manual_label_map <- list(
+  "XY vs XX__Hepatocytes" = c("Xist", "Tsix", "Kdm6a", "Ddx3y", "Uty", "Kdm5d"),
+  "Testes vs Ovaries__Hepatocytes" = c("Cyp2b9", "Cyp2b13", "Stambpl1", "Cyp2d9", "Mup20", "Slco1a1")
+)
+
 # Create volcano plots for each contrast and cell type
 for (contrast_name in names(ttop_full_list)) {
   cat("Processing:", contrast_name, "\n")
@@ -491,8 +500,12 @@ for (contrast_name in names(ttop_full_list)) {
 
     tryCatch({
       ttop <- ttop_full_list[[contrast_name]][[cell_type]]
-      
+
       ttop$P.Value <- ifelse(-log10(ttop$P.Value) > 25, 10^-25, ttop$P.Value)
+
+      # Check if this combination has manual labels
+      map_key <- paste0(contrast_name, "__", cell_type)
+      has_labels <- map_key %in% names(manual_label_map)
 
       # Create volcano plot
       p <- volcano_nice(
@@ -500,8 +513,9 @@ for (contrast_name in names(ttop_full_list)) {
         FCIndex = which(names(ttop) == "logFC"),
         pValIndex = which(names(ttop) == "P.Value"),
         IDIndex = which(names(ttop) == "ID"),
-        label = F,
-        nlabels = 40
+        label = has_labels,
+        nlabels = 0,
+        manual_labels = if (has_labels) manual_label_map[[map_key]] else NA
       )
 
       # Add labels
@@ -516,7 +530,7 @@ for (contrast_name in names(ttop_full_list)) {
       filename <- paste0("volcano_", gsub(" ", "_", contrast_name), "_",
                         gsub(" ", "_", cell_type), ".pdf")
       filepath <- file.path("results/pseudobulk/volcanos", filename)
-      ggsave(filepath, plot = p, width = 4, height = 5.5)
+      ggsave(filepath, plot = p, width = 5, height = 5)
     }, error = function(e) {
       cat("    WARNING: Error generating volcano plot for", contrast_name, "-", cell_type, "\n")
       cat("    Error message:", conditionMessage(e), "\n")
@@ -1183,6 +1197,207 @@ write.csv(pca_coords, "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv",
 cat("PCA coordinates saved to: results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv\n\n")
 
 # ==============================================================================
+# STEP 10: Proteomics Validation
+# ==============================================================================
+cat(paste(rep("=", 80), collapse = ""), "\n")
+cat("STEP 10: Proteomics Validation\n")
+cat(paste(rep("=", 80), collapse = ""), "\n\n")
+
+cat("Comparing FCG RNA gonad effects with bulk liver proteomics (WT male vs female)...\n\n")
+
+proteo_file <- "data/proteomics/P3225_fractionated_protein.tsv"
+proteo_metadata_file <- "data/proteomics/metadata.csv"
+
+if (file.exists(proteo_file) && file.exists(proteo_metadata_file)) {
+  tryCatch({
+    # --- Load and clean proteomics data ---
+    cat("Loading proteomics data...\n")
+    proteo <- as.data.frame(read.delim(proteo_file))
+
+    # Remove contaminant proteins
+    contam_idx <- grepl("contam", proteo[, 1])
+    cat("  Removing", sum(contam_idx), "contaminant proteins\n")
+    proteo <- proteo[!contam_idx, ]
+
+    # Keep Gene column (4) and TMT channel intensities (24:39)
+    proteo <- proteo[, c(4, 24:39)]
+
+    # Remove genes with duplicate entries
+    dups <- proteo$Gene[duplicated(proteo$Gene)]
+    cat("  Removing", length(unique(dups)), "genes with duplicate entries\n")
+    proteo <- proteo[!proteo$Gene %in% dups, ]
+
+    rownames(proteo) <- proteo$Gene
+    proteo <- proteo[, -1]
+
+    cat("  Proteins after filtering:", nrow(proteo), "\n")
+
+    # Replace zeros with NA before normalization
+    proteo[proteo == 0] <- NA
+
+    # --- VSN normalization ---
+    cat("  Applying VSN normalization...\n")
+    fit <- vsnMatrix(as.matrix(proteo))
+    proteo <- as.data.frame(vsn::predict(fit, as.matrix(proteo)))
+
+    # --- Load metadata and run limma ---
+    cat("Loading proteomics metadata...\n")
+    proteo_meta <- as.data.frame(readr::read_csv(proteo_metadata_file, show_col_types = FALSE))
+
+    proteo_targets <- proteo_meta[, c("col.name", "condition")]
+    names(proteo_targets) <- c("sample", "condition")
+    cat("  Conditions:", paste(unique(proteo_targets$condition), collapse = ", "), "\n")
+    cat("  Samples:", nrow(proteo_targets), "\n")
+
+    # Subset to metadata samples only
+    proteo <- proteo[, proteo_targets$sample]
+
+    # Male vs Female (WT mice: male = testes, female = ovaries)
+    proteo_comparisons <- list("male_vs_female" = c(1, -2))
+
+    cat("Running limma DE analysis (male vs female)...\n")
+    proteo_limma_res <- runLimma(proteo, proteo_targets, comparisons = proteo_comparisons)
+
+    proteo_ttop_list <- limma_res_to_ttop_list(
+      limma_res = proteo_limma_res,
+      comp_names = names(proteo_comparisons),
+      number = nrow(proteo),
+      adjust.method = "fdr"
+    )
+
+    proteo_ttop <- proteo_ttop_list$male_vs_female
+    cat("  Significant proteins (FDR < 0.05):", sum(proteo_ttop$adj.P.Val < 0.05), "\n\n")
+
+    # --- Compare protein t-values with RNA t-values ---
+    cat("Comparing protein and RNA effect sizes...\n")
+
+    # Load FCG RNA t-values
+    fcg_tval_df <- as.data.frame(readr::read_csv("results/pseudobulk/tval_full_df.csv",
+                                                   show_col_types = FALSE))
+
+    # Find the hepatocyte gonadal t-value column
+    hepa_col <- grep("Testes.*Ovaries.*Hepatocytes", names(fcg_tval_df), value = TRUE)[1]
+
+    proteo_rna_comparison <- merge(
+      proteo_ttop[, c("ID", "t")],
+      fcg_tval_df[, c("ID", hepa_col)],
+      by = "ID"
+    )
+    names(proteo_rna_comparison) <- c("ID", "proteo", "RNA")
+    cat("  Genes in common:", nrow(proteo_rna_comparison), "\n")
+
+    # Correlation
+    cor_result <- cor.test(proteo_rna_comparison$proteo, proteo_rna_comparison$RNA)
+    cat("  Pearson correlation: r =", round(cor_result$estimate, 3),
+        " p =", format(cor_result$p.value, digits = 3), "\n")
+
+    # --- Concordance of significant genes ---
+    # Merge adjusted p-values
+    ttop_RNA <- ttop_full_list[["Testes vs Ovaries"]]$Hepatocytes
+    pval_merged <- merge(
+      proteo_ttop[, c("ID", "adj.P.Val")],
+      ttop_RNA[, c("ID", "adj.P.Val")],
+      by = "ID",
+      suffixes = c(".proteo", ".RNA")
+    )
+
+    n_sig_rna <- sum(pval_merged$adj.P.Val.RNA <= 0.05)
+    n_sig_both <- sum(pval_merged$adj.P.Val.proteo <= 0.05 &
+                        pval_merged$adj.P.Val.RNA <= 0.05)
+
+    # Require concordant direction for true overlap
+    proteo_rna_comparison$sig_concordant <- proteo_rna_comparison$ID %in%
+      pval_merged$ID[pval_merged$adj.P.Val.proteo <= 0.05 & pval_merged$adj.P.Val.RNA <= 0.05]
+    proteo_rna_comparison$sig_concordant <- ifelse(
+      sign(proteo_rna_comparison$proteo) == sign(proteo_rna_comparison$RNA),
+      proteo_rna_comparison$sig_concordant,
+      FALSE
+    )
+
+    concordance_pct <- round(100 * sum(proteo_rna_comparison$sig_concordant) / n_sig_rna, 1)
+    cat("  RNA DEGs confirmed at protein level (concordant direction):",
+        sum(proteo_rna_comparison$sig_concordant), "/", n_sig_rna,
+        "(", concordance_pct, "%)\n\n")
+
+    # --- Scatter plot (same style as GDX validation in Step 7C) ---
+    cat("Creating proteomics validation plot...\n")
+
+    # Label genes with high effect sizes in both datasets
+    proteo_rna_comparison$label <- ifelse(
+      abs(proteo_rna_comparison$proteo) > 10 &
+        abs(proteo_rna_comparison$RNA) > 15,
+      proteo_rna_comparison$ID,
+      NA
+    )
+
+    # Color by direction (matching GDX plot convention)
+    proteo_rna_comparison$color <- ifelse(
+      proteo_rna_comparison$RNA < 0,
+      "Female-biased (Ovaries)",
+      "Male-biased (Testes)"
+    )
+
+    # Cap values to axis limits
+    proteo_rna_comparison$RNA <- pmin(pmax(proteo_rna_comparison$RNA, -25), 25)
+    proteo_rna_comparison$proteo <- pmin(pmax(proteo_rna_comparison$proteo, -30), 30)
+
+    p_proteo <- ggplot(proteo_rna_comparison,
+                       aes(x = RNA, y = proteo,
+                           color = color, label = label)) +
+      geom_point(alpha = 0.6, size = 1.5) +
+      geom_smooth(method = "lm", se = TRUE, color = "grey40",
+                  linewidth = 1.2, inherit.aes = FALSE,
+                  aes(x = RNA, y = proteo)) +
+      geom_text_repel(size = 3.5, max.overlaps = 20,
+                      box.padding = 0.5, point.padding = 0.3,
+                      segment.color = "grey30", segment.size = 0.4,
+                      min.segment.length = 0, show.legend = FALSE,
+                      arrow = arrow(length = unit(0.01, "npc"), type = "closed")) +
+      xlim(-25, 25) + ylim(-30, 30) +
+      annotate("text", x = -20, y = 28,
+               label = paste0("Pearson r = ", round(cor_result$estimate, 2)),
+               size = 5, hjust = 0) +
+      scale_color_manual(values = c("Female-biased (Ovaries)" = "#e54141",
+                                     "Male-biased (Testes)" = "#4173d8")) +
+      labs(
+        title = "Proteomics Validation",
+        x = "Four Core Genotypes gonad effect size (t-value)",
+        y = "Protein effect size (t-value)",
+        color = ""
+      ) +
+      theme_classic(base_size = 12) +
+      theme(
+        plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+        legend.position = "bottom",
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5)
+      )
+
+    ggsave(
+      filename = "results/pseudobulk/proteo_validation_comparison.pdf",
+      plot = p_proteo,
+      width = 7,
+      height = 7
+    )
+
+    cat("Proteomics validation plot saved to: results/pseudobulk/proteo_validation_comparison.pdf\n\n")
+
+    # Clean up
+    rm(proteo, fit, proteo_meta, proteo_targets, proteo_limma_res,
+       proteo_ttop_list, proteo_ttop, proteo_rna_comparison, pval_merged)
+    gc()
+
+  }, error = function(e) {
+    cat("WARNING: Could not complete proteomics validation\n")
+    cat("Error message:", conditionMessage(e), "\n\n")
+  })
+} else {
+  cat("Proteomics data not found, skipping validation.\n")
+  cat("  Expected:", proteo_file, "\n")
+  cat("  Expected:", proteo_metadata_file, "\n\n")
+}
+
+# ==============================================================================
 # WORKFLOW COMPLETE
 # ==============================================================================
 cat(paste(rep("=", 80), collapse = ""), "\n")
@@ -1214,6 +1429,10 @@ if (gdx_files_exist) {
 if (file.exists(xenium_panel_file)) {
   cat("  Xenium Spatial Validation:\n")
   cat("    - results/pseudobulk/xenium_validation_volcano.pdf (100-gene panel)\n")
+}
+if (file.exists("results/pseudobulk/proteo_validation_comparison.pdf")) {
+  cat("  Proteomics Validation:\n")
+  cat("    - results/pseudobulk/proteo_validation_comparison.pdf\n")
 }
 cat("  PCA Coordinates:\n")
 cat("    - results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv\n")

@@ -61,6 +61,11 @@ if (!dir.exists(file.path(zonation_dir, "volcanos"))) {
   dir.create(file.path(zonation_dir, "volcanos"), recursive = TRUE)
 }
 
+zonation_networks_dir <- file.path(zonation_dir, "networks")
+if (!dir.exists(zonation_networks_dir)) {
+  dir.create(zonation_networks_dir, recursive = TRUE)
+}
+
 ################################################################################
 # 2. LOAD ZONATION PSEUDOBULK DATA
 ################################################################################
@@ -191,21 +196,11 @@ cat(strrep("-", 80), "\n")
 cat("5. DIFFERENTIAL ANALYSIS\n")
 cat(strrep("-", 80), "\n\n")
 
-# NOTE: Each mouse contributes two pseudobulks (Pericentral + Periportal), which
-# are treated as independent samples here. Without duplicateCorrelation(), limma
-# does not account for within-mouse correlation between zones. This has opposite
-# effects depending on the contrast:
-#   - Between-gonad contrasts (testes_vs_ova, centraltestes_vs_centralova, etc.):
-#     each mouse counted twice as "independent" -> inflated effective N ->
-#     OVERESTIMATES significance. LogFC values are ~5x larger (median) than WF02,
-#     though directions are consistent (r = 0.81).
-#   - Within-mouse zonation contrasts (portalova_vs_centralova, etc.):
-#     paired measurements treated as independent -> between-mouse variability
-#     inflates residual variance -> UNDERESTIMATES significance.
-# Consider using limma's duplicateCorrelation() with mouse ID as blocking factor
-# to properly account for within-mouse correlation. This would decrease significance
-# for gonad contrasts (correct inflation) and increase significance for zonation
-# contrasts (leverage pairing).
+# Use duplicateCorrelation() with mouse ID as blocking factor to account for
+# within-mouse correlation between Pericentral and Periportal pseudobulks.
+# Each mouse contributes two pseudobulks (one per zone), so without blocking,
+# between-gonad contrasts overestimate significance (inflated N) and within-mouse
+# zonation contrasts underestimate significance (between-mouse variance inflates residuals).
 
 # Prepare targets
 targets <- meta_data_df[, c("sample", "condition")]
@@ -227,14 +222,49 @@ comparisons <- list(
   "testes_effect_zonation" = c(-3, 4, 1, -2)         # Interaction: does zonation differ by gonad?
 )
 
-cat("Running limma differential analysis...\n")
+cat("Running limma differential analysis with duplicateCorrelation...\n")
+cat("  Blocking factor: mouse ID (sample_name)\n")
 cat("  Contrasts:", length(comparisons), "\n")
 for (comp_name in names(comparisons)) {
   cat("    -", comp_name, "\n")
 }
 cat("\n")
 
-limmaRes <- runLimma(scaled_RNA, targets, comparisons = comparisons)
+# Build design and contrast matrices (same logic as runLimma)
+measurements_ordered <- scaled_RNA[, targets[, 1]]
+cont.matrix <- makeContrastsAlt(targets, comparisons)
+cont.matrix <- as.data.frame(cont.matrix)
+row.names(cont.matrix) <- unique(targets$condition)
+cont.matrix <- as.matrix(cont.matrix)
+
+fcond <- factor(targets$condition, levels = unique(targets$condition))
+design <- model.matrix(~0 + fcond)
+design <- as.data.frame(design)
+names(design) <- unique(targets$condition)
+design <- as.matrix(design)
+
+print(cont.matrix)
+
+# Extract mouse ID for blocking (sample_name column = mouse ID, e.g. "sx42_1")
+mouse_id <- meta_data_df$sample_name[match(targets$sample, meta_data_df$sample)]
+
+cat("\n  Mouse IDs (", length(unique(mouse_id)), " unique mice):\n")
+cat("  Samples per mouse:\n")
+print(table(mouse_id))
+cat("\n")
+
+# Estimate within-mouse correlation using duplicateCorrelation
+corfit <- limma::duplicateCorrelation(measurements_ordered, design, block = mouse_id)
+cat("  Within-mouse correlation:", round(corfit$consensus.correlation, 4), "\n\n")
+
+# Fit linear model with blocking
+fit <- lmFit(measurements_ordered, design, block = mouse_id,
+             correlation = corfit$consensus.correlation)
+fit2 <- contrasts.fit(fit, cont.matrix)
+fit2 <- eBayes(fit2)
+
+# Package as list (same format as runLimma output)
+limmaRes <- list(fit2, cont.matrix, fit)
 
 ttop_list <- limma_res_to_ttop_list(
   limma_res = limmaRes,
@@ -248,6 +278,11 @@ cat("Differential analysis complete.\n\n")
 # Print summary statistics
 for (comp_name in names(ttop_list)) {
   ttop <- ttop_list[[comp_name]]
+  # Significance defined by FDR < 0.05 only (no logFC cutoff). The zonation-resolved
+  # model z-scores expression across hepatocyte-zone pseudobulks only, unlike WF02
+  # which z-scores across all cell types. This difference in scaling denominators
+  # makes a fixed logFC threshold non-comparable between the two analyses — and
+  # within each analysis, FDR alone is the appropriate statistical criterion.
   sig_genes <- sum(ttop$adj.P.Val < 0.05, na.rm = TRUE)
   cat("  ", comp_name, ": ", sig_genes, " significant genes (FDR < 0.05)\n", sep = "")
 }
@@ -273,9 +308,9 @@ volcano_colors <- list(
   "portal_vs_Central" = c("#303030", "grey50", "#a0a0a0"),
   "testes_effect_zonation" = c("#303030", "grey50", "#a0a0a0"),
   # Zonation within Ovaries: dark red (central/down) vs light red (portal/up)
-  "portalova_vs_centralova" = c("#d32f2f", "grey30", "#ff5555"),
+  "portalova_vs_centralova" = c("#bf2e2e", "grey30", "#ff6969"),
   # Zonation within Testes: dark blue (central/down) vs light blue (portal/up)
-  "portaltestes_vs_centraltestes" = c("#2b64d6", "grey30", "#5f8dff")
+  "portaltestes_vs_centraltestes" = c("#205cbc", "grey30", "#7ba7ff")
 )
 
 for (k in 1:length(ttop_list)) {
@@ -704,10 +739,10 @@ gonad_by_zone$category <- factor(gonad_by_zone$category,
 
 # Colors matching the project scheme
 gonad_zone_colors <- c(
-  "Testes pericentral" = "#2b64d6",
-  "Testes periportal" = "#5f8dff",
-  "Ovaries pericentral" = "#d32f2f",
-  "Ovaries periportal" = "#ff5555",
+  "Testes pericentral" = "#205cbc",
+  "Testes periportal" = "#7ba7ff",
+  "Ovaries pericentral" = "#bf2e2e",
+  "Ovaries periportal" = "#ff6969",
   "None" = "#cccccc"
 )
 
@@ -1030,10 +1065,10 @@ scatter_data$category <- factor(scatter_data$category,
 
 # Define colors matching the project color scheme
 category_colors <- c(
-  "Testes pericentral" = "#2b64d6",
-  "Testes periportal" = "#5f8dff",
-  "Ovaries pericentral" = "#d32f2f",
-  "Ovaries periportal" = "#ff5555",
+  "Testes pericentral" = "#205cbc",
+  "Testes periportal" = "#7ba7ff",
+  "Ovaries pericentral" = "#bf2e2e",
+  "Ovaries periportal" = "#ff6969",
   "None" = "#cccccc"
 )
 
@@ -1224,10 +1259,10 @@ if (nrow(heatmap_genes) > 0) {
 
   annotation_colors <- list(
     Category = c(
-      "Testes pericentral" = "#2b64d6",
-      "Testes periportal" = "#5f8dff",
-      "Ovaries pericentral" = "#d32f2f",
-      "Ovaries periportal" = "#ff5555"
+      "Testes pericentral" = "#205cbc",
+      "Testes periportal" = "#7ba7ff",
+      "Ovaries pericentral" = "#bf2e2e",
+      "Ovaries periportal" = "#ff6969"
     )
   )
 
@@ -1315,12 +1350,6 @@ cat("  2. Full networks: correlation threshold = 0 (all correlations, lipid spec
 
 threshold_cor <- 0.65
 
-# Create multi-omic output directory if it doesn't exist
-multiomics_dir <- "results/multi-omic"
-if (!dir.exists(multiomics_dir)) {
-  dir.create(multiomics_dir, recursive = TRUE)
-}
-
 #===============================================================================
 # Network 1: Testes Periportal
 #===============================================================================
@@ -1342,8 +1371,8 @@ cormat_testes_portal_ATT <- expand_attributes(cormat_testes_portal, t_table, TF_
 cormat_testes_portal_ATT$type <- ifelse(cormat_testes_portal_ATT$gene %in% rownames(TF_scores_df), "TF",
                                         ifelse(cormat_testes_portal_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_testes_portal, file = file.path(multiomics_dir, "cormat_testes_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_testes_portal_ATT, file = file.path(multiomics_dir, "cormat_testes_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_portal, file = file.path(zonation_networks_dir, "cormat_testes_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_portal_ATT, file = file.path(zonation_networks_dir, "cormat_testes_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Generate full correlation network (threshold = 0) for non-compressed lipid species
 cat("  Generating full correlation network (threshold = 0)...\n")
@@ -1356,8 +1385,8 @@ cormat_testes_portal_full_ATT <- expand_attributes(cormat_testes_portal_full, t_
 cormat_testes_portal_full_ATT$type <- ifelse(cormat_testes_portal_full_ATT$gene %in% rownames(TF_scores_df), "TF",
                                               ifelse(cormat_testes_portal_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_testes_portal_full, file = file.path(multiomics_dir, "cormat_testes_portal_full_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_testes_portal_full_ATT, file = file.path(multiomics_dir, "cormat_testes_portal_full_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_portal_full, file = file.path(zonation_networks_dir, "cormat_testes_portal_full_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_portal_full_ATT, file = file.path(zonation_networks_dir, "cormat_testes_portal_full_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Create compressed version (aggregate by lipid class)
 cormat_testes_portal$node2 <- gsub("[(].*", "", cormat_testes_portal$node2)
@@ -1371,8 +1400,8 @@ cormat_testes_portal_ATT <- aggregate(cbind(portal_vs_Central, testes_vs_ova, po
                                             portaltestes_vs_portalova, testes_effect_zonation) ~ gene + type,
                                      data = cormat_testes_portal_ATT, FUN = mean)
 
-write.csv(cormat_testes_portal, file = file.path(multiomics_dir, "compressed_cormat_testes_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_testes_portal_ATT, file = file.path(multiomics_dir, "compressed_cormat_testes_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_portal, file = file.path(zonation_networks_dir, "compressed_cormat_testes_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_portal_ATT, file = file.path(zonation_networks_dir, "compressed_cormat_testes_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 cat("  ✓ Saved testes periportal networks\n")
 
@@ -1397,8 +1426,8 @@ cormat_testes_central_ATT <- expand_attributes(cormat_testes_central, t_table, T
 cormat_testes_central_ATT$type <- ifelse(cormat_testes_central_ATT$gene %in% rownames(TF_scores_df), "TF",
                                          ifelse(cormat_testes_central_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_testes_central, file = file.path(multiomics_dir, "cormat_testes_central_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_testes_central_ATT, file = file.path(multiomics_dir, "cormat_testes_central_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_central, file = file.path(zonation_networks_dir, "cormat_testes_central_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_central_ATT, file = file.path(zonation_networks_dir, "cormat_testes_central_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Generate full correlation network (threshold = 0) for non-compressed lipid species
 cat("  Generating full correlation network (threshold = 0)...\n")
@@ -1411,8 +1440,8 @@ cormat_testes_central_full_ATT <- expand_attributes(cormat_testes_central_full, 
 cormat_testes_central_full_ATT$type <- ifelse(cormat_testes_central_full_ATT$gene %in% rownames(TF_scores_df), "TF",
                                                ifelse(cormat_testes_central_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_testes_central_full, file = file.path(multiomics_dir, "cormat_testes_central_full_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_testes_central_full_ATT, file = file.path(multiomics_dir, "cormat_testes_central_full_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_central_full, file = file.path(zonation_networks_dir, "cormat_testes_central_full_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_central_full_ATT, file = file.path(zonation_networks_dir, "cormat_testes_central_full_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Create compressed version
 cormat_testes_central$node2 <- gsub("[(].*", "", cormat_testes_central$node2)
@@ -1426,8 +1455,8 @@ cormat_testes_central_ATT <- aggregate(cbind(portal_vs_Central, testes_vs_ova, p
                                              portaltestes_vs_portalova, testes_effect_zonation) ~ gene + type,
                                       data = cormat_testes_central_ATT, FUN = mean)
 
-write.csv(cormat_testes_central, file = file.path(multiomics_dir, "compressed_cormat_testes_central_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_testes_central_ATT, file = file.path(multiomics_dir, "compressed_cormat_testes_central_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_central, file = file.path(zonation_networks_dir, "compressed_cormat_testes_central_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_testes_central_ATT, file = file.path(zonation_networks_dir, "compressed_cormat_testes_central_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 cat("  ✓ Saved testes pericentral networks\n")
 
@@ -1452,8 +1481,8 @@ cormat_Ovaries_portal_ATT <- expand_attributes(cormat_Ovaries_portal, t_table, T
 cormat_Ovaries_portal_ATT$type <- ifelse(cormat_Ovaries_portal_ATT$gene %in% rownames(TF_scores_df), "TF",
                                          ifelse(cormat_Ovaries_portal_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_Ovaries_portal, file = file.path(multiomics_dir, "cormat_Ovaries_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_Ovaries_portal_ATT, file = file.path(multiomics_dir, "cormat_Ovaries_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_Ovaries_portal, file = file.path(zonation_networks_dir, "cormat_Ovaries_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_Ovaries_portal_ATT, file = file.path(zonation_networks_dir, "cormat_Ovaries_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Generate full correlation network (threshold = 0) for non-compressed lipid species
 cat("  Generating full correlation network (threshold = 0)...\n")
@@ -1466,8 +1495,8 @@ cormat_Ovaries_portal_full_ATT <- expand_attributes(cormat_Ovaries_portal_full, 
 cormat_Ovaries_portal_full_ATT$type <- ifelse(cormat_Ovaries_portal_full_ATT$gene %in% rownames(TF_scores_df), "TF",
                                                ifelse(cormat_Ovaries_portal_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_Ovaries_portal_full, file = file.path(multiomics_dir, "cormat_Ovaries_portal_full_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_Ovaries_portal_full_ATT, file = file.path(multiomics_dir, "cormat_Ovaries_portal_full_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_Ovaries_portal_full, file = file.path(zonation_networks_dir, "cormat_Ovaries_portal_full_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_Ovaries_portal_full_ATT, file = file.path(zonation_networks_dir, "cormat_Ovaries_portal_full_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Create compressed version
 cormat_Ovaries_portal$node2 <- gsub("[(].*", "", cormat_Ovaries_portal$node2)
@@ -1481,8 +1510,8 @@ cormat_Ovaries_portal_ATT <- aggregate(cbind(portal_vs_Central, testes_vs_ova, p
                                              portaltestes_vs_portalova, testes_effect_zonation) ~ gene + type,
                                       data = cormat_Ovaries_portal_ATT, FUN = mean)
 
-write.csv(cormat_Ovaries_portal, file = file.path(multiomics_dir, "compressed_cormat_Ovaries_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_Ovaries_portal_ATT, file = file.path(multiomics_dir, "compressed_cormat_Ovaries_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_Ovaries_portal, file = file.path(zonation_networks_dir, "compressed_cormat_Ovaries_portal_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_Ovaries_portal_ATT, file = file.path(zonation_networks_dir, "compressed_cormat_Ovaries_portal_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 cat("  ✓ Saved ovaries periportal networks\n")
 
@@ -1507,8 +1536,8 @@ cormat_ova_central_ATT <- expand_attributes(cormat_ova_central, t_table, TF_scor
 cormat_ova_central_ATT$type <- ifelse(cormat_ova_central_ATT$gene %in% rownames(TF_scores_df), "TF",
                                       ifelse(cormat_ova_central_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_ova_central, file = file.path(multiomics_dir, "cormat_ova_central_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_ova_central_ATT, file = file.path(multiomics_dir, "cormat_ova_central_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_ova_central, file = file.path(zonation_networks_dir, "cormat_ova_central_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_ova_central_ATT, file = file.path(zonation_networks_dir, "cormat_ova_central_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Generate full correlation network (threshold = 0) for non-compressed lipid species
 cat("  Generating full correlation network (threshold = 0)...\n")
@@ -1521,8 +1550,8 @@ cormat_ova_central_full_ATT <- expand_attributes(cormat_ova_central_full, t_tabl
 cormat_ova_central_full_ATT$type <- ifelse(cormat_ova_central_full_ATT$gene %in% rownames(TF_scores_df), "TF",
                                             ifelse(cormat_ova_central_full_ATT$gene %in% t_table$gene, "gene", "lipid"))
 
-write.csv(cormat_ova_central_full, file = file.path(multiomics_dir, "cormat_ova_central_full_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_ova_central_full_ATT, file = file.path(multiomics_dir, "cormat_ova_central_full_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_ova_central_full, file = file.path(zonation_networks_dir, "cormat_ova_central_full_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_ova_central_full_ATT, file = file.path(zonation_networks_dir, "cormat_ova_central_full_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 # Create compressed version
 cormat_ova_central$node2 <- gsub("[(].*", "", cormat_ova_central$node2)
@@ -1536,8 +1565,8 @@ cormat_ova_central_ATT <- aggregate(cbind(portal_vs_Central, testes_vs_ova, port
                                           portaltestes_vs_portalova, testes_effect_zonation) ~ gene + type,
                                    data = cormat_ova_central_ATT, FUN = mean)
 
-write.csv(cormat_ova_central, file = file.path(multiomics_dir, "compressed_cormat_ova_central_SIF.csv"), row.names = FALSE, quote = FALSE)
-write.csv(cormat_ova_central_ATT, file = file.path(multiomics_dir, "compressed_cormat_ova_central_ATT.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_ova_central, file = file.path(zonation_networks_dir, "compressed_cormat_ova_central_SIF.csv"), row.names = FALSE, quote = FALSE)
+write.csv(cormat_ova_central_ATT, file = file.path(zonation_networks_dir, "compressed_cormat_ova_central_ATT.csv"), row.names = FALSE, quote = FALSE)
 
 cat("  ✓ Saved ovaries pericentral networks\n\n")
 
@@ -1596,10 +1625,10 @@ cat("  Loaded", nrow(lipid_ttop), "lipids\n\n")
 # Read the UNCOMPRESSED correlation networks (individual lipids, not aggregated)
 cat("Loading uncompressed correlation networks (individual lipids)...\n")
 
-cormat_testes_portal <- read.csv(file.path(multiomics_dir, "cormat_testes_portal_SIF.csv"))
-cormat_testes_central <- read.csv(file.path(multiomics_dir, "cormat_testes_central_SIF.csv"))
-cormat_Ovaries_portal <- read.csv(file.path(multiomics_dir, "cormat_Ovaries_portal_SIF.csv"))
-cormat_ova_central <- read.csv(file.path(multiomics_dir, "cormat_ova_central_SIF.csv"))
+cormat_testes_portal <- read.csv(file.path(zonation_networks_dir, "cormat_testes_portal_SIF.csv"))
+cormat_testes_central <- read.csv(file.path(zonation_networks_dir, "cormat_testes_central_SIF.csv"))
+cormat_Ovaries_portal <- read.csv(file.path(zonation_networks_dir, "cormat_Ovaries_portal_SIF.csv"))
+cormat_ova_central <- read.csv(file.path(zonation_networks_dir, "cormat_ova_central_SIF.csv"))
 
 cat("  Loaded all 4 uncompressed networks\n\n")
 
@@ -2093,8 +2122,8 @@ p_class_proportions <- ggplot(class_proportions_by_gonad,
   facet_grid(lipid_class ~ ., switch = "y") +
   scale_fill_manual(
     name = "Zonation\nAssociation",
-    values = c("T_pericentral" = "#2b64d6", "T_periportal" = "#5f8dff",
-               "O_pericentral" = "#d32f2f", "O_periportal" = "#ff5555",
+    values = c("T_pericentral" = "#205cbc", "T_periportal" = "#7ba7ff",
+               "O_pericentral" = "#bf2e2e", "O_periportal" = "#ff6969",
                "both" = "#808080", "no_association" = "#FFFFFF"),
     labels = c("Testes Pericentral", "Testes Periportal",
                "Ovaries Pericentral", "Ovaries Periportal",
@@ -2169,9 +2198,9 @@ p_class_proportions_horizontal <- ggplot(butterfly_data,
   geom_hline(yintercept = 0, color = "black", linewidth = 0.3) +
   scale_fill_manual(
     name = "Zonation",
-    values = c("O_pericentral" = "#d32f2f", "O_periportal" = "#ff5555",
+    values = c("O_pericentral" = "#bf2e2e", "O_periportal" = "#ff6969",
                "O_both" = "#808080", "O_no_association" = "#FFFFFF",
-               "T_pericentral" = "#2b64d6", "T_periportal" = "#5f8dff",
+               "T_pericentral" = "#205cbc", "T_periportal" = "#7ba7ff",
                "T_both" = "#808080", "T_no_association" = "#FFFFFF"),
     breaks = c("O_pericentral", "O_periportal", "T_pericentral", "T_periportal",
                "O_both", "O_no_association"),
@@ -2213,9 +2242,9 @@ p_pg_mini <- ggplot(pg_proportions_mini, aes(x = lipid_class, y = y_val, fill = 
   geom_col(position = "stack", width = 0.85, color = "black", linewidth = 0.2) +
   geom_hline(yintercept = 0, color = "black", linewidth = 0.3) +
   scale_fill_manual(
-    values = c("O_pericentral" = "#d32f2f", "O_periportal" = "#ff5555",
+    values = c("O_pericentral" = "#bf2e2e", "O_periportal" = "#ff6969",
                "O_both" = "#808080", "O_no_association" = "#FFFFFF",
-               "T_pericentral" = "#2b64d6", "T_periportal" = "#5f8dff",
+               "T_pericentral" = "#205cbc", "T_periportal" = "#7ba7ff",
                "T_both" = "#808080", "T_no_association" = "#FFFFFF")
   ) +
   scale_y_continuous(limits = c(-1, 1), expand = expansion(mult = c(0, 0))) +
@@ -2308,7 +2337,7 @@ p_top <- ggplot(pg_periportal, aes(x = testes_vs_ova, y = 0, color = gonad_color
   geom_jitter(height = 0.25, width = 0, size = 4, alpha = 0.7) +
   geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
   scale_color_manual(
-    values = c("Ovaries" = "#ff5555", "Testes" = "#5f8dff", "Neutral" = "grey50")
+    values = c("Ovaries" = "#ff6969", "Testes" = "#7ba7ff", "Neutral" = "grey50")
   ) +
   scale_y_continuous(limits = c(-0.5, 0.5), breaks = NULL) +
   scale_x_continuous(limits = y_range) +
@@ -2328,7 +2357,7 @@ p_bottom <- ggplot(pg_pericentral, aes(x = testes_vs_ova, y = 0, color = gonad_c
   geom_jitter(height = 0.25, width = 0, size = 4, alpha = 0.7) +
   geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
   scale_color_manual(
-    values = c("Ovaries" = "#d32f2f", "Testes" = "#2b64d6", "Neutral" = "grey50")
+    values = c("Ovaries" = "#bf2e2e", "Testes" = "#205cbc", "Neutral" = "grey50")
   ) +
   scale_y_continuous(limits = c(-0.5, 0.5), breaks = NULL) +
   scale_x_continuous(limits = y_range) +
@@ -2554,8 +2583,8 @@ p_jitter_vertical <- ggplot(jitter_data_v3,
   scale_size_identity() +  # Use actual size values, no legend
   scale_fill_manual(
     name   = "Zonation\nAssociation",
-    values = c("TPC" = "#2b64d6", "TPP" = "#5f8dff",
-               "OPC" = "#d32f2f", "OPP" = "#ff5555",
+    values = c("TPC" = "#205cbc", "TPP" = "#7ba7ff",
+               "OPC" = "#bf2e2e", "OPP" = "#ff6969",
                "both" = "#808080", "no_network_data" = "#FFFFFF"),
     labels = c("Testes Pericentral", "Testes Periportal",
                "Ovaries Pericentral", "Ovaries Periportal",
@@ -2675,7 +2704,7 @@ cat("  - ", file.path(zonation_dir, "volcanos/"), "\n")
 cat("  - ", file.path(zonation_dir, "lipid_class_by_category.pdf"), "\n")
 cat("  - ", file.path(zonation_dir, "lipid_class_category_summary.csv"), "\n")
 cat("  - ", file.path(zonation_dir, "lipid_class_zonation_association_heatmap*.pdf"), " (5 versions)\n")
-cat("  - ", file.path(multiomics_dir, "cormat_*_SIF.csv / ATT.csv"), " (8 networks)\n\n")
+cat("  - ", file.path(zonation_networks_dir, "cormat_*_SIF.csv / ATT.csv"), " (8 networks)\n\n")
 
 cat("Expected biological findings (from manuscript):\n")
 cat("  - ~43% of gonad-dependent genes are pericentral-biased\n")

@@ -1,0 +1,8 @@
+Figure X, Panels E,F — Cyp2d9 and Cyp2c38 knockdown validation
+
+E,F. Validation of predicted gene–lipid associations by in vitro knockdown. Scatter plots show the relationship between in vivo gene–lipid correlation coefficients (x-axis; Pearson correlation between hepatocyte gene expression and lipid abundance across FCG mice, n = 43) and in vitro lipid perturbation effects (y-axis; limma t-statistic following siRNA-mediated knockdown in primary hepatocytes, n = 4 replicates) for Cyp2d9 (E) and Cyp2c38 (F). Each point represents one lipid species. Grey line and shaded area indicate linear regression fit with 95% confidence interval. Selected lipids with strong concordance between predicted and observed effects are labelled.
+
+
+Figure Y, Panel F — Mtmr11 knockdown validation
+
+F. Validation of zonation-specific gene–lipid associations by in vitro knockdown. Scatter plot shows the relationship between in vivo gene–lipid correlation coefficients computed within the testes periportal hepatocyte context (x-axis; Pearson correlation across FCG mice, n = 43) and in vitro lipid perturbation effects (y-axis; limma t-statistic following siRNA-mediated Mtmr11 knockdown in primary hepatocytes, n = 4 replicates). Each point represents one lipid species. Grey line and shaded area indicate linear regression fit with 95% confidence interval. Selected lipids with strong concordance between predicted and observed effects are labelled.

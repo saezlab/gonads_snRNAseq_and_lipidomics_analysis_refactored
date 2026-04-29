@@ -64,19 +64,19 @@ ZONATION_COLORS <- c(
 # Red tones for Ovaries, Blue tones for Testes
 ZONATION_GONAD_COLORS <- c(
   # Testes (blue tones)
-  "TPC" = "#2b64d6",            # Testes Pericentral - Dark blue
-  "TPP" = "#5f8dff",            # Testes Periportal - Light blue
+  "TPC" = "#205cbc",            # Testes Pericentral - Dark blue
+  "TPP" = "#7ba7ff",            # Testes Periportal - Light blue
   # Ovaries (red tones)
-  "OPC" = "#d32f2f",            # Ovaries Pericentral - Dark red
-  "OPP" = "#ff5555"             # Ovaries Periportal - Light red
+  "OPC" = "#bf2e2e",            # Ovaries Pericentral - Dark red
+  "OPP" = "#ff6969"             # Ovaries Periportal - Light red
 )
 
 # Full names version
 ZONATION_GONAD_COLORS_FULL <- c(
-  "Testes_Pericentral" = "#2b64d6",
-  "Testes_Periportal" = "#5f8dff",
-  "Ovaries_Pericentral" = "#d32f2f",
-  "Ovaries_Periportal" = "#ff5555"
+  "Testes_Pericentral" = "#205cbc",
+  "Testes_Periportal" = "#7ba7ff",
+  "Ovaries_Pericentral" = "#bf2e2e",
+  "Ovaries_Periportal" = "#ff6969"
 )
 
 # Lipid-Zonation Association Colors (by gonad x zonation)
@@ -84,11 +84,11 @@ ZONATION_GONAD_COLORS_FULL <- c(
 # Combines gonad (red=Ovaries, blue=Testes) with zonation (dark=pericentral, light=periportal)
 LIPID_ZONATION_ASSOC_COLORS <- c(
   # Testes (blue tones)
-  "TPC" = "#2b64d6",            # Testes Pericentral - Dark blue
-  "TPP" = "#5f8dff",            # Testes Periportal - Light blue
+  "TPC" = "#205cbc",            # Testes Pericentral - Dark blue
+  "TPP" = "#7ba7ff",            # Testes Periportal - Light blue
   # Ovaries (red tones)
-  "OPC" = "#d32f2f",            # Ovaries Pericentral - Dark red
-  "OPP" = "#ff5555",            # Ovaries Periportal - Light red
+  "OPC" = "#bf2e2e",            # Ovaries Pericentral - Dark red
+  "OPP" = "#ff6969",            # Ovaries Periportal - Light red
   # Mixed/None
   "both" = "#808080",           # Grey for both pericentral and periportal
   "no_association" = "#FFFFFF"  # White for no association

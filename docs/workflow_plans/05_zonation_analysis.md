@@ -28,7 +28,7 @@ Headers and console output are now aligned (1-16).
 | 2 | Load Zonation Data | 41-93 | Load zonation pseudobulk, metadata |
 | 3 | PCA | 95-132 | PCA by condition, gonad, zonation |
 | 4 | PCA Enrichment | 134-183 | Test variance explained by metadata factors |
-| 5 | DE Analysis | 185-237 | limma for 7 contrasts (incl. interaction) |
+| 5 | DE Analysis | 185-260 | limma for 7 contrasts with `duplicateCorrelation()` blocking on mouse ID |
 | 6 | Volcano Plots | 239-288 | Volcano plots for all contrasts |
 | 7 | Pathway Enrichment | 290-374 | **RUN COMMENTED OUT** - loads from `zonation_limma_results.RData` |
 | 8 | Lipidomics + TF | 376-439 | Load lipidomic data, compute TF scores, define sample groups |
@@ -80,8 +80,8 @@ Headers and console output are now aligned (1-16).
 - `results/zonation/lipid_species_zonation_association.csv` - Lipid-level associations
 - `results/zonation/lipid_category_binary_matrix.csv` - Binary lipid x category matrix
 - `results/zonation/lipid_class_association_summary.csv` - Class-level summary
-- `results/multi-omic/cormat_*_{SIF,ATT}.csv` - 4 x 3 = 12 network files
-- `results/multi-omic/compressed_cormat_*_{SIF,ATT}.csv` - 4 compressed networks
+- `results/zonation/networks/cormat_*_{SIF,ATT}.csv` - 4 x 3 = 12 network files
+- `results/zonation/networks/compressed_cormat_*_{SIF,ATT}.csv` - 4 compressed networks
 
 ## Key Variables
 
@@ -142,13 +142,13 @@ Ovaries-specific zonation genes:
   Split by: portalova_vs_centralova (neg = pericentral, pos = periportal)
 ```
 
-**Result:** 62 TPC + 38 TPP + 18 OPC + 19 OPP = 137 genes total
+**Result:** 30 TPC + 25 TPP + 11 OPC + 12 OPP = 78 genes total (with duplicateCorrelation blocking; optimal threshold ~5.4)
 
 ## Notes for Context Restoration
 
 When returning to this workflow:
 1. This is the LARGEST and most complex workflow - 2523 lines with many interdependencies
-2. The optimal threshold (~3.2) is the key parameter driving gene selection
+2. The optimal threshold (~5.4, after duplicateCorrelation blocking) is the key parameter driving gene selection
 3. Section 11 computes the threshold; section 12 uses it for gene selection; section 13 builds networks from those genes; section 14 maps lipids to network categories and visualizes threshold metrics
 4. The 4 gene lists (TPC/TPP/OPC/OPP) are the biological foundation for the correlation networks
 5. `make_cor_network()` and `expand_attributes()` come from `support_functions.R`

@@ -1,7 +1,7 @@
 # Workflow 02: FCG Pseudobulk Analysis
 
 **Script:** `scripts/workflows/02_fcg_pseudobulk_analysis.R`
-**Lines:** ~1224
+**Lines:** ~1370
 **Purpose:** Differential expression analysis across FCG groups and cell types using limma, pathway/TF enrichment, GDX and Xenium validation.
 
 ## Source Dependencies
@@ -33,7 +33,8 @@ source("scripts/visualization/heatmaps.R")
 | 7C | GDX Validation | 951-1050 | Correlation between FCG and GDX t-values |
 | 7D | Xenium Validation | 1051-1100 | Spatial transcriptomics validation (82 genes) |
 | 8 | TF Activity | 1101-1180 | CollecTRI + ESR1/AR regulons, TF heatmap |
-| 9 | Save PCA Coords | 1181-1224 | Save hepatocyte PCA coordinates for MOFA |
+| 9 | Save PCA Coords | 1181-1210 | Save hepatocyte PCA coordinates for MOFA |
+| 10 | Proteomics Validation | 1211-1340 | WT bulk liver proteomics (male vs female), VSN normalization, limma DE, correlation with FCG RNA, concordance analysis |
 
 ## Input Files
 
@@ -43,6 +44,8 @@ source("scripts/visualization/heatmaps.R")
 - `support/TF_regulons.RData` - CollecTRI TF regulons
 - `support/Gonadal_Hormone_Genes.csv` - ESR1/AR target genes
 - `support/FCGL_Xenium_Panel.csv` - Xenium validation gene panel
+- `data/proteomics/P3225_fractionated_protein.tsv` - TMT proteomics (WT male vs female)
+- `data/proteomics/metadata.csv` - Proteomics sample metadata (12 TMT channels)
 
 ## Output Files
 
@@ -55,6 +58,7 @@ source("scripts/visualization/heatmaps.R")
 - `results/pseudobulk/gdx_validation_comparison.pdf` - GDX vs FCG correlation
 - `results/pseudobulk/xenium_validation_volcano.pdf` - Xenium validation
 - `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` - Hepatocyte PCA coords
+- `results/pseudobulk/proteo_validation_comparison.pdf` - Proteomics vs RNA correlation
 
 ## Key Variables
 
@@ -91,3 +95,4 @@ When returning to this workflow:
 4. Focused pathway heatmap uses score threshold |score| > 11-12 (may need tuning)
 5. GDX validation expects correlation r ~ -0.48 with FCG (negative due to direction convention)
 6. Cell types: Hepatocytes, Endothelial_cells, Immune_cells, Stellate_cells, Cholangiocytes
+7. Proteomics validation uses WT mice (not FCG): male=testes, female=ovaries. VSN-normalized TMT data. ~33% of RNA DEGs confirmed at protein level.

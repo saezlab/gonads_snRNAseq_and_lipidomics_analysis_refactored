@@ -18,3 +18,22 @@ tests/logs/**
 Rplots.pdf
 .mcp.json
 __pycache__/
+
+# Large legacy data and superseded MOFA models
+data/RNA/legacy/
+results/mofa/RNA/old_*/
+**/legacy/
+
+# Datasets not yet integrated
+data/westernDiet/
+
+# Workflow run logs
+results/wf*_run.log
+results/wf*_rerun.log
+
+# OS / IDE artifacts and temporary files
+**/desktop.ini
+**/.Rapp.history
+**/Screenshot*.png
+*.tmp.*
+tmp_*.txt

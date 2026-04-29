@@ -70,8 +70,8 @@ class FCGLDataLoader:
         return self._load_csv("results/mofa/networks/gene_lipid_network_edges.csv")
 
     def get_structural_associations(self) -> pd.DataFrame:
-        """Get significant gene-lipid class structural associations."""
-        return self._load_csv("results/multi-omic/structural_model/significant_gene_lipid_class_associations.csv")
+        """Get lipid-only structural analysis coefficients (chain length, DB, interaction per class)."""
+        return self._load_csv("results/lipidomic/structural_model/lipid_only_class_coefficients.csv")
 
     def get_zonation_summary(self) -> pd.DataFrame:
         """Get zonation analysis summary."""
@@ -131,7 +131,7 @@ class FCGLDataLoader:
         return self._load_csv("results/zonation/ttop_full_long.csv")
 
     def get_sex_specific_zonation(self) -> pd.DataFrame:
-        """Get sex-specific zonation genes (137 genes)."""
+        """Get sex-specific zonation genes (78 genes, threshold 5.4 with duplicateCorrelation)."""
         return self._load_csv("results/zonation/sex_specific_zonation_genes_summary.csv")
 
     def get_lipid_species_zonation(self) -> pd.DataFrame:
@@ -144,8 +144,8 @@ class FCGLDataLoader:
 
     # --- WF06: Structural analysis ---
     def get_structural_summary(self) -> pd.DataFrame:
-        """Get structural analysis summary metrics."""
-        return self._load_csv("results/multi-omic/structural_model/analysis_summary.csv")
+        """Get structural analysis class-level model summaries (R², p-values)."""
+        return self._load_csv("results/lipidomic/structural_model/lipid_only_class_summaries.csv")
 
     # --- WF07: Validation ---
     def get_global_validation(self) -> pd.DataFrame:
@@ -182,6 +182,14 @@ class FCGLDataLoader:
     def get_rna_ttop_full(self) -> pd.DataFrame:
         """Get full RNA DE results (gene, contrast, cell_type, logFC, P.Value, adj.P.Val, B)."""
         return self._load_csv("results/pseudobulk/ttop_full_long.csv")
+
+    def get_lipid_zonation_binary_matrix(self) -> pd.DataFrame:
+        """Get binary matrix of lipid associations with sex-specific zonation gene categories."""
+        return self._load_csv("results/zonation/lipid_category_binary_matrix.csv")
+
+    def get_xenium_panel(self) -> pd.DataFrame:
+        """Get Xenium spatial validation gene panel (100 genes, 81 gonad-dependent)."""
+        return self._load_csv("data/xenium/FCGL_Xenium_Panel.csv")
 
 
 # Initialize server
@@ -292,17 +300,17 @@ async def list_tools():
         ),
         Tool(
             name="get_structural_associations",
-            description="Get genes with significant lipid structural preferences (chain length, saturation effects).",
+            description="Get lipid-only structural analysis: how chain length, double bonds, and their interaction predict logFC within each lipid class.",
             inputSchema={
                 "type": "object",
                 "properties": {
-                    "gene": {
-                        "type": "string",
-                        "description": "Filter by gene name (optional)"
-                    },
                     "lipid_class": {
                         "type": "string",
-                        "description": "Filter by lipid class (optional)"
+                        "description": "Filter by lipid class (optional, e.g. 'BMP', 'TG', 'SM')"
+                    },
+                    "significant_only": {
+                        "type": "boolean",
+                        "description": "Only show significant associations (p < 0.05, default: false)"
                     }
                 },
                 "required": []
@@ -426,7 +434,7 @@ async def list_tools():
         ),
         Tool(
             name="query_sex_specific_zonation_genes",
-            description="Query the 137 genes that show zonation bias (periportal vs pericentral) only in one gonadal context. These genes have significant zonation in testes OR ovaries but not both, representing sex-specific spatial regulation.",
+            description="Query the 78 genes that show zonation bias (periportal vs pericentral) only in one gonadal context. These genes have significant zonation in testes OR ovaries but not both, representing sex-specific spatial regulation.",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -514,7 +522,7 @@ async def list_tools():
         ),
         Tool(
             name="count_significant_features",
-            description="Count genes or lipids that pass significance and fold-change thresholds for a given contrast. Returns total counts, up/down split, and optionally a per-class or per-cell-type breakdown. Use this to get precise numbers for the paper (e.g., 'how many genes with FDR <= 0.05 and |logFC| > 0.4 in hepatocytes for testes vs ovaries?').",
+            description="Count genes or lipids that pass a significance threshold for a given contrast. Default uses FDR < 0.05 only (no logFC filter). The logFC threshold was dropped because WF02 z-scores across all cell types (compressing within-hepatocyte logFC) while WF05 z-scores across hepatocytes only, making fixed logFC cutoffs non-comparable.",
             inputSchema={
                 "type": "object",
                 "properties": {
@@ -545,7 +553,7 @@ async def list_tools():
                     },
                     "logfc_threshold": {
                         "type": "number",
-                        "description": "Minimum absolute logFC threshold (default: 0, meaning no FC filter)",
+                        "description": "Minimum absolute logFC threshold (default: 0, no logFC filter — recommended since logFC scale differs between analyses due to different z-score denominators)",
                         "default": 0
                     },
                     "breakdown": {
@@ -616,7 +624,56 @@ async def list_tools():
                 },
                 "required": ["feature_type"]
             }
-        )
+        ),
+        Tool(
+            name="count_gonad_zonation_overlap",
+            description="Count gonad-biased genes that are also zonation-biased, using the zonation-resolved DE (WF05). Returns total gonad-biased genes, pericentral-biased, periportal-biased, and percentages. Significance is FDR < 0.05 only (no logFC cutoff).",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "fdr_threshold": {
+                        "type": "number",
+                        "description": "FDR threshold (default: 0.05)",
+                        "default": 0.05
+                    }
+                },
+                "required": []
+            }
+        ),
+        Tool(
+            name="query_xenium_zonation",
+            description="Check Xenium panel gonad-dependent genes (gdg) against zonation-resolved DE results (WF05). Returns how many are significantly sex-biased in periportal and pericentral hepatocytes.",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "fdr_threshold": {
+                        "type": "number",
+                        "description": "FDR threshold (default: 0.05)",
+                        "default": 0.05
+                    },
+                    "gene": {
+                        "type": "string",
+                        "description": "Optional: query a specific gene from the panel"
+                    }
+                },
+                "required": []
+            }
+        ),
+        Tool(
+            name="get_zonation_lipid_associations",
+            description="Get lipid counts associated with sex-specific zonation gene categories (TPC, TPP, OPC, OPP) from the binary association matrix. Returns total lipids, pericentral vs periportal breakdown, and per-category counts.",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "category": {
+                        "type": "string",
+                        "description": "Filter by category: 'TPC' (testes pericentral), 'TPP' (testes periportal), 'OPC' (ovaries pericentral), 'OPP' (ovaries periportal), or 'all'",
+                        "enum": ["TPC", "TPP", "OPC", "OPP", "all"]
+                    }
+                },
+                "required": []
+            }
+        ),
     ]
 
 
@@ -668,6 +725,12 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
             return handle_count_zonation_categories(loader, arguments)
         elif name == "compare_fcg_gdx":
             return handle_compare_fcg_gdx(loader, arguments)
+        elif name == "count_gonad_zonation_overlap":
+            return handle_count_gonad_zonation_overlap(loader, arguments)
+        elif name == "query_xenium_zonation":
+            return handle_xenium_zonation(loader, arguments)
+        elif name == "get_zonation_lipid_associations":
+            return handle_zonation_lipid_associations(loader, arguments)
         else:
             return [TextContent(type="text", text=f"Unknown tool: {name}")]
 
@@ -700,8 +763,9 @@ Multi-omic study of sex-specific liver physiology using the Four Core Genotypes 
 ## Key Findings
 
 ### RNA-seq (Workflow 02)
-- **~4,000 gonad-dependent genes** in hepatocytes (FDR ≤ 0.05)
-- Minimal sex chromosome effects (mainly Y-linked or X-escape genes)
+- **4,103 gonad-dependent genes** in hepatocytes (FDR ≤ 0.05)
+- Significance defined by FDR ≤ 0.05 (no logFC threshold)
+- Minimal sex chromosome effects (up to 56 differentially transcribed genes per cell type, mainly Y-linked or X-escape genes)
 - Hepatocytes show strongest gonad-dependent gene expression among all cell types
 
 ### Lipidomics (Workflow 03)
@@ -720,13 +784,14 @@ Multi-omic study of sex-specific liver physiology using the Four Core Genotypes 
 - **Key TFs**: Esr1, Ar, Stat5a/b, Nfic, Dbp
 
 ### Zonation (Workflow 05)
-- 43% of gonad-dependent genes are pericentral-biased
-- 18% are periportal-biased
-- **137 genes** show sex-specific zonation (bias only in one gonadal context)
+- 34% (1,441/4,276) of gonad-dependent genes are pericentral-biased
+- 31% (1,342/4,276) are periportal-biased
+- **78 genes** show sex-specific zonation (30 testes pericentral, 25 testes periportal, 11 ovaries pericentral, 12 ovaries periportal)
+- 442 lipids associated with sex-specific zonation genes; 248 (56%) pericentral-biased
 
-### Lipid Structural Preferences (Workflow 06)
-- Gene-lipid correlations depend on lipid chain length and saturation
-- Multiple genes show structural substrate preferences
+### Lipid Structural Analysis (Workflow 06)
+- Lipid logFC depends on chain length and saturation within several classes
+- Significant effects in BMP, Cer, PI, SM (chain length) and Cer (double bonds)
 
 ### Validation (Workflow 07)
 - siRNA knockdowns validated for Cyp2b9, Cyp2b13, Cyp2c38, Cyp2d9, Mtmr11
@@ -753,13 +818,13 @@ Multi-omic study of sex-specific liver physiology using the Four Core Genotypes 
 ### Multi-Omic Integration
 - `query_gene_lipid_network`: MOFA Factor 1 gene-lipid correlations
 - `query_tf_gene_lipid_network`: TF→Gene→Lipid regulatory network
-- `get_structural_associations`: Lipid structural preferences (chain length, saturation)
+- `get_structural_associations`: Lipid-only structural analysis (chain length, saturation effects on logFC per class)
 
 ### Zonation
 - `get_zonation_info`: Zonation analysis overview
 - `query_gene_zonation`: Gene zonation bias (periportal vs pericentral)
 - `query_lipid_zonation`: Lipid class zonation associations
-- `query_sex_specific_zonation_genes`: 137 sex-specific zonation genes
+- `query_sex_specific_zonation_genes`: 78 sex-specific zonation genes
 - `query_lipid_species_zonation`: Per-lipid species zonation associations
 
 ### Validation
@@ -1029,16 +1094,16 @@ def handle_network(loader: FCGLDataLoader, args: dict) -> list[TextContent]:
 
 
 def handle_structural(loader: FCGLDataLoader, args: dict) -> list[TextContent]:
-    gene = args.get("gene", "")
     lipid_class = args.get("lipid_class", "")
+    significant_only = args.get("significant_only", False)
 
     try:
         df = loader.get_structural_associations()
 
-        if gene:
-            df = df[df['gene'].str.contains(gene, case=False, na=False)]
         if lipid_class:
             df = df[df['lipid_class'].str.contains(lipid_class, case=False, na=False)]
+        if significant_only:
+            df = df[df['significant'] == True]
 
         if len(df) == 0:
             return [TextContent(type="text", text="No structural associations found")]
@@ -1047,57 +1112,40 @@ def handle_structural(loader: FCGLDataLoader, args: dict) -> list[TextContent]:
         def interpret_term(row):
             term = row['term']
             est = row['estimate']
-            if 'chain_length' in term:
-                if est > 0:
-                    return "longer chains"
-                else:
-                    return "shorter chains"
-            elif 'db_position' in term:
-                if est > 0:
-                    return "more unsaturated"
-                else:
-                    return "more saturated"
-            elif term == 'logfc':
-                if est > 0:
-                    return "higher abundance"
-                else:
-                    return "lower abundance"
+            if 'chain_length' in term and 'db_position' not in term:
+                return f"longer chains → {'higher' if est > 0 else 'lower'} logFC"
+            elif 'db_position' in term and 'chain_length' not in term:
+                return f"more unsaturated → {'higher' if est > 0 else 'lower'} logFC"
+            elif 'chain_length:db_position' in term:
+                return "chain length × double bond interaction"
             return ""
 
         df = df.copy()
         df['interpretation'] = df.apply(interpret_term, axis=1)
 
-        text = "# Lipid Structural Associations\n\n"
-        text += "Genes whose correlation with lipids depends on structural features.\n\n"
-        text += "**Interpretation guide:**\n"
-        text += "- chain_length: positive estimate = stronger correlation with longer chain lipids\n"
-        text += "- db_position: positive estimate = stronger correlation with more unsaturated lipids\n"
-        text += "- logfc:X (interaction): effect of X depends on lipid abundance\n\n"
+        text = "# Lipid Structural Analysis (Lipid-Only)\n\n"
+        text += "Model per lipid class: `logfc ~ chain_length + db_position + chain_length:db_position`\n\n"
+        text += "**Interpretation:**\n"
+        text += "- chain_length: positive = longer chains have higher logFC (more male-biased)\n"
+        text += "- db_position: positive = more unsaturated lipids have higher logFC\n"
+        text += "- chain_length:db_position: interaction between the two\n\n"
 
-        # Group by gene if searching for a specific gene
-        if gene and len(df) > 0:
-            gene_name = df['gene'].iloc[0]
-            text += f"## {gene_name} Structural Preferences\n\n"
-            text += "| Lipid Class | Term | Estimate | p-value | Preference |\n"
-            text += "|-------------|------|----------|---------|------------|\n"
-            for _, row in df.head(20).iterrows():
-                lc = row['lipid_class'].replace('_with_name', '')
-                text += f"| {lc} | {row['term']} | {row['estimate']:.4f} | {row['p_value']:.4f} | {row['interpretation']} |\n"
-
-            # Summary
-            chain_rows = df[df['term'].str.contains('chain_length', na=False) & ~df['term'].str.contains(':', na=False)]
-            if len(chain_rows) > 0:
-                avg_chain = chain_rows['estimate'].mean()
-                text += f"\n**Chain length summary**: Average estimate = {avg_chain:.4f} "
-                text += f"({'prefers longer chains' if avg_chain > 0 else 'prefers shorter chains'})\n"
-
-            db_rows = df[df['term'].str.contains('db_position', na=False) & ~df['term'].str.contains(':', na=False)]
-            if len(db_rows) > 0:
-                avg_db = db_rows['estimate'].mean()
-                text += f"**Saturation summary**: Average estimate = {avg_db:.4f} "
-                text += f"({'prefers unsaturated' if avg_db > 0 else 'prefers saturated'})\n"
+        if lipid_class and len(df) > 0:
+            cls_name = df['lipid_class'].iloc[0]
+            r_sq = df['r_squared'].iloc[0]
+            n = df['n_lipids'].iloc[0]
+            text += f"## {cls_name} (n={int(n)}, R²={r_sq:.3f})\n\n"
+            text += "| Term | Estimate | p-value | Sig | Interpretation |\n"
+            text += "|------|----------|---------|-----|----------------|\n"
+            for _, row in df.iterrows():
+                sig = "*" if row['significant'] else ""
+                text += f"| {row['term']} | {row['estimate']:.4f} | {row['p_value']:.4f} | {sig} | {row['interpretation']} |\n"
         else:
-            text += df.head(30).to_string(index=False)
+            text += "| Lipid Class | Term | Estimate | p-value | Sig | R² | n | Interpretation |\n"
+            text += "|-------------|------|----------|---------|-----|----|---|----------------|\n"
+            for _, row in df.iterrows():
+                sig = "*" if row['significant'] else ""
+                text += f"| {row['lipid_class']} | {row['term']} | {row['estimate']:.4f} | {row['p_value']:.4f} | {sig} | {row['r_squared']:.3f} | {int(row['n_lipids'])} | {row['interpretation']} |\n"
 
         return [TextContent(type="text", text=text)]
 
@@ -2380,6 +2428,152 @@ def handle_compare_fcg_gdx(loader: FCGLDataLoader, args: dict) -> list[TextConte
 
     except ImportError:
         return [TextContent(type="text", text="Error: scipy is required for correlation computation. Install with: pip install scipy")]
+    except Exception as e:
+        return [TextContent(type="text", text=f"Error: {str(e)}")]
+
+
+def handle_count_gonad_zonation_overlap(loader: FCGLDataLoader, args: dict) -> list[TextContent]:
+    """Count gonad-biased genes that are also zonation-biased (WF05)."""
+    fdr_threshold = args.get("fdr_threshold", 0.05)
+
+    try:
+        df = loader.get_zonation_ttop_long()
+
+        # Get gonad-biased genes (testes_vs_ova)
+        gonad_df = df[df['contrast'] == 'testes_vs_ova']
+        gonad_sig = set(gonad_df[gonad_df['adj.P.Val'] < fdr_threshold]['gene'])
+
+        # Get zonation-biased genes (portal_vs_Central)
+        portal_df = df[df['contrast'] == 'portal_vs_Central']
+        portal_up = set(portal_df[(portal_df['adj.P.Val'] < fdr_threshold) & (portal_df['logFC'] > 0)]['gene'])
+        portal_down = set(portal_df[(portal_df['adj.P.Val'] < fdr_threshold) & (portal_df['logFC'] < 0)]['gene'])
+
+        gonad_periportal = gonad_sig & portal_up
+        gonad_pericentral = gonad_sig & portal_down
+        gonad_zonation = gonad_sig & (portal_up | portal_down)
+
+        pct = len(gonad_zonation) / len(gonad_sig) * 100 if gonad_sig else 0
+
+        text = f"# Gonad-Biased Genes with Zonation Bias (FDR < {fdr_threshold})\n\n"
+        text += f"**Total gonad-biased genes** (testes_vs_ova): {len(gonad_sig)}\n"
+        text += f"**Also zonation-biased** (portal_vs_Central): {len(gonad_zonation)} ({pct:.1f}%)\n"
+        text += f"  - Pericentral: {len(gonad_pericentral)}\n"
+        text += f"  - Periportal: {len(gonad_periportal)}\n\n"
+        text += f"**Not zonation-biased**: {len(gonad_sig) - len(gonad_zonation)}\n\n"
+        text += "Note: Significance uses FDR only (no logFC threshold). The zonation-resolved model\n"
+        text += "z-scores across hepatocyte-zone pseudobulks only, so logFC values are on a different\n"
+        text += "scale than the pooled WF02 analysis."
+
+        return [TextContent(type="text", text=text)]
+    except Exception as e:
+        return [TextContent(type="text", text=f"Error: {str(e)}")]
+
+
+def handle_xenium_zonation(loader: FCGLDataLoader, args: dict) -> list[TextContent]:
+    """Check Xenium gdg genes against zonation DE results."""
+    fdr_threshold = args.get("fdr_threshold", 0.05)
+    query_gene = args.get("gene", "").strip()
+
+    try:
+        panel = loader.get_xenium_panel()
+        gdg = panel[panel['Reason'] == 'gdg']
+        gdg_genes = set(gdg['Gene'])
+
+        ttop = loader.get_zonation_ttop_long()
+
+        # Check which gdg genes are in the expression data
+        all_genes = set(ttop['gene'].unique())
+        found = gdg_genes & all_genes
+        missing = gdg_genes - all_genes
+
+        # If querying specific gene
+        if query_gene:
+            gene_data = ttop[ttop['gene'].str.lower() == query_gene.lower()]
+            if len(gene_data) == 0:
+                return [TextContent(type="text", text=f"Gene '{query_gene}' not found in zonation DE results")]
+            text = f"# Xenium Gene: {query_gene}\n\n"
+            text += "| Contrast | logFC | t | FDR |\n|----------|-------|---|-----|\n"
+            for _, row in gene_data.iterrows():
+                sig = "*" if row['adj.P.Val'] < fdr_threshold else ""
+                text += f"| {row['contrast']} | {row['logFC']:.3f} | {row['t']:.3f} | {row['adj.P.Val']:.4f}{sig} |\n"
+            return [TextContent(type="text", text=text)]
+
+        # Count sig in periportal and pericentral
+        pp_df = ttop[ttop['contrast'] == 'portaltestes_vs_portalova']
+        pc_df = ttop[ttop['contrast'] == 'centraltestes_vs_centralova']
+
+        sig_pp = set(pp_df[(pp_df['adj.P.Val'] < fdr_threshold) & (pp_df['gene'].isin(found))]['gene'])
+        sig_pc = set(pc_df[(pc_df['adj.P.Val'] < fdr_threshold) & (pc_df['gene'].isin(found))]['gene'])
+        not_pp = found - sig_pp
+        not_pc = found - sig_pc
+
+        text = f"# Xenium Panel Zonation Validation (FDR < {fdr_threshold})\n\n"
+        text += f"**Panel**: {len(gdg_genes)} gonad-dependent genes, {len(found)} found in expression data\n"
+        if missing:
+            text += f"**Missing**: {', '.join(sorted(missing))}\n"
+        text += f"\n**Sex-biased in periportal** (portaltestes_vs_portalova): {len(sig_pp)} / {len(found)}\n"
+        text += f"  Not significant: {', '.join(sorted(not_pp))}\n"
+        text += f"\n**Sex-biased in pericentral** (centraltestes_vs_centralova): {len(sig_pc)} / {len(found)}\n"
+        text += f"  Not significant: {', '.join(sorted(not_pc))}\n"
+
+        return [TextContent(type="text", text=text)]
+    except Exception as e:
+        return [TextContent(type="text", text=f"Error: {str(e)}")]
+
+
+def handle_zonation_lipid_associations(loader: FCGLDataLoader, args: dict) -> list[TextContent]:
+    """Get lipid association counts from the binary matrix."""
+    category = args.get("category", "all")
+
+    try:
+        df = loader.get_lipid_zonation_binary_matrix()
+        total = len(df)
+
+        tpc = df['TPC'].sum()
+        tpp = df['TPP'].sum()
+        opc = df['OPC'].sum()
+        opp = df['OPP'].sum()
+
+        # Pericentral only (TPC or OPC, not TPP or OPP)
+        pc_only = len(df[((df['TPC'] == 1) | (df['OPC'] == 1)) & (df['TPP'] == 0) & (df['OPP'] == 0)])
+        pp_only = len(df[((df['TPP'] == 1) | (df['OPP'] == 1)) & (df['TPC'] == 0) & (df['OPC'] == 0)])
+
+        # Male/female pericentral exclusively
+        male_pc_only = len(df[(df['TPC'] == 1) & (df['TPP'] == 0) & (df['OPC'] == 0) & (df['OPP'] == 0)])
+        female_pc_only = len(df[(df['OPC'] == 1) & (df['TPC'] == 0) & (df['TPP'] == 0) & (df['OPP'] == 0)])
+
+        text = f"# Lipid Associations with Sex-Specific Zonation Genes\n\n"
+        text += f"**Total lipids**: {total}\n\n"
+        text += f"## Per-category counts\n"
+        text += f"| Category | Lipids |\n|----------|--------|\n"
+        text += f"| TPC (Testes Pericentral) | {tpc} |\n"
+        text += f"| TPP (Testes Periportal) | {tpp} |\n"
+        text += f"| OPC (Ovaries Pericentral) | {opc} |\n"
+        text += f"| OPP (Ovaries Periportal) | {opp} |\n\n"
+        text += f"## Zone summary\n"
+        text += f"| Zone | Count | % |\n|------|-------|---|\n"
+        text += f"| Pericentral only | {pc_only} | {pc_only/total*100:.0f}% |\n"
+        text += f"| Periportal only | {pp_only} | {pp_only/total*100:.0f}% |\n"
+        text += f"| Both | {total - pc_only - pp_only} | {(total - pc_only - pp_only)/total*100:.0f}% |\n\n"
+        text += f"## Pericentral breakdown\n"
+        text += f"- Male-specifically pericentral (TPC only): {male_pc_only}\n"
+        text += f"- Female-specifically pericentral (OPC only): {female_pc_only}\n"
+        text += f"- Total male OR female pericentral: {pc_only} ({pc_only/total*100:.0f}%)\n"
+
+        if category != "all":
+            cat_lipids = df[df[category] == 1]
+            text += f"\n## Lipids in category {category}\n"
+            text += f"Count: {len(cat_lipids)}\n\n"
+            # Show top 20 by absolute t-value
+            if 'abs_t' in cat_lipids.columns:
+                top = cat_lipids.nlargest(20, 'abs_t')
+            elif 't' in cat_lipids.columns:
+                top = cat_lipids.assign(abs_t=cat_lipids['t'].abs()).nlargest(20, 'abs_t')
+            else:
+                top = cat_lipids.head(20)
+            text += top[['lipid', 'TPC', 'TPP', 'OPC', 'OPP', 'gonad_bias']].to_string(index=False)
+
+        return [TextContent(type="text", text=text)]
     except Exception as e:
         return [TextContent(type="text", text=f"Error: {str(e)}")]
 

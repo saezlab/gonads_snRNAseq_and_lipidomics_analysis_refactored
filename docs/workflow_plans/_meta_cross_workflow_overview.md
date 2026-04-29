@@ -39,12 +39,12 @@
 | 01 | `data/RNA/scaled_RNA_gdxhr_{1,2,3}.csv` | 02 |
 | 01 | `data/RNA/meta_data_df_gdxhr.csv` | 02, 03 |
 | 02 | `results/pseudobulk/ttop_full_list.RData` | 04, 05 |
-| 02 | `results/pseudobulk/tval_full_df.csv` | 02 (internal: step 7C) |
+| 02 | `results/pseudobulk/tval_full_df.csv` | 02 (internal: steps 7C, 10) |
 | 03 | `results/lipidomic/ttop_full_list.RData` | 05 |
 | 03 | `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | 05 |
 | 04 | `results/mofa/main_model_RNA_lipid_weight.RData` | 05, 06 |
 | 04 | `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 07 |
-| 05 | `results/multi-omic/cormat_*_full_SIF.csv` (4 files) | 07 |
+| 05 | `results/zonation/networks/cormat_*_full_SIF.csv` (4 files) | 07 |
 | 05 | `results/zonation/zonation_limma_results.RData` | 05 (internal: pathway load) |
 
 ## Coherence Status

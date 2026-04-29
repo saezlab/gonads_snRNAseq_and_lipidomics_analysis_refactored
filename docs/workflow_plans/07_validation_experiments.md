@@ -39,10 +39,10 @@ source("scripts/visualization/heatmaps.R")
 
 **Network Files (from previous workflows):**
 - `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` - Global MOFA network (from workflow 04)
-- `results/multi-omic/cormat_testes_central_full_SIF.csv` - Testes pericentral network (from workflow 05)
-- `results/multi-omic/cormat_testes_portal_full_SIF.csv` - Testes periportal network (from workflow 05)
-- `results/multi-omic/cormat_ova_central_full_SIF.csv` - Ovaries pericentral network (from workflow 05)
-- `results/multi-omic/cormat_Ovaries_portal_full_SIF.csv` - Ovaries periportal network (from workflow 05)
+- `results/zonation/networks/cormat_testes_central_full_SIF.csv` - Testes pericentral network (from workflow 05)
+- `results/zonation/networks/cormat_testes_portal_full_SIF.csv` - Testes periportal network (from workflow 05)
+- `results/zonation/networks/cormat_ova_central_full_SIF.csv` - Ovaries pericentral network (from workflow 05)
+- `results/zonation/networks/cormat_Ovaries_portal_full_SIF.csv` - Ovaries periportal network (from workflow 05)
 
 ## Output Files
 

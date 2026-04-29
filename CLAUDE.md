@@ -140,6 +140,7 @@ When modifying any R script in this repository, you MUST:
    - **`group`**: Specific group comparisons (e.g., XXT vs. XXO)
 4. Generate volcano plots and save results in `results/pseudobulk/ttop_full_list.RData`
 5. Identify periportal vs. pericentral hepatocytes using zonation markers (Cyp2e1, Cyp2f2)
+6. **Proteomics validation**: VSN-normalized TMT bulk liver proteomics (WT male vs female), limma DE, correlation with FCG RNA hepatocyte t-values (~33% of RNA DEGs confirmed at protein level with concordant direction)
 
 **Key Finding:** Hepatocytes show the strongest gonad-dependent gene expression among all liver cell types.
 
