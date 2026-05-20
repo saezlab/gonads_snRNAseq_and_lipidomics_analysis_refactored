@@ -1,99 +1,166 @@
-# Cross-Workflow Dependencies & Coherence Report
+# Cross-Workflow Dependencies and Coherence Report
+
+**Last audited:** 2026-05-20  
+**Ground truth:** `scripts/workflows/*.R`
+
+This meta overview is synchronized with the current workflow scripts and the
+per-workflow plan files in this directory.
 
 ## Dependency Graph
 
-```
-00_preprocessing (raw data -> Seurat)  [if(FALSE) — requires HPC]
+```text
+00_snrnaseq_preprocessing
+  Reference/HPC workflow: raw sci-RNA-seq -> Seurat RDS files
   |
   v
-01_data_preparation_qc (Seurat -> 3 CSVs + metadata + zonation CSVs)
+01_data_preparation_qc
+  Seurat RDS -> main RNA CSVs, metadata, zonation CSVs, GDX RNA CSVs, QC
   |
-  +---> 02_fcg_pseudobulk_analysis (RNA DE, pathways, TFs)
+  +---> 02_fcg_pseudobulk_analysis
+  |       RNA DE, GDX RNA validation, pathway/TF scores, Xenium, proteomics
+  |
+  +---> 03_fcg_lipidomic_analysis
+  |       lipid DE, GDX lipid validation, lipid-class enrichment, LINEX2 network
   |       |
-  |       +---> 05_zonation_analysis (uses ttop patterns, TF regulons)
-  |       +---> 07_validation_experiments (uses DE results pattern)
-  |
-  +---> 03_fcg_lipidomic_analysis (lipid DE, enrichment)
+  |       +---> 05_zonation_analysis
+  |       |       uses lipid DE and lipid-class enrichment
   |       |
-  |       +---> 05_zonation_analysis (uses lipid ttop, enrichment scores)
-  |       +---> 08_variance_analysis (independent, same raw data)
+  |       +---> 06_structural_analysis
+  |               lipid-only structural analysis from lipid DE
   |
-  +---> 04_mofa_integration (RNA + lipid integration)
+  +---> 04_mofa_integration
+  |       RNA + lipidomics -> MOFA weights and gene-lipid/TF-gene-lipid networks
+  |       |
+  |       +---> 07_validation_experiments
+  |               validates global MOFA network predictions
+  |
+  +---> 05_zonation_analysis
+          uses zonation RNA CSVs and writes zonation-specific networks
           |
-          +---> 05_zonation_analysis (uses MOFA weights for TF scores)
-          +---> 06_structural_analysis (uses MOFA weights for gene-lipid cors)
-          +---> 07_validation_experiments (uses MOFA network files)
+          +---> 07_validation_experiments
+                  validates zonation network predictions
+
+06_structural_analysis
+  |
+  +---> 07_validation_experiments
+          uses structural lipid feature table for KO consistency plots
+
+08_variance_analysis
+  standalone; uses raw lipidomic data plus metadata only
 ```
+
+Important current-script clarifications:
+
+- WF02 DE outputs are not currently consumed by WF04 or WF05.
+- WF05 does not load WF04 outputs; it uses WF01 zonation CSVs, WF03 lipid
+  DE/enrichment outputs, support regulons, and raw lipidomics.
+- WF06 currently runs a lipid-only structural analysis. Older gene-lipid
+  structural sections are commented out.
+- WF07 section 11 depends on WF06 `lipids_with_structure.csv`.
 
 ## Key File Dependencies
 
-| Producing Workflow | File | Consuming Workflow(s) |
-|-------------------|------|----------------------|
-| 00 | `data/RNA/fcgl_pseudobulk_gonad_*.rds` | 01 |
-| 00 | `data/RNA/fcg_zonation_pseudobulks.rds` | 01 (section 11) |
-| 00 | `data/RNA/gdx_pseudobulks.rds` | 01 (section 12) |
-| 01 | `data/RNA/scaled_RNA_{1,2,3}.csv` | 02, 04, 05, 06 |
-| 01 | `data/RNA/meta_data_df.csv` | 02, 04, 05 |
+| Producing workflow | File | Consuming workflow(s) |
+| --- | --- | --- |
+| 00 | `data/RNA/fcg_pseudobulks.rds` | 01 |
+| 00 | `data/RNA/fcg_zonation_pseudobulks.rds` | 01 |
+| 00 | `data/RNA/gdx_pseudobulks.rds` | 01 |
+| 01 | `data/RNA/scaled_RNA_{1,2,3}.csv` | 02, 04 |
+| 01 | `data/RNA/meta_data_df.csv` | 02, 03 |
 | 01 | `data/RNA/scaled_RNA_zonation.csv` | 05 |
 | 01 | `data/RNA/meta_data_df_zonation.csv` | 05 |
 | 01 | `data/RNA/scaled_RNA_gdxhr_{1,2,3}.csv` | 02 |
-| 01 | `data/RNA/meta_data_df_gdxhr.csv` | 02, 03 |
-| 02 | `results/pseudobulk/ttop_full_list.RData` | 04, 05 |
-| 02 | `results/pseudobulk/tval_full_df.csv` | 02 (internal: steps 7C, 10) |
-| 03 | `results/lipidomic/ttop_full_list.RData` | 05 |
+| 01 | `data/RNA/meta_data_df_gdxhr.csv` | 02 |
+| 02 | `results/pseudobulk/ttop_full_list.RData` | Result lookup; no current scripted downstream workflow |
+| 02 | `results/pseudobulk/tval_full_df.csv` | 02 internal GDX/proteomics validation and result lookup |
+| 02 | `results/pseudobulk/pathways/pathway_scores_df_all.RData` | Result lookup |
+| 02 | `results/pseudobulk/pathways/tf_scores_df_all.RData` | Result lookup |
+| 03 | `results/lipidomic/ttop_full_list.RData` | 05, 06 |
 | 03 | `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | 05 |
-| 04 | `results/mofa/main_model_RNA_lipid_weight.RData` | 05, 06 |
+| 03 | `results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv` | Result lookup |
+| 03 | `results/lipidomic/network/significant_lipids_network_{SIF,ATT}.csv` | Cytoscape/result lookup |
+| 04 | `results/mofa/main_model_RNA_lipid_weight.RData` | Result lookup |
+| 04 | `results/mofa/networks/gene_lipid_correlations_factor1.csv` | Result lookup |
 | 04 | `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 07 |
-| 05 | `results/zonation/networks/cormat_*_full_SIF.csv` (4 files) | 07 |
-| 05 | `results/zonation/zonation_limma_results.RData` | 05 (internal: pathway load) |
+| 04 | `results/mofa/networks/hepatocyte_TF_gene_lipid_network_*_{SIF,ATT}.csv` | Cytoscape/result lookup |
+| 05 | `results/zonation/pathway_enrichment.RData` | 05 internal cached pathway load |
+| 05 | `results/zonation/zonation_ttop_list.RData` | Zonation result archive |
+| 05 | `results/zonation/t_table_zonation.csv` | Result lookup |
+| 05 | `results/zonation/ttop_full_long.csv` | Result lookup |
+| 05 | `results/zonation/sex_specific_zonation_genes_summary.csv` | Result lookup |
+| 05 | `results/zonation/lipid_class_association_summary.csv` | Result lookup |
+| 05 | `results/zonation/lipid_species_zonation_association.csv` | Result lookup |
+| 05 | `results/zonation/threshold_sensitivity_total.csv` | Result lookup |
+| 05 | `results/zonation/optimal_threshold_metrics.csv` | Result lookup |
+| 05 | `results/zonation/networks/cormat_*_full_SIF.csv` | 07 |
+| 06 | `results/lipidomic/structural_model/lipids_with_structure.csv` | 07 |
+| 06 | `results/lipidomic/structural_model/lipid_only_*effects.csv` | Result lookup, when files exist |
+| 06 | `results/lipidomic/structural_model/lipid_only_class_{coefficients,summaries}.csv` | Result lookup |
+| 07 | `results/validation/validation_summary.csv` | Result lookup |
+| 07 | `results/validation/global_network_validation_scores.csv` | Result lookup |
+| 07 | `results/validation/zonation_network_validation_scores.csv` | Result lookup |
+| 07 | `results/validation/structural_consistency/consistency_structural_regression_summary.csv` | Result lookup |
+| 08 | `results/lipidomic/variance_analysis/variance_analysis_summary.csv` | Result lookup |
+| 08 | `results/lipidomic/variance_analysis/variance_analysis_results.csv` | Result lookup |
+| 08 | `results/lipidomic/variance_analysis/variance_analysis_by_class.csv` | Result lookup |
 
 ## Coherence Status
 
-All workflows have been audited. **No open bugs.** See individual plan files for per-workflow vulnerabilities.
-
-| Workflow | Status | Vulnerabilities | Plan File |
-|----------|--------|-----------------|-----------|
-| 00 | GOOD | 5 (HPC paths, placeholder import, cluster mappings, setwd, optional packages) | `00_snrnaseq_preprocessing.md` |
-| 01 | GOOD | 0 | `01_data_preparation_qc.md` |
-| 02 | GOOD | 0 | `02_fcg_pseudobulk_analysis.md` |
-| 03 | GOOD | 0 | `03_fcg_lipidomic_analysis.md` |
-| 04 | GOOD | 0 | `04_mofa_integration.md` |
-| 05 | GOOD | 4 (pathway caching, long-distance deps, sample regex, local helper) | `05_zonation_analysis.md` |
-| 06 | GOOD | 2 (hardcoded focus genes, structural file matching) | `06_structural_analysis.md` |
-| 07 | GOOD | 1 (inconsistent but matched network filenames) | `07_validation_experiments.md` |
-| 08 | GOOD | 0 | `08_variance_analysis.md` |
+| Workflow | Script status | Plan-file status | Notes |
+| --- | --- | --- | --- |
+| 00 | GOOD | GOOD | Reference workflow in `if (FALSE)` blocks; requires original HPC context. |
+| 01 | GOOD | GOOD | Produces main RNA, zonation, and GDX RNA CSVs. |
+| 02 | GOOD | GOOD | Main RNA DE workflow; current script does not write RNA `ttop_full_long.csv`. |
+| 03 | GOOD | GOOD | Central lipid DE workflow; feeds WF05 and current WF06. |
+| 04 | GOOD | GOOD | Independent of WF02 DE outputs; feeds WF07 global network validation. |
+| 05 | GOOD | GOOD | Uses workflow 01 zonation CSVs, workflow 03 lipid outputs, and cached pathway enrichment. |
+| 06 | GOOD | GOOD | Active path is lipid-only structural analysis under `results/lipidomic/structural_model/`. |
+| 07 | GOOD | GOOD | Includes structural consistency analysis dependent on WF06. |
+| 08 | GOOD | GOOD | Standalone lipid variance workflow with current `variance_analysis_*` outputs. |
 
 ## Cross-Workflow Vulnerabilities
 
-These are fragility points that span multiple workflows:
-
-1. **WF05 pathway caching (section 7):** `run_ulm()` is commented out; loads from `zonation_limma_results.RData`. On a fresh run without this file, fails gracefully via `tryCatch` but pathway enrichment will be missing.
-
-2. **WF05 long-distance variable dependency (section 11 -> 14):** `sensitivity_df`, `proportion_total`, `optimal_metrics` computed in section 11, consumed ~700 lines later in section 14. If section 11 is skipped, section 14 will fail.
-
-3. **WF07 network file naming:** Filenames use mixed conventions (`testes_portal`, `Ovaries_portal`, `ova_central`) that must exactly match what WF05 writes. Currently matched but fragile if either side is renamed.
+1. **WF05 pathway cache:** Section 7 loads `results/zonation/pathway_enrichment.RData`; the active ULM run is commented out. A fresh environment without this file skips pathway reporting.
+2. **WF05 threshold variables:** `sensitivity_df`, `proportion_total`, and `optimal_metrics` are created in section 11 and consumed much later in section 14.
+3. **WF05 -> WF07 network names:** WF07 expects exact mixed names from WF05: `cormat_testes_portal_full_SIF.csv`, `cormat_testes_central_full_SIF.csv`, `cormat_Ovaries_portal_full_SIF.csv`, and `cormat_ova_central_full_SIF.csv`.
+4. **WF06 -> WF07 structural feature table:** WF07 section 11 expects `results/lipidomic/structural_model/lipids_with_structure.csv`.
+5. **WF03 quantitative count drift:** The WF03 script header and final printed text contain different headline lipid counts. Use generated result files for exact quantitative lookups.
 
 ## Shared Utility Functions
 
-These functions from `scripts/support_functions.R` are used across multiple workflows:
+`scripts/support_functions.R` is a compatibility entry point that sources
+`scripts/config/support_functions.R`. Workflows and plan files use the documented
+`scripts/support_functions.R` path.
 
-| Function | Used In | Purpose |
-|----------|---------|---------|
-| `runLimma()` | 02, 03, 05, 07 | Wrapper for limma DE analysis |
-| `volcano_nice()` | 02, 03, 05 | Publication-quality volcano plots |
-| `nicePCA()` | 01, 02, 03, 05 | PCA with density distributions |
-| `ttop_list_to_t_table()` | 02, 03, 05 | Convert ttop list to t-value matrix |
+| Function | Used in | Purpose |
+| --- | --- | --- |
+| `runLimma()` | 02, 03, 05, 07 | Wrapper for limma differential analysis |
+| `limma_res_to_ttop_list()` | 02, 03, 05, 07 | Convert limma results to topTable lists |
+| `ttop_list_to_t_table()` | 02, 03, 05, 07 | Convert topTable list to a t-value matrix/table |
+| `volcano_nice()` | 02, 03, 05 | Publication-style volcano plots |
+| `nicePCA()` | 01, 02, 03, 05, 07 | PCA plotting helper |
 | `make_cor_network()` | 04, 05 | Build correlation network from two matrices |
 | `expand_attributes()` | 04, 05 | Add DE statistics to network nodes |
-| `get_correlated_lipids()` | 05 (local) | Get lipids correlated with gene set |
-| `magicPlotMaker()` | 01 | Generate diagnostic plots |
+| `get_correlated_lipids()` | 05 local | Get lipids correlated with a gene set |
+| `generate_lipid_structural_data()` | 06 | Parse lipid names and append logFC |
+| `parse_lipid_names_to_df()` | 07 | Parse lipid structures for KO consistency analysis |
 
 ## Recommended Pre-Run Checks
 
 Before running any workflow, verify:
 
-1. **Working directory** is project root
-2. **Required `.RData` files** from upstream workflows exist
-3. **R packages** are loaded (check `support_functions.R` for full list)
-4. **No `View()` calls** in the code (breaks non-interactive execution)
-5. **Explicit namespacing** for `dplyr::select()`, `dplyr::filter()`, etc.
+1. Working directory is the project root.
+2. Required upstream files from the dependency table exist.
+3. R packages are installed and loadable.
+4. No `View()` calls remain in the code path you will run.
+5. Edited tidyverse calls use explicit namespaces where conflicts are likely.
+6. The relevant workflow plan still matches the script if you have changed code.
+
+## Agent Documentation Entry Point
+
+Use `docs/AGENT_GUIDE.md` as the static replacement for the discontinued MCP
+query layer. It maps common biological/data questions to result files that
+answer them directly.
+
+Keep this meta overview and `docs/AGENT_GUIDE.md` synchronized whenever a
+workflow starts writing a new machine-readable result or changes a dependency.

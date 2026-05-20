@@ -1,94 +1,101 @@
 # Workflow 07: Validation Experiments
 
-**Script:** `scripts/workflows/07_validation_experiments.R`
-**Lines:** ~672
-**Purpose:** Validate gene-lipid correlations from MOFA and zonation analyses using siRNA knockdown experiments in primary hepatocytes.
+**Script:** `scripts/workflows/07_validation_experiments.R`  
+**Lines:** ~1113  
+**Purpose:** Validate MOFA and zonation gene-lipid correlation predictions against siRNA knockdown lipidomics, then test whether knockdown-response consistency varies with lipid structure.
 
 ## Source Dependencies
 
 ```r
-source("scripts/support_functions.R")
-source("scripts/core/data_loading.R")
-source("scripts/core/differential_analysis.R")
 source("scripts/config/analysis_config.R")
-source("scripts/config/plotting_themes.R")
-source("scripts/visualization/volcano_plots.R")
-source("scripts/visualization/heatmaps.R")
+source("scripts/config/datasets.R")
+source("scripts/support_functions.R")
+
+# Section 11 only:
+source("scripts/core/structural_analysis.R")
 ```
 
 ## Section Breakdown
 
 | # | Section | Lines (approx) | Description |
 |---|---------|----------------|-------------|
-| 1 | Configuration | 1-40 | Load config, set validation output dir |
-| 2 | Load Knockdown Data | 41-120 | Load siRNA knockdown lipidomic data |
-| 3 | QC PCA | 121-200 | PCA of knockdown samples, check clustering |
-| 4 | DE Analysis | 201-300 | limma: knockdown vs control for each gene |
-| 5 | Heatmap | 301-380 | Heatmap of knockdown effects across lipids |
-| 6 | Global Network Validation | 381-470 | Compare knockdown FC with MOFA network correlations |
-| 7 | Scatter Plots | 471-530 | Scatter: predicted (MOFA cor) vs observed (knockdown FC) |
-| 8 | Zonation Network Validation | 531-590 | Same as 6-7 but using zonation-specific networks |
-| 9 | Zonation Scatter Plots | 591-640 | Scatter plots for Sult3a1, Mtmr11 |
-| 10 | Summary | 641-672 | Print validation statistics |
+| 1 | Configuration | 51-69 | Load config/datasets/support functions and create `results/validation/`. |
+| 2 | Load Knockdown Data | 72-103 | Read `lipidomics_20250423transfections.csv`, clean lipid data, infer condition from sample names. |
+| 3 | QC PCA | 106-122 | PCA of knockdown lipidomics. |
+| 4 | Differential Analysis | 125-190 | Build every knockdown-vs-control contrast, run limma, write ttop list and t table. |
+| 5 | Heatmap | 193-222 | Heatmap of lipid t-statistics across knockdowns. |
+| 6 | Global Network Validation | 227-274 | Load MOFA full gene-lipid network and score prediction/knockdown consistency with decoupleR ULM. |
+| 7 | Global Scatter Plots | 279-398 | Generate per-gene predicted-vs-observed scatter plots for available global genes. |
+| 8 | Zonation Network Validation | 404-481 | Load four workflow 05 full zonation networks, combine them, and score on-target validation. |
+| 9 | Zonation Scatter Plots | 483-620 | Generate zonation-specific predicted-vs-observed scatter plots for available zonation genes. |
+| 10 | Summary Statistics | 628-660 | Write validation summary table. |
+| 11 | Structural Consistency | 665-1079 | Parse lipid structures, regress KO-response consistency on `C`, `DB`, and `C:DB`, and write plots/table. |
+| - | Complete | 1081-1113 | Print output summary. |
 
 ## Input Files
 
-**Knockdown Data:**
-- Knockdown lipidomic data (loaded via `data_loading.R` functions)
-- Knockdown experiment metadata
+**Knockdown data**
+- `data/metabolomics/lipidomics_20250423transfections.csv`
 
-**Network Files (from previous workflows):**
-- `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` - Global MOFA network (from workflow 04)
-- `results/zonation/networks/cormat_testes_central_full_SIF.csv` - Testes pericentral network (from workflow 05)
-- `results/zonation/networks/cormat_testes_portal_full_SIF.csv` - Testes periportal network (from workflow 05)
-- `results/zonation/networks/cormat_ova_central_full_SIF.csv` - Ovaries pericentral network (from workflow 05)
-- `results/zonation/networks/cormat_Ovaries_portal_full_SIF.csv` - Ovaries periportal network (from workflow 05)
+**Prediction networks**
+- `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` - Global MOFA-derived gene-lipid network from workflow 04.
+- `results/zonation/networks/cormat_testes_portal_full_SIF.csv`
+- `results/zonation/networks/cormat_testes_central_full_SIF.csv`
+- `results/zonation/networks/cormat_Ovaries_portal_full_SIF.csv`
+- `results/zonation/networks/cormat_ova_central_full_SIF.csv`
+
+**Structural reference**
+- `results/lipidomic/structural_model/lipids_with_structure.csv` - Workflow 06 output used for shared axis limits in section 11.
 
 ## Output Files
 
-- `results/validation/knockdown_PCA.pdf` - PCA of knockdown samples
-- `results/validation/knockdown_heatmap.pdf` - Knockdown effects heatmap
-- `results/validation/cyp2d9_validation_scatter.pdf` - Cyp2d9 validation
-- `results/validation/cyp2b9_validation_scatter.pdf` - Cyp2b9 validation
-- `results/validation/cyp2c38_validation_scatter.pdf` - Cyp2c38 validation
-- `results/validation/sult3a1_zonation_validation_scatter.pdf` - Sult3a1 zonation validation
-- `results/validation/mtmr11_zonation_validation_scatter.pdf` - Mtmr11 zonation validation
+- `results/validation/knockdown_PCA.pdf`
+- `results/validation/knockdown_ttop_list.RData`
+- `results/validation/knockdown_t_table.csv`
+- `results/validation/knockdown_heatmap.pdf`
+- `results/validation/global_network_validation_scores.csv`
+- `results/validation/[gene]_validation_scatter.pdf` - Global network scatter plots for available genes among `cyp2d9`, `cyp2b9`, `cyp2c38`.
+- `results/validation/zonation_network_validation_scores.csv`
+- `results/validation/[gene]_zonation_validation_scatter.pdf` - Zonation scatter plots for available genes among `sult3a1`, `mtmr11`.
+- `results/validation/validation_summary.csv`
+- `results/validation/structural_consistency/[gene]_structural_consistency.pdf`
+- `results/validation/structural_consistency/consistency_structural_regression_summary.csv`
 
 ## Key Variables
 
 | Variable | Type | Description |
 |----------|------|-------------|
-| `knockdown_data` | data.frame | Knockdown lipidomic measurements |
-| `knockdown_meta` | data.frame | Knockdown experiment metadata |
-| `kd_ttop_list` | list | DE results per knockdown gene |
-| `global_network` | data.frame | MOFA gene-lipid network edges |
-| `zonation_networks` | list | 4 zone x gonad network data.frames |
+| `lipidomic_raw` | data.frame | Raw knockdown lipidomics file |
+| `lipidomic` | data.frame | Cleaned lipid abundance matrix, lipids x samples |
+| `targets` | data.frame | Sample and inferred condition metadata |
+| `comparisons` | named list | All knockdown conditions compared against detected control (`neg`, `control`, or `scramble`) |
+| `ttop_list` | list | Limma top tables by knockdown |
+| `t_table` | data.frame | Lipid t-statistic table used for validation |
+| `lipid_network` | data.frame | Global MOFA gene-lipid network with `source`, `target`, `mor` |
+| `sszb_network` | data.frame | Combined zonation-specific network |
+| `focus_classes` | character | `c("SM", "BMP", "PG", "TG")` for structural consistency |
 
 ## Genes Validated
 
-| Gene | Network | Zone | Validation Type |
-|------|---------|------|-----------------|
-| Cyp2d9 | Global (MOFA) | - | Global correlation |
-| Cyp2b9 | Global (MOFA) | - | Global correlation |
-| Cyp2c38 | Global (MOFA) | - | Global correlation |
-| Sult3a1 | Zonation | OPC | Zone-specific correlation |
-| Mtmr11 | Zonation | TPP | Zone-specific correlation |
+| Gene set | Hardcoded candidates | Notes |
+|----------|----------------------|-------|
+| Global MOFA network | `cyp2d9`, `cyp2b9`, `cyp2c38` | Only genes present in `names(comparisons)` are plotted/scored as available. |
+| Zonation network | `sult3a1`, `mtmr11` | Best gonad-zone context is chosen by highest absolute decoupleR score. |
+| Heatmap/limma table | All knockdowns in the 2025-04-23 file | Additional knockdowns can be present even if they do not get dedicated scatter plots. |
 
 ## Coherence Assessment
 
-**Status: GOOD** — Clean validation pipeline, no open issues.
+**Status: GOOD.** The workflow is linear. It conditionally skips zonation validation if workflow 05 full networks are missing, but global validation expects the workflow 04 full network to exist.
 
 ## Vulnerabilities to Keep in Mind When Modifying
 
-1. **Network file naming is inconsistent but matched (section 6, 8):** The zonation network filenames use mixed conventions (`testes_portal`, `Ovaries_portal` with capital O, `ova_central` abbreviated). These match exactly what workflow 05 writes, so it works. But if you rename any network output in workflow 05, you must update the paths in this workflow too (lines 405-408).
+1. **Network filename coupling:** WF07 expects the exact mixed WF05 filenames listed above, including `Ovaries` capitalization and `ova` abbreviation.
+2. **Control detection:** Section 4 searches for `neg`, `control`, or `scramble`; otherwise the first condition becomes the reference.
+3. **Structural dependency:** Section 11 requires WF06's `lipids_with_structure.csv`; a fresh run of WF07 after deleting structural outputs will fail there.
+4. **Case normalization:** Validation filters compare lowercased gene names. Preserve this when adding genes with mixed-case mouse symbols.
 
 ## Notes for Context Restoration
 
-When returning to this workflow:
-1. This is a validation workflow - it TESTS predictions from workflows 04 and 05
-2. Validation logic: if gene X correlates with lipid Y in the network, then knockdown of gene X should change lipid Y abundance
-3. Expected: negative correlation between MOFA network weight and knockdown fold-change (gene removed -> lipid changes in opposite direction)
-4. Global validation uses MOFA networks; zonation validation uses zone x gonad networks
-5. Sult3a1 and Mtmr11 are the zonation-specific validation genes (not in MOFA top genes)
-6. The knockdown data is from in vitro primary hepatocyte experiments
-7. Also validates Cyp2b13 (not shown in scatter but included in heatmap)
+1. Validation consistency is computed as predicted correlation times knockdown t-statistic times `-1`; positive consistency means the knockdown direction agrees with the FCGL prediction.
+2. Dedicated scatter plots are not automatically made for every knockdown; the hardcoded global and zonation candidate lists control those plots.
+3. Structural consistency plots use the same focus classes and axis-range logic as workflow 06.

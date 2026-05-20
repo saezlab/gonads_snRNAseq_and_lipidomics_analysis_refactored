@@ -1,8 +1,8 @@
 # Workflow 03: FCG Lipidomic Analysis
 
-**Script:** `scripts/workflows/03_fcg_lipidomic_analysis.R`
-**Lines:** ~938
-**Purpose:** Differential abundance analysis of 1,386 lipids across FCG groups, lipid class enrichment, LINEX2 network analysis, bubble plots.
+**Script:** `scripts/workflows/03_fcg_lipidomic_analysis.R`  
+**Lines:** ~953  
+**Purpose:** Run lipid differential abundance across FCG contrasts, optional GDX lipid validation, lipid-class enrichment, LINEX2 network extraction, and structural bubble plots.
 
 ## Source Dependencies
 
@@ -15,73 +15,73 @@ source("scripts/config/contrasts.R")
 source("scripts/config/plotting_themes.R")
 source("scripts/visualization/volcano_plots.R")
 source("scripts/visualization/dimred_plots.R")
+source("scripts/visualization/heatmaps.R")
 ```
 
 ## Section Breakdown
 
 | # | Section | Lines (approx) | Description |
 |---|---------|----------------|-------------|
-| 1 | Data Loading | 1-80 | Load lipidomic CSV, log2 transform, load metadata |
-| 1b | RNA Sample Filtering | ~103-112 | Load RNA metadata, filter lipidomic to 43 shared samples (drop 5 without RNA) |
-| 2 | PCA | ~115-190 | PCA colored by gonad type and sex chromosome |
-| 3 | DE Analysis (FCG) | 181-350 | limma for 6 contrasts on lipids |
-| 3.5 | DE Analysis (GDX) | 351-450 | GDX lipidomic DE for validation |
-| 4 | Volcano Plots | 451-530 | Volcano plots for all contrasts |
-| 4.5 | GDX Correlation | 531-600 | FCG vs GDX t-value correlation plot |
-| 5 | Lipid Class Enrichment | 601-700 | decoupleR ULM on lipid class membership network |
-| 5B | Enrichment Plot | 701-750 | Jitter plot of lipid t-values by class |
-| 6 | LINEX2 Network | 751-850 | Load adjacency matrix, extract significant lipid subnetwork |
-| 7 | Bubble Plots | 851-920 | Bubble plots showing lipid class x structural features |
-| 8 | Summary | 921-938 | Print summary statistics |
+| 1 | Load and Prepare Data | 77-114 | Load log2 lipidomics and metadata, then filter lipidomics to RNA-shared samples using `meta_data_df.csv`. |
+| 2 | PCA Visualization | 116-151 | Lipid PCA colored by gonad/allosome. |
+| 3 | FCG Differential Analysis | 154-235 | Six FCG contrasts on lipids. |
+| 3.5 | GDX Lipid Differential Analysis | 238-356 | Optional GDX lipidomic validation from `lipidomics_gdxhr.csv`. |
+| 4 | Volcano Plots | 358-410 | Volcano plots for lipid contrasts. |
+| 4.5 | FCG-GDX Correlation | 412-505 | Optional correlation between FCG and GDX lipid t-values. |
+| 5 | Lipid Class Enrichment | 507-568 | Build t-stat matrix and run class enrichment with `minsize = 5`. |
+| 6 | Enrichment Plot | 570-678 | Jitter/crossbar lipid-class plot for the gonadal contrast. |
+| 7 | LINEX2 Network | 681-778 | Convert LINEX2 adjacency to edge list and save significant-lipid subnetwork. |
+| 7.5 | Bubble Plots | 781-864 | Plot chain length (C) vs DB for every CSV in `data/metabolomics/for_bubbles/`. |
+| 8 | Summary Statistics | 867-953 | Print key lipidomic findings and output list. |
 
 ## Input Files
 
-- `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` - Raw lipidomic data (1,386 lipids)
-- `data/Suppl_Table_1_OverviewData.xlsx` - Sample metadata
-- `data/RNA/meta_data_df.csv` - RNA metadata (used to filter lipidomic to 43 shared samples)
-- `support/linex2_adjacency_matrix_OT.csv` - LINEX2 lipid reaction network
-- `support/lipid_classification.csv` - Lipid class hierarchy
+- `data/metabolomics/Lipid_data_file_JPC_cleaned.csv`
+- `data/Suppl_Table_1_OverviewData.xlsx` via `load_metadata()`
+- `data/RNA/meta_data_df.csv` - Used to keep lipid samples shared with RNA.
+- `data/metabolomics/lipidomics_gdxhr.csv` - Optional GDX lipid validation input.
+- `support/linex2_adjacency_matrix_OT.csv`
+- `data/metabolomics/for_bubbles/*.csv`
 
 ## Output Files
 
-- `results/lipidomic/ttop_full_list.RData` - All lipidomic DE results
-- `results/lipidomic/gdxhr_ttop_list.RData` - GDX DE results
-- `results/lipidomic/volcanos/*.pdf` - Volcano plots (6 files)
-- `results/lipidomic/pca/*.pdf` - PCA plots
-- `results/lipidomic/fcg_gdx_correlation.pdf` - FCG vs GDX correlation
-- `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` - Enrichment scores
-- `results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf` - Jitter enrichment plot
-- `results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv` - Enrichment table
+- `results/lipidomic/ttop_full_list.RData`
+- `results/lipidomic/gdxhr_t_table.csv`
+- `results/lipidomic/gdxhr_ttop_list.RData`
+- `results/lipidomic/volcanos/*.pdf`
+- `results/lipidomic/pca/*.pdf`
+- `results/lipidomic/fcg_gdx_correlation.pdf`
+- `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData`
+- `results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv`
+- `results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf`
+- `results/lipidomic/network/significant_lipids_network_SIF.csv`
+- `results/lipidomic/network/significant_lipids_network_ATT.csv`
+- `results/lipidomic/bubbles_DBC/*.pdf`
 
 ## Key Variables
 
 | Variable | Type | Description |
 |----------|------|-------------|
-| `lipidomic` | data.frame | Log2-transformed lipid abundances (lipids x samples) |
-| `ttop_full_list` | list | DE results per contrast |
-| `lipid_class_results` | data.frame | decoupleR enrichment scores per lipid class |
-| `lipid_enrichment_gonade` | data.frame | Gonadal enrichment with direction |
+| `lipidomic` | data.frame | Log2 lipid abundance matrix, filtered to RNA-shared samples |
+| `metadata_lipid` | data.frame | Metadata for lipidomic samples retained in the analysis |
+| `ttop_full_list` | list | Nested lipid limma result list by contrast |
+| `tval_matrix` | matrix | Lipid t-statistic matrix used for enrichment |
+| `lipid_class_results` | data.frame | decoupleR lipid-class enrichment scores |
+| `lipid_enrichment_gonade` | data.frame | Gonadal enrichment scores used for plotting |
 
 ## Coherence Assessment
 
-**Status: GOOD** - Linear pipeline with clear data flow.
+**Status: GOOD.** The workflow is linear after optional GDX input checks. It feeds workflow 05 with lipid DE/enrichment outputs and workflow 06 with `ttop_full_list.RData`.
 
-- Enrichment threshold of 1.8 is used for lipid class significance (same threshold reused in workflow 05)
-- LINEX2 network section is self-contained
-- `lipid_class_enrichment_scores.RData` is consumed by workflow 05 (section 14)
+## Key Constants and Caveats
 
-## Key Constants
-
-- Enrichment threshold: `|score| > 1.8` for lipid class significance
-- DE threshold: FDR < 0.05 for significant lipids
-- 733/1386 lipids significant for gonadal type
-- 0 lipids significant for sex chromosome complement
+- Lipid class enrichment uses `minsize = 5`.
+- The enrichment plot marks classes with `abs(enrichment) > 1.8`.
+- Main data loading starts from 1,386 lipid features, then filters samples to the RNA-shared cohort.
+- The script's header and final printed count differ (`733/1,386` vs `773/1,386`); generated result files should be treated as the quantitative source for exact counts.
 
 ## Notes for Context Restoration
 
-When returning to this workflow:
-1. `ttop_full_list.RData` naming differs from workflow 02 - here it's a flat list (contrasts only, no cell types)
-2. `lipid_class_enrichment_scores.RData` is critical for workflow 05's lipid-zonation analysis
-3. Lipid class extraction: `gsub("[(].*", "", lipid_name)` strips everything after first parenthesis
-4. Male-biased: TG, DG, glycerophospholipids; Female-biased: sphingolipids (SM, Cer, HexCer)
-5. GDX correlation direction may be negative due to contrast definition conventions
+1. WF03's `ttop_full_list.RData` is nested (`contrast -> comparison`) and is handled tolerantly in workflow 05.
+2. LINEX2 outputs are in `results/lipidomic/network/`; older root-level network CSVs may exist but are not written by the current script.
+3. Bubble plots use `data/metabolomics/for_bubbles/`, while workflow 06 parses lipid names directly from limma results.

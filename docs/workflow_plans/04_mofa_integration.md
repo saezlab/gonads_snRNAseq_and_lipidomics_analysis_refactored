@@ -1,17 +1,16 @@
 # Workflow 04: MOFA Integration
 
-**Script:** `scripts/workflows/04_mofa_integration.R`
-**Lines:** ~1438
-**Purpose:** Multi-Omics Factor Analysis integrating RNA expression (by cell type) with lipidomics, factor enrichment, TF analysis, gene-lipid correlation networks.
+**Script:** `scripts/workflows/04_mofa_integration.R`  
+**Lines:** ~1473  
+**Purpose:** Integrate RNA pseudobulk views and lipidomics with MOFA, enrich factors for gonadal type, extract factor weights, infer TF activity, and build gene-lipid and TF-gene-lipid networks.
 
 ## Source Dependencies
 
 ```r
 source("scripts/support_functions.R")
 source("scripts/core/data_loading.R")
-source("scripts/core/enrichment_analysis.R")
 source("scripts/core/multiomics.R")
-source("scripts/config/analysis_config.R")
+source("scripts/core/enrichment_analysis.R")
 source("scripts/config/plotting_themes.R")
 source("scripts/visualization/heatmaps.R")
 ```
@@ -20,80 +19,73 @@ source("scripts/visualization/heatmaps.R")
 
 | # | Section | Lines (approx) | Description |
 |---|---------|----------------|-------------|
-| 1 | MOFA Input Prep | 1-150 | Combine RNA (per cell type) + lipidomics into MOFA format |
-| 2 | Model Training | 151-300 | Train MOFA models (5-15 factors), optional skip if pre-trained |
-| 3 | Model Selection | 301-400 | Compare models, select model12 (12 factors) |
-| 4 | Weight Extraction | 401-600 | Extract W matrix, enrich for TFs using CollecTRI |
-| 5 | Factor Enrichment | 601-800 | Visualize factor-gonad associations, publication figures |
-| 6 | TF Analysis | 801-950 | Nfic, Dbp, Esr1 enrichment in factor weights |
-| 7 | Gene-Lipid Networks | 951-1350 | Sparse (r>0.65), full (r>0), compressed (by class) networks |
-| 8 | Summary | 1351-1438 | Print summary, list output files |
+| 1 | Prepare MOFA Input | 78-117 | Load RNA/lipidomics, harmonize samples in `prepare_mofa_input()`, and save `MOFA_data.RData`. |
+| 2 | MOFA Model Training | 120-197 | Use existing 5-15 factor models or run Python `scripts/mofa/mofa2.py`. |
+| 3 | Model Selection | 200-246 | Prefer `mofa_res_12factor.hdf5`. |
+| 4 | Extract Weights and TF Enrichment | 249-369 | Load MOFA model or existing weights, compute TF scores, and save weights RData. |
+| 5 | Factor Enrichment | 372-672 | Enrich factor scores for gonadal type and plot variance/enrichment figures. |
+| 6 | Analyze TF Enrichment | 675-753 | Summarize TF enrichment in hepatocyte weights. |
+| 7 | Gene-Lipid Networks | 756-1390 | Select Factor 1 features, compute gene-lipid correlations, save full/sparse/TF/compressed networks. |
+| - | Complete | 1438-1473 | Print output summary. |
 
 ## Input Files
 
-- `data/RNA/scaled_RNA_{1,2,3}.csv` - Expression data (from workflow 01)
-- `data/RNA/meta_data_df.csv` - Metadata
-- `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` - Lipidomic data
-- `data/mofa/` - Pre-computed MOFA models (optional)
-- `support/TF_regulons.RData` - TF regulons
-- `support/Gonadal_Hormone_Genes.csv` - ESR1/AR targets
-- `support/m5.all.v2023.2.Mm.symbols.gmt` - GO gene sets (for lipid metabolism filter)
+- `data/RNA/scaled_RNA_{1,2,3}.csv` - Workflow 01 main RNA matrix.
+- `data/metabolomics/Lipid_data_file_JPC_cleaned.csv`
+- `results/mofa/RNA/mofa_res_*factor.hdf5` - Optional pre-trained MOFA models.
+- `results/mofa/main_model_RNA_lipid_weight.RData` - Optional fallback if model loading is unavailable.
+- `data/Suppl_Table_1_OverviewData.xlsx` via `load_metadata()`.
+- `support/m5.all.v2023.2.Mm.symbols.gmt` - Lipid-metabolism gene filter for networks.
+- `support/TF_regulons.RData`
+- `support/Gonadal_Hormone_Genes.csv`
 
 ## Output Files
 
-- `results/mofa/MOFA_data.RData` - MOFA input data
-- `results/mofa/main_model_RNA_lipid_weight.RData` - **KEY OUTPUT**: MOFA weights with TF scores
-- `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` - Full gene-lipid network
-- `results/mofa/networks/hepatocyte_TF_gene_lipid_network_*_SIF.csv` - TF-gene-lipid networks
-- `results/multi-omic/hepatocyte_TF_spec_gene_lipid_network_mofa_full50percent.Rdata` - Correlation matrix for structural analysis
+- `results/mofa/MOFA_data.RData`
+- `data/mofa/MOFA_input.csv` - Written only if model training is needed.
+- `results/mofa/RNA/mofa_res_12factor.hdf5` - Expected optimal model location.
+- `results/mofa/main_model_RNA_lipid_weight.RData`
+- `results/mofa/factor_analysis/factor_enrichment_gonadal.RData`
+- `results/mofa/factor_analysis/variance_explained_pheatmap.pdf`
+- `results/mofa/factor_analysis/gonadal_enrichment_pheatmap.pdf`
+- `results/mofa/factor_analysis/mofa_variance_explained_with_gonadal_enrichment.pdf`
+- `results/mofa/networks/gene_lipid_correlations_factor1.RData`
+- `results/mofa/networks/gene_lipid_correlations_factor1.csv`
+- `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`
+- `results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv`
+- `results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv`
+- `results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv`
+- `results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv`
 
 ## Key Variables
 
 | Variable | Type | Description |
 |----------|------|-------------|
-| `mofa_model` | MOFA | Trained MOFA model object |
-| `weights` | list | MOFA W matrix (list of views -> data.frames) |
-| `TF_scores_df` | data.frame | TF activity scores (TFs x samples) |
-| `cor_mat` | matrix | Gene-lipid Pearson correlations |
-| `threshold_cor` | numeric | Correlation threshold (0.65 for sparse, 0 for full) |
-
-## Sample Harmonization (2026-03-13)
-
-`prepare_mofa_input()` in `scripts/core/multiomics.R` now filters **both** RNA and lipidomic
-samples to their intersection (43 common samples). Previously, only RNA was filtered to match
-lipidomic, leaving 48 lipidomic samples (5 extra) in the MOFA input. Old models archived in
-`results/mofa/RNA/old_20260313/`.
+| `MOFA_data` | data.frame | Long-format MOFA input with six views |
+| `model_dir` | character | `results/mofa/RNA` |
+| `optimal_model_file` | character | `results/mofa/RNA/mofa_res_12factor.hdf5` |
+| `weights` | list | MOFA weights by view, plus TF score view when available |
+| `factor_enrichment` | data.frame | Factor association with gonadal type |
+| `factor1_features` | list | Top positive/negative Factor 1 features by view |
+| `hepatocyte_cor_mat_RNA_lip` | matrix | Factor 1 gene-lipid correlations for sparse network |
+| `hepatocyte_cor_mat_RNA_lip_permissive` | matrix | Top 33% feature correlation matrix for full network |
 
 ## Coherence Assessment
 
-**Status: GOOD** — No real issues found. Notes on design patterns below.
-
-### Model loading has proper fallback logic
-- Three paths: (1) train new model, (2) load pre-trained `.hdf5`, (3) load pre-computed `weights` from `.RData`
-- Both paths 2 and 3 produce the same `weights` list object (list of views -> data.frames)
-- If neither model nor weights file exists, the script calls `stop()` — no silent failure
-- Downstream code uses `if (!is.null(model))` to branch correctly
-
-### Network generation is sequential by design
-- Three versions (sparse, full, compressed) are built in order within section 7
-- The compressed version intentionally overwrites `cormat_*` variables after the uncompressed versions have been saved to CSV
-- This is safe because the script runs sequentially top-to-bottom
+**Status: GOOD.** Workflow 04 is independent of workflow 02 DE outputs. It depends on workflow 01 RNA data and raw lipidomics, then feeds workflow 07 through the full gene-lipid network.
 
 ## Network Types Generated
 
-| Type | Threshold | Node Resolution | Purpose |
-|------|-----------|-----------------|---------|
-| Sparse | r > 0.65 | Individual lipids | Cytoscape visualization |
-| Full | r > 0 | Individual lipids | Validation (workflow 07) |
-| Compressed | r > 0.65 (pre-agg) | Lipid classes | Summary figures |
+| Type | Feature filter | Network resolution | Output |
+|------|----------------|--------------------|--------|
+| Sparse gene-lipid | Top 2.5% positive and negative Factor 1 features | Individual lipid species; top 3 genes per lipid | Internal input for TF-gene-lipid network |
+| Full gene-lipid | Top 33% positive and negative Factor 1 features | Individual lipid species; all gene-lipid pairs | `hepatocyte_gene_lipid_network_full_SIF.csv` |
+| TF-gene-lipid full | Sparse gene-lipid plus TF-gene edges | TFs, genes, lipid species | `hepatocyte_TF_gene_lipid_network_full_*` |
+| TF-gene-lipid compressed | Aggregates lipid species to classes | TFs, genes, lipid classes | `hepatocyte_TF_gene_lipid_network_compressed_*` |
 
 ## Notes for Context Restoration
 
-When returning to this workflow:
-1. `main_model_RNA_lipid_weight.RData` is the single most important output - used by workflows 05, 06, 07
-2. Factor 1 shows strongest gonad association - this is the key biological factor
-3. Top 50% filtering: features are selected by absolute weight magnitude from Factor 1
-4. Gene filter: Only lipid metabolism genes (GO:CELLULAR_LIPID_METABOLIC_PROCESS) are included in networks
-5. `make_cor_network()` and `expand_attributes()` are defined in `scripts/support_functions.R`
-6. Model12 (12 factors) was selected after cross-validation
-7. Key TFs identified: Nfic, Dbp, Esr1 (correlated with Cyp2b9, Cyp2d9, Cyp2b13, Cyp2c38)
+1. Factor 1 is the main gonad-associated factor in the current analysis narrative.
+2. `prepare_mofa_input()` now filters RNA and lipidomics to their sample intersection.
+3. `results/mofa/main_model_RNA_lipid_weight.RData` is important for lookup, but current workflow 06 no longer consumes it.
+4. Workflow 07 consumes `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`.

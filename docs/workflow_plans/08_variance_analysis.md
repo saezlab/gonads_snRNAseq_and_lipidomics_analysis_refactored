@@ -1,76 +1,72 @@
 # Workflow 08: Variance Analysis
 
-**Script:** `scripts/workflows/08_variance_analysis.R`
-**Lines:** ~782
-**Purpose:** Compare lipid variance (not mean) between ovaries and testes groups. Tests whether gonadal hormones affect lipid variability in addition to abundance.
+**Script:** `scripts/workflows/08_variance_analysis.R`  
+**Lines:** ~781  
+**Purpose:** Compare lipid variability between ovaries and testes groups, separately from mean differential abundance tested in workflow 03.
 
 ## Source Dependencies
 
 ```r
-source("scripts/support_functions.R")
-source("scripts/core/data_loading.R")
 source("scripts/config/analysis_config.R")
 source("scripts/config/plotting_themes.R")
+source("scripts/core/data_loading.R")
 ```
 
 ## Section Breakdown
 
 | # | Section | Lines (approx) | Description |
 |---|---------|----------------|-------------|
-| 1 | Configuration | 1-40 | Load config, set output dir |
-| 2 | Data Loading | 41-100 | Load lipidomic data, log2 transform |
-| 3 | Sample Separation | 101-150 | Split into ovaries vs testes sample groups |
-| 4 | CV Calculation | 151-250 | Coefficient of variation per lipid per group |
-| 5 | Levene's Test | 251-350 | Test equality of variances (lipid by lipid) |
-| 6 | Global Paired Test | 351-420 | Paired Wilcoxon: CVs ovaries vs testes overall |
-| 7 | Identify Differential Variance | 421-500 | Filter significant Levene's test results |
-| 8 | Visualizations | 501-600 | CV scatter, density plots, volcano-style plot |
-| 9 | Class-Level Analysis | 601-700 | Aggregate variance differences by lipid class |
-| 10 | Save Results | 701-750 | Write CSVs and RData |
-| 11 | Summary | 751-782 | Print summary statistics |
+| 1 | Configuration | 41-58 | Load config, themes, data loaders, and create `results/lipidomic/variance_analysis/`. |
+| 2 | Load Data | 61-94 | Load log2 lipidomics and sample metadata, subset metadata to lipidomic samples. |
+| 3 | Separate Samples | 98-119 | Split columns into ovaries and testes sample sets. |
+| 4 | CV Calculation | 123-178 | Compute per-lipid mean, SD, variance, CV, CV difference, and CV ratio. |
+| 5 | Levene's Test | 181-241 | Brown-Forsythe Levene test per lipid; BH adjustment. |
+| 6 | Global Paired Test | 246-289 | Paired Wilcoxon and paired t-test on lipid CVs. |
+| 7 | Differential Variance Labels | 293-342 | Mark significant lipids and report top more-variable lipids by group. |
+| 8 | Lipid-Level Plot | 349-414 | Volcano-style plot of CV difference versus Levene p-value. |
+| 9 | Class-Level Analysis | 417-634 | Aggregate lipids to class means, repeat CV/Levene/global tests, and plot class volcano. |
+| 10 | Save Results | 638-716 | Write result CSVs. |
+| 11 | Final Summary | 720-781 | Print interpretation and output paths. |
 
 ## Input Files
 
-- `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` - Lipidomic data
+- `data/metabolomics/Lipid_data_file_JPC_cleaned.csv`
+- `data/Suppl_Table_1_OverviewData.xlsx` via `load_metadata()`
 
 ## Output Files
 
-- `results/lipidomic/variance_analysis/cv_by_group.csv` - CV per lipid per group
-- `results/lipidomic/variance_analysis/levene_test_results.csv` - Levene's test results
-- `results/lipidomic/variance_analysis/differential_variance_lipids.csv` - Significant lipids
-- `results/lipidomic/variance_analysis/class_level_variance.csv` - Class-level summary
-- `results/lipidomic/variance_analysis/*.pdf` - Visualization plots
+- `results/lipidomic/variance_analysis/variance_analysis_results.csv` - Per-lipid CVs, Levene statistics, adjusted p-values, and direction labels.
+- `results/lipidomic/variance_analysis/significant_differential_variance_lipids.csv` - FDR-significant subset from the per-lipid table.
+- `results/lipidomic/variance_analysis/variance_analysis_by_class.csv` - Class-level variance analysis.
+- `results/lipidomic/variance_analysis/variance_analysis_summary.csv` - Text-like metric/value summary table.
+- `results/lipidomic/variance_analysis/cv_difference_volcano.pdf`
+- `results/lipidomic/variance_analysis/cv_difference_volcano_by_class.pdf`
 
 ## Key Variables
 
 | Variable | Type | Description |
 |----------|------|-------------|
-| `lipidomic` | data.frame | Log2-transformed lipid abundances |
-| `cv_df` | data.frame | CV values per lipid, split by gonad group |
-| `levene_results` | data.frame | Levene's test p-values per lipid |
-| `diff_var_lipids` | data.frame | Lipids with significantly different variance |
+| `lipidomic` | data.frame | Log2-transformed lipid abundance matrix |
+| `metadata_lipid` | data.frame | Metadata for samples present in lipidomics |
+| `ovaries_samples`, `testes_samples` | character | Sample names for the two gonadal groups |
+| `cv_results` | data.frame | Per-lipid mean/SD/variance/CV and Levene results |
+| `sig_var_lipids` | data.frame | FDR-significant per-lipid differential variance subset |
+| `cv_class_results` | data.frame | Class-level CV and Levene results |
+| `summary_stats` | data.frame | Output metric/value summary |
 
 ## Coherence Assessment
 
-**Status: GOOD** - Self-contained, no cross-workflow dependencies.
-
-- Clean linear flow: load -> compute -> test -> visualize -> save
-- No dependencies on other workflow outputs
-- Only needs the raw lipidomic data file
-- Levene's test is appropriate for testing variance equality
+**Status: GOOD.** The workflow is standalone and only depends on raw lipidomics plus metadata helpers. The plan has been updated to current `variance_analysis_*` output names.
 
 ## Statistical Methods
 
-1. **Coefficient of Variation (CV):** `CV = SD / mean` per lipid per gonad group
-2. **Levene's Test:** Non-parametric test for equality of variances (robust to non-normality)
-3. **Paired Wilcoxon:** Global test comparing CVs across all lipids (ovaries vs testes)
-4. **Multiple testing correction:** BH (Benjamini-Hochberg) on Levene's p-values
+1. **CV:** `SD / abs(mean) * 100`; the absolute mean is intentional because data are log2-transformed and means can be negative.
+2. **Levene's test:** `car::leveneTest(..., center = "median")`, i.e. Brown-Forsythe variant.
+3. **Multiple testing:** BH adjustment on per-lipid and per-class Levene p-values.
+4. **Global tests:** Paired Wilcoxon and paired t-test comparing CVs across lipids/classes.
 
 ## Notes for Context Restoration
 
-When returning to this workflow:
-1. This is a NEW workflow (untracked in git) - independent of the main analysis chain
-2. Tests a different hypothesis: are lipids more VARIABLE in one gonad group vs the other?
-3. This is complementary to workflow 03 which tests mean differences
-4. Self-contained: only needs raw lipidomic CSV, no dependencies on other workflow outputs
-5. Results go to `results/lipidomic/variance_analysis/` subdirectory
+1. This workflow complements workflow 03: it tests variability, not mean abundance.
+2. It does not consume workflow 03 outputs; it reloads lipidomics directly.
+3. Volcano plot colors use FDR-significant Levene results and direction of `cv_testes - cv_ovaries`.

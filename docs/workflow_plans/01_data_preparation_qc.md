@@ -1,8 +1,8 @@
-# Workflow 01: Data Preparation & QC
+# Workflow 01: Data Preparation and QC
 
-**Script:** `scripts/workflows/01_data_preparation_qc.R`
-**Lines:** ~870
-**Purpose:** Load Seurat pseudobulk object, extract metadata and scaled expression, perform QC, split data into 3 CSVs for downstream use. Also converts zonation Seurat object to CSV.
+**Script:** `scripts/workflows/01_data_preparation_qc.R`  
+**Lines:** ~1021  
+**Purpose:** Convert preprocessed pseudobulk Seurat objects into CSV matrices/metadata for downstream workflows, run QC checks, and generate exploratory PCA plots.
 
 ## Source Dependencies
 
@@ -18,57 +18,66 @@ source("scripts/visualization/dimred_plots.R")
 
 | # | Section | Lines (approx) | Description |
 |---|---------|----------------|-------------|
-| 1 | Configuration | 1-30 | Load config, set output dirs |
-| 2 | Load Seurat Object | 31-80 | Read `fcgl_pseudobulk_gonad_20241023.rds` |
-| 3 | Extract Metadata | 81-150 | Pull cell type, gonad, chromosome info from Seurat |
-| 4 | QC Metrics | 151-250 | Compute per-sample QC (gene counts, library size) |
-| 5 | Extract Scaled Data | 251-350 | Get scaled expression matrix from Seurat assay |
-| 6 | Verify Structure | 351-420 | Check dimensions, sample names, gene counts |
-| 7 | Split & Save CSVs | 421-520 | Split into `scaled_RNA_{1,2,3}.csv` + `meta_data_df.csv` |
-| 8 | Exploratory PCA | 521-650 | PCA on all cell types, variance by experimental factors |
-| 9 | Data Validation | 651-750 | Cross-check metadata vs expression, sample matching |
-| 10 | QC Report | 751-824 | Print summary statistics, save QC plots |
-| 11 | Zonation CSV Conversion | 825-870 | Convert `fcg_zonation_pseudobulks.rds` to `scaled_RNA_zonation.csv` + `meta_data_df_zonation.csv` |
-| 12 | GDX CSV Conversion | 875-960 | Convert `gdx_pseudobulks.rds` to `scaled_RNA_gdxhr_{1,2,3}.csv` + `meta_data_df_gdxhr.csv` |
+| 1 | Configuration | 51-80 | Load config/helpers and create `results/qc` and `data/RNA`. |
+| 2 | Load Seurat Object | 83-148 | Read `data/RNA/fcg_pseudobulks.rds` and inspect assay layers. |
+| 3 | Extract Metadata | 151-238 | Extract pseudobulk metadata and write `meta_data_df.csv`. |
+| 4 | QC Metrics | 241-331 | Count pseudobulks per mouse/cell type, design balance, and write QC tables/plots. |
+| 5 | Extract Scaled Data | 334-378 | Extract `RNA` `scale.data` via Seurat compatibility helper. |
+| 6 | Verify Structure | 381-413 | Validate pseudobulk sample IDs and dimensions. |
+| 7 | Split and Save Data Files | 416-477 | Split by sample columns into three CSV files, keeping all genes in each file. |
+| 8 | Initial Exploratory Analysis | 480-626 | Reload split files and metadata, then create PCA diagnostics. |
+| 9 | Data Validation | 630-696 | Check missing/infinite values, variance, range, duplicates, and sample completeness. |
+| 10 | QC Report | 699-792 | Write `results/qc/data_quality_report.txt`. |
+| 11 | Zonation CSV Conversion | 796-870 | Convert `data/RNA/fcg_zonation_pseudobulks.rds` to zonation CSV/metadata if present. |
+| 12 | GDX CSV Conversion | 876-988 | Convert `data/RNA/gdx_pseudobulks.rds` to split GDX CSV/metadata if present. |
+| - | Complete | 990-1021 | Print output summary. |
 
 ## Input Files
 
-- `data/RNA/fcg_pseudobulks.rds` - Seurat pseudobulk object (main FCG)
-- `data/RNA/fcg_zonation_pseudobulks.rds` - Zonation Seurat object (hepatocyte periportal/pericentral)
-- `data/RNA/gdx_pseudobulks.rds` - GDX Seurat pseudobulk object (gonadectomy validation)
+- `data/RNA/fcg_pseudobulks.rds` - Main FCG pseudobulk Seurat object.
+- `data/RNA/fcg_zonation_pseudobulks.rds` - Optional zonation pseudobulk Seurat object.
+- `data/RNA/gdx_pseudobulks.rds` - Optional GDX pseudobulk Seurat object.
+- `data/Suppl_Table_1_OverviewData.xlsx` - Used during PCA metadata merge.
 
 ## Output Files
 
-- `data/RNA/scaled_RNA_1.csv`, `scaled_RNA_2.csv`, `scaled_RNA_3.csv` - Split expression matrices
-- `data/RNA/meta_data_df.csv` - Sample metadata
-- `data/RNA/scaled_RNA_zonation.csv` - Zonation scaled expression matrix (20,123 genes x 86 samples)
-- `data/RNA/meta_data_df_zonation.csv` - Zonation metadata (sample, sample_name, zonation_type, gonadal_type)
-- `data/RNA/scaled_RNA_gdxhr_{1,2,3}.csv` - GDX split expression matrices (20,123 genes x 110 samples)
-- `data/RNA/meta_data_df_gdxhr.csv` - GDX metadata (sample, sample_name, cell_type, group)
-- `results/qc/` - QC diagnostic plots
+- `data/RNA/scaled_RNA_1.csv`
+- `data/RNA/scaled_RNA_2.csv`
+- `data/RNA/scaled_RNA_3.csv`
+- `data/RNA/meta_data_df.csv`
+- `data/RNA/scaled_RNA_zonation.csv`
+- `data/RNA/meta_data_df_zonation.csv`
+- `data/RNA/scaled_RNA_gdxhr_1.csv`
+- `data/RNA/scaled_RNA_gdxhr_2.csv`
+- `data/RNA/scaled_RNA_gdxhr_3.csv`
+- `data/RNA/meta_data_df_gdxhr.csv`
+- `results/qc/data_quality_report.txt`
+- `results/qc/pseudobulk_per_biosample.pdf`
+- `results/qc/pseudobulk_per_celltype.pdf`
+- `results/qc/sample_celltype_design.csv`
+- `results/qc/samples_per_group_celltype.csv`
+- `results/qc/PCA_all_samples_by_celltype.pdf`
+- `results/qc/PCA_[CellType].pdf`
 
 ## Key Variables
 
 | Variable | Type | Description |
 |----------|------|-------------|
-| `sobj` | Seurat | Main pseudobulk Seurat object |
-| `scaled_RNA` | data.frame | Full scaled expression matrix (genes x samples) |
-| `meta_data_df` | data.frame | Sample metadata with cell type, gonad, chromosome |
+| `seurat_path` | character | `data/RNA/fcg_pseudobulks.rds` |
+| `seurat_obj` | Seurat | Main pseudobulk object |
+| `metadata` | data.frame | Pseudobulk metadata written to `meta_data_df.csv` |
+| `scaled_RNA` | data.frame | Full genes x pseudobulk sample expression matrix |
+| `data_rna_dir` | character | `data/RNA` |
+| `zonation_rds_path` | character | `data/RNA/fcg_zonation_pseudobulks.rds` |
+| `gdx_rds_path` | character | `data/RNA/gdx_pseudobulks.rds` |
 
 ## Coherence Assessment
 
-**Status: GOOD** - Linear ETL pipeline, no ordering issues.
-
-- Flow is straightforward: Load -> Extract -> Validate -> Split -> Save
-- No conditional logic or skip-ahead dependencies
-- All outputs are self-contained
+**Status: GOOD.** This is the main ETL entry point after raw preprocessing. Optional zonation/GDX conversions are guarded by file-existence checks and skip with warnings if the RDS files are absent.
 
 ## Notes for Context Restoration
 
-When returning to this workflow:
-1. This is the entry point - requires raw Seurat `.rds` file
-2. Downstream workflows (02-08) depend on the 3 CSV files this produces
-3. The gene split is arbitrary (by column index), not biological - just for file size management
-4. Sample names in the Seurat object determine naming convention for all downstream analyses
-5. Section 11 converts the zonation Seurat object (`fcg_zonation_pseudobulks.rds`) to CSVs - used by workflow 05.
-6. Section 12 converts the GDX Seurat object (`gdx_pseudobulks.rds`) to split CSVs - used by workflows 02 (step 3B) and 03.
+1. The split RNA CSVs are split by **sample columns**, not genes. Each file keeps the `gene` column and all rows, which allows `load_rna_data()` to merge by `gene`.
+2. Main downstream consumers are workflows 02 and 04 for main RNA data, workflow 05 for zonation CSVs, and workflow 02 for GDX RNA CSVs.
+3. The Seurat objects are already pseudobulk objects; columns represent pseudobulk samples, not single cells.
+4. Metadata from the raw Seurat object initially lacks `group` and `allosome_type`; downstream loaders merge those from the overview workbook.

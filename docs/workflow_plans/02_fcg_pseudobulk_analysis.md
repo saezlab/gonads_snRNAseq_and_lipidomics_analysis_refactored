@@ -1,8 +1,8 @@
 # Workflow 02: FCG Pseudobulk Analysis
 
-**Script:** `scripts/workflows/02_fcg_pseudobulk_analysis.R`
-**Lines:** ~1370
-**Purpose:** Differential expression analysis across FCG groups and cell types using limma, pathway/TF enrichment, GDX and Xenium validation.
+**Script:** `scripts/workflows/02_fcg_pseudobulk_analysis.R`  
+**Lines:** ~1452  
+**Purpose:** Run FCG pseudobulk RNA differential expression across five liver cell types, enrich pathways/TFs, and perform GDX, Xenium, and proteomics validation.
 
 ## Source Dependencies
 
@@ -22,77 +22,83 @@ source("scripts/visualization/heatmaps.R")
 
 | # | Section | Lines (approx) | Description |
 |---|---------|----------------|-------------|
-| 1 | Data Loading | 1-80 | Load 3 CSVs, merge by gene, load metadata |
-| 2 | PCA | 81-200 | PCA per cell type, variance by gonad/chromosome |
-| 3 | DE Analysis (FCG) | 201-400 | limma for 6 contrasts x 5 cell types |
-| 3B | DE Analysis (GDX) | 401-500 | GDX validation DE analysis |
-| 4 | Volcano Plots | 501-600 | Volcano plots for all contrasts x cell types |
-| 5 | T-statistic Matrix | 601-700 | Convert ttop lists to t-value matrix, save |
-| 6 | Pathway Enrichment | 701-850 | decoupleR ULM with MSigDB GO-BP gene sets |
-| 6B | Pathway Heatmaps | 851-950 | Full + focused heatmaps of pathway scores |
-| 7C | GDX Validation | 951-1050 | Correlation between FCG and GDX t-values |
-| 7D | Xenium Validation | 1051-1100 | Spatial transcriptomics validation (82 genes) |
-| 8 | TF Activity | 1101-1180 | CollecTRI + ESR1/AR regulons, TF heatmap |
-| 9 | Save PCA Coords | 1181-1210 | Save hepatocyte PCA coordinates for MOFA |
-| 10 | Proteomics Validation | 1211-1340 | WT bulk liver proteomics (male vs female), VSN normalization, limma DE, correlation with FCG RNA, concordance analysis |
+| 1 | Load and Prepare Data | 77-97 | Load workflow 01 RNA CSVs and merged metadata. |
+| 2 | PCA Visualization | 100-220 | PCA per cell type plus PC1 ridgeline plots by gonad/allosome. |
+| 3 | FCG Differential Expression | 223-326 | Six FCG contrasts across five cell types, saved as nested ttop list. |
+| 3B | GDX Differential Analysis | 329-475 | Optional GDX RNA validation if workflow 01 GDX CSVs exist. |
+| 4 | Volcano Plots | 477-542 | Volcano plots for each FCG contrast and cell type. |
+| 5 | T-statistic Matrix | 545-606 | Build and save `tval_full_df.RData` and `tval_full_df.csv`. |
+| 6 | Pathway Enrichment | 609-636 | GO-BP ULM enrichment with `minsize = 5`. |
+| 7 | Pathway Heatmap | 639-692 | Full pathway heatmap. |
+| 7B | Focused Pathway Heatmap | 694-846 | Key pathway heatmap for gonadal contrast. |
+| 7C | GDX Validation Comparison | 848-982 | Correlate FCG and GDX t-values. |
+| 7D | Xenium Validation | 984-1078 | Optional Xenium panel volcano plot. |
+| 8 | TF Activity | 1090-1164 | CollecTRI/custom hormone receptor TF activity with `minsize = 20`. |
+| 9 | PCA Coordinates | 1166-1198 | Save hepatocyte PCA coordinates. |
+| 10 | Proteomics Validation | 1200-1399 | Optional WT bulk liver proteomics validation with VSN and limma. |
+| - | Complete | 1401-1452 | Print output summary. |
 
 ## Input Files
 
-- `data/RNA/scaled_RNA_{1,2,3}.csv` - Expression matrices (from workflow 01)
-- `data/RNA/meta_data_df.csv` - Sample metadata
-- `support/m5.all.v2023.2.Mm.symbols.gmt` - MSigDB gene sets
-- `support/TF_regulons.RData` - CollecTRI TF regulons
-- `support/Gonadal_Hormone_Genes.csv` - ESR1/AR target genes
-- `support/FCGL_Xenium_Panel.csv` - Xenium validation gene panel
-- `data/proteomics/P3225_fractionated_protein.tsv` - TMT proteomics (WT male vs female)
-- `data/proteomics/metadata.csv` - Proteomics sample metadata (12 TMT channels)
+- `data/RNA/scaled_RNA_{1,2,3}.csv` - Main RNA expression from workflow 01.
+- `data/RNA/meta_data_df.csv` - Main RNA metadata from workflow 01.
+- `data/RNA/scaled_RNA_gdxhr_{1,2,3}.csv` and `data/RNA/meta_data_df_gdxhr.csv` - Optional GDX RNA validation inputs.
+- `support/m5.all.v2023.2.Mm.symbols.gmt` - GO-BP gene sets.
+- `support/TF_regulons.RData` - CollecTRI regulons.
+- `support/Gonadal_Hormone_Genes.csv` - Custom ESR1/AR targets, used by helper functions.
+- `support/FCGL_Xenium_Panel.csv` - Xenium validation panel.
+- `data/proteomics/P3225_fractionated_protein.tsv`
+- `data/proteomics/metadata.csv`
 
 ## Output Files
 
-- `results/pseudobulk/ttop_full_list.RData` - All DE results (list of lists)
-- `results/pseudobulk/tval_full_df.RData` - T-statistic matrix (binary)
-- `results/pseudobulk/tval_full_df.csv` - T-statistic matrix (CSV, with ID column; used by Step 7C)
-- `results/pseudobulk/volcanos/*.pdf` - Volcano plots (30 files: 6 contrasts x 5 cell types)
-- `results/pseudobulk/pca/*.pdf` - PCA plots per cell type
-- `results/pseudobulk/pathways/*.pdf` - Pathway heatmaps
-- `results/pseudobulk/gdx_validation_comparison.pdf` - GDX vs FCG correlation
-- `results/pseudobulk/xenium_validation_volcano.pdf` - Xenium validation
-- `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` - Hepatocyte PCA coords
-- `results/pseudobulk/proteo_validation_comparison.pdf` - Proteomics vs RNA correlation
+- `results/pseudobulk/ttop_full_list.RData`
+- `results/pseudobulk/tval_full_df.RData`
+- `results/pseudobulk/tval_full_df.csv`
+- `results/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData`
+- `results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv`
+- `results/pseudobulk/volcanos/volcano_*.pdf`
+- `results/pseudobulk/pca/*.pdf`
+- `results/pseudobulk/pathways/pathway_scores_df_all.RData`
+- `results/pseudobulk/pathways/pathway_enrichment_heatmap.pdf`
+- `results/pseudobulk/pathways/pathway_enrichment_heatmap_focused.pdf`
+- `results/pseudobulk/pathways/tf_scores_df_all.RData`
+- `results/pseudobulk/pathways/tf_activity_heatmap.pdf`
+- `results/pseudobulk/gdx_validation_comparison.pdf`
+- `results/pseudobulk/xenium_validation_volcano.pdf`
+- `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv`
+- `results/pseudobulk/proteo_validation_comparison.pdf`
 
 ## Key Variables
 
 | Variable | Type | Description |
 |----------|------|-------------|
-| `scaled_RNA` | data.frame | Merged expression matrix (genes x samples) |
-| `meta_data_df` | data.frame | Sample metadata |
-| `targets` | data.frame | Design matrix for limma |
-| `ttop_full_list` | list | Nested list: contrast -> cell_type -> toptable |
-| `tval_full_df` | data.frame | T-statistics matrix |
-| `comparisons` | named list | Contrast vectors (from `contrasts.R`) |
-| `pathway_scores_df` | data.frame | decoupleR enrichment scores |
+| `scaled_RNA` | data.frame | Main genes x pseudobulk samples matrix |
+| `metadata` | data.frame | RNA metadata merged with overview workbook |
+| `cell_types` | character | Hepatocytes, Endothelial cells, Immune cells, Stellate cells, Cholangiocytes |
+| `contrasts` | character | Six FCG contrast config names |
+| `ttop_full_list` | list | Nested list: contrast display name -> cell type -> topTable |
+| `tval_full_df` | data.frame | Wide t-statistic matrix |
+| `pathway_results` | data.frame | decoupleR GO enrichment scores |
+| `tf_results` | data.frame | decoupleR TF activity scores |
 
 ## Coherence Assessment
 
-**Status: GOOD** — No open issues. The tval_full_df CSV/RData mismatch was fixed (Step 5 now exports both formats).
+**Status: GOOD.** The workflow's products are used mainly for RNA result lookup and validation figures. Current workflow 04 and 05 scripts do not consume workflow 02 DE outputs.
 
-## Contrasts (from `scripts/config/contrasts.R`)
+## Contrasts
 
-6 contrasts applied to each of 5 cell types:
-1. `testes_vs_ova` (Testes vs Ovaries) - primary gonadal comparison
-2. `XY_vs_XX` - sex chromosome comparison
-3. `XYT_vs_XYO` - within XY: testes vs ovaries
-4. `XYT_vs_XXT` - within Testes: XY vs XX
-5. `XXT_vs_XXO` - within XX: testes vs ovaries
-6. `XYO_vs_XXO` - within Ovaries: XY vs XX
+1. `gonadal_type` -> `Testes vs Ovaries`
+2. `allosome_type` -> `XY vs XX`
+3. `XXT_vs_XXO`
+4. `XYT_vs_XYO`
+5. `XYO_vs_XXO`
+6. `XYT_vs_XXT`
 
 ## Notes for Context Restoration
 
-When returning to this workflow:
-1. This is the main DE analysis pipeline - most downstream workflows depend on its outputs
-2. `ttop_full_list.RData` is the central result used by workflows 04, 05, 06, 07
-3. Pathway enrichment uses `run_ulm()` from decoupleR with `minsize = 20`
-4. Focused pathway heatmap uses score threshold |score| > 11-12 (may need tuning)
-5. GDX validation expects correlation r ~ -0.48 with FCG (negative due to direction convention)
-6. Cell types: Hepatocytes, Endothelial_cells, Immune_cells, Stellate_cells, Cholangiocytes
-7. Proteomics validation uses WT mice (not FCG): male=testes, female=ovaries. VSN-normalized TMT data. ~33% of RNA DEGs confirmed at protein level.
+1. `results/pseudobulk/ttop_full_list.RData` is the primary RNA DE archive. The current script does not write `ttop_full_long.csv`.
+2. Pathway enrichment intentionally uses `minsize = 5` to match the legacy/default decoupleR behavior.
+3. TF activity uses `minsize = 20`.
+4. GDX validation expects the workflow 01 GDX CSVs and writes into `results/pseudobulk/gdxrh/` (spelled `gdxrh` in the script).
+5. Proteomics validation is optional and skipped if either proteomics input file is missing.

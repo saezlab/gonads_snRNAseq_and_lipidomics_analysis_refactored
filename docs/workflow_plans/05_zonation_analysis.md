@@ -1,157 +1,168 @@
 # Workflow 05: Zonation Analysis
 
-**Script:** `scripts/workflows/05_zonation_analysis.R`
-**Lines:** ~2523 (LARGEST workflow)
-**Purpose:** Hepatocyte zonation (periportal vs pericentral) analysis: DE by zone x gonad, sex-specific zonation gene identification via entropy-optimized threshold, correlation networks per zone x gonad category, lipid-zone association heatmaps.
+**Script:** `scripts/workflows/05_zonation_analysis.R`  
+**Lines:** ~2720  
+**Purpose:** Analyze hepatocyte periportal/pericentral zonation, gonad-by-zonation interactions, sex-specific zonation-biased genes, zonation-specific gene-lipid networks, and lipid-class zonation associations.
 
 ## Source Dependencies
 
 ```r
+source("scripts/config/analysis_config.R")
+source("scripts/config/plotting_themes.R")
 source("scripts/support_functions.R")
 source("scripts/core/data_loading.R")
-source("scripts/core/differential_analysis.R")
-source("scripts/core/enrichment_analysis.R")
-source("scripts/config/contrasts.R")
-source("scripts/config/plotting_themes.R")
-source("scripts/visualization/volcano_plots.R")
-source("scripts/visualization/dimred_plots.R")
-source("scripts/visualization/heatmaps.R")
 ```
+
+The script loads additional RData/CSV resources inside later sections.
 
 ## Section Breakdown
 
-Headers and console output are now aligned (1-16).
-
 | # | Section | Lines (approx) | Description |
 |---|---------|----------------|-------------|
-| 1 | Configuration | 1-40 | Load config, set output dirs |
-| 2 | Load Zonation Data | 41-93 | Load zonation pseudobulk, metadata |
-| 3 | PCA | 95-132 | PCA by condition, gonad, zonation |
-| 4 | PCA Enrichment | 134-183 | Test variance explained by metadata factors |
-| 5 | DE Analysis | 185-260 | limma for 7 contrasts with `duplicateCorrelation()` blocking on mouse ID |
-| 6 | Volcano Plots | 239-288 | Volcano plots for all contrasts |
-| 7 | Pathway Enrichment | 290-374 | **RUN COMMENTED OUT** - loads from `zonation_limma_results.RData` |
-| 8 | Lipidomics + TF | 376-439 | Load lipidomic data, compute TF scores, define sample groups |
-| 9 | Zonation vs Sex Bias | 441-533 | Scatter: zonation t-value vs gonad t-value |
-| 10 | Zone-Specific Sex Bias | 535-620 | PP vs PC t-values scatter (collaborator style) |
-| 11 | Optimal Threshold | 622-774 | Entropy x stability x coverage x specificity optimization. Produces `sensitivity_df`, `proportion_total`, `optimal_metrics`, `optimal_threshold` |
-| 12 | Identify Genes | 776-1151 | Sex-specific zonation gene selection + quadrant scatter + bar + heatmap |
-| 13 | Correlation Networks | 1153-1407 | 4 networks (TPC, TPP, OPC, OPP) x 3 versions (sparse, full, compressed) |
-| 14 | Lipid Association | 1409-2455 | Binary heatmap, class proportions, butterfly chart, PG example, jitter. Uses `sensitivity_df`, `proportion_total`, `optimal_metrics` from section 11 |
-| 15 | Save Results | 2457-2483 | Save ttop_list, limmaRes, metadata, summary stats |
-| 16 | Workflow Complete | 2485-2523 | Summary printout |
+| 1 | Configuration | 41-68 | Load config/helpers and create `results/zonation/`, `volcanos/`, and `networks/`. |
+| 2 | Load Zonation Pseudobulk | 70-99 | Load workflow 01 zonation CSVs and report sample format. |
+| 3 | PCA Visualization | 102-138 | PCA by zonation, gonad, and combined condition. |
+| 4 | PCA Enrichment | 141-189 | Correlate/test PCA coordinates against metadata and plot a heatmap. |
+| 5 | Differential Analysis | 192-289 | Limma with `duplicateCorrelation()` blocked on mouse ID; 7 contrasts. |
+| 6 | Volcano Plots | 292-340 | Volcano plot for each contrast. |
+| 7 | Pathway Enrichment | 343-426 | Load GO gene sets, convert t-values, but active ULM call is commented out; loads cached `pathway_enrichment.RData`. |
+| 8 | Lipidomics + TF Activity | 429-487 | Load lipidomics, TF regulons, ESR1/AR targets, compute TF activity scores, and write `t_table_zonation.csv`. |
+| 9 | Zonation Bias vs Sex Bias | 490-610 | Scatter comparing overall zonation t-values and gonad t-values. |
+| 10 | Zone-Specific Sex Bias | 613-697 | Scatter comparing ovary-zone and testes-zone t-values. |
+| 10b | Zonation-Specific Sex Difference Quadrant | 700-814 | Additional quadrant plot for zone-specific gonad effects. |
+| 11 | Optimal Threshold Detection | 817-968 | Sweep interaction thresholds 0-10, compute entropy/stability/coverage/specificity, and choose `optimal_threshold`. |
+| 12 | Identify Zonation-Biased Genes | 971-1336 | Select sex-specific zonation genes, make quadrant/bar/panel/heatmap, and write gene summary. |
+| 13 | Correlation Networks | 1339-1586 | Build four zonation x gonad networks, each with standard, full, and compressed CSV outputs. |
+| 14 | Lipid-Gene Association Visualizations | 1589-2634 | Load WF03 lipid DE/enrichment and WF05 networks, map lipids to categories, export association/sensitivity tables, and plot class-level figures. |
+| 15 | Save Results | 2637-2680 | Save limma objects, metadata, summary stats, and long-format zonation DE table. |
+| 16 | Complete | 2683-2720 | Print outputs and expected biological findings. |
 
 ## Input Files
 
-- `data/RNA/heps_zonationsubsetted_pseudobulks_gonad.rds` - Zonation-annotated hepatocyte pseudobulk (from workflow 00)
-- `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` - Lipidomic data
-- `results/lipidomic/ttop_full_list.RData` - Lipidomic DE results (from workflow 03)
-- `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` - Enrichment scores (from workflow 03)
-- `support/TF_regulons.RData` - TF regulons
-- `support/Gonadal_Hormone_Genes.csv` - ESR1/AR targets
-- `results/zonation/zonation_limma_results.RData` - Pre-computed pathway results (loaded in section 7)
+- `data/RNA/scaled_RNA_zonation.csv` - Zonation pseudobulk expression from workflow 01.
+- `data/RNA/meta_data_df_zonation.csv` - Zonation metadata from workflow 01.
+- `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` - Loaded through `load_lipidomic_data()`.
+- `support/m5.all.v2023.2.Mm.symbols.gmt` - GO biological process gene sets.
+- `support/TF_regulons.RData` - CollecTRI regulons.
+- `support/Gonadal_Hormone_Genes.csv` - Custom ESR1/AR targets.
+- `results/zonation/pathway_enrichment.RData` - Cached pathway scores loaded in section 7 because active ULM run is commented out.
+- `results/lipidomic/ttop_full_list.RData` - Workflow 03 lipid DE results loaded in section 14.
+- `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` - Workflow 03 lipid-class enrichment scores loaded in section 14.
 
 ## Output Files
 
-**DE Results:**
-- `results/zonation/zonation_ttop_list.RData` - All zonation DE results
-- `results/zonation/zonation_limma_results.RData` - Full limma results
-- `results/zonation/t_table_zonation.csv` - T-statistic table
+**DE and tables**
+- `results/zonation/zonation_ttop_list.RData`
+- `results/zonation/zonation_limma_results.RData`
+- `results/zonation/t_table_zonation.csv`
+- `results/zonation/ttop_full_long.csv`
+- `results/zonation/metadata.csv`
+- `results/zonation/summary_statistics.csv`
 
-**Figures:**
-- `results/zonation/PCA_by_*.pdf` - PCA plots (3 files)
-- `results/zonation/volcanos/*.pdf` - Volcano plots (7 files)
-- `results/zonation/zonation_vs_sex_bias_scatter.pdf` - Scatter: zonation vs gonad
-- `results/zonation/zone_specific_sex_bias_scatter.pdf` - PP vs PC scatter
-- `results/zonation/sex_specific_zonation_panel_AB.pdf` - **MAIN FIGURE**: quadrant + bar
-- `results/zonation/sex_specific_zonation_quadrant.pdf` - Full quadrant scatter
-- `results/zonation/sex_specific_zonation_heatmap_faceted.pdf` - 137 genes heatmap
-- `results/zonation/sex_specific_zonation_summary_bar.pdf` - Bar chart
-- `results/zonation/optimal_threshold_detection.pdf` - Threshold optimization curves
-- `results/zonation/lipid_zonation_threshold_sensitivity_total.pdf` - Sensitivity area plot
-- `results/zonation/lipid_class_zonation_proportions.pdf` - Stacked bar proportions
-- `results/zonation/lipid_class_zonation_proportions_horizontal.pdf` - Butterfly chart
-- `results/zonation/lipid_class_zonation_proportions_PG_mini.pdf` - PG mini
-- `results/zonation/gonad_to_zonation_explanation_PG.pdf` - PG explanatory figure
-- `results/zonation/lipid_class_zonation_jitter_vertical.pdf` - Jitter plot
+**Gene-selection outputs**
+- `results/zonation/zonation_specific_sex_differences_quadrant.pdf`
+- `results/zonation/zonation_biased_genes_heatmap.pdf`
+- `results/zonation/sex_specific_zonation_quadrant.pdf`
+- `results/zonation/sex_specific_zonation_summary_bar.pdf`
+- `results/zonation/sex_specific_zonation_panel_AB.pdf`
+- `results/zonation/sex_specific_zonation_heatmap_faceted.pdf`
+- `results/zonation/sex_specific_zonation_genes_summary.csv`
 
-**Data:**
-- `results/zonation/sex_specific_zonation_genes_summary.csv` - Gene list with stats (137 genes)
-- `results/zonation/lipid_species_zonation_association.csv` - Lipid-level associations
-- `results/zonation/lipid_category_binary_matrix.csv` - Binary lipid x category matrix
-- `results/zonation/lipid_class_association_summary.csv` - Class-level summary
-- `results/zonation/networks/cormat_*_{SIF,ATT}.csv` - 4 x 3 = 12 network files
-- `results/zonation/networks/compressed_cormat_*_{SIF,ATT}.csv` - 4 compressed networks
+**Network outputs**
+- `results/zonation/networks/cormat_testes_portal_{SIF,ATT}.csv`
+- `results/zonation/networks/cormat_testes_central_{SIF,ATT}.csv`
+- `results/zonation/networks/cormat_Ovaries_portal_{SIF,ATT}.csv`
+- `results/zonation/networks/cormat_ova_central_{SIF,ATT}.csv`
+- `results/zonation/networks/cormat_*_full_{SIF,ATT}.csv` for the same four contexts.
+- `results/zonation/networks/compressed_cormat_*_{SIF,ATT}.csv` for the same four contexts.
+
+**Lipid association and threshold outputs**
+- `results/zonation/lipid_species_zonation_association.csv`
+- `results/zonation/lipid_category_binary_matrix.csv`
+- `results/zonation/lipid_class_association_summary.csv`
+- `results/zonation/threshold_sensitivity_by_class.csv`
+- `results/zonation/threshold_sensitivity_total.csv`
+- `results/zonation/optimal_threshold_metrics.csv`
+- `results/zonation/optimal_threshold_detection.pdf`
+- `results/zonation/lipid_zonation_threshold_sensitivity_total.pdf`
+- `results/zonation/lipid_class_zonation_proportions.pdf`
+- `results/zonation/lipid_class_zonation_proportions_horizontal.pdf`
+- `results/zonation/lipid_class_zonation_proportions_PG_mini.pdf`
+- `results/zonation/gonad_to_zonation_explanation_PG.pdf`
+- `results/zonation/lipid_class_zonation_jitter_vertical.pdf`
+
+**Other figures**
+- `results/zonation/PCA_by_zonation.pdf`
+- `results/zonation/PCA_by_gonad.pdf`
+- `results/zonation/PCA_by_condition.pdf`
+- `results/zonation/PCA_metadata_enrichment.pdf`
+- `results/zonation/zonation_vs_sex_bias_scatter.pdf`
+- `results/zonation/zone_specific_sex_bias_scatter.pdf`
+- `results/zonation/volcanos/volcano_*.pdf`
 
 ## Key Variables
 
 | Variable | Type | Defined in | Used in | Description |
-|----------|------|-----------|---------|-------------|
-| `t_table` | data.frame | Sec 5 | Sec 9-14 | T-statistics for all contrasts (genes x contrasts) |
-| `optimal_threshold` | numeric | Sec 11 | Sec 12, 14 | Entropy-optimized threshold (~3.2) |
-| `sensitivity_df` | data.frame | Sec 11 | Sec 14 | Lipid zonation at each threshold |
-| `proportion_total` | data.frame | Sec 11 | Sec 14 | Total proportions by threshold |
-| `optimal_metrics` | data.frame | Sec 11 | Sec 14 | Metrics for threshold selection |
-| `testes_pericentral_genes` | data.frame | Sec 12 | Sec 13 | Selected TPC genes |
-| `testes_periportal_genes` | data.frame | Sec 12 | Sec 13 | Selected TPP genes |
-| `ovaries_pericentral_genes` | data.frame | Sec 12 | Sec 13 | Selected OPC genes |
-| `ovaries_periportal_genes` | data.frame | Sec 12 | Sec 13 | Selected OPP genes |
-| `scaled_RNA` | data.frame | Sec 2 | Sec 13-14 | Zonation-specific expression |
-| `lipidomic` | data.frame | Sec 8 | Sec 13-14 | Lipidomic data |
-| `TF_scores_df` | data.frame | Sec 8 | Sec 13 | TF activity scores |
-| `jitter_data` | data.frame | Sec 14 | Sec 14 | Lipid jitter plot data |
-| `classes_with_enrichment` | character | Sec 14 | Sec 14 | Ordered lipid classes |
-| `lipid_class_results` | data.frame | Sec 14 (loaded) | Sec 14 | From workflow 03 enrichment |
-| Sample group vectors | character | Sec 8 | Sec 13-14 | `testes_central_samples`, `ovaries_portal_samples`, etc. |
+|----------|------|------------|---------|-------------|
+| `scaled_RNA` | data.frame | Sec 2 | Sec 3-14 | Zonation pseudobulk matrix |
+| `meta_data_df` | data.frame | Sec 2 | Sec 3-15 | Zonation metadata |
+| `comparisons` | list | Sec 5 | Sec 5-15 | Seven zonation/gonad contrasts |
+| `mouse_id` | character | Sec 5 | Sec 5 | Blocking factor for `duplicateCorrelation()` |
+| `ttop_list` | list | Sec 5 | Sec 6-15 | Limma toptables by contrast |
+| `t_table` | data.frame | Sec 8 | Sec 9-14 | Zonation t-statistic table with `gene` column |
+| `TF_scores_df` | data.frame | Sec 8 | Sec 13 | TF activity matrix |
+| `lipidomic` | data.frame | Sec 8 | Sec 11-14 | Lipidomic matrix |
+| `optimal_threshold` | numeric | Sec 11 | Sec 12-14 | Interaction t-statistic cutoff selected by combined score |
+| `sensitivity_df` | data.frame | Sec 11 | Sec 14 | Lipid zonation assignment at each threshold |
+| `proportion_total` | data.frame | Sec 11 | Sec 14 | Threshold-level zonation proportions |
+| `optimal_metrics` | data.frame | Sec 11 | Sec 14 | Entropy/stability/coverage/specificity metrics |
+| `testes_pericentral_genes` / `testes_periportal_genes` | data.frame | Sec 12 | Sec 13-14 | Testes-specific zonation gene sets |
+| `ovaries_pericentral_genes` / `ovaries_periportal_genes` | data.frame | Sec 12 | Sec 13-14 | Ovaries-specific zonation gene sets |
+| `classes_with_enrichment` | character | Sec 14 | Sec 14 | Lipid classes ordered by workflow 03 enrichment score |
 
 ## Coherence Assessment
 
-**Status: GOOD** — No open bugs. Section numbering and stale references have been fixed.
+**Status: GOOD.** The current script is coherent and the plan now reflects the CSV-based zonation input, duplicate-correlation DE model, threshold-selection section, and workflow 03 lipid dependencies.
 
 ## Vulnerabilities to Keep in Mind When Modifying
 
-1. **Pathway enrichment caching (section 7):** The `run_ulm()` call is commented out; section 7 loads pre-computed results from `pathway_enrichment.RData`. This is inside a `tryCatch` so it fails gracefully. If you need to re-run pathway enrichment (e.g. after changing contrasts), uncomment lines 334-347 and comment out line 350.
+1. **Pathway enrichment cache:** Section 7 has the `decoupleR::run_ulm()` call and save line commented out, then loads `results/zonation/pathway_enrichment.RData`. If that file is absent, the `tryCatch` skips pathway reporting.
+2. **Long-distance threshold dependency:** `sensitivity_df`, `proportion_total`, and `optimal_metrics` are computed in section 11 and consumed in section 14 more than 900 lines later.
+3. **Sample-name regex:** Network sections strip `_Peri.*_Testes` and `_Peri.*_Ovaries` suffixes to match lipidomic sample names. Upstream sample-format changes will break RNA-lipid matching.
+4. **WF05 -> WF07 filenames:** Workflow 07 expects the exact `cormat_testes_portal_full_SIF.csv`, `cormat_testes_central_full_SIF.csv`, `cormat_Ovaries_portal_full_SIF.csv`, and `cormat_ova_central_full_SIF.csv` names.
+5. **Locally defined helper:** `get_correlated_lipids()` is defined inside section 11 and reused in section 14; it is not imported from a helper module.
 
-2. **Long-distance variable dependencies (section 11 -> 14):** `sensitivity_df`, `proportion_total`, and `optimal_metrics` are computed in section 11 but used ~700 lines later in section 14. The flow is correct but if you modify or skip section 11, section 14 will fail. Always run sections 11-14 together.
+## Seven Contrasts
 
-3. **Sample name regex in network generation (section 13):** The `gsub("_Peri.*_Testes", "", ...)` pattern strips zonation/gonad suffixes to match lipidomic sample names. If sample naming conventions change upstream, these regexes need updating too.
+1. `portal_vs_Central` - Overall zonation effect.
+2. `testes_vs_ova` - Overall gonad effect.
+3. `portalova_vs_centralova` - Zonation effect within ovaries.
+4. `portaltestes_vs_centraltestes` - Zonation effect within testes.
+5. `centraltestes_vs_centralova` - Gonad effect in pericentral hepatocytes.
+6. `portaltestes_vs_portalova` - Gonad effect in periportal hepatocytes.
+7. `testes_effect_zonation` - Interaction: whether zonation differs by gonad.
 
-4. **`get_correlated_lipids()` is defined locally (section 11, line 633):** Not in an external file — it's a helper function within this workflow. If you refactor it out, update both the definition at line 633 and the calls in sections 11 and 14 (lines 670-676, 2251-2270).
+## Gene Selection Logic
 
-## 7 Contrasts
+```r
+testes_zonation_bias_genes:
+  abs(testes_effect_zonation) > optimal_threshold
+  abs(portalova_vs_centralova) < 1
 
-1. `portal_vs_Central` - Overall zonation effect
-2. `testes_vs_ova` - Overall gonad effect
-3. `portalova_vs_centralova` - Zonation within ovaries
-4. `portaltestes_vs_centraltestes` - Zonation within testes
-5. `centraltestes_vs_centralova` - Gonad effect in pericentral
-6. `portaltestes_vs_portalova` - Gonad effect in periportal
-7. `testes_effect_zonation` - **INTERACTION**: (Testes PC-PP) vs (Ovaries PC-PP)
+ovaries_zonation_bias_genes:
+  abs(testes_effect_zonation) > optimal_threshold
+  abs(portaltestes_vs_centraltestes) < 1
 
-## Gene Selection Logic (Section 12)
-
+general_zonation_bias_genes:
+  abs(testes_effect_zonation) < 1
+  abs(portal_vs_Central) > optimal_threshold
 ```
-optimal_threshold ≈ 3.2 (from entropy optimization in section 11)
 
-Testes-specific zonation genes:
-  |interaction_t| > optimal_threshold AND |zonation_ovaries_t| < 1
-  Split by: portaltestes_vs_centraltestes (neg = pericentral, pos = periportal)
-
-Ovaries-specific zonation genes:
-  |interaction_t| > optimal_threshold AND |zonation_testes_t| < 1
-  Split by: portalova_vs_centralova (neg = pericentral, pos = periportal)
-```
-
-**Result:** 30 TPC + 25 TPP + 11 OPC + 12 OPP = 78 genes total (with duplicateCorrelation blocking; optimal threshold ~5.4)
+Zone assignment is then based on the sign of `portaltestes_vs_centraltestes` or `portalova_vs_centralova`: negative means pericentral and positive means periportal in the current script.
 
 ## Notes for Context Restoration
 
-When returning to this workflow:
-1. This is the LARGEST and most complex workflow - 2523 lines with many interdependencies
-2. The optimal threshold (~5.4, after duplicateCorrelation blocking) is the key parameter driving gene selection
-3. Section 11 computes the threshold; section 12 uses it for gene selection; section 13 builds networks from those genes; section 14 maps lipids to network categories and visualizes threshold metrics
-4. The 4 gene lists (TPC/TPP/OPC/OPP) are the biological foundation for the correlation networks
-5. `make_cor_network()` and `expand_attributes()` come from `support_functions.R`
-6. Lipid enrichment scores (`lipid_class_enrichment_scores.RData`) come from workflow 03
-7. The butterfly chart and jitter plots reuse the enrichment-based lipid class ordering from workflow 03
-8. Key genes: Cyp2b13, Sult3a1, Cyp2a22 (OPC); Stambpl1, Cyp2b9, Cyp2a4 (OPP); Esco2, Kitl, Mup17 (TPC); Grm8, Mtmr11, Mindy3 (TPP)
+1. Workflow 05 is the largest workflow and should be read in sections, not skimmed.
+2. The active input is the workflow 01 CSV pair, not a Seurat RDS.
+3. Section 5 deliberately blocks on mouse ID because each mouse contributes both zonation pseudobulks.
+4. Section 14 depends on workflow 03's lipid DE and lipid-class enrichment outputs.
