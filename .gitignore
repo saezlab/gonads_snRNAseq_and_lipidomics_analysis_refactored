@@ -31,6 +31,11 @@ data/westernDiet/
 results/wf*_run.log
 results/wf*_rerun.log
 
+# Local/generated result variants
+results/validation/*_jpc.csv
+results/validation/mtmr11_top_lipid_joint_kd_correlation.csv
+results/xenium/**/Xenium_*.xlsx
+
 # OS / IDE artifacts and temporary files
 **/desktop.ini
 **/.Rapp.history
