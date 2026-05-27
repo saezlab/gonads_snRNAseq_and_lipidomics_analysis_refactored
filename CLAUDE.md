@@ -6,6 +6,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This repository contains analysis code for **"Gonadal hormone coordination of sex-specific adult liver physiology"**, a multi-omic study using the Four Core Genotypes (FCG) mouse model to quantify the relative contributions of gonadal hormones versus sex chromosome complement to hepatic sexual dimorphism.
 
+## Agent-Facing Documentation
+
+This repository is documented for direct agent use rather than through an MCP server. Agents should use:
+
+- `README.md` for the project overview, workflow order, and major outputs
+- `docs/AGENT_GUIDE.md` for the static result-query map and reproducibility entry points
+- `docs/workflow_plans/_meta_cross_workflow_overview.md` for cross-workflow dependencies
+- `docs/workflow_plans/NN_*.md` before modifying any workflow script
+
 **Main Findings:**
 - **Gonadal hormones (not sex chromosomes) are the primary driver** of sex differences in liver physiology
 - ~4,000 gonad-dependent genes identified in hepatocytes (>4000 DEGs at FDR ≤ 0.05)
@@ -496,7 +505,7 @@ The FCG model allows separation of:
 
 Detailed plan documents for each workflow are in `docs/workflow_plans/`.
 
-**MANDATORY PROTOCOL: Before modifying any workflow script (`scripts/workflows/NN_*.R`), you MUST:**
+**MANDATORY PROTOCOL: Before modifying any workflow script (`scripts/workflows/NN_*`), you MUST:**
 1. **Read the corresponding plan file** (`docs/workflow_plans/NN_*.md`) to understand section structure, key variables, data dependencies, and known vulnerabilities
 2. **Read the meta overview** (`docs/workflow_plans/_meta_cross_workflow_overview.md`) if the change affects cross-workflow data files
 3. **After completing modifications**, update the plan file to reflect any changes to sections, outputs, variables, or vulnerabilities
@@ -513,6 +522,7 @@ Detailed plan documents for each workflow are in `docs/workflow_plans/`.
 | `06_structural_analysis.md` | 06 | GOOD | 2 (hardcoded focus genes, structural file matching) |
 | `07_validation_experiments.md` | 07 | GOOD | 1 (inconsistent but matched network filenames) |
 | `08_variance_analysis.md` | 08 | GOOD | 0 |
+| `09_human_analysis.md` | 09 | GOOD | 1 (external GSE179250 data paths) |
 
 ### Cross-Workflow Data Flow
 
@@ -522,6 +532,7 @@ Detailed plan documents for each workflow are in `docs/workflow_plans/`.
 01 -> 03 (lipid DE) -> 05, 08
 01 -> 04 (MOFA) -> 05, 06, 07
 05 -> 07 (validation networks)
+02-derived hepatocyte signature -> 09 (human liver comparison; external GSE179250)
 ```
 
 ## Tips for Working with This Codebase

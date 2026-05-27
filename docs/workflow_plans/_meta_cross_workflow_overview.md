@@ -1,7 +1,7 @@
 # Cross-Workflow Dependencies and Coherence Report
 
-**Last audited:** 2026-05-20  
-**Ground truth:** `scripts/workflows/*.R`
+**Last audited:** 2026-05-27
+**Ground truth:** `scripts/workflows/*.R` plus `scripts/workflows/09_human_analysis.py`
 
 This meta overview is synchronized with the current workflow scripts and the
 per-workflow plan files in this directory.
@@ -47,11 +47,17 @@ per-workflow plan files in this directory.
 
 08_variance_analysis
   standalone; uses raw lipidomic data plus metadata only
+
+09_human_analysis
+  optional external-data Python workflow; uses the mouse hepatocyte gonad
+  signature plus external GSE179250 human liver count/TPM/SOFT files
 ```
 
 Important current-script clarifications:
 
-- WF02 DE outputs are not currently consumed by WF04 or WF05.
+- WF02 DE outputs are not currently consumed by WF04 or WF05. Optional WF09
+  uses a checked-in hepatocyte gonad signature derived from the WF02-style
+  Testes vs Ovaries hepatocyte t-values.
 - WF05 does not load WF04 outputs; it uses WF01 zonation CSVs, WF03 lipid
   DE/enrichment outputs, support regulons, and raw lipidomics.
 - WF06 currently runs a lipid-only structural analysis. Older gene-lipid
@@ -73,6 +79,7 @@ Important current-script clarifications:
 | 01 | `data/RNA/meta_data_df_gdxhr.csv` | 02 |
 | 02 | `results/pseudobulk/ttop_full_list.RData` | Result lookup; no current scripted downstream workflow |
 | 02 | `results/pseudobulk/tval_full_df.csv` | 02 internal GDX/proteomics validation and result lookup |
+| 02-derived/manual export | `results/pseudobulk/hepa_gonad_signature.csv` | 09, as the mouse hepatocyte gonad signature seed; script currently expects a copy in external `DATA_DIR` |
 | 02 | `results/pseudobulk/pathways/pathway_scores_df_all.RData` | Result lookup |
 | 02 | `results/pseudobulk/pathways/tf_scores_df_all.RData` | Result lookup |
 | 03 | `results/lipidomic/ttop_full_list.RData` | 05, 06 |
@@ -103,6 +110,8 @@ Important current-script clarifications:
 | 08 | `results/lipidomic/variance_analysis/variance_analysis_summary.csv` | Result lookup |
 | 08 | `results/lipidomic/variance_analysis/variance_analysis_results.csv` | Result lookup |
 | 08 | `results/lipidomic/variance_analysis/variance_analysis_by_class.csv` | Result lookup |
+| External GEO `GSE179250` | Human liver count matrix, TPM matrix, and SOFT metadata | 09 |
+| External copied mouse table | `DATA_DIR/male_vs_female_DA_res.csv` | 09 concordant ranked-gene dot plots |
 
 ## Coherence Status
 
@@ -117,6 +126,7 @@ Important current-script clarifications:
 | 06 | GOOD | GOOD | Active path is lipid-only structural analysis under `results/lipidomic/structural_model/`. |
 | 07 | GOOD | GOOD | Includes structural consistency analysis dependent on WF06. |
 | 08 | GOOD | GOOD | Standalone lipid variance workflow with current `variance_analysis_*` outputs. |
+| 09 | GOOD | GOOD | Optional Python human comparison; depends on external GSE179250 files and writes outside the repo by default. |
 
 ## Cross-Workflow Vulnerabilities
 
@@ -125,6 +135,7 @@ Important current-script clarifications:
 3. **WF05 -> WF07 network names:** WF07 expects exact mixed names from WF05: `cormat_testes_portal_full_SIF.csv`, `cormat_testes_central_full_SIF.csv`, `cormat_Ovaries_portal_full_SIF.csv`, and `cormat_ova_central_full_SIF.csv`.
 4. **WF06 -> WF07 structural feature table:** WF07 section 11 expects `results/lipidomic/structural_model/lipids_with_structure.csv`.
 5. **WF03 quantitative count drift:** The WF03 script header and final printed text contain different headline lipid counts. Use generated result files for exact quantitative lookups.
+6. **WF09 external-data paths:** The script uses absolute collaborator/HPC `DATA_DIR` and `RESULTS_DIR` values. The large human liver inputs are not committed, and `results/pseudobulk/hepa_gonad_signature.csv` must be copied to the expected external `DATA_DIR` path before running without code changes.
 
 ## Shared Utility Functions
 

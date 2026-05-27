@@ -16,6 +16,9 @@ gene expression with lipid metabolism.
   and 1 lipidomic view.
 - **Validation:** GDX RNA/lipidomic validation, Xenium spatial validation,
   proteomics validation, and siRNA knockdown lipidomics.
+- **Human liver comparison:** optional Python workflow comparing the mouse
+  hepatocyte gonadal t-value signature with human bulk liver sex differences
+  from GEO accession GSE179250.
 
 ## Key Findings
 
@@ -61,8 +64,8 @@ Start with:
 - `docs/workflow_plans/NN_*.md` - per-workflow structure, dependencies,
   outputs, and known vulnerabilities.
 
-When modifying any `scripts/workflows/NN_*.R` file, read the matching plan first
-and update it after the code change.
+When modifying any `scripts/workflows/NN_*` workflow file, read the matching
+plan first and update it after the code change.
 
 ## Repository Structure
 
@@ -74,7 +77,7 @@ and update it after the code change.
 |   |-- proteomics/                  # Bulk liver proteomics validation data
 |   `-- Suppl_Table_1_OverviewData.xlsx
 |-- scripts/
-|   |-- workflows/                   # Main workflows 00-08
+|   |-- workflows/                   # Main workflows 00-09
 |   |-- core/                        # Data loading, DE, enrichment, MOFA, structural helpers
 |   |-- config/                      # Dataset paths, contrasts, plotting config
 |   |-- visualization/               # Plot helpers
@@ -112,6 +115,9 @@ source("scripts/workflows/05_zonation_analysis.R")
 source("scripts/workflows/06_structural_analysis.R")
 source("scripts/workflows/07_validation_experiments.R")
 source("scripts/workflows/08_variance_analysis.R")
+
+# Optional external-data workflow; requires large GSE179250 inputs outside repo
+# python scripts/workflows/09_human_analysis.py
 ```
 
 Run workflows from the repository root.
@@ -310,10 +316,46 @@ Key outputs:
 - `results/lipidomic/variance_analysis/cv_difference_volcano.pdf`
 - `results/lipidomic/variance_analysis/cv_difference_volcano_by_class.pdf`
 
+### Workflow 09: Human Liver Comparison
+
+**Script:** `scripts/workflows/09_human_analysis.py`
+
+Optional Python workflow that compares the mouse FCG hepatocyte gonadal
+t-value signature with sex-associated gene expression in the Zhou et al. human
+bulk liver cohort ([`GSE179250`](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE179250)).
+It translates mouse signature genes to human ortholog symbols, scores the
+signature with decoupler ULM, runs PyDESeq2 male-vs-female differential
+expression in human liver, and generates concordant mouse-human ranked-gene
+plots.
+
+The raw human count/TPM matrices and GEO SOFT metadata are too large for this
+repository and are expected under the script's external `DATA_DIR`. The checked
+in signature seed is:
+
+- `results/pseudobulk/hepa_gonad_signature.csv`
+
+The script writes outputs to its external `RESULTS_DIR`, including:
+
+- `ulm_sex_signature_estimates.csv`
+- `adata_processed.h5ad`
+- `deg_zhou.csv`
+- `full_results_deg_zhou_malevsfemale.csv`
+- `12_49_malevsfemale_deg_zhou.csv`
+- `12_49_malevsfemale_full_results_deg_zhou.csv`
+- `olderthan11female_oldvsyoung_full_results_deg_zhou.csv`
+- `olderthan11female_oldvsyoung_deg_statmatrix_zhou.csv`
+- `pca_by_sex.pdf`
+- `ulm_enrichment_12_49.pdf`
+- `volcano_male_vs_female_highlight.pdf`
+- `volcano_male_vs_female_highlight_1249.pdf`
+- `top_ranked_genes_female_dot.pdf`
+- `top_ranked_genes_male_dot.pdf`
+- `ulm_enrichment_female__old_vs_young.pdf`
+
 ## Requirements
 
-The workflows are R scripts and expect packages from CRAN and Bioconductor.
-Core packages include:
+Workflows 00-08 are R scripts and expect packages from CRAN and Bioconductor.
+Core R packages include:
 
 - Data manipulation: `dplyr`, `tidyr`, `tibble`, `readr`, `readxl`, `reshape2`
 - Visualization: `ggplot2`, `ggrepel`, `pheatmap`, `cowplot`, `patchwork`,
@@ -323,12 +365,17 @@ Core packages include:
 - Multi-omic integration: `MOFA2` and Python `mofapy2` for retraining models
 - Gene sets: `GSEABase`
 
+Workflow 09 is Python and expects packages including `anndata`, `scanpy`,
+`decoupler`, `pydeseq2`, `pypath`, `pandas`, `numpy`, `matplotlib`, `seaborn`,
+`scipy`, and `adjustText`.
+
 ## Key Results Files
 
 ### RNA Differential Expression
 
 - `results/pseudobulk/ttop_full_list.RData`
 - `results/pseudobulk/tval_full_df.csv`
+- `results/pseudobulk/hepa_gonad_signature.csv`
 
 ### Lipid Differential Abundance
 
@@ -362,6 +409,13 @@ Core packages include:
 - `results/validation/zonation_network_validation_scores.csv`
 - `results/validation/structural_consistency/consistency_structural_regression_summary.csv`
 
+### Human Liver Comparison
+
+- `results/pseudobulk/hepa_gonad_signature.csv`
+- Workflow 09 outputs are written outside this repository by default; see
+  `scripts/workflows/09_human_analysis.py` and
+  `docs/workflow_plans/09_human_analysis.md`.
+
 ## Data Availability
 
 The checked-in CSV and RData outputs support result lookup and most downstream
@@ -371,6 +425,8 @@ analysis. Some raw/preprocessed inputs may not be present in all checkouts:
 - `data/RNA/fcg_zonation_pseudobulks.rds`
 - `data/RNA/gdx_pseudobulks.rds`
 - MOFA `.hdf5` models if retraining/loading is needed
+- Workflow 09 human liver inputs from `GSE179250`, including the count matrix,
+  TPM matrix, and SOFT metadata file.
 
 Workflow 00 requires the original raw alignment environment and is not expected
 to run in a standard checkout.

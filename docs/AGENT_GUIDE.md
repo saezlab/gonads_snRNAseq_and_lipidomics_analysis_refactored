@@ -16,7 +16,7 @@ interface for reproducing analyses and extracting results.
    to inspect or modify.
 5. `docs/pipeline_rerun_plan.md` - expected headline values for full reruns.
 
-When modifying `scripts/workflows/NN_*.R`, read the matching workflow plan first
+When modifying `scripts/workflows/NN_*`, read the matching workflow plan first
 and update it after the code change.
 
 ## Reproducibility Path
@@ -33,10 +33,15 @@ source("scripts/workflows/05_zonation_analysis.R")
 source("scripts/workflows/06_structural_analysis.R")
 source("scripts/workflows/07_validation_experiments.R")
 source("scripts/workflows/08_variance_analysis.R")
+
+# Optional human comparison; requires external GSE179250 files and Python deps
+# python scripts/workflows/09_human_analysis.py
 ```
 
-Run from the repository root. After editing an R script, run that script
-immediately or record why it could not be run.
+Run from the repository root for workflows 00-08. After editing an R script,
+run that script immediately or record why it could not be run. Workflow 09 uses
+absolute external data/output paths in the script and is not part of the default
+R rerun path.
 
 ## Static Query Map
 
@@ -49,6 +54,7 @@ previously answered.
 | RNA differential expression for a gene | `results/pseudobulk/ttop_full_list.RData`; `results/pseudobulk/tval_full_df.csv` | Current workflow 02 writes RData plus t-value CSV, not a long-format RNA CSV. |
 | Top RNA DE genes by contrast/cell type | `results/pseudobulk/ttop_full_list.RData` | Nested list: contrast display name -> cell type -> limma topTable. |
 | RNA t-statistic matrix | `results/pseudobulk/tval_full_df.csv`; `results/pseudobulk/tval_full_df.RData` | CSV has `ID` plus combined contrast/cell-type columns. |
+| Mouse hepatocyte gonad signature | `results/pseudobulk/hepa_gonad_signature.csv` | Two-column signature seed (`ID`, `t_Hepatocytes`) used by workflow 09 for human-liver scoring. It is a near-identical earlier export of the current hepatocyte gonad t-values. |
 | Lipid differential abundance | `results/lipidomic/ttop_full_list.RData`; `results/lipidomic/gonade_type_ttop.csv` | `logFC > 0` is testes-biased for the main gonadal contrast. `gonade_type_ttop.csv` is a generated lookup table present in results, not written by the current workflow 03 script. |
 | Lipid class enrichment | `results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv`; `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | Produced by workflow 03 using decoupleR. |
 | Lipid conversion network | `results/lipidomic/network/significant_lipids_network_SIF.csv`; `results/lipidomic/network/significant_lipids_network_ATT.csv` | Current workflow 03 writes these under `results/lipidomic/network/`. |
@@ -61,6 +67,7 @@ previously answered.
 | Structural lipid associations | `results/lipidomic/structural_model/lipids_with_structure.csv`; `results/lipidomic/structural_model/lipid_only_class_coefficients.csv`; `results/lipidomic/structural_model/lipid_only_class_summaries.csv`; `results/lipidomic/structural_model/lipid_only_chain_length_effects.csv`; `results/lipidomic/structural_model/lipid_only_db_position_effects.csv`; `results/lipidomic/structural_model/lipid_only_interaction_effects.csv` | Workflow 06 currently tests lipid-only structural effects on gonadal logFC. Older gene-lipid structural sections are commented out. |
 | Validation experiments | `results/validation/validation_summary.csv`; `results/validation/global_network_validation_scores.csv`; `results/validation/zonation_network_validation_scores.csv`; `results/validation/structural_consistency/consistency_structural_regression_summary.csv` | Workflow 07 compares predicted correlations with knockdown lipidomics and structural consistency. |
 | Lipid variance analysis | `results/lipidomic/variance_analysis/variance_analysis_summary.csv`; `results/lipidomic/variance_analysis/variance_analysis_results.csv`; `results/lipidomic/variance_analysis/variance_analysis_by_class.csv` | Workflow 08 compares variability between gonadal groups. |
+| Human liver comparison | `scripts/workflows/09_human_analysis.py`; `docs/workflow_plans/09_human_analysis.md` | Optional Python workflow using external `GSE179250` human liver inputs. Outputs are written to the script's external `RESULTS_DIR`, not this repository, by default. |
 
 ## Minimal Lookup Examples
 
