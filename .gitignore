@@ -16,7 +16,6 @@ GSE90277/GSE90277_RAW.tar
 tests/outputs/**
 tests/logs/**
 Rplots.pdf
-.mcp.json
 __pycache__/
 
 # Large legacy data and superseded MOFA models
@@ -32,6 +31,7 @@ results/wf*_run.log
 results/wf*_rerun.log
 
 # Local/generated result variants
+results/comment_responses/
 results/validation/*_jpc.csv
 results/validation/mtmr11_top_lipid_joint_kd_correlation.csv
 results/xenium/**/Xenium_*.xlsx
@@ -42,3 +42,7 @@ results/xenium/**/Xenium_*.xlsx
 **/Screenshot*.png
 *.tmp.*
 tmp_*.txt
+
+# Manuscript drafts and generated writing assets
+manuscript/
+scripts/james/

@@ -2658,8 +2658,8 @@ summary_stats <- data.frame(
 
 write.csv(summary_stats, file.path(zonation_dir, "summary_statistics.csv"), row.names = FALSE)
 
-# Export long-format ttop for MCP access (gene, contrast, logFC, P.Value, adj.P.Val, t)
-cat("  Exporting long-format ttop CSV for MCP queries...\n")
+# Export long-format ttop for machine-readable access (gene, contrast, logFC, P.Value, adj.P.Val, t)
+cat("  Exporting long-format ttop CSV for downstream queries...\n")
 ttop_long_list <- lapply(names(ttop_list), function(contrast_name) {
   tt <- ttop_list[[contrast_name]]
   data.frame(
