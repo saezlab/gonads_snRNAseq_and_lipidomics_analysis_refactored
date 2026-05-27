@@ -1,7 +1,9 @@
 # Cross-Workflow Dependencies and Coherence Report
 
 **Last audited:** 2026-05-27
-**Ground truth:** `scripts/workflows/*.R` plus `scripts/workflows/09_human_analysis.py`
+**Ground truth:** `scripts/workflows/*.R`,
+`scripts/workflows/09_human_analysis.py`, and
+`scripts/workflows/10_xenium_analysis/`
 
 This meta overview is synchronized with the current workflow scripts and the
 per-workflow plan files in this directory.
@@ -51,6 +53,10 @@ per-workflow plan files in this directory.
 09_human_analysis
   optional external-data Python workflow; uses the mouse hepatocyte gonad
   signature plus external GSE179250 human liver count/TPM/SOFT files
+
+10_xenium_analysis
+  optional collaborator Python workflow folder; raw Xenium output + panel
+  workbook -> doublet calls, fused AnnData, composition plots, and DGE tables
 ```
 
 Important current-script clarifications:
@@ -63,6 +69,8 @@ Important current-script clarifications:
 - WF06 currently runs a lipid-only structural analysis. Older gene-lipid
   structural sections are commented out.
 - WF07 section 11 depends on WF06 `lipids_with_structure.csv`.
+- WF10 is a folder-local collaborator workflow, not a downstream dependency of
+  workflows 00-09.
 
 ## Key File Dependencies
 
@@ -112,6 +120,11 @@ Important current-script clarifications:
 | 08 | `results/lipidomic/variance_analysis/variance_analysis_by_class.csv` | Result lookup |
 | External GEO `GSE179250` | Human liver count matrix, TPM matrix, and SOFT metadata | 09 |
 | External copied mouse table | `DATA_DIR/male_vs_female_DA_res.csv` | 09 concordant ranked-gene dot plots |
+| External Xenium output folder | `scripts/workflows/10_xenium_analysis/data_raw/output-XETG00078__0018188__Region_1__20240301__143248/` | 10 |
+| External Xenium panel workbook | `scripts/workflows/10_xenium_analysis/data_raw/XeniumTargetList_Mouse-Panel-1.xlsx` | 10 |
+| 10 | `scripts/workflows/10_xenium_analysis/inferred_components.json` | 10 internal, `01_merge_doublets.py` |
+| 10 | `scripts/workflows/10_xenium_analysis/fused_anndata_annotated.h5ad` | 10 internal, `02_compositional_analysis.py` and `03_DGE_analysis.py` |
+| 10 | `scripts/workflows/10_xenium_analysis/data_tidy/*.csv`; `scripts/workflows/10_xenium_analysis/data_tidy/*.xlsx`; `scripts/workflows/10_xenium_analysis/figures/*.pdf` | Folder-local result lookup when generated |
 
 ## Coherence Status
 
@@ -127,6 +140,7 @@ Important current-script clarifications:
 | 07 | GOOD | GOOD | Includes structural consistency analysis dependent on WF06. |
 | 08 | GOOD | GOOD | Standalone lipid variance workflow with current `variance_analysis_*` outputs. |
 | 09 | GOOD | GOOD | Optional Python human comparison; depends on external GSE179250 files and writes outside the repo by default. |
+| 10 | IMPORTED | DOCUMENTED | Optional collaborator Xenium folder; notebook-style scripts with raw-data and working-directory assumptions. |
 
 ## Cross-Workflow Vulnerabilities
 
@@ -136,6 +150,8 @@ Important current-script clarifications:
 4. **WF06 -> WF07 structural feature table:** WF07 section 11 expects `results/lipidomic/structural_model/lipids_with_structure.csv`.
 5. **WF03 quantitative count drift:** The WF03 script header and final printed text contain different headline lipid counts. Use generated result files for exact quantitative lookups.
 6. **WF09 external-data paths:** The script uses absolute collaborator/HPC `DATA_DIR` and `RESULTS_DIR` values. The large human liver inputs are not committed, and `results/pseudobulk/hepa_gonad_signature.csv` must be copied to the expected external `DATA_DIR` path before running without code changes.
+7. **WF10 folder-local paths:** Scripts use relative paths such as `data_raw/`, `data_tidy/`, and `figures/`; run from `scripts/workflows/10_xenium_analysis/` or adjust paths.
+8. **WF10 notebook-style code:** The DGE script contains repeated helper definitions and assumes interactive/script state in places. Treat it as collaborator-imported analysis code rather than a fully refactored pipeline.
 
 ## Shared Utility Functions
 

@@ -36,12 +36,19 @@ source("scripts/workflows/08_variance_analysis.R")
 
 # Optional human comparison; requires external GSE179250 files and Python deps
 # python scripts/workflows/09_human_analysis.py
+
+# Optional collaborator Xenium folder; run from scripts/workflows/10_xenium_analysis/
+# python 00_infer_doublets.py
+# python 01_merge_doublets.py
+# python 02_compositional_analysis.py
+# python 03_DGE_analysis.py
 ```
 
 Run from the repository root for workflows 00-08. After editing an R script,
 run that script immediately or record why it could not be run. Workflow 09 uses
 absolute external data/output paths in the script and is not part of the default
-R rerun path.
+R rerun path. Workflow 10 uses folder-local relative paths and raw Xenium inputs
+that are not committed.
 
 ## Static Query Map
 
@@ -68,6 +75,7 @@ previously answered.
 | Validation experiments | `results/validation/validation_summary.csv`; `results/validation/global_network_validation_scores.csv`; `results/validation/zonation_network_validation_scores.csv`; `results/validation/structural_consistency/consistency_structural_regression_summary.csv` | Workflow 07 compares predicted correlations with knockdown lipidomics and structural consistency. |
 | Lipid variance analysis | `results/lipidomic/variance_analysis/variance_analysis_summary.csv`; `results/lipidomic/variance_analysis/variance_analysis_results.csv`; `results/lipidomic/variance_analysis/variance_analysis_by_class.csv` | Workflow 08 compares variability between gonadal groups. |
 | Human liver comparison | `scripts/workflows/09_human_analysis.py`; `docs/workflow_plans/09_human_analysis.md` | Optional Python workflow using external `GSE179250` human liver inputs. Outputs are written to the script's external `RESULTS_DIR`, not this repository, by default. |
+| Xenium spatial analysis | `scripts/workflows/10_xenium_analysis/`; `docs/workflow_plans/10_xenium_analysis.md` | Optional collaborator Python workflow folder for Xenium doublet inference, cell-type annotation, composition plots, and Scanpy DGE. Raw Xenium inputs and outputs are folder-local by default. |
 
 ## Minimal Lookup Examples
 

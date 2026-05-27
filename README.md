@@ -15,7 +15,8 @@ gene expression with lipid metabolism.
 - **Multi-omic integration:** MOFA2-based integration of 5 RNA cell-type views
   and 1 lipidomic view.
 - **Validation:** GDX RNA/lipidomic validation, Xenium spatial validation,
-  proteomics validation, and siRNA knockdown lipidomics.
+  proteomics validation, siRNA knockdown lipidomics, and collaborator Xenium
+  spatial-analysis scripts.
 - **Human liver comparison:** optional Python workflow comparing the mouse
   hepatocyte gonadal t-value signature with human bulk liver sex differences
   from GEO accession GSE179250.
@@ -77,7 +78,7 @@ plan first and update it after the code change.
 |   |-- proteomics/                  # Bulk liver proteomics validation data
 |   `-- Suppl_Table_1_OverviewData.xlsx
 |-- scripts/
-|   |-- workflows/                   # Main workflows 00-09
+|   |-- workflows/                   # Main workflows 00-10
 |   |-- core/                        # Data loading, DE, enrichment, MOFA, structural helpers
 |   |-- config/                      # Dataset paths, contrasts, plotting config
 |   |-- visualization/               # Plot helpers
@@ -118,9 +119,18 @@ source("scripts/workflows/08_variance_analysis.R")
 
 # Optional external-data workflow; requires large GSE179250 inputs outside repo
 # python scripts/workflows/09_human_analysis.py
+
+# Optional collaborator Xenium scripts; require raw Xenium data under the
+# workflow folder and are run from scripts/workflows/10_xenium_analysis/
+# python 00_infer_doublets.py
+# python 01_merge_doublets.py
+# python 02_compositional_analysis.py
+# python 03_DGE_analysis.py
 ```
 
-Run workflows from the repository root.
+Run workflows 00-08 from the repository root. Workflows 09 and 10 are optional
+Python analyses with their own external or folder-local path assumptions, as
+documented below and in their plan files.
 
 ## Analysis Workflows
 
@@ -352,6 +362,52 @@ The script writes outputs to its external `RESULTS_DIR`, including:
 - `top_ranked_genes_male_dot.pdf`
 - `ulm_enrichment_female__old_vs_young.pdf`
 
+### Workflow 10: Xenium Spatial Analysis
+
+**Folder:** `scripts/workflows/10_xenium_analysis/`
+
+Optional collaborator-provided Python workflow for Xenium spatial validation.
+Unlike workflows 00-09, this is a folder of notebook-style scripts rather than
+a single canonical workflow script. It infers neighboring-nucleus doublets from
+Xenium nucleus boundaries, annotates and fuses likely hepatocyte doublets,
+creates cell-type/doublet composition plots, and runs Scanpy Wilcoxon
+differential expression for sex, hepatocyte-zone, and doublet comparisons.
+
+The scripts use relative paths and should be treated as folder-local: run them
+from `scripts/workflows/10_xenium_analysis/` with raw Xenium files under
+`data_raw/` and output folders such as `data_tidy/` and `figures/` available.
+The raw Xenium bundle is not committed.
+
+Main scripts:
+
+- `00_infer_doublets.py`
+- `01_merge_doublets.py`
+- `02_compositional_analysis.py`
+- `03_DGE_analysis.py`
+
+Key folder-local inputs include:
+
+- `data_raw/output-XETG00078__0018188__Region_1__20240301__143248/nucleus_boundaries.csv.gz`
+- `data_raw/output-XETG00078__0018188__Region_1__20240301__143248/cell_feature_matrix.h5`
+- `data_raw/output-XETG00078__0018188__Region_1__20240301__143248/cells.csv.gz`
+- `data_raw/XeniumTargetList_Mouse-Panel-1.xlsx`
+
+Key folder-local outputs include:
+
+- `data_tidy/inferred_components.csv`
+- `inferred_components.json`
+- `fused_anndata_annotated.h5ad`
+- `data_tidy/fused_doublet.csv`
+- `data_tidy/fused_celltype.csv`
+- `figures/celltype_freq_cores.pdf`
+- `figures/celltype_freq_sex.pdf`
+- `figures/doublet_freq_core.pdf`
+- `data_tidy/DEG_results_sex_per_celltype.xlsx`
+- `DEG_results.xlsx`
+- `Pairwise_DEG_hepatocytes.xlsx`
+- `Doublets_DEG_results.xlsx`
+- `Doublets_and_Sex_DEG_results_all_hepatocytes.xlsx`
+
 ## Requirements
 
 Workflows 00-08 are R scripts and expect packages from CRAN and Bioconductor.
@@ -368,6 +424,10 @@ Core R packages include:
 Workflow 09 is Python and expects packages including `anndata`, `scanpy`,
 `decoupler`, `pydeseq2`, `pypath`, `pandas`, `numpy`, `matplotlib`, `seaborn`,
 `scipy`, and `adjustText`.
+
+Workflow 10 is Python and expects packages including `scanpy`, `anndata`,
+`sccoda`, `pandas`, `numpy`, `matplotlib`, `seaborn`, `tifffile`, `shapely`,
+`rtree`, `networkx`, `tqdm`, and `openpyxl`.
 
 ## Key Results Files
 
@@ -416,6 +476,12 @@ Workflow 09 is Python and expects packages including `anndata`, `scanpy`,
   `scripts/workflows/09_human_analysis.py` and
   `docs/workflow_plans/09_human_analysis.md`.
 
+### Xenium Spatial Analysis
+
+- `scripts/workflows/10_xenium_analysis/`
+- Workflow 10 outputs are folder-local by default; see
+  `docs/workflow_plans/10_xenium_analysis.md`.
+
 ## Data Availability
 
 The checked-in CSV and RData outputs support result lookup and most downstream
@@ -427,6 +493,8 @@ analysis. Some raw/preprocessed inputs may not be present in all checkouts:
 - MOFA `.hdf5` models if retraining/loading is needed
 - Workflow 09 human liver inputs from `GSE179250`, including the count matrix,
   TPM matrix, and SOFT metadata file.
+- Workflow 10 raw Xenium files under `scripts/workflows/10_xenium_analysis/data_raw/`,
+  including the 10x output folder and Xenium panel workbook.
 
 Workflow 00 requires the original raw alignment environment and is not expected
 to run in a standard checkout.

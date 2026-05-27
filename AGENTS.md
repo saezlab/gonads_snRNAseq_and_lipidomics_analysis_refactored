@@ -523,6 +523,7 @@ Detailed plan documents for each workflow are in `docs/workflow_plans/`.
 | `07_validation_experiments.md` | 07 | GOOD | 1 (inconsistent but matched network filenames) |
 | `08_variance_analysis.md` | 08 | GOOD | 0 |
 | `09_human_analysis.md` | 09 | GOOD | 1 (external GSE179250 data paths) |
+| `10_xenium_analysis.md` | 10 | DOCUMENTED | 2 (folder-local raw data paths, notebook-style collaborator scripts) |
 
 ### Cross-Workflow Data Flow
 
@@ -533,6 +534,7 @@ Detailed plan documents for each workflow are in `docs/workflow_plans/`.
 01 -> 04 (MOFA) -> 05, 06, 07
 05 -> 07 (validation networks)
 02-derived hepatocyte signature -> 09 (human liver comparison; external GSE179250)
+external Xenium raw data -> 10 (collaborator Xenium spatial analysis folder)
 ```
 
 ## Tips for Working with This Codebase
