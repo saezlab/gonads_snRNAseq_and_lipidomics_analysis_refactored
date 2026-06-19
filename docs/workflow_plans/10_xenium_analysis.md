@@ -107,3 +107,6 @@ Folder-local outputs written by the scripts include:
 1. Workflow 10 is independent of workflows 00-09 and does not consume their generated files.
 2. Workflow 02 already includes a separate Xenium panel validation step using `support/FCGL_Xenium_Panel.csv`; workflow 10 is the collaborator spatial-analysis folder for raw Xenium output handling and DGE.
 3. Keep code edits out of this folder unless explicitly requested; document assumptions and outputs instead.
+4. The Xenium files provided in the 2026-06-19 missing-material zip were
+   compared against this folder's `00`-`03` scripts and matched after ignoring
+   CRLF line-ending differences, so no workflow 10 script files were recopied.

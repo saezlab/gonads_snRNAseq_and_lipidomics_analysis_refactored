@@ -1,9 +1,12 @@
 # Cross-Workflow Dependencies and Coherence Report
 
-**Last audited:** 2026-05-27
+**Last audited:** 2026-06-19
 **Ground truth:** `scripts/workflows/*.R`,
 `scripts/workflows/09_human_analysis.py`, and
 `scripts/workflows/10_xenium_analysis/`
+
+Non-workflow collaborator provenance files under `scripts/james/` are
+documented here but are not treated as cross-workflow dependencies.
 
 This meta overview is synchronized with the current workflow scripts and the
 per-workflow plan files in this directory.
@@ -57,6 +60,11 @@ per-workflow plan files in this directory.
 10_xenium_analysis
   optional collaborator Python workflow folder; raw Xenium output + panel
   workbook -> doublet calls, fused AnnData, composition plots, and DGE tables
+
+Non-workflow collaborator provenance
+  scripts/james/maldi/Cleland_analysis_expt2_recal.ipynb
+  scripts/james/proteomics/JamesCleland_P3225_V1.Rmd
+  retained for manuscript provenance; external inputs are not committed
 ```
 
 Important current-script clarifications:
@@ -71,6 +79,17 @@ Important current-script clarifications:
 - WF07 section 11 depends on WF06 `lipids_with_structure.csv`.
 - WF10 is a folder-local collaborator workflow, not a downstream dependency of
   workflows 00-09.
+- `scripts/james/maldi/Cleland_analysis_expt2_recal.ipynb` and
+  `scripts/james/proteomics/JamesCleland_P3225_V1.Rmd` are collaborator
+  provenance materials only. They are not sourced by active workflows.
+
+## Non-Workflow Collaborator Material
+
+| Bundle item | Repository location | Notes |
+| --- | --- | --- |
+| Attachment 1, MALDI | `scripts/james/maldi/Cleland_analysis_expt2_recal.ipynb` | Negative-mode MALDI-MSI liver zonation notebook. External AnnData, imaging, registration, and SCiLS inputs are not committed. |
+| Attachments 2-5, Xenium | `scripts/workflows/10_xenium_analysis/00_infer_doublets.py`; `01_merge_doublets.py`; `02_compositional_analysis.py`; `03_DGE_analysis.py` | Already present in workflow 10. The 2026-06-19 archive copies matched the checked-in scripts after ignoring CRLF line-ending differences. |
+| Attachment 6, proteomics | `scripts/james/proteomics/JamesCleland_P3225_V1.Rmd` | Original P3225 fractionated TMT proteomics R Markdown analysis. Workflow 02 uses curated checked-in inputs under `data/proteomics/`, not this Rmd directly. |
 
 ## Key File Dependencies
 

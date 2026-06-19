@@ -102,3 +102,8 @@ source("scripts/visualization/heatmaps.R")
 3. TF activity uses `minsize = 20`.
 4. GDX validation expects the workflow 01 GDX CSVs and writes into `results/pseudobulk/gdxrh/` (spelled `gdxrh` in the script).
 5. Proteomics validation is optional and skipped if either proteomics input file is missing.
+6. The original collaborator P3225 fractionated TMT proteomics R Markdown file
+   is retained as provenance at
+   `scripts/james/proteomics/JamesCleland_P3225_V1.Rmd`. Workflow 02 does not
+   source it; it uses the curated checked-in `data/proteomics/` files listed
+   above.

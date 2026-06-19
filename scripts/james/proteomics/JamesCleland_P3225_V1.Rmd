@@ -1,0 +1,1026 @@
+---
+title: "James Cleland - P3225"
+subtitle: "Version 1"
+author: "Frank Stein (PCF)"
+date: \today
+output: pdf_document
+---
+ 
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE)
+```
+ 
+```{r echo = FALSE}
+setwd("//pcf.embl.de/pcf/05_Projects/Heard_Edith/Cleland_James/P3225/P3225_fractionated/JamesCleland_P3225")
+```
+ 
+This analysis pipeline is partly based on an analysis workflow developed by Bernd Klaus.
+ 
+# R setup
+
+## Defining a working directory
+
+We defined the working directory for the analysis. This directory should contain the metadata file and the tab delimited text files containing the data.
+
+```{r eval = FALSE}
+setwd("~/home/path to the right file location")
+```
+
+## Loading packages
+
+```{r LoadingPackages}
+library(vsn)
+library(limma)
+library(MSnbase)
+library(gplots)
+library(fdrtool)
+library(biobroom)
+library(tidyverse)
+library(UpSetR)
+library(glue)
+```
+
+## Defining some functions and parameters
+
+```{r DefiningFunctions}
+customPlot <- list(
+  theme_bw(base_size = 12), 
+  scale_shape_manual(values = 1:8), 
+  scale_fill_brewer(palette = "Set1"), 
+  scale_colour_brewer(palette = "Set1")
+)
+script.version <- "V1"
+dir_save <- paste0("data_analysis_results_", script.version)
+if (!dir.exists(dir_save))
+{
+  dir.create(dir_save)
+}
+```
+
+# Loading data and annotating experimental conditions
+
+```{r loadRawFiles}
+conditions <- read.delim("metadata.csv", sep = ",")
+files <- file.path(unique(conditions$file))
+files <- files[file.exists(files)]
+data <- NULL
+for (i in seq_along(files))
+{
+  print(files[i])
+  x <- read_delim(file.path(files[i]), delim = "	")
+  names(x) <- make.names(names(x))
+  x$Gene[is.na(x$Gene)] <- x$Protein.ID[is.na(x$Gene)]
+  #keep only proteins with at least two unique peptide matches
+  x <- x %>%
+    dplyr::filter(Razor.Peptides >= 2)
+  #remove reverse hits
+  x <- x %>%
+    dplyr::filter(!grepl("rev_", Protein))
+  #remove known contaminants
+  x <- x %>%
+    dplyr::filter(!grepl("contam_", Protein))
+  x$file <- files[i]
+  keepnames <- as.character(subset(conditions, file == files[i])$col.name)
+  x <- x[, c("Gene", "Protein.ID", "Protein.Description", "Organism", "Unique.Peptides", "Razor.Peptides", "Total.Intensity", "file", keepnames)]
+  x <- x %>%
+    group_by(Gene, Protein.ID, Protein.Description, Organism, Unique.Peptides, Razor.Peptides, Total.Intensity, file) %>%
+    gather(key = "col.name", value = "value", keepnames)
+  x$Total.Intensity <- as.numeric(as.character(x$Total.Intensity))
+  data <- bind_rows(data, x)
+  rm(x, keepnames)
+}
+rm(i, files)
+data <- left_join(data, conditions)
+data <- subset(data, value > 0)
+```
+
+# Protein identification overview
+
+```{r proteinIdentificationOverview}
+ggplot(data = data, aes(condition, fill = rep)) +
+  geom_bar(position = position_dodge()) +
+  customPlot +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  geom_text(aes(label = after_stat(count), y = after_stat(count)), stat = "count", size = 2,
+            position = position_dodge(width = 0.9), hjust = 1, angle = 90)
+ggsave(file.path(dir_save, paste0("ProteinIdentification_CountOverview_", script.version, ".pdf")), width = 5.6, height = 4.36)
+ 
+upsetR.data <- data %>%
+  mutate(Gene = paste(Gene, Protein.ID, sep = "_")) %>%
+  group_by(Gene, ID) %>%
+  summarise(value = sum(value, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(identified = 1) %>%
+  dplyr::select(Gene, ID, identified) %>%
+  spread(key = ID, value = identified) %>%
+  as.data.frame()
+upsetR.data[is.na(upsetR.data)] <- 0
+upset.plot <- upset(upsetR.data, order.by = "freq", nsets = 16, mb.ratio = c(0.4, 0.6), nintersects = 30)
+pdf(file = file.path(dir_save, paste0("ProteinIdentification_UpSet_plot_", script.version, ".pdf")), width = 8.36, height = 5.6)
+print(upset.plot)
+dev.off()
+rm(upset.plot)
+write.csv(upsetR.data, file = file.path(dir_save, paste0("ProteinIdentification_Overview_", script.version, ".csv")), row.names = FALSE)
+ 
+NA.data <- upsetR.data %>%
+  dplyr::select(-Gene) %>%
+  as.matrix()
+rownames(NA.data) <- upsetR.data$Gene
+d <- dist(NA.data, method = "euclidean")
+hclust.fit <- hclust(d, method = "ward.D2")
+NA.tidy.data <- upsetR.data %>%
+  gather(key = ID, value = value, -Gene)
+NA.tidy.data$Gene <- factor(NA.tidy.data$Gene, ordered = TRUE, levels = hclust.fit$labels[hclust.fit$order])
+NA.tidy.data <- left_join(NA.tidy.data, conditions)
+ggplot(data = NA.tidy.data, aes(ID, Gene)) +
+  geom_tile(aes(fill = value > 0)) +
+  customPlot +
+  xlab("sample ID") +
+  scale_fill_manual(values = c("FALSE" = "#999999", "TRUE" = "#4daf4a"), name = "identified") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), 
+        axis.text.y = element_blank()) +
+  ggtitle("Missing value overview")
+ggsave(file.path(dir_save, paste0("ProteinIdentification_MissingValueOverview_", script.version, ".pdf")), width = 5.6, height = 8.36)
+rm(d, hclust.fit)
+ 
+sub_i <- data %>%
+  group_by(Gene) %>%
+  dplyr::select(Gene, rep, file) %>%
+  unique() %>%
+  summarise(found.in.files = n()) %>%
+  mutate(found.in.files = factor(found.in.files))
+ggplot(data = sub_i, aes(found.in.files)) + 
+  geom_bar(position = position_dodge()) + 
+  geom_text(aes(label = after_stat(count), y = after_stat(count)), stat = "count", size = 2,
+            position = position_dodge(width = 0.9), hjust = 1, angle = 90) +
+  customPlot + 
+  xlab("identified no of replicates per file")
+rm(sub_i)
+```
+
+# Identification and removal of duplicated gene names
+
+```{r renameDuplicates}
+dup.data <- data %>%
+  ungroup() %>%
+  dplyr::select(Gene, Protein.ID, file, Razor.Peptides) %>%
+  unique() %>%
+  group_by(file, Gene) %>%
+  dplyr::filter(n() > 1)
+if (nrow(dup.data) > 0)
+{
+  write.csv(dup.data, file.path(dir_save, paste0("Duplicates_", script.version, ".csv")), row.names = FALSE)
+}
+dups <- unique(dup.data$Gene)
+if (length(dups) > 0)
+{
+  print("Duplicates were identified:")
+  print(dups)
+  print("Removing genes with smaller numbers of quantified peptides.")
+  for (dup in dups)
+  {
+    for (filen in unique(subset(dup.data, Gene == dup)$file))
+    {
+      sub <- subset(data, Gene == dup & file == filen)
+      data <- subset(data, paste(Gene, file) != paste(dup, filen))
+      sub <- subset(sub, Razor.Peptides == max(sub$Razor.Peptides, na.rm = TRUE))
+      data <- bind_rows(data, sub)
+      rm(sub)
+    }
+    rm(filen)
+  }
+  rm(dup)
+}
+dup.data <- data %>%
+  ungroup() %>%
+  dplyr::select(Gene, Protein.ID, file, Razor.Peptides) %>%
+  unique() %>%
+  group_by(file, Gene) %>%
+  dplyr::filter(n() > 1)
+dups <- unique(dup.data$Gene)
+if (length(dups) > 0)
+{
+  print("Duplicates:")
+  print(dups)
+  print("Removing genes with the least overlap of protein ids in other ms experiments")
+  for (dup in dups)
+  {
+    sub <- subset(data, Gene %in% dup)
+    IDs <- unlist(strsplit(sub$Protein.ID, split = "[|]"))
+    rm(sub)
+    for (filen in unique(subset(dup.data, Gene == dup)$file))
+    {
+      sub <- subset(data, Gene == dup & file == filen)
+      data <- subset(data, paste(Gene, file) != paste(dup, filen))
+      sub$ID.count <- 0
+      for (ID in unique(sub$Protein.ID))
+      {
+        sub$ID.count[sub$Protein.ID == ID] <- length(which(IDs %in% unlist(strsplit(ID, split = "[|]"))))
+      }
+      sub <- subset(sub, ID.count == max(sub$ID.count, na.rm = TRUE))
+      sub$ID.count <- NULL
+      data <- bind_rows(data, sub)
+      rm(sub)
+    }
+    rm(filen, IDs)
+  }
+  rm(dup)
+}
+rm(dups, dup.data)
+```
+
+# Transforming long data to wide data
+
+```{r transformLongData2WideData, fig.height = 5}
+ggplot(data = data, aes(condition, log2(value), fill = rep)) + 
+  geom_boxplot() + 
+  ylab("log2(reporter_intensity)") + 
+  customPlot + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+cdata <- data %>%
+  group_by(Gene) %>%
+  mutate(key = paste("reporter_intensity", condition, rep, sep = "_")) %>%
+  dplyr::select(Gene, key, value) %>%
+  group_by(Gene, key) %>%
+  summarise(value = sum(value, na.rm = TRUE)) %>%
+  spread(key = key, value = value)
+#found.in.files
+fdata <- data %>%
+  group_by(Gene) %>%
+  dplyr::select(Gene, file) %>%
+  unique() %>%
+  summarise(found.in.files = n())
+fdata_i <- data %>%
+  mutate(file2 = make.names(file)) %>%
+  group_by(Gene, file2) %>%
+  dplyr::select(Gene, file, file2) %>%
+  unique() %>%
+  summarise(found.in.file = n()) %>%
+  mutate(file2 = paste0("found.in.file_", file2)) %>%
+  spread(key = file2, value = found.in.file)
+fdata <- left_join(fdata, fdata_i)
+#found.in.conditions
+fdata_i <- data %>%
+  group_by(Gene) %>%
+  dplyr::select(Gene, condition) %>%
+  unique() %>%
+  summarise(found.in.conditions = n())
+fdata <- left_join(fdata, fdata_i)
+#found.in.reps
+fdata_i <- data %>%
+  group_by(Gene) %>%
+  dplyr::select(Gene, rep) %>%
+  unique() %>%
+  summarise(found.in.reps = n())
+fdata <- left_join(fdata, fdata_i)
+#Unique.Peptides overview
+fdata_i <- data %>%
+  group_by(Gene) %>%
+  dplyr::select(Gene, Unique.Peptides) %>%
+  unique() %>%
+  summarise(max.Unique.Peptides = max(Unique.Peptides, na.rm = TRUE))
+fdata <- left_join(fdata, fdata_i)
+#Razor.Peptides overview
+fdata_i <- data %>%
+  group_by(Gene) %>%
+  dplyr::select(Gene, Razor.Peptides) %>%
+  unique() %>%
+  summarise(max.Razor.Peptides = max(Razor.Peptides, na.rm = TRUE))
+fdata <- left_join(fdata, fdata_i)
+#abundance overview
+fdata_i <- data %>%
+  group_by(Gene) %>%
+  dplyr::select(Gene, Total.Intensity) %>%
+  unique() %>%
+  summarise(average.Total.Intensity = mean(Total.Intensity, na.rm = TRUE))
+fdata <- left_join(fdata, fdata_i)
+id_data <- data %>%
+  ungroup() %>%
+  dplyr::select(Gene, Protein.ID, Protein.Description, Organism) %>%
+  unique()
+dups <- id_data %>%
+  group_by(Gene) %>%
+  summarize(n = n()) %>%
+  dplyr::filter(n > 1) %>%
+  dplyr::select(Gene)
+if (nrow(dups) > 0)
+{
+  dups <- dups$Gene
+  dup.data <- subset(id_data, Gene %in% dups)
+  id_data <- subset(id_data, !Gene %in% dups)
+  combine_ids <- function(ids)
+  {
+    ids <- as.character(ids)
+    return(paste(
+      sort(unique(unlist(strsplit(ids, split = "[;]")))), collapse = ";"))
+  }
+  dup.data <- dup.data %>%
+    group_by(Gene) %>%
+    summarise(Protein.ID = combine_ids(Protein.ID), 
+              Protein.Description = combine_ids(Protein.Description), 
+              Organism = combine_ids(Organism))
+  id_data <- bind_rows(id_data, dup.data)
+  rm(dup.data, combine_ids)
+}
+rm(dups)
+fdata <- left_join(id_data, fdata)
+rm(id_data)
+cdata <- left_join(fdata, cdata)
+rm(fdata_i, fdata)
+```
+
+# Filter data
+
+Only proteins that were quantified with two unique peptide matches are kept for the analysis. Proteins were filtered according to these condition already when loading the data. Moreover, only proteins were kept if they were quantified in at least 2/3 of the replicates.
+
+```{r filterData}
+dim(cdata)
+min.found.in.files <- 1
+min.Razor.Peptides <- 2
+cdata <- cdata %>%
+  dplyr::filter(found.in.files >= min.found.in.files, max.Razor.Peptides >= min.Razor.Peptides)
+dim(cdata)
+rm(min.found.in.files, min.Razor.Peptides)
+```
+
+# Building an expression set object
+
+```{r buildingEset}
+# Constructing assay data
+raw_data <- cdata %>%
+  dplyr::select(starts_with("reporter_intensity")) %>%
+  as.data.frame()
+rownames(raw_data) <- cdata$Gene
+names(raw_data) <- gsub("reporter_intensity_", "", names(raw_data))
+
+# Constructing metadata
+conditions_i <- data.frame(ID = names(raw_data))
+conditions_i <- left_join(conditions_i, conditions)
+
+# Constructing fdata
+fdata <- cdata %>%
+  dplyr::select(-starts_with("reporter_intensity")) %>%
+  as.data.frame()
+
+# Defining ID columns
+rownames(fdata) <- fdata$Gene
+rownames(conditions_i) <- conditions_i$ID
+colnames(raw_data) <- conditions_i$ID
+
+# Log2-transformation of raw_reporter_intensity values
+raw_data_m <- log2(as.matrix(raw_data))
+raw_data_m[is.infinite((raw_data_m))] <- NA
+raw_data_m[is.na((raw_data_m))] <- NA
+
+# Creating an expression set
+raw_dataE <- ExpressionSet(assayData = raw_data_m, 
+                           phenoData = AnnotatedDataFrame(conditions_i), 
+                           featureData = AnnotatedDataFrame(fdata))
+validObject(raw_dataE)
+rm(raw_data, raw_data_m, conditions_i, fdata)
+```
+
+# Batch effect removal
+
+```{r removingBatchEffects}
+batchcl_dataE <- raw_dataE
+exprs(batchcl_dataE) <- removeBatchEffect(exprs(batchcl_dataE), 
+      batch = as.character(pData(batchcl_dataE)$rep), 
+      design = model.matrix(~0 + as.character(pData(batchcl_dataE)$condition)))
+```
+
+# Data normalization
+
+The vsn package from Wolfgang Huber is used to apply a variance stabilization normalization method on the log2 raw data.
+
+```{r DataNormalization}
+norm_dataE <- batchcl_dataE
+norm_dataE <- batchcl_dataE
+norm_input.data <- 2^exprs(norm_dataE)
+exprs(norm_dataE) <- normalizeVSN(norm_input.data)
+meanSdPlot(vsn2(norm_input.data))
+
+rm(sdplot.object, norm_input.data)
+```
+
+# Calculation of ctrl-fold changes
+
+```{r CalculateCtrlFoldChanges}
+fc.data <- as.data.frame(2^exprs(norm_dataE))
+names.orig <- names(fc.data)
+for (i in seq_along(conditions$ID))
+{
+  fc.data[, paste0(conditions$ID[i], ".ctrl.ratio")] <-
+    fc.data[, as.character(conditions$ID[i])] /
+    apply(fc.data[, grep(paste0("^", conditions$ctrl[i], "_"), names.orig, value = TRUE)], 1, median, na.rm = TRUE)
+    # fc.data[, as.character(conditions$ctrl.ID[i])]
+}
+rm(i)
+fc.data <- fc.data %>%
+  dplyr::select(ends_with(".ctrl.ratio"))
+fc.data$Gene <- rownames(fc.data)
+fc.data <- fc.data %>%
+  dplyr::select(ends_with(".ctrl.ratio"))
+ctrl.ratio_dataE <- norm_dataE
+names(fc.data) <- gsub(".ctrl.ratio", "", names(fc.data))
+fc.data <- fc.data[ , colnames(ctrl.ratio_dataE)]
+exprs(ctrl.ratio_dataE) <- fc.data %>%
+  as.matrix() %>%
+  log2()
+rm(fc.data)
+```
+
+# PCA - principal component analysis
+
+```{r CreatePCAplots, fig.height = 5}
+sets <- list("raw data" = raw_dataE, "batchcl data" = batchcl_dataE, "norm data" = norm_dataE, "ctrl.ratio data" = ctrl.ratio_dataE)
+PCA_data <- NULL
+for (i in seq_along(sets)) {
+  set <- sets[[i]]
+  set.name <- names(sets)[i]
+  PCA_m <- t(na.omit(exprs(set)))
+  if (length(PCA_m) > 50) {
+    PCA <- prcomp(PCA_m, scale = FALSE)
+    perc_var <-
+      round(100 * PCA$sdev ^ 2 /
+              sum(PCA$sdev ^ 2), 1)
+    PCA_data_i <-
+      data.frame(PC1 = PCA$x[, 1],
+                 PC2 = PCA$x[, 2],
+                 PC3 = PCA$x[, 3],
+                 PC1.var = perc_var[1],
+                 PC2.var = perc_var[2],
+                 condition = pData(set)$condition,
+                 rep = pData(set)$rep,
+                 measurement = set.name)
+    PCA_data <- bind_rows(PCA_data, PCA_data_i)
+    rm(PCA_data_i)
+  }
+}
+rm(i)
+PCA_data$measurement <- factor(PCA_data$measurement, ordered = TRUE, levels = c("raw data", "batchcl data", "norm data", "ctrl.ratio data"))
+ggplot(data = PCA_data, aes(PC1, PC2)) +
+  geom_point(aes(colour = condition, shape = rep), size = 4) +
+  guides(size = "none") +
+  customPlot +
+  ggtitle("PCA analysis") +
+  xlab("PC1") +
+  ylab("PC2") +
+  facet_wrap(. ~ measurement + paste("PC1:", PC1.var, "% var - PC2:", PC2.var, "% var"), scale = "free", ncol = 4)
+ggsave(file.path(dir_save, paste0("PCA_analysis_", script.version, ".pdf")),
+     width = 14, height = 5)
+write.csv(PCA_data, file = file.path(dir_save, paste0("PCA_analysis_data_", script.version, ".csv")), row.names = FALSE)
+```
+
+# Merge modified data back into 'cdata'
+
+```{r CreateCastedData}
+cdata_i <- as.data.frame(2^exprs(batchcl_dataE))
+names(cdata_i) <- paste0("batchcl_reporter_intensity_", names(cdata_i))
+cdata_i$Gene <- rownames(cdata_i)
+cdata <- left_join(cdata, cdata_i)
+rm(cdata_i)
+
+cdata_i <- as.data.frame(2^exprs(norm_dataE))
+names(cdata_i) <- paste0("norm_reporter_intensity_", names(cdata_i))
+cdata_i$Gene <- rownames(cdata_i)
+cdata <- left_join(cdata, cdata_i)
+rm(cdata_i)
+
+cdata_i <- as.data.frame(2^exprs(ctrl.ratio_dataE))
+names(cdata_i) <- paste0("ctrl.ratio_", names(cdata_i))
+cdata_i$Gene <- rownames(cdata_i)
+cdata <- left_join(cdata, cdata_i)
+rm(cdata_i)
+
+write.csv(cdata, file = file.path(dir_save, paste0("Full_dataset_", script.version, ".csv")), row.names = FALSE)
+```
+
+# Create tidy data
+
+```{r CreateTidyData}
+mdata <- NULL
+
+mdata_i <- tidy(raw_dataE)
+mdata_i <- mdata_i %>%
+  mutate(value = 2 ^ value)
+names(mdata_i)[1] <- "Gene"
+names(mdata_i)[2] <- "ID"
+mdata_i <- left_join(mdata_i, conditions)
+mdata_i$measurement <- "raw_reporter_intensity"
+mdata <- bind_rows(mdata, mdata_i)
+rm(mdata_i)
+
+mdata_i <- tidy(batchcl_dataE)
+mdata_i <- mdata_i %>%
+  mutate(value = 2 ^ value)
+names(mdata_i)[1] <- "Gene"
+names(mdata_i)[2] <- "ID"
+mdata_i <- left_join(mdata_i, conditions)
+mdata_i$measurement <- "batchcl_reporter_intensity"
+mdata <- bind_rows(mdata, mdata_i)
+rm(mdata_i)
+
+mdata_i <- tidy(norm_dataE)
+mdata_i <- mdata_i %>%
+  mutate(value = 2 ^ value)
+names(mdata_i)[1] <- "Gene"
+names(mdata_i)[2] <- "ID"
+mdata_i <- left_join(mdata_i, conditions)
+mdata_i$measurement <- "norm_reporter_intensity"
+mdata <- bind_rows(mdata, mdata_i)
+rm(mdata_i)
+
+mdata_i <- tidy(ctrl.ratio_dataE)
+mdata_i <- mdata_i %>%
+  mutate(value = 2 ^ value)
+names(mdata_i)[1] <- "Gene"
+names(mdata_i)[2] <- "ID"
+mdata_i <- left_join(mdata_i, conditions)
+mdata_i$measurement <- "ctrl.ratio"
+mdata <- bind_rows(mdata, mdata_i)
+rm(mdata_i)
+
+mdata$condition <- factor(mdata$condition, ordered = TRUE, levels = c("male", "female"))
+mdata$measurement <- factor(mdata$measurement, ordered = TRUE, levels = c("raw_reporter_intensity", "batchcl_reporter_intensity", "norm_reporter_intensity", "ctrl.ratio"))
+```
+
+# Data transformation overview
+
+```{r DataTransformationOverview, fig.height = 6}
+ggplot(data = subset(mdata, !grepl("ratio", measurement)), aes(condition, log2(value))) +
+  geom_boxplot(aes(fill = rep)) +
+  customPlot +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  facet_grid(. ~ measurement)
+ggsave(file.path(dir_save, paste0("Normalization_overview_", script.version, ".pdf")), width = 10, height = 5)
+
+ggplot(data = subset(mdata, grepl("ratio", measurement)), aes(condition, log2(value))) +
+  geom_boxplot(aes(fill = rep)) +
+  customPlot +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  facet_grid(. ~ measurement, scale = "free")
+ggsave(file.path(dir_save, paste0("Normalization_overview_ratios_", script.version, ".pdf")), width = 6, height = 5)
+```
+
+# CV overview (coefficient of variation)
+
+```{r CVOverview, fig.height = 6}
+cv.data <- mdata %>%
+  group_by(Gene, measurement, condition) %>%
+  summarise(CV = sd(value, na.rm = TRUE) / mean(value, na.rm = TRUE))
+cv.data.all <- mdata %>%
+  mutate(condition = "all") %>%
+  group_by(Gene, measurement, condition) %>%
+  summarise(CV = sd(value, na.rm = TRUE) / mean(value, na.rm = TRUE))
+cv.data <- bind_rows(cv.data, cv.data.all)
+rm(cv.data.all)
+ggplot(data = cv.data, aes(condition, CV * 100)) +
+  geom_violin() +
+  geom_boxplot(width = 0.1) +
+  customPlot +
+  ylab("CV [%]") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  facet_grid(. ~ measurement)
+ggsave(file.path(dir_save, paste0("CV_overview_", script.version, ".pdf")), width = 12, height = 5)
+```
+
+# LIMMA analysis
+
+A protein is considered a 'hit', if the false discovery rate is smaller 0.05 and a fold change of at least 2-fold is observed. A protein is considered a 'candidate', if the false discovery rate is smaller 0.2 and a fold change of at least 1.5-fold is observed.
+
+## Initialize limma results data
+
+```{r LimmaInitialization}
+limma_results <- NULL
+```
+
+## Run limma analysis
+
+```{r LimmaRun}
+limma_data <- norm_dataE
+limma_weights <- exprs(raw_dataE)
+comparison.list <- c("female - male")
+limma_weights <- ifelse(is.na(limma_weights), 0.01, 1)
+limma.cond <- factor(pData(limma_data)$condition, ordered = FALSE)
+limma.rep <- factor(pData(limma_data)$rep, ordered = FALSE)
+design.matrix <- model.matrix( ~  0 + limma.cond + limma.rep)
+colnames(design.matrix) <- gsub("limma.cond", "", colnames(design.matrix))
+
+limma.object <- eBayes(
+  contrasts.fit(
+    lmFit(limma_data, design = design.matrix, weights = limma_weights), 
+    makeContrasts(contrasts = comparison.list, levels = design.matrix)
+  )
+)
+for (comparison in comparison.list)
+{
+  limma_results_i <- limma::topTable(limma.object, 
+                         sort.by = "t",  
+                         coef = comparison, 
+                         number = Inf)
+  names(limma_results_i)[grep("P.Value", names(limma_results_i))] <- "pvalue.limma"
+  names(limma_results_i)[grep("adj.P.Val", names(limma_results_i))] <- "fdr.limma"
+  limma_results_i <- subset(limma_results_i, !is.na(logFC))
+  fdr_res <- NULL
+  try(fdr_res <- fdrtool(limma_results_i$t, plot = FALSE, verbose = FALSE))
+  if (!is.null(fdr_res))
+  {
+    limma_results_i$pvalue.fdrtool <- fdr_res$pval
+    limma_results_i$qval.fdrtool <- fdr_res$qval
+    limma_results_i$lfdr.fdrtool <- fdr_res$lfdr
+  }else
+  {
+    limma_results_i$pvalue.fdrtool <- 1
+    limma_results_i$qval.fdrtool <- 1
+    limma_results_i$lfdr.fdrtool <- 1
+  }
+  limma_results_i$comparison <- comparison
+  limma_results <- bind_rows(limma_results, limma_results_i)
+  rm(limma_results_i, fdr_res)
+}
+rm(comparison.list, comparison, design.matrix, limma.cond, limma.rep, limma_data, limma_weights, limma.object)
+```
+
+## Fdr statistics comparison limma vs fdrtool
+
+```{r LimmaFDRcomparison, fig.height = 7}
+ggplot(data = limma_results, aes(abs(t))) + 
+  geom_line(aes(y = fdr.limma, colour = "limma - adj.P.Val")) + 
+  geom_line(aes(y = qval.fdrtool, colour = "fdrtool - qval")) + 
+  geom_point(aes(y = fdr.limma, colour = "limma - adj.P.Val")) + 
+  geom_point(aes(y = qval.fdrtool, colour = "fdrtool - qval")) + 
+  facet_wrap( ~ comparison, scale = "free_x") + 
+  ylab("fdr") + 
+  customPlot
+ggsave(file.path(dir_save, paste0("t_vs_fdr_limma_vs_fdrtool_", script.version, ".pdf")), width = 8, height = 4.5)
+
+ggplot(data = limma_results) + 
+  geom_histogram(aes(pvalue.limma, alpha = 0.5, fill = "limma"), bins = 40) + 
+  geom_histogram(aes(pvalue.fdrtool, alpha = 0.5, fill = "fdrtool"), bins = 40) + 
+  guides(alpha = FALSE) + 
+  xlab("p-value") + 
+  facet_wrap( ~ comparison, scale = "free_y") +
+  coord_cartesian(xlim = c(0, 1)) +
+  customPlot
+ggsave(file.path(dir_save, paste0("p-value_histogram_limma_vs_fdrtool_", script.version, ".pdf")), width = 8, height = 4.5)
+```
+
+## Hit annotation
+
+```{r LimmaHitAnnotation}
+limma_results$hit_annotation_method <- NA
+fdr_hit_threshold <- 0.05
+fdr_candidate_threshold = 0.2
+fc_hit_threshold <- 2
+fc_candidate_threshold <- 1.5
+limma_results$pvalue <- NA
+limma_results$fdr <- NA
+for (comparison in unique(limma_results$comparison))
+{
+  limma_hits <- 
+    nrow(limma_results[limma_results$comparison == comparison & 
+                         limma_results$fdr.limma <= fdr_hit_threshold, ])
+  fdrtool_hits <- 
+    nrow(limma_results[limma_results$comparison == comparison & 
+                         limma_results$qval.fdrtool <= fdr_hit_threshold, ])
+  if (limma_hits >= fdrtool_hits)
+  {
+    limma_results$hit_annotation_method[limma_results$comparison == comparison] <- 
+      "limma"
+  }
+  if (fdrtool_hits > limma_hits)
+  {
+    limma_results$hit_annotation_method[limma_results$comparison == comparison] <- 
+      "fdrtool"
+  }
+  rm(limma_hits, fdrtool_hits)
+}
+rm(comparison)
+table(limma_results$hit_annotation_method)
+# limma_results$hit_annotation_method <- "limma"
+limma_results$hit_annotation_method[!grepl("[(,)]", limma_results$comparison)] <- "limma"
+
+limma_results$pvalue[limma_results$hit_annotation_method == "limma"] <- 
+  limma_results$pvalue.limma[limma_results$hit_annotation_method == "limma"]
+limma_results$fdr[limma_results$hit_annotation_method == "limma"] <- 
+  limma_results$fdr.limma[limma_results$hit_annotation_method == "limma"]
+
+limma_results$pvalue[limma_results$hit_annotation_method == "fdrtool"] <- 
+  limma_results$pvalue.fdrtool[limma_results$hit_annotation_method == "fdrtool"]
+limma_results$fdr[limma_results$hit_annotation_method == "fdrtool"] <- 
+  limma_results$qval.fdrtool[limma_results$hit_annotation_method == "fdrtool"]
+
+limma_results$hit <- 
+  with(limma_results, ifelse(fdr <= fdr_hit_threshold & abs(logFC) >= 
+                               log2(fc_hit_threshold), TRUE, FALSE))
+limma_results$hit_annotation <- 
+  with(limma_results, 
+       ifelse(fdr <= fdr_hit_threshold & abs(logFC) >= 
+                log2(fc_hit_threshold), "hit",
+              ifelse(fdr <= fdr_candidate_threshold & abs(logFC) >= 
+                       log2(fc_candidate_threshold), "candidate", "no hit")))
+limma_results$hit_annotation <- 
+  factor(limma_results$hit_annotation, 
+         ordered = TRUE, 
+         levels = c("hit", "candidate", "no hit"))
+
+with(limma_results, table(comparison, hit_annotation))
+```
+
+## Volcano-plot
+
+```{r LimmaVolcanoPlot, fig.height = 7}
+ggplot(data = limma_results, aes(logFC, -log10(pvalue), colour = hit_annotation)) +
+  geom_vline(aes(xintercept = 0)) + 
+  geom_point() +
+  geom_text(aes(label = gsub("[|].+", "", Gene)), 
+            data = subset(limma_results, hit_annotation != "no hit"), 
+            vjust = 0, nudge_y = 0.1, size = 2, check_overlap = TRUE) + 
+  facet_wrap( ~ comparison + hit_annotation_method) +
+  xlab("log2(fold change)") +
+  customPlot
+ggsave(file.path(dir_save, paste0("Volcano_plot_", script.version, ".pdf")), width = 8, height = 4.5)
+```
+
+## MA-plot
+
+```{r LimmaMA_plot, fig.height = 7}
+ggplot(data = limma_results, aes(AveExpr, logFC, colour = hit_annotation)) +
+  geom_hline(aes(yintercept = 0)) + 
+  geom_point() +
+  geom_text(aes(label = gsub("[|].+", "", Gene)), 
+            data = subset(limma_results, hit_annotation != "no hit"), 
+            vjust = 0, nudge_y = 0.1, size = 2, check_overlap = TRUE) + 
+  facet_wrap( ~ comparison + hit_annotation_method) +
+  xlab("average log2(reporter_intensity)") +
+  ylab("log2(fold change)") +
+  customPlot
+ggsave(file.path(dir_save, paste0("MA_plot_", script.version, ".pdf")), width = 8, height = 4.5)
+```
+
+##Total.Intensity-plot
+
+```{r LimmaAbundancePlot, fig.height = 7}
+limma_results$Total.Intensity <- limma_results$average.Total.Intensity
+ggplot(data = limma_results, aes(log2(Total.Intensity), logFC, colour = hit_annotation)) +
+  geom_hline(aes(yintercept = 0)) + 
+  geom_point() +
+  geom_text(aes(label = gsub("[|].+", "", Gene)), 
+            data = subset(limma_results, hit_annotation != "no hit"), 
+            vjust = 0, nudge_y = 0.1, size = 2, check_overlap = TRUE) + 
+  facet_wrap( ~ comparison + hit_annotation_method) +
+  ylab("log2(fold change)") +
+  customPlot
+ggsave(file.path(dir_save, paste0("Total.Intensity_plot_", script.version, ".pdf")), width = 8, height = 4.5)
+```
+
+## Save limma results
+
+```{r LimmaSave}
+write.csv(limma_results, file.path(dir_save, paste0("Limma_results_", script.version, ".csv")), row.names = FALSE)
+```
+
+# Save R workspace
+
+```{r}
+save.image(file.path(dir_save, paste0("Workspace_", script.version, ".RData")))
+# load(file.path(dir_save, paste0("Workspace_", script.version, ".RData")))
+```
+
+# Comparative GO term enrichment analysis
+
+## Preparation
+
+```{r GO_IDLUT}
+library(clusterProfiler)
+library(org.Mm.eg.db)
+calculateFE <- function(GeneRatio, BgRatio)
+{
+  GeneRatio <- as.numeric(unlist(str_split(GeneRatio, pattern = "/")))
+  BgRatio <- as.numeric(unlist(str_split(BgRatio, pattern = "/")))
+  odds_ratio <- (GeneRatio[1] / GeneRatio[2]) / (BgRatio[1] / BgRatio[2])
+  return(odds_ratio)
+}
+ID_LUT <- bitr(geneID = cdata$Gene, fromType = "SYMBOL", toType = "ENTREZID", OrgDb = org.Mm.eg.db)
+names(ID_LUT) <- c("Gene", "ENTREZID")
+```
+
+## GO analysis for hits of differential abundance analysis
+
+```{r GO_DE}
+limma_results <- left_join(limma_results, ID_LUT)
+ego_data <- limma_results %>%
+  dplyr::filter(!is.na(ENTREZID), hit_annotation %in% c("hit", "candidate")) %>%
+  dplyr::select(ENTREZID, comparison, logFC) %>%
+  unique() %>% 
+  mutate(direction = ifelse(logFC > 0, "upregulated", "downregulated")) %>% 
+  mutate(comparison = gsub("[.]", "_", comparison))
+```
+
+### Cellular compartment
+
+```{r GO_DE_CC}
+ego_results_DE_CC <- NULL
+try(ego_results_DE_CC <- compareCluster(ENTREZID ~ comparison + direction,
+                                    data = ego_data, fun = "enrichGO",
+                                    OrgDb = org.Mm.eg.db,
+                                    keyType = "ENTREZID",
+                                    ont = "CC",
+                                    readable = TRUE,
+                                    universe = ID_LUT$ENTREZID))
+if (!is.null(ego_results_DE_CC))
+{
+  ego_results_DE_CC_table <- ego_results_DE_CC@compareClusterResult
+  ego_results_DE_CC_table <- ego_results_DE_CC_table %>% 
+    group_by(ID, comparison, direction) %>%
+    mutate(odds_ratio = calculateFE(GeneRatio, BgRatio))
+  ego_results_DE_CC_table$Description <- factor(ego_results_DE_CC_table$Description, levels = unique(rev(ego_results_DE_CC_table$Description)))
+  write.csv(ego_results_DE_CC_table, file.path(dir_save, paste0("GO_enrichment_DE_CC_limma_results_", script.version, ".csv")), row.names = FALSE)
+  ego_sub <- ego_results_DE_CC_table %>% 
+    group_by(comparison, direction) %>%
+    slice_head(n = 10)
+  ggplot(data = ego_sub, aes(paste(comparison, direction), Description)) +
+    geom_point(aes(size = odds_ratio, colour = -log10(p.adjust))) +
+    theme_bw(base_size = 12) +
+    scale_colour_gradientn(colours = c("#377eb8", "#984ea3", "#e41a1c", "#ff7f00", "#ffff33")) +
+    ggtitle("Cellular compartment") +
+    ylab("") +
+    xlab("") +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+  ggsave(file.path(dir_save, paste0("GO_enrichment_DE_CC_dotplot_limma_results_", script.version, ".pdf")), 
+         width = max(nchar(as.character(ego_sub$Description))) * 0.06 + with(ego_sub, length(unique(paste(comparison, direction)))) * 0.5 + 3,
+         height = length(unique(ego_sub$Description)) * 0.12 + max(with(ego_sub, nchar(unique(paste(comparison, direction))))) * 0.06 + 2)
+}
+```
+
+### Molecular function
+
+```{r GO_DE_MF}
+ego_results_DE_MF <- NULL
+try(ego_results_DE_MF <- compareCluster(ENTREZID ~ comparison + direction,
+                                    data = ego_data, fun = "enrichGO",
+                                    OrgDb = org.Mm.eg.db,
+                                    keyType = "ENTREZID",
+                                    ont = "MF",
+                                    readable = TRUE,
+                                    universe = ID_LUT$ENTREZID))
+if (!is.null(ego_results_DE_MF))
+{
+  ego_results_DE_MF_table <- ego_results_DE_MF@compareClusterResult
+  ego_results_DE_MF_table <- ego_results_DE_MF_table %>% 
+    group_by(ID, comparison, direction) %>%
+    mutate(odds_ratio = calculateFE(GeneRatio, BgRatio))
+  ego_results_DE_MF_table$Description <- factor(ego_results_DE_MF_table$Description, levels = unique(rev(ego_results_DE_MF_table$Description)))
+  write.csv(ego_results_DE_MF_table, file.path(dir_save, paste0("GO_enrichment_DE_MF_limma_results_", script.version, ".csv")), row.names = FALSE)
+  ego_sub <- ego_results_DE_MF_table %>% 
+    group_by(comparison, direction) %>%
+    slice_head(n = 10)
+  ggplot(data = ego_sub, aes(paste(comparison, direction), Description)) +
+    geom_point(aes(size = odds_ratio, colour = -log10(p.adjust))) +
+    theme_bw(base_size = 12) +
+    scale_colour_gradientn(colours = c("#377eb8", "#984ea3", "#e41a1c", "#ff7f00", "#ffff33")) +
+    ggtitle("Molecular function") +
+    ylab("") +
+    xlab("") +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+  ggsave(file.path(dir_save, paste0("GO_enrichment_DE_MF_dotplot_limma_results_", script.version, ".pdf")), 
+         width = max(nchar(as.character(ego_sub$Description))) * 0.06 + with(ego_sub, length(unique(paste(comparison, direction)))) * 0.5 + 3,
+         height = length(unique(ego_sub$Description)) * 0.12 + max(with(ego_sub, nchar(unique(paste(comparison, direction))))) * 0.06 + 2)
+}
+```
+
+### Biological process
+
+```{r GO_DE_BP}
+ego_results_DE_BP <- NULL
+try(ego_results_DE_BP <- compareCluster(ENTREZID ~ comparison + direction,
+                                    data = ego_data, fun = "enrichGO",
+                                    OrgDb = org.Mm.eg.db,
+                                    keyType = "ENTREZID",
+                                    ont = "BP",
+                                    readable = TRUE,
+                                    universe = ID_LUT$ENTREZID))
+if (!is.null(ego_results_DE_BP))
+{
+  ego_results_DE_BP_table <- ego_results_DE_BP@compareClusterResult
+  ego_results_DE_BP_table <- ego_results_DE_BP_table %>% 
+    group_by(ID, comparison, direction) %>%
+    mutate(odds_ratio = calculateFE(GeneRatio, BgRatio))
+  ego_results_DE_BP_table$Description <- factor(ego_results_DE_BP_table$Description, levels = unique(rev(ego_results_DE_BP_table$Description)))
+  write.csv(ego_results_DE_BP_table, file.path(dir_save, paste0("GO_enrichment_DE_BP_limma_results_", script.version, ".csv")), row.names = FALSE)
+  ego_sub <- ego_results_DE_BP_table %>% 
+    group_by(comparison, direction) %>%
+    slice_head(n = 10)
+  ggplot(data = ego_sub, aes(paste(comparison, direction), Description)) +
+    geom_point(aes(size = odds_ratio, colour = -log10(p.adjust))) +
+    theme_bw(base_size = 12) +
+    scale_colour_gradientn(colours = c("#377eb8", "#984ea3", "#e41a1c", "#ff7f00", "#ffff33")) +
+    ggtitle("Biological process") +
+    ylab("") +
+    xlab("") +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+  ggsave(file.path(dir_save, paste0("GO_enrichment_DE_BP_dotplot_limma_results_", script.version, ".pdf")), 
+         width = max(nchar(as.character(ego_sub$Description))) * 0.06 + with(ego_sub, length(unique(paste(comparison, direction)))) * 0.5 + 3,
+         height = length(unique(ego_sub$Description)) * 0.12 + max(with(ego_sub, nchar(unique(paste(comparison, direction))))) * 0.06 + 2)
+}
+```
+
+# Save Methods for analysis
+
+```{r SaveMethods}
+method.description <- "The raw output files of FragPipe (protein.tsv files) were processed using the R programming language (ISBN 3-900051-07-0)."
+method.description <- append(method.description, "Contaminants and reverse proteins were filtered out and only proteins that were quantified with at least 2 razor peptides (Razor.Peptides >= 2) were considered for the analysis.")
+method.description <- append(method.description, paste(nrow(cdata), "proteins passed the quality control filters."))
+method.description <- append(method.description, glue("Log2 transformed raw TMT reporter ion intensities ('channel' columns) were first cleaned for batch effects using the 'removeBatchEffect' function of the limma package (PMID: 25605792) and further normalized using the 'normalizeVSN' function of the limma package (VSN - variance stabilization normalization - PMID: 12169536)."))
+method.description <- append(method.description, "Proteins were tested for differential expression using a moderated t-test by applying the limma package ('lmFit' and 'eBayes' functions). The replicate information was added as a factor in the design matrix given as an argument to the 'lmFit' function of limma.")
+if ("fdrtool" %in% limma_results$hit_annotation_method)
+{
+  method.description <- append(method.description, "The t-value output of limma for certain statistical comparisons was analyzed with the 'fdrtool' function of the fdrtool packages (PMID: 18441000) in order to extract p-values and false discovery rates (q-values were used).")
+}
+method.description <- append(method.description, glue("A protein was annotated as a hit with a false discovery rate (fdr) smaller {fdr_hit_threshold} and an absolute fold-change of greater {fc_hit_threshold} and as a candidate with a fdr below {fdr_candidate_threshold} and an absolute fold-change of at least {fc_candidate_threshold}."))
+method.description <- paste(method.description, collapse = " ")
+writeLines(text = method.description, con = file.path(dir_save, paste0("Methods_", script.version, ".txt")))
+```
+
+# Save R workspace
+
+```{r}
+save.image(file.path(dir_save, paste0("Workspace_", script.version, ".RData")))
+# load(file.path(dir_save, paste0("Workspace_", script.version, ".RData")))
+```
+
+# Save Session information
+
+```{r SaveSessionInfo}
+sessionInfo()
+```
+
+# Plot individual proteins
+
+```{r PlotIndividualProteins, eval=F}
+f.name <- file.path(dir_save, paste0("all_proteins_", script.version, ".pdf"))
+pdf(width = 6, height = 14, file = f.name)
+genes <- unique(cdata$Gene)
+genes <- sort(genes)
+pb <- txtProgressBar(min = 0, max = length(genes), style = 3)
+for (i in seq_along(genes))
+{
+  gene <- genes[i]
+  setTxtProgressBar(pb, i)
+  mdata_i <- subset(mdata, Gene == gene)
+  cdata_i <- subset(cdata, Gene == gene)
+  if (nrow(cdata_i) == 1 & nrow(mdata_i) > 0)
+  {
+    titlestring <- paste(cdata_i$Gene[1], "-", cdata_i$Protein.ID[1])
+    try(
+      print(
+        ggplot(data = mdata_i, aes(condition, log2(value), fill = condition)) +
+          geom_boxplot() +
+          geom_point(aes(shape = rep)) +
+          facet_grid(measurement ~ ., space = "free_x", scale = "free") +
+          customPlot +
+          theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+          ggtitle(titlestring, subtitle = cdata_i$Protein.Description[1])
+      )
+    )
+    rm(titlestring)
+  }
+  rm(mdata_i, cdata_i)
+}
+dev.off()
+close(pb)
+
+f.name <- file.path(dir_save, paste0("hit_proteins_", script.version, ".pdf"))
+pdf(width = 6, height = 14, file = f.name)
+genes <- unique(subset(limma_results, hit_annotation %in% c("hit", "candidate"))$Gene)
+genes <- sort(genes)
+pb <- txtProgressBar(min = 0, max = length(genes), style = 3)
+for (i in seq_along(genes))
+{
+  gene <- genes[i]
+  setTxtProgressBar(pb, i)
+  mdata_i <- subset(mdata, Gene == gene)
+  cdata_i <- subset(cdata, Gene == gene)
+  if (nrow(cdata_i) == 1 & nrow(mdata_i) > 0)
+  {
+    titlestring <- paste(cdata_i$Gene[1], "-", cdata_i$Protein.ID[1])
+    try(
+      print(
+        ggplot(data = mdata_i, aes(condition, log2(value), fill = condition)) +
+          geom_boxplot() +
+          geom_point(aes(shape = rep)) +
+          facet_grid(measurement ~ ., space = "free_x", scale = "free") +
+          customPlot +
+          theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+          ggtitle(titlestring, subtitle = cdata_i$Protein.Description[1])
+      )
+    )
+    rm(titlestring)
+  }
+  rm(mdata_i, cdata_i)
+}
+dev.off()
+close(pb)
+```
+

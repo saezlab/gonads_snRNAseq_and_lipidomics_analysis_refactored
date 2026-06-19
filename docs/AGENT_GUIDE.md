@@ -50,6 +50,10 @@ absolute external data/output paths in the script and is not part of the default
 R rerun path. Workflow 10 uses folder-local relative paths and raw Xenium inputs
 that are not committed.
 
+Unrefactored collaborator source material that is not part of the default rerun
+path is kept under `scripts/james/`. See `scripts/james/README.md` before using
+those files.
+
 ## Static Query Map
 
 Use these files directly for common questions that the discontinued MCP server
@@ -76,6 +80,8 @@ previously answered.
 | Lipid variance analysis | `results/lipidomic/variance_analysis/variance_analysis_summary.csv`; `results/lipidomic/variance_analysis/variance_analysis_results.csv`; `results/lipidomic/variance_analysis/variance_analysis_by_class.csv` | Workflow 08 compares variability between gonadal groups. |
 | Human liver comparison | `scripts/workflows/09_human_analysis.py`; `docs/workflow_plans/09_human_analysis.md` | Optional Python workflow using external `GSE179250` human liver inputs. Outputs are written to the script's external `RESULTS_DIR`, not this repository, by default. |
 | Xenium spatial analysis | `scripts/workflows/10_xenium_analysis/`; `docs/workflow_plans/10_xenium_analysis.md` | Optional collaborator Python workflow folder for Xenium doublet inference, cell-type annotation, composition plots, and Scanpy DGE. Raw Xenium inputs and outputs are folder-local by default. |
+| MALDI-MSI collaborator notebook | `scripts/james/maldi/Cleland_analysis_expt2_recal.ipynb`; `scripts/james/README.md` | Provenance notebook for negative-mode MALDI-MSI liver zonation analysis. Raw AnnData, imaging, registration, and SCiLS inputs are external. |
+| Original P3225 proteomics Rmd | `scripts/james/proteomics/JamesCleland_P3225_V1.Rmd`; `data/proteomics/`; `docs/workflow_plans/02_fcg_pseudobulk_analysis.md` | Collaborator R Markdown source for the fractionated TMT proteomics analysis. Workflow 02 uses the curated checked-in proteomics files, not the Rmd directly. |
 
 ## Minimal Lookup Examples
 

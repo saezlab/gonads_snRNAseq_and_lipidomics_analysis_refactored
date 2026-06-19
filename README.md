@@ -14,9 +14,9 @@ gene expression with lipid metabolism.
   The current MOFA path uses the RNA-shared lipidomic sample set.
 - **Multi-omic integration:** MOFA2-based integration of 5 RNA cell-type views
   and 1 lipidomic view.
-- **Validation:** GDX RNA/lipidomic validation, Xenium spatial validation,
-  proteomics validation, siRNA knockdown lipidomics, and collaborator Xenium
-  spatial-analysis scripts.
+- **Validation and provenance:** GDX RNA/lipidomic validation, Xenium spatial
+  validation, proteomics validation, siRNA knockdown lipidomics, and
+  collaborator Xenium/MALDI/proteomics source materials.
 - **Human liver comparison:** optional Python workflow comparing the mouse
   hepatocyte gonadal t-value signature with human bulk liver sex differences
   from GEO accession GSE179250.
@@ -82,6 +82,7 @@ plan first and update it after the code change.
 |   |-- core/                        # Data loading, DE, enrichment, MOFA, structural helpers
 |   |-- config/                      # Dataset paths, contrasts, plotting config
 |   |-- visualization/               # Plot helpers
+|   |-- james/                       # Collaborator source/provenance material
 |   |-- support_functions.R          # Compatibility wrapper to config/support_functions.R
 |   `-- seurat_compatibility.R
 |-- support/                         # Gene sets, regulons, hormone targets, LINEX2 network
@@ -408,6 +409,22 @@ Key folder-local outputs include:
 - `Doublets_DEG_results.xlsx`
 - `Doublets_and_Sex_DEG_results_all_hepatocytes.xlsx`
 
+## Collaborator Provenance Materials
+
+Additional collaborator source files that are not part of the default workflow
+order are kept under `scripts/james/`:
+
+- `scripts/james/maldi/Cleland_analysis_expt2_recal.ipynb` - attachment 1
+  from the 2026-06-19 missing-material bundle; negative-mode MALDI-MSI liver
+  zonation notebook using external imaging/AnnData/SCiLS inputs.
+- `scripts/james/proteomics/JamesCleland_P3225_V1.Rmd` - attachment 6 from
+  the same bundle; original P3225 fractionated TMT proteomics R Markdown
+  analysis. Workflow 02 does not source this file; it uses the curated
+  proteomics inputs in `data/proteomics/`.
+- Attachments 2-5 from the same bundle were Xenium scripts already present in
+  `scripts/workflows/10_xenium_analysis/`; the archived copies matched the
+  checked-in scripts after ignoring CRLF line-ending differences.
+
 ## Requirements
 
 Workflows 00-08 are R scripts and expect packages from CRAN and Bioconductor.
@@ -482,6 +499,12 @@ Workflow 10 is Python and expects packages including `scanpy`, `anndata`,
 - Workflow 10 outputs are folder-local by default; see
   `docs/workflow_plans/10_xenium_analysis.md`.
 
+### Collaborator Provenance
+
+- `scripts/james/maldi/Cleland_analysis_expt2_recal.ipynb`
+- `scripts/james/proteomics/JamesCleland_P3225_V1.Rmd`
+- `scripts/james/README.md`
+
 ## Data Availability
 
 The checked-in CSV and RData outputs support result lookup and most downstream
@@ -495,6 +518,11 @@ analysis. Some raw/preprocessed inputs may not be present in all checkouts:
   TPM matrix, and SOFT metadata file.
 - Workflow 10 raw Xenium files under `scripts/workflows/10_xenium_analysis/data_raw/`,
   including the 10x output folder and Xenium panel workbook.
+- MALDI-MSI raw imaging/AnnData/registration/SCiLS inputs referenced by
+  `scripts/james/maldi/Cleland_analysis_expt2_recal.ipynb`.
+- Raw collaborator P3225 proteomics files referenced by
+  `scripts/james/proteomics/JamesCleland_P3225_V1.Rmd`; the curated validation
+  inputs used by workflow 02 are checked in under `data/proteomics/`.
 
 Workflow 00 requires the original raw alignment environment and is not expected
 to run in a standard checkout.
