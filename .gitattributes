@@ -1,0 +1,53 @@
+# This repository is shared between macOS and Windows through Dropbox.
+# Only explicitly listed text formats are normalized, using LF on every platform.
+* -text
+
+# Source, configuration, documentation, and tabular data
+*.R             text eol=lf
+*.r             text eol=lf
+*.py            text eol=lf
+*.Rmd           text eol=lf
+*.rmd           text eol=lf
+*.qmd           text eol=lf
+*.md            text eol=lf
+*.txt           text eol=lf
+*.csv           text eol=lf
+*.tsv           text eol=lf
+*.gmt           text eol=lf
+*.json          text eol=lf
+*.ipynb         text eol=lf
+*.Rproj         text eol=lf
+*.yml           text eol=lf
+*.yaml          text eol=lf
+*.toml          text eol=lf
+*.history       text eol=lf
+.gitignore      text eol=lf
+.gitattributes  text eol=lf
+LICENSE         text eol=lf
+
+# Historical terminal logs include bare carriage-return control characters.
+# Preserve their existing byte representation rather than normalizing them.
+refactoring_docs/test_output.txt          binary
+refactoring_docs/workflow2_final_test.txt binary
+refactoring_docs/workflow2_test_final.txt binary
+refactoring_docs/workflow2_test_fixed.txt binary
+
+# Opaque scientific data, office documents, figures, and Cytoscape sessions
+*.RData         binary
+*.Rdata         binary
+*.rda           binary
+*.rds           binary
+*.h5            binary
+*.hdf5          binary
+*.xls           binary
+*.xlsx          binary
+*.pdf           binary
+*.cys           binary
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.tif           binary
+*.tiff          binary
+*.zip           binary
+*.gz            binary
+*.tar           binary
