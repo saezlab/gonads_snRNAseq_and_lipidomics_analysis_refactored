@@ -1,0 +1,28 @@
+{
+  "summary": {
+    "model_commit": "fc769ac1da421c4e4e9e1cf2a9aec3fe4f02ef6a",
+    "metabolites": 8454,
+    "reactions": 12987,
+    "reactions_with_gpr": 8055,
+    "blocked_reactions": 8,
+    "reversible_reactions": 5978,
+    "all_participants_preserved": true
+  },
+  "sources": [
+    {
+      "file": "support/cosmos_mouse/raw/Mouse-GEM.xml",
+      "sha256": "fd7e830a846d450a2f39959fc96afc5f330de15b5a389e0e7284847ae656ac68",
+      "url": "https://raw.githubusercontent.com/SysBioChalmers/Mouse-GEM/fc769ac1da421c4e4e9e1cf2a9aec3fe4f02ef6a/model/Mouse-GEM.xml"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/mouse_gem_metabolites.tsv",
+      "sha256": "ff51b3ae9491d46eeb4d5778d4217132eaeee76fffe7d5113f23d5f3300814a0",
+      "url": "https://raw.githubusercontent.com/SysBioChalmers/Mouse-GEM/fc769ac1da421c4e4e9e1cf2a9aec3fe4f02ef6a/model/metabolites.tsv"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/mouse_gem_reactions.tsv",
+      "sha256": "5b71f39a249678e555adbd8352e43ed0188280ba0845e3c9036b2355b999250f",
+      "url": "https://raw.githubusercontent.com/SysBioChalmers/Mouse-GEM/fc769ac1da421c4e4e9e1cf2a9aec3fe4f02ef6a/model/reactions.tsv"
+    }
+  ]
+}

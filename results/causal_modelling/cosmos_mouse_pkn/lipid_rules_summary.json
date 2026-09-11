@@ -1,0 +1,150 @@
+{
+  "rule_instances": 149,
+  "supporting_directional_reactions": 8,
+  "supporting_reaction_masters": 8,
+  "unique_measured_features": 149,
+  "factor1_features": [
+    "DG(18:1_22:1)",
+    "DG(22:1_22:6)",
+    "DG(24:0_18:2)",
+    "DG(24:1_18:2)",
+    "PC(20:0_22:6)",
+    "PE(22:1_22:6)",
+    "PS(20:0_22:6)"
+  ],
+  "mouse_catalysts": 33,
+  "headgroup_transforms": {
+    "DG -> PA": 10,
+    "PC -> DG": 31,
+    "PC -> PA": 10,
+    "PA -> DG": 10,
+    "DG -> PC": 31,
+    "DG -> PE": 23,
+    "PI -> DG": 11,
+    "PC -> PS": 23
+  },
+  "eligible_measured_diacyl_features": 329,
+  "excluded_candidate_reasons": {
+    "unknown_direction_or_transport": 318,
+    "not_one_generic_diacyl_class_per_side": 294,
+    "additional_lipid_participant_requires_joint_instantiation": 7
+  },
+  "templates": [
+    {
+      "reaction_id": "RHEA:10273",
+      "master_reaction_id": "RHEA:10272",
+      "transform": "DG -> PA",
+      "catalysts": [
+        "D3YWQ0",
+        "D3YXJ0",
+        "E9PUQ8",
+        "O88673",
+        "Q6NS52",
+        "Q6P5E8",
+        "Q80UP3",
+        "Q91WG7",
+        "Q9ESW4",
+        "Q9R1C6"
+      ],
+      "instantiated_pairs": 10,
+      "generic_substrate_id": "CHEBI:17815",
+      "generic_product_id": "CHEBI:58608"
+    },
+    {
+      "reaction_id": "RHEA:10605",
+      "master_reaction_id": "RHEA:10604",
+      "transform": "PC -> DG",
+      "catalysts": [
+        "Q04519"
+      ],
+      "instantiated_pairs": 31,
+      "generic_substrate_id": "CHEBI:57643",
+      "generic_product_id": "CHEBI:17815"
+    },
+    {
+      "reaction_id": "RHEA:14446",
+      "master_reaction_id": "RHEA:14445",
+      "transform": "PC -> PA",
+      "catalysts": [
+        "P97813",
+        "Q9R1E6",
+        "Q9Z280"
+      ],
+      "instantiated_pairs": 10,
+      "generic_substrate_id": "CHEBI:57643",
+      "generic_product_id": "CHEBI:58608"
+    },
+    {
+      "reaction_id": "RHEA:27430",
+      "master_reaction_id": "RHEA:27429",
+      "transform": "PA -> DG",
+      "catalysts": [
+        "Q0VBU9",
+        "Q3UMZ3",
+        "Q61469",
+        "Q91ZP3",
+        "Q99JY8",
+        "Q99PI4",
+        "Q99PI5",
+        "Q9DAX2"
+      ],
+      "instantiated_pairs": 10,
+      "generic_substrate_id": "CHEBI:58608",
+      "generic_product_id": "CHEBI:17815"
+    },
+    {
+      "reaction_id": "RHEA:32940",
+      "master_reaction_id": "RHEA:32939",
+      "transform": "DG -> PC",
+      "catalysts": [
+        "Q8BGS7",
+        "Q8C025"
+      ],
+      "instantiated_pairs": 31,
+      "generic_substrate_id": "CHEBI:17815",
+      "generic_product_id": "CHEBI:57643"
+    },
+    {
+      "reaction_id": "RHEA:32944",
+      "master_reaction_id": "RHEA:32943",
+      "transform": "DG -> PE",
+      "catalysts": [
+        "Q80TA1",
+        "Q8BGS7"
+      ],
+      "instantiated_pairs": 23,
+      "generic_substrate_id": "CHEBI:17815",
+      "generic_product_id": "CHEBI:64612"
+    },
+    {
+      "reaction_id": "RHEA:43485",
+      "master_reaction_id": "RHEA:43484",
+      "transform": "PI -> DG",
+      "catalysts": [
+        "A3KGF7",
+        "B2RXA1",
+        "P51432",
+        "Q62077",
+        "Q8K3R3",
+        "Q8R3B1",
+        "Q9Z1B3"
+      ],
+      "instantiated_pairs": 11,
+      "generic_substrate_id": "CHEBI:57880",
+      "generic_product_id": "CHEBI:17815"
+    },
+    {
+      "reaction_id": "RHEA:45089",
+      "master_reaction_id": "RHEA:45088",
+      "transform": "PC -> PS",
+      "catalysts": [
+        "Q99LH2"
+      ],
+      "instantiated_pairs": 23,
+      "generic_substrate_id": "CHEBI:57643",
+      "generic_product_id": "CHEBI:57262"
+    }
+  ],
+  "interpretation": "Separate exploratory species rules. Exact reported acyl chains matched; enzyme species specificity, isomers and unreported sn positions unresolved.",
+  "not_implemented": "Acyl removal/addition, elongation/desaturation, ethers, sphingolipids, sum-composition expansion, multi-lipid coupled transformations or unmeasured intermediates."
+}

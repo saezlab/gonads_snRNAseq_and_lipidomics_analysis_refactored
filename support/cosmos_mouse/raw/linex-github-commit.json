@@ -1,0 +1,101 @@
+{
+  "sha": "04e0099655a6b7a8cb57aaeca7b1301b3524079d",
+  "node_id": "C_kwDOGw6UrNoAKDA0ZTAwOTk2NTVhNmI3YThjYjU3YWFlY2E3YjEzMDFiMzUyNDA3OWQ",
+  "commit": {
+    "author": {
+      "name": "nklkhlr",
+      "email": "nikolai.koehler@cos.uni-heidelberg.de",
+      "date": "2024-10-02T09:05:31Z"
+    },
+    "committer": {
+      "name": "nklkhlr",
+      "email": "nikolai.koehler@cos.uni-heidelberg.de",
+      "date": "2024-10-02T09:05:31Z"
+    },
+    "message": "update source code link in setup.py",
+    "tree": {
+      "sha": "a71b7904e9a51339bebeabc9dcd71095a6e609c4",
+      "url": "https://api.github.com/repos/LipiTUM/LINEX2_package/git/trees/a71b7904e9a51339bebeabc9dcd71095a6e609c4"
+    },
+    "url": "https://api.github.com/repos/LipiTUM/LINEX2_package/git/commits/04e0099655a6b7a8cb57aaeca7b1301b3524079d",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "url": "https://api.github.com/repos/LipiTUM/LINEX2_package/commits/04e0099655a6b7a8cb57aaeca7b1301b3524079d",
+  "html_url": "https://github.com/LipiTUM/LINEX2_package/commit/04e0099655a6b7a8cb57aaeca7b1301b3524079d",
+  "comments_url": "https://api.github.com/repos/LipiTUM/LINEX2_package/commits/04e0099655a6b7a8cb57aaeca7b1301b3524079d/comments",
+  "author": {
+    "login": "nklkhlr",
+    "id": 38030248,
+    "node_id": "MDQ6VXNlcjM4MDMwMjQ4",
+    "avatar_url": "https://avatars.githubusercontent.com/u/38030248?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/nklkhlr",
+    "html_url": "https://github.com/nklkhlr",
+    "followers_url": "https://api.github.com/users/nklkhlr/followers",
+    "following_url": "https://api.github.com/users/nklkhlr/following{/other_user}",
+    "gists_url": "https://api.github.com/users/nklkhlr/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/nklkhlr/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/nklkhlr/subscriptions",
+    "organizations_url": "https://api.github.com/users/nklkhlr/orgs",
+    "repos_url": "https://api.github.com/users/nklkhlr/repos",
+    "events_url": "https://api.github.com/users/nklkhlr/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/nklkhlr/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "nklkhlr",
+    "id": 38030248,
+    "node_id": "MDQ6VXNlcjM4MDMwMjQ4",
+    "avatar_url": "https://avatars.githubusercontent.com/u/38030248?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/nklkhlr",
+    "html_url": "https://github.com/nklkhlr",
+    "followers_url": "https://api.github.com/users/nklkhlr/followers",
+    "following_url": "https://api.github.com/users/nklkhlr/following{/other_user}",
+    "gists_url": "https://api.github.com/users/nklkhlr/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/nklkhlr/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/nklkhlr/subscriptions",
+    "organizations_url": "https://api.github.com/users/nklkhlr/orgs",
+    "repos_url": "https://api.github.com/users/nklkhlr/repos",
+    "events_url": "https://api.github.com/users/nklkhlr/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/nklkhlr/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "e0afb15d3c32def8c49b3b511b9a4f86219a7654",
+      "url": "https://api.github.com/repos/LipiTUM/LINEX2_package/commits/e0afb15d3c32def8c49b3b511b9a4f86219a7654",
+      "html_url": "https://github.com/LipiTUM/LINEX2_package/commit/e0afb15d3c32def8c49b3b511b9a4f86219a7654"
+    }
+  ],
+  "stats": {
+    "total": 2,
+    "additions": 1,
+    "deletions": 1
+  },
+  "files": [
+    {
+      "sha": "4182ec10dd308cd51d57c9e36b96da8021ac901a",
+      "filename": "setup.py",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/LipiTUM/LINEX2_package/blob/04e0099655a6b7a8cb57aaeca7b1301b3524079d/setup.py",
+      "raw_url": "https://github.com/LipiTUM/LINEX2_package/raw/04e0099655a6b7a8cb57aaeca7b1301b3524079d/setup.py",
+      "contents_url": "https://api.github.com/repos/LipiTUM/LINEX2_package/contents/setup.py?ref=04e0099655a6b7a8cb57aaeca7b1301b3524079d",
+      "patch": "@@ -14,7 +14,7 @@\n \n     url='https://exbio.wzw.tum.de/linex/',\n     project_urls={  # Optional\n-        'Source': 'https://gitlab.lrz.de/lipitum-projects/linex2_package',\n+        'Source': 'https://github.com/lipitum/linex2_package',\n         'Publication': \"https://doi.org/10.1093/bib/bbac572\"\n     },\n "
+    }
+  ]
+}

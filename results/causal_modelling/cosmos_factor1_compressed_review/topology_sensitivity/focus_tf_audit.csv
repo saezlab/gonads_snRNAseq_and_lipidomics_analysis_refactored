@@ -1,0 +1,13 @@
+"run_id","tf","topology_radius","n_layers","input_activity","in_prepared_pkn","in_final_pkn","inferred_before_sign_filter","score_level","retained_score","sign_agrees"
+"radius4_depth8_compressed","Gene__Esr1",4,8,-7.08874857626001,TRUE,TRUE,0.0985969508510717,3,FALSE,FALSE
+"radius4_depth8_compressed","Gene__Nfic",4,8,-4.34923126849243,TRUE,TRUE,0.628108591005345,4,FALSE,FALSE
+"radius4_depth8_compressed","Gene__Dbp",4,8,-7.66088476896073,TRUE,TRUE,0.334129168222966,4,FALSE,FALSE
+"radius5_depth8_compressed","Gene__Esr1",5,8,-7.08874857626001,TRUE,TRUE,0.105523813731928,3,FALSE,FALSE
+"radius5_depth8_compressed","Gene__Nfic",5,8,-4.34923126849243,TRUE,TRUE,0.686601741147688,4,FALSE,FALSE
+"radius5_depth8_compressed","Gene__Dbp",5,8,-7.66088476896073,TRUE,TRUE,0.347830517426975,4,FALSE,FALSE
+"radius7_depth8_compressed","Gene__Esr1",7,8,-7.08874857626001,TRUE,TRUE,0.131796253954624,3,FALSE,FALSE
+"radius7_depth8_compressed","Gene__Nfic",7,8,-4.34923126849243,TRUE,TRUE,0.718003517149955,4,FALSE,FALSE
+"radius7_depth8_compressed","Gene__Dbp",7,8,-7.66088476896073,TRUE,TRUE,0.344692799385205,4,FALSE,FALSE
+"radius12_depth8_compressed","Gene__Esr1",12,8,-7.08874857626001,TRUE,TRUE,0.0897314044699007,3,FALSE,FALSE
+"radius12_depth8_compressed","Gene__Nfic",12,8,-4.34923126849243,TRUE,TRUE,0.914216833251647,4,FALSE,FALSE
+"radius12_depth8_compressed","Gene__Dbp",12,8,-7.66088476896073,TRUE,TRUE,0.369042842243002,4,FALSE,FALSE

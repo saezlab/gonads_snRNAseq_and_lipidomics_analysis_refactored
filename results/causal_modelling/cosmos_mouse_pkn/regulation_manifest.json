@@ -1,0 +1,77 @@
+{
+  "builder": "scripts/pkn/build_lipid_regulation.py",
+  "sources": [
+    {
+      "file": "support/cosmos_mouse/raw/regulation_gtopdb_interactions.csv.gz",
+      "url": "https://www.guidetopharmacology.org/DATA/interactions.csv",
+      "sha256_uncompressed": "07bb605283dfc5356f309181737a4b15e7ecfe9e1dc53f9f4667163705d6a082",
+      "source_version": "# GtoPdb Version: 2026.2 - published: 2026-06-15",
+      "local_snapshot_mtime_utc": "2026-09-08T10:15:14.958750+00:00",
+      "license": "GtoPdb database ODbL; contents CC BY-SA 4.0"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/regulation_gtopdb_ligand_id_mapping.csv.gz",
+      "url": "https://www.guidetopharmacology.org/DATA/ligand_id_mapping.csv",
+      "sha256_uncompressed": "a711879adda7bb28cf78afae50ebc13b4388b08065abd4de63b0485d7f46054c",
+      "source_version": "# GtoPdb Version: 2026.2 - published: 2026-06-15",
+      "local_snapshot_mtime_utc": "2026-09-08T10:15:15.860109+00:00",
+      "license": "GtoPdb database ODbL; contents CC BY-SA 4.0"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/regulation_gtopdb_ligands.csv.gz",
+      "url": "https://www.guidetopharmacology.org/DATA/ligands.csv",
+      "sha256_uncompressed": "daaeb79ae670f2774e8e2b31cf047a32fdbf5cd434464113db6b3382af2faf42",
+      "source_version": "# GtoPdb Version: 2026.2 - published: 2026-06-15",
+      "local_snapshot_mtime_utc": "2026-09-08T10:15:17.180476+00:00",
+      "license": "GtoPdb database ODbL; contents CC BY-SA 4.0"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/regulation_gtopdb_targets_and_families.csv.gz",
+      "url": "https://www.guidetopharmacology.org/DATA/targets_and_families.csv",
+      "sha256_uncompressed": "1be2b880391bd0b523c027ca7b3767e176507374526184793ab91302b7272dfd",
+      "source_version": "# GtoPdb Version: 2026.2 - published: 2026-06-15",
+      "local_snapshot_mtime_utc": "2026-09-08T10:15:18.685944+00:00",
+      "license": "GtoPdb database ODbL; contents CC BY-SA 4.0"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/regulation_pubchem_missing_metabolite_synonyms.json.gz",
+      "url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/10883523,11723,148879,16061136,42607474,439260,452544,5280374,5280880,5283052,5283055,5311358,5353264,5497152,6438402,6445537,656745,73755062/synonyms/JSON",
+      "sha256_uncompressed": "4f216efffb7b99201e649f931cae9089e58d781fcfe77f9c995264e69fa114e4",
+      "source_version": "live PUG REST",
+      "local_snapshot_mtime_utc": "2026-09-08T10:16:32.394986+00:00"
+    },
+    {
+      "file": "results/cosmos_pkn_audit/raw/om-mouse-pkn.json.gz",
+      "url": "https://metabo.omnipathdb.org/cosmos/pkn?organism=10090&categories=all",
+      "sha256_uncompressed": "a4a2c26393b8a52816bce6cc9cf1611130be309329e4c8c5375dc7dd4f5f7cfe",
+      "source_version": "cached component build 2026-04-21, retrieved 2026-09-08"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/uniprot_mouse.tsv.gz",
+      "url": "https://rest.uniprot.org/uniprotkb/search",
+      "query": "organism_id:10090",
+      "sha256_uncompressed": "d2ccf8fb64221974963bf2819cacb9864bf02ca5b036100dd883f515aaa767a4",
+      "source_version": "mouse accession validation; parent builder manifest records retrieval"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/regulation_chebi.obo.gz",
+      "url": "https://ftp.ebi.ac.uk/pub/databases/chebi/ontology/chebi.obo.gz",
+      "sha256_compressed": "ba1efac7ba5d2a956d3512b7287849caee3d7b402759ffe6f777a38d20443c36",
+      "source_version": "Frozen ChEBI ontology; regulation_chebi_manifest.json records release and retrieval",
+      "purpose": "Audit GtoPdb cross-reference structures; export explicit protonation and alt_id crosswalks"
+    }
+  ],
+  "limitations": [
+    "Regulatory signs describe target protein activity; downstream transcription requires a separate signed GRN.",
+    "Only GtoPdb interactions explicitly measured/curated for Mouse are in the current tier; human data are not projected.",
+    "GtoPdb Metabolite classification is used for the metabolic tier and does not prove that the compound is a measured lipid.",
+    "Partial/biased agonist and antagonist signs are assay-context dependent; affinity and references are preserved.",
+    "PubChem synonym-derived chemical mappings are an explicit secondary tier; multi-ID mappings are alternatives.",
+    "Fresh chemical cross-references with different GtoPdb/ChEBI InChIKeys are quarantined, including stereo/protonation discrepancies; generic entities may lack InChIKeys.",
+    "Cached BRENDA/STITCH release, original chemical mappings, and per-edge references are unavailable in the service export.",
+    "Cached STITCH causal orientation cannot be independently reconstructed; use only as exploratory fallback.",
+    "MRCLinksDB associations are excluded because the upstream +1 is unconditional, including transport.",
+    "CellPhoneDB nonpeptidic adapter is human-only and assigns +1 without checking effect; not silently projected to mouse.",
+    "Sign conflicts are retained as evidence and reported, not resolved by majority vote."
+  ]
+}

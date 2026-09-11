@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Date: Tue, 08 Sep 2026 10:14:41 GMT
+Server: Apache
+Content-Security-Policy: default-src 'self'; img-src 'self' data: ; frame-ancestors 'none'
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+Last-Modified: Wed, 02 Sep 2026 14:00:00 GMT
+ETag: "850986-65a80737ab800"
+Accept-Ranges: bytes
+Content-Length: 8718726
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Access-Control-Allow-Origin: *
+Content-Type: application/x-gzip
+

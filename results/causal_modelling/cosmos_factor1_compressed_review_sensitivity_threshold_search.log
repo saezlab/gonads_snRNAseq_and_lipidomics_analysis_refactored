@@ -1,0 +1,23 @@
+radius6_depth4_compressed_inputs_only coarse 426 threshold pairs
+  100 / 426 
+  200 / 426 
+  300 / 426 
+  400 / 426 
+radius6_depth4_compressed_prescore_rna coarse 426 threshold pairs
+  100 / 426 
+  200 / 426 
+  300 / 426 
+  400 / 426 
+radius6_depth4_compressed_inputs_only refined 456 threshold pairs
+  100 / 456 
+  200 / 456 
+  300 / 456 
+  400 / 456 
+radius6_depth4_compressed_prescore_rna refined 600 threshold pairs
+  100 / 600 
+  200 / 600 
+  300 / 600 
+  400 / 600 
+  500 / 600 
+  600 / 600 
+Completed 5187 unique-state threshold pairs; 759 eligible <500 edges; 749 with >=2 TFs and >=2 lipids.

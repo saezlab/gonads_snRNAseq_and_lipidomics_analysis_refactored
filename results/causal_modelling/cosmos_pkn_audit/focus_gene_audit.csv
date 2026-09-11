@@ -1,0 +1,8 @@
+gene,uniprot_exact_gene_hits,uniprot_in_fresh_protein_exports,cached_incident_records,swisslipids_mouse_enzyme_rows
+Cyp2b9,A9CRD6;P12790,,"{""STITCH"": 8}",0
+Cyp2b13,A0ACM8QD84;A6H6J2;Q61461,,{},0
+Cyp2c38,A5A8F8;P56655;Q8C7K2,P56655,"{""GEM:Mouse-GEM"": 736, ""OmniPath:collectri"": 18, ""OmniPath:omnipath,ligrecextra"": 3}",1
+Cyp2d9,A0A2R8VHA0;A0A2R8VHD8;A0A2R8VHS2;A0A2R8VHT2;A0A2R8VHW1;A0A2R8VI52;A0A2R8W6Y8;P11714;Q3UNW2;Q6P7U3,,{},0
+Mtmr11,D6RIK1;Q3V1L6,,{},0
+Sult3a1,F7C7D2;O35403;Q059N0,,"{""GEM:Mouse-GEM"": 5}",0
+Abcb1a,P21447;Q3UMH0;Q9CVG4,P21447,"{""BRENDA"": 1, ""GEM:Mouse-GEM"": 102, ""GEM_transporter:Mouse-GEM"": 38, ""OmniPath:collectri"": 74, ""OmniPath:omnipath,ligrecextra"": 8}",4

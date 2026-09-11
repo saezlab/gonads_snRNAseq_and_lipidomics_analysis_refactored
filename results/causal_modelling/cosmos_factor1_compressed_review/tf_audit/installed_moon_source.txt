@@ -1,0 +1,77 @@
+function (upstream_input = NULL, downstream_input, meta_network, 
+    n_layers, n_perm = 1000, downstream_cutoff = 0, statistic = "ulm", 
+    return_levels = F) 
+{
+    regulons <- meta_network
+    names(regulons)[names(regulons) == "sign" | names(regulons) == 
+        "interaction"] <- "mor"
+    regulons <- regulons[!(regulons$source %in% names(downstream_input)), 
+        ]
+    switch(statistic, norm_wmean = {
+        n_plus_one <- run_wmean(mat = as.matrix(data.frame(downstream_input)), 
+            network = regulons, times = n_perm, minsize = 1)
+    }, wmean = {
+        n_plus_one <- run_wmean(mat = as.matrix(data.frame(downstream_input)), 
+            network = regulons, times = 2, minsize = 1)
+    }, ulm = {
+        n_plus_one <- run_ulm(mat = as.matrix(data.frame(downstream_input)), 
+            network = regulons, minsize = 1)
+    })
+    n_plus_one <- n_plus_one[n_plus_one$statistic == statistic, 
+        c(2, 4)]
+    n_plus_one$level <- 1
+    res_list <- list()
+    res_list[[1]] <- as.data.frame(n_plus_one)
+    i <- 2
+    while (length(regulons[, 1]) > 1 & sum(regulons$target %in% 
+        res_list[[i - 1]]$source) > 1 & i <= n_layers) {
+        print(i)
+        regulons <- regulons[!(regulons$source %in% res_list[[i - 
+            1]]$source), ]
+        previous_n_plu_one <- res_list[[i - 1]][, -3, drop = F]
+        row.names(previous_n_plu_one) <- previous_n_plu_one$source
+        previous_n_plu_one <- previous_n_plu_one[, -1, drop = F]
+        switch(statistic, norm_wmean = {
+            n_plus_one <- run_wmean(mat = as.matrix(previous_n_plu_one), 
+                network = regulons, times = n_perm, minsize = 1)
+        }, wmean = {
+            n_plus_one <- run_wmean(mat = as.matrix(previous_n_plu_one), 
+                network = regulons, times = 2, minsize = 1)
+        }, ulm = {
+            n_plus_one <- run_ulm(mat = as.matrix(previous_n_plu_one), 
+                network = regulons, minsize = 1)
+        })
+        n_plus_one <- n_plus_one[n_plus_one$statistic == statistic, 
+            c(2, 4)]
+        regulons <- regulons[!(regulons$source %in% n_plus_one$source), 
+            ]
+        n_plus_one$level <- i
+        res_list[[i]] <- as.data.frame(n_plus_one)
+        i <- i + 1
+    }
+    recursive_decoupleRnival_res <- as.data.frame(do.call(rbind, 
+        res_list))
+    downstream_names <- as.data.frame(downstream_input)
+    downstream_names$source <- row.names(downstream_names)
+    names(downstream_names)[1] <- "score"
+    downstream_names <- downstream_names[abs(downstream_names$score) > 
+        downstream_cutoff, ]
+    downstream_names$level <- 0
+    recursive_decoupleRnival_res <- as.data.frame(rbind(recursive_decoupleRnival_res, 
+        downstream_names))
+    if (!is.null(upstream_input)) {
+        upstream_input_df <- as.data.frame(upstream_input)
+        upstream_input_df$source <- row.names(upstream_input_df)
+        names(upstream_input_df)[1] <- "score"
+        upstream_input_df <- merge(upstream_input_df, recursive_decoupleRnival_res, 
+            by = "source")
+        upstream_input_df$filterout <- sign(upstream_input_df$score.x) != 
+            sign(upstream_input_df$score.y)
+        recursive_decoupleRnival_res <- recursive_decoupleRnival_res[!(recursive_decoupleRnival_res$source %in% 
+            upstream_input_df[upstream_input_df$filterout, "source"]), 
+            ]
+    }
+    return(return(recursive_decoupleRnival_res))
+}
+<bytecode: 0xb10e56938>
+<environment: namespace:cosmosR>

@@ -1,0 +1,6 @@
+query_gene,maximum_edges,rule_factor1_lipids_reachable,feature_ids,interpretation
+Esr1,6,3,DG(24:0_18:2)|DG(24:1_18:2)|PS(20:0_22:6),"Topology query only; no TF activity, causal validation or MOON input selection."
+Ar,6,3,DG(24:0_18:2)|DG(24:1_18:2)|PS(20:0_22:6),"Topology query only; no TF activity, causal validation or MOON input selection."
+Stat5b,6,3,DG(24:0_18:2)|DG(24:1_18:2)|PS(20:0_22:6),"Topology query only; no TF activity, causal validation or MOON input selection."
+Nfic,6,3,DG(24:0_18:2)|DG(24:1_18:2)|PS(20:0_22:6),"Topology query only; no TF activity, causal validation or MOON input selection."
+Dbp,6,3,DG(24:0_18:2)|DG(24:1_18:2)|PS(20:0_22:6),"Topology query only; no TF activity, causal validation or MOON input selection."

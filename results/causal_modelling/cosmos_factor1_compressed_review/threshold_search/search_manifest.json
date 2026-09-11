@@ -1,0 +1,73 @@
+{
+  "created_utc": "2026-09-09 13:28:04 UTC",
+  "mode": "Extraction only; unchanged converged compressed states from the previous search",
+  "cleanup_cache": "Exact-input memoization of repeated PKN cleanup; materialized candidates re-extracted without the cache",
+  "unique_scoring_states": 4,
+  "aliases": [
+    {
+      "run_id": "radius6_depth4_compressed",
+      "depth": 4,
+      "canonical_run": "radius6_depth4_compressed",
+      "realized_max_level": 4,
+      "_row": "radius6_depth4_compressed"
+    },
+    {
+      "run_id": "radius6_depth5_compressed",
+      "depth": 5,
+      "canonical_run": "radius6_depth5_compressed",
+      "realized_max_level": 5,
+      "_row": "radius6_depth5_compressed"
+    },
+    {
+      "run_id": "radius6_depth6_compressed",
+      "depth": 6,
+      "canonical_run": "radius6_depth6_compressed",
+      "realized_max_level": 6,
+      "_row": "radius6_depth6_compressed"
+    },
+    {
+      "run_id": "radius6_depth7_compressed",
+      "depth": 7,
+      "canonical_run": "radius6_depth7_compressed",
+      "realized_max_level": 7,
+      "_row": "radius6_depth7_compressed"
+    },
+    {
+      "run_id": "radius6_depth8_compressed",
+      "depth": 8,
+      "canonical_run": "radius6_depth7_compressed",
+      "realized_max_level": 7,
+      "_row": "radius6_depth8_compressed"
+    },
+    {
+      "run_id": "radius6_depth10_compressed",
+      "depth": 10,
+      "canonical_run": "radius6_depth7_compressed",
+      "realized_max_level": 7,
+      "_row": "radius6_depth10_compressed"
+    },
+    {
+      "run_id": "radius6_depth12_compressed",
+      "depth": 12,
+      "canonical_run": "radius6_depth7_compressed",
+      "realized_max_level": 7,
+      "_row": "radius6_depth12_compressed"
+    }
+  ],
+  "coarse_primary": [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3],
+  "coarse_secondary": [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2],
+  "refined": "0.025 increments within +/-0.1 of threshold/coverage Pareto and near-cap 500-999-edge coarse anchors",
+  "retention": "All grid rows, including empty; strict edges <500; at least 2 TF and 2 lipid observations preferred",
+  "level0_policy": "Original measured weights are exempt from inferred-node score cutoffs and cannot serve as primary nodes",
+  "md5": {
+    "results/cosmos_factor1_parameter_search/runs/radius6_depth4_compressed/run_state.rds": "3f035b52f990919fc51c0c450edd7a2f",
+    "results/cosmos_factor1_parameter_search/runs/radius6_depth5_compressed/run_state.rds": "0a04a43c333a9b9c333b0932a0f90824",
+    "results/cosmos_factor1_parameter_search/runs/radius6_depth6_compressed/run_state.rds": "35d3ca661507a78e97f7410ef5b6e907",
+    "results/cosmos_factor1_parameter_search/runs/radius6_depth7_compressed/run_state.rds": "25e0f6bed8bdb9f6e5bb8a7681087f00",
+    "results/cosmos_factor1_parameter_search/runs/radius6_depth8_compressed/run_state.rds": "7789d710a864412a7923ecc08490da4c",
+    "results/cosmos_factor1_parameter_search/runs/radius6_depth10_compressed/run_state.rds": "072cbc17c7a54fe7320138528a52a12f",
+    "results/cosmos_factor1_parameter_search/runs/radius6_depth12_compressed/run_state.rds": "f3c02b47102f449e4f0d76a4a7983786",
+    "scripts/moon/search_compressed_threshold_review.R": "508aa9adaa79e473988f4d88ca458b9d",
+    "scripts/moon/moon_safe_helpers.R": "86be2ca41edc65841f7674209c8b36fd"
+  }
+}

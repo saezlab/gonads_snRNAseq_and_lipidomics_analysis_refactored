@@ -1,0 +1,13 @@
+"setting","entity","compressed_count","uncompressed_count","shared_count","union_count","jaccard"
+"relaxed","edges",6320,13246,3219,16347,0.196916865479905
+"relaxed","nodes",1476,3647,1032,4091,0.252261060865314
+"relaxed","upstream_tfs",14,14,11,17,0.647058823529412
+"relaxed","lipids",10,11,10,11,0.909090909090909
+"primary","edges",0,1676,0,1676,0
+"primary","nodes",0,473,0,473,0
+"primary","upstream_tfs",0,8,0,8,0
+"primary","lipids",0,4,0,4,0
+"strict","edges",0,537,0,537,0
+"strict","nodes",0,187,0,187,0
+"strict","upstream_tfs",0,3,0,3,0
+"strict","lipids",0,2,0,2,0

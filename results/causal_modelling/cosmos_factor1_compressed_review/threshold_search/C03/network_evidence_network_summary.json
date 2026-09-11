@@ -1,0 +1,53 @@
+{
+  "solution_stem": "network",
+  "nodes": 153,
+  "edges": 388,
+  "upstream_tfs": 4,
+  "reported_path_length_cap": null,
+  "measured_downstream_nodes": 3,
+  "reachable_tf_lipid_pairs": 12,
+  "upstream_tfs_with_paths": 4,
+  "downstream_nodes_with_paths": 3,
+  "edge_evidence_records": 393,
+  "reaction_records": 3,
+  "edges_with_species_rule_hypotheses": 6,
+  "inconsistent_scored_edges": 0,
+  "nodes_unreachable_from_intended_upstream": 0,
+  "nodes_unable_to_reach_observation": 0,
+  "maximum_chosen_path_edges": 9,
+  "chosen_paths_longer_than_six_edges": 12,
+  "route_audits": [
+    {
+      "audit": "bounded6",
+      "reachable_pairs": 0,
+      "upstream_tfs": 0,
+      "downstream_nodes": 0,
+      "maximum_path_edges": 0
+    },
+    {
+      "audit": "catalyst_only",
+      "reachable_pairs": 12,
+      "upstream_tfs": 4,
+      "downstream_nodes": 3,
+      "maximum_path_edges": 9
+    },
+    {
+      "audit": "catalyst_only_bounded6",
+      "reachable_pairs": 0,
+      "upstream_tfs": 0,
+      "downstream_nodes": 0,
+      "maximum_path_edges": 0
+    }
+  ],
+  "catalyst_only_route_definition": "Gene__/UniProt__ regulatory intermediates, then exactly one annotated catalyst->Enzyme__->measured lipid product. No internal metabolites or reaction instances. This audit does not change scores or validate exact substrate specificity.",
+  "path_selection": "One shortest path per reachable TF/observation pair; ties maximize minimum absolute inferred MOON score, then deterministic node-ID ordering. Level-0 weights excluded from this minimum.",
+  "illustration_selection": "Up to three distinct downstream nodes ordered by absolute Factor 1 weight; for each choose greatest minimum absolute inferred score, then shortest path, then TF ID.",
+  "limitations": [
+    "Paths are qualitative directed hypotheses, not causal identification or flux predictions.",
+    "LINEX2_rule species reactions transfer a generic class reaction to the reported chains; source references do not establish the exact measured substrate specificity.",
+    "A shortest path omits alternative routes and is an auditable example, not an optimal mechanistic explanation.",
+    "Scoring layer depth does not cap the length of every directed TF/observation route in the union graph; exact edge counts are reported.",
+    "Protein node scores reflect activity hypotheses; they are not measurements of protein abundance.",
+    "Level-0 Factor 1 weights and inferred MOON scores are distinct quantities and should not be compared numerically."
+  ]
+}

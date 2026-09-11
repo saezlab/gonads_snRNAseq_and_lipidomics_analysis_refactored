@@ -1,0 +1,9 @@
+resource,records,positive,negative,unsigned
+BRENDA,786,131,655,0
+GEM:Mouse-GEM,115434,115434,0,0
+GEM_transporter:Mouse-GEM,27282,27282,0,0
+MRCLinksDB,641,641,0,0
+OmniPath:collectri,28414,0,0,28414
+"OmniPath:omnipath,ligrecextra",22034,0,0,22034
+STITCH,40428,20837,19591,0
+TCDB,283,283,0,0

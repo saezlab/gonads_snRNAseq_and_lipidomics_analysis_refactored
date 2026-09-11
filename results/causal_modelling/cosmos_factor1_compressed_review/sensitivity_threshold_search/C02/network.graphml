@@ -1,0 +1,2563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+         http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+<!-- Created by igraph -->
+  <key id="v_name" for="node" attr.name="name" attr.type="string"/>
+  <key id="v_score" for="node" attr.name="score" attr.type="double"/>
+  <key id="v_level" for="node" attr.name="level" attr.type="double"/>
+  <key id="v_type" for="node" attr.name="type" attr.type="string"/>
+  <key id="v_RNA_input" for="node" attr.name="RNA_input" attr.type="double"/>
+  <key id="v_label" for="node" attr.name="label" attr.type="string"/>
+  <key id="v_compressed_source" for="node" attr.name="compressed_source" attr.type="string"/>
+  <key id="v_upstream_activity" for="node" attr.name="upstream_activity" attr.type="double"/>
+  <key id="v_secondary_margin" for="node" attr.name="secondary_margin" attr.type="double"/>
+  <key id="v_above_primary" for="node" attr.name="above_primary" attr.type="boolean"/>
+  <key id="e_interaction" for="edge" attr.name="interaction" attr.type="double"/>
+  <key id="e_consistency" for="edge" attr.name="consistency" attr.type="boolean"/>
+  <key id="e_source_label" for="edge" attr.name="source_label" attr.type="string"/>
+  <key id="e_target_label" for="edge" attr.name="target_label" attr.type="string"/>
+  <graph id="G" edgedefault="directed">
+    <node id="n0">
+      <data key="v_name">Enzyme__28143c03c6898d48</data>
+      <data key="v_score">2.97188233409243</data>
+      <data key="v_level">1</data>
+      <data key="v_type">other</data>
+      <data key="v_label">LIPID_RULE:0a193eab8c3e1575e44a forward</data>
+      <data key="v_compressed_source">Enzyme__28143c03c6898d48</data>
+      <data key="v_secondary_margin">2.12188233409243</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n1">
+      <data key="v_name">Enzyme__34a1cda993b50319</data>
+      <data key="v_score">3.98867501177353</data>
+      <data key="v_level">1</data>
+      <data key="v_type">other</data>
+      <data key="v_label">LIPID_RULE:4dca6594acdae224a890 forward</data>
+      <data key="v_compressed_source">Enzyme__34a1cda993b50319</data>
+      <data key="v_secondary_margin">3.13867501177353</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n2">
+      <data key="v_name">Gene__Abl1</data>
+      <data key="v_score">1.04008095859013</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.000825561984568519</data>
+      <data key="v_label">Abl1</data>
+      <data key="v_compressed_source">Gene__Abl1</data>
+      <data key="v_secondary_margin">0.190080958590134</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n3">
+      <data key="v_name">Gene__Agtr1a</data>
+      <data key="v_score">-2.16427732135975</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.326223902755454</data>
+      <data key="v_label">Agtr1a</data>
+      <data key="v_compressed_source">Gene__Agtr1a</data>
+      <data key="v_secondary_margin">1.31427732135975</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n4">
+      <data key="v_name">Gene__Agtr1b</data>
+      <data key="v_score">-2.16427732135975</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0103248949186204</data>
+      <data key="v_label">Agtr1b</data>
+      <data key="v_compressed_source">Gene__Agtr1b</data>
+      <data key="v_secondary_margin">1.31427732135975</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n5">
+      <data key="v_name">Gene__Akap12</data>
+      <data key="v_score">2.47844506196226</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000494647079634284</data>
+      <data key="v_label">Akap12</data>
+      <data key="v_compressed_source">Gene__Akap12</data>
+      <data key="v_secondary_margin">1.62844506196226</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n6">
+      <data key="v_name">Gene__Akt1</data>
+      <data key="v_score">1.27318251162179</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00114920605777741</data>
+      <data key="v_label">Akt1</data>
+      <data key="v_compressed_source">Gene__Akt1</data>
+      <data key="v_secondary_margin">0.423182511621792</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n7">
+      <data key="v_name">Gene__Anapc1</data>
+      <data key="v_score">-2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00352241254590126</data>
+      <data key="v_label">Anapc1</data>
+      <data key="v_compressed_source">Gene__Anapc1</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n8">
+      <data key="v_name">Gene__Arf1</data>
+      <data key="v_score">2.41572159782501</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.00059354990883617</data>
+      <data key="v_label">Arf1</data>
+      <data key="v_compressed_source">Gene__Arf1</data>
+      <data key="v_secondary_margin">1.56572159782501</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n9">
+      <data key="v_name">Gene__Arfgef1</data>
+      <data key="v_score">2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.192207968587331</data>
+      <data key="v_label">Arfgef1</data>
+      <data key="v_compressed_source">Gene__Arfgef1</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n10">
+      <data key="v_name">Gene__Asap1</data>
+      <data key="v_score">-1.64857784647036</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.144292572590815</data>
+      <data key="v_label">Asap1</data>
+      <data key="v_compressed_source">Gene__Asap1</data>
+      <data key="v_secondary_margin">0.798577846470364</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n11">
+      <data key="v_name">Gene__Atf2</data>
+      <data key="v_score">1.64053774186024</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.000816921305094382</data>
+      <data key="v_label">Atf2</data>
+      <data key="v_compressed_source">Gene__Atf2</data>
+      <data key="v_secondary_margin">0.790537741860241</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n12">
+      <data key="v_name">Gene__Atm</data>
+      <data key="v_score">2.74660761745119</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.01245162755873</data>
+      <data key="v_label">Atm</data>
+      <data key="v_compressed_source">Gene__Atm</data>
+      <data key="v_secondary_margin">1.89660761745119</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n13">
+      <data key="v_name">Gene__Aurka</data>
+      <data key="v_score">2.09664278334866</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00101962646437956</data>
+      <data key="v_label">Aurka</data>
+      <data key="v_compressed_source">Gene__Aurka</data>
+      <data key="v_secondary_margin">1.24664278334866</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n14">
+      <data key="v_name">Gene__Brca1</data>
+      <data key="v_score">-1.48526537946808</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.198558998018515</data>
+      <data key="v_label">Brca1</data>
+      <data key="v_compressed_source">Gene__Brca1</data>
+      <data key="v_secondary_margin">0.635265379468083</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n15">
+      <data key="v_name">Gene__Carm1</data>
+      <data key="v_score">3.08589872593937</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.00466616012662003</data>
+      <data key="v_label">Carm1</data>
+      <data key="v_compressed_source">Gene__Carm1</data>
+      <data key="v_secondary_margin">2.23589872593937</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n16">
+      <data key="v_name">Gene__Cdc25a</data>
+      <data key="v_score">1.79391928925279</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000259313373037139</data>
+      <data key="v_label">Cdc25a</data>
+      <data key="v_compressed_source">Gene__Cdc25a</data>
+      <data key="v_secondary_margin">0.943919289252794</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n17">
+      <data key="v_name">Gene__Cdc73</data>
+      <data key="v_score">2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.686626368857035</data>
+      <data key="v_label">Cdc73</data>
+      <data key="v_compressed_source">Gene__Cdc73</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n18">
+      <data key="v_name">Gene__Cdh2</data>
+      <data key="v_score">2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">8.64589924907707e-05</data>
+      <data key="v_label">Cdh2</data>
+      <data key="v_compressed_source">Gene__Cdh2</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n19">
+      <data key="v_name">Gene__Cdh3</data>
+      <data key="v_score">2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">4.59153384836234e-05</data>
+      <data key="v_label">Cdh3</data>
+      <data key="v_compressed_source">Gene__Cdh3</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n20">
+      <data key="v_name">Gene__Cebpa</data>
+      <data key="v_score">1.64053774186024</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.17835269643317</data>
+      <data key="v_label">Cebpa</data>
+      <data key="v_compressed_source">Gene__Cebpa</data>
+      <data key="v_secondary_margin">0.790537741860241</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n21">
+      <data key="v_name">Gene__Chuk</data>
+      <data key="v_score">-2.23376400992843</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0178064499003731</data>
+      <data key="v_label">Chuk</data>
+      <data key="v_compressed_source">Gene__Chuk</data>
+      <data key="v_secondary_margin">1.38376400992843</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n22">
+      <data key="v_name">Gene__Crebbp</data>
+      <data key="v_score">1.32751835391271</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.0281366504915808</data>
+      <data key="v_label">Crebbp</data>
+      <data key="v_compressed_source">Gene__Crebbp</data>
+      <data key="v_secondary_margin">0.477518353912706</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n23">
+      <data key="v_name">Gene__Csk</data>
+      <data key="v_score">2.60124730310476</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.179565983025855</data>
+      <data key="v_label">Csk</data>
+      <data key="v_compressed_source">Gene__Csk</data>
+      <data key="v_secondary_margin">1.75124730310476</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n24">
+      <data key="v_name">Gene__Ctnnb1</data>
+      <data key="v_score">2.41572159782501</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00206977762148637</data>
+      <data key="v_label">Ctnnb1</data>
+      <data key="v_compressed_source">Gene__Ctnnb1</data>
+      <data key="v_secondary_margin">1.56572159782501</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n25">
+      <data key="v_name">Gene__Cul1</data>
+      <data key="v_score">-2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00114857240374167</data>
+      <data key="v_label">Cul1</data>
+      <data key="v_compressed_source">Gene__Cul1</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n26">
+      <data key="v_name">Gene__Cxcl2</data>
+      <data key="v_score">-2.01660649822316</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000339947897890061</data>
+      <data key="v_label">Cxcl2</data>
+      <data key="v_compressed_source">Gene__Cxcl2</data>
+      <data key="v_secondary_margin">1.16660649822316</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n27">
+      <data key="v_name">Gene__Dab2ip</data>
+      <data key="v_score">-2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.000453818445388903</data>
+      <data key="v_label">Dab2ip</data>
+      <data key="v_compressed_source">Gene__Dab2ip</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n28">
+      <data key="v_name">Gene__E2f1</data>
+      <data key="v_score">-1.40354703466857</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.127486699687396</data>
+      <data key="v_label">E2f1</data>
+      <data key="v_compressed_source">Gene__E2f1</data>
+      <data key="v_secondary_margin">0.55354703466857</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n29">
+      <data key="v_name">Gene__Erbb4</data>
+      <data key="v_score">1.10638841500699</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.00167178155813699</data>
+      <data key="v_label">Erbb4</data>
+      <data key="v_compressed_source">Gene__Erbb4</data>
+      <data key="v_secondary_margin">0.256388415006987</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n30">
+      <data key="v_name">Gene__Flna</data>
+      <data key="v_score">2.47844506196226</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">5.0277222657373e-06</data>
+      <data key="v_label">Flna</data>
+      <data key="v_compressed_source">Gene__Flna</data>
+      <data key="v_secondary_margin">1.62844506196226</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n31">
+      <data key="v_name">Gene__Flt3</data>
+      <data key="v_score">2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.000220993967955924</data>
+      <data key="v_label">Flt3</data>
+      <data key="v_compressed_source">Gene__Flt3</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n32">
+      <data key="v_name">Gene__Fosl2</data>
+      <data key="v_score">2.45634326394353</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.00830898591291194</data>
+      <data key="v_label">Fosl2</data>
+      <data key="v_compressed_source">Gene__Fosl2</data>
+      <data key="v_secondary_margin">1.60634326394353</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n33">
+      <data key="v_name">Gene__Git1</data>
+      <data key="v_score">-1.04008095859013</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.00174252158803414</data>
+      <data key="v_label">Git1</data>
+      <data key="v_compressed_source">Gene__Git1</data>
+      <data key="v_secondary_margin">0.190080958590134</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n34">
+      <data key="v_name">Gene__Gng12</data>
+      <data key="v_score">-2.01660649822316</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0033544450075977</data>
+      <data key="v_label">Gng12</data>
+      <data key="v_compressed_source">Gene__Gng12</data>
+      <data key="v_secondary_margin">1.16660649822316</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n35">
+      <data key="v_name">Gene__Gsk3a</data>
+      <data key="v_score">-1.44635890567322</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000983670442300348</data>
+      <data key="v_label">Gsk3a</data>
+      <data key="v_compressed_source">Gene__Gsk3a</data>
+      <data key="v_secondary_margin">0.596358905673218</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n36">
+      <data key="v_name">Gene__Hif1a</data>
+      <data key="v_score">-0.981235673854811</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00370275597465786</data>
+      <data key="v_label">Hif1a</data>
+      <data key="v_compressed_source">Gene__Hif1a</data>
+      <data key="v_secondary_margin">0.131235673854811</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n37">
+      <data key="v_name">Gene__Hmga1</data>
+      <data key="v_score">2.53225501536683</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000567093787536305</data>
+      <data key="v_label">Hmga1</data>
+      <data key="v_compressed_source">Gene__Hmga1</data>
+      <data key="v_secondary_margin">1.68225501536683</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n38">
+      <data key="v_name">Gene__Igf1r</data>
+      <data key="v_score">1.43979015159606</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000141271090397189</data>
+      <data key="v_label">Igf1r</data>
+      <data key="v_compressed_source">Gene__Igf1r</data>
+      <data key="v_secondary_margin">0.589790151596064</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n39">
+      <data key="v_name">Gene__Insr</data>
+      <data key="v_score">1.11551838742202</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.295760963720893</data>
+      <data key="v_label">Insr</data>
+      <data key="v_compressed_source">Gene__Insr</data>
+      <data key="v_secondary_margin">0.265518387422017</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n40">
+      <data key="v_name">Gene__Itgb1</data>
+      <data key="v_score">2.15320423305047</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.010552564167955</data>
+      <data key="v_label">Itgb1</data>
+      <data key="v_compressed_source">Gene__Itgb1</data>
+      <data key="v_secondary_margin">1.30320423305047</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n41">
+      <data key="v_name">Gene__Itgb4</data>
+      <data key="v_score">1.38316140289664</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">1.10525657542895e-05</data>
+      <data key="v_label">Itgb4</data>
+      <data key="v_compressed_source">Gene__Itgb4</data>
+      <data key="v_secondary_margin">0.533161402896642</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n42">
+      <data key="v_name">Gene__Itgb5</data>
+      <data key="v_score">1.38316140289664</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00348211749253052</data>
+      <data key="v_label">Itgb5</data>
+      <data key="v_compressed_source">Gene__Itgb5</data>
+      <data key="v_secondary_margin">0.533161402896642</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n43">
+      <data key="v_name">Gene__Itgb6</data>
+      <data key="v_score">1.38316140289664</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">6.67939157033365e-05</data>
+      <data key="v_label">Itgb6</data>
+      <data key="v_compressed_source">Gene__Itgb6</data>
+      <data key="v_secondary_margin">0.533161402896642</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n44">
+      <data key="v_name">Gene__Itgb7</data>
+      <data key="v_score">1.38316140289664</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.000257395788569891</data>
+      <data key="v_label">Itgb7</data>
+      <data key="v_compressed_source">Gene__Itgb7</data>
+      <data key="v_secondary_margin">0.533161402896642</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n45">
+      <data key="v_name">Gene__Itgb8</data>
+      <data key="v_score">1.38316140289664</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-3.49219269926899e-06</data>
+      <data key="v_label">Itgb8</data>
+      <data key="v_compressed_source">Gene__Itgb8</data>
+      <data key="v_secondary_margin">0.533161402896642</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n46">
+      <data key="v_name">Gene__Jak3</data>
+      <data key="v_score">1.64053774186024</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000692107156677651</data>
+      <data key="v_label">Jak3</data>
+      <data key="v_compressed_source">Gene__Jak3</data>
+      <data key="v_secondary_margin">0.790537741860241</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n47">
+      <data key="v_name">Gene__Kit</data>
+      <data key="v_score">1.72323660485027</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-2.39161951690447e-05</data>
+      <data key="v_label">Kit</data>
+      <data key="v_compressed_source">Gene__Kit</data>
+      <data key="v_secondary_margin">0.873236604850267</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n48">
+      <data key="v_name">Gene__Lck</data>
+      <data key="v_score">-1.04008095859013</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.0304015665361246</data>
+      <data key="v_label">Lck</data>
+      <data key="v_compressed_source">Gene__Lck</data>
+      <data key="v_secondary_margin">0.190080958590134</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n49">
+      <data key="v_name">Gene__Map2k1</data>
+      <data key="v_score">-2.20162375639999</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0696018532719784</data>
+      <data key="v_label">Map2k1</data>
+      <data key="v_compressed_source">Gene__Map2k1</data>
+      <data key="v_secondary_margin">1.35162375639999</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n50">
+      <data key="v_name">Gene__Map2k2</data>
+      <data key="v_score">-2.20162375639999</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.28253644438361</data>
+      <data key="v_label">Map2k2</data>
+      <data key="v_compressed_source">Gene__Map2k2</data>
+      <data key="v_secondary_margin">1.35162375639999</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n51">
+      <data key="v_name">Gene__Map2k4</data>
+      <data key="v_score">-2.37511767218516</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.0408434560539541</data>
+      <data key="v_label">Map2k4</data>
+      <data key="v_compressed_source">Gene__Map2k4</data>
+      <data key="v_secondary_margin">1.52511767218516</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n52">
+      <data key="v_name">Gene__Map2k6</data>
+      <data key="v_score">-1.56468063784172</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00782481887999565</data>
+      <data key="v_label">Map2k6</data>
+      <data key="v_compressed_source">Gene__Map2k6</data>
+      <data key="v_secondary_margin">0.714680637841724</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n53">
+      <data key="v_name">Gene__Map3k1</data>
+      <data key="v_score">-2.20162375639999</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.227528489364679</data>
+      <data key="v_label">Map3k1</data>
+      <data key="v_compressed_source">Gene__Map3k1</data>
+      <data key="v_secondary_margin">1.35162375639999</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n54">
+      <data key="v_name">Gene__Map3k5</data>
+      <data key="v_score">-1.56468063784172</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.0470560558386465</data>
+      <data key="v_label">Map3k5</data>
+      <data key="v_compressed_source">Gene__Map3k5</data>
+      <data key="v_secondary_margin">0.714680637841724</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n55">
+      <data key="v_name">Gene__Map4k1</data>
+      <data key="v_score">-1.29762781193572</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.000287486979438</data>
+      <data key="v_label">Map4k1</data>
+      <data key="v_compressed_source">Gene__Map4k1</data>
+      <data key="v_secondary_margin">0.447627811935717</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n56">
+      <data key="v_name">Gene__Mapk1</data>
+      <data key="v_score">-1.61815880956481</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00067651235997343</data>
+      <data key="v_label">Mapk1</data>
+      <data key="v_compressed_source">Gene__Mapk1</data>
+      <data key="v_secondary_margin">0.768158809564812</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n57">
+      <data key="v_name">Gene__Mapk14</data>
+      <data key="v_score">-1.89858017900825</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00168091437838378</data>
+      <data key="v_label">Mapk14</data>
+      <data key="v_compressed_source">Gene__Mapk14</data>
+      <data key="v_secondary_margin">1.04858017900825</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n58">
+      <data key="v_name">Gene__Mapk3</data>
+      <data key="v_score">-2.13809049456491</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.0306109392285926</data>
+      <data key="v_label">Mapk3</data>
+      <data key="v_compressed_source">Gene__Mapk3</data>
+      <data key="v_secondary_margin">1.28809049456491</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n59">
+      <data key="v_name">Gene__Myc</data>
+      <data key="v_score">-0.981235673854811</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.00434948516434607</data>
+      <data key="v_label">Myc</data>
+      <data key="v_compressed_source">Gene__Myc</data>
+      <data key="v_secondary_margin">0.131235673854811</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n60">
+      <data key="v_name">Gene__Nedd9</data>
+      <data key="v_score">1.20867901974511</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000311700266743237</data>
+      <data key="v_label">Nedd9</data>
+      <data key="v_compressed_source">Gene__Nedd9</data>
+      <data key="v_secondary_margin">0.358679019745111</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n61">
+      <data key="v_name">Gene__Nfat5</data>
+      <data key="v_score">1.64053774186024</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0449604852836741</data>
+      <data key="v_label">Nfat5</data>
+      <data key="v_compressed_source">Gene__Nfat5</data>
+      <data key="v_secondary_margin">0.790537741860242</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n62">
+      <data key="v_name">Gene__Nfatc1</data>
+      <data key="v_score">-1.63891123127443</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.00207517705859051</data>
+      <data key="v_label">Nfatc1</data>
+      <data key="v_compressed_source">Gene__Nfatc1</data>
+      <data key="v_secondary_margin">0.78891123127443</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n63">
+      <data key="v_name">Gene__Nfatc2</data>
+      <data key="v_score">2.41572159782501</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000338362762029054</data>
+      <data key="v_label">Nfatc2</data>
+      <data key="v_compressed_source">Gene__Nfatc2</data>
+      <data key="v_secondary_margin">1.56572159782501</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n64">
+      <data key="v_name">Gene__Nfkb1</data>
+      <data key="v_score">2.19564927234587</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000518288376612537</data>
+      <data key="v_label">Nfkb1</data>
+      <data key="v_compressed_source">Gene__Nfkb1</data>
+      <data key="v_secondary_margin">1.34564927234587</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n65">
+      <data key="v_name">Gene__Notch1</data>
+      <data key="v_score">1.0564642703462</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.0064502638237318</data>
+      <data key="v_label">Notch1</data>
+      <data key="v_compressed_source">Gene__Notch1</data>
+      <data key="v_secondary_margin">0.206464270346204</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n66">
+      <data key="v_name">Gene__Pak1</data>
+      <data key="v_score">1.14600624143055</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.000416547258332225</data>
+      <data key="v_label">Pak1</data>
+      <data key="v_compressed_source">Gene__Pak1</data>
+      <data key="v_secondary_margin">0.296006241430554</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n67">
+      <data key="v_name">Gene__Pak4</data>
+      <data key="v_score">2.03771223620438</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0895328051102932</data>
+      <data key="v_label">Pak4</data>
+      <data key="v_compressed_source">Gene__Pak4</data>
+      <data key="v_secondary_margin">1.18771223620438</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n68">
+      <data key="v_name">Gene__Pak6</data>
+      <data key="v_score">-2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">2.42490715293392e-06</data>
+      <data key="v_label">Pak6</data>
+      <data key="v_compressed_source">Gene__Pak6</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n69">
+      <data key="v_name">Gene__Pde4d</data>
+      <data key="v_score">2.01660649822316</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.2272229491615</data>
+      <data key="v_label">Pde4d</data>
+      <data key="v_compressed_source">Gene__Pde4d</data>
+      <data key="v_secondary_margin">1.16660649822316</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n70">
+      <data key="v_name">Gene__Pdpk1</data>
+      <data key="v_score">1.91454338762612</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0341929796678381</data>
+      <data key="v_label">Pdpk1</data>
+      <data key="v_compressed_source">Gene__Pdpk1</data>
+      <data key="v_secondary_margin">1.06454338762612</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n71">
+      <data key="v_name">Gene__Pim1</data>
+      <data key="v_score">-2.02281058857105</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.841165679919074</data>
+      <data key="v_label">Pim1</data>
+      <data key="v_compressed_source">Gene__Pim1</data>
+      <data key="v_secondary_margin">1.17281058857105</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n72">
+      <data key="v_name">Gene__Pld1</data>
+      <data key="v_score">1.30441415382536</data>
+      <data key="v_level">2</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.00118757102223773</data>
+      <data key="v_label">Pld1</data>
+      <data key="v_compressed_source">Gene__Pld1</data>
+      <data key="v_secondary_margin">0.454414153825356</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n73">
+      <data key="v_name">Gene__Plk1</data>
+      <data key="v_score">-1.86262836921574</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000115085535205785</data>
+      <data key="v_label">Plk1</data>
+      <data key="v_compressed_source">Gene__Plk1</data>
+      <data key="v_secondary_margin">1.01262836921574</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n74">
+      <data key="v_name">Gene__Ppara</data>
+      <data key="v_score">-0.981235673854811</data>
+      <data key="v_level">3</data>
+      <data key="v_type">upstream_input</data>
+      <data key="v_RNA_input">-0.189762056804844</data>
+      <data key="v_label">Ppara</data>
+      <data key="v_compressed_source">Gene__Ppara</data>
+      <data key="v_upstream_activity">-5.9658231913035</data>
+      <data key="v_secondary_margin">0.131235673854811</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n75">
+      <data key="v_name">Gene__Ppp2r5c</data>
+      <data key="v_score">1.44707521049219</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.00105035662165362</data>
+      <data key="v_label">Ppp2r5c</data>
+      <data key="v_compressed_source">Gene__Ppp2r5c</data>
+      <data key="v_secondary_margin">0.597075210492188</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n76">
+      <data key="v_name">Gene__Prkaca</data>
+      <data key="v_score">1.88515546354512</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.0030866312041134</data>
+      <data key="v_label">Prkaca</data>
+      <data key="v_compressed_source">Gene__Prkaca</data>
+      <data key="v_secondary_margin">1.03515546354512</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n77">
+      <data key="v_name">Gene__Prkca</data>
+      <data key="v_score">1.3035152537809</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.497060088396587</data>
+      <data key="v_label">Prkca</data>
+      <data key="v_compressed_source">Gene__Prkca</data>
+      <data key="v_secondary_margin">0.4535152537809</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n78">
+      <data key="v_name">Gene__Prkcd</data>
+      <data key="v_score">2.03565981473952</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0534417443724915</data>
+      <data key="v_label">Prkcd</data>
+      <data key="v_compressed_source">Gene__Prkcd</data>
+      <data key="v_secondary_margin">1.18565981473952</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n79">
+      <data key="v_name">Gene__Prkd1</data>
+      <data key="v_score">1.37247695970848</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000111292197942441</data>
+      <data key="v_label">Prkd1</data>
+      <data key="v_compressed_source">Gene__Prkd1</data>
+      <data key="v_secondary_margin">0.522476959708482</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n80">
+      <data key="v_name">Gene__Ptk2</data>
+      <data key="v_score">1.64053774186024</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.0010711601653142</data>
+      <data key="v_label">Ptk2</data>
+      <data key="v_compressed_source">Gene__Ptk2</data>
+      <data key="v_secondary_margin">0.790537741860241</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n81">
+      <data key="v_name">Gene__Ptpn11</data>
+      <data key="v_score">2.36159869947488</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0302361937845002</data>
+      <data key="v_label">Ptpn11</data>
+      <data key="v_compressed_source">Gene__Ptpn11</data>
+      <data key="v_secondary_margin">1.51159869947488</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n82">
+      <data key="v_name">Gene__Ptpn7</data>
+      <data key="v_score">2.72872474392174</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-1.6982864707113e-05</data>
+      <data key="v_label">Ptpn7</data>
+      <data key="v_compressed_source">Gene__Ptpn7</data>
+      <data key="v_secondary_margin">1.87872474392174</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n83">
+      <data key="v_name">Gene__Raf1</data>
+      <data key="v_score">-2.20162375639999</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.260288573696587</data>
+      <data key="v_label">Raf1</data>
+      <data key="v_compressed_source">Gene__Raf1</data>
+      <data key="v_secondary_margin">1.35162375639999</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n84">
+      <data key="v_name">Gene__Rela</data>
+      <data key="v_score">1.14492303681156</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.375365770586136</data>
+      <data key="v_label">Rela</data>
+      <data key="v_compressed_source">Gene__Rela</data>
+      <data key="v_secondary_margin">0.294923036811555</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n85">
+      <data key="v_name">Gene__Rock1</data>
+      <data key="v_score">2.13763832179837</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.00239601456696552</data>
+      <data key="v_label">Rock1</data>
+      <data key="v_compressed_source">Gene__Rock1</data>
+      <data key="v_secondary_margin">1.28763832179837</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n86">
+      <data key="v_name">Gene__Siah1a</data>
+      <data key="v_score">-2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.310697699574179</data>
+      <data key="v_label">Siah1a</data>
+      <data key="v_compressed_source">Gene__Siah1a</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n87">
+      <data key="v_name">Gene__Smpd1</data>
+      <data key="v_score">0.861174666028449</data>
+      <data key="v_level">2</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.160651948945845</data>
+      <data key="v_label">Smpd1</data>
+      <data key="v_compressed_source">Gene__Smpd1</data>
+      <data key="v_secondary_margin">0.0111746660284494</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n88">
+      <data key="v_name">Gene__Smurf2</data>
+      <data key="v_score">2.53225501536684</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.0364046450138446</data>
+      <data key="v_label">Smurf2</data>
+      <data key="v_compressed_source">Gene__Smurf2</data>
+      <data key="v_secondary_margin">1.68225501536684</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n89">
+      <data key="v_name">Gene__Stat1</data>
+      <data key="v_score">-1.04008095859013</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00271941852803255</data>
+      <data key="v_label">Stat1</data>
+      <data key="v_compressed_source">Gene__Stat1</data>
+      <data key="v_secondary_margin">0.190080958590134</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n90">
+      <data key="v_name">Gene__Stat5a</data>
+      <data key="v_score">2.1687737116231</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.425185397655404</data>
+      <data key="v_label">Stat5a</data>
+      <data key="v_compressed_source">Gene__Stat5a</data>
+      <data key="v_secondary_margin">1.3187737116231</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n91">
+      <data key="v_name">Gene__Tbx2</data>
+      <data key="v_score">-2.37511767218516</data>
+      <data key="v_level">4</data>
+      <data key="v_type">upstream_input</data>
+      <data key="v_RNA_input">-1.04280756988953e-06</data>
+      <data key="v_label">Tbx2</data>
+      <data key="v_compressed_source">Gene__Tbx2</data>
+      <data key="v_upstream_activity">-2.02109714431975</data>
+      <data key="v_secondary_margin">1.52511767218516</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n92">
+      <data key="v_name">Gene__Thrb</data>
+      <data key="v_score">1.78128245918218</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.000306446257547212</data>
+      <data key="v_label">Thrb</data>
+      <data key="v_compressed_source">Gene__Thrb</data>
+      <data key="v_secondary_margin">0.931282459182178</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n93">
+      <data key="v_name">Gene__Tsc22d3</data>
+      <data key="v_score">-2.77982273074905</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.067288116134138</data>
+      <data key="v_label">Tsc22d3</data>
+      <data key="v_compressed_source">Gene__Tsc22d3</data>
+      <data key="v_secondary_margin">1.92982273074905</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n94">
+      <data key="v_name">Gene__Twist1</data>
+      <data key="v_score">-1.84186116572175</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-3.25408370422987e-05</data>
+      <data key="v_label">Twist1</data>
+      <data key="v_compressed_source">Gene__Twist1</data>
+      <data key="v_secondary_margin">0.991861165721747</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n95">
+      <data key="v_name">Gene__Vasp</data>
+      <data key="v_score">2.47844506196226</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0537766403233114</data>
+      <data key="v_label">Vasp</data>
+      <data key="v_compressed_source">Gene__Vasp</data>
+      <data key="v_secondary_margin">1.62844506196226</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n96">
+      <data key="v_name">Gene__Vav1</data>
+      <data key="v_score">-1.04008095859013</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-1.75019604552037e-06</data>
+      <data key="v_label">Vav1</data>
+      <data key="v_compressed_source">Gene__Vav1</data>
+      <data key="v_secondary_margin">0.190080958590134</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n97">
+      <data key="v_name">Gene__Vav2</data>
+      <data key="v_score">-1.04008095859013</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.00196201052893208</data>
+      <data key="v_label">Vav2</data>
+      <data key="v_compressed_source">Gene__Vav2</data>
+      <data key="v_secondary_margin">0.190080958590134</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n98">
+      <data key="v_name">Gene__Vav3</data>
+      <data key="v_score">-1.04008095859013</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-2.09779978458092e-06</data>
+      <data key="v_label">Vav3</data>
+      <data key="v_compressed_source">Gene__Vav3</data>
+      <data key="v_secondary_margin">0.190080958590134</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n99">
+      <data key="v_name">Gene__Zap70</data>
+      <data key="v_score">-2.07445471202396</data>
+      <data key="v_level">4</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-0.0950753383382995</data>
+      <data key="v_label">Zap70</data>
+      <data key="v_compressed_source">Gene__Zap70</data>
+      <data key="v_secondary_margin">1.22445471202396</data>
+      <data key="v_above_primary">true</data>
+    </node>
+    <node id="n100">
+      <data key="v_name">Metab__MeasuredLipid:DG(24:0_18:2)_unknown</data>
+      <data key="v_score">1.39919914162362</data>
+      <data key="v_level">0</data>
+      <data key="v_type">level0</data>
+      <data key="v_label">DG(24:0_18:2)</data>
+      <data key="v_compressed_source">Metab__MeasuredLipid:DG(24:0_18:2)_unknown</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <node id="n101">
+      <data key="v_name">Metab__MeasuredLipid:DG(24:1_18:2)_unknown</data>
+      <data key="v_score">1.75095749390766</data>
+      <data key="v_level">0</data>
+      <data key="v_type">level0</data>
+      <data key="v_label">DG(24:1_18:2)</data>
+      <data key="v_compressed_source">Metab__MeasuredLipid:DG(24:1_18:2)_unknown</data>
+      <data key="v_above_primary">false</data>
+    </node>
+    <edge source="n0" target="n100">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">LIPID_RULE:0a193eab8c3e1575e44a forward</data>
+      <data key="e_target_label">DG(24:0_18:2)</data>
+    </edge>
+    <edge source="n1" target="n101">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">LIPID_RULE:4dca6594acdae224a890 forward</data>
+      <data key="e_target_label">DG(24:1_18:2)</data>
+    </edge>
+    <edge source="n2" target="n78">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Abl1</data>
+      <data key="e_target_label">Prkcd</data>
+    </edge>
+    <edge source="n2" target="n81">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Abl1</data>
+      <data key="e_target_label">Ptpn11</data>
+    </edge>
+    <edge source="n2" target="n90">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Abl1</data>
+      <data key="e_target_label">Stat5a</data>
+    </edge>
+    <edge source="n3" target="n34">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Agtr1a</data>
+      <data key="e_target_label">Gng12</data>
+    </edge>
+    <edge source="n4" target="n34">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Agtr1b</data>
+      <data key="e_target_label">Gng12</data>
+    </edge>
+    <edge source="n5" target="n76">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Akap12</data>
+      <data key="e_target_label">Prkaca</data>
+    </edge>
+    <edge source="n5" target="n77">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Akap12</data>
+      <data key="e_target_label">Prkca</data>
+    </edge>
+    <edge source="n6" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Akt1</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n6" target="n27">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Akt1</data>
+      <data key="e_target_label">Dab2ip</data>
+    </edge>
+    <edge source="n6" target="n30">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Akt1</data>
+      <data key="e_target_label">Flna</data>
+    </edge>
+    <edge source="n6" target="n40">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Akt1</data>
+      <data key="e_target_label">Itgb1</data>
+    </edge>
+    <edge source="n6" target="n51">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Akt1</data>
+      <data key="e_target_label">Map2k4</data>
+    </edge>
+    <edge source="n7" target="n24">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Anapc1</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n8" target="n10">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Arf1</data>
+      <data key="e_target_label">Asap1</data>
+    </edge>
+    <edge source="n8" target="n33">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Arf1</data>
+      <data key="e_target_label">Git1</data>
+    </edge>
+    <edge source="n8" target="n72">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Arf1</data>
+      <data key="e_target_label">Pld1</data>
+    </edge>
+    <edge source="n9" target="n8">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Arfgef1</data>
+      <data key="e_target_label">Arf1</data>
+    </edge>
+    <edge source="n10" target="n8">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Asap1</data>
+      <data key="e_target_label">Arf1</data>
+    </edge>
+    <edge source="n11" target="n78">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Atf2</data>
+      <data key="e_target_label">Prkcd</data>
+    </edge>
+    <edge source="n12" target="n2">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Atm</data>
+      <data key="e_target_label">Abl1</data>
+    </edge>
+    <edge source="n12" target="n6">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Atm</data>
+      <data key="e_target_label">Akt1</data>
+    </edge>
+    <edge source="n12" target="n11">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Atm</data>
+      <data key="e_target_label">Atf2</data>
+    </edge>
+    <edge source="n12" target="n37">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Atm</data>
+      <data key="e_target_label">Hmga1</data>
+    </edge>
+    <edge source="n12" target="n61">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Atm</data>
+      <data key="e_target_label">Nfat5</data>
+    </edge>
+    <edge source="n12" target="n73">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Atm</data>
+      <data key="e_target_label">Plk1</data>
+    </edge>
+    <edge source="n12" target="n75">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Atm</data>
+      <data key="e_target_label">Ppp2r5c</data>
+    </edge>
+    <edge source="n12" target="n86">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Atm</data>
+      <data key="e_target_label">Siah1a</data>
+    </edge>
+    <edge source="n12" target="n88">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Atm</data>
+      <data key="e_target_label">Smurf2</data>
+    </edge>
+    <edge source="n13" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Aurka</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n13" target="n60">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Aurka</data>
+      <data key="e_target_label">Nedd9</data>
+    </edge>
+    <edge source="n14" target="n19">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Brca1</data>
+      <data key="e_target_label">Cdh3</data>
+    </edge>
+    <edge source="n15" target="n22">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Carm1</data>
+      <data key="e_target_label">Crebbp</data>
+    </edge>
+    <edge source="n15" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Carm1</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n16" target="n58">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Cdc25a</data>
+      <data key="e_target_label">Mapk3</data>
+    </edge>
+    <edge source="n16" target="n83">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Cdc25a</data>
+      <data key="e_target_label">Raf1</data>
+    </edge>
+    <edge source="n17" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Cdc73</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n18" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Cdh2</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n19" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Cdh3</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n20" target="n64">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Cebpa</data>
+      <data key="e_target_label">Nfkb1</data>
+    </edge>
+    <edge source="n21" target="n89">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Chuk</data>
+      <data key="e_target_label">Stat1</data>
+    </edge>
+    <edge source="n22" target="n23">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Crebbp</data>
+      <data key="e_target_label">Csk</data>
+    </edge>
+    <edge source="n22" target="n64">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Crebbp</data>
+      <data key="e_target_label">Nfkb1</data>
+    </edge>
+    <edge source="n23" target="n31">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Flt3</data>
+    </edge>
+    <edge source="n23" target="n40">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Itgb1</data>
+    </edge>
+    <edge source="n23" target="n41">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Itgb4</data>
+    </edge>
+    <edge source="n23" target="n42">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Itgb5</data>
+    </edge>
+    <edge source="n23" target="n43">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Itgb6</data>
+    </edge>
+    <edge source="n23" target="n44">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Itgb7</data>
+    </edge>
+    <edge source="n23" target="n45">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Itgb8</data>
+    </edge>
+    <edge source="n23" target="n47">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Kit</data>
+    </edge>
+    <edge source="n23" target="n65">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Notch1</data>
+    </edge>
+    <edge source="n23" target="n76">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Prkaca</data>
+    </edge>
+    <edge source="n23" target="n80">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Csk</data>
+      <data key="e_target_label">Ptk2</data>
+    </edge>
+    <edge source="n24" target="n19">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ctnnb1</data>
+      <data key="e_target_label">Cdh3</data>
+    </edge>
+    <edge source="n24" target="n37">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ctnnb1</data>
+      <data key="e_target_label">Hmga1</data>
+    </edge>
+    <edge source="n24" target="n72">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ctnnb1</data>
+      <data key="e_target_label">Pld1</data>
+    </edge>
+    <edge source="n25" target="n24">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Cul1</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n26" target="n76">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Cxcl2</data>
+      <data key="e_target_label">Prkaca</data>
+    </edge>
+    <edge source="n27" target="n24">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Dab2ip</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n27" target="n54">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Dab2ip</data>
+      <data key="e_target_label">Map3k5</data>
+    </edge>
+    <edge source="n28" target="n86">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">E2f1</data>
+      <data key="e_target_label">Siah1a</data>
+    </edge>
+    <edge source="n29" target="n90">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Erbb4</data>
+      <data key="e_target_label">Stat5a</data>
+    </edge>
+    <edge source="n30" target="n6">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Flna</data>
+      <data key="e_target_label">Akt1</data>
+    </edge>
+    <edge source="n30" target="n76">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Flna</data>
+      <data key="e_target_label">Prkaca</data>
+    </edge>
+    <edge source="n30" target="n77">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Flna</data>
+      <data key="e_target_label">Prkca</data>
+    </edge>
+    <edge source="n31" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Flt3</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n31" target="n81">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Flt3</data>
+      <data key="e_target_label">Ptpn11</data>
+    </edge>
+    <edge source="n31" target="n90">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Flt3</data>
+      <data key="e_target_label">Stat5a</data>
+    </edge>
+    <edge source="n32" target="n20">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Fosl2</data>
+      <data key="e_target_label">Cebpa</data>
+    </edge>
+    <edge source="n33" target="n8">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Git1</data>
+      <data key="e_target_label">Arf1</data>
+    </edge>
+    <edge source="n33" target="n49">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Git1</data>
+      <data key="e_target_label">Map2k1</data>
+    </edge>
+    <edge source="n34" target="n76">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Gng12</data>
+      <data key="e_target_label">Prkaca</data>
+    </edge>
+    <edge source="n35" target="n7">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Gsk3a</data>
+      <data key="e_target_label">Anapc1</data>
+    </edge>
+    <edge source="n35" target="n24">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Gsk3a</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n36" target="n3">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Hif1a</data>
+      <data key="e_target_label">Agtr1a</data>
+    </edge>
+    <edge source="n36" target="n4">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Hif1a</data>
+      <data key="e_target_label">Agtr1b</data>
+    </edge>
+    <edge source="n37" target="n12">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Hmga1</data>
+      <data key="e_target_label">Atm</data>
+    </edge>
+    <edge source="n37" target="n14">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Hmga1</data>
+      <data key="e_target_label">Brca1</data>
+    </edge>
+    <edge source="n37" target="n16">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Hmga1</data>
+      <data key="e_target_label">Cdc25a</data>
+    </edge>
+    <edge source="n37" target="n38">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Hmga1</data>
+      <data key="e_target_label">Igf1r</data>
+    </edge>
+    <edge source="n37" target="n63">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Hmga1</data>
+      <data key="e_target_label">Nfatc2</data>
+    </edge>
+    <edge source="n38" target="n23">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Igf1r</data>
+      <data key="e_target_label">Csk</data>
+    </edge>
+    <edge source="n39" target="n81">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Insr</data>
+      <data key="e_target_label">Ptpn11</data>
+    </edge>
+    <edge source="n40" target="n6">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Itgb1</data>
+      <data key="e_target_label">Akt1</data>
+    </edge>
+    <edge source="n40" target="n23">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Itgb1</data>
+      <data key="e_target_label">Csk</data>
+    </edge>
+    <edge source="n40" target="n70">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Itgb1</data>
+      <data key="e_target_label">Pdpk1</data>
+    </edge>
+    <edge source="n40" target="n76">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Itgb1</data>
+      <data key="e_target_label">Prkaca</data>
+    </edge>
+    <edge source="n40" target="n77">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Itgb1</data>
+      <data key="e_target_label">Prkca</data>
+    </edge>
+    <edge source="n41" target="n23">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Itgb4</data>
+      <data key="e_target_label">Csk</data>
+    </edge>
+    <edge source="n42" target="n23">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Itgb5</data>
+      <data key="e_target_label">Csk</data>
+    </edge>
+    <edge source="n43" target="n23">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Itgb6</data>
+      <data key="e_target_label">Csk</data>
+    </edge>
+    <edge source="n44" target="n23">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Itgb7</data>
+      <data key="e_target_label">Csk</data>
+    </edge>
+    <edge source="n45" target="n23">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Itgb8</data>
+      <data key="e_target_label">Csk</data>
+    </edge>
+    <edge source="n46" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Jak3</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n46" target="n90">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Jak3</data>
+      <data key="e_target_label">Stat5a</data>
+    </edge>
+    <edge source="n47" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Kit</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n47" target="n81">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Kit</data>
+      <data key="e_target_label">Ptpn11</data>
+    </edge>
+    <edge source="n48" target="n58">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Lck</data>
+      <data key="e_target_label">Mapk3</data>
+    </edge>
+    <edge source="n48" target="n83">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Lck</data>
+      <data key="e_target_label">Raf1</data>
+    </edge>
+    <edge source="n48" target="n99">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Lck</data>
+      <data key="e_target_label">Zap70</data>
+    </edge>
+    <edge source="n49" target="n56">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map2k1</data>
+      <data key="e_target_label">Mapk1</data>
+    </edge>
+    <edge source="n49" target="n58">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map2k1</data>
+      <data key="e_target_label">Mapk3</data>
+    </edge>
+    <edge source="n49" target="n83">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map2k1</data>
+      <data key="e_target_label">Raf1</data>
+    </edge>
+    <edge source="n50" target="n56">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map2k2</data>
+      <data key="e_target_label">Mapk1</data>
+    </edge>
+    <edge source="n50" target="n58">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map2k2</data>
+      <data key="e_target_label">Mapk3</data>
+    </edge>
+    <edge source="n51" target="n57">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map2k4</data>
+      <data key="e_target_label">Mapk14</data>
+    </edge>
+    <edge source="n52" target="n68">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map2k6</data>
+      <data key="e_target_label">Pak6</data>
+    </edge>
+    <edge source="n53" target="n21">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map3k1</data>
+      <data key="e_target_label">Chuk</data>
+    </edge>
+    <edge source="n53" target="n49">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map3k1</data>
+      <data key="e_target_label">Map2k1</data>
+    </edge>
+    <edge source="n53" target="n50">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map3k1</data>
+      <data key="e_target_label">Map2k2</data>
+    </edge>
+    <edge source="n53" target="n52">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map3k1</data>
+      <data key="e_target_label">Map2k6</data>
+    </edge>
+    <edge source="n53" target="n56">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map3k1</data>
+      <data key="e_target_label">Mapk1</data>
+    </edge>
+    <edge source="n53" target="n58">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map3k1</data>
+      <data key="e_target_label">Mapk3</data>
+    </edge>
+    <edge source="n53" target="n65">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map3k1</data>
+      <data key="e_target_label">Notch1</data>
+    </edge>
+    <edge source="n54" target="n51">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map3k5</data>
+      <data key="e_target_label">Map2k4</data>
+    </edge>
+    <edge source="n55" target="n53">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Map4k1</data>
+      <data key="e_target_label">Map3k1</data>
+    </edge>
+    <edge source="n56" target="n85">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk1</data>
+      <data key="e_target_label">Rock1</data>
+    </edge>
+    <edge source="n57" target="n68">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk14</data>
+      <data key="e_target_label">Pak6</data>
+    </edge>
+    <edge source="n57" target="n82">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk14</data>
+      <data key="e_target_label">Ptpn7</data>
+    </edge>
+    <edge source="n58" target="n20">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Cebpa</data>
+    </edge>
+    <edge source="n58" target="n28">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">E2f1</data>
+    </edge>
+    <edge source="n58" target="n29">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Erbb4</data>
+    </edge>
+    <edge source="n58" target="n36">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Hif1a</data>
+    </edge>
+    <edge source="n58" target="n48">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Lck</data>
+    </edge>
+    <edge source="n58" target="n59">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Myc</data>
+    </edge>
+    <edge source="n58" target="n66">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Pak1</data>
+    </edge>
+    <edge source="n58" target="n69">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Pde4d</data>
+    </edge>
+    <edge source="n58" target="n74">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Ppara</data>
+    </edge>
+    <edge source="n58" target="n75">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Ppp2r5c</data>
+    </edge>
+    <edge source="n58" target="n92">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Thrb</data>
+    </edge>
+    <edge source="n58" target="n94">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Mapk3</data>
+      <data key="e_target_label">Twist1</data>
+    </edge>
+    <edge source="n59" target="n3">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Myc</data>
+      <data key="e_target_label">Agtr1a</data>
+    </edge>
+    <edge source="n59" target="n4">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Myc</data>
+      <data key="e_target_label">Agtr1b</data>
+    </edge>
+    <edge source="n59" target="n25">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Myc</data>
+      <data key="e_target_label">Cul1</data>
+    </edge>
+    <edge source="n59" target="n26">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Myc</data>
+      <data key="e_target_label">Cxcl2</data>
+    </edge>
+    <edge source="n59" target="n40">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Myc</data>
+      <data key="e_target_label">Itgb1</data>
+    </edge>
+    <edge source="n59" target="n93">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Myc</data>
+      <data key="e_target_label">Tsc22d3</data>
+    </edge>
+    <edge source="n60" target="n13">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Nedd9</data>
+      <data key="e_target_label">Aurka</data>
+    </edge>
+    <edge source="n61" target="n12">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Nfat5</data>
+      <data key="e_target_label">Atm</data>
+    </edge>
+    <edge source="n62" target="n58">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Nfatc1</data>
+      <data key="e_target_label">Mapk3</data>
+    </edge>
+    <edge source="n63" target="n12">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Nfatc2</data>
+      <data key="e_target_label">Atm</data>
+    </edge>
+    <edge source="n63" target="n72">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Nfatc2</data>
+      <data key="e_target_label">Pld1</data>
+    </edge>
+    <edge source="n64" target="n15">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Nfkb1</data>
+      <data key="e_target_label">Carm1</data>
+    </edge>
+    <edge source="n64" target="n20">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Nfkb1</data>
+      <data key="e_target_label">Cebpa</data>
+    </edge>
+    <edge source="n65" target="n18">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Notch1</data>
+      <data key="e_target_label">Cdh2</data>
+    </edge>
+    <edge source="n65" target="n64">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Notch1</data>
+      <data key="e_target_label">Nfkb1</data>
+    </edge>
+    <edge source="n66" target="n13">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pak1</data>
+      <data key="e_target_label">Aurka</data>
+    </edge>
+    <edge source="n66" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pak1</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n66" target="n30">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pak1</data>
+      <data key="e_target_label">Flna</data>
+    </edge>
+    <edge source="n67" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pak4</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n67" target="n42">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pak4</data>
+      <data key="e_target_label">Itgb5</data>
+    </edge>
+    <edge source="n68" target="n24">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pak6</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n68" target="n83">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pak6</data>
+      <data key="e_target_label">Raf1</data>
+    </edge>
+    <edge source="n69" target="n76">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pde4d</data>
+      <data key="e_target_label">Prkaca</data>
+    </edge>
+    <edge source="n70" target="n40">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pdpk1</data>
+      <data key="e_target_label">Itgb1</data>
+    </edge>
+    <edge source="n70" target="n78">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pdpk1</data>
+      <data key="e_target_label">Prkcd</data>
+    </edge>
+    <edge source="n71" target="n36">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pim1</data>
+      <data key="e_target_label">Hif1a</data>
+    </edge>
+    <edge source="n71" target="n59">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pim1</data>
+      <data key="e_target_label">Myc</data>
+    </edge>
+    <edge source="n71" target="n62">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pim1</data>
+      <data key="e_target_label">Nfatc1</data>
+    </edge>
+    <edge source="n72" target="n8">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Pld1</data>
+      <data key="e_target_label">Arf1</data>
+    </edge>
+    <edge source="n73" target="n7">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Plk1</data>
+      <data key="e_target_label">Anapc1</data>
+    </edge>
+    <edge source="n73" target="n83">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Plk1</data>
+      <data key="e_target_label">Raf1</data>
+    </edge>
+    <edge source="n74" target="n3">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ppara</data>
+      <data key="e_target_label">Agtr1a</data>
+    </edge>
+    <edge source="n74" target="n4">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ppara</data>
+      <data key="e_target_label">Agtr1b</data>
+    </edge>
+    <edge source="n75" target="n58">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ppp2r5c</data>
+      <data key="e_target_label">Mapk3</data>
+    </edge>
+    <edge source="n76" target="n5">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Akap12</data>
+    </edge>
+    <edge source="n76" target="n9">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Arfgef1</data>
+    </edge>
+    <edge source="n76" target="n13">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Aurka</data>
+    </edge>
+    <edge source="n76" target="n15">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Carm1</data>
+    </edge>
+    <edge source="n76" target="n23">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Csk</data>
+    </edge>
+    <edge source="n76" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n76" target="n30">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Flna</data>
+    </edge>
+    <edge source="n76" target="n40">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Itgb1</data>
+    </edge>
+    <edge source="n76" target="n64">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Nfkb1</data>
+    </edge>
+    <edge source="n76" target="n69">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Pde4d</data>
+    </edge>
+    <edge source="n76" target="n95">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkaca</data>
+      <data key="e_target_label">Vasp</data>
+    </edge>
+    <edge source="n77" target="n30">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkca</data>
+      <data key="e_target_label">Flna</data>
+    </edge>
+    <edge source="n77" target="n40">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkca</data>
+      <data key="e_target_label">Itgb1</data>
+    </edge>
+    <edge source="n77" target="n81">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkca</data>
+      <data key="e_target_label">Ptpn11</data>
+    </edge>
+    <edge source="n77" target="n95">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkca</data>
+      <data key="e_target_label">Vasp</data>
+    </edge>
+    <edge source="n78" target="n35">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkcd</data>
+      <data key="e_target_label">Gsk3a</data>
+    </edge>
+    <edge source="n78" target="n44">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkcd</data>
+      <data key="e_target_label">Itgb7</data>
+    </edge>
+    <edge source="n78" target="n79">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkcd</data>
+      <data key="e_target_label">Prkd1</data>
+    </edge>
+    <edge source="n78" target="n82">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkcd</data>
+      <data key="e_target_label">Ptpn7</data>
+    </edge>
+    <edge source="n78" target="n87">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkcd</data>
+      <data key="e_target_label">Smpd1</data>
+    </edge>
+    <edge source="n79" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkd1</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n79" target="n67">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkd1</data>
+      <data key="e_target_label">Pak4</data>
+    </edge>
+    <edge source="n79" target="n82">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkd1</data>
+      <data key="e_target_label">Ptpn7</data>
+    </edge>
+    <edge source="n79" target="n95">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Prkd1</data>
+      <data key="e_target_label">Vasp</data>
+    </edge>
+    <edge source="n80" target="n23">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptk2</data>
+      <data key="e_target_label">Csk</data>
+    </edge>
+    <edge source="n81" target="n17">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn11</data>
+      <data key="e_target_label">Cdc73</data>
+    </edge>
+    <edge source="n81" target="n38">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn11</data>
+      <data key="e_target_label">Igf1r</data>
+    </edge>
+    <edge source="n81" target="n39">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn11</data>
+      <data key="e_target_label">Insr</data>
+    </edge>
+    <edge source="n81" target="n46">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn11</data>
+      <data key="e_target_label">Jak3</data>
+    </edge>
+    <edge source="n81" target="n77">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn11</data>
+      <data key="e_target_label">Prkca</data>
+    </edge>
+    <edge source="n81" target="n96">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn11</data>
+      <data key="e_target_label">Vav1</data>
+    </edge>
+    <edge source="n81" target="n97">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn11</data>
+      <data key="e_target_label">Vav2</data>
+    </edge>
+    <edge source="n81" target="n98">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn11</data>
+      <data key="e_target_label">Vav3</data>
+    </edge>
+    <edge source="n82" target="n56">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn7</data>
+      <data key="e_target_label">Mapk1</data>
+    </edge>
+    <edge source="n82" target="n57">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn7</data>
+      <data key="e_target_label">Mapk14</data>
+    </edge>
+    <edge source="n82" target="n58">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Ptpn7</data>
+      <data key="e_target_label">Mapk3</data>
+    </edge>
+    <edge source="n83" target="n49">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Raf1</data>
+      <data key="e_target_label">Map2k1</data>
+    </edge>
+    <edge source="n83" target="n50">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Raf1</data>
+      <data key="e_target_label">Map2k2</data>
+    </edge>
+    <edge source="n83" target="n55">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Raf1</data>
+      <data key="e_target_label">Map4k1</data>
+    </edge>
+    <edge source="n83" target="n56">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Raf1</data>
+      <data key="e_target_label">Mapk1</data>
+    </edge>
+    <edge source="n83" target="n58">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Raf1</data>
+      <data key="e_target_label">Mapk3</data>
+    </edge>
+    <edge source="n84" target="n12">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Rela</data>
+      <data key="e_target_label">Atm</data>
+    </edge>
+    <edge source="n84" target="n15">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Rela</data>
+      <data key="e_target_label">Carm1</data>
+    </edge>
+    <edge source="n84" target="n64">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Rela</data>
+      <data key="e_target_label">Nfkb1</data>
+    </edge>
+    <edge source="n85" target="n56">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Rock1</data>
+      <data key="e_target_label">Mapk1</data>
+    </edge>
+    <edge source="n85" target="n70">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Rock1</data>
+      <data key="e_target_label">Pdpk1</data>
+    </edge>
+    <edge source="n85" target="n80">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Rock1</data>
+      <data key="e_target_label">Ptk2</data>
+    </edge>
+    <edge source="n86" target="n24">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Siah1a</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n87" target="n0">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Smpd1</data>
+      <data key="e_target_label">LIPID_RULE:0a193eab8c3e1575e44a forward</data>
+    </edge>
+    <edge source="n87" target="n1">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Smpd1</data>
+      <data key="e_target_label">LIPID_RULE:4dca6594acdae224a890 forward</data>
+    </edge>
+    <edge source="n88" target="n24">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Smurf2</data>
+      <data key="e_target_label">Ctnnb1</data>
+    </edge>
+    <edge source="n89" target="n71">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Stat1</data>
+      <data key="e_target_label">Pim1</data>
+    </edge>
+    <edge source="n90" target="n20">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Stat5a</data>
+      <data key="e_target_label">Cebpa</data>
+    </edge>
+    <edge source="n90" target="n32">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Stat5a</data>
+      <data key="e_target_label">Fosl2</data>
+    </edge>
+    <edge source="n90" target="n38">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Stat5a</data>
+      <data key="e_target_label">Igf1r</data>
+    </edge>
+    <edge source="n90" target="n46">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Stat5a</data>
+      <data key="e_target_label">Jak3</data>
+    </edge>
+    <edge source="n90" target="n63">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Stat5a</data>
+      <data key="e_target_label">Nfatc2</data>
+    </edge>
+    <edge source="n91" target="n57">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Tbx2</data>
+      <data key="e_target_label">Mapk14</data>
+    </edge>
+    <edge source="n92" target="n90">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Thrb</data>
+      <data key="e_target_label">Stat5a</data>
+    </edge>
+    <edge source="n93" target="n84">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Tsc22d3</data>
+      <data key="e_target_label">Rela</data>
+    </edge>
+    <edge source="n94" target="n58">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Twist1</data>
+      <data key="e_target_label">Mapk3</data>
+    </edge>
+    <edge source="n95" target="n76">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Vasp</data>
+      <data key="e_target_label">Prkaca</data>
+    </edge>
+    <edge source="n95" target="n77">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Vasp</data>
+      <data key="e_target_label">Prkca</data>
+    </edge>
+    <edge source="n96" target="n81">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Vav1</data>
+      <data key="e_target_label">Ptpn11</data>
+    </edge>
+    <edge source="n96" target="n99">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Vav1</data>
+      <data key="e_target_label">Zap70</data>
+    </edge>
+    <edge source="n97" target="n81">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Vav2</data>
+      <data key="e_target_label">Ptpn11</data>
+    </edge>
+    <edge source="n98" target="n81">
+      <data key="e_interaction">-1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Vav3</data>
+      <data key="e_target_label">Ptpn11</data>
+    </edge>
+    <edge source="n99" target="n57">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Zap70</data>
+      <data key="e_target_label">Mapk14</data>
+    </edge>
+    <edge source="n99" target="n96">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Zap70</data>
+      <data key="e_target_label">Vav1</data>
+    </edge>
+    <edge source="n99" target="n97">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+      <data key="e_source_label">Zap70</data>
+      <data key="e_target_label">Vav2</data>
+    </edge>
+  </graph>
+</graphml>

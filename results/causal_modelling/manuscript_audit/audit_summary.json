@@ -1,0 +1,78 @@
+{
+  "audited_utc": "2026-09-09 15:49:55 UTC",
+  "operation": "frozen-state audit and exact solution re-extraction; no model or MOON refitting",
+  "run_id": "radius6_depth4_compressed",
+  "candidate": "cosmos_factor1_compressed_review/threshold_search/C03",
+  "prior": {
+    "edges": 254589,
+    "nodes": 52755,
+    "archived_hash_matches": true
+  },
+  "inputs": {
+    "tf_inputs": 49,
+    "lipid_inputs": 74,
+    "archived_hash_matches": true
+  },
+  "compression": {
+    "initial_edges": 36569,
+    "merged_original_nodes": 2720,
+    "groups": 378,
+    "final_projection_matches": true
+  },
+  "scoring": {
+    "pruning_distance": 6,
+    "n_layers": 4,
+    "iterations": 3,
+    "final_scoring_edges": 27746,
+    "final_original_edges": 35304
+  },
+  "extraction": {
+    "primary_thresh": 1.85,
+    "secondary_thresh": 0.55,
+    "observed_exempt_from_secondary": true,
+    "observed_eligible_as_primary": false,
+    "candidate_edges": 1630,
+    "consistent_edges": 1029,
+    "final_edges": 388,
+    "final_nodes": 153,
+    "retained_upstream": 4,
+    "retained_observed": 3,
+    "all_edges_consistent": true,
+    "all_nodes_on_seed_to_observation_walk": true,
+    "observed_outgoing_edges": 0
+  },
+  "exact_reextraction_matches_saved": true,
+  "all_scores": {
+    "before_sign_filter": 2238,
+    "returned": 2207,
+    "upstream_sign_conflicts": 31
+  },
+  "focus_tf_scores": [
+    {
+      "source": "Gene__Esr1",
+      "score": 0.131796253954624,
+      "upstream_activity": -7.08874857626001,
+      "retention_reason": "upstream_sign_conflict"
+    },
+    {
+      "source": "Gene__Nfic",
+      "score": 0.71858971293777,
+      "upstream_activity": -4.34923126849243,
+      "retention_reason": "upstream_sign_conflict"
+    },
+    {
+      "source": "Gene__Dbp",
+      "score": 0.345155683867094,
+      "upstream_activity": -7.66088476896073,
+      "retention_reason": "upstream_sign_conflict"
+    }
+  ],
+  "threshold_evaluations": 7563,
+  "stronger_compression_reproduces_selected_graph": true,
+  "current_versions": {
+    "R": "4.6.1",
+    "cosmosR": "1.21.2",
+    "decoupleR": "2.17.0"
+  },
+  "relocation_note": "Historical scripts/manifests/RDS path strings may reference results/cosmos_*; this audit resolves relocated artifacts explicitly. This is not an end-to-end replay of historical runners."
+}

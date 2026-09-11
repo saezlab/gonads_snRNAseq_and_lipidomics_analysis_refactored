@@ -1,0 +1,46 @@
+{
+  "retrieved_utc": "2026-09-08T09:55:02.116704+00:00",
+  "omnipath_metabo_commit": "0d7bb56ac7c8b6e5ad0f19f54874ef84d4e7f84c",
+  "cosmosR_commit_prefix": "b2ed195",
+  "sources": [
+    {
+      "file": "results/cosmos_pkn_audit/raw/om-mouse-pkn.json.gz",
+      "url": "https://metabo.omnipathdb.org/cosmos/pkn?organism=10090&categories=all",
+      "sha256_uncompressed": "a4a2c26393b8a52816bce6cc9cf1611130be309329e4c8c5375dc7dd4f5f7cfe"
+    },
+    {
+      "file": "results/cosmos_pkn_audit/raw/om-status.json.gz",
+      "url": "https://metabo.omnipathdb.org/cosmos/status",
+      "sha256_uncompressed": "336aecfadcf61497b345e7d25a5b03a5d6545290156a5d5cf523bae5694a2089"
+    },
+    {
+      "file": "results/cosmos_pkn_audit/raw/om-fresh-grn.tsv.gz",
+      "url": "https://omnipathdb.org/interactions?datasets=collectri&organisms=10090&genesymbols=yes&fields=sources,references",
+      "sha256_uncompressed": "7fddda98a38079ba0f0f50574d39fa15a6b007bb166c12a13474236b1be43e68"
+    },
+    {
+      "file": "results/cosmos_pkn_audit/raw/om-fresh-ppi.tsv.gz",
+      "url": "https://omnipathdb.org/interactions?datasets=omnipath,ligrecextra&organisms=10090&genesymbols=yes&fields=sources,references",
+      "sha256_uncompressed": "f8ab6c6f560884f94706df23de0753eaec767a7342f56c0236f39a129e2327da"
+    },
+    {
+      "file": "results/cosmos_pkn_audit/raw/swisslipids-downloads.json.gz",
+      "url": "https://www.swisslipids.org/api/index.php/downloadData",
+      "sha256_uncompressed": "c7eec48ab94b5ce2dba1188713e5fced4585ceacdba5c94c27f577e06dbda629"
+    },
+    {
+      "file": "results/cosmos_pkn_audit/raw/swisslipids-enzymes.tsv.gz",
+      "url": "https://www.swisslipids.org/api/file.php?cas=download_files&file=enzymes.tsv",
+      "sha256_uncompressed": "411dac5e97cbf335cf9a76609ff3d84b01b15ca6d0ec938da1874ad5bf772c62"
+    },
+    {
+      "file": "results/cosmos_pkn_audit/raw/focus-uniprot.tsv.gz",
+      "url": "https://rest.uniprot.org/uniprotkb/search",
+      "query": "organism_id:10090 AND (gene_exact:Cyp2b9 OR gene_exact:Cyp2b13 OR gene_exact:Cyp2c38 OR gene_exact:Cyp2d9 OR gene_exact:Mtmr11 OR gene_exact:Sult3a1 OR gene_exact:Abcb1a)",
+      "format": "tsv",
+      "fields": "accession,gene_primary,reviewed",
+      "size": 500,
+      "sha256_uncompressed": "0f80cba44891333a12ccc06d5d32e035416ae624df683f26039cf8b477f5c9b7"
+    }
+  ]
+}

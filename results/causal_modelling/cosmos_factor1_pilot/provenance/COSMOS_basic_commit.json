@@ -1,0 +1,111 @@
+{
+  "sha": "7108c6b849c712b1282440dc122c9d783f563da8",
+  "node_id": "C_kwDOMEnzeNoAKDcxMDhjNmI4NDljNzEyYjEyODI0NDBkYzEyMmM5ZDc4M2Y1NjNkYTg",
+  "commit": {
+    "author": {
+      "name": "Aurelien Dugourd",
+      "email": "dugourd@ebi.ac.uk",
+      "date": "2026-03-03T12:55:33Z"
+    },
+    "committer": {
+      "name": "Aurelien Dugourd",
+      "email": "dugourd@ebi.ac.uk",
+      "date": "2026-03-03T12:55:33Z"
+    },
+    "message": "added talk slides",
+    "tree": {
+      "sha": "b37407dea5a4448a43a20a092e90d8348c2f694c",
+      "url": "https://api.github.com/repos/saezlab/COSMOS_basic/git/trees/b37407dea5a4448a43a20a092e90d8348c2f694c"
+    },
+    "url": "https://api.github.com/repos/saezlab/COSMOS_basic/git/commits/7108c6b849c712b1282440dc122c9d783f563da8",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "url": "https://api.github.com/repos/saezlab/COSMOS_basic/commits/7108c6b849c712b1282440dc122c9d783f563da8",
+  "html_url": "https://github.com/saezlab/COSMOS_basic/commit/7108c6b849c712b1282440dc122c9d783f563da8",
+  "comments_url": "https://api.github.com/repos/saezlab/COSMOS_basic/commits/7108c6b849c712b1282440dc122c9d783f563da8/comments",
+  "author": {
+    "login": "adugourd",
+    "id": 16302934,
+    "node_id": "MDQ6VXNlcjE2MzAyOTM0",
+    "avatar_url": "https://avatars.githubusercontent.com/u/16302934?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/adugourd",
+    "html_url": "https://github.com/adugourd",
+    "followers_url": "https://api.github.com/users/adugourd/followers",
+    "following_url": "https://api.github.com/users/adugourd/following{/other_user}",
+    "gists_url": "https://api.github.com/users/adugourd/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/adugourd/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/adugourd/subscriptions",
+    "organizations_url": "https://api.github.com/users/adugourd/orgs",
+    "repos_url": "https://api.github.com/users/adugourd/repos",
+    "events_url": "https://api.github.com/users/adugourd/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/adugourd/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "adugourd",
+    "id": 16302934,
+    "node_id": "MDQ6VXNlcjE2MzAyOTM0",
+    "avatar_url": "https://avatars.githubusercontent.com/u/16302934?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/adugourd",
+    "html_url": "https://github.com/adugourd",
+    "followers_url": "https://api.github.com/users/adugourd/followers",
+    "following_url": "https://api.github.com/users/adugourd/following{/other_user}",
+    "gists_url": "https://api.github.com/users/adugourd/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/adugourd/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/adugourd/subscriptions",
+    "organizations_url": "https://api.github.com/users/adugourd/orgs",
+    "repos_url": "https://api.github.com/users/adugourd/repos",
+    "events_url": "https://api.github.com/users/adugourd/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/adugourd/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "4b3e12934eeb742a8d52e1c55bda204dd49184ba",
+      "url": "https://api.github.com/repos/saezlab/COSMOS_basic/commits/4b3e12934eeb742a8d52e1c55bda204dd49184ba",
+      "html_url": "https://github.com/saezlab/COSMOS_basic/commit/4b3e12934eeb742a8d52e1c55bda204dd49184ba"
+    }
+  ],
+  "stats": {
+    "total": 0,
+    "additions": 0,
+    "deletions": 0
+  },
+  "files": [
+    {
+      "sha": "6d136c8001305c55439ef4051f49f7e67620e6b1",
+      "filename": "EBI_practical/20260303_EBI_multiomic_course_AurelienDugourd_60min.pdf",
+      "status": "added",
+      "additions": 0,
+      "deletions": 0,
+      "changes": 0,
+      "blob_url": "https://github.com/saezlab/COSMOS_basic/blob/7108c6b849c712b1282440dc122c9d783f563da8/EBI_practical%2F20260303_EBI_multiomic_course_AurelienDugourd_60min.pdf",
+      "raw_url": "https://github.com/saezlab/COSMOS_basic/raw/7108c6b849c712b1282440dc122c9d783f563da8/EBI_practical%2F20260303_EBI_multiomic_course_AurelienDugourd_60min.pdf",
+      "contents_url": "https://api.github.com/repos/saezlab/COSMOS_basic/contents/EBI_practical%2F20260303_EBI_multiomic_course_AurelienDugourd_60min.pdf?ref=7108c6b849c712b1282440dc122c9d783f563da8"
+    },
+    {
+      "sha": "73ffa9371f3cb413ed3a279033aaadfa941f5786",
+      "filename": "EBI_practical/20260303_EBI_multiomic_course_AurelienDugourd_60min.pptx",
+      "status": "added",
+      "additions": 0,
+      "deletions": 0,
+      "changes": 0,
+      "blob_url": "https://github.com/saezlab/COSMOS_basic/blob/7108c6b849c712b1282440dc122c9d783f563da8/EBI_practical%2F20260303_EBI_multiomic_course_AurelienDugourd_60min.pptx",
+      "raw_url": "https://github.com/saezlab/COSMOS_basic/raw/7108c6b849c712b1282440dc122c9d783f563da8/EBI_practical%2F20260303_EBI_multiomic_course_AurelienDugourd_60min.pptx",
+      "contents_url": "https://api.github.com/repos/saezlab/COSMOS_basic/contents/EBI_practical%2F20260303_EBI_multiomic_course_AurelienDugourd_60min.pptx?ref=7108c6b849c712b1282440dc122c9d783f563da8"
+    }
+  ]
+}

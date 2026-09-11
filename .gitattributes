@@ -51,3 +51,8 @@ refactoring_docs/workflow2_test_fixed.txt binary
 *.zip           binary
 *.gz            binary
 *.tar           binary
+
+# Frozen COSMOS sources and results are referenced by byte-level checksums.
+# Preserve their original line endings as well as their binary payloads.
+results/causal_modelling/** -text !eol
+support/cosmos_mouse/raw/** -text !eol

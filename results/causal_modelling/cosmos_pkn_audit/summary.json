@@ -1,0 +1,88 @@
+{
+  "cached_records": 235302,
+  "cached_resources": [
+    {
+      "resource": "BRENDA",
+      "records": 786,
+      "positive": 131,
+      "negative": 655,
+      "unsigned": 0
+    },
+    {
+      "resource": "GEM:Mouse-GEM",
+      "records": 115434,
+      "positive": 115434,
+      "negative": 0,
+      "unsigned": 0
+    },
+    {
+      "resource": "GEM_transporter:Mouse-GEM",
+      "records": 27282,
+      "positive": 27282,
+      "negative": 0,
+      "unsigned": 0
+    },
+    {
+      "resource": "MRCLinksDB",
+      "records": 641,
+      "positive": 641,
+      "negative": 0,
+      "unsigned": 0
+    },
+    {
+      "resource": "OmniPath:collectri",
+      "records": 28414,
+      "positive": 0,
+      "negative": 0,
+      "unsigned": 28414
+    },
+    {
+      "resource": "OmniPath:omnipath,ligrecextra",
+      "records": 22034,
+      "positive": 0,
+      "negative": 0,
+      "unsigned": 22034
+    },
+    {
+      "resource": "STITCH",
+      "records": 40428,
+      "positive": 20837,
+      "negative": 19591,
+      "unsigned": 0
+    },
+    {
+      "resource": "TCDB",
+      "records": 283,
+      "positive": 283,
+      "negative": 0,
+      "unsigned": 0
+    }
+  ],
+  "fresh_protein_exports": {
+    "grn": {
+      "records": 39849,
+      "single_sign": 35056,
+      "dual_sign": 4793
+    },
+    "ppi": {
+      "records": 32468,
+      "unsigned": 11692,
+      "single_sign": 19401,
+      "dual_sign": 1375
+    }
+  },
+  "candidate_protein_edges": 53562,
+  "quarantined_protein_pairs": 6194,
+  "current_lipid_DE_features": 1254,
+  "linex_nodes": 1129,
+  "linex_nonzero_matrix_entries": 7552,
+  "linex_symmetric": true,
+  "DE_features_in_linex_nodes": 910,
+  "DE_features_connected_in_linex": 853,
+  "mofa_factor1_matrix_genes": 139,
+  "mofa_factor1_matrix_lipids": 64,
+  "mofa_lipids_connected_in_linex": 22,
+  "swisslipids_enzyme_rows": 5714,
+  "swisslipids_mouse_enzyme_rows": 927,
+  "coverage_note": "LINEX overlap is exact label overlap, not curated directed PKN coverage. ChEBI/SwissLipids mapping and a complete lipid PKN remain unbuilt."
+}

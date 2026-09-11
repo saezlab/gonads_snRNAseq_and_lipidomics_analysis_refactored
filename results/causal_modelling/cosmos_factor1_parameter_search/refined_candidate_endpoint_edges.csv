@@ -1,0 +1,14 @@
+"source","target","interaction","consistency","run_id","solution","source_score","lipid_weight"
+"Enzyme__28143c03c6898d48","Metab__MeasuredLipid:DG(24:0_18:2)_unknown",1,TRUE,"radius6_depth4_compressed","solution_p2_00_s0_75",2.97188233409243,1.39919914162362
+"Enzyme__34a1cda993b50319","Metab__MeasuredLipid:DG(24:1_18:2)_unknown",1,TRUE,"radius6_depth4_compressed","solution_p2_00_s0_75",3.98867501177353,1.75095749390766
+"Enzyme__28143c03c6898d48","Metab__MeasuredLipid:DG(24:0_18:2)_unknown",1,TRUE,"radius6_depth4_compressed","solution_p2_00_s0_85",2.97188233409243,1.39919914162362
+"Enzyme__34a1cda993b50319","Metab__MeasuredLipid:DG(24:1_18:2)_unknown",1,TRUE,"radius6_depth4_compressed","solution_p2_00_s0_85",3.98867501177353,1.75095749390766
+"Enzyme__28143c03c6898d48","Metab__MeasuredLipid:DG(24:0_18:2)_unknown",1,TRUE,"radius6_depth4_uncompressed","solution_p1_70_s1_50",2.97188233409243,1.39919914162362
+"Enzyme__34a1cda993b50319","Metab__MeasuredLipid:DG(24:1_18:2)_unknown",1,TRUE,"radius6_depth4_uncompressed","solution_p1_70_s1_50",3.98867501177353,1.75095749390766
+"Enzyme__e7e675d8dad145b5","Metab__MeasuredLipid:DG(20:0_18:1)_unknown",1,TRUE,"radius6_depth4_uncompressed","solution_p1_70_s1_50",1.89116750630157,0.980129576992844
+"Enzyme__28143c03c6898d48","Metab__MeasuredLipid:DG(24:0_18:2)_unknown",1,TRUE,"radius6_depth4_uncompressed","solution_p1_90_s1_60",2.97188233409243,1.39919914162362
+"Enzyme__34a1cda993b50319","Metab__MeasuredLipid:DG(24:1_18:2)_unknown",1,TRUE,"radius6_depth4_uncompressed","solution_p1_90_s1_60",3.98867501177353,1.75095749390766
+"Enzyme__28143c03c6898d48","Metab__MeasuredLipid:DG(24:0_18:2)_unknown",1,TRUE,"radius6_depth5_uncompressed","solution_p2_00_s1_50",2.97188233409243,1.39919914162362
+"Enzyme__34a1cda993b50319","Metab__MeasuredLipid:DG(24:1_18:2)_unknown",1,TRUE,"radius6_depth5_uncompressed","solution_p2_00_s1_50",3.98867501177353,1.75095749390766
+"Enzyme__28143c03c6898d48","Metab__MeasuredLipid:DG(24:0_18:2)_unknown",1,TRUE,"radius6_depth5_uncompressed","solution_p2_05_s1_60",2.97188233409243,1.39919914162362
+"Enzyme__34a1cda993b50319","Metab__MeasuredLipid:DG(24:1_18:2)_unknown",1,TRUE,"radius6_depth5_uncompressed","solution_p2_05_s1_60",3.98867501177353,1.75095749390766

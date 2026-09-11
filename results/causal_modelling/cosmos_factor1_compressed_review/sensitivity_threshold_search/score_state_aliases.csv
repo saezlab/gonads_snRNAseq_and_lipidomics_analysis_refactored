@@ -1,0 +1,9 @@
+"run_id","depth","canonical_run","realized_max_level"
+"radius6_depth4_compressed_inputs_only",4,"radius6_depth4_compressed_inputs_only",4
+"radius6_depth8_compressed_inputs_only",8,"radius6_depth8_compressed_inputs_only",7
+"radius12_depth8_compressed",8,"radius12_depth8_compressed",8
+"radius4_depth8_compressed",8,"radius4_depth8_compressed",6
+"radius5_depth8_compressed",8,"radius5_depth8_compressed",7
+"radius7_depth8_compressed",8,"radius7_depth8_compressed",7
+"radius6_depth4_compressed_prescore_rna",4,"radius6_depth4_compressed_prescore_rna",4
+"radius6_depth8_compressed_prescore_rna",8,"radius6_depth8_compressed_prescore_rna",7

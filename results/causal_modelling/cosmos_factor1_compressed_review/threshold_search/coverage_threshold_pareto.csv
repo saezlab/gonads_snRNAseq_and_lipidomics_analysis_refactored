@@ -1,0 +1,16 @@
+"run_id","depth","phase","primary","secondary","nodes","edges","upstream_tfs","downstream_lipids","tf_names","lipid_names","route_pairs","shortest_route_min","shortest_route_max","converged","valid","candidate_edges","consistent_edges","eligible","multiple_tfs_and_lipids","coverage_threshold_pareto","threshold_frontier"
+"radius6_depth4_compressed",4,"refined",2.025,0.85,102,235,1,2,"Tbx2","DG(24:0_18:2);DG(24:1_18:2)",2,9,9,TRUE,TRUE,975,632,TRUE,FALSE,TRUE,TRUE
+"radius6_depth4_compressed",4,"refined",2,0.85,110,255,2,2,"Ppara;Tbx2","DG(24:0_18:2);DG(24:1_18:2)",4,9,9,TRUE,TRUE,1036,664,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",1.875,0.85,137,349,2,3,"Ppara;Tbx2","DG(20:0_18:1);DG(24:0_18:2);DG(24:1_18:2)",6,7,8,TRUE,TRUE,1303,848,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",2.025,0.75,106,241,2,2,"Ahr;Tbx2","DG(24:0_18:2);DG(24:1_18:2)",4,9,9,TRUE,TRUE,1072,678,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",2,0.75,114,261,3,2,"Ahr;Ppara;Tbx2","DG(24:0_18:2);DG(24:1_18:2)",6,9,9,TRUE,TRUE,1136,713,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",1.875,0.75,143,359,3,3,"Ahr;Ppara;Tbx2","DG(20:0_18:1);DG(24:0_18:2);DG(24:1_18:2)",9,7,9,TRUE,TRUE,1445,922,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",2.025,0.6,112,257,3,2,"Ahr;Hnf4a;Tbx2","DG(24:0_18:2);DG(24:1_18:2)",6,9,9,TRUE,TRUE,1194,754,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"coarse",2,0.6,120,277,4,2,"Ahr;Hnf4a;Ppara;Tbx2","DG(24:0_18:2);DG(24:1_18:2)",8,9,9,TRUE,TRUE,1263,792,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",1.875,0.6,152,386,4,3,"Ahr;Hnf4a;Ppara;Tbx2","DG(20:0_18:1);DG(24:0_18:2);DG(24:1_18:2)",12,7,9,TRUE,TRUE,1611,1021,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",2.025,0.475,116,274,4,2,"Ahr;Hnf4a;Tbx15;Tbx2","DG(24:0_18:2);DG(24:1_18:2)",8,8,9,TRUE,TRUE,1239,780,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",2,0.475,124,294,5,2,"Ahr;Hnf4a;Ppara;Tbx15;Tbx2","DG(24:0_18:2);DG(24:1_18:2)",10,8,9,TRUE,TRUE,1311,818,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",1.875,0.475,156,404,5,3,"Ahr;Hnf4a;Ppara;Tbx15;Tbx2","DG(20:0_18:1);DG(24:0_18:2);DG(24:1_18:2)",15,7,9,TRUE,TRUE,1670,1051,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",2.025,0.325,123,304,5,2,"Ahr;Hnf4a;Nfe2l2;Tbx15;Tbx2","DG(24:0_18:2);DG(24:1_18:2)",10,8,9,TRUE,TRUE,1332,836,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",2,0.325,132,326,6,2,"Ahr;Hnf4a;Nfe2l2;Ppara;Tbx15;Tbx2","DG(24:0_18:2);DG(24:1_18:2)",12,8,9,TRUE,TRUE,1409,876,TRUE,TRUE,TRUE,FALSE
+"radius6_depth4_compressed",4,"refined",1.875,0.325,166,446,6,3,"Ahr;Hnf4a;Nfe2l2;Ppara;Tbx15;Tbx2","DG(20:0_18:1);DG(24:0_18:2);DG(24:1_18:2)",18,7,9,TRUE,TRUE,1797,1127,TRUE,TRUE,TRUE,FALSE

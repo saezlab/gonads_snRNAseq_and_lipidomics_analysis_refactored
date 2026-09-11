@@ -1,0 +1,4 @@
+"run_id","tf","topology_radius","n_layers","input_activity","in_prepared_pkn","in_final_pkn","inferred_before_sign_filter","score_level","retained_score","sign_agrees"
+"radius6_depth4_compressed_prescore_rna","Gene__Esr1",6,4,-7.08874857626001,TRUE,TRUE,0.132701938693858,3,FALSE,FALSE
+"radius6_depth4_compressed_prescore_rna","Gene__Nfic",6,4,-4.34923126849243,TRUE,TRUE,0.729162438533042,4,FALSE,FALSE
+"radius6_depth4_compressed_prescore_rna","Gene__Dbp",6,4,-7.66088476896073,TRUE,TRUE,0.352345857764369,4,FALSE,FALSE

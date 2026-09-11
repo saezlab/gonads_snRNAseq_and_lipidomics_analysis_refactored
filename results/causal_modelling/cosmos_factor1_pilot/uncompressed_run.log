@@ -1,0 +1,32 @@
+PKN: 254589 edges; TF seeds: 49 ; mapped lipid node observations: 155 
+MOON compression: 44127 -> 44127 edges; 0 original nodes in 0 merged groups; 6673 protected IDs verified.
+Pruned: 44127 edges / 6673 nodes; compressed: 44127 edges / 6673 nodes
+MOON coherence iteration 1 with 44127 edges
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+MOON coherence iteration 2 with 36204 edges
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+MOON coherence iteration 3 with 35072 edges
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+MOON coherence iteration 4 with 34973 edges
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+Completed MOON pilot. Converged: TRUE 
+    name primary secondary nodes edges upstream_tfs downstream_nodes
+ relaxed     1.0       0.0  3647 13246           14               11
+ primary     1.7       1.0   473  1676            8                4
+  strict     2.0       1.5   187   537            3                2

@@ -1,0 +1,8 @@
+"run_id","run_dir","compression","depth","n_layers","topology_radius","status","converged","audit_passed","valid","nodes","edges","upstream_tfs","downstream_lipids","downstream_nodes","realized_max_level","scored_nodes","final_scoring_edges","final_original_edges"
+"radius7_depth4_uncompressed","results/cosmos_factor1_parameter_search/runs/radius7_depth4_uncompressed","uncompressed",4,4,7,"complete",TRUE,TRUE,TRUE,,,49,74,74,4,2237,37844,37844
+"radius7_depth5_uncompressed","results/cosmos_factor1_parameter_search/runs/radius7_depth5_uncompressed","uncompressed",5,5,7,"complete",TRUE,TRUE,TRUE,,,49,74,74,5,5730,36951,36951
+"radius7_depth6_uncompressed","results/cosmos_factor1_parameter_search/runs/radius7_depth6_uncompressed","uncompressed",6,6,7,"complete",TRUE,TRUE,TRUE,,,49,74,74,6,6642,36884,36884
+"radius7_depth7_uncompressed","results/cosmos_factor1_parameter_search/runs/radius7_depth7_uncompressed","uncompressed",7,7,7,"complete",TRUE,TRUE,TRUE,,,49,74,74,7,7157,36869,36869
+"radius7_depth8_uncompressed","results/cosmos_factor1_parameter_search/runs/radius7_depth8_uncompressed","uncompressed",8,8,7,"complete",TRUE,TRUE,TRUE,,,49,74,74,7,7157,36869,36869
+"radius7_depth10_uncompressed","results/cosmos_factor1_parameter_search/runs/radius7_depth10_uncompressed","uncompressed",10,10,7,"complete",TRUE,TRUE,TRUE,,,49,74,74,7,7157,36869,36869
+"radius7_depth12_uncompressed","results/cosmos_factor1_parameter_search/runs/radius7_depth12_uncompressed","uncompressed",12,12,7,"complete",TRUE,TRUE,TRUE,,,49,74,74,7,7157,36869,36869

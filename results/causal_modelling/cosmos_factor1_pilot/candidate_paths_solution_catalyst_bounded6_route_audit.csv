@@ -1,0 +1,4 @@
+audit,reachable_pairs,upstream_tfs,downstream_nodes,maximum_path_edges
+bounded6,53,14,7,6
+catalyst_only,53,14,7,6
+catalyst_only_bounded6,53,14,7,6

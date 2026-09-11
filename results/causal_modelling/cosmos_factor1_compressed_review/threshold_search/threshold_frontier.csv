@@ -1,0 +1,2 @@
+"run_id","depth","phase","primary","secondary","nodes","edges","upstream_tfs","downstream_lipids","tf_names","lipid_names","route_pairs","shortest_route_min","shortest_route_max","converged","valid","candidate_edges","consistent_edges","eligible","multiple_tfs_and_lipids","coverage_threshold_pareto","threshold_frontier"
+"radius6_depth4_compressed",4,"refined",2.025,0.85,102,235,1,2,"Tbx2","DG(24:0_18:2);DG(24:1_18:2)",2,9,9,TRUE,TRUE,975,632,TRUE,FALSE,TRUE,TRUE

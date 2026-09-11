@@ -1,0 +1,38 @@
+{
+  "evidence_rows": 41235,
+  "unique_signed_edges": 26245,
+  "source_chemicals": 4343,
+  "target_proteins": 3225,
+  "evidence_by_tier": {
+    "cached_brenda_fallback": 772,
+    "curated_mouse_current_secondary_chemical_mapping": 20,
+    "curated_mouse_current": 83,
+    "cached_stitch_fallback": 40360
+  },
+  "exclusion_reasons": {
+    "no_ChEBI_mapping": 615,
+    "chemical_connectivity_mismatch": 15,
+    "unsigned_or_context_dependent_action": 6,
+    "unresolved_or_multisubunit_mouse_target": 8,
+    "chemical_stereochemistry_or_protonation_discrepancy": 11,
+    "not_small_molecule": 289,
+    "no_unambiguous_effect": 1,
+    "upstream_assumed_sign_not_regulatory_evidence": 641,
+    "not_in_current_mouse_UniProt_export": 82
+  },
+  "conflicting_pairs": 988,
+  "pharmacological_supplement_rows": 179,
+  "direct_gene_expression_edges": 0,
+  "chebi_identity_mapping": {
+    "source_version": "255",
+    "terms": 218768,
+    "aliases": 19425,
+    "lipid_descendants": 39798,
+    "direct_acid_base_pairs": 8794,
+    "regulatory_sources": 4343,
+    "regulatory_sources_mapped_by_alt_id": 5,
+    "regulatory_sources_with_conjugate_forms": 811,
+    "regulatory_sources_lipid_is_a": 632,
+    "source_file": "support/cosmos_mouse/raw/regulation_chebi.obo.gz"
+  }
+}

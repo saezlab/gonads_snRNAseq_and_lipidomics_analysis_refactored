@@ -1,0 +1,65 @@
+{
+  "built_utc": "2026-09-08T10:39:31.217197+00:00",
+  "source_version": "Rhea release 142 (2026-09-02)",
+  "sources": [
+    {
+      "file": "support/cosmos_mouse/raw/rhea-release.properties",
+      "url": "https://ftp.expasy.org/databases/rhea/rhea-release.properties",
+      "sha256_file": "4259110467406048a19f7dd797bc3f0506736d1cf2a8327f67ec7b10043fc5d4"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/rhea.rdf.gz",
+      "url": "https://ftp.expasy.org/databases/rhea/rdf/rhea.rdf.gz",
+      "sha256_file": "8ee48d7044cf3eef1001fa730dae2a491902ab25b259b519d6826796bb8acedf"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/rhea-directions.tsv",
+      "url": "https://ftp.expasy.org/databases/rhea/tsv/rhea-directions.tsv",
+      "sha256_file": "deae1911da372c70ee8fc97992809c7923e63b288a8702fc4396edcb2633fb04"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/rhea2uniprot_sprot.tsv",
+      "url": "https://ftp.expasy.org/databases/rhea/tsv/rhea2uniprot_sprot.tsv",
+      "sha256_file": "ff2e1038df2352d4ce4f3e9ae840c350211d8193e79b6a0a2d29fc1c2f392def"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/rhea-lipid-reactions.tsv",
+      "url": "https://sparql.rhea-db.org/sparql",
+      "sha256_file": "929a820d8ad267d25b01b76664bbed098ae3954ca9e1759113203653c2f9a881",
+      "sparql_query": "PREFIX rh: <http://rdf.rhea-db.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?reaction ?chebi WHERE { ?reaction rdfs:subClassOf rh:Reaction; rh:side/rh:contains/rh:compound/rh:chebi ?chebi . ?chebi rdfs:subClassOf* <http://purl.obolibrary.org/obo/CHEBI_18059> . }"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/rhea-all-lipid-chebi.tsv",
+      "url": "https://sparql.rhea-db.org/sparql",
+      "sha256_file": "8e354e73f8d003139971b460548abdf3acd22f4a625e6e9be3ea32b847588301",
+      "sparql_query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?chebi WHERE { ?chebi rdfs:subClassOf* <http://purl.obolibrary.org/obo/CHEBI_18059> . }"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/rhea-chebi_pH7_3_mapping.tsv",
+      "url": "https://ftp.expasy.org/databases/rhea/tsv/chebi_pH7_3_mapping.tsv",
+      "sha256_file": "7076e992933d94e81b66e55d4977c4634b11ad5d9146052c0a25ebc72b5067b2"
+    }
+  ],
+  "shared_inputs": [
+    {
+      "file": "results/cosmos_pkn_audit/raw/swisslipids-enzymes.tsv.gz",
+      "sha256_file": "a1ee67fc6a0b435dc8ea31d549420640ebb008330bc7e30c80b386f844595f40"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/uniprot_mouse.tsv.gz",
+      "sha256_file": "61e908219c7e849111c2205e336034f2b8768cf9a08a377df357db52e5936511"
+    }
+  ],
+  "outputs": [
+    "rhea_reactions.jsonl",
+    "rhea_molecules.tsv",
+    "rhea_lipid_chebi.tsv",
+    "rhea_all_lipid_chebi.tsv",
+    "rhea_lipid_identity_classification.tsv",
+    "rhea_chebi_ph73.tsv",
+    "rhea_rejected_annotations.json",
+    "rhea_summary.json"
+  ],
+  "rhea_direction_documentation": "https://www.rhea-db.org/help/reaction-side-direction",
+  "rhea_download_documentation": "https://www.rhea-db.org/help/download"
+}

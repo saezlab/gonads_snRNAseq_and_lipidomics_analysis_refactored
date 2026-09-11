@@ -1,0 +1,543 @@
+{
+  "created_utc": "2026-09-08T10:44:38.683405+00:00",
+  "task": "Mouse COSMOS prior construction; no biological input mapping or scoring",
+  "raw_sources": [
+    {
+      "path": "support/cosmos_mouse/raw/Mouse-GEM.xml",
+      "bytes": 36099768,
+      "sha256": "fd7e830a846d450a2f39959fc96afc5f330de15b5a389e0e7284847ae656ac68"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/linex-github-commit.json",
+      "bytes": 4759,
+      "sha256": "298459dc6d286fa1205015cd21f425618d3600e2884fc4cae97ffe7ce30c7829"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/linex-source.tar.gz",
+      "bytes": 2299229,
+      "sha256": "24a7a6ce7a1ecace4b12bbd2a5e026f3c8113ef9ada7b8cb4a4c21662242382c"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/mouse_gem_metabolites.tsv",
+      "bytes": 910653,
+      "sha256": "ff51b3ae9491d46eeb4d5778d4217132eaeee76fffe7d5113f23d5f3300814a0"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/mouse_gem_reactions.tsv",
+      "bytes": 1246733,
+      "sha256": "5b71f39a249678e555adbd8352e43ed0188280ba0845e3c9036b2355b999250f"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/regulation_chebi.obo.gz",
+      "bytes": 47152417,
+      "sha256": "ba1efac7ba5d2a956d3512b7287849caee3d7b402759ffe6f777a38d20443c36"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/regulation_chebi.obo.gz.metadata.json",
+      "bytes": 687,
+      "sha256": "76f17e8f106a7027bd2d50a6b4c2ee545cfe69caf903abfaa85a269dda2fffb6"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/regulation_gtopdb_interactions.csv.gz",
+      "bytes": 811108,
+      "sha256": "af50a1361af70a79987995a57e5a24a1ebe3567308130e4af594848747593e04"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/regulation_gtopdb_ligand_id_mapping.csv.gz",
+      "bytes": 698329,
+      "sha256": "9fc1b064856bf29ca32d00e62b285085e56925e53274f6e1d79e321430b725c4"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/regulation_gtopdb_ligands.csv.gz",
+      "bytes": 2411749,
+      "sha256": "59648072b3b756200ade33dc8cd0de060d6c81cdeee30b18cb46e963786906d6"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/regulation_gtopdb_targets_and_families.csv.gz",
+      "bytes": 444167,
+      "sha256": "fda771b52399dfd1d089a416150ee3a04cdc50010384d64ea92286e14f84f92e"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/regulation_pubchem_missing_metabolite_synonyms.json.gz",
+      "bytes": 7114,
+      "sha256": "823e46ec1c97e96d423299dfd494e7f08c8e4dd101a4a2245eabb32c532b78d9"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/rhea-all-lipid-chebi.tsv",
+      "bytes": 2339707,
+      "sha256": "8e354e73f8d003139971b460548abdf3acd22f4a625e6e9be3ea32b847588301"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/rhea-chebi_pH7_3_mapping.tsv",
+      "bytes": 3099222,
+      "sha256": "7076e992933d94e81b66e55d4977c4634b11ad5d9146052c0a25ebc72b5067b2"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/rhea-directions.tsv",
+      "bytes": 446712,
+      "sha256": "deae1911da372c70ee8fc97992809c7923e63b288a8702fc4396edcb2633fb04"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/rhea-lipid-reactions.tsv",
+      "bytes": 633576,
+      "sha256": "929a820d8ad267d25b01b76664bbed098ae3954ca9e1759113203653c2f9a881"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/rhea-release.properties",
+      "bytes": 53,
+      "sha256": "4259110467406048a19f7dd797bc3f0506736d1cf2a8327f67ec7b10043fc5d4"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/rhea.rdf.gz",
+      "bytes": 8718726,
+      "sha256": "8ee48d7044cf3eef1001fa730dae2a491902ab25b259b519d6826796bb8acedf"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/rhea.rdf.headers.txt",
+      "bytes": 479,
+      "sha256": "6c2b86b9f7944367fe5f1062a87360b6238a83b8acdae26bc0f5e5e48a469c9c"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/rhea2uniprot_sprot.tsv",
+      "bytes": 8835509,
+      "sha256": "ff2e1038df2352d4ce4f3e9ae840c350211d8193e79b6a0a2d29fc1c2f392def"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/swisslipids_downloads.json",
+      "bytes": 2501,
+      "sha256": "c7eec48ab94b5ce2dba1188713e5fced4585ceacdba5c94c27f577e06dbda629"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/swisslipids_lipids.tsv.gz",
+      "bytes": 76772233,
+      "sha256": "2221a3fcf26676c472ca4b8caa6c53055a920e649a6c408fa9a9f11eefe7a335"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/uniprot_mouse.tsv.gz",
+      "bytes": 590210,
+      "sha256": "61e908219c7e849111c2205e336034f2b8768cf9a08a377df357db52e5936511"
+    },
+    {
+      "path": "results/cosmos_pkn_audit/raw/om-fresh-grn.tsv.gz",
+      "bytes": 1863453,
+      "sha256": "4b8c020915de19b170455272783f68df505e51642a32641fc2f5427fdcab9d5e"
+    },
+    {
+      "path": "results/cosmos_pkn_audit/raw/om-fresh-ppi.tsv.gz",
+      "bytes": 1390346,
+      "sha256": "9f0d82cd6868b3a7fe55a5fd262ac95acbcec09760ab5a53a46d31c365c776a3"
+    },
+    {
+      "path": "results/cosmos_pkn_audit/raw/om-mouse-pkn.json.gz",
+      "bytes": 2787699,
+      "sha256": "bf40a094572cb70a9836b20a7465c33f01e6f5ddbdee72ed82fa401a5feaea23"
+    },
+    {
+      "path": "results/cosmos_pkn_audit/raw/swisslipids-enzymes.tsv.gz",
+      "bytes": 125078,
+      "sha256": "a1ee67fc6a0b435dc8ea31d549420640ebb008330bc7e30c80b386f844595f40"
+    }
+  ],
+  "local_feature_inputs": [
+    {
+      "path": "results/lipidomic/gonade_type_ttop.csv",
+      "bytes": 167575,
+      "sha256": "d68000023c8b2792302d71df4180f15d5d99e862a215027cc3464c1085510210"
+    },
+    {
+      "path": "results/mofa/networks/gene_lipid_correlations_factor1.csv",
+      "bytes": 165956,
+      "sha256": "4933754a4525aefa9bd89167ccb8c2a7b0cb7dc2de42478456b623e8bd5f4926"
+    }
+  ],
+  "build_code": [
+    {
+      "path": "scripts/pkn/assemble_mouse_pkn.py",
+      "bytes": 15208,
+      "sha256": "6078170e987c08cc6e9bbb31c928d2bc5cfafa823299f9c78f5d02d2bdf112a2"
+    },
+    {
+      "path": "scripts/pkn/audit_mouse_pkn.py",
+      "bytes": 11514,
+      "sha256": "5c5acabc9d14acc23d2b8597bcea7f7310ad7bee33f4cb356709cd8d0b854d86"
+    },
+    {
+      "path": "scripts/pkn/build_lipid_regulation.py",
+      "bytes": 35029,
+      "sha256": "b0035ec7e41aea86c270d9f1a66c0f9c908c17a3341996f50d25a86184e717c7"
+    },
+    {
+      "path": "scripts/pkn/build_lipid_rules.py",
+      "bytes": 15459,
+      "sha256": "ac31a6eaf7636d8ef3af3fcdff13a5761ede145cd2b3c6251c764074da92ae55"
+    },
+    {
+      "path": "scripts/pkn/build_mouse_gem.py",
+      "bytes": 5672,
+      "sha256": "4b74fe61a7cd0e96d6713fc4b72ab8e32dfdcba7820788b99ae109425ae1f1cb"
+    },
+    {
+      "path": "scripts/pkn/build_rhea_lipid_reactions.py",
+      "bytes": 25146,
+      "sha256": "76e9f51f911caa09e45b4127e8ef626f7e66d104d9a096ab6c0b886fb3582fa2"
+    },
+    {
+      "path": "scripts/pkn/map_lipids.py",
+      "bytes": 22079,
+      "sha256": "67195f580de5cd845b6a95c9611d4e3520e1be78f10049d71b726bfa3fa102e7"
+    },
+    {
+      "path": "scripts/pkn/run_build.py",
+      "bytes": 1006,
+      "sha256": "3da3c7c8332ec322d0488e5951907b9797f53029a660b512fd9eae02efb16466"
+    },
+    {
+      "path": "scripts/pkn/test_pkn.py",
+      "bytes": 5515,
+      "sha256": "b5cb0c7ce7a1a78d84143e9f010697e2e7948d09d78d8a0e396836da87d705a8"
+    },
+    {
+      "path": "scripts/pkn/write_build_manifest.py",
+      "bytes": 2244,
+      "sha256": "5884bcd94d0f9749627c05bb235e8446c5b44d9c7391cdf27d927c884f580c9b"
+    },
+    {
+      "path": "scripts/pkn/validate_export.R",
+      "bytes": 1976,
+      "sha256": "a85c7f7ceeab295503dc705447c494f5dceb02be49bf42cc81520b42f258096b"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "results/cosmos_mouse_pkn/R_sessionInfo.txt",
+      "bytes": 1323,
+      "sha256": "ed080e05273191c36a978ed85970eac6ef3aa5dbf86fa12b2da893d4710a874d"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/build_summary.json",
+      "bytes": 1589,
+      "sha256": "0447c4b3d1a8b8e4d60a24cf164517bbfdab2daf601d83bfdd1e81659214364c"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/chemical_node_aliases.csv",
+      "bytes": 407752,
+      "sha256": "d726e1ccc11bdc200e9e774fd1a7d0143bddf56014c6e9310a7b66c960f97481"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/conflicts_core.csv",
+      "bytes": 148644,
+      "sha256": "9d2c938036d5bad4a597b6335d49d928de10382e72a6d277eb0d15c40e7b703b"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/conflicts_exploratory.csv",
+      "bytes": 185106,
+      "sha256": "1051ac95241651035570fa034ff5281465d44d891c9916685293b3a79db95092"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/conflicts_lipid_curated.csv",
+      "bytes": 148724,
+      "sha256": "132ccae649d216684f1cdd7cf57a978629f541a294636df6ea6fb1f9f8d291b3"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/conflicts_lipid_curated_ph73.csv",
+      "bytes": 148724,
+      "sha256": "e13830e119205b20e45c85bf67a91c56459e3f2a6ea8806bdc3b66df4be89192"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/conflicts_lipid_rules.csv",
+      "bytes": 148724,
+      "sha256": "132ccae649d216684f1cdd7cf57a978629f541a294636df6ea6fb1f9f8d291b3"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/coverage_summary.json",
+      "bytes": 2178,
+      "sha256": "1e075433d71951708aaa396ad1cf28cb4a4dd92ba90ff7bbed6adc69fd1d53a0"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/edge_evidence.jsonl.gz",
+      "bytes": 6291101,
+      "sha256": "4e8df5948f1c6c055bd721f8e846b8fd9a5c129dcd064ed295c4ac1cf267fa83"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/feature_coverage.csv",
+      "bytes": 902003,
+      "sha256": "b16bc384cb23efc260a2467a08306b56cce0d2914c3a372cf7fa8d9c94230e57"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/focus_gene_coverage.csv",
+      "bytes": 1345,
+      "sha256": "2fb635745b09806ec90484ca16c5b7d03ffdd0a914f0437794fc14e5c2288d21"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/focus_reaction_examples.csv",
+      "bytes": 1911,
+      "sha256": "24ce3f8efc5105e6ca0405c17030218a0f813552e7b90461685b33e865c7d1e7"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/lipid_rules_manifest.json",
+      "bytes": 1507,
+      "sha256": "84d981937c5435fbe415125537f0078dfa6759b2f3d6e8496e7cce06077fa2d0"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/lipid_rules_pairs.csv",
+      "bytes": 17105,
+      "sha256": "5b629abc3280c2f23751a4c5af1df1f0edb757b8bed0a0f0948bf856e9aa4079"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/lipid_rules_reactions.jsonl",
+      "bytes": 1177399,
+      "sha256": "a96cabe6594f2f7c61064797f9a08dc069545bf0f5188de1953ec59d6f946cde"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/lipid_rules_summary.json",
+      "bytes": 3918,
+      "sha256": "b49b660c700a62478aeea679617c56c7eebd6781043282f6b10a2c013a5e8a5d"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/mapping_README.md",
+      "bytes": 3564,
+      "sha256": "ea5c6c26a097490dcbba4e1a71cfbfcdb905dfa2f30d6bc8294ca9f1c2a29f08"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/mapping_candidates.csv",
+      "bytes": 1615453,
+      "sha256": "f0d1ce369147d4aea6cbc3e1a30be9203cc499f80da54448c2d0e076c77dcfab"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/mapping_chebi_nodes.csv",
+      "bytes": 701849,
+      "sha256": "f2e360f687ef73b4bcba4c24d34a07eb80ebf66ff7b9624d81adbf9d290b84fd"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/mapping_features.csv",
+      "bytes": 129432,
+      "sha256": "c6b8efc5fe22cd3e1f3aba93211d8b1d48d2c0bc78aa37e7c0c2e3d99d54f15e"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/mapping_metadata.json",
+      "bytes": 4264,
+      "sha256": "cf0f7918ad26d613f12cdb70d9b5a2219f703e2bfbe5cb33657cf44cfe53d369"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/mapping_swisslipids_catalog.csv",
+      "bytes": 661095,
+      "sha256": "8b60e09581926a3d2522cf0a8a08e63a24cbdc9645d71726be3510c06a252c92"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/mouse_gem_manifest.json",
+      "bytes": 1176,
+      "sha256": "efddd17b5241aafdd0ed7673092c6af2540da1c5427629e0d5147e72fdd30d9f"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/mouse_gem_metabolites.jsonl",
+      "bytes": 3763215,
+      "sha256": "12e4b424bb99f62974ff9130f886cad3ee1d1c448481a5b1fe4979c5321f7c67"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/mouse_gem_reactions.jsonl",
+      "bytes": 13135805,
+      "sha256": "12a8a26c890557dd7c5ba1ae237404aff932ccc0856c8db370ce1766d6917311"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/nodes.csv",
+      "bytes": 7280773,
+      "sha256": "e9e09e4b00aae7e87c63da67f8d884a47f831698d55c6a9a876f320fab340169"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/nodes.jsonl",
+      "bytes": 14921222,
+      "sha256": "9bdbefe2b336ea5e09835ebd8132fa6a260eaab5861219280d9f306d482b7e8c"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/nodes_ph73.jsonl",
+      "bytes": 18201926,
+      "sha256": "e0ca22ebaac9be450421849269284461b849b13bf4a12cc6879de7b6f9fe585e"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/pkn_core.csv",
+      "bytes": 10127107,
+      "sha256": "72b1d8cd2f12bf1e448874c8712c74489c6b01255171ee6206be3805d8f67c66"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/pkn_core.rds",
+      "bytes": 872756,
+      "sha256": "ea90a6ec00cabce45e77068b3b747881793d419452f218199dc94d555c75767e"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/pkn_exploratory.csv",
+      "bytes": 13516198,
+      "sha256": "a5a1cae1588d29a5d8cfb21085c47035a7b5f7dd21e1082509faffcc8ca446c8"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/pkn_exploratory.rds",
+      "bytes": 1247284,
+      "sha256": "9daa7b96c993a2543c66bbf816569e80c81b8eea23e80903bdfc532dad3d9b5b"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/pkn_lipid_curated.csv",
+      "bytes": 11207343,
+      "sha256": "5728f2c4591883ed0c0ea1f8f47eaa81db92d305b553fd5a29e48daebbd66d87"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/pkn_lipid_curated.rds",
+      "bytes": 1022220,
+      "sha256": "110b49139255deed94e9094edcaae1b59a126ccfdbcd3f8a4670689fb663ccbe"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/pkn_lipid_curated_ph73.csv",
+      "bytes": 11213718,
+      "sha256": "25b2e26e5c96e39e1ff12fb5fa1ec3b70ca40e9d845ca540ceb453cd26511d7a"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/pkn_lipid_curated_ph73.rds",
+      "bytes": 1023812,
+      "sha256": "9746c887daf40552b30ff96995745f2f7562087c60be06ef7407b691343a17e4"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/pkn_lipid_rules.csv",
+      "bytes": 11357526,
+      "sha256": "cf1ffc29e716ef3a90f617ae49bbd739fe163b7d604ac6e26e0e13fd445f9e4f"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/pkn_lipid_rules.rds",
+      "bytes": 1039092,
+      "sha256": "ebc5437616e96eb97d46f5915fcbd214b88a28f7234c0b6092ddcad815a240e0"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/r_validation.json",
+      "bytes": 1108,
+      "sha256": "cbea41eb2eb914b6d8e4d4fd2804407d34b8628b6d4dfb88af818ddda56bddca"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_build_notes.md",
+      "bytes": 6097,
+      "sha256": "a44ab993467c981f54fa4fdea653879fe123ca8e8ed6c26c52608ae62c80c052"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_chebi_acid_base_relations.csv",
+      "bytes": 1968710,
+      "sha256": "866bd657728bb3ce8d1a9b40ad7efce12b9872b266a86637f7524ff602ee07a3"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_chebi_aliases.csv",
+      "bytes": 811022,
+      "sha256": "57dd67656033f23ad409342ac8bec50048ec543460adb4696c6fcabf5073c1e4"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_chebi_manifest.json",
+      "bytes": 1843,
+      "sha256": "a422e4902d76e6467ac43923c0802c77938d4f768fb53a334f4c7435d9029a95"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_chebi_source_crosswalk.csv",
+      "bytes": 1035428,
+      "sha256": "d258f0d89deacb8f66e2569b48ce3d1107fe69f962a23fdcf9d5ac754ff47a2b"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_edges.csv",
+      "bytes": 38031330,
+      "sha256": "c7325ce35fbbf98c276a9dd6ea48cf681ed0322599f837e3dca52db72e8d3bb9"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_exclusions.csv",
+      "bytes": 245956,
+      "sha256": "9b4bc704ec0a885867ecb47454dd47d2d2295fbd2aa26a514e4b8bb38a3bf284"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_manifest.json",
+      "bytes": 5081,
+      "sha256": "3ebb585d1555a30b44aa3e84649988e0d5d2bc2d767d1f9c407f772601e3865b"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_mapping_review.csv",
+      "bytes": 7295,
+      "sha256": "b550809787e16ec28b4b63d563a64228d5f387ecec26ecc51852cf7ba1f02bef"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_pharmacological_supplement.csv",
+      "bytes": 141706,
+      "sha256": "74e2aa690ff9e2c43d999ba7d37424096018f8c1398994c015cbd18b0c6a7c37"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_sign_conflicts.csv",
+      "bytes": 2802485,
+      "sha256": "df893122e7a479f11414dde596044acc16b916a2f5bbeccbe3e8dc3980020c90"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/regulation_summary.json",
+      "bytes": 1261,
+      "sha256": "0f6aeac5c40bfe61f99db85353a4e9e8d679543cc0f60ed353d6f49129b1faef"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/rhea_all_lipid_chebi.tsv",
+      "bytes": 2772996,
+      "sha256": "acf31b2dec89bfa09c1133c0ee447c340dcec505edd2a636cabe717047012965"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/rhea_chebi_ph73.tsv",
+      "bytes": 8253972,
+      "sha256": "89734404176e8021cd024c4b96d07339dbbad62da69efa37efd792e5962e52b2"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/rhea_lipid_chebi.tsv",
+      "bytes": 239483,
+      "sha256": "44fe9c2b1f168ac3d3f276ba7c51e795ae8614d6ecf7bd6732ccbd20f29ed969"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/rhea_lipid_identity_classification.tsv",
+      "bytes": 2899879,
+      "sha256": "dd4cfb9a8224daa1a28090ed4b65581a674bc1ebeefc93d57d95de5b24fc2c9f"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/rhea_manifest.json",
+      "bytes": 3070,
+      "sha256": "0a6e039f3acdb544eb77d3b4b58e013191eb76487995a7e1321de66d3b028982"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/rhea_molecules.tsv",
+      "bytes": 227449,
+      "sha256": "44de298ef09f2c354fdedfd3e3d5b757eecd66bda23b15633bd1b7113100a81e"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/rhea_reactions.jsonl",
+      "bytes": 25145239,
+      "sha256": "f9fd2405ebccc0a1caa9b29620469ee40cd26cdfafba775d14de7f9e23f48f6a"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/rhea_rejected_annotations.json",
+      "bytes": 373991,
+      "sha256": "4c0c32c9e7165c08373d95e418130e12eb6e92d843bf1bdad2078bc923cfacb1"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/rhea_summary.json",
+      "bytes": 3177,
+      "sha256": "2d96103068398fb0a7a3f1a469bf509222dd57e19171b1db427e4849b0aad28c"
+    },
+    {
+      "path": "results/cosmos_mouse_pkn/topology_queries.csv",
+      "bytes": 752,
+      "sha256": "528af077c7b4cf7281682e8849f234d4204530cfd969e12545ea7d397a99613d"
+    }
+  ],
+  "documentation": [
+    {
+      "path": "docs/cosmos_mouse_pkn_build.md",
+      "bytes": 15389,
+      "sha256": "fa27d81d66364cf877b6632dce51d4f2d47f758018f909e8260e967f311c1819"
+    },
+    {
+      "path": "support/cosmos_mouse/README.md",
+      "bytes": 1542,
+      "sha256": "0ab80c584a0fd6ad683aad96bef6d39ff352a7b0a01f6124af7ce07a15ca0838"
+    }
+  ],
+  "upstream_version_manifests": [
+    "results/cosmos_mouse_pkn/lipid_rules_manifest.json",
+    "results/cosmos_mouse_pkn/mapping_metadata.json",
+    "results/cosmos_mouse_pkn/mouse_gem_manifest.json",
+    "results/cosmos_mouse_pkn/regulation_chebi_manifest.json",
+    "results/cosmos_mouse_pkn/regulation_manifest.json",
+    "results/cosmos_mouse_pkn/rhea_manifest.json"
+  ],
+  "cached_protein_export_urls_manifest": "results/cosmos_pkn_audit/manifest.json"
+}

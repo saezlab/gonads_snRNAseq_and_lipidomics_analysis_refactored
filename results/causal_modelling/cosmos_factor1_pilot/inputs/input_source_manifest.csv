@@ -1,0 +1,6 @@
+"path","md5","bytes"
+"results/mofa/main_model_RNA_lipid_weight.RData","a6b34f95ca2f2e5996e972c27865cb64",7795787
+"support/TF_regulons.RData","39f383a88bf71ddb91300b3463c59c25",187633
+"support/Gonadal_Hormone_Genes.csv","187b2f905c009401d2276ee3a5c82f1b",698
+"results/mofa/RNA/mofa_res_12factor.hdf5","91511b378de200f4c26222489c2f4b40",42945394
+"results/mofa/networks/gene_lipid_correlations_factor1.RData","71b322179e754200062dd54a814f50bd",69051

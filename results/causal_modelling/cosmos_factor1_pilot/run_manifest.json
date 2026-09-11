@@ -1,0 +1,61 @@
+{
+  "created_utc": "2026-09-08 15:55:57 UTC",
+  "command": "Rscript scripts/moon/run_factor1_moon.R ",
+  "compression_enabled": true,
+  "cosmosR": "1.21.2",
+  "decoupleR": "2.17.0",
+  "statistic": "ulm",
+  "n_layers": 6,
+  "tf_cutoff": "abs(activity) > 2",
+  "expression_filter": "none: RNA weights are not expression presence measurements",
+  "downstream_scaling": "none; level0 weights exempt from inferred-score secondary cutoff, not primary seeds",
+  "convergence": true,
+  "iterations": 5,
+  "upstream_inputs": 49,
+  "downstream_inputs": 74,
+  "scored_upstream": 14,
+  "scored_nodes": 6510,
+  "orientation": {
+    "label": "testes_positive_Factor1_coordinate",
+    "multiplier": 1,
+    "saved_coordinate_group_means": [-0.7423, 0.7086],
+    "scope": "same_multiplier_for_TF_activities_RNA_loadings_lipid_loadings_and_sample_coordinates",
+    "interpretation": "positive_agrees_with_testes_associated_Factor1_not_a_direct_differential_effect"
+  },
+  "input_and_script_md5": {
+    "results/cosmos_mouse_pkn/pkn_lipid_rules.rds": "be8da3886f19f8b121a389e442113edd",
+    "scripts/moon/run_factor1_moon.R": "b706660be06aead6687cddd6af8f6ecc",
+    "scripts/moon/moon_safe_helpers.R": "86be2ca41edc65841f7674209c8b36fd",
+    "results/cosmos_factor1_pilot/inputs/factor1_inputs.rds": "679f0f336499ec59106eb2107bb49ec4"
+  },
+  "template_url": "https://github.com/saezlab/COSMOS_basic/blob/7108c6b849c712b1282440dc122c9d783f563da8/scripts/net_compr_MOON.R",
+  "threshold_sensitivity": [
+    {
+      "name": "relaxed",
+      "primary": 1,
+      "secondary": 0,
+      "nodes": 1476,
+      "edges": 6320,
+      "upstream_tfs": 14,
+      "downstream_nodes": 10
+    },
+    {
+      "name": "primary",
+      "primary": 1.7,
+      "secondary": 1,
+      "nodes": 0,
+      "edges": 0,
+      "upstream_tfs": 0,
+      "downstream_nodes": 0
+    },
+    {
+      "name": "strict",
+      "primary": 2,
+      "secondary": 1.5,
+      "nodes": 0,
+      "edges": 0,
+      "upstream_tfs": 0,
+      "downstream_nodes": 0
+    }
+  ]
+}

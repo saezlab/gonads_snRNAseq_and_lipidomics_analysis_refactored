@@ -1,0 +1,9 @@
+"run_id","n_tfs","n_lipids","scoring_edges","original_edges","merged_nodes","merged_groups","iterations","convergence_validated","projection_validated","score_copy_validated","all_focus_tf_positive_raw_scores"
+"radius12_depth8_compressed",49,74,28808,37175,3021,507,5,TRUE,TRUE,TRUE,TRUE
+"radius4_depth8_compressed",45,72,12127,13643,597,73,4,TRUE,TRUE,TRUE,TRUE
+"radius5_depth8_compressed",49,74,21051,26686,2136,203,5,TRUE,TRUE,TRUE,TRUE
+"radius7_depth8_compressed",49,74,27867,36230,3062,447,5,TRUE,TRUE,TRUE,TRUE
+"radius6_depth4_compressed_prescore_rna",49,74,27006,34556,2729,378,4,TRUE,TRUE,TRUE,TRUE
+"radius6_depth8_compressed_prescore_rna",49,74,26030,33580,2729,378,4,TRUE,TRUE,TRUE,TRUE
+"radius6_depth4_compressed_inputs_only",49,74,25039,35275,3391,600,3,TRUE,TRUE,TRUE,TRUE
+"radius6_depth8_compressed_inputs_only",49,74,24054,34228,3415,606,5,TRUE,TRUE,TRUE,TRUE

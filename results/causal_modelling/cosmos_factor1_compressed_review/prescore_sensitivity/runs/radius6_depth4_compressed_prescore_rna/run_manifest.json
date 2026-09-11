@@ -1,0 +1,23 @@
+{
+  "run_id": "radius6_depth4_compressed_prescore_rna",
+  "converged": true,
+  "compression": "same_signed_children",
+  "radius": 6,
+  "depth": 4,
+  "prescore_rna": true,
+  "initial_edges": 42924,
+  "compressed_edges": 35374,
+  "merged_nodes": 2729,
+  "groups": 378,
+  "final_scoring_edges": 27006,
+  "final_original_edges": 34556,
+  "n_tfs": 49,
+  "n_lipids": 74,
+  "input": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+  "input_and_script_md5": {
+    "scripts/moon/run_factor1_compressed_sensitivities.R": "7500c386d88b52194337adf9efb507f4",
+    "scripts/moon/moon_safe_helpers.R": "86be2ca41edc65841f7674209c8b36fd",
+    "results/cosmos_factor1_pilot/inputs/factor1_inputs.rds": "679f0f336499ec59106eb2107bb49ec4",
+    "results/cosmos_mouse_pkn/pkn_lipid_rules.rds": "be8da3886f19f8b121a389e442113edd"
+  }
+}

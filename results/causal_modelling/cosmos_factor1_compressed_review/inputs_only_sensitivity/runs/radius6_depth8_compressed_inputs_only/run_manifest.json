@@ -1,0 +1,23 @@
+{
+  "run_id": "radius6_depth8_compressed_inputs_only",
+  "converged": true,
+  "depth": 8,
+  "radius": 6,
+  "policy": "inputs_only; recompress current original graph after each original-ID coherence iteration",
+  "iteration_count": 5,
+  "initial_tfs": 49,
+  "final_tfs": 49,
+  "initial_lipids": 74,
+  "final_lipids": 74,
+  "initial_edges": 44127,
+  "final_edges": 34228,
+  "final_scoring_edges": 24054,
+  "final_merged_nodes": 3415,
+  "final_groups": 606,
+  "md5": {
+    "scripts/moon/run_factor1_inputs_only_compression.R": "1245a2015b4fba545829d3283c5f78f4",
+    "scripts/moon/moon_safe_helpers.R": "86be2ca41edc65841f7674209c8b36fd",
+    "results/cosmos_factor1_pilot/inputs/factor1_inputs.rds": "679f0f336499ec59106eb2107bb49ec4",
+    "results/cosmos_factor1_parameter_search/topology_radius_6/prepared_topology.rds": "ce881f7b89c3b533eab1e137b899ffc0"
+  }
+}

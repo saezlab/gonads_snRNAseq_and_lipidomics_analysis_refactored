@@ -1,0 +1,119 @@
+Depth 4 : 18423 edges, 2226 nodes, 45 TFs, 72 lipids, 3240 reachable pairs; max shortest path 6 ; cycle edges 16686 
+Depth 5 : 35036 edges, 5114 nodes, 49 TFs, 74 lipids, 3626 reachable pairs; max shortest path 7 ; cycle edges 34405 
+Depth 6 : 44127 edges, 6673 nodes, 49 TFs, 74 lipids, 3626 reachable pairs; max shortest path 7 ; cycle edges 43491 
+Depth 7 : 46161 edges, 7284 nodes, 49 TFs, 74 lipids, 3626 reachable pairs; max shortest path 7 ; cycle edges 45528 
+Depth 8 : 47044 edges, 7404 nodes, 49 TFs, 74 lipids, 3626 reachable pairs; max shortest path 7 ; cycle edges 46411 
+Depth 9 : 47210 edges, 7466 nodes, 49 TFs, 74 lipids, 3626 reachable pairs; max shortest path 7 ; cycle edges 46577 
+Depth 10 : 47262 edges, 7484 nodes, 49 TFs, 74 lipids, 3626 reachable pairs; max shortest path 7 ; cycle edges 46629 
+Depth 11 : 47278 edges, 7493 nodes, 49 TFs, 74 lipids, 3626 reachable pairs; max shortest path 7 ; cycle edges 46645 
+Depth 12 : 47280 edges, 7494 nodes, 49 TFs, 74 lipids, 3626 reachable pairs; max shortest path 7 ; cycle edges 46647 
+Depth 13 : 47283 edges, 7496 nodes, 49 TFs, 74 lipids, 3626 reachable pairs; max shortest path 7 ; cycle edges 46650 
+Depth 14 : 47285 edges, 7497 nodes, 49 TFs, 74 lipids, 3626 reachable pairs; max shortest path 7 ; cycle edges 46652 
+ depth pruning_iterations retained_edges retained_nodes candidate_tfs
+     4                  3          18423           2226            49
+     5                  3          35036           5114            49
+     6                  3          44127           6673            49
+     7                  3          46161           7284            49
+     8                  3          47044           7404            49
+     9                  3          47210           7466            49
+    10                  3          47262           7484            49
+    11                  2          47278           7493            49
+    12                  3          47280           7494            49
+    13                  2          47283           7496            49
+    14                  2          47285           7497            49
+ retained_tfs candidate_lipids retained_lipids reachable_tf_lipid_pairs
+           45              155              72                     3240
+           49              155              74                     3626
+           49              155              74                     3626
+           49              155              74                     3626
+           49              155              74                     3626
+           49              155              74                     3626
+           49              155              74                     3626
+           49              155              74                     3626
+           49              155              74                     3626
+           49              155              74                     3626
+           49              155              74                     3626
+ full_terminal_reachable_pairs pair_coverage_of_full_terminal
+                          3626                      0.8935466
+                          3626                      1.0000000
+                          3626                      1.0000000
+                          3626                      1.0000000
+                          3626                      1.0000000
+                          3626                      1.0000000
+                          3626                      1.0000000
+                          3626                      1.0000000
+                          3626                      1.0000000
+                          3626                      1.0000000
+                          3626                      1.0000000
+ pairs_shortest_length_le_depth pairs_shortest_length_gt_depth
+                           1330                           1910
+                           2974                            652
+                           3624                              2
+                           3626                              0
+                           3626                              0
+                           3626                              0
+                           3626                              0
+                           3626                              0
+                           3626                              0
+                           3626                              0
+                           3626                              0
+ shortest_pair_min shortest_pair_median shortest_pair_p90 shortest_pair_max
+                 3                    5                 6                 6
+                 3                    5                 6                 7
+                 3                    5                 6                 7
+                 3                    5                 6                 7
+                 3                    5                 6                 7
+                 3                    5                 6                 7
+                 3                    5                 6                 7
+                 3                    5                 6                 7
+                 3                    5                 6                 7
+                 3                    5                 6                 7
+                 3                    5                 6                 7
+ new_reachable_pairs_vs_previous_depth shortened_pairs_vs_previous_depth
+                                    NA                                NA
+                                   386                                 0
+                                     0                                 0
+                                     0                                 0
+                                     0                                 0
+                                     0                                 0
+                                     0                                 0
+                                     0                                 0
+                                     0                                 0
+                                     0                                 0
+                                     0                                 0
+ endpoint_minimal_route_edges edges_on_directed_cycles nodes_on_directed_cycles
+                          827                    16686                     1795
+                         1578                    34405                     4915
+                         1578                    43491                     6472
+                         1578                    45528                     7085
+                         1578                    46411                     7205
+                         1578                    46577                     7267
+                         1578                    46629                     7285
+                         1578                    46645                     7294
+                         1578                    46647                     7295
+                         1578                    46650                     7297
+                         1578                    46652                     7298
+ largest_strong_component added_edges_vs_previous_depth added_edges_on_cycles
+                     1385                            NA                    NA
+                     4915                         16613                 16592
+                     6472                          9091                  9086
+                     7085                          2034                  2034
+                     7205                           883                   883
+                     7267                           166                   166
+                     7285                            52                    52
+                     7294                            16                    16
+                     7295                             2                     2
+                     7297                             3                     3
+                     7298                             2                     2
+ added_endpoint_minimal_route_edges
+                                 NA
+                                 32
+                                  0
+                                  0
+                                  0
+                                  0
+                                  0
+                                  0
+                                  0
+                                  0
+                                  0

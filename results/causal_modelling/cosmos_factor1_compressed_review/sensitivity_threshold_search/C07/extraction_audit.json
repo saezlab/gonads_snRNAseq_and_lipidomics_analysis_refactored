@@ -1,0 +1,17 @@
+{
+  "run_id": "radius4_depth8_compressed",
+  "candidate_id": "C07",
+  "primary_thresh": 1.85,
+  "secondary_thresh": 0.425,
+  "observed_exempt_from_secondary": true,
+  "observed_eligible_as_primary": false,
+  "candidate_edges": 1723,
+  "consistent_edges": 1080,
+  "final_edges": 457,
+  "final_nodes": 177,
+  "retained_upstream": 5,
+  "retained_observed": 3,
+  "all_edges_consistent": true,
+  "all_nodes_on_seed_to_observation_walk": true,
+  "observed_outgoing_edges": 0
+}

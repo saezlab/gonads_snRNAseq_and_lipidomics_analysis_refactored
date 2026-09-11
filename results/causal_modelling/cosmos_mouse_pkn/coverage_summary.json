@@ -1,0 +1,107 @@
+{
+  "core": {
+    "edges": 231386,
+    "nodes": 46114,
+    "chemical_ids": 5010,
+    "coverage": {
+      "all_features": {
+        "total": 1254,
+        "exact": 0,
+        "compatible": 7,
+        "hierarchy": 223,
+        "species_rule_connected": 0
+      },
+      "factor1": {
+        "total": 64,
+        "exact": 0,
+        "compatible": 0,
+        "hierarchy": 11,
+        "species_rule_connected": 0
+      }
+    }
+  },
+  "lipid_curated": {
+    "edges": 251998,
+    "nodes": 52157,
+    "chemical_ids": 7072,
+    "coverage": {
+      "all_features": {
+        "total": 1254,
+        "exact": 7,
+        "compatible": 181,
+        "hierarchy": 750,
+        "species_rule_connected": 0
+      },
+      "factor1": {
+        "total": 64,
+        "exact": 0,
+        "compatible": 6,
+        "hierarchy": 43,
+        "species_rule_connected": 0
+      }
+    }
+  },
+  "lipid_curated_ph73": {
+    "edges": 251998,
+    "nodes": 52124,
+    "chemical_ids": 6794,
+    "coverage": {
+      "all_features": {
+        "total": 1254,
+        "exact": 7,
+        "compatible": 182,
+        "hierarchy": 757,
+        "species_rule_connected": 0
+      },
+      "factor1": {
+        "total": 64,
+        "exact": 0,
+        "compatible": 6,
+        "hierarchy": 43,
+        "species_rule_connected": 0
+      }
+    }
+  },
+  "lipid_rules": {
+    "edges": 254589,
+    "nodes": 52755,
+    "chemical_ids": 7221,
+    "coverage": {
+      "all_features": {
+        "total": 1254,
+        "exact": 7,
+        "compatible": 181,
+        "hierarchy": 750,
+        "species_rule_connected": 149
+      },
+      "factor1": {
+        "total": 64,
+        "exact": 0,
+        "compatible": 6,
+        "hierarchy": 43,
+        "species_rule_connected": 7
+      }
+    }
+  },
+  "exploratory": {
+    "edges": 303925,
+    "nodes": 70049,
+    "chemical_ids": 11690,
+    "coverage": {
+      "all_features": {
+        "total": 1254,
+        "exact": 7,
+        "compatible": 181,
+        "hierarchy": 751,
+        "species_rule_connected": 149
+      },
+      "factor1": {
+        "total": 64,
+        "exact": 0,
+        "compatible": 6,
+        "hierarchy": 43,
+        "species_rule_connected": 7
+      }
+    }
+  }
+}

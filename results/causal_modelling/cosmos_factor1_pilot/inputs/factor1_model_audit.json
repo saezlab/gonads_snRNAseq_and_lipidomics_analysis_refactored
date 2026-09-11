@@ -1,0 +1,39 @@
+{
+  "model": "results/mofa/RNA/mofa_res_12factor.hdf5",
+  "initial_factors": 12,
+  "retained_factors": 10,
+  "training_iterations_recorded": 440,
+  "training_options": {
+    "maxiter": 1000.0,
+    "freqELBO": 1.0,
+    "start_elbo": 1.0,
+    "gpu_mode": 0.0,
+    "stochastic": 0.0,
+    "seed": 1.0
+  },
+  "sample_count": 43,
+  "native_factor_index_1based": 1,
+  "native_to_saved_sign": 1,
+  "saved_coordinate_group_means": {
+    "Ovaries": -0.7422907154646632,
+    "Testes": 0.708550228398085
+  },
+  "saved_to_testes_positive_multiplier": 1,
+  "alignment": [
+    {
+      "view": "Hepatocytes",
+      "native_factor_index_1based": 1,
+      "native_to_saved_sign": 1,
+      "pearson_r": 0.9999999999999999,
+      "max_absolute_difference": 4.884981308350689e-15
+    },
+    {
+      "view": "lipidomic",
+      "native_factor_index_1based": 1,
+      "native_to_saved_sign": 1,
+      "pearson_r": 0.9999999999999999,
+      "max_absolute_difference": 5.10702591327572e-15
+    }
+  ],
+  "caveat": "Existing factor-number fits only; no bootstrap, repeated-seed, or donor-resampling validation."
+}

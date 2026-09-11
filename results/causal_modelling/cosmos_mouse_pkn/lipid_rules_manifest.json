@@ -1,0 +1,38 @@
+{
+  "linex_commit": "04e0099655a6b7a8cb57aaeca7b1301b3524079d",
+  "linex_commit_date": "2024-10-02T09:05:31Z",
+  "linex_repository": "https://github.com/LipiTUM/LINEX2_package",
+  "archive_url": "https://api.github.com/repos/LipiTUM/LINEX2_package/tarball/04e0099655a6b7a8cb57aaeca7b1301b3524079d",
+  "inputs": [
+    {
+      "file": "support/cosmos_mouse/raw/linex-source.tar.gz",
+      "sha256": "24a7a6ce7a1ecace4b12bbd2a5e026f3c8113ef9ada7b8cb4a4c21662242382c"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/linex-github-commit.json",
+      "sha256": "298459dc6d286fa1205015cd21f425618d3600e2884fc4cae97ffe7ce30c7829"
+    },
+    {
+      "file": "results/cosmos_mouse_pkn/rhea_reactions.jsonl",
+      "sha256": "f9fd2405ebccc0a1caa9b29620469ee40cd26cdfafba775d14de7f9e23f48f6a"
+    },
+    {
+      "file": "results/cosmos_mouse_pkn/mapping_features.csv",
+      "sha256": "c6b8efc5fe22cd3e1f3aba93211d8b1d48d2c0bc78aa37e7c0c2e3d99d54f15e"
+    }
+  ],
+  "generic_chemical_allowlist": {
+    "CHEBI:58608": "PA",
+    "CHEBI:17815": "DG",
+    "CHEBI:49172": "DG",
+    "CHEBI:57643": "PC",
+    "CHEBI:64482": "PC",
+    "CHEBI:64612": "PE",
+    "CHEBI:57262": "PS",
+    "CHEBI:57880": "PI",
+    "CHEBI:64716": "PG",
+    "CHEBI:60523": "PG"
+  },
+  "data_provenance": "LINEX2 includes Rhea class annotations; current catalysts, directional chemistry and full participants supplied by Rhea 142 mouse export.",
+  "license": "LINEX2 software AGPLv3; underlying Rhea data CC BY 4.0 (see pinned source license)."
+}

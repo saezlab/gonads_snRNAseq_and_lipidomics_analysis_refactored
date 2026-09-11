@@ -1,0 +1,11 @@
+gene,reaction_id,resource,enzyme_node,lipid_substrates,lipid_products,note
+Cyp2c38,MAR08596,Mouse-GEM,Enzyme__046c0e63e3ef5b5c,Metab__CHEBI:15383_c,Metab__CHEBI:15389_c,"Curated reaction traversal; lipid nodes may be chemical classes, not measured species."
+Cyp2c38,MAR08601,Mouse-GEM,Enzyme__170934f02bdc2bd4,Metab__CHEBI:36740_c,Metab__CHEBI:29060_c,"Curated reaction traversal; lipid nodes may be chemical classes, not measured species."
+Cyp2c38,MAR00943,Mouse-GEM,Enzyme__2368e91edecf9637,Metab__CHEBI:15843_c,Metab__CHEBI:34450_c,"Curated reaction traversal; lipid nodes may be chemical classes, not measured species."
+Cyp2c38,MAR00946,Mouse-GEM,Enzyme__283b6141585a1209,Metab__CHEBI:15843_c,Metab__CHEBI:34490_c,"Curated reaction traversal; lipid nodes may be chemical classes, not measured species."
+Cyp2c38,MAR00944,Mouse-GEM,Enzyme__50bec8fa5dc808c5,Metab__CHEBI:15843_r,Metab__CHEBI:34450_r,"Curated reaction traversal; lipid nodes may be chemical classes, not measured species."
+Abcb1a,MAR11766,Mouse-GEM,Enzyme__027956a1610478eb,Metab__CHEBI:28324_c,Metab__CHEBI:28324_e,"Curated reaction traversal; lipid nodes may be chemical classes, not measured species."
+Abcb1a,MAR11767,Mouse-GEM,Enzyme__2ab204046a6885e3,Metab__CHEBI:16973_c,Metab__CHEBI:16973_e,"Curated reaction traversal; lipid nodes may be chemical classes, not measured species."
+Abcb1a,MAR11759,Mouse-GEM,Enzyme__2df5c062824c8be7,Metab__CHEBI:28195_c,Metab__CHEBI:28195_e,"Curated reaction traversal; lipid nodes may be chemical classes, not measured species."
+Abcb1a,MAR11771,Mouse-GEM,Enzyme__2f0b1debdd7a6e0b,Metab__CHEBI:28750_c,Metab__CHEBI:28750_e,"Curated reaction traversal; lipid nodes may be chemical classes, not measured species."
+Abcb1a,MAR11757,Mouse-GEM,Enzyme__36e362ff98648134,Metab__CHEBI:16422_c,Metab__CHEBI:16422_e,"Curated reaction traversal; lipid nodes may be chemical classes, not measured species."

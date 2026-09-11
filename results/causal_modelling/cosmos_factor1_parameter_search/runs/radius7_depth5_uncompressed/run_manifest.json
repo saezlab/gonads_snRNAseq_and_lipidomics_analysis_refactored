@@ -1,0 +1,37 @@
+{
+  "created_utc": "2026-09-09 09:30:14 UTC",
+  "command": "Rscript scripts/moon/search_factor1_parameter_space.R --phase=coarse",
+  "run_id": "radius7_depth5_uncompressed",
+  "compression": "uncompressed",
+  "n_layers": 5,
+  "topology_radius": 7,
+  "topology_radius_policy": "fixed across n_layers to isolate MOON propagation depth",
+  "pkn": "results/cosmos_mouse_pkn/pkn_lipid_rules.rds",
+  "input": "results/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+  "statistic": "ulm",
+  "tf_cutoff": "abs(activity) > 2",
+  "expression_filter": "none: Factor 1 RNA weights are not expression-presence measurements",
+  "downstream_scaling": "none; observed level-0 weights are exempt from inferred-score thresholds",
+  "converged": true,
+  "iterations": 4,
+  "upstream_inputs": 49,
+  "downstream_inputs": 74,
+  "scored_nodes": 5730,
+  "realized_max_level": 5,
+  "final_scoring_edges": 36951,
+  "final_original_edges": 36951,
+  "orientation": {
+    "label": "testes_positive_Factor1_coordinate",
+    "multiplier": 1,
+    "saved_coordinate_group_means": [-0.7423, 0.7086],
+    "scope": "same_multiplier_for_TF_activities_RNA_loadings_lipid_loadings_and_sample_coordinates",
+    "interpretation": "positive_agrees_with_testes_associated_Factor1_not_a_direct_differential_effect"
+  },
+  "input_and_script_md5": {
+    "results/cosmos_mouse_pkn/pkn_lipid_rules.rds": "be8da3886f19f8b121a389e442113edd",
+    "results/cosmos_factor1_pilot/inputs/factor1_inputs.rds": "679f0f336499ec59106eb2107bb49ec4",
+    "scripts/moon/search_factor1_parameter_space.R": "93b4571b8a92414497aeee05730e98ea",
+    "scripts/moon/moon_safe_helpers.R": "86be2ca41edc65841f7674209c8b36fd"
+  },
+  "template_url": "https://github.com/saezlab/COSMOS_basic/blob/7108c6b849c712b1282440dc122c9d783f563da8/scripts/net_compr_MOON.R"
+}

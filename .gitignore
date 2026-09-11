@@ -5,6 +5,8 @@
 .DS_Store
 omnipathr-log/**
 **.rds
+# Preserve frozen COSMOS inputs, scoring states, and solutions for audit.
+!results/causal_modelling/**/*.rds
 .RDataTmp
 **MOFA_RNA_data.csv
 **/rna_until_pseudobulking/**

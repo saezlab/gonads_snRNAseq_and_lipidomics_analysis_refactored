@@ -204,6 +204,97 @@ Before running any workflow, verify:
 
 ## Agent Documentation Entry Point
 
+### Experimental mouse COSMOS PKN (2026-09-08)
+
+`scripts/pkn/run_build.py` is a separate, optional prior-construction pipeline,
+documented in `docs/cosmos_mouse_pkn_build.md`. It reads frozen external network
+resources, the current WF03 lipid DE feature IDs and WF04 Factor 1 lipid IDs for
+coverage/rule matching. It writes `results/cosmos_mouse_pkn/`, including signed
+R/CSV priors, rich reaction/evidence tables, mapping candidates and validation.
+It neither changes the existing workflows nor uses their correlation/abundance
+signs to create causal edges. The optional Factor 1 MOON pilot below consumes
+the measured-species rules prior; workflows 00–10 remain unchanged.
+
+### Optional Factor 1 MOON pilot (2026-09-08)
+
+`scripts/moon/prepare_factor1_inputs.R`, `audit_factor1_model.py` and
+`map_factor1_inputs.R` read the WF04 saved loading/TF-score bundle, selected
+MOFA HDF5 model, sample metadata, existing TF regulons and PKN mappings. They
+write audited, jointly oriented inputs under `results/cosmos_factor1_pilot/inputs/`.
+`scripts/moon/run_factor1_moon.R` consumes these inputs and
+`results/cosmos_mouse_pkn/pkn_lipid_rules.rds` for six-layer ULM scoring,
+compression, iterative RNA coherence and signed TF-to-lipid extraction.
+`audit_factor1_thresholds.R` reuses the final scores for extraction sensitivity;
+`export_factor1_network.py` adds prior evidence, candidate paths and figures.
+The main result is documented in `docs/cosmos_factor1_moon_pilot.md`: the
+tutorial extraction thresholds yield no complete paths with compression, while
+an independently converged uncompressed run retains 8 TFs and 4 lipids. Relaxed
+and stricter settings, compression effects and bounded catalyst routes are
+audited separately. These outputs are not consumed by existing
+workflows or treated as validated causal mechanisms.
+
+### Optional Factor 1 MOON parameter search (2026-09-09)
+
+`scripts/moon/search_factor1_parameter_space.R` extends the pilot without
+altering workflows 00--10, the saved MOFA fit, PKN, or input measurements. It
+scores fixed-radius terminal-observation PKNs across propagation depths 4--12,
+separately for compressed and uncompressed representations where appropriate,
+then reuses each saved score state for a coarse and local-refined dual-threshold
+grid. `audit_factor1_depth_topology.R`,
+`summarize_factor1_parameter_search.py`, `audit_refined_candidates.R` and
+`export_factor1_network.py` write topology coverage, all threshold rows,
+independent edge/sign/connectivity checks, GraphML and reaction-evidence
+exports under `results/cosmos_factor1_parameter_search/`.
+
+The original uncompressed U5/U4 preference is superseded by the compressed
+review below. These saved runs remain representation diagnostics, since higher
+uncompressed scores do not establish stronger evidence than compressed scores.
+`docs/cosmos_factor1_moon_parameter_search.md` preserves the historical search
+and exact artifacts. These outputs are not consumed by existing workflows.
+
+### Optional compressed MOON review and TF audit (2026-09-09)
+
+`docs/cosmos_factor1_compressed_review.md` is the current interpretation entry
+point. `search_compressed_threshold_review.R` evaluates 7,563 additional cutoff
+pairs on saved baseline compressed scores and eight new compressed sensitivity
+states, writing to `results/cosmos_factor1_compressed_review/`. The new states
+come from `run_factor1_compressed_sensitivities.R` (radii and uniform initial
+RNA coherence) and `run_factor1_inputs_only_compression.R` (stronger compression
+with original-ID coherence and recompression after deletions). The primary
+exploratory C03 has 388 edges at radius 6/depth 4 and cutoffs 1.85/0.55, with
+Ahr/Hnf4a/Ppara/Tbx2 and three DGs. Stronger compression reproduces its exact
+graph. A wider radius-12/depth-8 compressed alternative has 468 edges at
+2.15/1.075 with Klf10/Tbx2 and two DGs. Cutoffs across changed scoring
+backgrounds are not ranks of biological confidence.
+
+`audit_factor1_focus_tf_retention.R` and
+`validate_factor1_compressed_tf_sensitivities.R` establish that Esr1/Nfic/Dbp
+survive preprocessing and compression but have weak positive inferred scores
+against negative supplied TF activities; MOON removes them after scoring.
+All 66 audited TF/run comparisons retain this sign conflict.
+`export_compressed_score_retention.R` saves all pre-sign-filter score rows
+with explicit return/exclusion and candidate-membership flags. Exact PKN
+projection, coherence, sign and connectivity validation, reaction provenance
+and figures accompany the networks. No workflow 00--10 dependency, accepted
+input mapping, MOFA fit or raw PKN is changed. These are mechanistic hypotheses
+with narrow lipid-rule coverage, not validated causal mechanisms.
+
+### Manuscript drafting and relocated causal-model archive (2026-09-09)
+
+The user moved the COSMOS result folders into `results/causal_modelling/`.
+`docs/manuscript_drafts/cosmos_results_methods.md` drafts the Results and
+Methods additions for the supplied revised paper; its companion notes map
+scripts and current artifacts and distinguish curated PKN edges from species
+hypotheses. `scripts/moon/audit_manuscript_causal_model.R` was executed against
+the relocated archive. It verifies input hashes and the final compression
+projection and re-extracts exactly the selected388-edge/153-node C03 network
+from frozen scores, without refitting MOFA or MOON. Its output is
+`results/causal_modelling/manuscript_audit/`. Historical generation scripts and
+embedded RDS/manifest paths retain their old locations; full source replay
+requires path migration and reconciliation of recorded script versions. No
+workflow00--10 dependency or scientific result was changed by this drafting
+and audit step.
+
 Use `docs/AGENT_GUIDE.md` as the static replacement for the discontinued MCP
 query layer. It maps common biological/data questions to result files that
 answer them directly.

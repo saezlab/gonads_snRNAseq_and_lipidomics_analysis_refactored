@@ -1,0 +1,36 @@
+{
+  "created_utc": "2026-09-09T09:34:22.866860+00:00",
+  "source_grid": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/cosmos_factor1_parameter_search/parameter_grid.csv",
+  "source_sha256": "f0fe5019623d2512519bea0754ee0133dedf59f765d626ddadda55bd2a5b0c6c",
+  "script_sha256": "8dc352337f0a6aeec5ab2d2f080de899f2ca835e0c42da66354470e555be62cc",
+  "raw_rows": 3792,
+  "unique_rows": 3792,
+  "superseded_duplicate_rows": 0,
+  "eligible_rows": 152,
+  "interpretable_rows": 132,
+  "pareto_rows": 48,
+  "shortlist_rows": 9,
+  "max_edges": 500,
+  "exclusion_reason_counts": {
+    "edge_cap_exceeded": 276,
+    "empty_network": 3364,
+    "no_upstream_tf": 3364,
+    "no_downstream_lipid": 3364
+  },
+  "ranking": "secondary descending, primary descending, downstream lipid endpoints descending, upstream TFs descending, edges ascending; candidate ID only breaks exact ties",
+  "pareto_strata": [
+    "compression",
+    "n_layers",
+    "topology_radius"
+  ],
+  "pareto_objectives": [
+    "maximize secondary",
+    "maximize primary",
+    "maximize lipid endpoints",
+    "maximize TF endpoints",
+    "minimize edges"
+  ],
+  "grid_validity_scope": "The input valid flag certifies the producer's audits; this script does not recalculate networks or recertify unmaterialized artifacts.",
+  "duplicate_policy": "Latest grid line supersedes an identical run/configuration/threshold/artifact identity.",
+  "biological_stability": "Not established by eligibility counts. Materialize comparable candidate networks and compare exact endpoint/edge identities, signs and route support before claiming stability."
+}

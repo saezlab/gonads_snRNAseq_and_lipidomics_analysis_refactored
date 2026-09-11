@@ -1,0 +1,1 @@
+run_id,run_dir,compression,n_layers,topology_radius,primary_threshold,secondary_threshold,status,converged,valid,nodes,edges,upstream_tfs,downstream_nodes,solution_stem,phase,realized_max_level,candidate_edges,consistent_edges,short_route_pairs,route_pairs,run_manifest

@@ -1,0 +1,58 @@
+{
+  "variants": {
+    "core": {
+      "edges": 231386,
+      "nodes": 46114,
+      "conflicting_pairs_excluded": 6119,
+      "node_types": {
+        "enzyme_reaction_instance": 29820,
+        "metabolite": 6691,
+        "gene_product": 9590,
+        "protein_unmapped": 13
+      }
+    },
+    "lipid_curated": {
+      "edges": 251998,
+      "nodes": 52157,
+      "conflicting_pairs_excluded": 6121,
+      "node_types": {
+        "enzyme_reaction_instance": 33504,
+        "metabolite": 8967,
+        "gene_product": 9673,
+        "protein_unmapped": 13
+      }
+    },
+    "lipid_rules": {
+      "edges": 254589,
+      "nodes": 52755,
+      "conflicting_pairs_excluded": 6121,
+      "node_types": {
+        "enzyme_reaction_instance": 33953,
+        "metabolite": 9116,
+        "gene_product": 9673,
+        "protein_unmapped": 13
+      }
+    },
+    "exploratory": {
+      "edges": 303925,
+      "nodes": 70049,
+      "conflicting_pairs_excluded": 7115,
+      "node_types": {
+        "enzyme_reaction_instance": 36860,
+        "metabolite": 22887,
+        "gene_product": 10277,
+        "protein_unmapped": 25
+      }
+    }
+  },
+  "excluded_records": {
+    "self_edges": 2,
+    "protein_unsigned": 11692,
+    "reaction_no_catalyst_or_boundary": 4932,
+    "rhea_redundant_UN_annotation": 2233,
+    "rhea_transport_unresolved_compartments": 356
+  },
+  "semantics": "Positive metabolic traversal; no concentration or flux inference",
+  "protein_namespace": "Gene__mouse_primary_symbol; unmapped accessions preserved",
+  "compartments": "unknown is distinct; no synthetic compartment bridges"
+}

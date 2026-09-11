@@ -1,0 +1,13 @@
+candidate,node_id,label,role,inferred_moon_score,tf_activity_input,factor1_weight,secondary_margin
+U4,Gene__Nfe2l2,Nfe2l2,upstream_tf,1.62899977646913,3.77941615388038,,0.02899977646912988
+U4,Gene__Nr4a2,Nr4a2,upstream_tf,1.99478561358422,2.24121687412745,,0.3947856135842198
+U4,Metab__MeasuredLipid:DG(24:0_18:2)_unknown,DG(24:0_18:2),measured_lipid,,,1.39919914162362,
+U4,Metab__MeasuredLipid:DG(24:1_18:2)_unknown,DG(24:1_18:2),measured_lipid,,,1.75095749390766,
+U5,Gene__Klf10,Klf10,upstream_tf,-1.60018634712962,-3.24922835434819,,0.00018634712961995703
+U5,Gene__Nfe2l2,Nfe2l2,upstream_tf,1.62899977646913,3.77941615388038,,0.02899977646912988
+U5,Metab__MeasuredLipid:DG(24:0_18:2)_unknown,DG(24:0_18:2),measured_lipid,,,1.39919914162362,
+U5,Metab__MeasuredLipid:DG(24:1_18:2)_unknown,DG(24:1_18:2),measured_lipid,,,1.75095749390766,
+C4,Gene__Ppara,Ppara,upstream_tf,-0.980414452032455,-5.9658231913035,,0.13041445203245505
+C4,Gene__Tbx2,Tbx2,upstream_tf,-2.37620109679616,-2.02109714431975,,1.52620109679616
+C4,Metab__MeasuredLipid:DG(24:0_18:2)_unknown,DG(24:0_18:2),measured_lipid,,,1.39919914162362,
+C4,Metab__MeasuredLipid:DG(24:1_18:2)_unknown,DG(24:1_18:2),measured_lipid,,,1.75095749390766,

@@ -1,0 +1,4 @@
+"candidate_id","edges","nodes","matches_grid","edges_in_final_pkn","score_exactly_matches_state","all_inferred_above_secondary","all_edges_incident_to_primary","all_edges_sign_consistent","all_nodes_on_seed_observation_walk"
+"C01",255,110,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE
+"C02",446,166,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE
+"C03",388,153,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE

@@ -1,0 +1,81 @@
+{
+  "created_utc": "2026-09-09 13:30:49 UTC",
+  "mode": "Extraction only; new compressed topology, pre-score RNA, and input-only protection sensitivity states",
+  "cleanup_cache": "Exact-input memoization of repeated PKN cleanup; materialized candidates re-extracted without the cache",
+  "unique_scoring_states": 8,
+  "aliases": [
+    {
+      "run_id": "radius6_depth4_compressed_inputs_only",
+      "depth": 4,
+      "canonical_run": "radius6_depth4_compressed_inputs_only",
+      "realized_max_level": 4,
+      "_row": "radius6_depth4_compressed_inputs_only"
+    },
+    {
+      "run_id": "radius6_depth8_compressed_inputs_only",
+      "depth": 8,
+      "canonical_run": "radius6_depth8_compressed_inputs_only",
+      "realized_max_level": 7,
+      "_row": "radius6_depth8_compressed_inputs_only"
+    },
+    {
+      "run_id": "radius12_depth8_compressed",
+      "depth": 8,
+      "canonical_run": "radius12_depth8_compressed",
+      "realized_max_level": 8,
+      "_row": "radius12_depth8_compressed"
+    },
+    {
+      "run_id": "radius4_depth8_compressed",
+      "depth": 8,
+      "canonical_run": "radius4_depth8_compressed",
+      "realized_max_level": 6,
+      "_row": "radius4_depth8_compressed"
+    },
+    {
+      "run_id": "radius5_depth8_compressed",
+      "depth": 8,
+      "canonical_run": "radius5_depth8_compressed",
+      "realized_max_level": 7,
+      "_row": "radius5_depth8_compressed"
+    },
+    {
+      "run_id": "radius7_depth8_compressed",
+      "depth": 8,
+      "canonical_run": "radius7_depth8_compressed",
+      "realized_max_level": 7,
+      "_row": "radius7_depth8_compressed"
+    },
+    {
+      "run_id": "radius6_depth4_compressed_prescore_rna",
+      "depth": 4,
+      "canonical_run": "radius6_depth4_compressed_prescore_rna",
+      "realized_max_level": 4,
+      "_row": "radius6_depth4_compressed_prescore_rna"
+    },
+    {
+      "run_id": "radius6_depth8_compressed_prescore_rna",
+      "depth": 8,
+      "canonical_run": "radius6_depth8_compressed_prescore_rna",
+      "realized_max_level": 7,
+      "_row": "radius6_depth8_compressed_prescore_rna"
+    }
+  ],
+  "coarse_primary": [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3],
+  "coarse_secondary": [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2],
+  "refined": "0.025 increments within +/-0.1 of threshold/coverage Pareto and near-cap 500-999-edge coarse anchors",
+  "retention": "All grid rows, including empty; strict edges <500; at least 2 TF and 2 lipid observations preferred",
+  "level0_policy": "Original measured weights are exempt from inferred-node score cutoffs and cannot serve as primary nodes",
+  "md5": {
+    "results/cosmos_factor1_compressed_review/inputs_only_sensitivity/runs/radius6_depth4_compressed_inputs_only/run_state.rds": "296f403d879d5c42c74a312d73b8a299",
+    "results/cosmos_factor1_compressed_review/inputs_only_sensitivity/runs/radius6_depth8_compressed_inputs_only/run_state.rds": "bd1fd33b4b492e73a21c8b532c517677",
+    "results/cosmos_factor1_compressed_review/topology_sensitivity/runs/radius12_depth8_compressed/run_state.rds": "d9ffefd9a0ff6b83e44d85568e49baa8",
+    "results/cosmos_factor1_compressed_review/topology_sensitivity/runs/radius4_depth8_compressed/run_state.rds": "5f2460b48ddff8f5e877180da1d72e2f",
+    "results/cosmos_factor1_compressed_review/topology_sensitivity/runs/radius5_depth8_compressed/run_state.rds": "b72a57f8796597af64ce60c8ea8b4975",
+    "results/cosmos_factor1_compressed_review/topology_sensitivity/runs/radius7_depth8_compressed/run_state.rds": "8591c5a0dfc0bd2d5276de4a2bc5b532",
+    "results/cosmos_factor1_compressed_review/prescore_sensitivity/runs/radius6_depth4_compressed_prescore_rna/run_state.rds": "752d2e8dbf828f904d56f4f48f4608fb",
+    "results/cosmos_factor1_compressed_review/prescore_sensitivity/runs/radius6_depth8_compressed_prescore_rna/run_state.rds": "53a559c50e8418fc74141b9182a86f85",
+    "scripts/moon/search_compressed_threshold_review.R": "e906362cd4c39f1be09039cb1749be81",
+    "scripts/moon/moon_safe_helpers.R": "86be2ca41edc65841f7674209c8b36fd"
+  }
+}

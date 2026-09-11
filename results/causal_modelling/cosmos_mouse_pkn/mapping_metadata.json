@@ -1,0 +1,124 @@
+{
+  "built_utc": "2026-09-08T10:40:46.613480+00:00",
+  "source": {
+    "url": "https://www.swisslipids.org/api/file.php?cas=download_files&file=lipids.tsv",
+    "path": "support/cosmos_mouse/raw/swisslipids_lipids.tsv.gz",
+    "sha256_download": "2221a3fcf26676c472ca4b8caa6c53055a920e649a6c408fa9a9f11eefe7a335",
+    "encoding": "latin-1",
+    "rows": 779257,
+    "levels": {
+      "Class": 806,
+      "Isomeric subspecies": 592422,
+      "": 1292,
+      "Category": 7,
+      "Species": 10347,
+      "Molecular subspecies": 62516,
+      "Structural subspecies": 111867
+    },
+    "metadata_file": "support/cosmos_mouse/raw/swisslipids_downloads.json",
+    "metadata_sha256": "c7eec48ab94b5ce2dba1188713e5fced4585ceacdba5c94c27f577e06dbda629",
+    "release_metadata": {
+      "file": "lipids.tsv",
+      "url": "https://www.swisslipids.org/api/file.php?cas=download_files&file=lipids.tsv",
+      "size": "655.65M",
+      "columns": [
+        "Lipid ID",
+        "Level",
+        "Name",
+        "Abbreviation*",
+        "Synonyms*",
+        "Lipid class*",
+        "Parent",
+        "Components*",
+        "SMILES (pH7.3)",
+        "InChI (pH7.3)",
+        "InChI key (pH7.3)",
+        "Formula (pH7.3)",
+        "Charge (pH7.3)",
+        "Mass (pH7.3)",
+        "Exact Mass (neutral form)",
+        "Exact m/z of [M.]+",
+        "Exact m/z of [M+H]+",
+        "Exact m/z of [M+K]+ ",
+        "Exact m/z of [M+Na]+",
+        "Exact m/z of [M+Li]+",
+        "Exact m/z of [M+NH4]+",
+        "Exact m/z of [M-H]-",
+        "Exact m/z of [M+Cl]-",
+        "Exact m/z of [M+OAc]- ",
+        "CHEBI",
+        "LIPID MAPS",
+        "HMDB",
+        "MetaNetX",
+        "PMID"
+      ],
+      "date": "September 08 2026",
+      "license": "by"
+    }
+  },
+  "dependencies": {
+    "pygoslin": "2.2.5",
+    "scipy": "1.13.1",
+    "numpy": "2.0.2"
+  },
+  "inputs": {
+    "results/lipidomic/gonade_type_ttop.csv": "d68000023c8b2792302d71df4180f15d5d99e862a215027cc3464c1085510210",
+    "results/mofa/networks/gene_lipid_correlations_factor1.csv": "4933754a4525aefa9bd89167ccb8c2a7b0cb7dc2de42478456b623e8bd5f4926"
+  },
+  "all_features": {
+    "n_features": 1254,
+    "statuses": {
+      "exact_reported_resolution": 877,
+      "compatible_only": 163,
+      "unmapped": 13,
+      "class_or_ancestor_only": 201
+    },
+    "exact_chebi_features": 128,
+    "compatible_chebi_features": 344,
+    "parsed_features": 1214
+  },
+  "factor1": {
+    "n_features": 64,
+    "statuses": {
+      "exact_reported_resolution": 41,
+      "compatible_only": 14,
+      "unmapped": 4,
+      "class_or_ancestor_only": 5
+    },
+    "exact_chebi_features": 3,
+    "compatible_chebi_features": 15,
+    "parsed_features": 63
+  },
+  "candidate_rows": 8816,
+  "catalog_rows": 6369,
+  "chebi_node_mapping": {
+    "rows": 6288,
+    "pH73_crosswalk_path": "support/cosmos_mouse/raw/rhea-chebi_pH7_3_mapping.tsv",
+    "pH73_crosswalk_sha256": "7076e992933d94e81b66e55d4977c4634b11ad5d9146052c0a25ebc72b5067b2",
+    "pH73_changed_rows": 1
+  },
+  "candidate_parse_failures": {},
+  "unresolved_parent_ids": [
+    "SLM:000001080",
+    "SLM:000389930",
+    "SLM:000501265",
+    "SLM:000758330",
+    "SLM:000782329",
+    "SLM:000782330",
+    "SLM:000782331",
+    "SLM:000782332",
+    "SLM:000782333",
+    "SLM:000782334",
+    "SLM:000782335"
+  ],
+  "policy": [
+    "Nomenclature resolution does not establish experimental structural identification confidence.",
+    "Exact means identical Goslin canonical shorthand at the reported resolution; multiple resource records remain alternatives.",
+    "Underscore and slash are distinct; matching to higher/lower resolution is explicitly labeled.",
+    "HexCer does not establish glucose versus galactose; such candidates are labeled headgroup isomers.",
+    "Two-moiety CL labels automatically reinterpreted as lysocardiolipins by Goslin are rejected; class annotation only is retained.",
+    "Class and ancestor links are annotations, never signed causal edges.",
+    "Detailed isomers without ChEBI are not exhaustively enumerated; compatibility candidate counts are not a complete chemical-isomer enumeration.",
+    "SwissLipids structures are not organism-filtered. Mouse specificity belongs to the catalytic/regulatory evidence, not lipid chemical identity."
+  ]
+}
