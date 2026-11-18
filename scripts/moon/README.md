@@ -40,11 +40,17 @@ remap inputs or alter either fitted analysis.
 [`results/causal_modelling/cosmos_mouse_pkn_stitch_directional/`](../../results/causal_modelling/cosmos_mouse_pkn_stitch_directional/)
 contains a separate exploratory PKN in which all cache-normalized STITCH rows
 were replaced with raw chemical-actor records with explicit direction and
-sign. Neither checked-in MOON configuration points to this overlay, and no
-TF→lipid or lipid→TF fit has used it. The direct-coverage and no-route
-statements below therefore apply to the frozen `pkn_lipid_rules` resource only.
-A future overlay analysis must use an explicit sensitivity configuration and
-repeat measurement-identity coverage rather than silently substituting its PKN.
+sign. The active relaxed lipid→TF configuration
+`config/factor1_lipid_to_tf_relaxed.json` uses this overlay and its separate
+conditional mapping ledger. The selected TF→lipid baseline and the exact-mapped
+lipid→TF configuration retain the original PKN. The direct-coverage and no-route
+statements below apply to that original `pkn_lipid_rules` resource, not to the
+relaxed overlay analysis. Do not substitute either prior for the other.
+
+The retained overlay, mapping/evidence tables and selected states ship with the
+repository. Rebuilding the overlay additionally requires the two large local-only
+STITCH action/link downloads recorded in its source manifest; those raw files
+are not needed merely to read or fit from the retained overlay.
 
 The main workflow reproduces the **TF activities → lipid weights** network in
 the manuscript Results. It starts from the frozen, previously audited Factor 1
@@ -76,6 +82,24 @@ Existing nonempty output directories are refused. Paths in the configuration
 and command options resolve from the project root; the entry point can also
 be invoked by its absolute path from another directory. `--validate-only`
 checks dependencies and hashes without scoring or writing output.
+
+The software gate is part of that validation, not an optional full-fit check.
+As confirmed from installed package metadata on 18 November 2026, local
+decoupleR is 2.9.7 while these replay configurations require 2.17.0. Thus the
+three main MOON `--validate-only` commands stop before fitting in this
+environment. Saved-artifact extraction checks use a separate entry point and
+do not certify that a fresh fit is ready:
+
+```sh
+Rscript scripts/moon/ancillary/validate_frozen_archives.R
+```
+
+That command reads existing selected/relaxed states and their frozen references,
+checks hashes and re-extracts networks without new MOON scoring. By default it
+prints a report; `--output=NEW_JSON` explicitly writes one new report and refuses
+an existing filename. The 13 compact archived dependencies in
+[`active_frozen_dependencies.json`](../../docs/provenance/active_frozen_dependencies.json)
+are deliberately shipped. Other historical search payloads remain local-only.
 
 The checked-in configuration is
 [`config/factor1_tf_to_lipid.json`](config/factor1_tf_to_lipid.json):
@@ -309,3 +333,11 @@ are excluded from audit paths. Cebpb/Pparg regulatory prefixes are separately
 labelled unscored follow-up hypotheses, not selected, sign-coherent Factor 1
 MOON explanations. RXRA and all TF-to-enzyme claims require mediator/context
 gates. No PKN mutation, new fit or quantitative KO/synergy simulation occurs.
+
+Recomputing the expression audit additionally needs the local original
+`data/RNA/fcg_pseudobulks.rds` whole-cell count object and the archived culture
+count CSV under `miscellaneous/older_inputs/legacy_rna/`; neither is shipped.
+The seven public CSV transports do not supply this whole-cell FCG counts
+object. The proposal exporter can consume its retained expression-audit CSV
+instead, with its reviewed graph/source inputs. Keep those two preparation
+routes distinct; neither command fits MOON.

@@ -1,0 +1,1242 @@
+{
+  "schema_version": 1,
+  "audited_on": "2026-11-18",
+  "base_commit": "f45e2a9702dae4274d8581d647f219b548525bdb",
+  "scope": "Source-versus-documentation review, dependency inventory, navigation checks and approved-output guard hardening. No scientific model or panel reruns.",
+  "coverage": {
+    "logical_workflow_branches": 29,
+    "numbered_entry_files": 25,
+    "input_groups": 143,
+    "output_groups": 66
+  },
+  "maintained_documents": {
+    "execution_guide": "PIPELINE.md",
+    "complete_reference": "docs/WORKFLOW_REFERENCE.md",
+    "editable_contract": "docs/workflow_dependencies.json",
+    "dependency_inventory": "docs/workflow_dependencies.csv",
+    "catalog": "docs/analysis_catalog.csv",
+    "generator": "scripts/maintenance/build_workflow_documentation.py"
+  },
+  "important_corrections": [
+    "Separated scientific data flow from Workflow17 orchestration and manual14/15/16 parent handoffs.",
+    "Documented mandatory17 prerequisites from03,06 and saved independent07 KD fits, plus14 whole-hepatocyte intake.",
+    "Distinguished public CSV transports from local original Seurat objects and ignored downstream model caches.",
+    "Replaced layered stale meta overview while preserving its exact previous bytes.",
+    "Recorded actual validation and overwrite scope per entry, including older fixed-path execution-on-source scripts,11 observed-model validation and04 conditional automatic training.",
+    "Preserved independent diet interpretation and historical two-marker12/13 reference boundaries.",
+    "Corrected optional MOON prior/default/software provenance and made local archive link availability explicit.",
+    "Added narrow cache-independent protection for full public writes to the approved release; explicit refresh modes retain their stated write semantics.",
+    "Corrected Markdown directory availability checks and added scoped raw/generated Xenium excludes."
+  ],
+  "known_limits": [
+    {
+      "branch": "00/01",
+      "issue": "Legacy HPC preprocessing output filenames require explicit external import/name handoff; full01 needs excluded original cell-type Seurat objects. Supplied downstream CSVs bypass that preparation requirement."
+    },
+    {
+      "branch": "09",
+      "issue": "Requires externally supplied mouse signature, human data and live pypath orthology lookup; no validation/source guard. Current02 does not emit the required seed file."
+    },
+    {
+      "branch": "10",
+      "issue": "Not a ready standalone end-to-end pipeline:03 uses adata before initialization,00 looks up sequential row IDs against cell_id-keyed component sizes and needs review, and raw inputs are external. Scientific code was not modified."
+    },
+    {
+      "branch": "17 private audit",
+      "issue": "Full audit needs local historical caches/private manuscript and preprocessing references. The shared source-root must satisfy both transport and preprocessing-reference lookup, or exact snapshots must already exist."
+    },
+    {
+      "branch": "internal helpers",
+      "issue": "Approved-output protection applies to maintained public routes. Internal staging/GDX helpers retain their own cache guards and are not independent safe public rerun entries."
+    },
+    {
+      "branch": "historical provenance QA",
+      "issue": "Strict saved source/plan snapshot hashes can differ after intentional documentation/guard edits. This is distinct from numeric/cache-parent checks; original manifests were not refreshed."
+    },
+    {
+      "branch": "MOON full fitting",
+      "issue": "Full fits require the pinned decoupleR2.17.0 environment; installed2.9.7 is insufficient. Saved replay is separate from a full refit."
+    },
+    {
+      "branch": "deferred nucleus QC",
+      "issue": "Figure4A/S4B-C counts/composition and exact executed retained-marker confirmation remain James tasks."
+    },
+    {
+      "branch": "frozen/local links",
+      "issue": "The frozen KO-target result README retains an old absent PDF link; see the causal map for restoration context. The independent11 result README links its explicitly local-only limma_fits.rds cache. Frozen artifact bytes are preserved."
+    }
+  ],
+  "validation": {
+    "documentation_contract_and_generation_check": "passed",
+    "approved_output_guard_fixture": "passed; temporary cache-absent/symlink paths, all fitting/rendering/subprocess work stubbed",
+    "workflow_documentation_unit_tests": "passed (7 tests)",
+    "github_link_classification_unit_test": "passed",
+    "whitespace_check": "passed"
+  },
+  "checks": {
+    "repository_organization": {
+      "command": "python3 scripts/maintenance/verify_repository_organization.py --require-full-archive",
+      "exit_code": 0,
+      "groups": 17,
+      "files_hashed": 3134,
+      "byte_mismatches": 0,
+      "missing_payloads": 0
+    },
+    "github_readiness": {
+      "command": "python3 scripts/maintenance/audit_github_readiness.py --strict",
+      "exit_code": 0,
+      "ready": true,
+      "oversized_candidates": 0,
+      "local_metadata_or_cache_candidates": 0
+    },
+    "documentation": {
+      "command": "python3 scripts/maintenance/build_workflow_documentation.py --check",
+      "exit_code": 0,
+      "entry_coverage": 25,
+      "generated_documents": 3
+    },
+    "guard_fixture": {
+      "command": "Rscript tests/test_approved_output_guard.R",
+      "exit_code": 0,
+      "scientific_work": "all model/render/subprocess calls stubbed"
+    },
+    "unit_tests": [
+      {
+        "command": "python3 tests/test_workflow_documentation.py",
+        "exit_code": 0,
+        "tests": 7
+      },
+      {
+        "command": "python3 tests/test_github_readiness_links.py",
+        "exit_code": 0,
+        "tests": 1
+      }
+    ],
+    "whitespace": {
+      "command": "git diff --check",
+      "exit_code": 0
+    },
+    "external_imaging_ignore_paths": {
+      "command": "git check-ignore --no-index <four synthetic raw/generated Xenium paths>",
+      "exit_code": 0,
+      "paths_ignored": 4
+    },
+    "additional_read_only_R_tests": [
+      {
+        "command": "Rscript tests/test_analysis_provenance_identity.R",
+        "exit_code": 0
+      },
+      {
+        "command": "Rscript tests/test_analysis_release.R",
+        "exit_code": 0
+      },
+      {
+        "command": "Rscript tests/test_validation_global_entry.R",
+        "exit_code": 0
+      }
+    ]
+  },
+  "preservation": {
+    "approved_results_modified": false,
+    "scientific_inputs_modified": false,
+    "model_definitions_or_thresholds_modified": false,
+    "scientific_fits_run": false,
+    "figures_generated": false,
+    "frozen_manifests_rewritten": false,
+    "source_files_compared": 177,
+    "unchanged_source_files": 170,
+    "guard_only_source_files": 7,
+    "previous_meta_copy": "miscellaneous/documentation/dependency_audit_20261118/_meta_cross_workflow_overview.md",
+    "previous_meta_sha256": "874ac6d01b0d97f2f29517e699011bda12fbac128e6fdaba1cdf1f16551daa76"
+  },
+  "source_comparison": [
+    {
+      "path": "scripts/workflows/00_snrnaseq_preprocessing.R",
+      "before_sha256": "5b30769d8f06b6df4473bafee5ea62fe9cba96ac930f3cc7c1724388a0002e66",
+      "after_sha256": "5b30769d8f06b6df4473bafee5ea62fe9cba96ac930f3cc7c1724388a0002e66",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/01_data_preparation_qc.R",
+      "before_sha256": "9c04772c4e991ed13e7381622cd5d0d5f4f4013c99713707c53ba9aaaf4842e3",
+      "after_sha256": "9c04772c4e991ed13e7381622cd5d0d5f4f4013c99713707c53ba9aaaf4842e3",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/02_fcg_pseudobulk_analysis.R",
+      "before_sha256": "a9e73004739a0eaafb417127b9c1ff9739fc5526bf10362e2c6342e1278464f3",
+      "after_sha256": "a9e73004739a0eaafb417127b9c1ff9739fc5526bf10362e2c6342e1278464f3",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/03_fcg_lipidomic_analysis.R",
+      "before_sha256": "8a762736b00c7192b96a5046f40b1609a3036e2d4714c4579a31d6e2f10b6d2f",
+      "after_sha256": "8a762736b00c7192b96a5046f40b1609a3036e2d4714c4579a31d6e2f10b6d2f",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/04_mofa_integration.R",
+      "before_sha256": "669ae01f8cb3d620b53c3f224fdadb5bc5bf0e045c092e7333e417dedc001c8a",
+      "after_sha256": "669ae01f8cb3d620b53c3f224fdadb5bc5bf0e045c092e7333e417dedc001c8a",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/05_zonation_analysis.R",
+      "before_sha256": "0358cbf50d680bfe796d85c4a36d0aa3dba2b28df68e84e30655043b50a2ac2f",
+      "after_sha256": "91d2a31763e3a009b0bd5e5cf62af9c0ffae05ff046baca42ca5d7a593c92685",
+      "changed": true
+    },
+    {
+      "path": "scripts/workflows/05b_wdsd_network_comparison.R",
+      "before_sha256": "719f504e27522393d7b7bf6496facc8820c59c77e502e6975bc6a17500bbe46a",
+      "after_sha256": "719f504e27522393d7b7bf6496facc8820c59c77e502e6975bc6a17500bbe46a",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/05c_wdsd_lipid_overlap_and_pooled_network.R",
+      "before_sha256": "3183847f37207eb2042461fd82ec5dfeccd1408faeee4fa2a5267ea6834f84f8",
+      "after_sha256": "3183847f37207eb2042461fd82ec5dfeccd1408faeee4fa2a5267ea6834f84f8",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/06_structural_analysis.R",
+      "before_sha256": "a17b0dc54f9f24239322ae940652781372ed77025c37f4da4c7c8f8c9bbc0044",
+      "after_sha256": "a17b0dc54f9f24239322ae940652781372ed77025c37f4da4c7c8f8c9bbc0044",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/07_validation_experiments.R",
+      "before_sha256": "7a476a9ddda2c486272bab85e1541ed773b098601d78aff09d6e9c6a285e9781",
+      "after_sha256": "04c9211c3c0126ab90726a29e56af8ddba9eba4030487d23c20ac974f230f383",
+      "changed": true
+    },
+    {
+      "path": "scripts/workflows/07b_cyp2c38_in_vivo_validation.R",
+      "before_sha256": "8010cca84d9b462f931b396a59842cb884fc7182d07d4d08c66072329640efbf",
+      "after_sha256": "8010cca84d9b462f931b396a59842cb884fc7182d07d4d08c66072329640efbf",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/07c_cyp2c38_ulm_resampling.R",
+      "before_sha256": "db842e91ed345b153d02fa08081280c7ab19c8783b7290145cc2ff64d446dd3e",
+      "after_sha256": "db842e91ed345b153d02fa08081280c7ab19c8783b7290145cc2ff64d446dd3e",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/08_variance_analysis.R",
+      "before_sha256": "cffa1938a8f01a029170a21333661700a062b9588f6f7da0e0e7e016b3dc2e2a",
+      "after_sha256": "cffa1938a8f01a029170a21333661700a062b9588f6f7da0e0e7e016b3dc2e2a",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/09_human_analysis.py",
+      "before_sha256": "d038b62182554a5e8be6efd1b6b80b55fcd491b9f9f5eb2d7bb4a17f2bbdd15f",
+      "after_sha256": "d038b62182554a5e8be6efd1b6b80b55fcd491b9f9f5eb2d7bb4a17f2bbdd15f",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/10_xenium_analysis/00_infer_doublets.py",
+      "before_sha256": "c0f45220ab5c16ff79fd34cb91ad006508cac4de656b1226d2b7bfc9ec27221b",
+      "after_sha256": "c0f45220ab5c16ff79fd34cb91ad006508cac4de656b1226d2b7bfc9ec27221b",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/10_xenium_analysis/01_merge_doublets.py",
+      "before_sha256": "a160560df4a15be2fed742dcb87d7bcd03d0abc8e2093792d04bb10ba88eee70",
+      "after_sha256": "a160560df4a15be2fed742dcb87d7bcd03d0abc8e2093792d04bb10ba88eee70",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/10_xenium_analysis/02_compositional_analysis.py",
+      "before_sha256": "429752ad71c1207380ba174e4b24c29c3c2bc0fdc93fe50715ea2baecc12b4f1",
+      "after_sha256": "429752ad71c1207380ba174e4b24c29c3c2bc0fdc93fe50715ea2baecc12b4f1",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/10_xenium_analysis/03_DGE_analysis.py",
+      "before_sha256": "fae22f661a6e22ffb51e35719e758e02a9c5f5ed166bb63af32414e5f9e560ab",
+      "after_sha256": "fae22f661a6e22ffb51e35719e758e02a9c5f5ed166bb63af32414e5f9e560ab",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/11_cyp2c38_in_vivo_validation.R",
+      "before_sha256": "902d48cadac188a1356c6872dd1943976bfee321e1d25bcc18750be65364012d",
+      "after_sha256": "902d48cadac188a1356c6872dd1943976bfee321e1d25bcc18750be65364012d",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/12_wdsd_network_comparison.R",
+      "before_sha256": "8596f0212358d692b2613ae8da3826f49f89a9407fbedab6cd8667883fed6cb6",
+      "after_sha256": "8596f0212358d692b2613ae8da3826f49f89a9407fbedab6cd8667883fed6cb6",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/13_wd_crosscohort_robustness.R",
+      "before_sha256": "757b8029e4c198a30aab77b9dbba2fd72fcf3b45c10b79159373df073b9e97eb",
+      "after_sha256": "757b8029e4c198a30aab77b9dbba2fd72fcf3b45c10b79159373df073b9e97eb",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/14_cf453_standalone_figure6.R",
+      "before_sha256": "19b4ddfc9d7f6cf7a0b1bbbeccebd403388f3b2a326e314cd327d1e44c378aca",
+      "after_sha256": "760d14c149ee8c1bad86fce332edfdb8a7ea871005d850eb7eec2774a1ace2f2",
+      "changed": true
+    },
+    {
+      "path": "scripts/workflows/15_cf453_diet_impact_figure6.R",
+      "before_sha256": "86438b91b291271ff98ec7ec22d2b906fb3bdfe8eb3cd77da7e213eb3853bf1d",
+      "after_sha256": "86438b91b291271ff98ec7ec22d2b906fb3bdfe8eb3cd77da7e213eb3853bf1d",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/16_cf453_diet_rewiring_figure6.R",
+      "before_sha256": "736f9d21f7a8d1f18005ba721941e13ac3d1b285513815d174dabe876404d8ea",
+      "after_sha256": "736f9d21f7a8d1f18005ba721941e13ac3d1b285513815d174dabe876404d8ea",
+      "changed": false
+    },
+    {
+      "path": "scripts/workflows/17_expanded_marker_zonation_update.R",
+      "before_sha256": "5ff325cde4c39df3c9b427783e64f56ab6b91e5aa51eccde3e3d88e184708a73",
+      "after_sha256": "cc9a801cdb02d7372c641802614b0f48669dc06491336a7986eca3380e179b85",
+      "changed": true
+    },
+    {
+      "path": "scripts/core/cf453_diet_impact.R",
+      "before_sha256": "2ecb1604dca5a1e4f56e8c7918cdee02c0bce3f8ac39e6cad27f21993b373be9",
+      "after_sha256": "2ecb1604dca5a1e4f56e8c7918cdee02c0bce3f8ac39e6cad27f21993b373be9",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_diet_impact_plots.R",
+      "before_sha256": "010c60128f4a1d5dd3c71af6e015ae1842116e4e48f0ea6d35617d9826c3d8fb",
+      "after_sha256": "010c60128f4a1d5dd3c71af6e015ae1842116e4e48f0ea6d35617d9826c3d8fb",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_diet_impact_report.R",
+      "before_sha256": "445b94ffe1620b4517b9648a74b97eb26bdee7ff5a7681c5646fcebf1787df67",
+      "after_sha256": "445b94ffe1620b4517b9648a74b97eb26bdee7ff5a7681c5646fcebf1787df67",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_diet_rewiring.R",
+      "before_sha256": "7c2afaf40bafdd6909a6cfdcaaa6e8b22ca1ef20deb4fad29de785169dfc0790",
+      "after_sha256": "7c2afaf40bafdd6909a6cfdcaaa6e8b22ca1ef20deb4fad29de785169dfc0790",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_diet_rewiring_plots.R",
+      "before_sha256": "ea1c21efc4c03516256271613fb1613977a1d84a9c14cdf500e3a7177d319a61",
+      "after_sha256": "ea1c21efc4c03516256271613fb1613977a1d84a9c14cdf500e3a7177d319a61",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_diet_rewiring_report.R",
+      "before_sha256": "4083c34a80d1e8c3976aa1bf9c4f93ae58404850626e352d7a55298b29ba7f20",
+      "after_sha256": "4083c34a80d1e8c3976aa1bf9c4f93ae58404850626e352d7a55298b29ba7f20",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_figure6_plots.R",
+      "before_sha256": "b4e18c903e80622891945d0b1b7212be9f7b2ae03a35d5c0eb1823e8bb249ee0",
+      "after_sha256": "b4e18c903e80622891945d0b1b7212be9f7b2ae03a35d5c0eb1823e8bb249ee0",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_figure6_report.R",
+      "before_sha256": "476d5bfc1a16554f8e3b5d7c6a154635c90f9eddb7489b5628a27a05062f08c5",
+      "after_sha256": "476d5bfc1a16554f8e3b5d7c6a154635c90f9eddb7489b5628a27a05062f08c5",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_figure6a_dots.R",
+      "before_sha256": "13f129c13af5dd0453379c540a6d51c5dacc81e0b1c0fb194ac86fa18e2bd5f8",
+      "after_sha256": "13f129c13af5dd0453379c540a6d51c5dacc81e0b1c0fb194ac86fa18e2bd5f8",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_figure6a_heatmap.R",
+      "before_sha256": "f1cf963f3ef6ee1fd1e574a034dd111c7f9d8f5dd574cdf57137310656f71664",
+      "after_sha256": "f1cf963f3ef6ee1fd1e574a034dd111c7f9d8f5dd574cdf57137310656f71664",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_figure6a_layouts.R",
+      "before_sha256": "244b148ecda60ac1874fd4ef92aceed221d5df129e7c768ce4680cc0deaa156c",
+      "after_sha256": "244b148ecda60ac1874fd4ef92aceed221d5df129e7c768ce4680cc0deaa156c",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cf453_standalone.R",
+      "before_sha256": "ab3a323e8e586c4bdb4d7d39b5c54733e88bab42b81184fc6207546ba3b5d6cd",
+      "after_sha256": "ab3a323e8e586c4bdb4d7d39b5c54733e88bab42b81184fc6207546ba3b5d6cd",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cyp2c38_models.R",
+      "before_sha256": "2de3d53166b1530215c1a62972dfe82fdfbd218a83e6fa7a8e7781b4c83f22a1",
+      "after_sha256": "2de3d53166b1530215c1a62972dfe82fdfbd218a83e6fa7a8e7781b4c83f22a1",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cyp2c38_plots.R",
+      "before_sha256": "2ba2e094c1e31a3db77b5d155dbf39b043e072d6c34e6846270c96f95fa4158b",
+      "after_sha256": "2ba2e094c1e31a3db77b5d155dbf39b043e072d6c34e6846270c96f95fa4158b",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cyp2c38_reference.R",
+      "before_sha256": "9c8cb1a514e9c142ca23f679710e0114c5fa9752c5151d73cc01638a74d0c280",
+      "after_sha256": "9c8cb1a514e9c142ca23f679710e0114c5fa9752c5151d73cc01638a74d0c280",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cyp2c38_report.R",
+      "before_sha256": "9e32933585120a7d5170e5f0ec0306518ecde377d3f08d82cbcc538a3f306a5f",
+      "after_sha256": "9e32933585120a7d5170e5f0ec0306518ecde377d3f08d82cbcc538a3f306a5f",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cyp2c38_sex_networks.R",
+      "before_sha256": "8aa087c03c8669a2860c076781d0419bdfa70f80be0656a38314db501cf96646",
+      "after_sha256": "8aa087c03c8669a2860c076781d0419bdfa70f80be0656a38314db501cf96646",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cyp2c38_ulm_bootstrap.R",
+      "before_sha256": "539ba53141c1b667c1a27f21a7fb8f73a7ef0a56028c291ef7c0dfa63fe52a76",
+      "after_sha256": "539ba53141c1b667c1a27f21a7fb8f73a7ef0a56028c291ef7c0dfa63fe52a76",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cyp2c38_ulm_calibration.R",
+      "before_sha256": "5f30d3f9a2e7585769393a1cc638e78a24d858ba9a286e21f90b9b72150b5536",
+      "after_sha256": "5f30d3f9a2e7585769393a1cc638e78a24d858ba9a286e21f90b9b72150b5536",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/cyp2c38_ulm_presentation.R",
+      "before_sha256": "c4dbfc989e6e1c1298210e07b52603084c2b67d8ac61825d39224c7bb915ccea",
+      "after_sha256": "c4dbfc989e6e1c1298210e07b52603084c2b67d8ac61825d39224c7bb915ccea",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/data_loading.R",
+      "before_sha256": "8bf4f0b6ed95ad4fcb98c97afa953bf67bb9ff116284b2c0d91bd7e371af8be0",
+      "after_sha256": "8bf4f0b6ed95ad4fcb98c97afa953bf67bb9ff116284b2c0d91bd7e371af8be0",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/differential_analysis.R",
+      "before_sha256": "ad4e877ac2c55f8200d33572e7b8b419260faf972b90eed8a4bd6550e3d236da",
+      "after_sha256": "ad4e877ac2c55f8200d33572e7b8b419260faf972b90eed8a4bd6550e3d236da",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/engines/05_zonation_analysis_legacy.R",
+      "before_sha256": "c560572332047ce3ce0cb065662d32a112241bcc2d46600824b424232ae25410",
+      "after_sha256": "c560572332047ce3ce0cb065662d32a112241bcc2d46600824b424232ae25410",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/engines/07_validation_experiments_legacy.R",
+      "before_sha256": "730420ace073e6bd94ce2e15ca7b90d063b082cb9ebf73c58fa0d68f1e26b66b",
+      "after_sha256": "730420ace073e6bd94ce2e15ca7b90d063b082cb9ebf73c58fa0d68f1e26b66b",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/enrichment_analysis.R",
+      "before_sha256": "5d9131c9f2c4734e3bc4efbb61ef98e552bddd169e55133ebbfe9fd59baf5877",
+      "after_sha256": "5d9131c9f2c4734e3bc4efbb61ef98e552bddd169e55133ebbfe9fd59baf5877",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/multiomics.R",
+      "before_sha256": "26d65ec4ccccb2efcce1bcfb8cc5290c2094c84159f8954859d323c6927f0997",
+      "after_sha256": "26d65ec4ccccb2efcce1bcfb8cc5290c2094c84159f8954859d323c6927f0997",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/pseudobulk_csv.R",
+      "before_sha256": "d22fa6873314818654033d680e9ad259a26b8168b3851b05170f7d0a448cc400",
+      "after_sha256": "d22fa6873314818654033d680e9ad259a26b8168b3851b05170f7d0a448cc400",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/structural_analysis.R",
+      "before_sha256": "b4ab8d68643d2b5ac69cf3816223a288a0ea33c6be4d344d57bc5bd78f55f143",
+      "after_sha256": "b4ab8d68643d2b5ac69cf3816223a288a0ea33c6be4d344d57bc5bd78f55f143",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/validation_global.R",
+      "before_sha256": "351457d259232a1dacfb437cc981e36fbf17147e5f9092aa29025a7580cde7c7",
+      "after_sha256": "351457d259232a1dacfb437cc981e36fbf17147e5f9092aa29025a7580cde7c7",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wd_crosscohort_presentation.R",
+      "before_sha256": "e996b6227a9d25aced263d3d7484f269933671061c1f0455e0914dce43dd2998",
+      "after_sha256": "e996b6227a9d25aced263d3d7484f269933671061c1f0455e0914dce43dd2998",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wd_crosscohort_setup.R",
+      "before_sha256": "bd6b70a8a7a87f75d18ed95a18d4251a3c34ac95b58fde286a7f637548b74de2",
+      "after_sha256": "bd6b70a8a7a87f75d18ed95a18d4251a3c34ac95b58fde286a7f637548b74de2",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wd_crosscohort_statistics.R",
+      "before_sha256": "075d9275f65e407c7091eaa33d4dcd3c2bbff3f6ed0d1e82278271f64766c91c",
+      "after_sha256": "075d9275f65e407c7091eaa33d4dcd3c2bbff3f6ed0d1e82278271f64766c91c",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wd_crosscohort_workflow.R",
+      "before_sha256": "66da5d9d8a63ffd3fbea8b474b4f67ab907f343dbf341875ddb69ee81f0731ad",
+      "after_sha256": "66da5d9d8a63ffd3fbea8b474b4f67ab907f343dbf341875ddb69ee81f0731ad",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wd_fcg_comparison.R",
+      "before_sha256": "418ed7f6a8f3df018ad8b922b6cd0cdccc66f48a50939d2cf4ebe9265e23b395",
+      "after_sha256": "418ed7f6a8f3df018ad8b922b6cd0cdccc66f48a50939d2cf4ebe9265e23b395",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wd_intake.R",
+      "before_sha256": "36d139b18ca37ed501ccb273fd207f00e47d8e5ae28582cc66eb5feece28ebb2",
+      "after_sha256": "36d139b18ca37ed501ccb273fd207f00e47d8e5ae28582cc66eb5feece28ebb2",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wdsd_comparison_setup.R",
+      "before_sha256": "1ac33f8eff2fc13992b662c8474183daa4d60637ac5ee6e40a629717c6ac7dff",
+      "after_sha256": "1ac33f8eff2fc13992b662c8474183daa4d60637ac5ee6e40a629717c6ac7dff",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wdsd_intake.R",
+      "before_sha256": "1c48cdfb653f4230c95ccb79b1c09d41712ced41743e8c8ee5457b89479cabcc",
+      "after_sha256": "1c48cdfb653f4230c95ccb79b1c09d41712ced41743e8c8ee5457b89479cabcc",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wdsd_lipid_overlap_audit.R",
+      "before_sha256": "888664a8e118fec9f76b0c647d135bdb18b84a91cde8369ba77ad63c6ed725e7",
+      "after_sha256": "888664a8e118fec9f76b0c647d135bdb18b84a91cde8369ba77ad63c6ed725e7",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wdsd_network_statistics.R",
+      "before_sha256": "f39e3fe4444dfbbabced03011ee2ef41f9be9fc40e813e375008d035e9b17cdc",
+      "after_sha256": "f39e3fe4444dfbbabced03011ee2ef41f9be9fc40e813e375008d035e9b17cdc",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wdsd_pooled_presentation.R",
+      "before_sha256": "2137235bcf1f60557335e63daed1d58c7df05c89a389bee12395107d3102b6e3",
+      "after_sha256": "2137235bcf1f60557335e63daed1d58c7df05c89a389bee12395107d3102b6e3",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wdsd_pooled_reference.R",
+      "before_sha256": "f2d1912b74461e0c6a66306d5b148ba8a208d8c43a6ab28e4d3e24c8521c8dfb",
+      "after_sha256": "f2d1912b74461e0c6a66306d5b148ba8a208d8c43a6ab28e4d3e24c8521c8dfb",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wdsd_pooled_setup.R",
+      "before_sha256": "4b15ee534fde71b40abdbea7733c413548630f30e898df5f225aa6381aecf17d",
+      "after_sha256": "4b15ee534fde71b40abdbea7733c413548630f30e898df5f225aa6381aecf17d",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wdsd_pooled_statistics.R",
+      "before_sha256": "04868a37613d125e9c1c4dd6da5c8190725d88d13b5701f917ff92a578b6aa0b",
+      "after_sha256": "04868a37613d125e9c1c4dd6da5c8190725d88d13b5701f917ff92a578b6aa0b",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wdsd_presentation.R",
+      "before_sha256": "e4db9f8c12347d31f6dac22396e71bce15db4b5b0c8736d5d89c8817a7c5a0ee",
+      "after_sha256": "e4db9f8c12347d31f6dac22396e71bce15db4b5b0c8736d5d89c8817a7c5a0ee",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wdsd_reference.R",
+      "before_sha256": "6b9c59952484dc99f6fe6346cceaf169523e656154bcd0f23983fb457317fba6",
+      "after_sha256": "6b9c59952484dc99f6fe6346cceaf169523e656154bcd0f23983fb457317fba6",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wp1_workflow.R",
+      "before_sha256": "eec9bdc93077aca9c2153f469fdef730509a7093acaf6453b54118c4abecc84b",
+      "after_sha256": "eec9bdc93077aca9c2153f469fdef730509a7093acaf6453b54118c4abecc84b",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wp2_report.R",
+      "before_sha256": "8b4187faf1485d8dc141e2fd3ed2859a7cfd1f22a257189ce9bc1a16a8e68068",
+      "after_sha256": "8b4187faf1485d8dc141e2fd3ed2859a7cfd1f22a257189ce9bc1a16a8e68068",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/wp2_workflow.R",
+      "before_sha256": "a9eadaa1262805604c67303617be9515ec6ed99f2cbffeddc417f5cd36fc6175",
+      "after_sha256": "a9eadaa1262805604c67303617be9515ec6ed99f2cbffeddc417f5cd36fc6175",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/zonation_update_fcg.R",
+      "before_sha256": "276bd1e3e5a5da3f561a1e4a79f90366fb053f03e8da86c71789023675f6c14e",
+      "after_sha256": "276bd1e3e5a5da3f561a1e4a79f90366fb053f03e8da86c71789023675f6c14e",
+      "changed": false
+    },
+    {
+      "path": "scripts/core/zonation_update_gdx.R",
+      "before_sha256": "502610b28615c6b2e886d8007aeb7ac1c236243fa41307df8007301523434c55",
+      "after_sha256": "502610b28615c6b2e886d8007aeb7ac1c236243fa41307df8007301523434c55",
+      "changed": false
+    },
+    {
+      "path": "scripts/config/analysis_config.R",
+      "before_sha256": "c2e7b95dceff77b047317ecf718a679baa8cf6182ab406af5eea6fd40aededdd",
+      "after_sha256": "c2e7b95dceff77b047317ecf718a679baa8cf6182ab406af5eea6fd40aededdd",
+      "changed": false
+    },
+    {
+      "path": "scripts/config/analysis_release.R",
+      "before_sha256": "bf3bf3d9ef30be5be5c697ba359daac2b4fff015088bcd0d0b8fe55493bb5aa9",
+      "after_sha256": "174f39fbe4798da635057de794db6fefbde3e111a1e95d185c4cfaca2a211681",
+      "changed": true
+    },
+    {
+      "path": "scripts/config/analysis_release.json",
+      "before_sha256": "0b6c521d58c52c2f5e9c7b6b6673ac46f18b0d91aab3ac3ea522007aa38c543f",
+      "after_sha256": "0b6c521d58c52c2f5e9c7b6b6673ac46f18b0d91aab3ac3ea522007aa38c543f",
+      "changed": false
+    },
+    {
+      "path": "scripts/config/contrasts.R",
+      "before_sha256": "f29016fcf31ad5263c82b5fc212f819826a80e83d49b12bc2ab7eb01972778d7",
+      "after_sha256": "f29016fcf31ad5263c82b5fc212f819826a80e83d49b12bc2ab7eb01972778d7",
+      "changed": false
+    },
+    {
+      "path": "scripts/config/datasets.R",
+      "before_sha256": "76c2c7b64e67054b25a8abff6feb6404ecefe142afb88523bba0ac54a9768645",
+      "after_sha256": "76c2c7b64e67054b25a8abff6feb6404ecefe142afb88523bba0ac54a9768645",
+      "changed": false
+    },
+    {
+      "path": "scripts/config/plotting_themes.R",
+      "before_sha256": "082e858acc13b885989302d41a1452e30ee37f02175bcf700288a16c8913c722",
+      "after_sha256": "082e858acc13b885989302d41a1452e30ee37f02175bcf700288a16c8913c722",
+      "changed": false
+    },
+    {
+      "path": "scripts/config/support_functions.R",
+      "before_sha256": "de61cd138a9969531406cf6db7b43de281609897b010da2e61d560aa593e39aa",
+      "after_sha256": "de61cd138a9969531406cf6db7b43de281609897b010da2e61d560aa593e39aa",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_direct_lipid_regulatory_mapping.py",
+      "before_sha256": "6776cd09827f620d50f08a57268595d37b64398dfdeb1ba3b233afb0bfeefb7f",
+      "after_sha256": "6776cd09827f620d50f08a57268595d37b64398dfdeb1ba3b233afb0bfeefb7f",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_expanded_factor1_rerun.R",
+      "before_sha256": "ddfa05e250519c49e3fb4b782d36fcdeaa00cc213d3525649088e4afa0f5367a",
+      "after_sha256": "ddfa05e250519c49e3fb4b782d36fcdeaa00cc213d3525649088e4afa0f5367a",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_factor1_ko_expression.R",
+      "before_sha256": "4ea284302287c2c6ab992f8e990a7a74a7fcaaa3bad3dd8421301a3903e6c72f",
+      "after_sha256": "4ea284302287c2c6ab992f8e990a7a74a7fcaaa3bad3dd8421301a3903e6c72f",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_factor1_lipid_to_tf_relaxed_candidates.R",
+      "before_sha256": "d80a9dfa487975afd6d0eb604be837b670c52175816691e047f1bcd4b3a321df",
+      "after_sha256": "d80a9dfa487975afd6d0eb604be837b670c52175816691e047f1bcd4b3a321df",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_factor1_lipid_to_tf_relaxed_score_layer_evidence.py",
+      "before_sha256": "ee5cb06452033e15f573a1834edc83055610b2e1c71fa236fbc618df846ae236",
+      "after_sha256": "ee5cb06452033e15f573a1834edc83055610b2e1c71fa236fbc618df846ae236",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_lipid_tf_coverage.py",
+      "before_sha256": "84e9877ab2bf02d33a5239c85944c099db20b751d9895593c5f0961832a44c8b",
+      "after_sha256": "84e9877ab2bf02d33a5239c85944c099db20b751d9895593c5f0961832a44c8b",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_lipid_tf_scores.R",
+      "before_sha256": "69424f7d48bb076e81f213256ce91fbd062726f7fb58e611f266a8e09211fcc2",
+      "after_sha256": "69424f7d48bb076e81f213256ce91fbd062726f7fb58e611f266a8e09211fcc2",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_lipid_tf_selected_reactions.py",
+      "before_sha256": "3f164b6a616cacdde17319b6bc353f40c2b55852edaaae47a5e0f68a15a15521",
+      "after_sha256": "3f164b6a616cacdde17319b6bc353f40c2b55852edaaae47a5e0f68a15a15521",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_normalized_rules_pruning.R",
+      "before_sha256": "b2302baa4634c6fbeff4322d92255e4da7c2afe1051cbb8e70ba4a852b601b84",
+      "after_sha256": "b2302baa4634c6fbeff4322d92255e4da7c2afe1051cbb8e70ba4a852b601b84",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_normalized_rules_topology.py",
+      "before_sha256": "c9917ccac94716866b79b0685629d42263886332af3d4166e9b40e06eb9191a7",
+      "after_sha256": "c9917ccac94716866b79b0685629d42263886332af3d4166e9b40e06eb9191a7",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/audit_regulatory_resolution_candidates.py",
+      "before_sha256": "7d63e219f33692a7bedf8ef9afa39fd5ffd80a5890b290ef8d7bf0902e6f5c91",
+      "after_sha256": "7d63e219f33692a7bedf8ef9afa39fd5ffd80a5890b290ef8d7bf0902e6f5c91",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/build_currency_traversal_policy.py",
+      "before_sha256": "3b3c1dff9d63164b564d7e23c20dfe2b5a1557b3003d20ff871b83a7ce926fed",
+      "after_sha256": "3b3c1dff9d63164b564d7e23c20dfe2b5a1557b3003d20ff871b83a7ce926fed",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/export_expanded_factor1_network.py",
+      "before_sha256": "1a88fc83837d900afe9f0f2c443182065b3dc149e25781329ef9348d42dff10c",
+      "after_sha256": "1a88fc83837d900afe9f0f2c443182065b3dc149e25781329ef9348d42dff10c",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/export_factor1_lipid_to_tf_relaxed_network.py",
+      "before_sha256": "a2b97f19ec94d0940c675f765ba87e4fba09eaf81208854cc09b73cce011894e",
+      "after_sha256": "a2b97f19ec94d0940c675f765ba87e4fba09eaf81208854cc09b73cce011894e",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/export_factor1_network.py",
+      "before_sha256": "69e1b99bc5d0f19c17cd7136b5a4ac21c1a024677dfba8275f2d650ba6a6aeb4",
+      "after_sha256": "69e1b99bc5d0f19c17cd7136b5a4ac21c1a024677dfba8275f2d650ba6a6aeb4",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/export_lipid_tf_network.py",
+      "before_sha256": "318d1cba89341e710824276ee0a3b0b3f5f37adc9f2c3810a113aa2614f9cc71",
+      "after_sha256": "318d1cba89341e710824276ee0a3b0b3f5f37adc9f2c3810a113aa2614f9cc71",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/plot_expanded_factor1_routes.R",
+      "before_sha256": "e57e47d44b01fdc1bb504424b50cf8d50b1701c6fddf3f4b498a92c119afd4ab",
+      "after_sha256": "e57e47d44b01fdc1bb504424b50cf8d50b1701c6fddf3f4b498a92c119afd4ab",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/plot_factor1_network.R",
+      "before_sha256": "73eea881dd67e76a68c65bb70740a13b984ad4fd65923dc3aa430567e5193d87",
+      "after_sha256": "73eea881dd67e76a68c65bb70740a13b984ad4fd65923dc3aa430567e5193d87",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/prepare_expanded_factor1_mapping.py",
+      "before_sha256": "8d1b01db74c931767c4c3747baaea78e96049d591493b0e6bbdc9e2ce1ba4780",
+      "after_sha256": "8d1b01db74c931767c4c3747baaea78e96049d591493b0e6bbdc9e2ce1ba4780",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/propose_factor1_ko_validation.py",
+      "before_sha256": "d5f6be6c357f7fab39b96387632a3305f6e02249f9c93bd17251d04f1cf2918b",
+      "after_sha256": "d5f6be6c357f7fab39b96387632a3305f6e02249f9c93bd17251d04f1cf2918b",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/reextract_expanded_factor1_thresholds.R",
+      "before_sha256": "c9df0fce99eb42599965aebcb9bb969c84309c7ba7212a64014259122f79f003",
+      "after_sha256": "c9df0fce99eb42599965aebcb9bb969c84309c7ba7212a64014259122f79f003",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/refine_lipid_tf_thresholds.R",
+      "before_sha256": "08dc0f94b1f427abbc6371d9648be6500b87ee6a203ef90c51131329e00d2fb6",
+      "after_sha256": "08dc0f94b1f427abbc6371d9648be6500b87ee6a203ef90c51131329e00d2fb6",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/run_expanded_factor1_tf_to_lipid.R",
+      "before_sha256": "38349b4c04f6b04ac0fc1b05e4afffbfcfb83a276ca559f94302b9861d0bc849",
+      "after_sha256": "38349b4c04f6b04ac0fc1b05e4afffbfcfb83a276ca559f94302b9861d0bc849",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/search_factor1_lipid_to_tf_relaxed_parameters.R",
+      "before_sha256": "9ab4c4bf861a40f9d96372906268cf6cee92162fa477f31af1e764c6f676b0b6",
+      "after_sha256": "9ab4c4bf861a40f9d96372906268cf6cee92162fa477f31af1e764c6f676b0b6",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/search_factor1_parameters.R",
+      "before_sha256": "6c1e914081199dbe0f4672230f390f8c58e25cdd9938f80685da089f25cbcd37",
+      "after_sha256": "6c1e914081199dbe0f4672230f390f8c58e25cdd9938f80685da089f25cbcd37",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/summarize_lipid_regulatory_coverage.py",
+      "before_sha256": "bd1ae6d5fb80a6776593ec4e91cf38508b6c08d071214f0a3cf5c695e0a52797",
+      "after_sha256": "bd1ae6d5fb80a6776593ec4e91cf38508b6c08d071214f0a3cf5c695e0a52797",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/ancillary/validate_frozen_archives.R",
+      "before_sha256": "6a6aae03b732204ee3e8d2e6a9b10afab75a38abda38588b23c540c24b59fd49",
+      "after_sha256": "6a6aae03b732204ee3e8d2e6a9b10afab75a38abda38588b23c540c24b59fd49",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/audit_compressed_candidate_neighborhood.R",
+      "before_sha256": "f425541ae068f558550671f0c257d286cfec1c4bb5e4816d4cf783eb4ae86daf",
+      "after_sha256": "f425541ae068f558550671f0c257d286cfec1c4bb5e4816d4cf783eb4ae86daf",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/audit_factor1_depth_topology.R",
+      "before_sha256": "45785a64d23d210e6cefd71c8bf71879f0673576a579eafc4fd4014d023c8e97",
+      "after_sha256": "45785a64d23d210e6cefd71c8bf71879f0673576a579eafc4fd4014d023c8e97",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/audit_factor1_focus_tf_retention.R",
+      "before_sha256": "422ee885f40b00fe9aa906aa17e6dcba58ac900cf82b1558080c5d673fdde003",
+      "after_sha256": "422ee885f40b00fe9aa906aa17e6dcba58ac900cf82b1558080c5d673fdde003",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/audit_factor1_model.py",
+      "before_sha256": "469032b6f82552a6662a330d647883e717566d413f458a46e17c2fdcbb842dc8",
+      "after_sha256": "469032b6f82552a6662a330d647883e717566d413f458a46e17c2fdcbb842dc8",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/audit_factor1_search_candidates.py",
+      "before_sha256": "f4419b262528e40d3f63124cbb78496dc4e62885e3d2f0ed52e0f99e6a967fc7",
+      "after_sha256": "f4419b262528e40d3f63124cbb78496dc4e62885e3d2f0ed52e0f99e6a967fc7",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/audit_factor1_thresholds.R",
+      "before_sha256": "2943f7456ed73a65743e92ad4152b26a93bc6951232b9a22ba7d3c69bf0cead7",
+      "after_sha256": "2943f7456ed73a65743e92ad4152b26a93bc6951232b9a22ba7d3c69bf0cead7",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/audit_manuscript_causal_model.R",
+      "before_sha256": "c7fcd274f37ce1a92ee5be14d98a363e4c64e94fae28dfc287f307a4815c3ce7",
+      "after_sha256": "c7fcd274f37ce1a92ee5be14d98a363e4c64e94fae28dfc287f307a4815c3ce7",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/audit_refined_candidates.R",
+      "before_sha256": "e50acf893c521ebbadac4ab4e13b1c64cf3cbe67f7787ed356d582cdc2c674cd",
+      "after_sha256": "e50acf893c521ebbadac4ab4e13b1c64cf3cbe67f7787ed356d582cdc2c674cd",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/audit_score_support.R",
+      "before_sha256": "db7aa6e02fad63aa0c6504edc71127843ade2425aaf87403d7295406e009a236",
+      "after_sha256": "db7aa6e02fad63aa0c6504edc71127843ade2425aaf87403d7295406e009a236",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/compare_factor1_runs.R",
+      "before_sha256": "712df6f801a0ebd574271dd0ea18755648977918ca0112b93fd006d2ccaf1594",
+      "after_sha256": "712df6f801a0ebd574271dd0ea18755648977918ca0112b93fd006d2ccaf1594",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/export_compressed_score_retention.R",
+      "before_sha256": "3fde0212e12dc80a0adc9522bca6ca648abc248253fa217643d07beffcbcbcaf",
+      "after_sha256": "3fde0212e12dc80a0adc9522bca6ca648abc248253fa217643d07beffcbcbcaf",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/export_factor1_network.py",
+      "before_sha256": "46eeaf66c794ff3514e589404f319ad006d65273851cd0716b62d976b40b36cd",
+      "after_sha256": "46eeaf66c794ff3514e589404f319ad006d65273851cd0716b62d976b40b36cd",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/map_factor1_inputs.R",
+      "before_sha256": "d0e6d2a5fd88d1633b9f74b11cdc77340243b447af4d5b92f936f392da402c60",
+      "after_sha256": "d0e6d2a5fd88d1633b9f74b11cdc77340243b447af4d5b92f936f392da402c60",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/plot_compressed_review.R",
+      "before_sha256": "47a0f668662aa759e06308a586da20db536b4e2124d229a2abe5d29c1eeabb9e",
+      "after_sha256": "47a0f668662aa759e06308a586da20db536b4e2124d229a2abe5d29c1eeabb9e",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/plot_factor1_candidate_audit.R",
+      "before_sha256": "6823c67f649671f9b033c0b2c32a0d949eabd97d39aa8b24bbbd6ebd61356388",
+      "after_sha256": "6823c67f649671f9b033c0b2c32a0d949eabd97d39aa8b24bbbd6ebd61356388",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/plot_factor1_network.R",
+      "before_sha256": "a1664078df279fa5d1e4f47525dfbd494ff1abe0a41b2b2b92532cc71df6670a",
+      "after_sha256": "a1664078df279fa5d1e4f47525dfbd494ff1abe0a41b2b2b92532cc71df6670a",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/plot_factor1_parameter_search.R",
+      "before_sha256": "832a36d740d9c745122fb41b38ceebb4ce82faf4a87343f098af001bc9906d62",
+      "after_sha256": "832a36d740d9c745122fb41b38ceebb4ce82faf4a87343f098af001bc9906d62",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/prepare_factor1_inputs.R",
+      "before_sha256": "b327706de304649c991ced5f12dc010c6a2b06751ebdfcb49f02e279c44cc54a",
+      "after_sha256": "b327706de304649c991ced5f12dc010c6a2b06751ebdfcb49f02e279c44cc54a",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/rank_parameter_candidates.R",
+      "before_sha256": "767176f7470a4d3aed60cdf0ec1fb0b182c68f93c210ab74a8a4825da2f62747",
+      "after_sha256": "767176f7470a4d3aed60cdf0ec1fb0b182c68f93c210ab74a8a4825da2f62747",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/read_saved_candidate_pkn.R",
+      "before_sha256": "3374469e625de297296004e93bcbedb10275259cfdcd9bf382686471999c220e",
+      "after_sha256": "3374469e625de297296004e93bcbedb10275259cfdcd9bf382686471999c220e",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/relaxed_lipid_to_tf_precleanup/audit_relaxed_lipid_tf_candidates.R",
+      "before_sha256": "c48d9246f16d629f2b883e51778532cefc615cfd21d1bc5e6fa111b7be7daebd",
+      "after_sha256": "c48d9246f16d629f2b883e51778532cefc615cfd21d1bc5e6fa111b7be7daebd",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/relaxed_lipid_to_tf_precleanup/audit_relaxed_lipid_tf_score_layer_evidence.py",
+      "before_sha256": "32bf52ff90e59b1c4e5e576e45154b4a25a0ba29b9b3a5581c78b27237f34906",
+      "after_sha256": "32bf52ff90e59b1c4e5e576e45154b4a25a0ba29b9b3a5581c78b27237f34906",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/relaxed_lipid_to_tf_precleanup/extract_relaxed_lipid_tf_score_layer_paths.R",
+      "before_sha256": "e4109ccac946f06093fa40b3d5c4f6c79a98035ddf5c12cbdacd055572649da0",
+      "after_sha256": "e4109ccac946f06093fa40b3d5c4f6c79a98035ddf5c12cbdacd055572649da0",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/relaxed_lipid_to_tf_precleanup/run_factor1_lipid_to_tf_relaxed_grid.R",
+      "before_sha256": "2fac726b2400393c16c9961dfb9fbdb2fc7b1a47b4e8794db010dff7cbcf05e1",
+      "after_sha256": "2fac726b2400393c16c9961dfb9fbdb2fc7b1a47b4e8794db010dff7cbcf05e1",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/run_factor1_compressed_sensitivities.R",
+      "before_sha256": "4a161c20181d4ac45af01fbfb6f23a068cf88bd57b36463bb736c95969ffb60f",
+      "after_sha256": "4a161c20181d4ac45af01fbfb6f23a068cf88bd57b36463bb736c95969ffb60f",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/run_factor1_inputs_only_compression.R",
+      "before_sha256": "295fb9502d08de57eed04f2c62f16e21c4bb38212e277647f8c8bb34cacbfa40",
+      "after_sha256": "295fb9502d08de57eed04f2c62f16e21c4bb38212e277647f8c8bb34cacbfa40",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/run_factor1_moon.R",
+      "before_sha256": "5340dd08175b023bc34af8ad6ee5e890ace021828eb72cae51a5972750db7879",
+      "after_sha256": "5340dd08175b023bc34af8ad6ee5e890ace021828eb72cae51a5972750db7879",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/search_compressed_threshold_review.R",
+      "before_sha256": "51a2a19a3ca4ba2eeff50e611457eb0a88ec3312e240e62dd81fe72c08053665",
+      "after_sha256": "51a2a19a3ca4ba2eeff50e611457eb0a88ec3312e240e62dd81fe72c08053665",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/search_factor1_parameter_space.R",
+      "before_sha256": "ab9113a27277f392a65d5ae7c2fededc1b48758c753b770a43486c2d930a8186",
+      "after_sha256": "ab9113a27277f392a65d5ae7c2fededc1b48758c753b770a43486c2d930a8186",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/summarize_factor1_parameter_search.py",
+      "before_sha256": "8dc352337f0a6aeec5ab2d2f080de899f2ca835e0c42da66354470e555be62cc",
+      "after_sha256": "8dc352337f0a6aeec5ab2d2f080de899f2ca835e0c42da66354470e555be62cc",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/archive/2026-09/validate_factor1_compressed_tf_sensitivities.R",
+      "before_sha256": "2c9ba4a1c7519e466492ce9ddf4a4fc6e6609dfc3923f6bdff5b1aa8d77d2e89",
+      "after_sha256": "2c9ba4a1c7519e466492ce9ddf4a4fc6e6609dfc3923f6bdff5b1aa8d77d2e89",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/config/factor1_lipid_to_tf.json",
+      "before_sha256": "581ae108a4c6b1064417384170b671370873a224b614ff996489fd12bca78edb",
+      "after_sha256": "581ae108a4c6b1064417384170b671370873a224b614ff996489fd12bca78edb",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/config/factor1_lipid_to_tf_relaxed.json",
+      "before_sha256": "4810ff00b5a1affac809cfcf5d6654fd69fec9781de338728bfa2f3bedf62080",
+      "after_sha256": "4810ff00b5a1affac809cfcf5d6654fd69fec9781de338728bfa2f3bedf62080",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/config/factor1_lipid_to_tf_relaxed_parameter_search.json",
+      "before_sha256": "d26f0ba915b8c4f4608982ae902041614c5d6bd6ea791c7f8f67545f4278b173",
+      "after_sha256": "d26f0ba915b8c4f4608982ae902041614c5d6bd6ea791c7f8f67545f4278b173",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/config/factor1_tf_to_lipid.json",
+      "before_sha256": "28343f0f559470108fc67366733934540ed772ac2af9ab1c4e299d5eccf7204d",
+      "after_sha256": "28343f0f559470108fc67366733934540ed772ac2af9ab1c4e299d5eccf7204d",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/config/factor1_tf_to_lipid_expanded_species.json",
+      "before_sha256": "075200a011b5dd96712fcb5f74ade3949527b6e7fd9a3e30a42dc3b33e523cce",
+      "after_sha256": "075200a011b5dd96712fcb5f74ade3949527b6e7fd9a3e30a42dc3b33e523cce",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/lib/relaxed_lipid_tf.R",
+      "before_sha256": "6a8ac7aba81bfba3c9ca4fb6570388c40caf808b1370add934a385e5896d3286",
+      "after_sha256": "6a8ac7aba81bfba3c9ca4fb6570388c40caf808b1370add934a385e5896d3286",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/lib/workflow.R",
+      "before_sha256": "7617e0cbeefd48803e2e8a070e9107e20998cf19395acf6c18122a0691beb970",
+      "after_sha256": "7617e0cbeefd48803e2e8a070e9107e20998cf19395acf6c18122a0691beb970",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/moon_safe_helpers.R",
+      "before_sha256": "09b3eb28fd99876aee96907c71ddf41cd1132b95b0f22e56d35eefb5cb6f5b9d",
+      "after_sha256": "09b3eb28fd99876aee96907c71ddf41cd1132b95b0f22e56d35eefb5cb6f5b9d",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/run_factor1_lipid_to_tf.R",
+      "before_sha256": "3df7ea00c7e5f37525cc84bdec337a56158e6f2dd089b4739565e5236cbced83",
+      "after_sha256": "3df7ea00c7e5f37525cc84bdec337a56158e6f2dd089b4739565e5236cbced83",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/run_factor1_lipid_to_tf_relaxed.R",
+      "before_sha256": "a7352f13913f9c2f0921f362f01bb180c3ac6d9f90f89b90ad5c213da2cec55b",
+      "after_sha256": "a7352f13913f9c2f0921f362f01bb180c3ac6d9f90f89b90ad5c213da2cec55b",
+      "changed": false
+    },
+    {
+      "path": "scripts/moon/run_factor1_tf_to_lipid.R",
+      "before_sha256": "0bfb8bbfa16a2ddd53d4be82ac5b3042312f1141c12ae9034c235015b918038e",
+      "after_sha256": "0bfb8bbfa16a2ddd53d4be82ac5b3042312f1141c12ae9034c235015b918038e",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/assemble_mouse_pkn.py",
+      "before_sha256": "de1ea75674ef1c8e18c9fb8714793149369cfca1c95df89dad4b5db2bd57c72b",
+      "after_sha256": "de1ea75674ef1c8e18c9fb8714793149369cfca1c95df89dad4b5db2bd57c72b",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/audit_factor1_relaxed_regulatory_mapping.py",
+      "before_sha256": "6cc87fdcaae50b11d44a912726a3e1a149231fe7bb511aa9b7c8889092b36a47",
+      "after_sha256": "6cc87fdcaae50b11d44a912726a3e1a149231fe7bb511aa9b7c8889092b36a47",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/audit_measured_lipid_reaction_targets.py",
+      "before_sha256": "161ff2f7a6d1c9d435b98a47d11313e82764394f075e3ea2fe320a8927adb382",
+      "after_sha256": "161ff2f7a6d1c9d435b98a47d11313e82764394f075e3ea2fe320a8927adb382",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/audit_measured_lipids_stitch_directional.py",
+      "before_sha256": "59cbdbcf4998ec372166b0dd46e9e05759b8dea869a8c96274ee53dfb0ad0c35",
+      "after_sha256": "59cbdbcf4998ec372166b0dd46e9e05759b8dea869a8c96274ee53dfb0ad0c35",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/audit_mouse_pkn.py",
+      "before_sha256": "5c5acabc9d14acc23d2b8597bcea7f7310ad7bee33f4cb356709cd8d0b854d86",
+      "after_sha256": "5c5acabc9d14acc23d2b8597bcea7f7310ad7bee33f4cb356709cd8d0b854d86",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/audit_relaxed_lipid_pkn_mapping.py",
+      "before_sha256": "ccc7ca4faa50aa2bd0d5ee7d3ce3a71175c396243a041eeebce861786975db29",
+      "after_sha256": "ccc7ca4faa50aa2bd0d5ee7d3ce3a71175c396243a041eeebce861786975db29",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/build_expanded_lipid_rules.py",
+      "before_sha256": "dfad2890f1cd68f4d55e3c44409ee2f208d1824ea629fefcdff5ea82b5848c26",
+      "after_sha256": "dfad2890f1cd68f4d55e3c44409ee2f208d1824ea629fefcdff5ea82b5848c26",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/build_lipid_regulation.py",
+      "before_sha256": "30752b9be2eee25ed2ef19b1a6c6c2384cd1162e59adaf2ea29a23567bbc156c",
+      "after_sha256": "30752b9be2eee25ed2ef19b1a6c6c2384cd1162e59adaf2ea29a23567bbc156c",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/build_lipid_rules.py",
+      "before_sha256": "052f5604b9eda1fae86e05cdb989cc91d34a83020ba7b0778919a80c164ec279",
+      "after_sha256": "052f5604b9eda1fae86e05cdb989cc91d34a83020ba7b0778919a80c164ec279",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/build_mouse_gem.py",
+      "before_sha256": "3657ac1ebdb209a1823386209f9ad2d766060c134e6d7b4c6fbb79b962f84412",
+      "after_sha256": "3657ac1ebdb209a1823386209f9ad2d766060c134e6d7b4c6fbb79b962f84412",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/build_rhea_lipid_reactions.py",
+      "before_sha256": "7903de2da2ef9a25c76356b1b630039089a74be173983fb7c6fa20494e3a1ee8",
+      "after_sha256": "7903de2da2ef9a25c76356b1b630039089a74be173983fb7c6fa20494e3a1ee8",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/build_stitch_directional.py",
+      "before_sha256": "88376cc2c37508d9f0b0e6da428af4d5dd0d36dd89bb0fc06e6a074d27464468",
+      "after_sha256": "88376cc2c37508d9f0b0e6da428af4d5dd0d36dd89bb0fc06e6a074d27464468",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/compare_lamanno_lipid_network.py",
+      "before_sha256": "f16903aa5a52465297affccd91330bc594dfa5d44d9858953fb741249f604d69",
+      "after_sha256": "f16903aa5a52465297affccd91330bc594dfa5d44d9858953fb741249f604d69",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/expanded_lipid_matching.py",
+      "before_sha256": "7733b1eaede932acdfe790f5bb90a4b411e63fd06d76a50f8b014c804bb6503c",
+      "after_sha256": "7733b1eaede932acdfe790f5bb90a4b411e63fd06d76a50f8b014c804bb6503c",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/map_lipids.py",
+      "before_sha256": "da4804c39716f18e0d40223d8d0de8324a07c889a880ee019e3cc5ff7e7bf453",
+      "after_sha256": "da4804c39716f18e0d40223d8d0de8324a07c889a880ee019e3cc5ff7e7bf453",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/run_build.py",
+      "before_sha256": "3da3c7c8332ec322d0488e5951907b9797f53029a660b512fd9eae02efb16466",
+      "after_sha256": "3da3c7c8332ec322d0488e5951907b9797f53029a660b512fd9eae02efb16466",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/test_pkn.py",
+      "before_sha256": "7b691631bcc925a0f442fa2d3da861d1563f0b1bee1a99da324a52e59b60bc9b",
+      "after_sha256": "7b691631bcc925a0f442fa2d3da861d1563f0b1bee1a99da324a52e59b60bc9b",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/test_stitch_directional.py",
+      "before_sha256": "c4c6e53466e6366e94d74932aa4229179be8a2bf0f7ad8aaaac2a6ab5128f626",
+      "after_sha256": "c4c6e53466e6366e94d74932aa4229179be8a2bf0f7ad8aaaac2a6ab5128f626",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/validate_expanded_lipid_rules.R",
+      "before_sha256": "914c3474460dedcabd6e2ddab68ae80330655d97100577c6734b419de754ecd3",
+      "after_sha256": "914c3474460dedcabd6e2ddab68ae80330655d97100577c6734b419de754ecd3",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/validate_expanded_lipid_rules.py",
+      "before_sha256": "1888e0843227f051825e2b6c0146942626ce8d804767f6bed0a818bc528e095b",
+      "after_sha256": "1888e0843227f051825e2b6c0146942626ce8d804767f6bed0a818bc528e095b",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/validate_export.R",
+      "before_sha256": "8d637d28a338812fbec512bef4139132e203659187c9ae15f9c0c471b95673f4",
+      "after_sha256": "8d637d28a338812fbec512bef4139132e203659187c9ae15f9c0c471b95673f4",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/validate_stitch_directional_overlay.R",
+      "before_sha256": "9e4aafe450a8f5bacb2e64f929e15299614b4de950146dbde222de2a0f9ea0cc",
+      "after_sha256": "9e4aafe450a8f5bacb2e64f929e15299614b4de950146dbde222de2a0f9ea0cc",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/validate_stitch_directional_overlay.py",
+      "before_sha256": "70ee620af340dc974a5ae6a5ca50e8fc97c9d4d1a1499b6ee05d23448af79da4",
+      "after_sha256": "70ee620af340dc974a5ae6a5ca50e8fc97c9d4d1a1499b6ee05d23448af79da4",
+      "changed": false
+    },
+    {
+      "path": "scripts/pkn/write_build_manifest.py",
+      "before_sha256": "e2b65796edf59f3fd4a93bf7e55e36ef6d162baa784a7bc613c872a364829042",
+      "after_sha256": "e2b65796edf59f3fd4a93bf7e55e36ef6d162baa784a7bc613c872a364829042",
+      "changed": false
+    },
+    {
+      "path": "scripts/reports/cf453_figure6a_layouts.R",
+      "before_sha256": "98db61a20da65dd95c9477cb5d50057808ec885e595b2a02380bc95240a75580",
+      "after_sha256": "b0b8df10e67703c248395912bc64b5f85368126374fc29452f09e0c1714c9866",
+      "changed": true
+    },
+    {
+      "path": "scripts/reports/run_zonation_update_fcg.R",
+      "before_sha256": "bbdabba3da2b44ff5daf44855b2c9d9b57131c2c02de5453c1b68335ae96022d",
+      "after_sha256": "f5abd91ace2009c057fb6124b28161f1daa790d0151c2e2ab65357f33f55a7b7",
+      "changed": true
+    }
+  ],
+  "git_actions": "This record describes pre-commit validation. Subsequent user-authorized commit and push are recorded by Git history.",
+  "documentation_snapshots": [
+    {
+      "original_path": "tests/README.md",
+      "snapshot_path": "miscellaneous/documentation/dependency_audit_20261118/tests_README.md",
+      "sha256": "e448540eafd1d3a57a10a2f56088248526e14d0c2d2ea2ed0c1a926a21289160",
+      "role": "Byte-preserved pre-final-pass testing instructions; superseded by current tests documentation."
+    },
+    {
+      "original_path": "tests/TESTING_GUIDE.md",
+      "snapshot_path": "miscellaneous/documentation/dependency_audit_20261118/tests_TESTING_GUIDE.md",
+      "sha256": "8bdb886273da4256ae93babba31466b6fbd5f9b14d6d9617515fefa484f9dfad",
+      "role": "Byte-preserved pre-final-pass testing instructions; superseded by current tests documentation."
+    }
+  ],
+  "final_pass": {
+    "scope": "Independent source/documentation, R guard and maintenance reviews requested before commit/push.",
+    "findings_addressed": [
+      "Expanded R output-path canonicalization to cover home-directory paths and mixed missing-directory/dot/symlink paths; unresolved dangling symlinks refused.",
+      "Replaced obsolete test runner instructions with current side-effect-aware guidance, preserving exact prior documentation bytes.",
+      "Clarified historical cleanup/publication language, current script directory paths and two panel-restricted FCG volcano descriptions.",
+      "Strengthened documentation checks to retain missing-local warnings beside runtime placeholders and reject unknown producer/call identifiers; seven synthetic tests pass."
+    ],
+    "scientific_models_run": false,
+    "figures_generated": false
+  }
+}

@@ -14,6 +14,7 @@ cf6_run <- function(args = commandArgs(TRUE)) {
     stop("--input-zonation applies to a fresh model fit, not a saved-result mode")
   value<-function(key,default) {x<-args[startsWith(args,paste0(key,"="))];if(length(x)) sub("^[^=]*=","",x) else default}
   output<-value("--output",analysis_current("cf453_models"))
+  if(!any(mode%in%c("--finish","--plot-only")))analysis_assert_not_approved_output(output)
   b<-as.integer(value("--bootstraps","999"));seed<-as.integer(value("--seed","20261030"))
   if(is.na(b)||b<19L||is.na(seed))stop("Invalid resampling settings")
   dir.create(output,recursive=TRUE,showWarnings=FALSE)

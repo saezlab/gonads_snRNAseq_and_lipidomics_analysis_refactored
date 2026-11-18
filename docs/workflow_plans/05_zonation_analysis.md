@@ -1,213 +1,138 @@
-# Workflow 05: Zonation Analysis
+# Workflow 05: Current FCG Zonation Analysis
 
-## Current execution entry - 16 November 2026
+## Authoritative execution contract (audited 18 November 2026)
 
-`scripts/workflows/05_zonation_analysis.R` is now a source-safe entry for the
-validated expanded-marker adapter in `scripts/core/zonation_update_fcg.R`.
-It reads the registry's current FCG CSV/metadata by default and writes an isolated
-`fcg05/` below `--output`. `--validate-only` checks inputs, dependencies and the
-prepared runtime without writing. A completed checkpoint is never overwritten;
-use a fresh output directory. Workflow17 coordinates the complete current chain.
+- Public entry: `scripts/workflows/05_zonation_analysis.R` (19-line source-safe wrapper).
+- Implementation: `scripts/core/zonation_update_fcg.R`, which reads the immutable
+  `engine_fcg05` body at `scripts/core/engines/05_zonation_analysis_legacy.R`.
+- Default input directory: the parent of registry `current_fcg_zonation_csv`.
+  Default output root: registry `current_root` (`results/zonation_marker_update_20261116`).
+- `source()` defines functions; `Rscript` calls `fcg_zonation_run()`. Supported
+  arguments are only `--input=DIR`, `--output=ROOT`, and `--validate-only`.
+- A fit writes `<ROOT>/fcg05/` plus `<ROOT>/runtime/`. A completed
+  `fcg05/fcg05_checkpoint.rds` blocks rerunning into that root. Use a fresh root;
+  the guard does not promise to preserve every file in a partial destination.
+  `analysis_assert_not_approved_output()` additionally refuses the approved
+  registry root and every descendant before scientific work, regardless of
+  whether ignored checkpoints exist. This also protects a Git-only clone.
+  Always supply a fresh `--output` outside the approved root.
 
-The previous full script is preserved byte-for-byte as
-`scripts/core/engines/05_zonation_analysis_legacy.R`; section/line descriptions
-below refer to that engine. The adapter preserves the approved explicit condition
-order, empty-category correction, fresh pathway calculation and measured-lipid
-identity checks. Historical comparison inputs/networks are explicit registry
-roles and are used only by retrospective audit modes. Default scientific output
-requires no old zonation models or archived CF453 network files.
+Workflow17 is the main coordinated current zonation/diet entry. It stages CSV
+transports and invokes the report driver in `--science-only` mode, running05,
+zonal07 and current panel finalization. Running05 alone runs the model/network
+engine and saves its checkpoint; it does not run07 or the report driver's extra
+Figure5D/context-class panel finalization.
 
-A fresh current-only FCG/GDX execution passed48 approved-run scientific/source
-equivalence checks. Runtime scripts, warnings and patch details are retained in
-each fresh output. Cleanup verification files are local QA, not scientific results.
+`--validate-only` verifies RNA matrix/metadata integrity, required R packages and
+prepared runtime syntax without writing. It does not open/check every later
+GO/regulon/Workflow03 resource; file presence there remains a full-run prerequisite.
+The frozen engine must not be sourced directly: its old paths, condition ordering
+and cache behavior are implementation history rather than maintained defaults.
 
----
+## Actual inputs and producers
 
-**Script:** `scripts/workflows/05_zonation_analysis.R`  
-**Lines:** ~2720  
-**Purpose:** Analyze hepatocyte periportal/pericentral zonation, gonad-by-zonation interactions, sex-specific zonation-biased genes, zonation-specific gene-lipid networks, and lipid-class zonation associations.
+| Input | Producer/role |
+| --- | --- |
+| `data/RNA/zonation/current/fcg/scaled_RNA_zonation.csv` (`current_fcg_zonation_csv`) | Supplied current FCG compatibility matrix; Workflow01 section11 can regenerate it from `current_fcg_zonation_transport`. Workflow17 instead stages the same values into its fresh run's `inputs/fcg/`. |
+| `data/RNA/zonation/current/fcg/meta_data_df_zonation.csv` (`current_fcg_zonation_metadata`) | Matching paired mouse/zone/gonad metadata. |
+| `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | Curated whole-liver lipid data, read through `core/data_loading.R::load_lipidomic_data()`. |
+| `support/m5.all.v2023.2.Mm.symbols.gmt` | Curated GO-BP sets for fresh pathway ULM. |
+| `support/TF_regulons.RData`, `support/Gonadal_Hormone_Genes.csv` | Curated regulons/custom ESR1/AR target replacement. |
+| `results/lipidomic/ttop_full_list.RData` | Workflow03 lipid DE, used by the association presentation. |
+| `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | Workflow03 lipid-class enrichment, used for class ordering/presentation. |
 
-## Source Dependencies
+These scientific prerequisites are distributed in the public tree with the R
+packages; no source Seurat object, Workflow02 DE, Workflow04/MOFA output, historical
+zonation model or historical pathway cache is required. Recompute03 first if its
+lipid DE/enrichment products are being rebuilt. Paired RNA zones remain within
+mouse; the lipid vector is one whole-liver measurement per mouse.
 
-```r
-source("scripts/config/analysis_config.R")
-source("scripts/config/plotting_themes.R")
-source("scripts/support_functions.R")
-source("scripts/core/data_loading.R")
-```
+The wrapper sources the registry/adapter; the generated engine runtime sources
+`analysis_config.R`, `plotting_themes.R`, `support_functions.R` and `core/data_loading.R`.
+Their generic config lists do not replace the explicit input/output overrides.
 
-The script loads additional RData/CSV resources inside later sections.
+## Runtime adaptations and order
 
-## Section Breakdown
+`zmu_runtime05()` redirects all engine outputs and the input CSV pair, orders the
+four gonad-zone conditions explicitly before positional limma contrasts, replaces
+engine section7 with fresh `decoupleR::run_ulm(minsize=15)`, and repairs an absent
+`no_association` category using a scalar zero. It preserves the seven paired-mouse
+limma contrasts, threshold objective, candidate gates and correlation calculations.
+The historical pathway cache is an output of the fresh calculation, not an input.
 
-| # | Section | Lines (approx) | Description |
-|---|---------|----------------|-------------|
-| 1 | Configuration | 41-68 | Load config/helpers and create `results/zonation/`, `volcanos/`, and `networks/`. |
-| 2 | Load Zonation Pseudobulk | 70-99 | Load workflow 01 zonation CSVs and report sample format. |
-| 3 | PCA Visualization | 102-138 | PCA by zonation, gonad, and combined condition. |
-| 4 | PCA Enrichment | 141-189 | Correlate/test PCA coordinates against metadata and plot a heatmap. |
-| 5 | Differential Analysis | 192-289 | Limma with `duplicateCorrelation()` blocked on mouse ID; 7 contrasts. |
-| 6 | Volcano Plots | 292-340 | Volcano plot for each contrast. |
-| 7 | Pathway Enrichment | 343-426 | Load GO gene sets, convert t-values, but active ULM call is commented out; loads cached `pathway_enrichment.RData`. |
-| 8 | Lipidomics + TF Activity | 429-487 | Load lipidomics, TF regulons, ESR1/AR targets, compute TF activity scores, and write `t_table_zonation.csv`. |
-| 9 | Zonation Bias vs Sex Bias | 490-610 | Scatter comparing overall zonation t-values and gonad t-values. |
-| 10 | Zone-Specific Sex Bias | 613-697 | Scatter comparing ovary-zone and testes-zone t-values. |
-| 10b | Zonation-Specific Sex Difference Quadrant | 700-814 | Additional quadrant plot for zone-specific gonad effects. |
-| 11 | Optimal Threshold Detection | 817-968 | Sweep interaction thresholds 0-10, compute entropy/stability/coverage/specificity, and choose `optimal_threshold`. |
-| 12 | Identify Zonation-Biased Genes | 971-1336 | Select sex-specific zonation genes, make quadrant/bar/panel/heatmap, and write gene summary. |
-| 13 | Correlation Networks | 1339-1586 | Build four zonation x gonad networks, each with standard, full, and compressed CSV outputs. |
-| 14 | Lipid-Gene Association Visualizations | 1589-2634 | Load WF03 lipid DE/enrichment and WF05 networks, map lipids to categories, export association/sensitivity tables, and plot class-level figures. |
-| 15 | Save Results | 2637-2680 | Save limma objects, metadata, summary stats, and long-format zonation DE table. |
-| 16 | Complete | 2683-2720 | Print outputs and expected biological findings. |
+| Engine section | Current runtime behavior |
+| --- | --- |
+| 1-4 | Configuration, paired zonal CSVs, PCA and metadata enrichment. |
+| 5-6 | Seven limma contrasts with mouse `duplicateCorrelation`, then volcanoes. |
+| 7 | Replaced by fresh current-input pathway ULM; writes `pathway_enrichment.RData` and `pathway_enrichment_fresh.csv`. |
+| 8-10b | Lipid import, TF scores and overall/conditional zonation/sex scatter plots. |
+| 11-12 | Optimize interaction threshold and select gonad-specific PP/PC candidates. |
+| 13 | Four RNA-lipid/TF networks; full, displayed and class-compressed exports. |
+| 14-16 | Lipid association/class/threshold summaries, fitted objects and result tables. |
 
-## Input Files
+Engine line references are approximately1-2720 in the frozen file, not the19-line
+public wrapper. Its old literal `results/zonation/` prefix is replaced in memory.
 
-- `data/RNA/scaled_RNA_zonation.csv` - Zonation pseudobulk expression from workflow 01.
-- `data/RNA/meta_data_df_zonation.csv` - Zonation metadata from workflow 01.
-- `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` - Loaded through `load_lipidomic_data()`.
-- `support/m5.all.v2023.2.Mm.symbols.gmt` - GO biological process gene sets.
-- `support/TF_regulons.RData` - CollecTRI regulons.
-- `support/Gonadal_Hormone_Genes.csv` - Custom ESR1/AR targets.
-- `results/zonation/pathway_enrichment.RData` - Cached pathway scores loaded in section 7 because active ULM run is commented out.
-- `results/lipidomic/ttop_full_list.RData` - Workflow 03 lipid DE results loaded in section 14.
-- `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` - Workflow 03 lipid-class enrichment scores loaded in section 14.
+## Outputs under the selected root
 
-## Output Files
+- `fcg05/fcg05_checkpoint.rds`, `zonation_ttop_list.RData`,
+  `zonation_limma_results.RData`, `t_table_zonation.csv`, `ttop_full_long.csv`,
+  `metadata.csv`, `summary_statistics.csv`, `warnings.csv`, `sessionInfo.txt`.
+- `fcg05/pathway_enrichment.RData`, `pathway_enrichment_fresh.csv`.
+- `fcg05/optimal_threshold_metrics.csv`, `sex_specific_zonation_genes_summary.csv`,
+  `lipid_species_zonation_association.csv`, `lipid_category_binary_matrix.csv`,
+  `lipid_class_association_summary.csv`, and class/total threshold-sensitivity CSVs.
+- `fcg05/networks/cormat_{testes_portal,testes_central,Ovaries_portal,ova_central}_{SIF,ATT}.csv`,
+  the same four `_full_{SIF,ATT}.csv` pairs and `compressed_cormat_*_{SIF,ATT}.csv`.
+- Engine PCA, volcano, scatter, candidate, class and threshold PDFs under `fcg05/`.
+- `runtime/05_zonation_analysis_versioned.R` records the exact executed adaptation.
 
-**DE and tables**
-- `results/zonation/zonation_ttop_list.RData`
-- `results/zonation/zonation_limma_results.RData`
-- `results/zonation/t_table_zonation.csv`
-- `results/zonation/ttop_full_long.csv`
-- `results/zonation/metadata.csv`
-- `results/zonation/summary_statistics.csv`
+The report-driver/17 science finalizer additionally writes current standalone
+panels/source data under `fcg05/panels/`, `fcg05/panel_source_data/`, the FCG panel
+manifest and patch manifest. Its retrospective mode additionally needs explicit
+historical registry roles and writes `comparisons/` and metric/replay ledgers.
+It is not an upstream requirement of a current05 fit.
 
-**Gene-selection outputs**
-- `results/zonation/zonation_specific_sex_differences_quadrant.pdf`
-- `results/zonation/zonation_biased_genes_heatmap.pdf`
-- `results/zonation/sex_specific_zonation_quadrant.pdf`
-- `results/zonation/sex_specific_zonation_summary_bar.pdf`
-- `results/zonation/sex_specific_zonation_panel_AB.pdf`
-- `results/zonation/sex_specific_zonation_heatmap_faceted.pdf`
-- `results/zonation/sex_specific_zonation_genes_summary.csv`
+## Contrasts and candidate semantics
 
-**Network outputs**
-- `results/zonation/networks/cormat_testes_portal_{SIF,ATT}.csv`
-- `results/zonation/networks/cormat_testes_central_{SIF,ATT}.csv`
-- `results/zonation/networks/cormat_Ovaries_portal_{SIF,ATT}.csv`
-- `results/zonation/networks/cormat_ova_central_{SIF,ATT}.csv`
-- `results/zonation/networks/cormat_*_full_{SIF,ATT}.csv` for the same four contexts.
-- `results/zonation/networks/compressed_cormat_*_{SIF,ATT}.csv` for the same four contexts.
+Contrasts are `portal_vs_Central`, `testes_vs_ova`,
+`portalova_vs_centralova`, `portaltestes_vs_centraltestes`,
+`centraltestes_vs_centralova`, `portaltestes_vs_portalova`, and
+`testes_effect_zonation`. Own-zone t signs assign PP positive and PC negative.
+Candidates require interaction absolute-t above the optimized threshold and weak
+other-gonad zonation absolute-t below1. These are the original selection rules,
+not a direct FDR-defined differential-correlation test.
 
-**Lipid association and threshold outputs**
-- `results/zonation/lipid_species_zonation_association.csv`
-- `results/zonation/lipid_category_binary_matrix.csv`
-- `results/zonation/lipid_class_association_summary.csv`
-- `results/zonation/threshold_sensitivity_by_class.csv`
-- `results/zonation/threshold_sensitivity_total.csv`
-- `results/zonation/optimal_threshold_metrics.csv`
-- `results/zonation/optimal_threshold_detection.pdf`
-- `results/zonation/lipid_zonation_threshold_sensitivity_total.pdf`
-- `results/zonation/lipid_class_zonation_proportions.pdf`
-- `results/zonation/lipid_class_zonation_proportions_horizontal.pdf`
-- `results/zonation/lipid_class_zonation_proportions_PG_mini.pdf`
-- `results/zonation/gonad_to_zonation_explanation_PG.pdf`
-- `results/zonation/lipid_class_zonation_jitter_vertical.pdf`
+The faithful class butterfly groups by lipid DE direction and pooled PP/PC gene
+association; it must not be relabelled as four gene-sex/zone programme fractions.
+The science finalizer supplies a separate explicit-context class panel for that
+interpretation. Networks contain measured whole-liver associations, not spatial
+lipid localization or causal effects.
 
-**Other figures**
-- `results/zonation/PCA_by_zonation.pdf`
-- `results/zonation/PCA_by_gonad.pdf`
-- `results/zonation/PCA_by_condition.pdf`
-- `results/zonation/PCA_metadata_enrichment.pdf`
-- `results/zonation/zonation_vs_sex_bias_scatter.pdf`
-- `results/zonation/zone_specific_sex_bias_scatter.pdf`
-- `results/zonation/volcanos/volcano_*.pdf`
+## Frozen consumers and vulnerabilities
 
-## Key Variables
+Workflow12/13 use `historical_fcg05` and historical input roles to replay the old
+two-marker Figure5 branches. They do not automatically consume this current
+expanded-marker output. Current zonal07 consumes the selected root's current
+checkpoint/networks. Preserve the mixed `Ovaries`/`ova` network filenames.
 
-| Variable | Type | Defined in | Used in | Description |
-|----------|------|------------|---------|-------------|
-| `scaled_RNA` | data.frame | Sec 2 | Sec 3-14 | Zonation pseudobulk matrix |
-| `meta_data_df` | data.frame | Sec 2 | Sec 3-15 | Zonation metadata |
-| `comparisons` | list | Sec 5 | Sec 5-15 | Seven zonation/gonad contrasts |
-| `mouse_id` | character | Sec 5 | Sec 5 | Blocking factor for `duplicateCorrelation()` |
-| `ttop_list` | list | Sec 5 | Sec 6-15 | Limma toptables by contrast |
-| `t_table` | data.frame | Sec 8 | Sec 9-14 | Zonation t-statistic table with `gene` column |
-| `TF_scores_df` | data.frame | Sec 8 | Sec 13 | TF activity matrix |
-| `lipidomic` | data.frame | Sec 8 | Sec 11-14 | Lipidomic matrix |
-| `optimal_threshold` | numeric | Sec 11 | Sec 12-14 | Interaction t-statistic cutoff selected by combined score |
-| `sensitivity_df` | data.frame | Sec 11 | Sec 14 | Lipid zonation assignment at each threshold |
-| `proportion_total` | data.frame | Sec 11 | Sec 14 | Threshold-level zonation proportions |
-| `optimal_metrics` | data.frame | Sec 11 | Sec 14 | Entropy/stability/coverage/specificity metrics |
-| `testes_pericentral_genes` / `testes_periportal_genes` | data.frame | Sec 12 | Sec 13-14 | Testes-specific zonation gene sets |
-| `ovaries_pericentral_genes` / `ovaries_periportal_genes` | data.frame | Sec 12 | Sec 13-14 | Ovaries-specific zonation gene sets |
-| `classes_with_enrichment` | character | Sec 14 | Sec 14 | Lipid classes ordered by workflow 03 enrichment score |
+Runtime adaptation is text/section based: engine header markers and exact literal
+substitutions form a compatibility contract. Metadata sample suffixes and the
+four-condition order matter. Threshold state created in section11 is consumed
+later in section14; the locally defined correlation helper is reused there.
+Fresh/current models must not be combined with old cached pathways or network
+coefficients. The approved root and historical engine/reference bytes are frozen.
 
-## Coherence Assessment
-
-**Status: GOOD.** The current script is coherent and the plan now reflects the CSV-based zonation input, duplicate-correlation DE model, threshold-selection section, and workflow 03 lipid dependencies.
-
-## Vulnerabilities to Keep in Mind When Modifying
-
-1. **Pathway enrichment cache:** Section 7 has the `decoupleR::run_ulm()` call and save line commented out, then loads `results/zonation/pathway_enrichment.RData`. If that file is absent, the `tryCatch` skips pathway reporting.
-2. **Long-distance threshold dependency:** `sensitivity_df`, `proportion_total`, and `optimal_metrics` are computed in section 11 and consumed in section 14 more than 900 lines later.
-3. **Sample-name regex:** Network sections strip `_Peri.*_Testes` and `_Peri.*_Ovaries` suffixes to match lipidomic sample names. Upstream sample-format changes will break RNA-lipid matching.
-4. **WF05 -> WF07 filenames:** Workflow 07 expects the exact `cormat_testes_portal_full_SIF.csv`, `cormat_testes_central_full_SIF.csv`, `cormat_Ovaries_portal_full_SIF.csv`, and `cormat_ova_central_full_SIF.csv` names.
-5. **Locally defined helper:** `get_correlated_lipids()` is defined inside section 11 and reused in section 14; it is not imported from a helper module.
-
-## Seven Contrasts
-
-1. `portal_vs_Central` - Overall zonation effect.
-2. `testes_vs_ova` - Overall gonad effect.
-3. `portalova_vs_centralova` - Zonation effect within ovaries.
-4. `portaltestes_vs_centraltestes` - Zonation effect within testes.
-5. `centraltestes_vs_centralova` - Gonad effect in pericentral hepatocytes.
-6. `portaltestes_vs_portalova` - Gonad effect in periportal hepatocytes.
-7. `testes_effect_zonation` - Interaction: whether zonation differs by gonad.
-
-## Gene Selection Logic
-
-```r
-testes_zonation_bias_genes:
-  abs(testes_effect_zonation) > optimal_threshold
-  abs(portalova_vs_centralova) < 1
-
-ovaries_zonation_bias_genes:
-  abs(testes_effect_zonation) > optimal_threshold
-  abs(portaltestes_vs_centraltestes) < 1
-
-general_zonation_bias_genes:
-  abs(testes_effect_zonation) < 1
-  abs(portal_vs_Central) > optimal_threshold
-```
-
-Zone assignment is then based on the sign of `portaltestes_vs_centraltestes` or `portalova_vs_centralova`: negative means pericentral and positive means periportal in the current script.
-
-## Notes for Context Restoration
-
-1. Workflow 05 is the largest workflow and should be read in sections, not skimmed.
-2. The active input is the workflow 01 CSV pair, not a Seurat RDS.
-3. Section 5 deliberately blocks on mouse ID because each mouse contributes both zonation pseudobulks.
-4. Section 14 depends on workflow 03's lipid DE and lipid-class enrichment outputs.
-
-## Frozen Reference Consumer Added October 2026
-
-Workflow 12 zonation phase (former 05b) implements meeting WP2 using this workflow's four full and
-displayed Figure 5 networks as immutable references. It independently replays
-the gene-lipid branch using the original zonation RNA, log2 lipid abundance and
-mouse metadata, preserving genes that also have a TF attribute label. It then
-compares the same eligible pairs with paired CF453 SD/WD measurements. See
-`12_wdsd_network_comparison.md` and the preserved phase plan
-`05b_wdsd_network_comparison.md`. This extension does not modify or rerun
-Workflow 05 and writes only its separate results directory.
+## Historical production and replay record
 
 ## Expanded-marker FCG rerun, 16 November 2026
 
 The isolated adapter `scripts/core/zonation_update_fcg.R`, invoked through
 `scripts/reports/run_zonation_update_fcg.R`, reruns this workflow against the
 staged expanded-marker FCG zonation export under
-`results/zonation_marker_update_20261116/inputs/fcg/`. Historical inputs,
-workflow defaults and `results/zonation/` remain unchanged. Its versioned
+`results/zonation_marker_update_20261116/inputs/fcg/`. This paragraph records the isolated production run before the later default
+promotion. Historical inputs/results remain archived; current defaults are the
+maintained wrapper and registry paths documented above. Its versioned
 runtime copy and outputs are in `runtime/` and `fcg05/` under the update root.
 See Workflow 17 for the coordinated multi-cohort revision scope.
 
@@ -247,9 +172,12 @@ scatter remains the original absolute-t threshold, rather than these FDR
 claim sets. Existing legend sign and sample-size discrepancies are recorded
 separately from the marker update.
 
-The entry accepts `--validate-only`, `--input=...`, `--output=...`, and
-`--postprocess-only`; completed model outputs cannot be overwritten by the
-default analysis call. `--postprocess-only --rerun-zonal-validation` refreshes
-the dependent validation without rerunning WF05. Runtime adaptations,
-source/fit hashes, execution logs and warning tables are retained in the
-versioned output root.
+The documented report driver also rejects approved-root full fitting before either
+core fit; explicit validate/postprocess-only modes retain their stated behavior.
+The report driver `scripts/reports/run_zonation_update_fcg.R` accepts
+`--validate-only`, `--input=...`, `--output=...`, `--science-only`, and
+`--postprocess-only`; these report-driver modes are not extra flags of the
+numbered05 wrapper. `--postprocess-only --rerun-zonal-validation` is an explicit
+audit refresh against saved models and archived references. It can rewrite
+presentation/audit outputs and must not be confused with read-only validation.
+Runtime adaptations, source/fit hashes, execution logs and warnings are retained.

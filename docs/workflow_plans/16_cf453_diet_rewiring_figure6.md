@@ -1,29 +1,48 @@
 # Workflow 16: Diet shifts in selected sex-specific zonation programmes
 
-## CSV transport update - 18 November 2026
+## Current parents, modes and layout entry (18 November 2026)
 
-Frozen model-parent input checks and retained-layout checks use the verified
-source-RDS-SHA to CSV-export bridge. Original paths/hashes remain recorded;
-`analysis_provenance()` labels original RDS identity hashes separately and records
-every actual CSV hash. New runs use CSV manifest/payload input paths directly.
-Current/historical intake and approved scientific invariant checks passed while
-all source-pseudobulk `readRDS` calls were explicitly forbidden. Statistical and
-resampling implementations were not rerun or changed for this format update.
+Defaults are `analysis_current("cf453_models/models.rds")`,
+`analysis_current("cf453_direct_diet/diet_analysis.rds")` and output
+`analysis_current("cf453_rewiring")`. Both generated parent caches are mandatory;
+the selected Workflow14 parent's adjacent `provenance_sha256.csv` is also read,
+unless `--parent-provenance` overrides it. The two parents must contain identical
+metadata and modeled RNA. Supplying `--parent` alone does not redirect `--direct`
+to a sibling fresh run: specify both explicitly when reproducing elsewhere.
+The code does not run14 or15 when a cache is absent.
 
----
+CLI accepts `--parent`, `--direct`, `--parent-provenance`, `--output` and either
+`--models-only` or `--plot-only`. There is no `--validate-only`, bootstrap-count
+or seed CLI option. Default/full execution computes all anchor/edge/class/LOO and
+999-bootstrap statistics before plotting/reporting. `--models-only` saves this
+complete numerical analysis as `rewiring_analysis.rds` plus tables/provenance;
+it is not a cheap input/model check. `--plot-only` reads that object from
+`--output` and rewrites exports, without reading another supplied parent.
+New analyses reject nonempty destinations except a lone `QA/` directory.
 
-## Current selected-programme entry - 16 November 2026
+Public RNA inputs are CSV transports; expected frozen RDS hashes are verified
+against their exact exports with original identity and opened-file provenance
+kept separate. Generated model/analysis caches are ignored. A public clone
+must run14 models-only, then15 models-only from that parent, then16 with both
+fresh parent paths. It does not need the historical30-panel network output.
 
-Defaults use current `cf453_models/models.rds`, current
-`cf453_direct_diet/diet_analysis.rds`, and current `cf453_rewiring/`; completed
-outputs are protected and reproduction needs fresh `--output`. The Figure6A layout
-entry similarly uses current rewiring and writes current `cf453_layouts/`.
-Historical presentations remain under `historical_cf453_rewiring`. Parent raw-input
-hashes retain recorded path identities and resolve archive locations only for
-opening/hashing. Layout retained-original SHA checks use that same resolver.
-No resampling, coefficient, anchor-selection or display gate changed in promotion.
+The separate `scripts/reports/cf453_figure6a_layouts.R` accepts only
+`--parent=<rewiring_analysis.rds>` and `--output`; defaults are current rewiring
+and `analysis_current("cf453_layouts")`. It reads saved anchors/effects, preserves
+selection and creates two independent layout alternatives. It does not fit or
+resample. It calls `analysis_assert_not_approved_output()` before writes, so the approved
+root/descendants are rejected even when model caches are absent. The declared
+default output is an approved lookup location and rendering needs an explicit
+fresh `--output`. Outside the protected root there is no general nonempty-output
+guard, so existing review exports can be overwritten. Retained-original
+hashes are checked through the relocation/CSV identity resolver. PNG/PDF/SVG
+packaging/review scripts are separate tools, not implicit statistical stages.
 
----
+Production parent reuse checks the recorded input-data identities, not every
+mutable code/plan row in a historical provenance file. New exports record current
+code/docs hashes. Historical strict export-QA can separately compare all recorded
+source/plan hashes and therefore report source-snapshot drift after documentation
+edits. Preserve approved manifests/results; do not refresh them to hide that drift.
 
 Requested 2 November 2026 as three independent Figure 6 panel groups closer
 to Figure 5. Preserve workflows 14/15 and their outputs. This is a standalone
@@ -34,8 +53,8 @@ analysis and no cross-cohort conservation claim is intended.
 ## Inputs and RNA selection
 
 Read validated Workflow 14 models.rds and Workflow 15 diet_analysis.rds.
-Verify the three raw input hashes against Workflow 14 provenance; retain
-18,486 eligible genes, 56 paired zone profiles and 1,129 primary-QC lipids.
+Verify every recorded parent input against Workflow14 provenance; retain its
+data-driven eligible-gene/lipid ledgers and the balanced 56-zone-profile roster.
 Reuse the eight-cell mouse-blocked limma fit and declared FDR families.
 
 For each selection diet and sex, require sex x zone q<=.05 (Workflow 14
@@ -51,7 +70,7 @@ panel. Track the same genes in the other diet regardless of its significance.
 ## Three panel groups
 
 A: two scatter facets, SD-selected SD->WD and WD-selected WD->SD, each with
-20 selected genes. Female PP-PC t is x, male PP-PC t is y, matching Figure5A.
+up to20 selected genes (underfilled bins retain all eligibility gates). Female PP-PC t is x, male PP-PC t is y, matching Figure5A.
 Open endpoints are SD; filled endpoints WD. Arrow starts in selection diet.
 Colour encodes anchor sex/zone. Solid arrows have direct three-way diet x
 sex x zone q<=.05 from Workflow 15's genes x three direct contrasts family;
@@ -103,7 +122,7 @@ unsupported context empty rather than lower thresholds.
 
 Entry: scripts/workflows/16_cf453_diet_rewiring_figure6.R. Core, plots and
 report: scripts/core/cf453_diet_rewiring*.R. Output directory:
-results/cf453_diet_rewiring_figure6/. Save rewiring_analysis.rds, bootstrap
+`analysis_current("cf453_rewiring")` (use a fresh output for reproduction). Save rewiring_analysis.rds, bootstrap
 indices, eligibility/selection/edge/class ledgers, three source CSVs, three
 PDF/SVG/300-dpi PNG groups, manifest, legends/methods and portable ZIP.
 No assembled manuscript figure or extra supplementary plots.
@@ -117,7 +136,7 @@ vector SVG and PNG resolution. Report small n, conditional selection and
 resampling limits. Supplied normalized RNA is not raw counts; aggregation,
 nuclei/batch/litter and randomisation provenance remain unestablished.
 
-## Completed results (2 November 2026)
+## Historical two-marker three-panel results (2 November 2026)
 
 Both anchor diets support all four five-gene bins: 40 selections, 34 distinct
 genes. Fixed context unions are female PP10/PC7 and male PP8/PC9 genes.
@@ -146,12 +165,14 @@ A fresh CLI model run reproduces all 16 saved top-level components exactly.
 All three PDFs were rendered and individually inspected; page bounds,
 vector-only SVGs and 300-dpi PNG dimensions pass. Source and CLI-export
 checks and bundle verification are recorded under QA/ and the completion
-manifest. Reproduce with the entry script and a fresh --output directory;
+manifest. Exact historical reproduction needs matching historical14/15 parent
+paths; defaults now use the expanded-marker release. With explicit parents and
+a fresh --output,
 --models-only exports numerical results, --plot-only regenerates panels from
 saved rewiring_analysis.rds. Package with
 `python3 scripts/reports/package_cf453_diet_rewiring.py`.
 
-## Figure 6A layout comparison, 4 November 2026
+## Historical two-marker Figure6A layout production, 4 November 2026
 
 The user requested two review candidates without replacing the existing
 figure: a four-state heatmap and row-wise SD/WD paired dots. Read the saved
@@ -193,7 +214,8 @@ remain fixed. Anchor-bin availability/selected/requested counts are exported;
 underfilled bins retain their eligibility gates rather than forcing five genes.
 Gene and lipid counts and both 6A layout counts are data-driven; historical
 34-gene/9-marker assertions and labels no longer constrain new fitted inputs.
-The default historical input/output paths are unchanged.
+Current defaults now select the approved expanded-marker parents/output;
+explicit historical parents remain supported.
 
 The new full result is `results/zonation_marker_update_20261116/cf453_rewiring/`.
 All eight bins still support five anchors: 40 selections, 35 distinct genes,
@@ -220,7 +242,9 @@ Matched-programme class comparisons additionally use identical intersection
 genes/pairs, separating coefficient changes from programme-reselection effects;
 these extra comparisons are observed tables, without new significance tests.
 
-Both candidates are exported at6.8x9.5in (heatmap) and9x8in (paired dots),
+### Historical two-marker layout geometry verification (4 November 2026)
+
+Those original candidates were exported at6.8x9.5in (heatmap) and9x8in (paired dots),
 each with a136-row source table. The gene ledger retains34 unique genes,
 six selected in both diets and nine direct three-way q marks. The heatmap
 uses a common symmetric colour domain +/-2.58409055449904. Dots use one

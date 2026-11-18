@@ -15,6 +15,7 @@ if ("--validate-only" %in% args) {
 } else if ("--postprocess-only" %in% args) {
   zmu_finish(output,rerun07="--rerun-zonal-validation" %in% args)
 } else {
+  analysis_assert_not_approved_output(output)
   zmu_run05(input, output)
   zmu_run07(output)
   if("--science-only"%in%args)zmu_science_finish(output) else zmu_finish(output)

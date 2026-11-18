@@ -1,14 +1,21 @@
 # Workflow 05b - WDSD baseline conservation and Western diet perturbation (WP2)
 
-**Compatibility phase documentation — 9 October 2026:** the active complete
-work package is [12](12_wdsd_network_comparison.md), entered through
-`scripts/workflows/12_wdsd_network_comparison.R`. This former entry is a thin wrapper for its
-zonation/diet phase; orchestration now lives in `scripts/core/wp2_workflow.R`.
-Inputs are repository-local, with byte-preserving import provenance in
-`data/wp1_wp2_input_migration_manifest.csv`. The recorded production results
-below remain unchanged. The combined WP2 report now presents pooled results
-first, then zonation/diet, as authorized on 9 October. Earlier separate-report
-instructions below document the original deliveries.
+## Current compatibility entry (18 November 2026)
+
+This thin wrapper calls only the zonation/diet `wp2_run()` phase in
+`scripts/core/wp2_workflow.R`. Use [Workflow12](12_wdsd_network_comparison.md)
+for the complete pooled-first package. It accepts `--bootstraps`, `--paired-bootstraps`, `--seed`, `--output` and `--validate-only`; package
+`--report-only` is not a wrapper mode. Default output is `analysis_path("historical_wf12")`.
+The zonation phase rejects any existing root contents when invoked alone. A fresh complete package should use Workflow12 and a fresh output.
+
+Both phases explicitly pass `historical_wdsd_zonation_transport` to shared
+intake, which also requires `wdsd_hepatocytes_transport` and CF453 lipidomics.
+There is no source-Seurat dependency in the public default. The original FCG
+reference dependencies and public-clone restoration requirements are detailed
+in Workflow12. The supplied CSV transports do not replace frozen FCG networks.
+Validation performs observed-data/reference checks without resampling or writes.
+The historical scientific specification and execution results below remain
+conditional on the original compartment definition.
 
 **Entry point:** `scripts/workflows/05b_wdsd_network_comparison.R`.
 **Authorized scope:** Work package 2 of the 5 October 2026 meeting plan: four
@@ -20,26 +27,26 @@ outside the defined WP2 network analysis.
 Read the meeting plan, Workflow 05 plan and cross-workflow overview before
 editing. Reuse existing results as a frozen reference; preserve Workflow 05,
 WP1, and unrelated working-tree changes. Write new results only to
-`results/wdsd_network_comparison/` (or a user-specified fresh directory).
+`miscellaneous/comparisons/wdsd_network_comparison/` (or a user-specified fresh directory).
 
 ## Inputs and pairing
 
 - WDSD CF453 lipidomics:
   `data/metabolomics/wdsd/lipidomics_cf453.csv`.
 - Updated WDSD pseudobulks:
-  `data/RNA/wdsd/wdsd_hep_pseudobulks.rds` and
-  `wdsd_zonation_pseudobulks.rds`.
+  `wdsd_hepatocytes_transport` and `historical_wdsd_zonation_transport`
+  from the release registry (CSV manifests plus all payloads).
 - Frozen original four context networks:
-  `results/zonation/networks/cormat_{testes_portal,testes_central,Ovaries_portal,ova_central}_{SIF,full_SIF}.csv`.
+  `miscellaneous/older_results/zonation_two_marker/networks/cormat_{testes_portal,testes_central,Ovaries_portal,ova_central}_{SIF,full_SIF}.csv`.
 - Original source matrices:
-  `data/RNA/scaled_RNA_zonation.csv`, `meta_data_df_zonation.csv`,
+  `historical_fcg_zonation_csv`, `historical_fcg_zonation_metadata`,
   `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` and FCG group metadata.
 
 Require 28 distinct CF453 mice, seven in each female/male x SD/WD group,
 56 zone profiles with exactly two different zones per mouse, and exact
 RNA-lipid alignment by `cf453_id`. Each mouse contributes one bulk-liver lipid
 profile shared by its two RNA zones. Zones are not independent animals.
-Use Seurat v5 named layer accessors; preserve supplied objects unchanged.
+Use named lossless CSV layers; preserve source values, identities and metadata.
 Record library totals/detected genes and marker consistency, but do not infer
 nucleus counts or completed nucleus-level QC from aggregated pseudobulks.
 
@@ -131,7 +138,7 @@ correct delta orientation. Update this plan after complete execution with actual
 coverage, results and unresolved QC/provenance limitations. No outcomes are
 assumed from the hoped-for conservation discussed in the meeting.
 
-## Verified Execution - 7 October 2026
+## Historical production verification - 7 October 2026
 
 The validation-only and full entry point passed with seed 20261007, 4,999
 independent-marginal null bootstraps, 999 paired/paired-reference stability
@@ -203,4 +210,4 @@ ULM/decoupleR equivalence, resampling, group strata and LOCO. Independent actual
 output QA verifies all coefficients (maximum discrepancy 7.8e-15), all 16
 exports, unchanged original Git inputs, earlier shared FCG SHA256 values and
 all 19 primary/secondary exact-permutation identities and null p-value tails.
-Scientific and report PDF QA is recorded under `results/wdsd_network_comparison/QA/`.
+Scientific and report PDF QA is recorded under `miscellaneous/comparisons/wdsd_network_comparison/QA/`.

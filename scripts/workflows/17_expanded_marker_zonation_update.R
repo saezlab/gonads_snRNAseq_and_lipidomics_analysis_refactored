@@ -7,6 +7,7 @@ zu17_run <- function(args=commandArgs(TRUE)) {
   if(any(!args%in%c(flags,values))||anyDuplicated(sub("=.*$","",args))||all(c("--validate-only","--report-only")%in%args))stop("Unknown, duplicate or mutually exclusive CLI options")
   value<-function(key,default){v<-args[startsWith(args,paste0(key,"="))];if(length(v))sub("^[^=]*=","",v[1]) else default}
   output<-value("--output",analysis_current())
+  if(!any(c("--validate-only","--report-only")%in%args))analysis_assert_not_approved_output(output)
   source_root<-value("--source-root",analysis_path("pseudobulk_csv_root"))
   staging<-new.env(parent=globalenv());sys.source("scripts/reports/stage_zonation_marker_update.R",envir=staging)
   py<-value("--python",Sys.getenv("ZONATION_PYTHON",unset=Sys.which("python3")))

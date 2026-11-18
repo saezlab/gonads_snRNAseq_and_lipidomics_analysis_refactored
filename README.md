@@ -9,6 +9,7 @@ Analysis code and results for the Four Core Genotypes mouse liver study, with in
 Start with:
 
 - [Pipeline and dependency map](PIPELINE.md): execution order, current outputs and optional branches.
+- [Complete workflow reference](docs/WORKFLOW_REFERENCE.md): each workflow’s inputs, producers, modes, outputs and restoration requirements.
 - [Current results](results/README.md): figure-panel and table locations.
 - [Result lookup guide](docs/AGENT_GUIDE.md): concise query map.
 - [Provenance and archive map](docs/REPOSITORY_ORGANIZATION.md): original paths, archive locations, hashes and restoration.
@@ -21,7 +22,7 @@ The executable release registry is [scripts/config/analysis_release.json](script
 Run commands from the repository root in an R environment with the required packages installed.
 
 ```sh
-# Check current inputs, historical reference prerequisites and setup; no models run.
+# Check the three zone CSV transports, engine files and saved KD artifacts; no models run.
 Rscript scripts/workflows/17_expanded_marker_zonation_update.R --validate-only
 
 # Recompute into a fresh directory; the approved release is preserved.
@@ -30,7 +31,7 @@ Rscript scripts/workflows/17_expanded_marker_zonation_update.R --output=results/
 
 Workflow 17 is the main zonation entry. It runs the FCG zonation models and gene–lipid networks, zonation-dependent knockdown validation, paired gonadectomy supporting analysis, diet-study models, selected-programme Figure 6, and both Figure 6A layouts. Workflow 14 and 15 model stages are upstream components of the current three-panel Workflow 16 presentation. Earlier full Figure 6 presentations are archived.
 
-Scientific reruns do not require the private manuscript. Manuscript auditing/report regeneration is an explicit optional mode; the completed report and its replacement ledger are already provided with the approved release. Read the [Workflow 17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md) for CLI details and prerequisites.
+Scientific reruns do not require the private manuscript. Manuscript auditing/report regeneration is an explicit optional mode; the completed report and its replacement ledger are already provided with the approved release. Workflow17 consumes saved Workflow03 lipid DE/class scores, Workflow06 structural annotations and the independent KD fit artifacts; it does not regenerate them. These derived prerequisites are shipped. Its validation mode checks only the inputs listed in the command comment, rather than every downstream resource. Read the [Workflow17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md) and [complete reference](docs/WORKFLOW_REFERENCE.md#workflow-17) before a full run. Manual14→15→16 runs must pass fresh parent paths explicitly; the orchestrator does this automatically.
 
 ## Main study pipeline
 
@@ -46,7 +47,7 @@ Scientific reruns do not require the private manuscript. Manuscript auditing/rep
 | Lipid variance | `08_variance_analysis.R` | `results/lipidomic/variance_analysis/` |
 | In-vivo Cyp2c38 validation | `11_cyp2c38_in_vivo_validation.R` | `results/validation/cyp2c38_in_vivo/` |
 
-Entries are under `scripts/workflows/`. The [workflow plans](docs/workflow_plans/) describe inputs, contrasts, units, outputs and limitations. Raw sci-RNA-seq preprocessing (00), human comparison (09) and collaborator Xenium scripts (10) need external raw data and are optional. MOFA defaults use the retained trained models rather than training new models. The committed whole-cell CSVs support starting downstream analyses at 02; regenerating them with 01 also requires the original whole-cell FCG/GDX Seurat objects specified in its plan.
+Entries are under `scripts/workflows/`. The [workflow plans](docs/workflow_plans/) describe inputs, contrasts, units, outputs and limitations. Raw sci-RNA-seq preprocessing (00), human comparison (09) and collaborator Xenium scripts (10) need external raw data and are optional. Workflow04 uses the retained model set when all eleven factor-count model files are present; otherwise its current code starts training automatically. It requires MOFA2 even for cached analysis. Workflows01–04,06 and08 have fixed output paths and no safe validation CLI; sourcing or passing `--help` can execute analyses. Human09 and Xenium10 also have external/runtime requirements;10 has known execution blockers documented in its plan. The committed whole-cell CSVs support starting downstream analyses at 02; regenerating them with 01 also requires the original whole-cell FCG/GDX Seurat objects specified in its plan.
 
 ## Figures and interpretation
 
@@ -65,6 +66,8 @@ Earlier cross-cohort analyses (12/13) retain their original two-marker compartme
 ## GitHub preparation
 
 ```sh
+python3 scripts/maintenance/build_workflow_documentation.py --check
+python3 scripts/maintenance/verify_repository_organization.py
 python3 scripts/maintenance/audit_github_readiness.py --strict
 ```
 

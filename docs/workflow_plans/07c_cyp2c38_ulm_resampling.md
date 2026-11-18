@@ -1,13 +1,25 @@
 # Workflow 07c — Cyp2c38 ULM reporting and resampling audit
 
-**Compatibility phase documentation — 9 October 2026:** the active complete
-work package is [11](11_cyp2c38_in_vivo_validation.md), entered through
-`scripts/workflows/11_cyp2c38_in_vivo_validation.R`. This former entry is a thin wrapper for its
-ULM/resampling phase; orchestration now lives in `scripts/core/wp1_workflow.R`.
-Inputs are repository-local, with byte-preserving import provenance in
-`data/wp1_wp2_input_migration_manifest.csv`. The recorded production results
-below remain unchanged. The complete WP1 entry passes fresh intake/results between phases; standalone
-phase execution retains its documented dependencies.
+## Current compatibility entry (18 November 2026)
+
+This wrapper calls only `wp1_ulm_run()` in `scripts/core/wp1_workflow.R`.
+Use [Workflow11](11_cyp2c38_in_vivo_validation.md) for a fresh complete package.
+The wrapper's `previous` parent is fixed by the helper default to
+`results/validation/cyp2c38_in_vivo/`; `--output` changes only the follow-up
+destination. There is no CLI `--previous`/`--parent`, report-only or resume mode.
+
+Even `--validate-only` reads base `log2_analysis_matrix.csv`,
+`sample_manifest.csv`, `feature_annotation_and_QC_ledger.csv` and
+`limma_fits.rds`; it refits/replays the observed KO model but performs no
+resampling or writes. A full follow-up additionally reads base
+`combined_bootstrap_draws.csv` and `permutation_draws.csv`. The generated fit RDS
+is ignored in Git: restore/regenerate this fixed parent or use the complete
+Workflow11, which passes fresh intake during validation and its fresh base
+outputs during execution. The new follow-up destination must be empty.
+
+Options are `--bootstraps`, `--permutations`, `--seed`, `--workers`, `--output`,
+`--calibration-datasets`, `--calibration-inner`, `--injection-datasets` and
+`--validate-only`; defaults and historical statistical specifications follow.
 
 **Entry point:** `scripts/workflows/07c_cyp2c38_ulm_resampling.R`.
 **Scope:** October 2026 WP1 follow-up: focus reporting on ULM scores, nominal ULM p-values and explicit bootstrap p-values; regenerate separate ovarian/testicular Cyp2c38–lipid networks; check calibration versus low power. Execution and reporting dated 2026-10-07.
@@ -67,7 +79,7 @@ all observed results with decoupleR and the saved 07b t-statistics. Presentation
 and calibration helpers also passed synthetic/actual-data smoke tests, invalid
 input checks and worker-invariant RNG checks during development.
 
-## Verified full execution, 2026-10-07
+## Historical production verification, 2026-10-07
 
 All 4,999 primary and combined bootstrap draws were finite for all ten rows;
 the full entry point completed successfully with the defaults above. Original

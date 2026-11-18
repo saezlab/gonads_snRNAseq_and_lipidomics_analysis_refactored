@@ -1,14 +1,21 @@
 # Workflow 05c - Lipid overlap audit and pooled Figure 3 conservation
 
-**Compatibility phase documentation — 9 October 2026:** the active complete
-work package is [12](12_wdsd_network_comparison.md), entered through
-`scripts/workflows/12_wdsd_network_comparison.R`. This former entry is a thin wrapper for its
-pooled/annotation phase; orchestration now lives in `scripts/core/wp2_workflow.R`.
-Inputs are repository-local, with byte-preserving import provenance in
-`data/wp1_wp2_input_migration_manifest.csv`. The recorded production results
-below remain unchanged. The combined WP2 report now presents pooled results
-first, then zonation/diet, as authorized on 9 October. Earlier separate-report
-instructions below document the original deliveries.
+## Current compatibility entry (18 November 2026)
+
+This thin wrapper calls only the pooled/annotation `wp2_pooled_run()` phase in
+`scripts/core/wp2_workflow.R`. Use [Workflow12](12_wdsd_network_comparison.md)
+for the complete pooled-first package. It accepts `--permutations`, `--bootstraps`, `--paired-bootstraps`, `--seed`, `--output` and `--validate-only`; package
+`--report-only` is not a wrapper mode. Default output is `file.path(analysis_path("historical_wf12"), "followup")`.
+The pooled phase rejects an existing `pooled_analysis.rds` or `README.md`; an otherwise partial directory is not a general overwrite-safe resume contract. A fresh complete package should use Workflow12 and a fresh output.
+
+Both phases explicitly pass `historical_wdsd_zonation_transport` to shared
+intake, which also requires `wdsd_hepatocytes_transport` and CF453 lipidomics.
+There is no source-Seurat dependency in the public default. The original FCG
+reference dependencies and public-clone restoration requirements are detailed
+in Workflow12. The supplied CSV transports do not replace frozen FCG networks.
+Validation performs observed-data/reference checks without resampling or writes.
+The historical scientific specification and execution results below remain
+conditional on the original compartment definition.
 
 **Entry point:** `scripts/workflows/05c_wdsd_lipid_overlap_and_pooled_network.R`.
 **Scope:** The 7 October 2026 user follow-up to WP2: explain the 752/1,254
@@ -18,7 +25,7 @@ Preserve all completed WP1/WP2 and original FCG outputs.
 
 Read Workflow 04, 05b and the cross-workflow overview before modifying the
 entry point. Write new results only to
-`results/wdsd_network_comparison/followup/` or a fresh user-specified destination.
+`miscellaneous/comparisons/wdsd_network_comparison/followup/` or a fresh user-specified destination.
 Save a separate Markdown/PDF addendum in Meeting_Summaries after numeric and
 visual QA. Do not silently replace the prior WP2 report or its strict matches.
 
@@ -33,9 +40,10 @@ visual QA. Do not silently replace the prior WP2 report or its strict matches.
   panel is not the separate permissive top-33%-tail network.
 - Updated WDSD whole-hepatocyte pseudobulks, CF453 lipid export and the
   validated 28-mouse intake. Pooled SD contains 14 distinct animals, seven
-  recorded females and seven males. No zonation profiles enter this comparison.
+  recorded females and seven males. No zonation profiles enter the pooled coefficient calculation, but the shared
+  intake still validates the historical CF453 zone transport.
 - Raw original annotation metadata in
-  `data/metabolomics/fcg/lipidomics_fcg.csv`, when available, for
+  `data/metabolomics/fcg/lipidomics_fcg.csv` (required by the current audit), for
   annotation aliases, adduct/mass/retention and structural-identifier audits.
 
 Reconstruct and independently replay all original pooled correlations before
@@ -123,7 +131,7 @@ Monte Carlo tails, shared complete feature draws and centered-network behavior.
 Update this plan with actual counts, outcomes and unresolved limitations after
 the completed run; register the extension in the repository query map/meta.
 
-## Completed run: 7 October 2026
+## Historical production record - 7 October 2026
 
 Default settings completed: seed 20261007, 19,999 random pairings per null,
 4,999 independent-marginal bootstrap draws per null, and 999 paired SD/reference

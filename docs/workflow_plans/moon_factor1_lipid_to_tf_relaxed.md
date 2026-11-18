@@ -30,11 +30,18 @@ checked without treating the legacy directory as its output.
 ```text
 Factor 1 inputs + directional STITCH overlay + relaxed mapping ledger
   -> direct chemical-to-protein + protein-to-protein graph
-  -> compressed MOON fits with TF activities as terminal observations
-  -> candidate score and duplicate-fingerprint audit
-  -> parameter search with score-layer-constrained route extraction
-  -> evidence audit and network export
+  -> selected compressed fit with terminal TF observations
+  -> frozen-reference comparison + selected export
+
+Separate optional branch using the same input/fitting contract:
+  -> parameter search with score-layer-constrained extraction
+  -> candidate/fingerprint and edge-evidence audits
 ```
+
+The selected main entry does not invoke that parameter search. Likewise,
+candidate/evidence audits are explicit ancillary calls, not implied by a main
+`--validate-only` pass. Both fitting entries keep the pinned software gate;
+the retained saved outputs can be inspected without fitting again.
 
 Workflows 00–10 do not consume these outputs.
 

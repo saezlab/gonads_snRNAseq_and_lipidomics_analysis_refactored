@@ -1,135 +1,115 @@
-# Workflow 07: Validation Experiments
+# Workflow 07: siRNA Validation Experiments
 
-## Current and independent execution entries - 16 November 2026
+## Authoritative execution contract (audited 18 November 2026)
 
-The source-safe Workflow07 entry defaults to current expanded-marker zonation
-validation. It requires the selected output root's `fcg05/fcg05_checkpoint.rds`
-and the unchanged siRNA KD table/fit, writes `fcg07/`, and refuses to overwrite
-completed validation. `--validate-only` checks that zonation entry's requirements.
+Public entry: `scripts/workflows/07_validation_experiments.R` (23-line source-safe
+wrapper). `source()` defines functions; `Rscript` invokes
+`zonation_validation_run()`. The original full body is immutable at
+`scripts/core/engines/07_validation_experiments_legacy.R` (`engine_validation07`),
+not a maintained direct execution entry. There are two intentionally separate modes.
 
-Independent KD/global/structural reproduction remains available explicitly:
-`Rscript scripts/workflows/07_validation_experiments.R --global-only --output=results/runs/global_validation_reproduction`.
-This mode requires a fresh directory, refits the original KD data, and executes
-unchanged engine sections1-7 and10-11 without zonation networks. Its own
-`--global-only --validate-only` checks the independent input scope. The adapter
-is `scripts/core/validation_global.R`; output redirection and a t-based plot CI
-helper are the only transformations beyond section selection. Actual execution
-reproduced every KD fit, global ULM value and global structural regression at
-1e-12 tolerance after matching tied lipid rows by ID. Overwrite guards were tested.
+| Mode | What runs | Destination and protection |
+| --- | --- | --- |
+| Default/current zonal | `core/zonation_update_fcg.R::zmu_run07()`: frozen engine8/9/11 with global genes empty; reuse unchanged KD effects, adaptive zonal contexts plus prespecified Mtmr11 male-PP. | `--output=ROOT` defaults to `current_root`; writes `ROOT/fcg07/` and `ROOT/runtime/`. A completed `fcg07_checkpoint.rds` blocks the wrapper. |
+| `--global-only` | `core/validation_global.R`: frozen engine1-7 and10-11; refit original KD data, global MOFA validation and global structural consistency; no zonation network read. | Actual execution requires explicit `--output=FRESH_DIR`; any nonempty directory is refused. Files are written directly under this directory. |
 
-The original full body is frozen byte-for-byte in
-`scripts/core/engines/07_validation_experiments_legacy.R`. The historical section
-map below refers to that engine. Current zonation execution separately preserves
-Mtmr11 male-periportal prespecified validation and the adaptive-context result;
-neither changes the independent KD measurements or global MOFA networks.
+Supported flags are `--output=...`, `--global-only`, and `--validate-only`.
+`--validate-only` alone checks package/checkpoint/KD-file prerequisites without
+writing; it does not verify the structural reference later opened by the fit.
+`--global-only --validate-only` verifies its raw KD/global/structural inputs and
+prepared runtime syntax without writing. The checkpoint guard on zonal runs does
+not promise to preserve a partial destination lacking its completion checkpoint.
+Full zonal execution also calls `analysis_assert_not_approved_output()` before
+checking/fitting, rejecting the approved root and descendants even when model
+caches are absent. Validation is allowed there; actual fits need an explicit
+fresh root outside it. Cache guards additionally protect completed fresh runs.
 
----
+Workflow17 coordinates current05 then zonal07. The independent in-vivo Cyp2c38
+Workflow11 is a different experiment and is not called by this entry; former07b/07c
+are phase compatibility wrappers for11.
 
-The October 2026 meeting's heterozygous **in vivo Cyp2c38 KO** WP1 is an
-independent extension, documented in `11_cyp2c38_in_vivo_validation.md` (with the original 07b/07c
-phase plans retained) and implemented in
-`scripts/workflows/11_cyp2c38_in_vivo_validation.R`. This
-workflow retains the original primary-hepatocyte siRNA analyses.
+## Actual inputs and ordering by mode
 
-**Script:** `scripts/workflows/07_validation_experiments.R`  
-**Lines:** ~1113  
-**Purpose:** Validate MOFA and zonation gene-lipid correlation predictions against siRNA knockdown lipidomics, then test whether knockdown-response consistency varies with lipid structure.
+| Input | Zonal mode | Global-only mode | Producer |
+| --- | --- | --- | --- |
+| `<ROOT>/fcg05/fcg05_checkpoint.rds` and four `fcg05/networks/cormat_*_full_SIF.csv` | Required current reference; the exact mixed names are below. | Not read. | Current05 in the same run root. |
+| `results/validation/knockdown_t_table.csv` | Reused directly for scoring and plots. | Not an input; a new table is fitted/written in the fresh output. | Retained original siRNA result. |
+| `results/validation/knockdown_ttop_list.RData` | Entry-level prerequisite; the score calculations read the CSV. | Not an input; newly fitted. | Retained original siRNA fit. |
+| `data/metabolomics/lipidomics_20250423transfections.csv` | Not read. | Required original KD measurements. | Curated experimental input. |
+| `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | Not read. | Required permissive global gene-lipid reference. | Workflow04. |
+| `results/lipidomic/structural_model/lipids_with_structure.csv` | Required for structural reference axes. | Required for structural reference axes. | Workflow06 after03. |
 
-## Source Dependencies
+The curated KD/global/structural resources are public-tree artifacts with the
+necessary R packages; neither mode requires a source RNA/Seurat object. Zonal
+validation also requires its generated same-root05 checkpoint, which is an ignored
+model cache. A public clone must first fit05/17 into a fresh root (or explicitly
+restore that cache); plain07 is not a way to recreate it. Recompute04/06 first only when
+rebuilding their global network/structural inputs. A new global-only run writes
+its KD fit to its fresh output; it does not silently replace the curated canonical
+`results/validation/` inputs reused by current zonal validation.
 
-```r
-source("scripts/config/analysis_config.R")
-source("scripts/config/datasets.R")
-source("scripts/support_functions.R")
+Exact current full-network basenames are
+`cormat_testes_portal_full_SIF.csv`, `cormat_testes_central_full_SIF.csv`,
+`cormat_Ovaries_portal_full_SIF.csv`, `cormat_ova_central_full_SIF.csv`.
+All are below the selected root's `fcg05/networks/`. Old `results/zonation/`
+paths occur only inside the frozen engine and are redirected by the zonal adapter.
 
-# Section 11 only:
-source("scripts/core/structural_analysis.R")
-```
+## Implementation and outputs
 
-## Section Breakdown
+Both adapters source the registry and shared FCG adapter, whose `zmu_require()`
+checks the full declared package set. Generated runtimes additionally source
+`analysis_config.R`, `datasets.R`, `support_functions.R`, and structural helpers.
+The global adapter removes workspace clearing, binds an empty zonation candidate
+set to avoid inherited interactive state, redirects only validation output paths,
+and supplies the t-based mean-CI plotting helper. No statistical model changes
+are introduced by those transport/execution adapters.
 
-| # | Section | Lines (approx) | Description |
-|---|---------|----------------|-------------|
-| 1 | Configuration | 51-69 | Load config/datasets/support functions and create `results/validation/`. |
-| 2 | Load Knockdown Data | 72-103 | Read `lipidomics_20250423transfections.csv`, clean lipid data, infer condition from sample names. |
-| 3 | QC PCA | 106-122 | PCA of knockdown lipidomics. |
-| 4 | Differential Analysis | 125-190 | Build every knockdown-vs-control contrast, run limma, write ttop list and t table. |
-| 5 | Heatmap | 193-222 | Heatmap of lipid t-statistics across knockdowns. |
-| 6 | Global Network Validation | 227-274 | Load MOFA full gene-lipid network and score prediction/knockdown consistency with decoupleR ULM. |
-| 7 | Global Scatter Plots | 279-398 | Generate per-gene predicted-vs-observed scatter plots for available global genes. |
-| 8 | Zonation Network Validation | 404-481 | Load four workflow 05 full zonation networks, combine them, and score on-target validation. |
-| 9 | Zonation Scatter Plots | 483-620 | Generate zonation-specific predicted-vs-observed scatter plots for available zonation genes. |
-| 10 | Summary Statistics | 628-660 | Write validation summary table. |
-| 11 | Structural Consistency | 665-1079 | Parse lipid structures, regress KO-response consistency on `C`, `DB`, and `C:DB`, and write plots/table. |
-| - | Complete | 1081-1113 | Print output summary. |
+Zonal outputs under `<ROOT>/fcg07/` include:
 
-## Input Files
+- `zonation_network_validation_scores.csv`, on-target/adaptive context results in
+  `fcg07_checkpoint.rds`, `warnings.csv`, and zonal validation scatter PDFs.
+- `Mtmr11_male_PP_prespecified_ULM.csv`,
+  `Mtmr11_male_PP_prespecified_source.csv`,
+  `Mtmr11_male_PP_ULM_background_source.csv`,
+  `Fig5F_Mtmr11_male_PP_prespecified.pdf`.
+- `structural_consistency/[gene]_structural_consistency.pdf` and
+  `structural_consistency/consistency_structural_regression_summary.csv` for zonal
+  candidates. Runtime: `runtime/07_zonation_validation_versioned.R` at root level.
 
-**Knockdown data**
-- `data/metabolomics/lipidomics_20250423transfections.csv`
+Global-only outputs directly under its explicit fresh directory include:
 
-**Prediction networks**
-- `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` - Global MOFA-derived gene-lipid network from workflow 04.
-- `results/zonation/networks/cormat_testes_portal_full_SIF.csv`
-- `results/zonation/networks/cormat_testes_central_full_SIF.csv`
-- `results/zonation/networks/cormat_Ovaries_portal_full_SIF.csv`
-- `results/zonation/networks/cormat_ova_central_full_SIF.csv`
+- `knockdown_PCA.pdf`, `knockdown_ttop_list.RData`, `knockdown_t_table.csv`,
+  `knockdown_heatmap.pdf`, `global_network_validation_scores.csv`.
+- Global scatter PDFs for available genes among Cyp2d9/Cyp2b9/Cyp2c38;
+  `validation_summary.csv`, global `structural_consistency/` plots/regressions,
+  `warnings.csv`, `runtime/07_global_validation_versioned.R` and its section ledger.
 
-**Structural reference**
-- `results/lipidomic/structural_model/lipids_with_structure.csv` - Workflow 06 output used for shared axis limits in section 11.
+Additional old/new comparison tables and unchanged-KD-fit audits belong to the
+retrospective FCG report driver/Workflow17 audit mode, not to the plain07 wrapper.
 
-## Output Files
+## Method and interpretation contracts
 
-- `results/validation/knockdown_PCA.pdf`
-- `results/validation/knockdown_ttop_list.RData`
-- `results/validation/knockdown_t_table.csv`
-- `results/validation/knockdown_heatmap.pdf`
-- `results/validation/global_network_validation_scores.csv`
-- `results/validation/[gene]_validation_scatter.pdf` - Global network scatter plots for available genes among `cyp2d9`, `cyp2b9`, `cyp2c38`.
-- `results/validation/zonation_network_validation_scores.csv`
-- `results/validation/[gene]_zonation_validation_scatter.pdf` - Zonation scatter plots for available genes among `sult3a1`, `mtmr11`.
-- `results/validation/validation_summary.csv`
-- `results/validation/structural_consistency/[gene]_structural_consistency.pdf`
-- `results/validation/structural_consistency/consistency_structural_regression_summary.csv`
+Global candidates are Cyp2d9/Cyp2b9/Cyp2c38; zonal adaptive candidates are
+Sult3a1/Mtmr11 when available. Adaptive best-context scores remain distinct from
+prespecified Mtmr11 male-PP validation. Structural consistency is correlation times
+KD t-statistic times minus1, with SM/BMP/PG/TG focus classes. The ULM background
+and measured-scatter feature count must remain distinct; zones are paired RNA
+profiles and lipids are measured at whole-liver level. Preserve lowercase gene
+matching and the exact network filenames. The original parenthesis-based target
+filter is historical scoring behavior, not a general lipid-name identity rule.
 
-## Key Variables
+The base-R mean-CI helper is a plotting-dependency replacement for Hmisc's normal-
+theory t interval; it does not change ULM or regression calculations. Actual
+independent global reproduction previously matched all KD fits, global ULM values
+and global structural regressions at1e-12 after matching tied lipid rows by ID.
 
-| Variable | Type | Description |
-|----------|------|-------------|
-| `lipidomic_raw` | data.frame | Raw knockdown lipidomics file |
-| `lipidomic` | data.frame | Cleaned lipid abundance matrix, lipids x samples |
-| `targets` | data.frame | Sample and inferred condition metadata |
-| `comparisons` | named list | All knockdown conditions compared against detected control (`neg`, `control`, or `scramble`) |
-| `ttop_list` | list | Limma top tables by knockdown |
-| `t_table` | data.frame | Lipid t-statistic table used for validation |
-| `lipid_network` | data.frame | Global MOFA gene-lipid network with `source`, `target`, `mor` |
-| `sszb_network` | data.frame | Combined zonation-specific network |
-| `focus_classes` | character | `c("SM", "BMP", "PG", "TG")` for structural consistency |
+## Historical engine map and production record
 
-## Genes Validated
-
-| Gene set | Hardcoded candidates | Notes |
-|----------|----------------------|-------|
-| Global MOFA network | `cyp2d9`, `cyp2b9`, `cyp2c38` | Only genes present in `names(comparisons)` are plotted/scored as available. |
-| Zonation network | `sult3a1`, `mtmr11` | Best gonad-zone context is chosen by highest absolute decoupleR score. |
-| Heatmap/limma table | All knockdowns in the 2025-04-23 file | Additional knockdowns can be present even if they do not get dedicated scatter plots. |
-
-## Coherence Assessment
-
-**Status: GOOD.** The workflow is linear. It conditionally skips zonation validation if workflow 05 full networks are missing, but global validation expects the workflow 04 full network to exist.
-
-## Vulnerabilities to Keep in Mind When Modifying
-
-1. **Network filename coupling:** WF07 expects the exact mixed WF05 filenames listed above, including `Ovaries` capitalization and `ova` abbreviation.
-2. **Control detection:** Section 4 searches for `neg`, `control`, or `scramble`; otherwise the first condition becomes the reference.
-3. **Structural dependency:** Section 11 requires WF06's `lipids_with_structure.csv`; a fresh run of WF07 after deleting structural outputs will fail there.
-4. **Case normalization:** Validation filters compare lowercased gene names. Preserve this when adding genes with mixed-case mouse symbols.
-
-## Notes for Context Restoration
-
-1. Validation consistency is computed as predicted correlation times knockdown t-statistic times `-1`; positive consistency means the knockdown direction agrees with the FCGL prediction.
-2. Dedicated scatter plots are not automatically made for every knockdown; the hardcoded global and zonation candidate lists control those plots.
-3. Structural consistency plots use the same focus classes and axis-range logic as workflow 06.
+The frozen engine's original1113-line map was:1 configuration,2 KD import,3 PCA,
+4 limma KD fitting,5 heatmap,6 global ULM,7 global scatters,8 zonal ULM,9 zonal
+scatters,10 combined summary,11 structural consistency. Its original fixed
+`results/validation/` outputs and automatic combined execution are historical;
+the maintained mode table above defines current behavior.
 
 ## Versioned zonation-reference update, 16 November 2026
 
@@ -137,7 +117,8 @@ source("scripts/core/structural_analysis.R")
 `scripts/core/zonation_update_fcg.R` adapter rerun only the zonation-dependent
 validation and structural-consistency sections against the revised FCG WF05
 networks. Outputs are under `results/zonation_marker_update_20261116/fcg07/`;
-historical validation outputs and workflow defaults are preserved. The global
+historical validation outputs are preserved. This records the production
+comparison; current defaults are the zonal wrapper mode described above. The global
 MOFA validation and knockdown fit are unchanged. The saved knockdown t-table
 is reused directly and independently checked against all five saved limma
 toptables to numerical precision.

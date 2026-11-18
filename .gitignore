@@ -89,6 +89,12 @@ tmp_*.txt
 # Manuscript drafts and generated writing assets
 manuscript/
 scripts/james/
+# External Xenium nuclei/imaging inputs and notebook-style intermediate outputs
+# are local-only even when following workflow 10's folder-local instructions.
+/scripts/workflows/10_xenium_analysis/data_raw/
+/scripts/workflows/10_xenium_analysis/data_tidy/
+/scripts/workflows/10_xenium_analysis/figures/
+/scripts/workflows/10_xenium_analysis/inferred_components.json
 
 # Archived local state and generated material stay on disk, outside the normal
 # source commit. Archive documentation/code and migration manifests stay visible.

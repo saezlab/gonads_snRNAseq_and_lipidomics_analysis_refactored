@@ -12,6 +12,13 @@ This is a folder of Python scripts, not a single canonical workflow file. The sc
 cd scripts/workflows/10_xenium_analysis
 ```
 
+The numbered order below is the intended data dependency order, not a validated
+one-command reproduction. These scripts execute top-level notebook-style code
+and provide no `--validate-only` or no-write CLI. Importing/running them can read
+raw data and write figures immediately. Existing output names can be overwritten;
+there is no fresh-output guard. Provision `data_raw/`, `data_tidy/` and `figures/`
+before execution, then review the existing blockers below with the collaborator.
+
 Python packages imported by the scripts:
 
 - `scanpy`
@@ -44,18 +51,24 @@ Folder-local raw inputs expected under `scripts/workflows/10_xenium_analysis/dat
 - `output-XETG00078__0018188__Region_1__20240301__143248/nucleus_boundaries.csv.gz`
 - `output-XETG00078__0018188__Region_1__20240301__143248/cell_feature_matrix.h5`
 - `output-XETG00078__0018188__Region_1__20240301__143248/cells.csv.gz`
-- `XeniumTargetList_Mouse-Panel-1.xlsx`
+- `XeniumTargetList_Mouse-Panel-1.xlsx`, including the `reason` and `gene name`
+  columns used by `01_merge_doublets.py` for marker selection.
 
 Intermediate inputs produced by earlier scripts:
 
 - `inferred_components.json` from `00_infer_doublets.py`
 - `fused_anndata_annotated.h5ad` from `01_merge_doublets.py`
 
-The raw Xenium files are large and are not committed to the repository.
+The raw Xenium files are external and not committed. Generated nucleus/cell-level
+AnnData, component JSON, CellCharter CSV and diagnostic figure files are local
+workflow products, not prerequisites shipped by the current pseudobulk release.
+Retained exports under `results/xenium/` do not automatically populate these
+folder-local inputs. This branch does not regenerate the deferred Figure 4A or
+S4B-C sci-RNA-seq nucleus-composition QC from pseudobulk data.
 
 ## Output Files
 
-Folder-local outputs written by the scripts include:
+Intended folder-local output names in the scripts include:
 
 - `data_tidy/inferred_components.csv`
 - `inferred_components.json`
@@ -92,7 +105,10 @@ Folder-local outputs written by the scripts include:
 
 ## Coherence Assessment
 
-**Status: DOCUMENTED, collaborator-imported.** The folder is intentionally documented without code changes. It is not yet refactored into the main workflow style and should not be assumed to run from the repository root.
+**Status: collaborator-imported provenance with existing standalone-run blockers.**
+The folder is documented without scientific code changes. It is not refactored
+into the main workflow style; external data and the intended script order alone
+do not establish successful fresh-process execution.
 
 ## Known Vulnerabilities
 
@@ -101,11 +117,27 @@ Folder-local outputs written by the scripts include:
 3. **Notebook-style script state:** `03_DGE_analysis.py` contains repeated helper definitions and top-level code blocks inherited from collaborator analysis. It should be treated as imported analysis provenance rather than a fully normalized pipeline.
 4. **Hardcoded spatial assignment:** TMA and sex labels are assigned from hardcoded `x_lines`/`y_lines` coordinate thresholds.
 5. **Manual cell-type mapping:** Leiden cluster labels are mapped manually in `cell_type_dict`; changes to clustering resolution or raw inputs require revisiting this mapping.
+6. **Existing fresh-process error in 03:** Line 14 of `03_DGE_analysis.py`
+   references `adata.var_names` before the raw `adata` object is assigned at
+   lines 15-17. In a fresh Python process this raises `NameError`; pre-existing
+   notebook state can conceal the problem. No code correction was made here.
+7. **Component-key mismatch in 00:** `id2component_size` is keyed by raw
+   `cell_id` at lines 139-142, but line 146 indexes it with sequential `df['id']`.
+   These are different identifiers and can fail or misassign component sizes
+   before the CSV/JSON export. Confirm intended behavior before rerunning.
+8. **Overwritten composition panel:** `02_compositional_analysis.py` saves
+   `figures/doublet_freq_core.pdf` twice, first by sex and then by `tma_id`;
+   the latter replaces the former. `03` also reuses some output filenames and
+   older writer APIs. Its output list is not a guarantee that every intended
+   intermediate panel survives a full run.
+
+These are static code findings from 18 November 2026. No raw Xenium data,
+models, differential analyses or figures were run during that audit.
 
 ## Notes for Context Restoration
 
 1. Workflow 10 is independent of workflows 00-09 and does not consume their generated files.
-2. Workflow 02 already includes a separate Xenium panel validation step using `support/FCGL_Xenium_Panel.csv`; workflow 10 is the collaborator spatial-analysis folder for raw Xenium output handling and DGE.
+2. Workflow 02 includes a panel-restricted FCG RNA volcano using `support/FCGL_Xenium_Panel.csv`; it loads no Xenium measurements. Workflow 10 is the collaborator spatial-analysis folder for raw Xenium output handling and DGE.
 3. Keep code edits out of this folder unless explicitly requested; document assumptions and outputs instead.
 4. The Xenium files provided in the 2026-06-19 missing-material zip were
    compared against this folder's `00`-`03` scripts and matched after ignoring

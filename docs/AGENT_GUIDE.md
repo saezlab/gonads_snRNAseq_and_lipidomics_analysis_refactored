@@ -2,6 +2,8 @@
 
 Use [the release registry](../scripts/config/analysis_release.json) as the source of current defaults. This guide replaces the previous static map, preserved under `miscellaneous/documentation/pre_cleanup_20261116/docs/AGENT_GUIDE.md`.
 
+For input dependencies, producers, execution modes and fresh-checkout requirements, use the [complete workflow reference](WORKFLOW_REFERENCE.md). Its [CSV dependency inventory](workflow_dependencies.csv) can be filtered by consumer or producer; the [JSON contract](workflow_dependencies.json) is its editable source. This result guide alone is not an execution recipe.
+
 ## Current main result map
 
 | Question | File or folder | Producer / interpretation |
@@ -50,3 +52,11 @@ head(selected)
 ```
 
 Commands, prerequisites and fit definitions are in [PIPELINE.md](../PIPELINE.md) and the corresponding [workflow plans](workflow_plans/). A saved-result lookup does not require model refitting.
+
+## Validation and provenance scope
+
+A saved table or PDF can be inspected without its ignored model cache. Re-rendering or chaining analyses can require that cache and its adjacent provenance files; the complete workflow reference identifies these dependencies. A shipped upstream result can be consumed without rerunning its producer.
+
+Validation flags differ by workflow:17 checks transport/engine/KD prerequisites without fitting, while11’s `--validate-only` fits the observed weighted model in memory. Several older entries have no validation CLI and run on source. Consult the documented mode before executing any entry.
+
+Some historical export QA checks compare every recorded code/plan hash with the current working tree. After a documented source or plan edit, that strict source-snapshot comparison can fail even while the frozen numerical results and ordinary cache-parent checks remain valid. Preserve the original manifests and inspect the stated mismatch; do not rewrite their hashes to conceal it. The repository organization check separately verifies preserved approved results and inputs.

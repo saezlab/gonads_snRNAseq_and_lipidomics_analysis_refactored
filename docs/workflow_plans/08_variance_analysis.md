@@ -4,6 +4,25 @@
 **Lines:** ~781  
 **Purpose:** Compare lipid variability between ovaries and testes groups, separately from mean differential abundance tested in workflow 03.
 
+## Current execution contract (audited 18 November 2026)
+
+The complete body executes under `source()` and `Rscript`. There is no CLI parser,
+source guard, validate-only or output override; existing named files in
+`results/lipidomic/variance_analysis/` can be overwritten. Use an isolated checkout
+or copy for a fresh reproduction. `load_lipidomic_data()` and `load_metadata()`
+use their literal/default paths; `DATASETS` is not selected.
+
+This branch needs only the supplied lipid CSV and overview workbook plus R
+packages (including `car`). It has no RNA, zonation, Workflow02/03 result or MOFA
+input. Unlike03's43-mouse RNA intersection,08 retains all48 measured lipid mice:
+21 ovaries,22 FCG testes and five WT testes in the supplied roster. These are
+metadata counts verified in this audit, not a regenerated statistical result.
+
+CV is computed on supplied log2 abundances, and class values are per-mouse means
+of those log2 lipid values for classes with at least two species. The global
+paired tests pair the same lipid/class metric between groups, not matched mice.
+No expanded-marker rerun is implied by a change in RNA zonation assignments.
+
 ## Source Dependencies
 
 ```r

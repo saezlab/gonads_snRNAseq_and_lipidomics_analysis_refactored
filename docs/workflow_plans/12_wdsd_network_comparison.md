@@ -1,29 +1,17 @@
 # Workflow 12 — WDSD pooled and zonation network comparison (WP2)
 
-## CSV transport update - 18 November 2026
+## Current execution contract (18 November 2026)
 
-Both phases now explicitly request `historical_wdsd_zonation_transport`; the shared
-intake defaults its whole-hepatocyte input to `wdsd_hepatocytes_transport`. These
-lossless exports preserve the historical source RDS identities without opening
-Seurat objects. All3 RNA layers, metadata, pairing, QC/marker summaries and stored
-command/version provenance matched the previous RDS intake exactly. Explicit local
-RDS overrides remain supported but public defaults choose CSV even while originals
-exist. Each manifest and every payload file enters input provenance.
-
----
-
-## Frozen comparison routing - 16 November 2026
-
-Workflow12 remains a historical Figure3/Figure5 comparison and explicitly passes
-the registry's `historical_wdsd_zonation_rds` into both analysis phases. Original
-FCG zonation matrices and networks use `historical_fcg_zonation_*` / `historical_fcg05`.
-The default archived output root is `historical_wf12`; fresh runs still require a
-fresh `--output`. No expanded-marker reference is substituted into this comparison.
-The exact original78-gene,708-displayed-edge reconstruction and coefficient replay
-pass after physical archive relocation. Report-only input links also resolve to
-the frozen input role. Current CF453 zonation science runs through Workflow17.
-
----
+This is the frozen original-compartment comparison, not the current standalone
+Figure6 workflow. Both phases pass `historical_wdsd_zonation_transport`; shared
+intake also requires `wdsd_hepatocytes_transport` and the CF453 lipid CSV. The
+current expanded-marker zonation transport must not replace this historical key.
+Default output is `analysis_path("historical_wf12")`, currently
+`miscellaneous/comparisons/wdsd_network_comparison/`. A fresh analysis requires a
+fresh `--output`; the default completed archive is for lookup/report replay.
+CSV manifests plus every payload enter new provenance. Original source-RDS
+identities are retained separately for frozen-cache checks; public defaults do
+not deserialize or require those RDS objects.
 
 **Entry point:** `scripts/workflows/12_wdsd_network_comparison.R`.
 **Orchestration:** `scripts/core/wp2_workflow.R`.
@@ -61,21 +49,22 @@ on earlier WP2 outputs or the zonation phase.
 | Repository input | Role |
 |---|---|
 | `data/metabolomics/wdsd/lipidomics_cf453.csv` | CF453 lipidomics, controls and raw annotations |
-| `data/RNA/wdsd/wdsd_hep_pseudobulks.rds` | Updated whole-hepatocyte Seurat pseudobulks |
-| `data/RNA/wdsd/wdsd_zonation_pseudobulks.rds` | Updated paired zone pseudobulks |
+| `wdsd_hepatocytes_transport` = `data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json` | Whole-hepatocyte profiles and complete layers/metadata |
+| `historical_wdsd_zonation_transport` = `data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json` | Frozen two-marker CF453 zones; required by shared intake even in pooled-only phase |
 | `data/metabolomics/fcg/lipidomics_fcg.csv` | Original raw annotation audit |
 | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | Original cleaned 1,254-feature matrix |
 | `data/RNA/scaled_RNA_{1,2,3}.csv`, `meta_data_df.csv` | Original whole-hepatocyte FCG profiles |
-| `data/RNA/scaled_RNA_zonation.csv`, `meta_data_df_zonation.csv` | Original zonation profiles |
+| `historical_fcg_zonation_csv`, `historical_fcg_zonation_metadata` | Original FCG zonation matrices under `miscellaneous/older_inputs/two_marker_zonation/RNA/` |
 | `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv`, overview workbook | Validated original FCG identities |
 | Workflow 04 sparse species Figure 3 SIF and precursor | Frozen displayed/precursor pairs |
-| `results/zonation/networks/cormat_*_{SIF,full_SIF}.csv` | Four frozen Figure 5 branches |
+| `historical_fcg05` + `networks/cormat_*_{SIF,full_SIF,full_ATT}.csv` | Four frozen Figure5 branches under `miscellaneous/older_results/zonation_two_marker/` |
 | `docs/reference_figures/FCGL_Fig3.ai` | Optional selection provenance; not required for numerical replay |
 
 See `data/WP1_WP2_INPUTS.md` and `data/wp1_wp2_input_migration_manifest.csv`
 for original source paths/verified hashes. Input bytes/processing are unchanged;
 shared archives preserved. No active helper reads sibling `original_datasets`
-or `Revised_Figures`. Only two frozen input RDSs receive gitignore exceptions.
+or `Revised_Figures`. No RNA input RDS is shipped. The two CSV transports preserve their source
+identities and exact values.
 
 Require 28 distinct cross-mapped CF453 mice, seven per sex/diet group, 56
 profiles with two zones per mouse and 14 pooled SD animals. Original paired FCG
@@ -113,7 +102,7 @@ lipid pairs as independent mice. See phase 05b for complete assumptions.
 Rscript scripts/workflows/12_wdsd_network_comparison.R --validate-only
 Rscript scripts/workflows/12_wdsd_network_comparison.R --output=results/wdsd_network_comparison_reproduction
 Rscript scripts/workflows/12_wdsd_network_comparison.R --report-only
-python3 scripts/reports/build_wp2_report_pdf.py --input results/wdsd_network_comparison/README.md
+python3 scripts/reports/build_wp2_report_pdf.py --input miscellaneous/comparisons/wdsd_network_comparison/README.md
 ```
 
 Defaults: seed 20261007, pooled pairing draws 19,999, independent-marginal
@@ -131,7 +120,8 @@ step using reportlab/pypdf and configured fonts, not executed by the R analysis.
 
 ## Outputs and reporting order
 
-Default root is `results/wdsd_network_comparison/`. Root retains zonal baseline,
+Default root is `analysis_path("historical_wf12")`
+(`miscellaneous/comparisons/wdsd_network_comparison/`). Root retains zonal baseline,
 diet, edge/LOCO, QC and sensitivity CSV/RDS, network SIFs and plots. `followup/`
 retains pooled inferences, mapping/annotation ledgers, complete contexts,
 shared null/stability draws and plots. Core statistical helpers retain
@@ -152,7 +142,34 @@ archives the preceding root narrative. Historical Meeting_Summaries deliveries
 are preserved. Combined prose is regenerated from machine-readable results;
 links and PDF text/tables/vector figures/layout are checked before delivery.
 
-## Verified consolidation and limitations
+## Upstream artifacts and public-clone availability
+
+The pooled phase requires Workflow04's
+`results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`,
+`hepatocyte_TF_gene_lipid_network_full_SIF.csv`, corresponding full ATT,
+`hepatocyte_TF_gene_lipid_network_compressed_SIF.csv` and
+`gene_lipid_correlations_factor1.csv`, plus original split whole-cell RNA,
+metadata, cleaned lipids and the Workflow02 hepatocyte PCA/group CSV. Raw FCG
+annotation data `data/metabolomics/fcg/lipidomics_fcg.csv` are required by the
+fresh overlap audit. These are replay inputs; no MOFA model is refitted.
+
+The complete and zonation-only phases additionally need the original FCG zone
+CSV/metadata and all four frozen SIF/full-SIF/full-ATT branches. Those historical
+matrix/network payloads are retained locally but mostly excluded from Git;
+restore them by the migration/recovery ledger before running full validation or
+analysis in a public clone. Seven shipped RNA transports do not replace these
+original FCG reference artifacts. The pooled-only `05c` wrapper has no numerical
+FCG-zonation dependency, although shared CF453 intake still loads its historical
+zone transport. No saved prior WP2 output is needed for fresh validation/full
+analysis.
+
+`--report-only` requires completed root/followup CSVs and the generated
+`network_analysis.rds` / `followup/pooled_analysis.rds` plus report inputs; those
+ignored caches must be restored or regenerated. It rewrites combined Markdown,
+not statistical fits. The phase wrappers have only their phase CLI, with no
+package `--report-only` mode. See their plans for exact output guards.
+
+## Historical consolidation verification and continuing limitations
 
 Actual local validation, source loading, fresh intake, CLI/default routing,
 pooled-first order, report refresh and output guards passed independent checks.

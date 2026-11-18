@@ -11,6 +11,7 @@ zonation_validation_run <- function(args=commandArgs(TRUE)) {
     if(!length(x)&&!"--validate-only"%in%args)stop("Use --global-only with a fresh --output=<directory>")
     return(validation_global_run(output,validate_only="--validate-only"%in%args))
   }
+  if(!"--validate-only"%in%args)analysis_assert_not_approved_output(output)
   required<-c(file.path(output,"fcg05/fcg05_checkpoint.rds"),
     "results/validation/knockdown_t_table.csv","results/validation/knockdown_ttop_list.RData")
   zmu_require();stopifnot(all(file.exists(required)))

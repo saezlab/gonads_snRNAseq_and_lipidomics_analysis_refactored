@@ -1,26 +1,16 @@
 # Workflow 13 - Western-diet cross-cohort robustness (WP3)
 
-## CSV transport update - 18 November 2026
+## Current frozen-comparison contract (18 November 2026)
 
-CF459 now reads `wd_cell_types_transport` (all40 original cell-type profiles) and
-`wd_zonation_transport`; CF453 explicitly retains its historical zonation CSV
-transport. Counts, normalized data and scaled data are imported without numerical
-change or new normalization. Original per-object scaling rosters and missing-QC
-limitations remain unchanged. All pre-existing intake matrices and QC/metadata
-results matched the local RDS baseline exactly, with source-RDS reads forbidden.
-
----
-
-## Frozen comparison routing - 16 November 2026
-
-Workflow13 retains the original two-marker FCG/CF453 reference and cohort question.
-It explicitly loads `historical_wdsd_zonation_rds`, reconstructs the archived FCG
-reference through the registry, and reads optional prior Workflow12 edge outputs
-from `historical_wf12`. The archived default output is `historical_wf13`; use a
-fresh `--output` for reproduction. This path promotion does not update its science
-or silently compare expanded-marker profiles with old reference coefficients.
-
----
+CF453 uses `wdsd_hepatocytes_transport` plus
+`historical_wdsd_zonation_transport`; CF459 uses `wd_cell_types_transport`
+(40 profiles across five cell types) plus `wd_zonation_transport`. Both use
+complete CSV layers/metadata without normalization or source-Seurat reads.
+Original FCG reference matrices/networks resolve through
+`historical_fcg_zonation_csv`, `historical_fcg_zonation_metadata` and
+`historical_fcg05`. The default output is `historical_wf13`, currently
+`miscellaneous/comparisons/wd_crosscohort_robustness/`. Current expanded-marker
+inputs are not substituted into these frozen comparisons.
 
 **Entry:** `scripts/workflows/13_wd_crosscohort_robustness.R`.
 **Scope fixed before outcome calculation, 14 October 2026:** meeting WP3
@@ -45,10 +35,11 @@ before modification. Existing WP1/WP2/FCG outputs and unrelated work remain fixe
 5. Figures, CSV/RDS/index ledgers, Markdown report, input/code SHA256 and
    session/CLI provenance. PDF rendering is a separate reproducible Python step.
 
-Required local CF459 files: `data/metabolomics/wd/lipidomics_wd.csv`,
-`data/RNA/wd/wd_pseudobulks.rds`, `data/RNA/wd/wd_zonation_pseudobulks.rds`.
-Copy bytes unchanged from shared original_datasets archives, preserve sources,
-and record hashes in `data/wp3_input_migration_manifest.csv`.
+Required CF459 inputs are `data/metabolomics/wd/lipidomics_wd.csv` and the
+`wd_cell_types_transport` / `wd_zonation_transport` manifests and payloads under
+`data/RNA/pseudobulk_csv/`. Original local RDS copies remain provenance evidence,
+not public runtime requirements; historical import hashes are recorded in
+`data/wp3_input_migration_manifest.csv`.
 CF453 inputs remain under `data/metabolomics/wdsd/` and `data/RNA/wdsd/`.
 Frozen FCG references are Workflow 05 Figure 5 networks and original matrices;
 Workflow 12 outputs supply a numerical replay check, not feature selection.
@@ -61,7 +52,7 @@ according to meeting provenance, not a control diet. IDs1-4 are females and
 13-16 males. Validate this independently across lipid and RNA records. Each
 mouse supplies one whole-liver lipid vector and two RNA zone profiles; zones
 are not independent animals. Supplied objects contain five cell types or two
-zones and 20,123 genes. Use named Seurat v5 layers, no new normalization or
+zones and 20,123 genes. Use the named CSV-transport layers (or an explicit local RDS override), no new normalization or
 imputation. Main RNA is scale.data; data-layer correlations are a sensitivity
 and count/library/marker checks are aggregate diagnostics only.
 
@@ -113,21 +104,39 @@ FCG membership/ranking, not new cross-cohort responses. Additional highlighted
 changes must be labelled descriptive selection. Compare age/background/diet
 exposure only if source metadata establishes them; otherwise record unavailable.
 
-## CLI and outputs (implementation target)
+## Current CLI, outputs and public-clone prerequisites
 
 Defaults: seed 20261014, bootstrap 4,999, paired 999; exact permutations fixed 24/5040.
-Fresh output root `results/wd_crosscohort_robustness/`; reject nonempty analysis
-outputs. `--validate-only` checks actual local inputs/reference/matching without
+Default lookup/output root is `analysis_path("historical_wf13")`; choose a
+fresh `--output` for analysis because nonempty destinations are rejected. `--validate-only` checks actual local inputs/reference/matching without
 writing. `--output`, `--seed`, `--bootstraps`, `--paired-bootstraps` control runs.
 `source()` defines functions; Rscript executes the complete workflow.
 
 Outputs: sample/QC/input and identity/edge ledgers; coverage/replay tables;
 full and displayed comparison inferences; all species coefficients and SIFs;
 complete shared null/paired/permutation index banks; LOCO tables; sensitivities;
-plots and a self-contained Markdown/PDF report, delivered to Meeting_Summaries.
+plots and a self-contained Markdown report. PDF rendering and historical
+Meeting_Summaries delivery are separate operations.
 Preserve native ULM/nominal and explicit bootstrap p in technical report; focus
 interpretation on correlation magnitude and animal-level uncertainty. No FDR,
 reversed score or confidence-interval reporting is requested here.
+
+`--report-only` requires `report_bundle.rds` and linked saved artifacts; it
+refreshes Markdown and saved-extension figures without refitting statistics.
+`--fcg-comparison-only` requires `contexts.rds` and `analysis.rds` in `--output`
+and the original FCG references. It reuses saved WD draw banks, rejects new
+bootstrap counts and requires a fresh extension destination (default
+`<output>/fcg_comparison`, or `--comparison-output`). It does compute the extension
+and its FCG resampling; it is not report-only. These RDS caches and most historical
+comparison payloads are ignored, so restore or regenerate them in a public clone.
+
+Fresh `--validate-only` reconstructs observed contexts/native ULM without saved
+WP3 outputs or new resampling. It still needs the ignored original FCG zone
+matrices and network branches described in Workflow12. Prior
+`historical_wf12/network_edges.csv` is optional: if present it supplies a replay
+check, otherwise the check is recorded unavailable. It does not select edges and
+is not a mandatory Workflow12 execution dependency. Public CF453/CF459 transports,
+lipid CSVs and group metadata alone do not reconstruct the frozen FCG selection.
 
 ## Verification and limitations
 

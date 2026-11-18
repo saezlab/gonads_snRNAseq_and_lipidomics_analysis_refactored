@@ -245,22 +245,33 @@ inputs and current PKN. The narrow DG coverage remains a substantive limitation.
 
 ## Deliverables
 
-All outputs are under `miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/`:
+All paths below are under
+`miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/`.
+The retained SIF, score table and audit documentation are included in Git.
+The six artifacts explicitly marked **local archive only** are excluded from
+the GitHub checkout; their paths identify retained local files, not downloads.
+Use the [migration ledger](provenance/causal_cleanup_20261116.csv) and
+[recovery map](provenance/archive_recovery.csv) to locate a hash-verified copy
+or a byte-identical historical Git object where available. The
+[restoration guide](REPOSITORY_ORGANIZATION.md#github-and-restoration) explains
+the distinction. No payload was regenerated or removed by this documentation
+update.
 
-- [Broader compressed GraphML](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/network.graphml),
-  [SIF](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/network_SIF.csv),
-  [node attributes](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/network_ATT.csv),
-  and [illustrative routes PDF](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/figures/candidate_paths_network_network.pdf).
-- [Higher-cutoff compressed GraphML](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/sensitivity_threshold_search/C01/network.graphml)
-  and [routes PDF](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/sensitivity_threshold_search/C01/figures/candidate_paths_network_network.pdf).
+- Broader compressed baseline: [signed edges (SIF)](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/network_SIF.csv).
+  **Local archive only:** GraphML `threshold_search/C03/network.graphml`,
+  node attributes `threshold_search/C03/network_ATT.csv`, and illustrative
+  routes `threshold_search/C03/figures/candidate_paths_network_network.pdf`.
+- Higher-cutoff compressed sensitivity, **local archive only**:
+  GraphML `sensitivity_threshold_search/C01/network.graphml` and routes
+  `sensitivity_threshold_search/C01/figures/candidate_paths_network_network.pdf`.
 - [Complete baseline score-retention table](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/score_retention/radius6_depth4_compressed_scores_all.csv):
   2,238 original-ID rows before sign filtering, 2,207 returned, 31 upstream
   sign conflicts. Explicit flags distinguish returned scores, excluded scores
   and membership of each baseline solution.
 - [Detailed TF audit](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/tf_audit/README.md),
   [baseline search](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/README.md),
-  [sensitivity search](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/sensitivity_threshold_search/README.md)
-  and [summary figure](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/figures/compressed_review_summary.pdf).
+  and [sensitivity search](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/sensitivity_threshold_search/README.md).
+  Summary figure, **local archive only**: `figures/compressed_review_summary.pdf`.
 
 Search directories contain every tested cutoff, selected candidates, endpoint
 margins, shortest routes and independent validation. Scoring directories retain

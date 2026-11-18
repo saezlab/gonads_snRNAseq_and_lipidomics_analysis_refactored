@@ -28,6 +28,38 @@ analysis_current <- function(component="",root=".",mustWork=FALSE) {
   p
 }
 
+# Protect the approved release independently of ignored cache/checkpoint files.
+# Resolve existing ancestors too, so a new child through a symlink is protected.
+# Reject dangling symlinks whose eventual write destination cannot be resolved.
+analysis_assert_not_approved_output <- function(output,root=".") {
+  stopifnot(length(output)==1L,!is.na(output),nzchar(output))
+  canonical<-function(path){
+    path<-path.expand(path)
+    if(!grepl("^(/|[A-Za-z]:)",path))path<-file.path(normalizePath(root,mustWork=TRUE),path)
+    suffix<-character();ancestor<-path
+    while(!file.exists(ancestor)&&!dir.exists(ancestor)){
+      suffix<-c(basename(ancestor),suffix);parent<-dirname(ancestor)
+      if(identical(parent,ancestor))stop("Cannot resolve output path: ",path)
+      ancestor<-parent
+    }
+    resolved<-normalizePath(ancestor,winslash="/",mustWork=TRUE)
+    for(part in suffix){
+      if(part%in%c("","."))next
+      resolved<-if(part=="..")dirname(resolved) else file.path(resolved,part)
+      link<-Sys.readlink(resolved)
+      if(!is.na(link)&&nzchar(link)&&!file.exists(resolved)&&!dir.exists(resolved))
+        stop("Cannot safely resolve dangling output symlink: ",resolved)
+      if(file.exists(resolved)||dir.exists(resolved))
+        resolved<-normalizePath(resolved,winslash="/",mustWork=TRUE)
+    }
+    resolved
+  }
+  target<-canonical(output);approved<-canonical(analysis_current(root=root))
+  if(identical(target,approved)||startsWith(target,paste0(approved,"/")))
+    stop("Preserve the approved release: scientific output must use a fresh directory outside ",approved)
+  invisible(target)
+}
+
 analysis_resolve_recorded_path <- function(path,root=".",mustWork=FALSE) {
   r<-analysis_release(root);repo<-attr(r,"root")
   resolve_one<-function(p){

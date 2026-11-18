@@ -1,84 +1,128 @@
-# Workflow 17 Expanded marker zonation update
+# Workflow 17: Current expanded-marker zonation and diet pipeline
 
-## CSV-only public input contract - 18 November 2026
+## Maintained entry and release
 
-Public scientific defaults now use the seven registry-selected transports under
-`data/RNA/pseudobulk_csv/`; no RNA/Seurat source RDS is required or included in Git.
-Each transport is a small JSON manifest, file-index CSV, complete metadata/identity
-CSVs and split counts/data/scale.data CSVs, each below50,000,000 bytes. Import
-verifies all file hashes and exact IEEE754 content hashes and preserves the full
-original gene/profile order and metadata types. No renormalization occurs.
+Entry: `scripts/workflows/17_expanded_marker_zonation_update.R`.
+`analysis_path("current_root")` selects the immutable approved release
+`results/zonation_marker_update_20261116/`. A fresh scientific run must supply
+`--output=results/runs/NAME`. Before any staging or writes, full scientific and
+full manuscript-audit modes call `analysis_assert_not_approved_output()`, rejecting
+the approved root and every descendant even when ignored caches are absent;
+home-directory and symlink aliases are resolved; unresolved dangling symlinks
+are refused. Existing `cf453_models/models.rds` or
+`fcg05/zonation_ttop_list.RData` additionally trigger the completed-run guard.
+Staging and internal FCG/GDX components retain their checkpoint/cache guards.
+There is no general resume mode for a partial release.
 
-Default `--source-root` is `pseudobulk_csv_root`. Staging copies verified manifests
-and payloads into fresh `inputs/{fcg,gdx,wdsd}/`, then reproduces the existing FCG/GDX
-scaled CSV conventions exactly. Workflow14 receives the staged WDSD manifest;
-GDX's unchanged fit reads the staged plain matrices. An explicit local source root
-may still contain original RDS files, but a CSV manifest always takes precedence.
-Completed release inputs/results are protected against staging/fit overwrites.
+`stage_zonation_marker_update.R`, the GDX driver and `zonation_update_*` helpers
+are internal components of this protected chain, not independent public rerun
+entries with the same approved-output guarantee. Their local cache guards are
+not a substitute for the main17 guard. The maintained standalone FCG driver
+`run_zonation_update_fcg.R` also has the shared full-run guard; use the public
+05/17 entries and documented modes for ordinary reruns.
 
-`--validate-only` verifies the current CSV transports without source-RDS reads.
-The approved cache bridge retains original RDS identities, verifies their source
-SHA against the complete CSV export, and records actual opened CSV hashes
-separately. Historical input identities are not rewritten. Actual validation
-passed85 consumer/provenance checks under a source-RDS rejection guard, including
-all current/historical CF453 and CF459 intake values and23 approved scientific
-invariants. FCG/GDX staging tables were identical to approved tables; Workflow01's
-targeted CSV conversion also matched. No scientific model or plot was regenerated
-for this representation-only change. QA is local under
-`miscellaneous/local/pseudobulk_csv_migration/`; export roundtrip proof is recorded
-in `docs/provenance/pseudobulk_csv_roundtrip.json`.
+Source loading defines `zu17_run()` without executing it. Run from the repository
+root. The public scientific default does not require the private manuscript,
+source Seurat objects or a Codex runtime. Python is chosen by `--python`, then
+`ZONATION_PYTHON`, then system `python3`; `.local/R-library` is only an optional
+local R-library preference, not part of the distributed environment.
 
-Unbound provenance for an existing explicit local RDS first hashes its actual
-bytes. A changed same-name file cannot inherit an older CSV export identity;
-unmatched files retain direct-file provenance. Expected-SHA frozen-cache checks
-remain CSV-first and source-RDS-free. A temporary changed-basename fixture in
-`tests/test_analysis_provenance_identity.R` verifies both behaviors without
-altering source objects or scientific results.
+## Actual upstream prerequisites
 
----
+| Input/artifact | Producer and role | Public-clone status |
+|---|---|---|
+| `current_fcg_zonation_transport`, `current_gdx_zonation_transport`, `current_wdsd_zonation_transport` | Supplied expanded-marker counts/data/scale CSV transports | Shipped manifests and all payloads under `data/RNA/pseudobulk_csv/`; original RDS identities retained only as provenance |
+| `wdsd_hepatocytes_transport` and `data/metabolomics/wdsd/lipidomics_cf453.csv` | Mandatory additional Workflow14 intake, even in models-only mode | Shipped; not replaced by `--source-root` or the staged WDSD zones |
+| `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | Original FCG whole-liver lipids used by the current FCG gene-lipid calculations | Shipped; loaded directly, with the established log2 transform |
+| `results/lipidomic/ttop_full_list.RData` | Workflow03 gonadal lipid effects used by class/sex displays | Required full-run upstream output; shipped current artifact |
+| `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | Workflow03 lipid-class enrichment display source | Required full-run upstream output; shipped current artifact |
+| `results/lipidomic/structural_model/lipids_with_structure.csv` | Workflow06 structural reference used by the zonal07 structural-consistency plot ranges | Required when that structural branch has matched data; supplied current artifact; regenerate06 if absent |
+| `results/validation/knockdown_t_table.csv`, `knockdown_ttop_list.RData` | Workflow07 independent KD fit artifacts, reused without refitting raw experiments | Required: CSV supplies KD t statistics; RData is also required by validation/provenance checks |
+| `support/TF_regulons.RData`, `support/Gonadal_Hormone_Genes.csv`, `support/m5.all.v2023.2.Mm.symbols.gmt` | Supplied TF/pathway resources used by FCG05 | Shipped; pathway ULM is recalculated, not read from the old05 cache |
+| `engine_fcg05`, `engine_validation07` | Frozen internal implementation engines, with versioned adapters | Shipped code; do not execute as unreviewed public legacy entries |
 
-## Default release contract - 16 November 2026
+Workflow17 does not execute03,06 or the independent KD model producer. A
+successful entry `--validate-only` is not proof that all these upstream result
+files or plotting dependencies are present: its checks are deliberately narrower.
+The actual full-run engine reads the03 results and06 structural reference later.
+No original whole-hepatocyte MOFA fit or historical FCG zonation result is needed
+for the default current scientific branch.
 
-`scripts/config/analysis_release.json` selects the authoritative expanded-marker
-release at `results/zonation_marker_update_20261116/`. Its approved files stay
-immutable. Current inputs and preprocessing references are repository-local under
-`data/RNA/zonation/current/`; no external original-datasets folder is needed for
-normal scientific execution. Entry validation performs no output writes.
+## Modes, validation and overwrite behavior
 
-A normal reproduction command is:
-`Rscript scripts/workflows/17_expanded_marker_zonation_update.R --output=results/runs/expanded_markers_reproduction`.
-The default branch stages current inputs, reruns current FCG05/zonal07 and paired
-GDX, builds CF45314/15 model caches, runs16 and both6A layouts, and runs current
-scientific invariant QA. It skips old/new comparison stages and historical fits.
-Original05/07 engines are frozen under `scripts/core/engines/`; validated adapters
-select the appropriate scientific branches. Independent KD/global validation can
-be regenerated separately with Workflow07 `--global-only --output=<fresh>`.
+Accepted flags are `--validate-only`, `--report-only`, `--with-manuscript-audit`;
+values are `--output`, `--source-root`, `--python`. Unknown/duplicate options and
+simultaneous validation/report-only are rejected.
 
-`--with-manuscript-audit` additionally requests the retrospective baselines,
-private source manuscript inventory, report and bundle. `--report-only` explicitly
-refreshes saved audit outputs. Those modes require the separately documented
-archived baseline objects and private manuscript. Python is selected with
-`--python`, `ZONATION_PYTHON`, then `Sys.which("python3")`; no Codex runtime is
-hardcoded. Available Python stages the13 formal table copies with `--tables-only`
-in science mode. All scientific CSV sources exist independently of that optional
-formal-copy step. Approved reports are not refreshed by default lookup/validation.
+- **Default science:** stage three current zone inputs; run current FCG05 and
+  zonal07 adapters plus paired current GDX; run14 `--models-only`,15
+  `--models-only`,16 full and the two6A layouts; run current scientific QA.
+  If Python is available, copy the formal source tables with `--tables-only`.
+  It does not run the old/new comparisons, private manuscript inventory or
+  report/bundle generation.
+- **`--validate-only`:** verify the three current CSV transports/layers and
+  balanced zone counts, check the two engine files and saved KD CSV/RData.
+  It bypasses the approved-output write guard, writes nothing and does not fit models, enumerate bootstrap draws or
+  validate every downstream03/06/resource prerequisite.
+- **`--validate-only --with-manuscript-audit`:** additionally check Python and
+  selected historical FCG/CF453 cache files. It still does not prove that every
+  private manuscript/preprocessing/report prerequisite is restorable.
+- **`--with-manuscript-audit`:** execute the scientific stages with old/new
+  FCG/GDX/CF453 comparison branches, then the retrospective QA, private inventory,
+  author report and delivery bundle. Needs historical matrices/networks/model
+  caches and the private DOCX/preprocessing reference sources, many excluded
+  from Git. It is not the public-clone default. The same `--source-root` is forwarded to
+  preprocessing-reference staging, which looks for `james_scripts_20261104/` and
+  `Zonation_Genes.csv`. A fresh audit therefore needs a root containing both
+  acceptable zone inputs and those references, or exact pre-staged snapshots;
+  the default public CSV root alone does not contain the reference sources.
+- **`--report-only`:** implies manuscript-audit mode and skips model/staging
+  stages. It reads saved FCG/GDX/14/15/16 caches and comparison tables, runs
+  scientific/retrospective numerical QA, stages source tables/references and
+  rewrites inventory/report/bundle. This explicit mode bypasses the approved-output write guard. It is not a read-only command and cannot
+  reconstruct missing comparisons/model caches. Main model fits are not rerun.
 
-Promotion verification included an actual isolated current-only FCG/GDX rerun:
-48 scientific/source equivalence checks pass against the approved output;
-23 current-release invariant checks pass for both approved and fresh paths.
-Both current and historical CF453 cached parent input hashes pass without a new
-bootstrap run. Separate historical fixture tests explicitly retain their old
-marker-order assertions and data role. Original section/output descriptions below
-are retained as the approved16November audit's provenance, not current defaults.
+`--source-root` defaults to registry `pseudobulk_csv_root`. For each cohort,
+staging prefers `current_<cohort>_zonation/manifest.json`, then
+`<cohort>/manifest.json`, then an explicit local `<cohort>_zonation_pseudobulks_score.rds`.
+It copies and SHA-verifies all transport payloads into `<output>/inputs/<cohort>/`.
+FCG/GDX scale-layer CSVs reproduce the established sample-name conventions;
+Workflow14 receives the staged WDSD manifest. New provenance hashes actual CSV
+files separately from the original source-RDS identity. No normalization changes.
 
----
+## Outputs and parent graph
+
+Default components are `<current_root>/inputs`, `fcg05`, `fcg07`, `gdx_zonation`,
+`cf453_models`, `cf453_direct_diet`, `cf453_rewiring`, `cf453_layouts`, `runtime`,
+`logs` and QA/manifests. `cf453_models/models.rds` feeds15 and16;
+`cf453_direct_diet/diet_analysis.rds` additionally feeds16;
+`cf453_rewiring/rewiring_analysis.rds` feeds the separate6A layout entry.
+No stage infers a sibling fresh parent unless the orchestrator passes it.
+
+Curated panels, source tables, methods/legends and public manifests are supplied.
+Generated RDS/RData model, bootstrap and runtime caches are local/ignored and
+must be regenerated into a fresh run or restored before saved-result modes.
+The public report PDF and numeric replacement ledger do not make its private
+manuscript-audit inputs public. The HTML/full paragraph extraction remains local.
+Current source tables exist independently of the optional formal-copy step.
+
+Figure4A/S4B–C composition/nucleus QC and exact executed retained-marker
+confirmation remain James's tasks. Pseudobulk expression cannot recover those
+inputs. Current diet association panels remain exploratory, with paired RNA
+zones and whole-liver lipid measurements.
+
+## Historical authorization and approved production procedure (16 November 2026)
+
+The following records the original approved run and its original audit/report
+procedure. Its original-datasets paths and RDS copy procedure are historical;
+the maintained runtime/dependency contract is specified above.
 
 Authorized 16 November2026 after the read-only input and dependency audit.
 The user requests the affected reruns and a final report tracing every affected
 figure panel and manuscript numerical replacement. Preserve all original
 inputs, analyses, figure bundles and the manuscript itself.
 
-## Scope and inputs
+### Scope and inputs
 
 Output root: `results/zonation_marker_update_20261116/`.
 Updated source files reside in the user-specified original-datasets
@@ -94,7 +138,7 @@ from workflows05/14/15/16; GDX's repaired branch uses paired mouse blocking
 and explicit four-group contrasts, separately labelled from legacy hormone
 replacement notebooks that do not match the supplied cohort.
 
-## Execution branches
+### Execution branches
 
 1. Stage inputs and audit RNA layers, identities, paired zones and normalization.
    Generate only the updated FCG zone CSV pair, not unrelated WF01 outputs.
@@ -120,7 +164,7 @@ replacement notebooks that do not match the supplied cohort.
    numerical replacement ledger, old/new comparisons, current-source hashes,
    changed-panel bundles and explicitly unresolved deliverables.
 
-## Panel and manuscript tracing
+### Panel and manuscript tracing
 
 - Figure4A and S4B/C are explicitly deferred to James by the user during this
   run. Do not generate these panels or infer nuclei/denominators from expression.
@@ -140,7 +184,7 @@ replacement notebooks that do not match the supplied cohort.
   pooled WF12 remains unchanged. WF13 expanded-marker rebase is on hold
   without equivalent CF459 zone inputs. Figure3 editorial revisions are separate.
 
-## Audit rules
+### Audit rules
 
 Extract exact manuscript paragraphs/captions/table references, their historical
 numbers and source analysis. Every flagged value must have a new measured
@@ -163,7 +207,7 @@ versioned run are read-only. Any transform of production code is saved with
 an explicit patch manifest and code hash. Do not claim blocked composition
 panels have been regenerated without nucleus-level data.
 
-## Observed results and execution record
+### Observed results and execution record
 
 FCG historical model replay reproduces all seven archived contrasts (maximum
 t discrepancy4.1e-12). The repaired zero-category threshold implementation
@@ -203,11 +247,10 @@ S13,S14,S15 are copied under tables/ with hashes; S11/S12 remain unchanged.
 Figure4A/S4B-C and associated composition statements are explicitly deferred
 to James, as are final retained-marker-list Methods provenance details.
 
-Entry `scripts/workflows/17_expanded_marker_zonation_update.R --validate-only`
-checks setup without writing. A full run requires a fresh --output and invokes
-staging, the isolated FCG/GDX branches and CF45314-16/layouts before audit and
-reporting. --report-only refreshes independent checks, inventory and report
-from saved results. The output root retains104 historical file SHA256 records;
+The original production entry validated setup without writing. That approved
+full run staged inputs and executed the FCG/GDX/CF453 stages before its audit
+and report. The maintained CLI now separates scientific and manuscript-audit
+modes as described above. The output root retains104 historical file SHA256 records;
 bundle creation rechecks them. The original manuscript is never edited.
 
 Before inventory/report generation, `scripts/reports/prepare_zonation_update_report_sources.py`

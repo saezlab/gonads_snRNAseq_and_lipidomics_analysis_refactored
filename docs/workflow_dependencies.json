@@ -1,0 +1,3587 @@
+{
+  "schema_version": 1,
+  "audited_on": "2026-11-18",
+  "source_commit": "f45e2a9702dae4274d8581d647f219b548525bdb",
+  "source_scope": "Code-audited working tree based on this commit; documented guard-only fixes are tracked separately in the audit report.",
+  "workflows": [
+    {
+      "id": "00",
+      "name": "Raw sci-RNA preprocessing reference",
+      "entrypoints": [
+        "scripts/workflows/00_snrnaseq_preprocessing.R"
+      ],
+      "plan": "docs/workflow_plans/00_snrnaseq_preprocessing.md",
+      "purpose": "Document raw import/QC/clustering/doublets, cell-type aggregation and historical two-marker zonation.",
+      "status": "optional_external_inactive_reference",
+      "inputs": [
+        {
+          "name": "Raw alignments and source sample workbooks",
+          "paths": [
+            "/omics/odcf/analysis/OE0538_projects/DO-0012/processed_data/20240524_36047_sx42b/36047/alignment/",
+            "/omics/odcf/analysis/OE0538_projects/DO-0012/processed_data/41064_gdxhr/41064/alignment",
+            "/omics/odcf/analysis/OE0538_projects/DO-0012/fcgl_paper/fcg_sci/sci_metadata.xlsx",
+            "/omics/odcf/analysis/OE0538_projects/DO-0012/fcgl_paper/gdxhr_sci/sci_metadata.xlsx"
+          ],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "manually enabled processing",
+          "role": "Nucleus-level original sequencing/preprocessing inputs.",
+          "availability_note": "External DKFZ/HPC inputs, not a public-clone prerequisite; importer is an intentional stop placeholder."
+        },
+        {
+          "name": "Common annotation GTF",
+          "paths": [
+            "/omics/groups/OE0538/internal/users/j083d/sci-fcg/data/annotations/gencode.vM34.basic.annotation.gtf"
+          ],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "manually enabled processing",
+          "role": "config$fcg$gtf_file is used by BOTH cohort imports.",
+          "availability_note": "External/HPC."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Potential FCG intermediates/pseudobulks",
+          "paths": [
+            "/omics/odcf/analysis/OE0538_projects/DO-0012/fcgl_paper/fcg_sci/*.rds"
+          ],
+          "registry_keys": [],
+          "mode": "manually enabled processing"
+        },
+        {
+          "name": "Potential GDX intermediates/pseudobulks",
+          "paths": [
+            "/omics/odcf/analysis/OE0538_projects/DO-0012/fcgl_paper/gdxhr_sci/*.rds"
+          ],
+          "registry_keys": [],
+          "mode": "manually enabled processing"
+        }
+      ],
+      "calls": [],
+      "validation": "No CLI/validate-only/source guard. Both data-processing blocks are if(FALSE); loading still loads packages/defines helpers/prints.",
+      "overwrite": "If blocks are manually enabled, fixed HPC filenames can be overwritten and setwd changes session state.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/00_snrnaseq_preprocessing.R",
+          "effect": "Loads packages and defines/prints reference workflow; disabled processing blocks do not run."
+        }
+      ],
+      "notes": [
+        "Does not produce the current expanded-marker transports.",
+        "HPC pseudobulks_scc.rds is not automatically handed to01 as data/RNA/fcg_pseudobulks.rds.",
+        "Requires reviewed importer, external data and cluster mapping before enabling."
+      ],
+      "evidence": [
+        "scripts/workflows/00_snrnaseq_preprocessing.R"
+      ]
+    },
+    {
+      "id": "01",
+      "name": "Local pseudobulk preparation and QC",
+      "entrypoints": [
+        "scripts/workflows/01_data_preparation_qc.R"
+      ],
+      "plan": "docs/workflow_plans/01_data_preparation_qc.md",
+      "purpose": "Convert original whole-cell-type pseudobulks to main split CSVs; optional current FCG zonation and legacy GDX conversions.",
+      "status": "local_preparation_not_public_prerequisite",
+      "inputs": [
+        {
+          "name": "Main FCG pseudobulk object",
+          "paths": [
+            "data/RNA/fcg_pseudobulks.rds"
+          ],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "default full body",
+          "role": "Mandatory first input of complete script.",
+          "availability_note": "Ignored local Seurat object; public scientific reruns use already supplied CSVs instead."
+        },
+        {
+          "name": "Overview workbook",
+          "paths": [
+            "data/Suppl_Table_1_OverviewData.xlsx"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "default",
+          "role": "Metadata/PCA merge.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Current FCG transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/current_fcg_zonation/manifest.json"
+          ],
+          "registry_keys": [
+            "current_fcg_zonation_transport"
+          ],
+          "producer": "curated",
+          "mode": "section11 if manifest exists",
+          "role": "Optional section11 current scale.data/typed profile metadata source.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Legacy whole-cell-type GDX pseudobulk object",
+          "paths": [
+            "data/RNA/gdx_pseudobulks.rds"
+          ],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "section12 if local RDS exists",
+          "role": "Optional section12 source for02 GDX RNA validation.",
+          "availability_note": "Ignored local object; distinct from17 paired-zone GDX source."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Main RNA inputs",
+          "paths": [
+            "data/RNA/scaled_RNA_1.csv",
+            "data/RNA/scaled_RNA_2.csv",
+            "data/RNA/scaled_RNA_3.csv",
+            "data/RNA/meta_data_df.csv"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "Preparation QC",
+          "paths": [
+            "results/qc/data_quality_report.txt",
+            "results/qc/pseudobulk_per_biosample.pdf",
+            "results/qc/pseudobulk_per_celltype.pdf",
+            "results/qc/sample_celltype_design.csv",
+            "results/qc/samples_per_group_celltype.csv",
+            "results/qc/PCA_*.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "Current FCG compatibility CSVs",
+          "paths": [
+            "data/RNA/zonation/current/fcg/scaled_RNA_zonation.csv",
+            "data/RNA/zonation/current/fcg/meta_data_df_zonation.csv"
+          ],
+          "registry_keys": [
+            "current_fcg_zonation_csv",
+            "current_fcg_zonation_metadata"
+          ],
+          "mode": "optional section11"
+        },
+        {
+          "name": "Legacy GDX RNA validation CSVs",
+          "paths": [
+            "data/RNA/scaled_RNA_gdxhr_1.csv",
+            "data/RNA/scaled_RNA_gdxhr_2.csv",
+            "data/RNA/scaled_RNA_gdxhr_3.csv",
+            "data/RNA/meta_data_df_gdxhr.csv"
+          ],
+          "registry_keys": [],
+          "mode": "optional section12"
+        }
+      ],
+      "calls": [],
+      "validation": "No CLI/source guard/validate-only. Whole body executes; optional sections cannot bypass earlier mandatory main RDS. DATASETS source validation is a separate helper, not entry dry-run.",
+      "overwrite": "Writes fixed data/RNA and results/qc paths and can overwrite curated inputs; use isolated checkout/copy.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/01_data_preparation_qc.R",
+          "effect": "Executes full local preparation with fixed-path writes; needs ignored main RDS."
+        }
+      ],
+      "notes": [
+        "Main CSVs feed02/04; main RNA metadata also filters03 cohort.",
+        "Only02 consumes the GDX RNA CSVs;03 GDX lipid analysis reads its own experimental CSV.",
+        "Section11 transport can regenerate05 compatibility input, while17 stages current transports independently.",
+        "DATASETS does not redirect hardcoded whole-FCG/GDX RDS paths."
+      ],
+      "evidence": [
+        "scripts/workflows/01_data_preparation_qc.R",
+        "scripts/config/datasets.R",
+        "scripts/core/pseudobulk_csv.R"
+      ]
+    },
+    {
+      "id": "02",
+      "name": "FCG RNA differential analysis",
+      "entrypoints": [
+        "scripts/workflows/02_fcg_pseudobulk_analysis.R"
+      ],
+      "plan": "docs/workflow_plans/02_fcg_pseudobulk_analysis.md",
+      "purpose": "Fit main cell-type RNA contrasts, pathway/TF activities and optional validation displays.",
+      "status": "public_science_fixed_output",
+      "inputs": [
+        {
+          "name": "Main FCG RNA CSVs and profile metadata",
+          "paths": [
+            "data/RNA/scaled_RNA_1.csv",
+            "data/RNA/scaled_RNA_2.csv",
+            "data/RNA/scaled_RNA_3.csv",
+            "data/RNA/meta_data_df.csv"
+          ],
+          "registry_keys": [],
+          "producer": "01",
+          "mode": "default",
+          "role": "Supplied main pseudobulk expression and annotation; no need to rerun01.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Mouse overview",
+          "paths": [
+            "data/Suppl_Table_1_OverviewData.xlsx"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "default",
+          "role": "RNA sample-name-to-group/allosome merge.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Pathway and TF resources",
+          "paths": [
+            "support/m5.all.v2023.2.Mm.symbols.gmt",
+            "support/TF_regulons.RData",
+            "support/Gonadal_Hormone_Genes.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "default",
+          "role": "GO ULM minsize5; TF ULM minsize20.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Legacy GDX RNA validation",
+          "paths": [
+            "data/RNA/scaled_RNA_gdxhr_1.csv",
+            "data/RNA/scaled_RNA_gdxhr_2.csv",
+            "data/RNA/scaled_RNA_gdxhr_3.csv",
+            "data/RNA/meta_data_df_gdxhr.csv"
+          ],
+          "registry_keys": [],
+          "producer": "01",
+          "mode": "optional when all four files exist",
+          "role": "Independent legacy GDX RNA comparisons, not17 paired-zone GDX.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Xenium gene panel",
+          "paths": [
+            "support/FCGL_Xenium_Panel.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "optional if file exists",
+          "role": "Select genes from FCG DE for a panel-restricted volcano; no Xenium measurement read.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "WT bulk proteomics",
+          "paths": [
+            "data/proteomics/P3225_fractionated_protein.tsv",
+            "data/proteomics/metadata.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "optional when both files exist",
+          "role": "Optional bulk proteomics normalization/DE validation.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Main RNA DE/statistics",
+          "paths": [
+            "results/pseudobulk/ttop_full_list.RData",
+            "results/pseudobulk/tval_full_df.RData",
+            "results/pseudobulk/tval_full_df.csv",
+            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "RNA enrichment",
+          "paths": [
+            "results/pseudobulk/pathways/pathway_scores_df_all.RData",
+            "results/pseudobulk/pathways/tf_scores_df_all.RData",
+            "results/pseudobulk/pathways/*.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "RNA figures",
+          "paths": [
+            "results/pseudobulk/pca/*.pdf",
+            "results/pseudobulk/volcanos/*.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "Legacy GDX results",
+          "paths": [
+            "results/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData",
+            "results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv",
+            "results/pseudobulk/gdx_validation_comparison.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "optional GDX"
+        },
+        {
+          "name": "Optional validation displays",
+          "paths": [
+            "results/pseudobulk/xenium_validation_volcano.pdf",
+            "results/pseudobulk/proteo_validation_comparison.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "optional panel/proteomics"
+        }
+      ],
+      "calls": [],
+      "validation": "No CLI/source guard/validate-only; source or Rscript executes all sections. vsn is loaded even if proteomics input is absent.",
+      "overwrite": "Overwrites fixed results/pseudobulk paths; use isolated checkout/copy.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/02_fcg_pseudobulk_analysis.R",
+          "effect": "Runs RNA analyses and available optional branches; writes fixed result paths."
+        }
+      ],
+      "notes": [
+        "Current04/05 do not consume02 DE.",
+        "PCA checked group metadata is used by independent11/frozen-reference consumers; optional09 uses its separately curated hepatocyte signature.",
+        "Xenium panel restriction is not independent spatial validation or a10 output dependency."
+      ],
+      "evidence": [
+        "scripts/workflows/02_fcg_pseudobulk_analysis.R",
+        "scripts/core/data_loading.R"
+      ]
+    },
+    {
+      "id": "03",
+      "name": "FCG lipid differential analysis",
+      "entrypoints": [
+        "scripts/workflows/03_fcg_lipidomic_analysis.R"
+      ],
+      "plan": "docs/workflow_plans/03_fcg_lipidomic_analysis.md",
+      "purpose": "Fit lipid mean-abundance contrasts, class enrichment, optional GDX lipid comparison, network and bubble displays.",
+      "status": "public_science_fixed_output",
+      "inputs": [
+        {
+          "name": "Curated main lipid data and mouse overview",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv",
+            "data/Suppl_Table_1_OverviewData.xlsx"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "default",
+          "role": "Log2 lipid data and experimental groups.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Main RNA mouse roster",
+          "paths": [
+            "data/RNA/meta_data_df.csv"
+          ],
+          "registry_keys": [],
+          "producer": "01",
+          "mode": "default",
+          "role": "Restrict main lipid models to RNA-shared mice; no02 DE needed.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "GDX lipid validation",
+          "paths": [
+            "data/metabolomics/lipidomics_gdxhr.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "optional if file exists",
+          "role": "Read original lipid experimental measurements directly.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "LINEX2 adjacency",
+          "paths": [
+            "support/linex2_adjacency_matrix_OT.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "default",
+          "role": "Significant lipid-reaction subnetwork.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Bubble annotation tables",
+          "paths": [
+            "data/metabolomics/for_bubbles/*.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "default",
+          "role": "Class-specific structural bubble displays.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Main lipid DE",
+          "paths": [
+            "results/lipidomic/ttop_full_list.RData"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "Class enrichment",
+          "paths": [
+            "results/lipidomic/enrichment/lipid_class_enrichment_scores.RData",
+            "results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv",
+            "results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "Lipid figures/network",
+          "paths": [
+            "results/lipidomic/pca/*.pdf",
+            "results/lipidomic/volcanos/*.pdf",
+            "results/lipidomic/network/significant_lipids_network_SIF.csv",
+            "results/lipidomic/network/significant_lipids_network_ATT.csv",
+            "results/lipidomic/bubbles_DBC/*.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "GDX lipid results",
+          "paths": [
+            "results/lipidomic/gdxhr_t_table.csv",
+            "results/lipidomic/gdxhr_ttop_list.RData",
+            "results/lipidomic/fcg_gdx_correlation.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "optional GDX"
+        }
+      ],
+      "calls": [],
+      "validation": "No CLI/source guard/validate-only; source/Rscript executes body.",
+      "overwrite": "Fixed results/lipidomic outputs can be overwritten; isolated checkout/copy required to preserve curated outputs.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/03_fcg_lipidomic_analysis.R",
+          "effect": "Runs main and available GDX lipid analysis, class/network/bubble displays."
+        }
+      ],
+      "notes": [
+        "03 intersects to43 RNA-shared FCG mice in supplied data;08 independently retains all48 lipid mice.",
+        "Feeds05 lipid DE/enrichment and06 structural input.",
+        "No dependency on02 DE or02 GDX RNA results."
+      ],
+      "evidence": [
+        "scripts/workflows/03_fcg_lipidomic_analysis.R"
+      ]
+    },
+    {
+      "id": "04",
+      "name": "MOFA integration and global networks",
+      "entrypoints": [
+        "scripts/workflows/04_mofa_integration.R"
+      ],
+      "plan": "docs/workflow_plans/04_mofa_integration.md",
+      "purpose": "Integrate main cell-type RNA/lipids, reuse/train factor models, extract weights/activity and global correlation networks.",
+      "status": "public_science_with_retained_model_cache",
+      "inputs": [
+        {
+          "name": "Main RNA inputs",
+          "paths": [
+            "data/RNA/scaled_RNA_1.csv",
+            "data/RNA/scaled_RNA_2.csv",
+            "data/RNA/scaled_RNA_3.csv"
+          ],
+          "registry_keys": [],
+          "producer": "01",
+          "mode": "default",
+          "role": "Supplied main cell-type pseudobulk CSVs; no need to rerun01.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Lipid input",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "default",
+          "role": "Whole-liver lipid vector, sample-intersected with RNA for six-view MOFA input.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Overview and regulatory resources",
+          "paths": [
+            "data/Suppl_Table_1_OverviewData.xlsx",
+            "support/m5.all.v2023.2.Mm.symbols.gmt",
+            "support/TF_regulons.RData",
+            "support/Gonadal_Hormone_Genes.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "default",
+          "role": "Factor group association and lipid-metabolism/TF annotations.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Pretrained model set",
+          "paths": [
+            "results/mofa/RNA/mofa_res_*factor.hdf5"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "default retained-cache mode",
+          "role": "At least11 regex matches skip training; selects12factor model.",
+          "availability_note": "All11 factor5-15 models exist and are unignored in supplied public tree; MOFA2 R package required."
+        },
+        {
+          "name": "Fallback weights",
+          "paths": [
+            "results/mofa/main_model_RNA_lipid_weight.RData"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "model unavailable",
+          "role": "Later fallback if model unavailable; does not bypass earlier training gate or unconditional MOFA2 helper import.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Python trainer",
+          "paths": [
+            "scripts/mofa/mofa2.py"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "automatic if fewer than11 matching HDF5 files",
+          "role": "Python mofapy2 training command with GPU then CPU retry.",
+          "availability_note": "Python/mofapy2 needed only in training contingency."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Prepared integration input",
+          "paths": [
+            "results/mofa/MOFA_data.RData"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "Training input/models",
+          "paths": [
+            "data/mofa/MOFA_RNA_data.csv",
+            "results/mofa/RNA/mofa_res_*factor.hdf5"
+          ],
+          "registry_keys": [],
+          "mode": "automatic missing-cache training"
+        },
+        {
+          "name": "Weight/factor products",
+          "paths": [
+            "results/mofa/main_model_RNA_lipid_weight.RData",
+            "results/mofa/factor_analysis/factor_enrichment_gonadal.RData",
+            "results/mofa/factor_analysis/*.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "Global network products",
+          "paths": [
+            "results/mofa/networks/gene_lipid_correlations_factor1.RData",
+            "results/mofa/networks/gene_lipid_correlations_factor1.csv",
+            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
+            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv",
+            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv",
+            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv",
+            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        }
+      ],
+      "calls": [],
+      "validation": "No CLI/source guard/validate-only. Always prepares and writes MOFA_data before cache branch. MOFA2 loads unconditionally in core/multiomics.R.",
+      "overwrite": "Overwrites prepared input, weights, factor/network outputs; skips existing individual HDF5 training files. Use isolated checkout/copy.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/04_mofa_integration.R",
+          "effect": "Full integration analysis; normally reuse retained11models, otherwise automatically train missing factors."
+        }
+      ],
+      "notes": [
+        "Global07 uses permissive gene-lipid full network;12 pooled uses separately frozen sparse TF-gene-lipid branch/precursor.",
+        "Current05/06 do not depend on04.",
+        "Active MOON uses frozen precision inputs historically derived from04, not an automatic04 rerun.",
+        "Generic MOFA_SETTINGS does not control this entry hardcoded factor loop/trainer options."
+      ],
+      "evidence": [
+        "scripts/workflows/04_mofa_integration.R",
+        "scripts/core/multiomics.R"
+      ]
+    },
+    {
+      "id": "05",
+      "name": "Current expanded-marker FCG zonation",
+      "entrypoints": [
+        "scripts/workflows/05_zonation_analysis.R",
+        "scripts/reports/run_zonation_update_fcg.R"
+      ],
+      "plan": "docs/workflow_plans/05_zonation_analysis.md",
+      "purpose": "Run seven blocked zonation/gonad contrasts, fresh pathways, TFs, threshold selection, networks and class associations.",
+      "status": "current_component_public_CSV_inputs",
+      "inputs": [
+        {
+          "name": "Current FCG compatibility CSV pair",
+          "paths": [
+            "data/RNA/zonation/current/fcg/scaled_RNA_zonation.csv",
+            "data/RNA/zonation/current/fcg/meta_data_df_zonation.csv"
+          ],
+          "registry_keys": [
+            "current_fcg_zonation_csv",
+            "current_fcg_zonation_metadata"
+          ],
+          "producer": "curated",
+          "mode": "default --input",
+          "role": "Supplied paired-zone matrix/metadata;01section11 or17staging can regenerate from current transport.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Current FCG transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/current_fcg_zonation/manifest.json"
+          ],
+          "registry_keys": [
+            "current_fcg_zonation_transport"
+          ],
+          "producer": "curated",
+          "mode": "coordinated17 staging",
+          "role": "Upstream source copied/extracted by17; not opened by bare05 wrapper.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Lipid and support data",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv",
+            "support/m5.all.v2023.2.Mm.symbols.gmt",
+            "support/TF_regulons.RData",
+            "support/Gonadal_Hormone_Genes.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "default",
+          "role": "Whole-liver associations; GO/TF annotation.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Lipid DE and class enrichment",
+          "paths": [
+            "results/lipidomic/ttop_full_list.RData",
+            "results/lipidomic/enrichment/lipid_class_enrichment_scores.RData"
+          ],
+          "registry_keys": [],
+          "producer": "03",
+          "mode": "default",
+          "role": "Class direction/order and lipid association presentation.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Frozen implementation engine",
+          "paths": [
+            "scripts/core/engines/05_zonation_analysis_legacy.R"
+          ],
+          "registry_keys": [
+            "engine_fcg05"
+          ],
+          "producer": "frozen",
+          "mode": "default",
+          "role": "Read as text and adapted, not directly sourced.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Current model/network results",
+          "paths": [
+            "results/zonation_marker_update_20261116/fcg05/fcg05_checkpoint.rds",
+            "results/zonation_marker_update_20261116/fcg05/zonation_ttop_list.RData",
+            "results/zonation_marker_update_20261116/fcg05/t_table_zonation.csv",
+            "results/zonation_marker_update_20261116/fcg05/ttop_full_long.csv",
+            "results/zonation_marker_update_20261116/fcg05/optimal_threshold_metrics.csv",
+            "results/zonation_marker_update_20261116/fcg05/networks/*.csv"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "default: generated below selected fresh --output; current_root paths identify the saved approved release only"
+        },
+        {
+          "name": "Fresh pathway/runtime records",
+          "paths": [
+            "results/zonation_marker_update_20261116/fcg05/pathway_enrichment.RData",
+            "results/zonation_marker_update_20261116/fcg05/pathway_enrichment_fresh.csv",
+            "results/zonation_marker_update_20261116/runtime/05_zonation_analysis_versioned.R"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "default: generated below selected fresh --output; current_root paths identify the saved approved release only"
+        }
+      ],
+      "calls": [],
+      "validation": "--validate-only checks current RNA integrity, packages and runtime parse without writes; later GO/TF/03 resources are not all opened by validation.",
+      "overwrite": "Shared approved-root guard rejects current_root and every descendant before full fitting, independent of cache presence (also in documented FCG report driver). Validation and explicit postprocess refresh remain allowed. Outside approved root, completed fcg05 checkpoint blocks rerun; partial destinations may be rewritten. Use explicit fresh --output.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/05_zonation_analysis.R --validate-only",
+          "effect": "Read-only current input/runtime validation."
+        },
+        {
+          "command": "Rscript scripts/workflows/05_zonation_analysis.R --output=results/runs/fcg_zonation_reproduction",
+          "effect": "Fit current05 engine/checkpoint into explicit fresh root; does not call07 or science-panel finalizer."
+        }
+      ],
+      "notes": [
+        "Source-safe wrapper; calls zmu_run05, not old direct body.",
+        "No02/04/historical model/pathway cache needed for current fit.",
+        "Fresh ULM minsize15 replaces frozen cache section; condition order and absent-category scalar fixes are preserved.",
+        "17/report-driver --science-only adds07 and current panel finalization; retrospective report-driver modes require archive references.",
+        "12/13 consume historical_fcg05, not current05 outputs.",
+        "Guard-only hardening was tested with missing-cache Git-like fixtures and model/render stubs; engines/statistical functions were unchanged."
+      ],
+      "evidence": [
+        "scripts/workflows/05_zonation_analysis.R",
+        "scripts/core/zonation_update_fcg.R",
+        "scripts/reports/run_zonation_update_fcg.R"
+      ]
+    },
+    {
+      "id": "06",
+      "name": "Lipid-only structural regression",
+      "entrypoints": [
+        "scripts/workflows/06_structural_analysis.R"
+      ],
+      "plan": "docs/workflow_plans/06_structural_analysis.md",
+      "purpose": "Parse main lipid DE structures and fit class-specific logFC ~ chain_length + db_position + interaction.",
+      "status": "public_science_fixed_output",
+      "inputs": [
+        {
+          "name": "Main lipid DE archive",
+          "paths": [
+            "results/lipidomic/ttop_full_list.RData"
+          ],
+          "registry_keys": [],
+          "producer": "03",
+          "mode": "default",
+          "role": "Nested Testes vs Ovaries result table; active workflow has no RNA/MOFA input.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Structural features and regressions",
+          "paths": [
+            "results/lipidomic/structural_model/lipids_with_structure.csv",
+            "results/lipidomic/structural_model/lipid_only_class_coefficients.csv",
+            "results/lipidomic/structural_model/lipid_only_class_summaries.csv"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "Conditional significant terms",
+          "paths": [
+            "results/lipidomic/structural_model/lipid_only_chain_length_effects.csv",
+            "results/lipidomic/structural_model/lipid_only_db_position_effects.csv",
+            "results/lipidomic/structural_model/lipid_only_interaction_effects.csv"
+          ],
+          "registry_keys": [],
+          "mode": "only when qualifying terms exist"
+        },
+        {
+          "name": "Structural figures",
+          "paths": [
+            "results/lipidomic/structural_model/lipid_only_summary_heatmap.pdf",
+            "results/lipidomic/structural_model/lipid_only_plots/*_structural_effects.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        }
+      ],
+      "calls": [],
+      "validation": "No CLI/source guard/validate-only. Parses nested03 result with structural helper.",
+      "overwrite": "Overwrites fixed structural root; conditional empty results do not remove stale previous CSVs. Use isolated checkout/copy.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/06_structural_analysis.R",
+          "effect": "Runs lipid-only structural models/figures on current03 DE."
+        }
+      ],
+      "notes": [
+        "Both07modes use lipids_with_structure.csv for shared structural axes.",
+        "Older gene-lipid/MOFA structural concept in header is not active.",
+        "Focus classes SM/BMP/PG/TG and paths are hardcoded despite sourced configs."
+      ],
+      "evidence": [
+        "scripts/workflows/06_structural_analysis.R",
+        "scripts/core/structural_analysis.R"
+      ]
+    },
+    {
+      "id": "07",
+      "name": "siRNA global/current-zonal validation",
+      "entrypoints": [
+        "scripts/workflows/07_validation_experiments.R"
+      ],
+      "plan": "docs/workflow_plans/07_validation_experiments.md",
+      "purpose": "Validate original gene-lipid predictions with unchanged KD data, with separate global-refit and current-zonal modes.",
+      "status": "source_safe_two_mode_component",
+      "inputs": [
+        {
+          "name": "Same-root current FCG reference",
+          "paths": [
+            "results/zonation_marker_update_20261116/fcg05/fcg05_checkpoint.rds",
+            "results/zonation_marker_update_20261116/fcg05/networks/cormat_testes_portal_full_SIF.csv",
+            "results/zonation_marker_update_20261116/fcg05/networks/cormat_testes_central_full_SIF.csv",
+            "results/zonation_marker_update_20261116/fcg05/networks/cormat_Ovaries_portal_full_SIF.csv",
+            "results/zonation_marker_update_20261116/fcg05/networks/cormat_ova_central_full_SIF.csv"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "producer": "05",
+          "mode": "default zonal",
+          "role": "Paired current FCG reference and candidate networks.",
+          "availability_note": "Checkpoint is an ignored generated model cache; clone must first fit05/17 in the same fresh output root or restore it explicitly."
+        },
+        {
+          "name": "Unchanged canonical KD fit/table",
+          "paths": [
+            "results/validation/knockdown_t_table.csv",
+            "results/validation/knockdown_ttop_list.RData"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "default zonal",
+          "role": "Table is scored; fit RData is additionally checked by the public wrapper.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Structural reference",
+          "paths": [
+            "results/lipidomic/structural_model/lipids_with_structure.csv"
+          ],
+          "registry_keys": [],
+          "producer": "06",
+          "mode": "default",
+          "role": "Axis reference for structural consistency; required by both modes.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Original siRNA lipid measurements",
+          "paths": [
+            "data/metabolomics/lipidomics_20250423transfections.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "--global-only",
+          "role": "Refit original KD effects.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Global full correlation network",
+          "paths": [
+            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
+          ],
+          "registry_keys": [],
+          "producer": "04",
+          "mode": "--global-only",
+          "role": "Permissive original global reference.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Frozen validation engine",
+          "paths": [
+            "scripts/core/engines/07_validation_experiments_legacy.R"
+          ],
+          "registry_keys": [
+            "engine_validation07"
+          ],
+          "producer": "frozen",
+          "mode": "default",
+          "role": "Extract sections8/9/11 for zonal,1-7/10-11 forglobal.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Current zonal validation",
+          "paths": [
+            "results/zonation_marker_update_20261116/fcg07/fcg07_checkpoint.rds",
+            "results/zonation_marker_update_20261116/fcg07/zonation_network_validation_scores.csv",
+            "results/zonation_marker_update_20261116/fcg07/Mtmr11_male_PP_prespecified_ULM.csv",
+            "results/zonation_marker_update_20261116/fcg07/Mtmr11_male_PP_prespecified_source.csv",
+            "results/zonation_marker_update_20261116/fcg07/Mtmr11_male_PP_ULM_background_source.csv",
+            "results/zonation_marker_update_20261116/fcg07/Fig5F_Mtmr11_male_PP_prespecified.pdf",
+            "results/zonation_marker_update_20261116/fcg07/structural_consistency/*"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "default zonal: generated below selected fresh --output; current_root paths identify the saved approved release only"
+        },
+        {
+          "name": "Independent global refit and validation",
+          "paths": [
+            "results/runs/global_validation_reproduction/knockdown_t_table.csv",
+            "results/runs/global_validation_reproduction/knockdown_ttop_list.RData",
+            "results/runs/global_validation_reproduction/global_network_validation_scores.csv",
+            "results/runs/global_validation_reproduction/validation_summary.csv",
+            "results/runs/global_validation_reproduction/structural_consistency/*"
+          ],
+          "registry_keys": [],
+          "mode": "--global-only explicit fresh output"
+        }
+      ],
+      "calls": [],
+      "validation": "Default --validate-only checks05checkpoint, KD table/fit and packages (not later structural reference). --global-only --validate-only checks raw/global/structural inputs and runtime parse. Source-safe.",
+      "overwrite": "Shared approved-root guard rejects full zonal fitting at current_root/descendants independently of caches; validate-only remains allowed. Outside it, completed fcg07 checkpoint blocks rerun; partial destinations may be rewritten. Global-only requires explicit empty/fresh output.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/07_validation_experiments.R --validate-only",
+          "effect": "Read-only selected-root zonal setup check; requires generated05checkpoint."
+        },
+        {
+          "command": "Rscript scripts/workflows/07_validation_experiments.R --output=results/runs/fcg_zonation_reproduction",
+          "effect": "Run zonal validation after05 in the same fresh root."
+        },
+        {
+          "command": "Rscript scripts/workflows/07_validation_experiments.R --global-only --validate-only",
+          "effect": "Read-only independent global setup check."
+        },
+        {
+          "command": "Rscript scripts/workflows/07_validation_experiments.R --global-only --output=results/runs/global_validation_reproduction",
+          "effect": "Refit KD/global/structural independent branch into fresh output; does not overwrite canonical KD inputs."
+        }
+      ],
+      "notes": [
+        "Default mode does not read rawKD orglobalMOFA network; globalonly does not read zonation network.",
+        "Prespecified Mtmr11 malePP is separate from adaptive best context; ULM fullKDbackground differs from matchedscatter universe.",
+        "Workflow11 in-vivoKO is independent;07b/07c are compatibility phase entries for11."
+      ],
+      "evidence": [
+        "scripts/workflows/07_validation_experiments.R",
+        "scripts/core/zonation_update_fcg.R",
+        "scripts/core/validation_global.R",
+        "scripts/core/engines/07_validation_experiments_legacy.R"
+      ]
+    },
+    {
+      "id": "08",
+      "name": "Whole-liver lipid variability",
+      "entrypoints": [
+        "scripts/workflows/08_variance_analysis.R"
+      ],
+      "plan": "docs/workflow_plans/08_variance_analysis.md",
+      "purpose": "Compare log2-lipid CV/Brown-Forsythe variability between gonad groups and class means.",
+      "status": "independent_public_science_fixed_output",
+      "inputs": [
+        {
+          "name": "Whole-liver lipid matrix and mouse overview",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv",
+            "data/Suppl_Table_1_OverviewData.xlsx"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "default",
+          "role": "All measured lipid mice; load_metadata default exclude_wt=FALSE. No RNA input.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Variance tables",
+          "paths": [
+            "results/lipidomic/variance_analysis/variance_analysis_results.csv",
+            "results/lipidomic/variance_analysis/significant_differential_variance_lipids.csv",
+            "results/lipidomic/variance_analysis/variance_analysis_by_class.csv",
+            "results/lipidomic/variance_analysis/variance_analysis_summary.csv"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        },
+        {
+          "name": "Variance figures",
+          "paths": [
+            "results/lipidomic/variance_analysis/cv_difference_volcano.pdf",
+            "results/lipidomic/variance_analysis/cv_difference_volcano_by_class.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "default"
+        }
+      ],
+      "calls": [],
+      "validation": "No CLI/source guard/validate-only; direct full body.",
+      "overwrite": "Fixed output files can be overwritten; use isolated checkout/copy.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/08_variance_analysis.R",
+          "effect": "Run independent lipid-variability models/plots with fixed output paths."
+        }
+      ],
+      "notes": [
+        "Supplied roster48mice includes21ovaries,22FCGtestes and5WTtestes;03 intersects to43 instead.",
+        "No03result, RNAzonation, MOFA or17 requirement.",
+        "Global pairedtests pairfeature-level CVmetrics, notmatchedmice; classvalues average supplied log2 species values."
+      ],
+      "evidence": [
+        "scripts/workflows/08_variance_analysis.R",
+        "scripts/core/data_loading.R"
+      ]
+    },
+    {
+      "id": "09",
+      "name": "Optional human bulk-liver comparison",
+      "entrypoints": [
+        "scripts/workflows/09_human_analysis.py"
+      ],
+      "plan": "docs/workflow_plans/09_human_analysis.md",
+      "purpose": "Compare a whole-hepatocyte mouse gonad signature with human bulk-liver sex/age expression.",
+      "status": "Optional external analysis; no public-checkout end-to-end validation.",
+      "inputs": [
+        {
+          "name": "Human read/TPM/SOFT files",
+          "paths": [
+            "/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/bulk/zhou/GSE179250_gene_reads.txt",
+            "/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/bulk/zhou/GSE179250_gene_tpm_normalized.txt",
+            "/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/bulk/zhou/GSE179250_family.soft.gz"
+          ],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "full run",
+          "role": "Counts, normalized comparison layer and sample sex/age/title metadata",
+          "availability_note": "External absolute HPC DATA_DIR; not shipped."
+        },
+        {
+          "name": "Mouse signature seed and provisioned copy",
+          "paths": [
+            "results/pseudobulk/hepa_gonad_signature.csv",
+            "/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/hepa_gonad_signature.csv"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "full run",
+          "role": "ID,t_Hepatocytes signature",
+          "availability_note": "Repository seed ships, but script reads a manually provisioned external copy. Its biological definition is the02gonadcontrast, but02doesnotwrite/copythisnamedseed."
+        },
+        {
+          "name": "Full mouse DE table",
+          "paths": [
+            "/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/male_vs_female_DA_res.csv"
+          ],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "ranked concordance stage",
+          "role": "ID,t_Hepatocytes,adj.P.Val,logFC table",
+          "availability_note": "Separate required external copy; not produced by09."
+        },
+        {
+          "name": "Orthology resources",
+          "paths": [],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "full run",
+          "role": "Live package-resource/cache orthology lookup",
+          "availability_note": "Compatible pypath resource/cache or network access; frozen support/ortholog_resource.RData is not read.",
+          "resources": [
+            "Live package-resource/cache orthology lookup"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Analysis output",
+          "paths": [
+            "/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/results/bulk_manuscript/adata_processed.h5ad",
+            "/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/results/bulk_manuscript/*.csv",
+            "/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/results/bulk_manuscript/*.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "external configured output"
+        },
+        {
+          "name": "Retained study artifacts",
+          "paths": [
+            "results/human/"
+          ],
+          "registry_keys": [],
+          "mode": "saved outputs; not the script default destination"
+        }
+      ],
+      "calls": [],
+      "validation": "No CLI, --validate-only or harmless --help. Static audit only; importing calls RESULTS_DIR.mkdir before main.",
+      "overwrite": "External output directory is created at import; saves reuse fixed names and can overwrite. No fresh-directory guard.",
+      "commands": [
+        {
+          "command": "python3 scripts/workflows/09_human_analysis.py",
+          "effect": "Runs full analysis after external paths/data/packages are provisioned; not a preflight."
+        }
+      ],
+      "notes": [
+        "Independent of17 expanded-marker and diet inputs.",
+        "DATA_DIR/RESULTS_DIR are literal /home/... HPC paths.",
+        "Male−female DE uses female reference; female age contrast is >=50 versus12–49.",
+        "Output/model state was not regenerated during this documentation audit."
+      ],
+      "evidence": [
+        "scripts/workflows/09_human_analysis.py",
+        "docs/workflow_plans/09_human_analysis.md"
+      ]
+    },
+    {
+      "id": "10",
+      "name": "Optional collaborator Xenium analysis",
+      "entrypoints": [
+        "scripts/workflows/10_xenium_analysis/00_infer_doublets.py",
+        "scripts/workflows/10_xenium_analysis/01_merge_doublets.py",
+        "scripts/workflows/10_xenium_analysis/02_compositional_analysis.py",
+        "scripts/workflows/10_xenium_analysis/03_DGE_analysis.py"
+      ],
+      "plan": "docs/workflow_plans/10_xenium_analysis.md",
+      "purpose": "Imported nucleus-boundary doublet inference, fused annotations, composition plots and cell-level DGE.",
+      "status": "Imported provenance; existing fresh-process blockers; intended order00→01→02/03 is not a validated standalone run.",
+      "inputs": [
+        {
+          "name": "Raw Xenium and panel workbook",
+          "paths": [
+            "scripts/workflows/10_xenium_analysis/data_raw/output-XETG00078__0018188__Region_1__20240301__143248/nucleus_boundaries.csv.gz",
+            "scripts/workflows/10_xenium_analysis/data_raw/output-XETG00078__0018188__Region_1__20240301__143248/cell_feature_matrix.h5",
+            "scripts/workflows/10_xenium_analysis/data_raw/output-XETG00078__0018188__Region_1__20240301__143248/cells.csv.gz",
+            "scripts/workflows/10_xenium_analysis/data_raw/XeniumTargetList_Mouse-Panel-1.xlsx"
+          ],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "00/01/03",
+          "role": "Raw boundaries/counts/cell positions and marker-selection columns",
+          "availability_note": "Not shipped; requires folder-local cwd and data_raw/data_tidy/figures directories."
+        },
+        {
+          "name": "Fused state",
+          "paths": [
+            "scripts/workflows/10_xenium_analysis/inferred_components.json",
+            "scripts/workflows/10_xenium_analysis/fused_anndata_annotated.h5ad"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "01 then02/03",
+          "role": "00 components and01 fused AnnData",
+          "availability_note": "Generated local products; existing raw-code blockers must be reviewed before reproduction."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Components/fused object",
+          "paths": [
+            "scripts/workflows/10_xenium_analysis/inferred_components.json",
+            "scripts/workflows/10_xenium_analysis/fused_anndata_annotated.h5ad",
+            "scripts/workflows/10_xenium_analysis/data_tidy/"
+          ],
+          "registry_keys": [],
+          "mode": "intended folder-local generated outputs"
+        },
+        {
+          "name": "DGE/plots",
+          "paths": [
+            "scripts/workflows/10_xenium_analysis/figures/",
+            "scripts/workflows/10_xenium_analysis/*.xlsx",
+            "scripts/workflows/10_xenium_analysis/*.pdf"
+          ],
+          "registry_keys": [],
+          "mode": "intended generated outputs"
+        }
+      ],
+      "calls": [],
+      "validation": "No CLI/no-write validation; do not use --help as preflight.03 line14 uses adata before definition;00 lines139–146 mix cell_id keys and sequentialid. Static findings only.",
+      "overwrite": "Fixed output names;02 overwrites doublet_freq_core.pdf sex plot with TMA plot;03 repeats some filenames. No fresh-output guard.",
+      "commands": [
+        {
+          "command": "cd scripts/workflows/10_xenium_analysis",
+          "effect": "Required working directory for relative paths; does not validate data."
+        },
+        {
+          "command": "python3 00_infer_doublets.py",
+          "effect": "Intended first stage; review existing component-key blocker before running."
+        },
+        {
+          "command": "python3 01_merge_doublets.py",
+          "effect": "Consumes raw files +00JSON, generates fused object."
+        },
+        {
+          "command": "python3 02_compositional_analysis.py",
+          "effect": "Consumes fused object; generates compositions, with known overwritten output."
+        },
+        {
+          "command": "python3 03_DGE_analysis.py",
+          "effect": "Not a supported fresh-process run until existing undefined-adata blocker is addressed."
+        }
+      ],
+      "notes": [
+        "No dependency on17 pseudobulks; not a replacement for James deferred4A/S4B-C nucleus QC.",
+        "01 workbook needs reason and gene name columns; spatial assignment and cluster/cell-type labels are hardcoded.",
+        "Keep raw/object products outside ordinary Git commits."
+      ],
+      "evidence": [
+        "scripts/workflows/10_xenium_analysis/00_infer_doublets.py",
+        "scripts/workflows/10_xenium_analysis/01_merge_doublets.py",
+        "scripts/workflows/10_xenium_analysis/02_compositional_analysis.py",
+        "scripts/workflows/10_xenium_analysis/03_DGE_analysis.py"
+      ]
+    },
+    {
+      "id": "11",
+      "name": "Cyp2c38 in-vivo validation (WP1)",
+      "entrypoints": [
+        "scripts/workflows/11_cyp2c38_in_vivo_validation.R"
+      ],
+      "plan": "docs/workflow_plans/11_cyp2c38_in_vivo_validation.md",
+      "purpose": "Independent KO differential models, fixed-reference concordance, native ULM/null bootstrap and calibration",
+      "status": "active independent extension",
+      "inputs": [
+        {
+          "name": "Cyp2c38 in-vivo KO lipid input",
+          "paths": [
+            "data/metabolomics/cyp2c38ko/lipidomics_cyp2c38ko.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original whole-hepatocyte RNA and metadata",
+          "paths": [
+            "data/RNA/scaled_RNA_[123].csv",
+            "data/RNA/meta_data_df.csv"
+          ],
+          "registry_keys": [],
+          "producer": "01",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original lipid measurements",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original FCG group/PCA roster",
+          "paths": [
+            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+          ],
+          "registry_keys": [],
+          "producer": "02",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen original full-network Cyp2c38 selection",
+          "paths": [
+            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
+          ],
+          "registry_keys": [],
+          "producer": "04",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Overview workbook recorded in production hashes",
+          "paths": [
+            "data/Suppl_Table_1_OverviewData.xlsx"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "full",
+          "role": "production provenance dependency",
+          "availability_note": "Shipped current artifact or source input"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Complete WP1 package",
+          "paths": [
+            "results/validation/cyp2c38_in_vivo/",
+            "results/validation/cyp2c38_in_vivo/ulm_followup/"
+          ],
+          "registry_keys": [],
+          "mode": "full"
+        }
+      ],
+      "calls": [
+        "07b",
+        "07c"
+      ],
+      "validation": "--validate-only reconstructs intake/reference and fits observed weighted KO model; no saved WP1 cache, resampling, figures or output writes required.",
+      "overwrite": "Full phases reject nonempty destinations; default is completed lookup root, use fresh --output.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/11_cyp2c38_in_vivo_validation.R --validate-only",
+          "effect": "Observed-data/reference validation without output"
+        },
+        {
+          "command": "Rscript scripts/workflows/11_cyp2c38_in_vivo_validation.R --output=results/runs/wp1",
+          "effect": "Both phases in fresh root"
+        }
+      ],
+      "notes": [
+        "No dependency on zonation05/17 or source Seurat objects.",
+        "Default base B999/seed20261006; followup B4999/seed20261007. Shared B/P options affect both unless base override; --seed controls followup, --base-seed base.",
+        "No report-only mode; PDF builder separate."
+      ],
+      "evidence": [
+        "scripts/core/wp1_workflow.R",
+        "scripts/core/cyp2c38_reference.R",
+        "scripts/core/cyp2c38_sex_networks.R"
+      ]
+    },
+    {
+      "id": "12",
+      "name": "Frozen pooled and zonation network comparison (WP2)",
+      "entrypoints": [
+        "scripts/workflows/12_wdsd_network_comparison.R"
+      ],
+      "plan": "docs/workflow_plans/12_wdsd_network_comparison.md",
+      "purpose": "Original Figure3/5 conservation versus CF453 SD and descriptive WD-SD changes",
+      "status": "active historical-definition comparison",
+      "inputs": [
+        {
+          "name": "CF453 whole-hepatocyte pseudobulk transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json",
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/*.csv"
+          ],
+          "registry_keys": [
+            "wdsd_hepatocytes_transport"
+          ],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "CF453 lipid measurements",
+          "paths": [
+            "data/metabolomics/wdsd/lipidomics_cf453.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen original CF453 zone transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/historical_wdsd_zonation/*.csv"
+          ],
+          "registry_keys": [
+            "historical_wdsd_zonation_transport"
+          ],
+          "producer": "frozen",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen whole-hepatocyte Figure3 networks and precursor",
+          "paths": [
+            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
+            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv",
+            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv",
+            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv",
+            "results/mofa/networks/gene_lipid_correlations_factor1.csv"
+          ],
+          "registry_keys": [],
+          "producer": "04",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original raw lipid annotations",
+          "paths": [
+            "data/metabolomics/fcg/lipidomics_fcg.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original whole-hepatocyte RNA and metadata",
+          "paths": [
+            "data/RNA/scaled_RNA_[123].csv",
+            "data/RNA/meta_data_df.csv"
+          ],
+          "registry_keys": [],
+          "producer": "01",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original lipid measurements",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original FCG group/PCA roster",
+          "paths": [
+            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+          ],
+          "registry_keys": [],
+          "producer": "02",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen original FCG zone matrices",
+          "paths": [
+            "miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv",
+            "miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv"
+          ],
+          "registry_keys": [
+            "historical_fcg_zonation_csv",
+            "historical_fcg_zonation_metadata"
+          ],
+          "producer": "frozen",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Retained local archive; payloads excluded from ordinary Git; restore through migration/recovery ledger"
+        },
+        {
+          "name": "Four frozen Figure5 context references",
+          "paths": [
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_ATT.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_ATT.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_ATT.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_ATT.csv"
+          ],
+          "registry_keys": [
+            "historical_fcg05"
+          ],
+          "producer": "frozen",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Retained local archive; numerical payloads mostly ignored; restore original selected SIF/full-SIF/full-ATT, not current expanded-marker networks"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Pooled-first package",
+          "paths": [
+            "miscellaneous/comparisons/wdsd_network_comparison/",
+            "miscellaneous/comparisons/wdsd_network_comparison/followup/"
+          ],
+          "registry_keys": [
+            "historical_wf12"
+          ],
+          "mode": "full"
+        },
+        {
+          "name": "Report refresh",
+          "paths": [
+            "miscellaneous/comparisons/wdsd_network_comparison/README.md"
+          ],
+          "registry_keys": [
+            "historical_wf12"
+          ],
+          "mode": "--report-only"
+        }
+      ],
+      "calls": [
+        "05c",
+        "05b"
+      ],
+      "validation": "--validate-only runs both actual intake/reference phases without saved WP2 result caches, resampling or writes; historical FCG reference payloads are still required.",
+      "overwrite": "Complete full run rejects any nonempty root; explicit report-only rewrites saved combined Markdown.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/12_wdsd_network_comparison.R --validate-only",
+          "effect": "Validate frozen pooled and zonation prerequisites"
+        },
+        {
+          "command": "Rscript scripts/workflows/12_wdsd_network_comparison.R --output=results/runs/wp2",
+          "effect": "Pooled then zonal phases into fresh root"
+        },
+        {
+          "command": "Rscript scripts/workflows/12_wdsd_network_comparison.R --report-only",
+          "effect": "Saved report refresh at historical default root"
+        }
+      ],
+      "notes": [
+        "No MOFA refit. Pooled phase still loads CF453 historical zones through shared intake even though pooled coefficients use whole hepatocytes.",
+        "Report-only needs root network_analysis.rds and followup/pooled_analysis.rds plus companion CSVs/linked artifacts; these caches are ignored.",
+        "Public transports do not provide original FCG two-marker selection/matrices; restore archive for complete12."
+      ],
+      "evidence": [
+        "scripts/core/wp2_workflow.R",
+        "scripts/core/wdsd_reference.R",
+        "scripts/core/wdsd_pooled_reference.R",
+        "scripts/core/wdsd_lipid_overlap_audit.R",
+        "scripts/core/wp2_report.R"
+      ]
+    },
+    {
+      "id": "13",
+      "name": "Male WD cross-cohort robustness and original-FCG anchor",
+      "entrypoints": [
+        "scripts/workflows/13_wd_crosscohort_robustness.R"
+      ],
+      "plan": "docs/workflow_plans/13_wd_crosscohort_robustness.md",
+      "purpose": "Compare CF459 WD with CF453 WD and original male FCG on fixed three-cohort pairs",
+      "status": "active historical-definition comparison",
+      "inputs": [
+        {
+          "name": "CF453 whole-hepatocyte pseudobulk transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json",
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/*.csv"
+          ],
+          "registry_keys": [
+            "wdsd_hepatocytes_transport"
+          ],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "CF453 lipid measurements",
+          "paths": [
+            "data/metabolomics/wdsd/lipidomics_cf453.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen original CF453 zone transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/historical_wdsd_zonation/*.csv"
+          ],
+          "registry_keys": [
+            "historical_wdsd_zonation_transport"
+          ],
+          "producer": "frozen",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "CF459 WD cell-type and zone transports",
+          "paths": [
+            "data/RNA/pseudobulk_csv/wd_cell_types/manifest.json",
+            "data/RNA/pseudobulk_csv/wd_cell_types/*.csv",
+            "data/RNA/pseudobulk_csv/wd_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/wd_zonation/*.csv"
+          ],
+          "registry_keys": [
+            "wd_cell_types_transport",
+            "wd_zonation_transport"
+          ],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "CF459 WD lipid export",
+          "paths": [
+            "data/metabolomics/wd/lipidomics_wd.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen original FCG zone matrices",
+          "paths": [
+            "miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv",
+            "miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv"
+          ],
+          "registry_keys": [
+            "historical_fcg_zonation_csv",
+            "historical_fcg_zonation_metadata"
+          ],
+          "producer": "frozen",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Retained local archive; payloads excluded from ordinary Git; restore through migration/recovery ledger"
+        },
+        {
+          "name": "Four frozen Figure5 context references",
+          "paths": [
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_ATT.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_ATT.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_ATT.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_ATT.csv"
+          ],
+          "registry_keys": [
+            "historical_fcg05"
+          ],
+          "producer": "frozen",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Retained local archive; numerical payloads mostly ignored; restore original selected SIF/full-SIF/full-ATT, not current expanded-marker networks"
+        },
+        {
+          "name": "Original lipid measurements",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original FCG group/PCA roster",
+          "paths": [
+            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+          ],
+          "registry_keys": [],
+          "producer": "02",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Prior WP2 coefficient replay",
+          "paths": [
+            "miscellaneous/comparisons/wdsd_network_comparison/network_edges.csv"
+          ],
+          "registry_keys": [
+            "historical_wf12"
+          ],
+          "producer": "12",
+          "mode": "all",
+          "role": "optional replay only",
+          "availability_note": "If absent, comparison proceeds and records replay unavailable"
+        },
+        {
+          "name": "Saved base draw banks and contexts",
+          "paths": [
+            "miscellaneous/comparisons/wd_crosscohort_robustness/contexts.rds",
+            "miscellaneous/comparisons/wd_crosscohort_robustness/analysis.rds"
+          ],
+          "registry_keys": [
+            "historical_wf13"
+          ],
+          "producer": "13",
+          "mode": "--fcg-comparison-only",
+          "role": "required",
+          "availability_note": "Ignored generated caches; restore or regenerate full13"
+        },
+        {
+          "name": "Saved report bundle",
+          "paths": [
+            "miscellaneous/comparisons/wd_crosscohort_robustness/report_bundle.rds",
+            "miscellaneous/comparisons/wd_crosscohort_robustness/fcg_comparison/analysis.rds"
+          ],
+          "registry_keys": [
+            "historical_wf13"
+          ],
+          "producer": "13",
+          "mode": "--report-only",
+          "role": "required",
+          "availability_note": "Bundle required; extension cache used when present, otherwise bundle extension"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Full comparison",
+          "paths": [
+            "miscellaneous/comparisons/wd_crosscohort_robustness/"
+          ],
+          "registry_keys": [
+            "historical_wf13"
+          ],
+          "mode": "full"
+        },
+        {
+          "name": "Original-FCG extension",
+          "paths": [
+            "miscellaneous/comparisons/wd_crosscohort_robustness/fcg_comparison/"
+          ],
+          "registry_keys": [
+            "historical_wf13"
+          ],
+          "mode": "full or --fcg-comparison-only"
+        },
+        {
+          "name": "Saved report/extension figures",
+          "paths": [
+            "miscellaneous/comparisons/wd_crosscohort_robustness/README.md",
+            "miscellaneous/comparisons/wd_crosscohort_robustness/plots/"
+          ],
+          "registry_keys": [
+            "historical_wf13"
+          ],
+          "mode": "--report-only"
+        }
+      ],
+      "calls": [],
+      "validation": "Fresh --validate-only checks input/reference/matching and native ULM without saved13 outputs or resampling; still needs ignored original FCG references.",
+      "overwrite": "Full run rejects nonempty output. Extension-only requires fresh extension destination; --comparison-output only valid with extension-only. Report-only rewrites Markdown/extension figures.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/13_wd_crosscohort_robustness.R --validate-only",
+          "effect": "Observed fixed-reference validation"
+        },
+        {
+          "command": "Rscript scripts/workflows/13_wd_crosscohort_robustness.R --output=results/runs/wp3",
+          "effect": "Full comparison, sensitivities and original-FCG extension"
+        },
+        {
+          "command": "Rscript scripts/workflows/13_wd_crosscohort_robustness.R --fcg-comparison-only --output=PATH --comparison-output=FRESH_PATH",
+          "effect": "Reuse saved WD draws; compute extension/FCG draws"
+        },
+        {
+          "command": "Rscript scripts/workflows/13_wd_crosscohort_robustness.R --report-only --output=PATH",
+          "effect": "Saved report and extension-plot refresh"
+        }
+      ],
+      "notes": [
+        "No CF459 SD arm and no expanded-marker CF459 transport.",
+        "WF12 execution is not mandatory; optional replay is not feature selection.",
+        "Extension-only rejects bootstrap-count overrides and reuses saved counts.",
+        "Retain user-corrected ages and conditional, descriptive interpretation."
+      ],
+      "evidence": [
+        "scripts/core/wd_crosscohort_workflow.R",
+        "scripts/core/wd_crosscohort_setup.R",
+        "scripts/core/wd_crosscohort_presentation.R",
+        "scripts/core/wd_fcg_comparison.R",
+        "scripts/core/wd_intake.R"
+      ]
+    },
+    {
+      "id": "14",
+      "name": "CF453 standalone models and legacy complete presentation",
+      "entrypoints": [
+        "scripts/workflows/14_cf453_standalone_figure6.R"
+      ],
+      "plan": "docs/workflow_plans/14_cf453_standalone_figure6.md",
+      "purpose": "Supply current RNA/lipid models; optionally run full legacy30-panel association presentation",
+      "status": "current upstream model stage; full presentation alternative",
+      "inputs": [
+        {
+          "name": "CF453 whole-hepatocyte pseudobulk transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json",
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/*.csv"
+          ],
+          "registry_keys": [
+            "wdsd_hepatocytes_transport"
+          ],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "CF453 lipid measurements",
+          "paths": [
+            "data/metabolomics/wdsd/lipidomics_cf453.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Current CF453 zone transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/current_wdsd_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/current_wdsd_zonation/*.csv"
+          ],
+          "registry_keys": [
+            "current_wdsd_zonation_transport"
+          ],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Saved model/full analysis",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_models/models.rds",
+            "results/zonation_marker_update_20261116/cf453_models/analysis.rds"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "producer": "14",
+          "mode": "--finish/--plot-only",
+          "role": "required",
+          "availability_note": "Ignored caches; finish needs models and no analysis, plot-only needs analysis; approved current model-only stage has no analysis.rds"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Model stage",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_models/models.rds",
+            "results/zonation_marker_update_20261116/cf453_models/tables/",
+            "results/zonation_marker_update_20261116/cf453_models/provenance_sha256.csv"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "all fresh modes; --models-only stops here"
+        },
+        {
+          "name": "Legacy full association/panel set",
+          "paths": [
+            "<output>/analysis.rds",
+            "<output>/panels/",
+            "<output>/source_data/",
+            "<output>/panel_manifest.csv"
+          ],
+          "registry_keys": [],
+          "mode": "default/full, --finish or saved --plot-only exports"
+        }
+      ],
+      "calls": [],
+      "validation": "No --validate-only. Source guard defines functions; use intake tests or17 validation for no-fit checks.",
+      "overwrite": "Full/models-only call approved-root/descendant guard before mkdir/fitting, independent of ignored caches. Outside that root existing model/analysis cache guards remain. Explicit finish/plot-only skip new-fit guard and can mutate saved results; use copied/fresh run destinations.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/14_cf453_standalone_figure6.R --models-only --output=results/runs/cf14",
+          "effect": "Fit complete parent cache only"
+        },
+        {
+          "command": "Rscript scripts/workflows/14_cf453_standalone_figure6.R --finish --output=FRESH_MODEL_STAGE",
+          "effect": "Run legacy network/panel remainder from saved models"
+        }
+      ],
+      "notes": [
+        "Whole-hepatocyte28-profile transport is a hard shared-intake dependency, even models-only.",
+        "Primary RNA uses supplied normalized zone layer; no FCG, CF459 or MOFA reference.",
+        "Options --input-zonation for fresh fit only, --bootstraps=999, --seed=20261030.",
+        "Source-loading does not run pipeline; saved caches excluded from public Git."
+      ],
+      "evidence": [
+        "scripts/core/cf453_standalone.R",
+        "scripts/core/wdsd_intake.R",
+        "scripts/core/pseudobulk_csv.R"
+      ]
+    },
+    {
+      "id": "15",
+      "name": "CF453 direct diet interactions",
+      "entrypoints": [
+        "scripts/workflows/15_cf453_diet_impact_figure6.R"
+      ],
+      "plan": "docs/workflow_plans/15_cf453_diet_impact_figure6.md",
+      "purpose": "Extend14 cache with direct diet interactions; optional four-panel presentation",
+      "status": "current upstream direct-evidence stage; four-panel alternative",
+      "inputs": [
+        {
+          "name": "Selected Workflow14 model cache and adjacent provenance",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_models/models.rds",
+            "results/zonation_marker_update_20261116/cf453_models/provenance_sha256.csv"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "producer": "14",
+          "mode": "fresh fit",
+          "role": "required",
+          "availability_note": "Generated model RDS ignored in Git; regenerate14 models-only into fresh directory or restore exact cache; explicit --parent does not infer any other parent"
+        },
+        {
+          "name": "Saved direct analysis",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_direct_diet/diet_analysis.rds"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "producer": "15",
+          "mode": "--plot-only",
+          "role": "required",
+          "availability_note": "Ignored generated cache; must restore/regenerate"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Direct model evidence",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_direct_diet/diet_analysis.rds",
+            "results/zonation_marker_update_20261116/cf453_direct_diet/tables/",
+            "results/zonation_marker_update_20261116/cf453_direct_diet/provenance_sha256.csv"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "full or --models-only"
+        },
+        {
+          "name": "Four-panel alternative",
+          "paths": [
+            "<output>/panels/",
+            "<output>/source_data/",
+            "<output>/panel_manifest.csv"
+          ],
+          "registry_keys": [],
+          "mode": "full or saved --plot-only"
+        }
+      ],
+      "calls": [],
+      "validation": "No --validate-only; full or models-only refits direct contrasts.",
+      "overwrite": "New fit requires empty output except QA/. Plot-only reads cache from output and rewrites exports.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/15_cf453_diet_impact_figure6.R --models-only --parent=results/runs/cf14/models.rds --output=results/runs/cf15",
+          "effect": "Fit direct evidence from explicit14 parent"
+        }
+      ],
+      "notes": [
+        "--parent-provenance overrides adjacent14 provenance; raw-input identities are checked, not all historical code/plan rows.",
+        "No automatic14 execution and no need for14 legacy all-edge analysis.",
+        "Public clone must regenerate ignored14/15 caches.",
+        "--plot-only ignores parent choice for loading: reads output/diet_analysis.rds."
+      ],
+      "evidence": [
+        "scripts/core/cf453_diet_impact.R",
+        "scripts/config/analysis_release.R"
+      ]
+    },
+    {
+      "id": "16",
+      "name": "CF453 selected programmes and exploratory diet association shifts",
+      "entrypoints": [
+        "scripts/workflows/16_cf453_diet_rewiring_figure6.R"
+      ],
+      "plan": "docs/workflow_plans/16_cf453_diet_rewiring_figure6.md",
+      "purpose": "Select zonation anchors and compute fixed-programme class/network displays",
+      "status": "current Figure6 presentation",
+      "inputs": [
+        {
+          "name": "Selected Workflow14 model cache and adjacent provenance",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_models/models.rds",
+            "results/zonation_marker_update_20261116/cf453_models/provenance_sha256.csv"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "producer": "14",
+          "mode": "fresh fit",
+          "role": "required",
+          "availability_note": "Generated model RDS ignored in Git; regenerate14 models-only into fresh directory or restore exact cache; explicit --parent does not infer any other parent"
+        },
+        {
+          "name": "Selected Workflow15 direct-diet evidence cache",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_direct_diet/diet_analysis.rds"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "producer": "15",
+          "mode": "fresh analysis",
+          "role": "required",
+          "availability_note": "Generated RDS ignored in Git; regenerate15 models-only using the same14 parent or restore"
+        },
+        {
+          "name": "Saved selected-programme analysis",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_rewiring/rewiring_analysis.rds"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "producer": "16",
+          "mode": "--plot-only",
+          "role": "required",
+          "availability_note": "Ignored cache; restore/regenerate16"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Selected-programme statistics",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_rewiring/rewiring_analysis.rds",
+            "results/zonation_marker_update_20261116/cf453_rewiring/tables/",
+            "results/zonation_marker_update_20261116/cf453_rewiring/provenance_sha256.csv"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "full or --models-only"
+        },
+        {
+          "name": "Three main panel groups",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_rewiring/panels/",
+            "results/zonation_marker_update_20261116/cf453_rewiring/source_data/",
+            "results/zonation_marker_update_20261116/cf453_rewiring/panel_manifest.csv"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "full or --plot-only"
+        }
+      ],
+      "calls": [],
+      "validation": "No --validate-only. --models-only computes complete999-bootstrap/LOO statistics, not just models or validation.",
+      "overwrite": "New analysis requires empty output except QA/. Plot-only reads output cache and overwrites panels/reports.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/16_cf453_diet_rewiring_figure6.R --parent=results/runs/cf14/models.rds --direct=results/runs/cf15/diet_analysis.rds --output=results/runs/cf16",
+          "effect": "Fresh complete selected-programme analysis and three panels"
+        }
+      ],
+      "notes": [
+        "Both explicit parent paths required when reproducing fresh chain; changing --parent does not infer sibling --direct.",
+        "Metadata and modeled RNA must agree across parents.",
+        "No CLI bootstrap/seed override; implementation B999/seed20261102.",
+        "Association thresholds/bootstrap ranges are descriptive and exploratory.",
+        "Normal parent verification checks data identities; strict historical source-snapshot exportQA separately checks mutable code/plan hashes."
+      ],
+      "evidence": [
+        "scripts/core/cf453_diet_rewiring.R",
+        "scripts/core/cf453_diet_rewiring_plots.R",
+        "scripts/config/analysis_release.R"
+      ]
+    },
+    {
+      "id": "17",
+      "name": "Current expanded-marker zonation and standalone diet pipeline",
+      "entrypoints": [
+        "scripts/workflows/17_expanded_marker_zonation_update.R"
+      ],
+      "plan": "docs/workflow_plans/17_expanded_marker_zonation_update.md",
+      "purpose": "Reproduce current FCG zonal/KD, paired GDX and CF45314/15/16/layout stages; optional retrospective manuscript audit",
+      "status": "current main zonation/diet entry",
+      "inputs": [
+        {
+          "name": "Three current expanded-marker zone transports",
+          "paths": [
+            "data/RNA/pseudobulk_csv/current_fcg_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/current_gdx_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/current_wdsd_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/current_*_zonation/*.csv"
+          ],
+          "registry_keys": [
+            "pseudobulk_csv_root",
+            "current_fcg_zonation_transport",
+            "current_gdx_zonation_transport",
+            "current_wdsd_zonation_transport"
+          ],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "CF453 whole-hepatocyte pseudobulk transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json",
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/*.csv"
+          ],
+          "registry_keys": [
+            "wdsd_hepatocytes_transport"
+          ],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "CF453 lipid measurements",
+          "paths": [
+            "data/metabolomics/wdsd/lipidomics_cf453.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "FCG lipid measurements",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Lipid DA and enrichment outputs",
+          "paths": [
+            "results/lipidomic/ttop_full_list.RData",
+            "results/lipidomic/enrichment/lipid_class_enrichment_scores.RData"
+          ],
+          "registry_keys": [],
+          "producer": "03",
+          "mode": "full",
+          "role": "required",
+          "availability_note": "Shipped result artifacts; actual FCG engine requires them, but17 validate-only does not preflight them"
+        },
+        {
+          "name": "Lipid structural reference",
+          "paths": [
+            "results/lipidomic/structural_model/lipids_with_structure.csv"
+          ],
+          "registry_keys": [],
+          "producer": "06",
+          "mode": "full zonal07 structural branch",
+          "role": "required",
+          "availability_note": "Shipped; needed when matched structural data exist;17 validate-only does not check it"
+        },
+        {
+          "name": "Independent KD fitted effects",
+          "paths": [
+            "results/validation/knockdown_t_table.csv",
+            "results/validation/knockdown_ttop_list.RData"
+          ],
+          "registry_keys": [],
+          "producer": "07",
+          "mode": "all",
+          "role": "reused KD fit, not raw-experiment refitting",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "TF/pathway resources",
+          "paths": [
+            "support/TF_regulons.RData",
+            "support/Gonadal_Hormone_Genes.csv",
+            "support/m5.all.v2023.2.Mm.symbols.gmt"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen implementation engines",
+          "paths": [
+            "scripts/core/engines/05_zonation_analysis_legacy.R",
+            "scripts/core/engines/07_validation_experiments_legacy.R"
+          ],
+          "registry_keys": [
+            "engine_fcg05",
+            "engine_validation07"
+          ],
+          "producer": "curated",
+          "mode": "all",
+          "role": "implementation dependency",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Retrospective FCG/CF453/GDX references",
+          "paths": [
+            "miscellaneous/older_results/zonation_two_marker/*",
+            "miscellaneous/older_inputs/two_marker_zonation/RNA/*",
+            "miscellaneous/older_results/cf453_standalone_figure6/models.rds",
+            "miscellaneous/older_results/cf453_diet_impact_figure6/diet_analysis.rds",
+            "miscellaneous/older_results/cf453_diet_rewiring_figure6/rewiring_analysis.rds"
+          ],
+          "registry_keys": [
+            "historical_fcg05",
+            "historical_fcg_zonation_csv",
+            "historical_fcg_zonation_metadata",
+            "historical_gdx_zonation_rds",
+            "historical_cf453_models",
+            "historical_cf453_direct",
+            "historical_cf453_rewiring"
+          ],
+          "producer": "frozen",
+          "mode": "--with-manuscript-audit or --report-only",
+          "role": "required",
+          "availability_note": "Mostly ignored local archive; restore exact original baselines. Old GDX RDS required for old/new supporting fit; current science does not need it."
+        },
+        {
+          "name": "Whole-hepatocyte DE comparison audit",
+          "paths": [
+            "results/pseudobulk/ttop_full_list.RData"
+          ],
+          "registry_keys": [],
+          "producer": "02",
+          "mode": "--with-manuscript-audit",
+          "role": "denominator-definition comparison only",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Private manuscript and supplied preprocessing evidence",
+          "paths": [
+            "manuscript/Cleland and Dugourd et al.docx",
+            "<source-root>/james_scripts_20261104/preprocessing_{02_fcg,03_gdx,04_wdsd}.R",
+            "<source-root>/Zonation_Genes.csv",
+            "results/zonation_marker_update_20261116/inputs/preprocessing_reference/*"
+          ],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "audit/report modes",
+          "role": "required",
+          "availability_note": "Private DOCX ignored; exact saved reference snapshots may satisfy completed report replay. Fresh audit source-root must also contain preprocessing evidence; default public CSV root alone does not."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Current staged inputs and scientific result stages",
+          "paths": [
+            "results/zonation_marker_update_20261116/inputs/",
+            "results/zonation_marker_update_20261116/fcg05/",
+            "results/zonation_marker_update_20261116/fcg07/",
+            "results/zonation_marker_update_20261116/gdx_zonation/",
+            "results/zonation_marker_update_20261116/cf453_models/",
+            "results/zonation_marker_update_20261116/cf453_direct_diet/",
+            "results/zonation_marker_update_20261116/cf453_rewiring/",
+            "results/zonation_marker_update_20261116/cf453_layouts/",
+            "results/zonation_marker_update_20261116/fcg_panel_manifest.csv"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "default science/full"
+        },
+        {
+          "name": "Formal scientific table copies",
+          "paths": [
+            "results/zonation_marker_update_20261116/tables/"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "science when system Python available; audit/report"
+        },
+        {
+          "name": "Old/new comparisons and private revision report",
+          "paths": [
+            "results/zonation_marker_update_20261116/comparisons/",
+            "results/zonation_marker_update_20261116/report/"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "--with-manuscript-audit or --report-only"
+        }
+      ],
+      "calls": [
+        "05",
+        "07",
+        "14",
+        "15",
+        "16",
+        "6A_layouts"
+      ],
+      "validation": "Entry --validate-only verifies3zone transports, balanced zones, engine paths and KD CSV/RData; no models or writes. It does NOT check all03/06/resources/whole-hepatocyte14 prerequisites. With --with-manuscript-audit it also checks Python and selected historical cache files, not all private/report dependencies.",
+      "overwrite": "Before any writes, full science/audit modes reject approved current_root and all descendants including cache-absent/symlink aliases via analysis_assert_not_approved_output; ordinary completed-cache guards remain. Validation skips guard and writes nothing. Explicit report-only skips guard and rewrites saved audit/report outputs.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/17_expanded_marker_zonation_update.R --validate-only",
+          "effect": "No-fit limited input validation"
+        },
+        {
+          "command": "Rscript scripts/workflows/17_expanded_marker_zonation_update.R --output=results/runs/expanded_markers_reproduction",
+          "effect": "Current science; does not run03/06 or refit rawKD"
+        },
+        {
+          "command": "Rscript scripts/workflows/17_expanded_marker_zonation_update.R --report-only",
+          "effect": "Saved-cache QA/table/inventory/report/bundle refresh; private prerequisites"
+        }
+      ],
+      "notes": [
+        "Normal source-root is public pseudobulk_csv_root; staging copies zones only.14 whole-hepatocyte/lipid intake still comes from repository registry/defaults.",
+        "Normal scientific run does not require private manuscript, original datasets or Codex runtime.",
+        "Optional Python tables-only copies13tableCSVs; statistical source CSVs do not depend on that copy.",
+        "Audit source-root is reused for preprocessing reference lookup: fresh audit needs a combined source folder or exact pre-staged references.",
+        "Report-only implies audit and still requires saved model/checkpoint/comparison caches; it does not rebuild missing model stages.",
+        "James retains nucleus-composition panels and exact executed marker-list confirmation.",
+        "Guard-only public-clone protection was added and tested with cache-absent stub fixtures; no estimates or approved artifacts changed.",
+        "Internal staging/GDX/core helpers retain cache guards and are not public approved-output-safe entries; maintained17 protects the chain before invoking them. Standalone maintained FCG driver also has the shared full guard."
+      ],
+      "evidence": [
+        "scripts/workflows/17_expanded_marker_zonation_update.R",
+        "scripts/reports/stage_zonation_marker_update.R",
+        "scripts/reports/run_zonation_update_fcg.R",
+        "scripts/reports/run_zonation_update_gdx.R",
+        "scripts/core/zonation_update_fcg.R",
+        "scripts/core/zonation_update_gdx.R",
+        "scripts/core/engines/05_zonation_analysis_legacy.R",
+        "scripts/core/engines/07_validation_experiments_legacy.R",
+        "scripts/reports/prepare_zonation_update_report_sources.py",
+        "scripts/config/analysis_release.R"
+      ]
+    },
+    {
+      "id": "05b",
+      "name": "WP2 zonation/diet phase",
+      "entrypoints": [
+        "scripts/workflows/05b_wdsd_network_comparison.R"
+      ],
+      "plan": "docs/workflow_plans/05b_wdsd_network_comparison.md",
+      "purpose": "Compatibility phase of complete workflow",
+      "status": "compatibility wrapper; historical scientific definition",
+      "inputs": [
+        {
+          "name": "CF453 whole-hepatocyte pseudobulk transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json",
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/*.csv"
+          ],
+          "registry_keys": [
+            "wdsd_hepatocytes_transport"
+          ],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "CF453 lipid measurements",
+          "paths": [
+            "data/metabolomics/wdsd/lipidomics_cf453.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen original CF453 zone transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/historical_wdsd_zonation/*.csv"
+          ],
+          "registry_keys": [
+            "historical_wdsd_zonation_transport"
+          ],
+          "producer": "frozen",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen original FCG zone matrices",
+          "paths": [
+            "miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv",
+            "miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv"
+          ],
+          "registry_keys": [
+            "historical_fcg_zonation_csv",
+            "historical_fcg_zonation_metadata"
+          ],
+          "producer": "frozen",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Retained local archive; payloads excluded from ordinary Git; restore through migration/recovery ledger"
+        },
+        {
+          "name": "Four frozen Figure5 context references",
+          "paths": [
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_ATT.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_ATT.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_ATT.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_SIF.csv",
+            "miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_ATT.csv"
+          ],
+          "registry_keys": [
+            "historical_fcg05"
+          ],
+          "producer": "frozen",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Retained local archive; numerical payloads mostly ignored; restore original selected SIF/full-SIF/full-ATT, not current expanded-marker networks"
+        },
+        {
+          "name": "Original lipid measurements",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original FCG group/PCA roster",
+          "paths": [
+            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+          ],
+          "registry_keys": [],
+          "producer": "02",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Zonation/diet phase",
+          "paths": [
+            "miscellaneous/comparisons/wdsd_network_comparison/"
+          ],
+          "registry_keys": [
+            "historical_wf12"
+          ],
+          "mode": "full"
+        }
+      ],
+      "calls": [],
+      "validation": "Observed intake/reference checks only; no savedWP2analysis or resampling.",
+      "overwrite": "Standalone phase rejects any existing root contents.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/05b_wdsd_network_comparison.R --validate-only",
+          "effect": "Phase-specific validation as documented"
+        }
+      ],
+      "notes": [
+        "Only bootstraps/paired-bootstraps/seed/output/validate-only; no permutations or report-only option."
+      ],
+      "evidence": [
+        "scripts/core/wp2_workflow.R"
+      ]
+    },
+    {
+      "id": "05c",
+      "name": "WP2 pooled/annotation phase",
+      "entrypoints": [
+        "scripts/workflows/05c_wdsd_lipid_overlap_and_pooled_network.R"
+      ],
+      "plan": "docs/workflow_plans/05c_wdsd_lipid_overlap_and_pooled_network.md",
+      "purpose": "Compatibility phase of complete workflow",
+      "status": "compatibility wrapper; historical scientific definition",
+      "inputs": [
+        {
+          "name": "CF453 whole-hepatocyte pseudobulk transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json",
+            "data/RNA/pseudobulk_csv/wdsd_hepatocytes/*.csv"
+          ],
+          "registry_keys": [
+            "wdsd_hepatocytes_transport"
+          ],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "CF453 lipid measurements",
+          "paths": [
+            "data/metabolomics/wdsd/lipidomics_cf453.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen original CF453 zone transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/historical_wdsd_zonation/*.csv"
+          ],
+          "registry_keys": [
+            "historical_wdsd_zonation_transport"
+          ],
+          "producer": "frozen",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen whole-hepatocyte Figure3 networks and precursor",
+          "paths": [
+            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
+            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv",
+            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv",
+            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv",
+            "results/mofa/networks/gene_lipid_correlations_factor1.csv"
+          ],
+          "registry_keys": [],
+          "producer": "04",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original raw lipid annotations",
+          "paths": [
+            "data/metabolomics/fcg/lipidomics_fcg.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original whole-hepatocyte RNA and metadata",
+          "paths": [
+            "data/RNA/scaled_RNA_[123].csv",
+            "data/RNA/meta_data_df.csv"
+          ],
+          "registry_keys": [],
+          "producer": "01",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original lipid measurements",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original FCG group/PCA roster",
+          "paths": [
+            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+          ],
+          "registry_keys": [],
+          "producer": "02",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Pooled/annotation phase",
+          "paths": [
+            "miscellaneous/comparisons/wdsd_network_comparison/followup/"
+          ],
+          "registry_keys": [
+            "historical_wf12"
+          ],
+          "mode": "full"
+        }
+      ],
+      "calls": [],
+      "validation": "Observed intake/pooledreference/mapping checks only; no savedWP2analysis or resampling.",
+      "overwrite": "Rejects existing pooled_analysis.rds or README; partial folder is not generally fresh-guarded.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/05c_wdsd_lipid_overlap_and_pooled_network.R --validate-only",
+          "effect": "Phase-specific validation as documented"
+        }
+      ],
+      "notes": [
+        "Permutations/bootstraps/paired-bootstraps/seed/output/validate-only; no report-only.",
+        "No FCGzone statistical reference, but sharedCF453intake still loads historicalzone transport."
+      ],
+      "evidence": [
+        "scripts/core/wp2_workflow.R"
+      ]
+    },
+    {
+      "id": "07b",
+      "name": "WP1 base KO phase",
+      "entrypoints": [
+        "scripts/workflows/07b_cyp2c38_in_vivo_validation.R"
+      ],
+      "plan": "docs/workflow_plans/07b_cyp2c38_in_vivo_validation.md",
+      "purpose": "Compatibility phase of complete workflow",
+      "status": "compatibility wrapper; historical scientific definition",
+      "inputs": [
+        {
+          "name": "Cyp2c38 in-vivo KO lipid input",
+          "paths": [
+            "data/metabolomics/cyp2c38ko/lipidomics_cyp2c38ko.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original whole-hepatocyte RNA and metadata",
+          "paths": [
+            "data/RNA/scaled_RNA_[123].csv",
+            "data/RNA/meta_data_df.csv"
+          ],
+          "registry_keys": [],
+          "producer": "01",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original lipid measurements",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original FCG group/PCA roster",
+          "paths": [
+            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+          ],
+          "registry_keys": [],
+          "producer": "02",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen original full-network Cyp2c38 selection",
+          "paths": [
+            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
+          ],
+          "registry_keys": [],
+          "producer": "04",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Overview workbook recorded in production hashes",
+          "paths": [
+            "data/Suppl_Table_1_OverviewData.xlsx"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "full",
+          "role": "production provenance dependency",
+          "availability_note": "Shipped current artifact or source input"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Base KO results",
+          "paths": [
+            "results/validation/cyp2c38_in_vivo/"
+          ],
+          "registry_keys": [],
+          "mode": "full"
+        }
+      ],
+      "calls": [],
+      "validation": "Intake and frozenreference checks; no savedWP1cache needed.",
+      "overwrite": "Rejects nonempty output.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/07b_cyp2c38_in_vivo_validation.R --validate-only",
+          "effect": "Phase-specific validation as documented"
+        }
+      ],
+      "notes": [
+        "Permutations1999,bootstrap999,seed20261006,workers3; no ULMfollowup/report-only."
+      ],
+      "evidence": [
+        "scripts/core/wp1_workflow.R"
+      ]
+    },
+    {
+      "id": "07c",
+      "name": "WP1 ULM/resampling phase",
+      "entrypoints": [
+        "scripts/workflows/07c_cyp2c38_ulm_resampling.R"
+      ],
+      "plan": "docs/workflow_plans/07c_cyp2c38_ulm_resampling.md",
+      "purpose": "Compatibility phase of complete workflow",
+      "status": "compatibility wrapper; historical scientific definition",
+      "inputs": [
+        {
+          "name": "Cyp2c38 in-vivo KO lipid input",
+          "paths": [
+            "data/metabolomics/cyp2c38ko/lipidomics_cyp2c38ko.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original whole-hepatocyte RNA and metadata",
+          "paths": [
+            "data/RNA/scaled_RNA_[123].csv",
+            "data/RNA/meta_data_df.csv"
+          ],
+          "registry_keys": [],
+          "producer": "01",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original lipid measurements",
+          "paths": [
+            "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Original FCG group/PCA roster",
+          "paths": [
+            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+          ],
+          "registry_keys": [],
+          "producer": "02",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Frozen original full-network Cyp2c38 selection",
+          "paths": [
+            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
+          ],
+          "registry_keys": [],
+          "producer": "04",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Overview workbook recorded in production hashes",
+          "paths": [
+            "data/Suppl_Table_1_OverviewData.xlsx"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "full",
+          "role": "production provenance dependency",
+          "availability_note": "Shipped current artifact or source input"
+        },
+        {
+          "name": "Fixed base parent outputs",
+          "paths": [
+            "results/validation/cyp2c38_in_vivo/log2_analysis_matrix.csv",
+            "results/validation/cyp2c38_in_vivo/sample_manifest.csv",
+            "results/validation/cyp2c38_in_vivo/feature_annotation_and_QC_ledger.csv",
+            "results/validation/cyp2c38_in_vivo/limma_fits.rds"
+          ],
+          "registry_keys": [],
+          "producer": "07b",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Required even validate-only; fit RDS ignored, must restore/regenerate"
+        },
+        {
+          "name": "Previous resampling banks",
+          "paths": [
+            "results/validation/cyp2c38_in_vivo/combined_bootstrap_draws.csv",
+            "results/validation/cyp2c38_in_vivo/permutation_draws.csv"
+          ],
+          "registry_keys": [],
+          "producer": "07b",
+          "mode": "full",
+          "role": "required",
+          "availability_note": "Required full followup; base generated outputs"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ULM followup",
+          "paths": [
+            "results/validation/cyp2c38_in_vivo/ulm_followup/"
+          ],
+          "registry_keys": [],
+          "mode": "full"
+        }
+      ],
+      "calls": [],
+      "validation": "Reads fixed savedbase and refits/replays observedKOmodel; no resampling/writes.",
+      "overwrite": "Rejects nonempty followup output.",
+      "commands": [
+        {
+          "command": "Rscript scripts/workflows/07c_cyp2c38_ulm_resampling.R --validate-only",
+          "effect": "Phase-specific validation as documented"
+        }
+      ],
+      "notes": [
+        "--output changes destination only; no --parent/--previous CLI.",
+        "Complete11 avoids standalone saved-parent validation dependency by passing raw intake."
+      ],
+      "evidence": [
+        "scripts/core/wp1_workflow.R"
+      ]
+    },
+    {
+      "id": "6A_layouts",
+      "name": "Figure6A saved-anchor visual alternatives",
+      "entrypoints": [
+        "scripts/reports/cf453_figure6a_layouts.R"
+      ],
+      "plan": "docs/workflow_plans/16_cf453_diet_rewiring_figure6.md",
+      "purpose": "Replot saved anchor effects as four-state heatmap and paired dots without reselection",
+      "status": "current optional display entry",
+      "inputs": [
+        {
+          "name": "Saved16 analysis",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_rewiring/rewiring_analysis.rds"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "producer": "16",
+          "mode": "all",
+          "role": "required",
+          "availability_note": "Ignored generated cache; restore or run16 first"
+        },
+        {
+          "name": "Retained-original artifacts recorded when present",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_rewiring/panels/Fig6A_anchor_gene_shifts.pdf",
+            "results/zonation_marker_update_20261116/cf453_rewiring/panels/Fig6B_lipid_class_shift.pdf",
+            "results/zonation_marker_update_20261116/cf453_rewiring/panels/Fig6C_network_gain_loss.pdf",
+            "results/zonation_marker_update_20261116/cf453_rewiring/source_data/*.csv",
+            "results/zonation_marker_update_20261116/cf453_rewiring/CF453_Figure6_zonation_diet_panels.zip"
+          ],
+          "registry_keys": [],
+          "producer": "16",
+          "mode": "all",
+          "role": "optional retained-artifact checks",
+          "availability_note": "Only existing files enter a new ledger; reusing oldoutput ledger can require its recorded original files"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Two layout groups, ledger and provenance",
+          "paths": [
+            "results/zonation_marker_update_20261116/cf453_layouts/"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "plot-only by design"
+        }
+      ],
+      "calls": [],
+      "validation": "No validate-only option; source-loading defines runner. Reads16anchors/effects, no models or resampling.",
+      "overwrite": "Approved-root/descendant guard runs before any writes, independent of ignored caches and symlink aliases. Default approved output is intentionally refused; supply fresh --output. Outside protected root existing review exports can be rewritten; retained-original identities checked at end.",
+      "commands": [
+        {
+          "command": "Rscript scripts/reports/cf453_figure6a_layouts.R --parent=results/runs/cf16/rewiring_analysis.rds --output=results/runs/cf6a_layouts",
+          "effect": "Render two layouts from explicit saved16analysis"
+        }
+      ],
+      "notes": [
+        "Only --parent/--output options.",
+        "No automatic16 execution; do not treat dots as repeated dietary measurements on one mouse.",
+        "Plan/source hashes are recorded anew, not compared as retained-original data identities."
+      ],
+      "evidence": [
+        "scripts/reports/cf453_figure6a_layouts.R",
+        "scripts/core/cf453_figure6a_layouts.R"
+      ]
+    },
+    {
+      "id": "MOON_EXPANDED",
+      "name": "Expanded-prior TF→lipid sensitivity",
+      "entrypoints": [
+        "scripts/pkn/audit_measured_lipid_reaction_targets.py",
+        "scripts/pkn/build_expanded_lipid_rules.py",
+        "scripts/moon/ancillary/prepare_expanded_factor1_mapping.py",
+        "scripts/moon/ancillary/build_currency_traversal_policy.py",
+        "scripts/moon/ancillary/run_expanded_factor1_tf_to_lipid.R",
+        "scripts/moon/ancillary/reextract_expanded_factor1_thresholds.R",
+        "scripts/moon/ancillary/export_expanded_factor1_network.py"
+      ],
+      "plan": "docs/workflow_plans/moon_factor1_tf_to_lipid_expanded_species.md",
+      "purpose": "Prepare chain-compatibleprior/mapping and fit explicit graph/currency/depth sensitivities; extract lower thresholds separately.",
+      "status": "Active optional sensitivity; retained preferred outputs differ from runner defaults.",
+      "inputs": [
+        {
+          "name": "Base prior/resources",
+          "paths": [
+            "results/causal_modelling/cosmos_mouse_pkn/",
+            "support/cosmos_mouse/raw/uniprot_mouse.tsv.gz"
+          ],
+          "registry_keys": [],
+          "producer": "PKN",
+          "mode": "expanded prior build",
+          "role": "Frozen reactions,nodes,evidence,mappings",
+          "availability_note": "Retained artifacts ship; base builder does not run expandedbuilder."
+        },
+        {
+          "name": "Selected baseline seed/export",
+          "paths": [
+            "results/causal_modelling/factor1_tf_to_lipid/upstream_input.csv"
+          ],
+          "registry_keys": [],
+          "producer": "MOON_TF_TO_LIPID",
+          "mode": "expanded prior audit/build",
+          "role": "Selected TF seed/context table",
+          "availability_note": "Shipped savedCSV can satisfy prerequisite without refitting baseline."
+        },
+        {
+          "name": "Curated templates/inventory",
+          "paths": [
+            "support/cosmos_mouse/expanded_species_templates.json",
+            "results/causal_modelling/lipid_reaction_target_mapping_audit/feature_reaction_target_inventory.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "expanded prior build",
+          "role": "Reaction templates and measured-target audit",
+          "availability_note": "Retained catalogue/inventory ship; target audit is separate preparation."
+        },
+        {
+          "name": "Frozen factor/mapping companions",
+          "paths": [
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_node_mapping.csv",
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_weights_all.csv",
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_model_audit.json"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "mapping/fit",
+          "role": "Full precision values and one-to-one identities",
+          "availability_note": "Included minimal archived payloads."
+        },
+        {
+          "name": "Retained expanded mapping/policy",
+          "paths": [
+            "results/causal_modelling/factor1_tf_to_lipid_expanded_species/inputs/input_mapping.csv",
+            "support/cosmos_mouse/moon_currency_substrate_edges_v2.csv"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "conservative sensitivity",
+          "role": "Prepared observations and explicit V2 currency exclusions",
+          "availability_note": "Shipped; default runner instead uses full currency and no adjacent-layer restriction."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Expanded prior",
+          "paths": [
+            "results/causal_modelling/cosmos_mouse_pkn_expanded_species/"
+          ],
+          "registry_keys": [],
+          "mode": "separate builder; new empty output"
+        },
+        {
+          "name": "Fits/extractions",
+          "paths": [
+            "results/causal_modelling/factor1_tf_to_lipid_expanded_species/"
+          ],
+          "registry_keys": [],
+          "mode": "default mode dirs expanded/ or frozen_control/; saved study names were explicit"
+        },
+        {
+          "name": "Preferred saved sensitivity",
+          "paths": [
+            "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers4_lower_thresholds/"
+          ],
+          "registry_keys": [],
+          "mode": "saved separate lower-threshold extraction"
+        }
+      ],
+      "calls": [],
+      "validation": "Mapping --validate-only checks prepared files/identities without writes or scoring. Full-fit --validate-only enforces baseline software/input/graph/mapping/policy gates. Reextract --validate-only checks completed fit,source commit and grid without scoring/writes.",
+      "overwrite": "Builders/fits/mapping/exports require new empty destinations; currency policy refuses existing three output paths. Baseline PKN builder is a separate overwrite-risk command.",
+      "commands": [
+        {
+          "command": "python3 scripts/moon/ancillary/prepare_expanded_factor1_mapping.py --validate-only",
+          "effect": "No-write mapping check using retained expanded graph/resources."
+        },
+        {
+          "command": "Rscript scripts/moon/ancillary/run_expanded_factor1_tf_to_lipid.R --mode=expanded --validate-only",
+          "effect": "Full-fit gate; currentdecoupleR mismatch blocks."
+        },
+        {
+          "command": "Rscript scripts/moon/ancillary/reextract_expanded_factor1_thresholds.R --fit=COMPLETED_FIT_DIR --output=NEW_DIRECTORY --layer-consistent --validate-only",
+          "effect": "Check saved fit/commit and lower-cutoff grid; no scores or writes."
+        }
+      ],
+      "notes": [
+        "Order:baseprior+selectedseeds→targetaudit/catalogue→expandedprior→mapping→optionalV2policy→fit→lower-thresholdreextraction→evidence/routeexport.",
+        "Preferredconservativebehavior requires explicit no_generic_substrate, V2edgeCSV and --layer-consistent; not a default invocation.",
+        "--alias-complete alone still targets existingV1policy filenames; supply three fresh outputpaths if regeneratingV2.",
+        "Default fit outputsubdirs expanded/frozen_control differ from saved expanded_inputs/frozen_inputs_control and namedcurrency runs."
+      ],
+      "evidence": [
+        "scripts/pkn/build_expanded_lipid_rules.py",
+        "scripts/moon/ancillary/prepare_expanded_factor1_mapping.py",
+        "scripts/moon/ancillary/build_currency_traversal_policy.py",
+        "scripts/moon/ancillary/run_expanded_factor1_tf_to_lipid.R",
+        "scripts/moon/ancillary/reextract_expanded_factor1_thresholds.R",
+        "scripts/moon/config/factor1_tf_to_lipid_expanded_species.json"
+      ]
+    },
+    {
+      "id": "MOON_KO",
+      "name": "Reviewed KO validation proposal and optional expression audit",
+      "entrypoints": [
+        "scripts/moon/ancillary/audit_factor1_ko_expression.R",
+        "scripts/moon/ancillary/propose_factor1_ko_validation.py"
+      ],
+      "plan": "docs/workflow_plans/moon_factor1_ko_validation_prioritization.md",
+      "purpose": "Export reviewed target/path priorities separately from actual-count feasibility evidence.",
+      "status": "Optional no-fit evidence/proposal branch; raw-count regeneration needs local inputs.",
+      "inputs": [
+        {
+          "name": "Expanded selected networks/mapping",
+          "paths": [
+            "results/causal_modelling/factor1_tf_to_lipid_expanded_species/"
+          ],
+          "registry_keys": [],
+          "producer": "MOON_EXPANDED",
+          "mode": "proposal/expression context",
+          "role": "Four/six-layer frozen networks and mapped endpoint identities",
+          "availability_note": "Retained selected outputs ship."
+        },
+        {
+          "name": "Review and source metadata",
+          "paths": [
+            "support/cosmos_mouse/factor1_ko_validation_review.json",
+            "support/cosmos_mouse/ko_validation_literature_sources.json"
+          ],
+          "registry_keys": [],
+          "producer": "curated",
+          "mode": "proposal",
+          "role": "Reviewed exclusions,hypotheses,ranking and source identities",
+          "availability_note": "Shipped; no graph mutation or automatic causal intervention inference."
+        },
+        {
+          "name": "Original count evidence",
+          "paths": [
+            "data/RNA/fcg_pseudobulks.rds",
+            "miscellaneous/older_inputs/legacy_rna/merged_counts_matrix_250508_VH00211_433_AACVFM3HV_with_gene_symbols_and_groups.csv"
+          ],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "expression-audit regeneration",
+          "role": "Actual whole-cell FCG counts and historical culture controls; factor values remain separate",
+          "availability_note": "FCGSeuratobject andcultureCSV arelocal-only; seven publictransports do not replace whole-cell FCG counts."
+        },
+        {
+          "name": "Retained expression audit",
+          "paths": [
+            "results/causal_modelling/factor1_ko_validation_targets/expression_audit/gene_expression.csv"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "proposal only",
+          "role": "Reusable count-derived feasibility table",
+          "availability_note": "Shipped; proposal need not rerun raw-count audit."
+        },
+        {
+          "name": "Frozen factor annotations",
+          "paths": [
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "expression audit",
+          "role": "FullprecisionFactor1values shown separately from actualcounts",
+          "availability_note": "Included compact active-model dependency."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Prioritization/path exports",
+          "paths": [
+            "results/causal_modelling/factor1_ko_validation_targets/alternating_prioritization/"
+          ],
+          "registry_keys": [],
+          "mode": "default existing; fresh output"
+        },
+        {
+          "name": "Expression audit",
+          "paths": [],
+          "registry_keys": [],
+          "mode": "default temporary or explicit fresh output"
+        }
+      ],
+      "calls": [],
+      "validation": "Expression --validate-only performs its actual count/metadata checks and still needs local raw count inputs; proposal --validate-only checks reviewed paths/graph/source/expression without exporting. Neither fitsMOON.",
+      "overwrite": "Fresh proposal/expression output required; existing nonempty destinations refused.",
+      "commands": [
+        {
+          "command": "Rscript scripts/moon/ancillary/audit_factor1_ko_expression.R --validate-only",
+          "effect": "No-write checks; requires local original FCG/culture counts."
+        },
+        {
+          "command": "python3 scripts/moon/ancillary/propose_factor1_ko_validation.py --validate-only",
+          "effect": "Validate retained proposal inputs without model fit/output."
+        }
+      ],
+      "notes": [
+        "This proposal consumes expanded sensitivities, not solely the baseline388edge graph.",
+        "Archived proposalPDF is local-only; frozen READMEoldlink is not a public download.",
+        "Raw count audit and reviewedproposal exports are different rerun scopes."
+      ],
+      "evidence": [
+        "scripts/moon/ancillary/audit_factor1_ko_expression.R",
+        "scripts/moon/ancillary/propose_factor1_ko_validation.py",
+        "support/cosmos_mouse/factor1_ko_validation_review.json"
+      ]
+    },
+    {
+      "id": "MOON_LIPID_TO_TF",
+      "name": "Exact-mapped lipid→TF hypotheses",
+      "entrypoints": [
+        "scripts/moon/run_factor1_lipid_to_tf.R",
+        "scripts/moon/ancillary/refine_lipid_tf_thresholds.R",
+        "scripts/moon/ancillary/audit_lipid_tf_scores.R"
+      ],
+      "plan": "docs/workflow_plans/moon_factor1_lipid_to_tf.md",
+      "purpose": "Fit original-direction regulatory/precursor feasibility policies; optionalph73 remains separate.",
+      "status": "Active optional branch; main entry produces coarsegrid, not every retained refinement/export.",
+      "inputs": [
+        {
+          "name": "Frozen observations/contract",
+          "paths": [
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_node_mapping.csv",
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_hepatocyte_tf_activities_mapped.csv",
+            "scripts/moon/config/factor1_tf_to_lipid.json"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "fit/coverage",
+          "role": "Exact lipid inputs,TF observations,RNA coherence,softwarepin",
+          "availability_note": "Included; forward config used as dependency contract, not a forward-run call."
+        },
+        {
+          "name": "Original and optional normalized priors",
+          "paths": [
+            "results/causal_modelling/cosmos_mouse_pkn/"
+          ],
+          "registry_keys": [],
+          "producer": "PKN",
+          "mode": "fit/coverage/export",
+          "role": "Original PKN plus --include-ph73 curated sensitivity",
+          "availability_note": "Retained resources/evidence ship."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Coarse fitting/extraction",
+          "paths": [
+            "results/causal_modelling/factor1_lipid_to_tf/"
+          ],
+          "registry_keys": [],
+          "mode": "default existing; fresh --output"
+        },
+        {
+          "name": "Refinement/export",
+          "paths": [
+            "results/causal_modelling/factor1_lipid_to_tf/refinement/"
+          ],
+          "registry_keys": [],
+          "mode": "separate ancillary extraction from saved fits"
+        },
+        {
+          "name": "Score diagnostics",
+          "paths": [
+            "results/causal_modelling/factor1_lipid_to_tf/score_audit/"
+          ],
+          "registry_keys": [],
+          "mode": "separate recomputation on final graphs"
+        }
+      ],
+      "calls": [],
+      "validation": "Main --validate-only checks frozen software/observations before coverage fitting; it does not run every later ancillary/export check. Refinement reuses scores; score audit computes diagnostic scores on saved graphs (not a new coherence fit).",
+      "overwrite": "Main/refinement/selected export require fresh directories; no automatic overwrite.",
+      "commands": [
+        {
+          "command": "Rscript scripts/moon/run_factor1_lipid_to_tf.R --validate-only --include-ph73",
+          "effect": "Input/software check; current pin blocks."
+        },
+        {
+          "command": "Rscript scripts/moon/run_factor1_lipid_to_tf.R --include-ph73 --output=results/runs/moon_lipid_to_tf",
+          "effect": "Fit explicit original+normalized sensitivities after setup."
+        },
+        {
+          "command": "Rscript scripts/moon/ancillary/refine_lipid_tf_thresholds.R --results=results/runs/moon_lipid_to_tf",
+          "effect": "Refine saved coarsefits and materialize reviewed candidate; no refit."
+        }
+      ],
+      "notes": [
+        "Config: scripts/moon/config/factor1_lipid_to_tf.json.",
+        "No PKN edge reversal. Main does not automatically perform refinement or final-score audit.",
+        "Omitting --include-ph73 preserves original-prior negative policies; later refinement is not needed for those no-route results."
+      ],
+      "evidence": [
+        "scripts/moon/run_factor1_lipid_to_tf.R",
+        "scripts/moon/config/factor1_lipid_to_tf.json",
+        "scripts/moon/ancillary/refine_lipid_tf_thresholds.R",
+        "scripts/moon/ancillary/audit_lipid_tf_scores.R"
+      ]
+    },
+    {
+      "id": "MOON_RELAXED",
+      "name": "Relaxed regulatory lipid→TF sensitivity",
+      "entrypoints": [
+        "scripts/moon/run_factor1_lipid_to_tf_relaxed.R",
+        "scripts/moon/ancillary/search_factor1_lipid_to_tf_relaxed_parameters.R"
+      ],
+      "plan": "docs/workflow_plans/moon_factor1_lipid_to_tf_relaxed.md",
+      "purpose": "Separate direct-regulatory conditional mapping/scoring analysis using directional STITCH.",
+      "status": "Active optional sensitivity; distinct from original-prior lipid→TF and selected baseline.",
+      "inputs": [
+        {
+          "name": "Directional prior",
+          "paths": [
+            "results/causal_modelling/cosmos_mouse_pkn_stitch_directional/pkn_exploratory_stitch_directional.rds"
+          ],
+          "registry_keys": [],
+          "producer": "PKN",
+          "mode": "selected fit/search",
+          "role": "Direct chemical→protein +protein prior",
+          "availability_note": "Retained overlay ships; large rawSTITCH files are rebuild-only prerequisites."
+        },
+        {
+          "name": "Frozen factor/mapping/reference",
+          "paths": [
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+            "results/causal_modelling/factor1_relaxed_lipid_regulatory_mapping/",
+            "miscellaneous/older_results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory/runs/direct_strong_tfs_pruning4_layers4/run_state.rds",
+            "miscellaneous/older_results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory/score_layer_constrained/solutions/direct_strong_tfs_pruning4_layers4__p0.5__s0.5/"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "fit/export/reference",
+          "role": "Conditional feature/chemical assignments and selected saved comparator",
+          "availability_note": "Required compact states,ledgers and current evidence ship."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Selected sensitivity",
+          "paths": [
+            "results/causal_modelling/factor1_lipid_to_tf_relaxed/"
+          ],
+          "registry_keys": [],
+          "mode": "default existing; fresh output"
+        },
+        {
+          "name": "Parameter search",
+          "paths": [
+            "results/causal_modelling/factor1_lipid_to_tf_relaxed_parameter_search/"
+          ],
+          "registry_keys": [],
+          "mode": "separate search entry/config"
+        }
+      ],
+      "calls": [],
+      "validation": "--validate-only checks exact pinned packages/source hashes,selected reference and direct-graph inputs without fit/writes; currentdecoupleR pin fails. Candidate/evidence audits are separate commands.",
+      "overwrite": "Selected and search outputs refuse existing nonempty directories.",
+      "commands": [
+        {
+          "command": "Rscript scripts/moon/run_factor1_lipid_to_tf_relaxed.R --validate-only",
+          "effect": "No-write prerequisites; currentdecoupleR pin blocks."
+        },
+        {
+          "command": "Rscript scripts/moon/run_factor1_lipid_to_tf_relaxed.R --output=results/runs/moon_relaxed",
+          "effect": "New selected sensitivity fit after environment provisioning."
+        }
+      ],
+      "notes": [
+        "Config: scripts/moon/config/factor1_lipid_to_tf_relaxed.json; searchconfigseparate.",
+        "Unlike the stale older README claim, this active configuration DOES use the STITCH overlay.",
+        "Candidate chemical topology seeds and post-score abundance-sign annotations are not receptor perturbations or independent TF validation."
+      ],
+      "evidence": [
+        "scripts/moon/run_factor1_lipid_to_tf_relaxed.R",
+        "scripts/moon/lib/relaxed_lipid_tf.R",
+        "scripts/moon/config/factor1_lipid_to_tf_relaxed.json",
+        "scripts/moon/config/factor1_lipid_to_tf_relaxed_parameter_search.json"
+      ]
+    },
+    {
+      "id": "MOON_TF_TO_LIPID",
+      "name": "Selected TF→lipid replay",
+      "entrypoints": [
+        "scripts/moon/run_factor1_tf_to_lipid.R",
+        "scripts/moon/ancillary/validate_frozen_archives.R"
+      ],
+      "plan": "docs/workflow_plans/moon_factor1_tf_to_lipid.md",
+      "purpose": "Refit selected baseline from frozen mapped factor inputs and compare it with the original selected result.",
+      "status": "Active optional branch; saved result/reference checks available; current full-fit software gate fails.",
+      "inputs": [
+        {
+          "name": "Full-precision factor observations",
+          "paths": [
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_node_mapping.csv"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "fit/reference replay",
+          "role": "TF activities,lipid weights,RNA coherence and mapping",
+          "availability_note": "Mandatory compact archived states are included via active_frozen_dependencies.json; not regenerated by17."
+        },
+        {
+          "name": "Base PKN and provenance",
+          "paths": [
+            "results/causal_modelling/cosmos_mouse_pkn/"
+          ],
+          "registry_keys": [],
+          "producer": "PKN",
+          "mode": "fit/export",
+          "role": "Signed prior plus node/edge/reaction evidence",
+          "availability_note": "Retained resource ships; no builder call by main runner."
+        },
+        {
+          "name": "Selected reference states",
+          "paths": [
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth4_compressed/",
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/topology_radius_6/compressed/compression.rds",
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/network_SIF.csv",
+            "miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/score_retention/radius6_depth4_compressed_scores_all.csv"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "reference comparison",
+          "role": "Exact saved scores,compression,graph and selectedsolution",
+          "availability_note": "Minimal required files ship; remaining exploratory archive payloads can be ignored/local."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Selected fit,exports",
+          "paths": [
+            "results/causal_modelling/factor1_tf_to_lipid/"
+          ],
+          "registry_keys": [],
+          "mode": "default already populated; fresh --output required for rerun"
+        }
+      ],
+      "calls": [],
+      "validation": "Main --validate-only enforces exact package/commit/input contracts, reads prerequisites and stops before scoring/writes. Saved-artifact validator instead re-extracts from retained main+relaxed fits; default prints only, optional --output=NEW_JSON writes report.",
+      "overwrite": "Nonempty fit output refused; saved-artifact validator refuses existing report filename.",
+      "commands": [
+        {
+          "command": "Rscript scripts/moon/run_factor1_tf_to_lipid.R --validate-only",
+          "effect": "No-write full-fit prerequisites; currently blocked at decoupleR pin."
+        },
+        {
+          "command": "Rscript scripts/moon/ancillary/validate_frozen_archives.R",
+          "effect": "Saved hashes/reference/extraction checks; no fit or new scoring."
+        },
+        {
+          "command": "Rscript scripts/moon/run_factor1_tf_to_lipid.R --output=results/runs/moon_selected_replay",
+          "effect": "New fit/export only after pinned environment is provisioned."
+        }
+      ],
+      "notes": [
+        "Config: scripts/moon/config/factor1_tf_to_lipid.json.",
+        "Requires cosmosR1.21.2 commitb2ed195738479c4ad204cace37fd11ae2fd02bb8,decoupleR2.17.0,igraph2.3.3,jsonlite2.0.0.",
+        "Installed metadata18Nov2026 hasdecoupleR2.9.7; this blocks full-fit validation without invalidating saved artifact checks.",
+        "Does not run04,PKN builders or17; no expanded-marker RNA dependency."
+      ],
+      "evidence": [
+        "scripts/moon/run_factor1_tf_to_lipid.R",
+        "scripts/moon/lib/workflow.R",
+        "scripts/moon/config/factor1_tf_to_lipid.json",
+        "scripts/moon/ancillary/validate_frozen_archives.R",
+        "docs/provenance/active_frozen_dependencies.json"
+      ]
+    },
+    {
+      "id": "PKN",
+      "name": "Base PKN and separate directional overlay",
+      "entrypoints": [
+        "scripts/pkn/run_build.py",
+        "scripts/pkn/build_stitch_directional.py",
+        "scripts/pkn/validate_export.R"
+      ],
+      "plan": "docs/CAUSAL_ANALYSIS_MAP.md",
+      "purpose": "Build/audit signed prior resources separately from omic scoring.",
+      "status": "Optional resource generation; retained priors/evidence ship; full source rebuild has additional packages/raw prerequisites.",
+      "inputs": [
+        {
+          "name": "Frozen source snapshots",
+          "paths": [
+            "support/cosmos_mouse/raw/",
+            "results/causal_modelling/cosmos_pkn_audit/raw/"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "base build",
+          "role": "Mouse-GEM,Rhea,regulation,SwissLipids,LINEX identity/reaction resources",
+          "availability_note": "Retained base snapshots ship; do not infer that every optional upstream download ships."
+        },
+        {
+          "name": "Study feature inputs",
+          "paths": [
+            "results/lipidomic/gonade_type_ttop.csv"
+          ],
+          "registry_keys": [],
+          "producer": "03",
+          "mode": "base mapping",
+          "role": "Measured lipid DA/catalogue",
+          "availability_note": "Shipped saved output."
+        },
+        {
+          "name": "MOFA selected-feature context",
+          "paths": [
+            "results/mofa/networks/gene_lipid_correlations_factor1.csv"
+          ],
+          "registry_keys": [],
+          "producer": "04",
+          "mode": "base mapping",
+          "role": "Factor1 feature selection context",
+          "availability_note": "Shipped saved output; builder does not invoke04."
+        },
+        {
+          "name": "Large directional STITCH downloads",
+          "paths": [
+            "support/cosmos_mouse/raw/stitch_actions_10090_v5.0.tsv.gz",
+            "support/cosmos_mouse/raw/stitch_links_detailed_10090_v5.0.tsv.gz"
+          ],
+          "registry_keys": [],
+          "producer": "external",
+          "mode": "overlay rebuild only",
+          "role": "Raw acting-partner/action/link evidence",
+          "availability_note": "Local-only/ignored; source URLs+hashes retained. Existing overlay consumers do not need rawdownloads."
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Base resource",
+          "paths": [
+            "results/causal_modelling/cosmos_mouse_pkn/"
+          ],
+          "registry_keys": [],
+          "mode": "base generation; fixed destination"
+        },
+        {
+          "name": "Audit cache",
+          "paths": [
+            "results/causal_modelling/cosmos_pkn_audit/"
+          ],
+          "registry_keys": [],
+          "mode": "retained source evidence"
+        },
+        {
+          "name": "Directional overlay",
+          "paths": [
+            "results/causal_modelling/cosmos_mouse_pkn_stitch_directional/"
+          ],
+          "registry_keys": [],
+          "mode": "separate builder; new empty output"
+        }
+      ],
+      "calls": [],
+      "validation": "validate_export.R --validate-only checks existing signed CSV graphs against installed COSMOS cleaner without conversion/writes. It is not a MOON/software-version full-fit gate.",
+      "overwrite": "run_build.py can overwrite its fixed base directory; no --validate-only/help parser. Overlay builder requires empty/new output. Default validate_export writes RDS and validation/session records.",
+      "commands": [
+        {
+          "command": "Rscript scripts/pkn/validate_export.R --validate-only",
+          "effect": "No-fit/no-write validation of retained base CSV exports."
+        },
+        {
+          "command": "python3 scripts/pkn/run_build.py",
+          "effect": "Full resource rebuild in fixed directory; never use as a no-write preflight."
+        },
+        {
+          "command": "python3 scripts/pkn/build_stitch_directional.py --output=NEW_EMPTY_DIRECTORY",
+          "effect": "Separate overlay rebuild; requires local rawSTITCH files."
+        }
+      ],
+      "notes": [
+        "Base order: build_mouse_gem→build_rhea_lipid_reactions→build_lipid_regulation→map_lipids→build_lipid_rules→assemble_mouse_pkn→audit_mouse_pkn→validate_export.R→write_build_manifest.",
+        "Base runner does not call overlay/expanded builders or fitMOON.",
+        "Python pygoslin/pinned dependencies and RcosmosR/jsonlite are separate setup requirements."
+      ],
+      "evidence": [
+        "scripts/pkn/run_build.py",
+        "scripts/pkn/map_lipids.py",
+        "scripts/pkn/build_stitch_directional.py",
+        "scripts/pkn/validate_export.R"
+      ]
+    }
+  ]
+}

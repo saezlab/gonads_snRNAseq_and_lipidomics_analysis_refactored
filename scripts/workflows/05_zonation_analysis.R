@@ -13,6 +13,7 @@ fcg_zonation_run <- function(args=commandArgs(TRUE)) {
     cat("Current expanded-marker FCG inputs and isolated engine validated; no files changed.\n")
     return(invisible(TRUE))
   }
+  analysis_assert_not_approved_output(output)
   zmu_run05(input,output)
 }
 if(sys.nframe()==0L)fcg_zonation_run()

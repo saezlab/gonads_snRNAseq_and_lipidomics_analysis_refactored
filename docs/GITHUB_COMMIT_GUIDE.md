@@ -197,7 +197,10 @@ reproduce an optional manuscript-audit command requiring an undistributed
 manuscript. Scientific defaults and private report steps remain separate.
 
 Raw HPC preprocessing, human-cohort and collaborator imaging workflows can
-still require external datasets. Document those prerequisites rather than
+still require external datasets. Workflow10 folder-local `data_raw/`, `data_tidy/`
+and `figures/`, plus its per-cell `inferred_components.json`, are explicitly
+ignored so following its local-data instructions
+does not add individual-nucleus H5/H5AD files or generated imaging outputs to Git. Document those prerequisites rather than
 inventing substitutes or silently treating an absolute-path provenance field
 as an input present in the public repository. The provided expanded-marker
 preprocessing scripts establish an algorithm; exact retained-marker/runtime

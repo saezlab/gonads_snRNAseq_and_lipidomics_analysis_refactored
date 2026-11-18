@@ -1,13 +1,18 @@
 # Workflow 07b — Cyp2c38 in vivo lipidomic validation (WP1)
 
-**Compatibility phase documentation — 9 October 2026:** the active complete
-work package is [11](11_cyp2c38_in_vivo_validation.md), entered through
-`scripts/workflows/11_cyp2c38_in_vivo_validation.R`. This former entry is a thin wrapper for its
-base intake/differential phase; orchestration now lives in `scripts/core/wp1_workflow.R`.
-Inputs are repository-local, with byte-preserving import provenance in
-`data/wp1_wp2_input_migration_manifest.csv`. The recorded production results
-below remain unchanged. The complete WP1 entry passes fresh intake/results between phases; standalone
-phase execution retains its documented dependencies.
+## Current compatibility entry (18 November 2026)
+
+This wrapper calls only `wp1_run()` in `scripts/core/wp1_workflow.R`.
+The complete public work package is [Workflow11](11_cyp2c38_in_vivo_validation.md).
+Accepted phase options are `--permutations` (1999), `--bootstraps` (999),
+`--seed` (20261006), `--workers` (3), `--output` and `--validate-only`.
+Default output is `results/validation/cyp2c38_in_vivo/`; a full phase rejects a
+nonempty directory. Validation reconstructs intake/reference coefficients without
+saved WP1 output or writes. No report-only or ULM/calibration phase runs here.
+The exact original whole-cell RNA, cleaned lipids, Workflow02 group/PCA export
+and Workflow04 full-network SIF prerequisites are listed in Workflow11; those
+are public supplied artifacts. The original execution record below is retained
+as historical evidence, not a new result caused by cleanup or CSV distribution.
 
 **Entry point:** `scripts/workflows/07b_cyp2c38_in_vivo_validation.R`.
 **Helpers:** `scripts/core/cyp2c38_reference.R`, `scripts/core/cyp2c38_models.R`.
@@ -56,7 +61,7 @@ t-statistic matrix is exported explicitly.
 candidates (Alignment IDs 8059 and 8073); the second has two reference labels in
 the same unordered equivalence class. Neither enters primary matching.
 
-## Verified execution, 2026-10-06
+## Historical production verification, 2026-10-06
 
 The full entry point and `tests/test_cyp2c38_in_vivo.R` passed. Defaults are
 1,999 within-sex KO label permutations and 999 combined whole-animal bootstrap

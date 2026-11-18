@@ -103,14 +103,16 @@ Rscript scripts/workflows/11_cyp2c38_in_vivo_validation.R --output=results/valid
 Options: `--output`, `--permutations`, `--bootstraps`, `--workers`, `--seed`,
 `--base-permutations`, `--base-bootstraps`, `--base-seed`,
 `--calibration-datasets`, `--calibration-inner`, `--injection-datasets`,
-`--validate-only`. Unknown/duplicate options are rejected. Explicit common
+`--validate-only`. Unknown options and repeated valued options are rejected. Explicit common
 permutation/bootstrap options affect both phases unless the corresponding
 `--base-*` override is supplied. Omitting them preserves distinct defaults;
 explicit production settings include `--bootstraps=4999 --base-bootstraps=999`.
 `--seed` controls ULM; `--base-seed` controls the base phase.
 
 `--validate-only` passes fresh raw intake directly to ULM validation; it requires
-no saved WP1 results and creates no outputs. Full runs reject nonempty output
+no saved WP1 results and creates no outputs. It reconstructs coefficients and fits
+the observed weighted KO model for validation; it does not run the resampling,
+calibration, injection or plotting stages. Full runs reject nonempty output
 directories. Default root is `results/validation/cyp2c38_in_vivo/`, with
 ULM results in `ulm_followup/`.
 
@@ -125,7 +127,28 @@ Helpers retain `cyp2c38_*` names in `scripts/core/`. Existing PDF builders under
 Original historical run hashes remain historical records; fresh runs record
 new local paths/code hashes and the package manifest.
 
-## Verified consolidation and limitations
+## Public-clone and phase-only prerequisites
+
+The listed whole-cell CSVs, KO/FCG lipid tables, group/PCA export and frozen
+Workflow04 full-network SIF are supplied in the curated tree. `--validate-only`
+and a fresh full Workflow11 run do not require a saved WP1 model cache, a Seurat
+object, Workflow05/17, the private manuscript or external original-datasets paths.
+The overview workbook is also recorded in production input/code hashes. The
+optional global-siRNA reference in the report is contextual, not a replacement
+for the in-vivo KO data.
+
+The `07b` wrapper calls only `wp1_run()` and produces the base outputs. The `07c`
+wrapper calls only `wp1_ulm_run()` with `previous` fixed to
+`results/validation/cyp2c38_in_vivo/`; `--output` changes its destination, not its
+base parent. Its standalone validation needs base `log2_analysis_matrix.csv`,
+`sample_manifest.csv`, `feature_annotation_and_QC_ledger.csv` and
+`limma_fits.rds`; a full follow-up additionally reads
+`combined_bootstrap_draws.csv` and `permutation_draws.csv`. The base fit RDS is an
+ignored generated cache and must be regenerated/restored in a public clone.
+There is no `--report-only` mode in Workflow11 or either phase wrapper. Python
+PDF builders are optional separate commands with their own dependencies.
+
+## Historical consolidation verification and continuing limitations
 
 Actual validation of both phases passed from a nonexistent output directory;
 source loading, CLI routing/defaults and overwrite protection passed independent

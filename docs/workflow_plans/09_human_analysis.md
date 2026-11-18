@@ -6,7 +6,28 @@
 
 ## Source Dependencies
 
-This workflow is standalone Python and does not source the R helper stack used by workflows 00-08.
+This Python script defines its own helpers and does not source the R helper
+stack used by workflows 00-08. It is not self-contained in a public checkout.
+
+It is an optional external-data analysis, not a stage invoked by Workflow 17.
+The mouse input is a whole-hepatocyte signature; expanded-marker zonation
+inputs and the standalone diet cohort are not upstream inputs.
+
+## Execution and side effects
+
+There is no argument parser, `--validate-only` or harmless `--help` mode.
+`python3 scripts/workflows/09_human_analysis.py` runs `main()` in full after
+imports. `DATA_DIR` and `RESULTS_DIR` are literal external HPC paths at lines
+60-61 and must be provisioned or deliberately edited before use. Importing
+the module also calls `RESULTS_DIR.mkdir(...)` at line 63; importing it is not
+a no-write preflight. Existing filenames in that output directory can be
+overwritten. No fresh-output guard or frozen-result comparison is implemented.
+
+The `pypath` homology lookup in `main()` obtains mouse-to-human mappings from
+the installed package's resources/cache; the script does not use the
+repository's frozen `support/ortholog_resource.RData`. A suitable cache or
+network access and a compatible Python environment are additional
+prerequisites. The package list below is not a tested version lock.
 
 Python packages imported by the script:
 
@@ -45,17 +66,24 @@ External files expected under `DATA_DIR`:
 - `bulk/zhou/GSE179250_gene_tpm_normalized.txt` - Human liver TPM-normalized matrix.
 - `bulk/zhou/GSE179250_family.soft.gz` - GEO SOFT metadata for sample sex, age, and titles.
 - `hepa_gonad_signature.csv` - Copy of the mouse hepatocyte gonadal signature.
-- `male_vs_female_DA_res.csv` - Mouse DE/signature table used for the concordant ranked-gene dot plots.
+- `male_vs_female_DA_res.csv` - Separate mouse DE table used for the concordant
+  ranked-gene dot plots, with `ID`, `t_Hepatocytes`, `adj.P.Val` and `logFC`
+  columns. Workflow 09 does not create this input; it must be supplied explicitly.
 
 Repository source for the signature:
 
-- `results/pseudobulk/hepa_gonad_signature.csv` - Two-column table (`ID`, `t_Hepatocytes`) containing the mouse hepatocyte Testes vs Ovaries t-value vector. This is a near-identical earlier export of the current workflow 02 hepatocyte gonad t-values.
+- `results/pseudobulk/hepa_gonad_signature.csv` - Retained two-column table
+  (`ID`, `t_Hepatocytes`) containing the mouse hepatocyte Testes vs Ovaries
+  t-value vector. The script reads an external copy, so merely running
+  Workflow 02 does not provision `DATA_DIR/hepa_gonad_signature.csv`.
 
 The human liver data come from GEO accession [`GSE179250`](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE179250), associated with Zhou et al. 2022, "A resource for integrated genomic analysis of the human liver."
 
 ## Output Files
 
 Outputs are written to the external `RESULTS_DIR` configured in the script, not to this repository by default.
+Retained tables/figures under `results/human/` are saved study artifacts;
+the script does not automatically write or synchronize that repository tree.
 
 - `adata_processed.h5ad`
 - `pca_by_sex.pdf`
@@ -90,7 +118,11 @@ Outputs are written to the external `RESULTS_DIR` configured in the script, not 
 
 ## Coherence Assessment
 
-**Status: GOOD, external-data dependent.** The workflow is documented and isolated from the R rerun path. It cannot be rerun from a standard checkout unless the large `GSE179250` human liver files and copied mouse input tables are present under the script's external `DATA_DIR`.
+**Status: documented optional external analysis; not a public-checkout preflight.**
+The workflow is isolated from the R rerun path. The human data, both copied mouse
+tables, external paths, homology resources and compatible packages must be
+provisioned before a full run. No analysis was rerun during the documentation
+audit on 18 November 2026.
 
 ## Notes for Context Restoration
 

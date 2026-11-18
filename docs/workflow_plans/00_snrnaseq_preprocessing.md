@@ -6,6 +6,28 @@
 
 **Runtime status:** The two processing sections are wrapped in `if (FALSE)` blocks. The script documents the original HPC workflow and will not process data unless those guards are changed and the placeholder importer/HPC paths are supplied.
 
+## Current execution and handoff contract (audited 18 November 2026)
+
+This is an optional external/HPC reference, not a producer automatically executed
+by the public pipeline. Both cohort-processing blocks are disabled with
+`if (FALSE)`; loading the file still loads packages, defines functions and prints
+messages. There is no argument parser, validate-only mode or source guard. If a
+block is manually enabled, the importer still stops until implemented, `setwd()`
+changes the session directory, and existing named outputs can be replaced.
+
+Both cohorts use `config$fcg$gtf_file`; there is no `config$gdx$gtf_file`. The
+HPC output `pseudobulks_scc.rds` is not automatically copied/renamed to Workflow01's
+local input `data/RNA/fcg_pseudobulks.rds`. That import/name mapping is an explicit
+external preparation step. Public reruns start from the supplied CSV inputs in
+02/03/04/08, or from Workflow17 for current zonation/diet science; they do not need
+to execute00 or01.
+
+The two-marker `annotate_zonation()` helper is historical. It is not the producer
+of the current James-supplied expanded-marker transports, and does not establish
+the executed retained marker lists for the approved release. Enabling this raw
+workflow would require external alignments, the metadata workbook/GTF and a
+reviewed importer; no such execution occurred in this documentation audit.
+
 ## Source Dependencies
 
 ```r
@@ -47,7 +69,7 @@ SCpubr
 
 - Raw sci-RNA-seq alignment output on the original DKFZ `/omics/` filesystem.
 - `sci_metadata.xlsx`, sheet `metadata`, for FCG and GDX cohorts.
-- GTF annotation files referenced in `config$fcg$gtf_file` and `config$gdx$gtf_file`.
+- GTF annotation referenced by `config$fcg$gtf_file`, used by both cohort import calls.
 
 ## Output Files
 
@@ -123,7 +145,7 @@ SCpubr
 
 ## Notes for Context Restoration
 
-1. Most reproducible reruns should start with workflow 01.
+1. Public reruns start downstream from supplied CSVs (02/03/04/08) or current zonation Workflow17. Workflow01 itself requires local original whole-cell-type pseudobulk objects.
 2. Zonation classification is `Cyp2e1 > 1 & Cyp2f2 < 1` for pericentral, and `Cyp2e1 < 1 & Cyp2f2 > 1` for periportal.
 3. FCG wild-type controls (`XYT-WT`) are excluded before creating `pseudobulks_scc.rds`.
 4. GDX pseudobulks are written both with and without pump-status subsetting.

@@ -1,28 +1,37 @@
 # Workflow 15: Direct diet impact on CF453 sex and zonation differences
 
-## CSV transport update - 18 November 2026
+## Current parent, modes and public-clone prerequisites (18 November 2026)
 
-Parent verification uses `analysis_verify_inputs()` before model use. For frozen
-source-RDS identities it verifies the expected original SHA against the CSV export
-manifest, all CSV file hashes and exact numeric-content hashes without reading the
-RDS. `input_verification` records the opened manifest separately from the original
-identity. New CSV parent inputs are checked as ordinary actual files. This is an
-input representation change only; no contrasts, estimates or selection rules
-changed and no new model fit was needed for validation.
+Default parent is `analysis_current("cf453_models/models.rds")`; default output
+is `analysis_current("cf453_direct_diet")`. The parent is a generated Workflow14
+cache, not a raw-input path. Its adjacent `provenance_sha256.csv` is required,
+unless explicitly supplied with `--parent-provenance=PATH`. No Workflow14
+association/network output is needed. All recorded inputs are verified through
+`analysis_verify_inputs()`; frozen RDS identities can bridge to the exact public
+CSV export, while new parents verify their actual manifest/payload hashes.
 
----
+CLI accepts `--parent`, `--parent-provenance`, `--output`, `--models-only` or
+`--plot-only` (mutually exclusive modes). There is no `--validate-only`.
+Default execution refits the three direct RNA contrasts from the saved modeled
+RNA/design/rho, saves `diet_analysis.rds` and tables/provenance, and exports the
+four-panel alternative. `--models-only` performs that numerical stage without
+panels/reports; Workflow17 uses it before16. `--plot-only` reads
+`<output>/diet_analysis.rds` and rewrites plots/reports without fitting; parent
+arguments are not used to choose another cache in this mode. New fits reject an
+existing output except a lone `QA/` directory. Source-loading only defines APIs.
 
-## Current model entry - 16 November 2026
+Both model RDS caches are ignored in Git. In a public clone, first run14
+`--models-only --output=<fresh14>`, then15
+`--parent=<fresh14>/models.rds --output=<fresh15> --models-only`. The script
+never creates a missing parent automatically. Its approved current default
+contains model-stage output; the older four-panel delivery is the
+`historical_cf453_direct` archive. New scientific runs preserve both releases.
 
-Default parent is the registry's current `cf453_models/models.rds`; default output
-is current `cf453_direct_diet/`. Workflow17 invokes `--models-only` here before16.
-The historical four-panel presentation remains under `historical_cf453_direct`.
-New fits require fresh output. Raw-source hashes are checked against the original
-recorded manifest identities while opening the actual relocated files; fresh
-provenance records retain those identities with a separate `resolved_path`.
-No statistical contrast, family or selection rule changed during path promotion.
-
----
+Production parent reuse checks the recorded input-data identities, not every
+mutable code/plan row in a historical provenance file. New exports record current
+code/docs hashes. Historical strict export-QA can separately compare all recorded
+source/plan hashes and therefore report source-snapshot drift after documentation
+edits. Preserve approved manifests/results; do not refresh them to hide that drift.
 
 Requested 2 November 2026 to replace the 30-panel presentation with four
 independent panel groups focused on direct differences between diets.
@@ -31,10 +40,10 @@ cross-cohort/network conservation analysis or separate-diet network discovery.
 
 ## Inputs and model
 
-Use the validated `results/cf453_standalone_figure6/models.rds` containing
-18,486 eligible genes, 56 profiles from 28 mice, named eight-cell RNA design,
+Use the validated selected Workflow14 `models.rds`, containing its data-driven
+eligible-gene ledger, 56 profiles from 28 mice, named eight-cell RNA design,
 mouse blocking correlation, and the four-cell/28-mouse lipid model. Verify the
-three source-input SHA256 hashes against Workflow 14 provenance before use.
+recorded source-input SHA256 hashes against Workflow 14 provenance before use.
 This is a model extension on the same supplied normalized RNA and log2 lipid
 data, not a new normalization or change to animal/feature eligibility.
 
@@ -95,7 +104,7 @@ and direct diet x sex FDR highlighting. Labels rank by interaction q/p/ID.
 Four panel files in PDF, plus alternative SVG/PNG formats (12 graphic exports),
 four matching source CSVs, concise methods/legends and a portable ZIP. No extra
 main or supplementary plots and no assembled manuscript figure. Store under
-`results/cf453_diet_impact_figure6/`.
+`analysis_current("cf453_direct_diet")` or a fresh explicit output.
 
 ## Implementation and verification
 
@@ -115,7 +124,7 @@ count aggregation, nuclei/batches/litter and randomization provenance remain.
 Diet-modified observational associations do not isolate hormones or establish
 causality. Selected examples and nominal intervals are not independent validation.
 
-## Completed results and verification (2 November 2026)
+## Historical two-marker four-panel results and verification (2 November 2026)
 
 The pooled 55,458-test direct-diet RNA family identifies 166 diet x sex,
 350 diet x zone and 137 three-way genes at BH q<=0.05. The separate omnibus
@@ -146,8 +155,9 @@ and individually inspected; PDF bounds/text, vector-only SVG and 300-dpi PNG
 checks pass. Exactly four PDF/SVG/PNG panel groups and four CSV sidecars are
 delivered, without an assembled figure or extra supplementary plots.
 
-Reproduce with `Rscript scripts/workflows/15_cf453_diet_impact_figure6.R
---output=results/cf453_diet_impact_figure6_reproduction` (one shell line).
+Exact historical reproduction requires the matching `historical_cf453_models`
+parent explicitly; the default parent now selects expanded-marker data. Use a
+fresh `--output` with that chosen parent.
 `--plot-only` uses saved `diet_analysis.rds`; `--models-only` fits and exports
 without plotting. New full runs require a fresh destination. The validated
 Workflow 14 models.rds is the input; if absent, first run Workflow 14 with
@@ -158,7 +168,8 @@ Workflow 14 models.rds is the input; if absent, first run Workflow 14 with
 
 The parent provenance manifest now defaults to `provenance_sha256.csv` beside
 the supplied `--parent` cache, with an optional `--parent-provenance=PATH`.
-The historical parent/default behaviour is preserved. Gene eligibility is
+An explicitly supplied historical parent remains supported; current defaults
+select the expanded-marker release. Gene eligibility is
 validated against the parent ledger rather than a historical 18,486-gene count;
 the 28-mouse/56-profile balanced design and all contrast/FDR rules remain fixed.
 

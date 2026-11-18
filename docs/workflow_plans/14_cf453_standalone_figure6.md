@@ -1,33 +1,53 @@
 # Workflow 14: Standalone CF453 Figure 6
 
-## CSV transport update - 18 November 2026
+## Current entry and dependencies (18 November 2026)
 
-The public intake uses `current_wdsd_zonation_transport` and
-`wdsd_hepatocytes_transport`, each a manifest plus split CSV layers/metadata.
-No source Seurat object is needed. The normalized primary matrix, counts used for
-eligibility, scaled sensitivities, animal/profile rosters and all intake QC results
-are unchanged. New parent caches hash every actual manifest/payload file. Existing
-approved caches retain their recorded RDS identities; the verifier matches the
-expected original SHA to a fully verified lossless export before permitting reuse.
+The current pipeline uses this entry's `--models-only` stage. Default output is
+`analysis_current("cf453_models")` under the approved expanded-marker release;
+new fits require a fresh `--output` outside that approved root. Fresh full and
+`--models-only` modes call `analysis_assert_not_approved_output()` before any
+directory creation or model work, rejecting the approved root/descendants even
+when generated caches are absent (including symlink aliases). Input defaults are
+`current_wdsd_zonation_transport`, `wdsd_hepatocytes_transport` and
+`data/metabolomics/wdsd/lipidomics_cf453.csv`. Both RNA transports are mandatory:
+shared `wp2_load_inputs()` validates all 28 whole-hepatocyte profiles as well as
+56 paired zone profiles, even though the primary RNA fit uses only the zones.
+All counts/data/scale layers and metadata/QC are loaded. These inputs are supplied
+in the public tree; no source Seurat object, original FCG result or MOFA model is
+needed for a fresh CF453 fit.
 
----
+New model caches record each actual manifest/payload hash. Frozen approved
+caches retain their original source-RDS identities; `analysis_verify_inputs()`
+can verify an expected original SHA against a complete lossless CSV transport
+without deserializing the RDS. It does not substitute a CSV hash for an RDS hash.
 
-## Current model entry - 16 November 2026
+Modes (there is no `--validate-only`):
 
-Current Workflow17 uses this workflow's `--models-only` stage with the expanded-marker
-CF453 zonation RDS. The default input is `current_wdsd_zonation_rds`; the default
-output/lookup role is the current release's `cf453_models/`. Completed models are
-protected: a new fit needs fresh `--output`. Historical complete30-panel outputs
-and old model parents remain under the explicit `historical_cf453_models` role.
+- Default: fit/save models, run the full legacy association/density/bootstrap
+  analysis and export its 30-panel presentation.
+- `--models-only`: fit/save `models.rds`, model/design/eligibility tables,
+  provenance and session information, then stop. This is the upstream stage for
+  current Workflows15/16; it does not compute the legacy all-edge networks.
+- `--finish`: read `<output>/models.rds`, reject an existing `analysis.rds`, then
+  run the legacy network/panel remainder. It is not an input-only validation.
+- `--plot-only`: read `<output>/analysis.rds` and rewrite its panels/reports.
+  The approved current `cf453_models/` contains only the model stage, so it has
+  no full-analysis object for this plotting mode.
 
-The shared WP2 intake defaults current only for current standalone science;
-Workflows12/13 explicitly request their frozen historical input instead. Recorded
-raw-input paths remain provenance identities; file opening/hashing uses the
-relocation resolver and records `resolved_path`. Current and historical cached
-parent raw-input SHA256 checks both pass after relocation. Full old network
-exports are not prerequisites for the current14->15->16 chain.
+`--input-zonation=PATH` overrides only the zone source for a fresh fit; shared
+whole-hepatocyte intake remains required. It is rejected with `--finish` or
+`--plot-only`. Other values are `--output`, `--bootstraps` (999) and `--seed`
+(20261030). Saved modes require generated RDS caches, which are ignored in Git;
+a public clone must regenerate them into fresh directories. Source-loading the
+entry defines functions without executing analysis. `--finish` and `--plot-only`
+remain explicitly mutating saved-result modes and skip that new-fit guard; use
+a separate/copied run destination to preserve the approved release.
 
----
+Production parent reuse checks the recorded input-data identities, not every
+mutable code/plan row in a historical provenance file. New exports record current
+code/docs hashes. Historical strict export-QA can separately compare all recorded
+source/plan hashes and therefore report source-snapshot drift after documentation
+edits. Preserve approved manifests/results; do not refresh them to hide that drift.
 
 Approved by the user on 30 October 2026. This workflow implements the accepted
 standalone analysis plan, preserving all previous cohort-comparison outputs.
@@ -44,7 +64,7 @@ formatting is the pure helper in `scripts/core/cyp2c38_reference.R`.
 Entry: `scripts/workflows/14_cf453_standalone_figure6.R`.
 Statistics: `scripts/core/cf453_standalone.R`.
 Plots: `scripts/core/cf453_figure6_plots.R`.
-Output: fresh `results/cf453_standalone_figure6/`.
+Default output: `analysis_current("cf453_models")`; use a fresh `--output` for any new execution.
 
 ## Design and primary analysis
 
@@ -129,7 +149,7 @@ isolated hormone/chromosome effects, causal regulation or spatial lipid levels.
 Missing nucleus counts, raw-processing and batch/litter provenance remain
 limitations. Update this plan with actual results and any justified deviations.
 
-## Completed numerical results and verification (30 October 2026)
+## Historical two-marker full-analysis results and verification (30 October 2026)
 
 Primary modeled RNA: 18,486 genes; detection in >=7 of 56 profiles and nonzero
 variation. Supplied normalization replays ln(1+10000*counts/library) to <1e-15.
@@ -195,10 +215,10 @@ keeps 999 draws. Logs/replay checks are preserved in QA/fresh_cli; temporary
 smoke outputs are removed after verification. Full independent actual checks:
 720 groups, maximum absolute difference 1.509903e-13; density: 2,400 checks.
 
-## Versioned score-zonation update (16 November 2026)
+## Expanded-marker model-stage production record (16 November 2026)
 
 Workflow 14 now accepts an optional `--input-zonation=PATH` for a fresh fit;
-the default historical input remains unchanged. `wp2_load_inputs()` and
+the default is now the current expanded-marker CSV transport. `wp2_load_inputs()` and
 `cf6_models()` forward the explicit override and preserve its actual path.
 Models-only runs now export a complete parent cache: `models.rds`, model/design
 tables, input/model/code SHA256 and session provenance, without all-edge analysis

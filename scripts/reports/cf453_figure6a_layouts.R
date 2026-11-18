@@ -8,6 +8,7 @@ cf6a_run <- function(args=commandArgs(TRUE)) {
   value<-function(key,default){x<-args[startsWith(args,paste0(key,"="))];if(length(x))sub("^[^=]*=","",x) else default}
   parent<-value("--parent",analysis_current("cf453_rewiring/rewiring_analysis.rds"))
   output<-value("--output",analysis_current("cf453_layouts"))
+  analysis_assert_not_approved_output(output)
   dir.create(output,recursive=TRUE,showWarnings=FALSE)
   original_path<-file.path(output,"retained_original_sha256.csv")
   original<-if(file.exists(original_path))utils::read.csv(original_path,stringsAsFactors=FALSE) else {

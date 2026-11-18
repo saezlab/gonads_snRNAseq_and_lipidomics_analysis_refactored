@@ -2,7 +2,28 @@
 
 **Script:** `scripts/workflows/02_fcg_pseudobulk_analysis.R`  
 **Lines:** ~1452  
-**Purpose:** Run FCG pseudobulk RNA differential expression across five liver cell types, enrich pathways/TFs, and perform GDX, Xenium, and proteomics validation.
+**Purpose:** Run FCG pseudobulk RNA differential expression across five liver cell types, enrich pathways/TFs, perform GDX/proteomics comparisons, and plot an FCG volcano restricted to Xenium panel genes.
+
+## Current execution contract (audited 18 November 2026)
+
+The entry runs the complete body under both `source()` and `Rscript`; there is no
+CLI parser, source guard, validate-only mode or output-directory override. Existing
+files under `results/pseudobulk/` can be overwritten. Reproduction without changing
+curated results requires an isolated checkout/copy. The literal/default loader
+paths below, not `DATASETS` selection, control its inputs.
+
+Public CSVs and support files are sufficient with the required R environment;
+00/01 need not run again. Main RNA is read from all three split CSVs and merged
+with `meta_data_df.csv` plus the overview workbook. Optional legacy GDX analysis
+runs only when all four GDX RNA CSV/metadata files exist; it is separate from
+Workflow17's paired-zonation GDX analysis. Optional proteomics requires both listed
+protein/metadata files, but `vsn` is loaded unconditionally at entry start.
+
+The file named `xenium_validation_volcano.pdf` is a Workflow02 FCG hepatocyte DE
+volcano restricted to non-marker genes from the Xenium panel. It reads no Xenium
+measurements and has no dependency on Workflow10 outputs. The independent spatial
+analysis remains separate. Current04/05 do not load this workflow's DE tables;
+other consumers can use its checked hepatocyte group/PCA output.
 
 ## Source Dependencies
 
@@ -32,7 +53,7 @@ source("scripts/visualization/heatmaps.R")
 | 7 | Pathway Heatmap | 639-692 | Full pathway heatmap. |
 | 7B | Focused Pathway Heatmap | 694-846 | Key pathway heatmap for gonadal contrast. |
 | 7C | GDX Validation Comparison | 848-982 | Correlate FCG and GDX t-values. |
-| 7D | Xenium Validation | 984-1078 | Optional Xenium panel volcano plot. |
+| 7D | Xenium Validation | 984-1078 | Optional panel-restricted FCG volcano; no spatial measurements loaded. |
 | 8 | TF Activity | 1090-1164 | CollecTRI/custom hormone receptor TF activity with `minsize = 20`. |
 | 9 | PCA Coordinates | 1166-1198 | Save hepatocyte PCA coordinates. |
 | 10 | Proteomics Validation | 1200-1399 | Optional WT bulk liver proteomics validation with VSN and limma. |

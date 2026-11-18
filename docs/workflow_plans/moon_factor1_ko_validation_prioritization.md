@@ -18,6 +18,16 @@ this is not a MOON refit, flux model or quantitative intervention simulation.
   gates in `support/cosmos_mouse/factor1_ko_validation_review.json`.
 - Verified sources in `support/cosmos_mouse/ko_validation_literature_sources.json`.
 
+The raw-count regeneration and proposal-export scopes have different public
+prerequisites. The original whole-cell FCG RDS and the culture-count CSV are
+local-only/ignored; the seven public CSV transports cover other pseudobulk
+objects and do not replace the whole-cell FCG counts used here. Recomputing
+`audit_factor1_ko_expression.R`, including its `--validate-only` mode, requires
+restoring both count inputs. The proposal exporter instead reads the retained
+`results/causal_modelling/factor1_ko_validation_targets/expression_audit/gene_expression.csv`
+by default, together with the reviewed graph/mapping/source inputs. It need
+not regenerate that expression audit or refit MOON.
+
 ## Entry points and invariants
 
 `ancillary/audit_factor1_ko_expression.R` under `scripts/moon/` separates
@@ -112,6 +122,13 @@ nine pages, with one landscape ranking page and two landscape route pages.
 The renderer was run immediately after edits. Poppler rendering and full
 page-by-page visual inspection are required; PDF text/link checks are stored
 in `pdf_export_audit.json`. No R script edits or new MOON fit are involved.
+
+The preceding rendering record describes the October production. Its retained
+PDF moved to the local-only
+`miscellaneous/quick_tests/output/pdf/cosmos_factor1_ko_validation_targets.pdf`.
+The renderer still defaults to generating a new `output/pdf/` file; that output
+is ignored by Git. Neither location is a public-download guarantee. The source
+report and current proposal tables remain available separately.
 
 ## 16 November 2026 repository cleanup
 

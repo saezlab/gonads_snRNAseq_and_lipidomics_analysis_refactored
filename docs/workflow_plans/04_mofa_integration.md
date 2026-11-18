@@ -4,6 +4,31 @@
 **Lines:** ~1473  
 **Purpose:** Integrate RNA pseudobulk views and lipidomics with MOFA, enrich factors for gonadal type, extract factor weights, infer TF activity, and build gene-lipid and TF-gene-lipid networks.
 
+## Current execution contract (audited 18 November 2026)
+
+The full body runs under `source()` and `Rscript`, with no CLI parser, source guard,
+validate-only or fresh-output option. It always prepares/saves `MOFA_data.RData`
+and can overwrite weights, enrichment, network and figure outputs under
+`results/mofa/`. Use an isolated checkout/copy for reproduction without changing
+curated results. The entry's literal/default paths control loading; neither
+`DATASETS` nor `MOFA_SETTINGS` redirects its hardcoded model loop/options.
+
+It skips training only when at least11 filenames match
+`results/mofa/RNA/mofa_res_.*factor.hdf5`. All eleven5-15 factor models are retained
+in the public tree, so the normal supplied-cache run reuses them. If this count
+gate fails, the script automatically writes `data/mofa/MOFA_RNA_data.csv` and trains
+missing factors5-15 via `python scripts/mofa/mofa2.py options_MOFA.csv` (GPU attempt,
+CPU retry). A cached weights RData does not bypass this earlier training step.
+The fallback weights branch is reached later if no model is selected/available.
+
+`core/multiomics.R` unconditionally loads `MOFA2`; therefore MOFA2 is an actual
+package prerequisite despite the entry's later unavailable-package/fallback
+message. Python/mofapy2 is needed only for the automatic training contingency.
+Public main CSVs, lipid data, workbook, support resources and retained models are
+sufficient; no Seurat object, Workflow02 DE or current zonation output is consumed.
+Current05 does not depend on04. Global07 consumes the permissive gene-lipid network;
+11/12 and optional causal workflows use their separately declared frozen branches.
+
 ## Source Dependencies
 
 ```r
@@ -32,8 +57,8 @@ source("scripts/visualization/heatmaps.R")
 
 - `data/RNA/scaled_RNA_{1,2,3}.csv` - Workflow 01 main RNA matrix.
 - `data/metabolomics/Lipid_data_file_JPC_cleaned.csv`
-- `results/mofa/RNA/mofa_res_*factor.hdf5` - Optional pre-trained MOFA models.
-- `results/mofa/main_model_RNA_lipid_weight.RData` - Optional fallback if model loading is unavailable.
+- `results/mofa/RNA/mofa_res_*factor.hdf5` - Retained pre-trained models; a count below11 triggers automatic training of missing5-15 factors.
+- `results/mofa/main_model_RNA_lipid_weight.RData` - Later weight fallback if no model is available; it does not suppress the earlier training gate or the MOFA2 package requirement.
 - `data/Suppl_Table_1_OverviewData.xlsx` via `load_metadata()`.
 - `support/m5.all.v2023.2.Mm.symbols.gmt` - Lipid-metabolism gene filter for networks.
 - `support/TF_regulons.RData`
@@ -42,7 +67,7 @@ source("scripts/visualization/heatmaps.R")
 ## Output Files
 
 - `results/mofa/MOFA_data.RData`
-- `data/mofa/MOFA_input.csv` - Written only if model training is needed.
+- `data/mofa/MOFA_RNA_data.csv` - Written only if model training is needed.
 - `results/mofa/RNA/mofa_res_12factor.hdf5` - Expected optimal model location.
 - `results/mofa/main_model_RNA_lipid_weight.RData`
 - `results/mofa/factor_analysis/factor_enrichment_gonadal.RData`

@@ -1,19 +1,19 @@
 # Repository organization and provenance
 
-The cleanup on 16 November 2026 promotes the approved expanded-marker analysis without changing the approved scientific result files. Moves preserve bytes; copies are hash-verified. Nothing was deleted, committed or pushed.
+The cleanup on 16 November 2026 promotes the approved expanded-marker analysis without changing the approved scientific result files. Moves preserve bytes; copies are hash-verified. The cleanup procedure itself did not delete files or perform Git publication; later user-authorized commits and pushes are recorded in Git history.
 
 ## Maintained locations
 
 | Location | Role |
 | --- | --- |
 | `scripts/workflows/` | Numbered entry points; 17 is the current zonation/diet chain |
-| `scripts/core/`, `config/`, `visualization/` | Shared implementations, release registry and plotting code |
+| `scripts/core/`, `scripts/config/`, `scripts/visualization/` | Shared implementations, release registry and plotting code |
 | `scripts/core/engines/` | Frozen original 05/07 source bodies used by validated adapters |
 | `scripts/moon/`, `scripts/pkn/` | Active optional causal workflows and resources |
 | `scripts/maintenance/` | Organization, path resolution and GitHub checks |
 | `tests/` | Maintained tests and independent numerical QA; generated test logs are not source |
 | `data/RNA/pseudobulk_csv/` | Public pseudobulk CSV parts under 50 MB, with verified source values and original-object provenance |
-| `data/RNA/zonation/current/` | Ignored local expanded-marker source objects, scoring scripts and small compatibility CSVs |
+| `data/RNA/zonation/current/` | Local expanded-marker source objects (excluded from Git), alongside retained scoring scripts and small compatibility CSVs |
 | `results/zonation_marker_update_20261116/` | Immutable current zonation, diet panels, source tables and completed revision audit |
 | Other main `results/` roots | Unchanged cell-type, lipid, MOFA, validation and optional active causal outputs |
 | `miscellaneous/` | Historical results, comparison branches, source, refactoring, scratch outputs and local state |
@@ -52,6 +52,8 @@ Exact file paths override this compact summary. Use the machine-readable ledgers
 - [Git-history recovery map](provenance/archive_recovery.csv): exact Git object references where pre-cleanup tracked bytes match; otherwise an explicit local-archive requirement.
 - [Causal dependency map](CAUSAL_ANALYSIS_MAP.md): active workflows versus frozen pilot/selection evidence and optional sensitivities.
 - [Analysis catalog](analysis_catalog.csv): current/optional/historical workflow roles and output roots.
+- [Complete workflow reference](WORKFLOW_REFERENCE.md) and [dependency inventory](workflow_dependencies.csv): exact inputs, producers, execution modes and availability, maintained through [the JSON contract](workflow_dependencies.json).
+- [Documentation audit](provenance/workflow_documentation_audit_20261118.json): source review, preserved documentation snapshots, guard-only code changes and verification.
 
 Run `python3 scripts/maintenance/verify_repository_organization.py` to verify the moves, stable inputs, historical reference resolution and approved release. Run `python3 scripts/maintenance/audit_github_readiness.py --strict` for the prospective Git tree. These checks do not stage or commit files.
 

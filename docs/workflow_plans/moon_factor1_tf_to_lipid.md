@@ -4,7 +4,12 @@
 
 `scripts/moon/run_factor1_tf_to_lipid.R` regenerates the selected manuscript network from the existing, audited Factor 1 inputs and lipid-expanded mouse PKN. It is separate from workflows 00–10 and does not retrain MOFA or rebuild the PKN. The lipid-to-TF analysis has its own entry point and plan, `moon_factor1_lipid_to_tf.md`.
 
-Read this plan and `scripts/moon/README.md` before changing the workflow. Preserve the current manuscript configuration and reference comparison while adding ancillary analyses. Frozen `results/causal_modelling/cosmos_*` files are provenance/reference inputs, not output locations for this workflow.
+Read this plan and `scripts/moon/README.md` before changing the workflow.
+Preserve the selected configuration and reference comparison while adding
+ancillary analyses. The base prior remains under
+`results/causal_modelling/cosmos_mouse_pkn/`; historical pilot/search/selection
+references now live under `miscellaneous/older_results/causal_modelling/`.
+Those reference folders are inputs, not destinations for a new selected fit.
 
 ## Entry points and shared code
 

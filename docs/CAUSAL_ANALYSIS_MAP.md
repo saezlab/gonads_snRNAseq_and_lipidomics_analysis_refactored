@@ -29,6 +29,37 @@ retained. The optional KO expression audit reads its four historical culture
 controls from `miscellaneous/older_inputs/legacy_rna/merged_counts_matrix_250508_VH00211_433_AACVFM3HV_with_gene_symbols_and_groups.csv`; this archived input remains a live dependency. Optional sensitivity outputs are not automatic replacements for the
 selected TF → lipid analysis.
 
+## Generation order and available inputs
+
+Saved-result inspection starts from the retained artifacts, not from raw-data
+reconstruction. These branches do not run automatically after Workflow 17 and
+do not consume its expanded-marker RNA transports.
+
+| Branch | Required upstream material | What the entry actually generates |
+|---|---|---|
+| Base PKN | Frozen source snapshots, Workflow 03 lipid statistics and Workflow 04 gene-lipid correlations; Python/R builder packages | Base prior, mappings, reaction/evidence exports and validated RDS versions; no MOON fit |
+| Selected TF→lipid | Frozen Factor 1 bundle, base PKN, archived selected states/solutions and exact software contract | New scoring/coherence fit, reference comparison, extraction and exports in a fresh directory |
+| Exact-mapped lipid→TF | Same frozen observations/base prior; optional `--include-ph73` prior | Coarse feasibility/fitting/extraction grid; finer refinement, selected export and score diagnostics are separate ancillary commands |
+| Relaxed lipid→TF | Retained directional STITCH overlay, conditional mapping/evidence ledgers and relaxed frozen reference | Separate selected fit or explicit parameter search; it does use the STITCH overlay |
+| Expanded TF→lipid | Base PKN + reaction-target audit/catalog + selected baseline seed table → expanded prior → prepared mapping → optional currency policy | Separate scoring sensitivity; lower-threshold re-extraction and evidence/route exports follow the completed fit |
+| KO proposal | Retained expanded network/source/evidence and expression-audit tables | Reviewed prioritization/path exports; no simulated KO or new MOON fit |
+
+The 13 explicitly included archived files below are sufficient frozen reference
+payloads for the maintained main MOON entry points, together with their retained
+current priors/results. They do not promise reconstruction of every upstream
+raw resource. Two large STITCH downloads
+(`support/cosmos_mouse/raw/stitch_actions_10090_v5.0.tsv.gz` and
+`stitch_links_detailed_10090_v5.0.tsv.gz`) remain local-only, with URLs and
+checksums in the overlay's source manifest; rebuilding that overlay needs them,
+whereas fitting from its retained RDS/evidence does not.
+
+The optional KO expression audit is a separate data-dependent preparation step:
+it also needs the local `data/RNA/fcg_pseudobulks.rds` whole-cell count object
+and the archived culture-count CSV. Neither is included in the Git tree. The
+proposal exporter instead accepts the retained `expression_audit/gene_expression.csv`
+alongside reviewed graphs and source metadata. A public clone can inspect those
+exports without claiming access to the original count libraries.
+
 ## Archived results that remain live inputs
 
 The following complete folders moved from `results/causal_modelling/` to
@@ -67,10 +98,12 @@ assumptions and are not current commands. The separate initial PKN feasibility
 probe moved unchanged to `miscellaneous/quick_tests/code/audit_cosmos_pkn.py`;
 it is also historical and is included in the cleanup ledger.
 
-The archived KO proposal PDF is now at
-[`miscellaneous/quick_tests/output/pdf/cosmos_factor1_ko_validation_targets.pdf`](../miscellaneous/quick_tests/output/pdf/cosmos_factor1_ko_validation_targets.pdf).
+The archived KO proposal PDF is local-only at
+`miscellaneous/quick_tests/output/pdf/cosmos_factor1_ko_validation_targets.pdf`.
 Frozen KO result README/source snapshots can retain the former `output/pdf/`
-link as historical provenance; this map gives its current physical location.
+link as historical provenance; it is not a working public-download link. This
+map gives the retained physical location; use the migration/restoration ledger
+when the local payload is unavailable.
 
 ## Verification without refitting
 
@@ -99,7 +132,8 @@ Base PKN builders, exporters and their audit-cache references consistently use
 `results/causal_modelling/cosmos_mouse_pkn/` and
 `results/causal_modelling/cosmos_pkn_audit/`. This repairs the former mixture of
 `results/cosmos_*` and relocated paths. Raw sources in
-`support/cosmos_mouse/raw/` and `cosmos_pkn_audit/raw/` remain available.
+`support/cosmos_mouse/raw/` and `cosmos_pkn_audit/raw/` contain the retained base
+snapshots; optional large-download exclusions are described above.
 
 `scripts/pkn/run_build.py` is a resource rebuild, not a cleanup or smoke test;
 it writes its declared resource directory. The cleanup ran compilation,
@@ -107,6 +141,25 @@ small tests and saved-export validation, without rerunning the full builder or
 changing frozen PKNs. Existing output/dependency manifests retain original
 execution paths and source hashes; new code changes do not retroactively alter
 those historical records.
+
+The base builder calls, in order, `build_mouse_gem.py`,
+`build_rhea_lipid_reactions.py`, `build_lipid_regulation.py`, `map_lipids.py`,
+`build_lipid_rules.py`, `assemble_mouse_pkn.py`, `audit_mouse_pkn.py`,
+`validate_export.R` and `write_build_manifest.py`. Its default output is the
+existing base-resource directory and it can overwrite generated files there;
+it has no `--validate-only` or no-write `--help` implementation. Use the
+documented validator, not a builder invocation, merely to inspect retained
+resources. Without `--validate-only`, `validate_export.R` writes RDS conversions
+and validation/session records.
+
+`build_stitch_directional.py --output=NEW_EMPTY_DIRECTORY` and
+`build_expanded_lipid_rules.py --output=NEW_EMPTY_DIRECTORY` are separate
+builders, not stages called by `run_build.py`. The expanded builder additionally
+reads the reaction-target inventory and selected baseline `upstream_input.csv`;
+those saved artifacts can be consumed without refitting the baseline. Mapping
+preparation follows the expanded graph. Conservative V2 policy and adjacent-layer
+extraction require explicit options: they are not the expanded runner's default
+`full` currency policy. See its workflow plan for fit versus re-extraction order.
 
 Scores and routes remain exploratory prior-guided hypotheses. Supplied TF
 observations, conditional chemical mappings, measured bulk-liver abundance and

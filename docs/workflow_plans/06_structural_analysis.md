@@ -6,6 +6,22 @@
 
 **Current-status note:** The script header and `scripts/core/structural_analysis.R` still document the older gene-lipid structural-regression concept. In the active workflow, those older gene-lipid correlation sections are not run; the script ends with a note that sections 6-14 are commented out.
 
+## Current execution contract (audited 18 November 2026)
+
+This direct script executes under both `source()` and `Rscript`; there is no CLI
+parser, source guard, validate-only or fresh-output override. It overwrites named
+outputs under `results/lipidomic/structural_model/`, so reproduce in an isolated
+checkout/copy when retaining curated outputs. The current public WF03 result
+RData is sufficient with the R environment; no RNA/Seurat object, MOFA result,
+zonation result or bubble-annotation CSV is loaded by this active workflow.
+
+Run after03 when recomputing its input. Both maintained07 modes read this
+workflow's `lipids_with_structure.csv` for structural reference axes: default zonal
+validation and explicit `--global-only`. Config/dataset files are sourced, but
+input/output paths and the four plotted focus classes are hardcoded locally.
+Conditional significance CSVs are not removed when a later run has no qualifying
+rows, so an old file in a reused output root is not proof of a current result.
+
 ## Source Dependencies
 
 ```r

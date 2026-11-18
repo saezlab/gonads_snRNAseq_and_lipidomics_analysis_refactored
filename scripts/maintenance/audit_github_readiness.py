@@ -268,7 +268,13 @@ def markdown_links(files: list[str], candidate: set[str]) -> list[dict]:
                 destination = path.parent / destination
             destination = destination.resolve()
             resolved = relative(destination)
-            state = "present_in_commit" if resolved in candidate else (
+            # Git records files, but GitHub also exposes their parent
+            # directories. A local directory alone is not enough: it must
+            # contain at least one file included in the prospective tree.
+            directory_prefix = "" if resolved=="." else resolved.rstrip("/")+"/"
+            included_directory = destination.is_dir() and any(
+                entry.startswith(directory_prefix) for entry in candidate)
+            state = "present_in_commit" if resolved in candidate or included_directory else (
                 "present_local_only" if destination.exists() else "missing")
             if state == "present_in_commit":
                 continue

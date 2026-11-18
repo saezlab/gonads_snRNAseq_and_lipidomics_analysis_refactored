@@ -4,6 +4,25 @@
 **Lines:** ~953  
 **Purpose:** Run lipid differential abundance across FCG contrasts, optional GDX lipid validation, lipid-class enrichment, LINEX2 network extraction, and structural bubble plots.
 
+## Current execution contract (audited 18 November 2026)
+
+Both `source()` and `Rscript` execute the complete body. There is no CLI parser,
+validate-only, source guard or output-root option; named outputs under
+`results/lipidomic/` can be overwritten. Use an isolated checkout/copy for a fresh
+reproduction. The script uses literal/default loader paths, not `DATASETS` routing.
+
+The main branch needs the supplied cleaned lipid CSV, overview workbook and main
+RNA metadata roster, but no Workflow02 result. It explicitly intersects lipid
+samples with the RNA mouse roster before fitting. The supplied roster retains43
+FCG mice; Workflow08 instead uses all48 measured lipid mice and includes the five
+WT males. Treat regenerated tables as authoritative if inputs change.
+
+The optional GDX lipid branch reads `data/metabolomics/lipidomics_gdxhr.csv`
+directly; it does not need Workflow01's GDX RNA CSVs or Workflow02 GDX results.
+LINEX2 adjacency and supplied bubble-plot CSVs are separate curated resources.
+Outputs supply lipid DE/enrichment to05 and lipid DE to06. Public-clone execution
+requires these files and the R packages, without any source RNA/Seurat object.
+
 ## Source Dependencies
 
 ```r
@@ -77,7 +96,7 @@ source("scripts/visualization/heatmaps.R")
 
 - Lipid class enrichment uses `minsize = 5`.
 - The enrichment plot marks classes with `abs(enrichment) > 1.8`.
-- Main data loading starts from 1,386 lipid features, then filters samples to the RNA-shared cohort.
+- The loader reads the supplied cleaned lipid matrix, then the entry filters samples to the RNA-shared cohort; use generated results for feature counts.
 - The script's header and final printed count differ (`733/1,386` vs `773/1,386`); generated result files should be treated as the quantitative source for exact counts.
 
 ## Notes for Context Restoration
