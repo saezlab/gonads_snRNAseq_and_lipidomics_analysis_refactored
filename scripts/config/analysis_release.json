@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "release_id": "expanded_markers_20261116",
+  "description": "Current manuscript zonation and standalone diet analysis; expanded-marker pseudobulks prepared by James on 2026-11-04, approved 2026-11-16.",
+  "paths": {
+    "current_root": "results/zonation_marker_update_20261116",
+    "current_input_root": "data/RNA/zonation/current",
+    "current_fcg_zonation_rds": "data/RNA/zonation/current/fcg_zonation_pseudobulks_score.rds",
+    "current_gdx_zonation_rds": "data/RNA/zonation/current/gdx_zonation_pseudobulks_score.rds",
+    "current_wdsd_zonation_rds": "data/RNA/zonation/current/wdsd_zonation_pseudobulks_score.rds",
+    "current_fcg_zonation_csv": "data/RNA/zonation/current/fcg/scaled_RNA_zonation.csv",
+    "current_fcg_zonation_metadata": "data/RNA/zonation/current/fcg/meta_data_df_zonation.csv",
+    "current_gdx_zonation_csv": "data/RNA/zonation/current/gdx/scaled_RNA_gdx_zonation.csv",
+    "current_gdx_zonation_metadata": "data/RNA/zonation/current/gdx/meta_data_df_gdx_zonation.csv",
+    "historical_fcg_zonation_rds": "miscellaneous/older_inputs/two_marker_zonation/RNA/fcg_zonation_pseudobulks.rds",
+    "historical_gdx_zonation_rds": "miscellaneous/older_inputs/two_marker_zonation/RNA/gdx_zonation_pseudobulks.rds",
+    "historical_wdsd_zonation_rds": "miscellaneous/older_inputs/two_marker_zonation/RNA/wdsd/wdsd_zonation_pseudobulks.rds",
+    "historical_fcg_zonation_csv": "miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv",
+    "historical_fcg_zonation_metadata": "miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv",
+    "historical_fcg05": "miscellaneous/older_results/zonation_two_marker",
+    "historical_cf453_models": "miscellaneous/older_results/cf453_standalone_figure6",
+    "historical_cf453_direct": "miscellaneous/older_results/cf453_diet_impact_figure6",
+    "historical_cf453_rewiring": "miscellaneous/older_results/cf453_diet_rewiring_figure6",
+    "historical_wf12": "miscellaneous/comparisons/wdsd_network_comparison",
+    "historical_wf13": "miscellaneous/comparisons/wd_crosscohort_robustness",
+    "engine_fcg05": "scripts/core/engines/05_zonation_analysis_legacy.R",
+    "engine_validation07": "scripts/core/engines/07_validation_experiments_legacy.R",
+    "pseudobulk_csv_root": "data/RNA/pseudobulk_csv",
+    "current_fcg_zonation_transport": "data/RNA/pseudobulk_csv/current_fcg_zonation/manifest.json",
+    "current_gdx_zonation_transport": "data/RNA/pseudobulk_csv/current_gdx_zonation/manifest.json",
+    "current_wdsd_zonation_transport": "data/RNA/pseudobulk_csv/current_wdsd_zonation/manifest.json",
+    "wdsd_hepatocytes_transport": "data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json",
+    "historical_wdsd_zonation_transport": "data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json",
+    "wd_cell_types_transport": "data/RNA/pseudobulk_csv/wd_cell_types/manifest.json",
+    "wd_zonation_transport": "data/RNA/pseudobulk_csv/wd_zonation/manifest.json"
+  },
+  "relocations": [
+    {
+      "from": "results/zonation",
+      "to": "miscellaneous/older_results/zonation_two_marker"
+    },
+    {
+      "from": "results/cf453_standalone_figure6",
+      "to": "miscellaneous/older_results/cf453_standalone_figure6"
+    },
+    {
+      "from": "results/cf453_diet_impact_figure6",
+      "to": "miscellaneous/older_results/cf453_diet_impact_figure6"
+    },
+    {
+      "from": "results/cf453_diet_rewiring_figure6",
+      "to": "miscellaneous/older_results/cf453_diet_rewiring_figure6"
+    },
+    {
+      "from": "results/wdsd_network_comparison",
+      "to": "miscellaneous/comparisons/wdsd_network_comparison"
+    },
+    {
+      "from": "results/wd_crosscohort_robustness",
+      "to": "miscellaneous/comparisons/wd_crosscohort_robustness"
+    },
+    {
+      "from": "data/RNA/fcg_zonation_pseudobulks.rds",
+      "to": "miscellaneous/older_inputs/two_marker_zonation/RNA/fcg_zonation_pseudobulks.rds"
+    },
+    {
+      "from": "data/RNA/gdx_zonation_pseudobulks.rds",
+      "to": "miscellaneous/older_inputs/two_marker_zonation/RNA/gdx_zonation_pseudobulks.rds"
+    },
+    {
+      "from": "data/RNA/wdsd/wdsd_zonation_pseudobulks.rds",
+      "to": "miscellaneous/older_inputs/two_marker_zonation/RNA/wdsd/wdsd_zonation_pseudobulks.rds"
+    },
+    {
+      "from": "data/RNA/scaled_RNA_zonation.csv",
+      "to": "miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv"
+    },
+    {
+      "from": "data/RNA/meta_data_df_zonation.csv",
+      "to": "miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv"
+    },
+    {
+      "from": "data/RNA/legacy",
+      "to": "miscellaneous/older_inputs/legacy_rna"
+    },
+    {
+      "from": "results/mofa/RNA/old_20241023",
+      "to": "miscellaneous/older_results/mofa/old_20241023"
+    },
+    {
+      "from": "results/mofa/RNA/old_20260313",
+      "to": "miscellaneous/older_results/mofa/old_20260313"
+    },
+    {
+      "from": "results/multi-omic/legacy",
+      "to": "miscellaneous/older_results/multi_omic"
+    },
+    {
+      "from": "refactoring_docs",
+      "to": "miscellaneous/refactoring"
+    },
+    {
+      "from": "scripts/legacy",
+      "to": "miscellaneous/older_code/legacy"
+    },
+    {
+      "from": "scripts/old",
+      "to": "miscellaneous/older_code/old"
+    },
+    {
+      "from": "unused",
+      "to": "miscellaneous/older_code/unused"
+    },
+    {
+      "from": "output",
+      "to": "miscellaneous/quick_tests/output"
+    },
+    {
+      "from": "tmp",
+      "to": "miscellaneous/quick_tests/tmp"
+    },
+    {
+      "from": "omnipathr-log",
+      "to": "miscellaneous/logs/omnipathr"
+    },
+    {
+      "from": "results/comment_responses",
+      "to": "miscellaneous/comparisons/comment_responses"
+    },
+    {
+      "from": "results/validation/mtmr11_zonation_validation_scatter.pdf",
+      "to": "miscellaneous/older_results/validation_zonation_two_marker/mtmr11_zonation_validation_scatter.pdf"
+    },
+    {
+      "from": "results/validation/sult3a1_zonation_validation_scatter.pdf",
+      "to": "miscellaneous/older_results/validation_zonation_two_marker/sult3a1_zonation_validation_scatter.pdf"
+    },
+    {
+      "from": "results/validation/zonation_network_validation_scores.csv",
+      "to": "miscellaneous/older_results/validation_zonation_two_marker/zonation_network_validation_scores.csv"
+    },
+    {
+      "from": "results/validation/zonation_network_validation_scores_jpc.csv",
+      "to": "miscellaneous/older_results/validation_zonation_two_marker/zonation_network_validation_scores_jpc.csv"
+    },
+    {
+      "from": "results/validation/mtmr11_top_lipid_joint_kd_correlation.csv",
+      "to": "miscellaneous/older_results/validation_zonation_two_marker/mtmr11_top_lipid_joint_kd_correlation.csv"
+    },
+    {
+      "from": "results/DGE_hepatocytes_results.xlsx",
+      "to": "miscellaneous/older_results/collaborator_exports/DGE_hepatocytes_results.xlsx"
+    },
+    {
+      "from": "results/Doublets_and_Sex_DEG_results_all_hepatocytes.xlsx",
+      "to": "miscellaneous/older_results/collaborator_exports/Doublets_and_Sex_DEG_results_all_hepatocytes.xlsx"
+    },
+    {
+      "from": ".claude/settings.local.json",
+      "to": "miscellaneous/local/.claude_settings.local.json"
+    },
+    {
+      "from": ".Rhistory",
+      "to": "miscellaneous/local/.Rhistory"
+    },
+    {
+      "from": "results/lipidomic/.Rapp.history",
+      "to": "miscellaneous/local/results_lipidomic_.Rapp.history"
+    },
+    {
+      "from": "results/pseudobulk/.Rapp.history",
+      "to": "miscellaneous/local/results_pseudobulk_.Rapp.history"
+    },
+    {
+      "from": "Rplots.pdf",
+      "to": "miscellaneous/quick_tests/Rplots.pdf"
+    },
+    {
+      "from": "tmp_figure_legend.txt",
+      "to": "miscellaneous/quick_tests/tmp_figure_legend.txt"
+    },
+    {
+      "from": "scripts/quick_insaturation_stress_analysis.R",
+      "to": "miscellaneous/quick_tests/code/quick_insaturation_stress_analysis.R"
+    },
+    {
+      "from": "scripts/quick_regenerate_volcanos.R",
+      "to": "miscellaneous/quick_tests/code/quick_regenerate_volcanos.R"
+    },
+    {
+      "from": "scripts/quick_stress_pathways.R",
+      "to": "miscellaneous/quick_tests/code/quick_stress_pathways.R"
+    },
+    {
+      "from": "tests/test_output.txt",
+      "to": "miscellaneous/quick_tests/logs/test_output.txt"
+    },
+    {
+      "from": "tests/test_output_final.txt",
+      "to": "miscellaneous/quick_tests/logs/test_output_final.txt"
+    },
+    {
+      "from": "tests/test_output_rerun.txt",
+      "to": "miscellaneous/quick_tests/logs/test_output_rerun.txt"
+    },
+    {
+      "from": "tests/TEST_RESULTS_FINAL.md",
+      "to": "miscellaneous/quick_tests/logs/TEST_RESULTS_FINAL.md"
+    },
+    {
+      "from": "tests/TEST_RESULTS_SUMMARY.md",
+      "to": "miscellaneous/quick_tests/logs/TEST_RESULTS_SUMMARY.md"
+    },
+    {
+      "from": "results/wf01_run.log",
+      "to": "miscellaneous/logs/workflows/wf01_run.log"
+    },
+    {
+      "from": "results/wf02_run.log",
+      "to": "miscellaneous/logs/workflows/wf02_run.log"
+    },
+    {
+      "from": "results/wf03_run.log",
+      "to": "miscellaneous/logs/workflows/wf03_run.log"
+    },
+    {
+      "from": "results/wf04_run.log",
+      "to": "miscellaneous/logs/workflows/wf04_run.log"
+    },
+    {
+      "from": "results/wf05_rerun.log",
+      "to": "miscellaneous/logs/workflows/wf05_rerun.log"
+    },
+    {
+      "from": "results/wf05_run.log",
+      "to": "miscellaneous/logs/workflows/wf05_run.log"
+    },
+    {
+      "from": "results/wf06_run.log",
+      "to": "miscellaneous/logs/workflows/wf06_run.log"
+    },
+    {
+      "from": "results/wf07_run.log",
+      "to": "miscellaneous/logs/workflows/wf07_run.log"
+    },
+    {
+      "from": "results/wf08_run.log",
+      "to": "miscellaneous/logs/workflows/wf08_run.log"
+    },
+    {
+      "from": "results/causal_modelling/cosmos_factor1_pilot",
+      "to": "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot"
+    },
+    {
+      "from": "results/causal_modelling/cosmos_factor1_parameter_search",
+      "to": "miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search"
+    },
+    {
+      "from": "results/causal_modelling/cosmos_factor1_compressed_review",
+      "to": "miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review"
+    },
+    {
+      "from": "results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory",
+      "to": "miscellaneous/older_results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory"
+    },
+    {
+      "from": "scripts/exploration/audit_cosmos_pkn.py",
+      "to": "miscellaneous/quick_tests/code/audit_cosmos_pkn.py"
+    }
+  ],
+  "input_distribution": {
+    "format": "split_csv_pseudobulk",
+    "max_part_bytes_exclusive": 50000000,
+    "serialized_seurat_objects": "local_only",
+    "approved_source_rds_hashes": "retained in transport provenance; not replaced by CSV hashes",
+    "updated": "2026-11-18"
+  }
+}

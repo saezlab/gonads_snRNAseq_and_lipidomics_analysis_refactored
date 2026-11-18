@@ -1,4 +1,0 @@
-"run_id","tf","input_activity","in_initial_pkn","in_final_pkn","inferred_before_sign_filter","score_level","retained_score","sign_agrees"
-"radius6_depth8_compressed_inputs_only","Gene__Esr1",-7.08874857626001,TRUE,TRUE,0.131796253954624,3,FALSE,FALSE
-"radius6_depth8_compressed_inputs_only","Gene__Nfic",-4.34923126849243,TRUE,TRUE,0.699337886038863,4,FALSE,FALSE
-"radius6_depth8_compressed_inputs_only","Gene__Dbp",-7.66088476896073,TRUE,TRUE,0.334276674507616,4,FALSE,FALSE

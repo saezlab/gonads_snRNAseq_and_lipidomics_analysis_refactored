@@ -1,0 +1,43 @@
+{
+  "extraction": {
+    "primary": 0.5,
+    "secondary": 0.5,
+    "score_layer_constrained": true,
+    "candidate_edges": 5040,
+    "score_layer_edges": 2469,
+    "consistent_edges": 2069,
+    "final_edges": 25,
+    "final_nodes": 25,
+    "retained_upstream": 2,
+    "retained_observed": 15,
+    "all_edges_descend_one_score_level": true,
+    "all_nodes_on_seed_to_observation_walk": true
+  },
+  "candidate_metadata": {
+    "source_nodes": ["Metab__CHEBI:27997_unknown", "Metab__CHEBI:85403_unknown"],
+    "measurement_features": ["FA(18:1)", "LPS(18:0)"],
+    "edge_fingerprint_groups": ["edge_08e703eec870d543", "edge_1183a9daffa46143"],
+    "raw_upstream_candidate_nodes": 2,
+    "independent_edge_fingerprint_groups": 2,
+    "observed_tfs": ["Gene__Ar", "Gene__Esr1", "Gene__Gli1", "Gene__Gtf2i", "Gene__Hdac3", "Gene__Hes1", "Gene__Irf3", "Gene__Irf4", "Gene__Runx3", "Gene__Rxra", "Gene__Stat5a", "Gene__Stat5b", "Gene__Tp53", "Gene__Vhl", "Gene__Yy1"],
+    "retained_observed_tfs": 15
+  },
+  "eligibility": {
+    "eligible": true,
+    "edges": 25,
+    "nodes": 25,
+    "source_nodes": ["Metab__CHEBI:27997_unknown", "Metab__CHEBI:85403_unknown"],
+    "measurement_features": ["FA(18:1)", "LPS(18:0)"],
+    "edge_fingerprint_groups": ["edge_08e703eec870d543", "edge_1183a9daffa46143"],
+    "raw_upstream_candidate_nodes": 2,
+    "independent_edge_fingerprint_groups": 2,
+    "observed_tfs": ["Gene__Ar", "Gene__Esr1", "Gene__Gli1", "Gene__Gtf2i", "Gene__Hdac3", "Gene__Hes1", "Gene__Irf3", "Gene__Irf4", "Gene__Runx3", "Gene__Rxra", "Gene__Stat5a", "Gene__Stat5b", "Gene__Tp53", "Gene__Vhl", "Gene__Yy1"],
+    "retained_observed_tfs": 15
+  },
+  "run_id": "direct_all_tfs_pruning6_layers6",
+  "tf_panel": "all_tfs",
+  "pruning_steps": 6,
+  "n_layers": 6,
+  "topology_hash": "c7757e9b4ddcad373e919f6036fef93a",
+  "interpretation": "Strict layer-consecutive score-path sensitivity; not a calibrated causal confidence estimate."
+}

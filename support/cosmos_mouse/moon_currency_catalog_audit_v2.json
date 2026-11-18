@@ -1,0 +1,72 @@
+{
+  "currency_to_protein_regulatory_edges_preserved": [
+    [
+      "Metab__CHEBI:15422_unknown",
+      -1,
+      "Gene__Kcnj11"
+    ],
+    [
+      "Metab__CHEBI:15422_unknown",
+      -1,
+      "Gene__Trpm4"
+    ],
+    [
+      "Metab__CHEBI:15422_unknown",
+      1,
+      "Gene__P2rx4"
+    ],
+    [
+      "Metab__CHEBI:17552_unknown",
+      1,
+      "Gene__Kcnj8"
+    ]
+  ],
+  "edge_policy_sha256": "fae23006954fd2570dc20f30598ca2b6120e52ee5c9041a382a43d99e217e00e",
+  "excluded_signed_substrate_edges": 37666,
+  "expected_nodes": 119,
+  "independent_identity_panel": [
+    "CHEBI:1146900",
+    "CHEBI:15377",
+    "CHEBI:15378",
+    "CHEBI:15422",
+    "CHEBI:15846",
+    "CHEBI:15996",
+    "CHEBI:16027",
+    "CHEBI:16474",
+    "CHEBI:16761",
+    "CHEBI:16908",
+    "CHEBI:17552",
+    "CHEBI:18009",
+    "CHEBI:18361",
+    "CHEBI:18367",
+    "CHEBI:24636",
+    "CHEBI:30616",
+    "CHEBI:33019",
+    "CHEBI:37565",
+    "CHEBI:43474",
+    "CHEBI:456215",
+    "CHEBI:456216",
+    "CHEBI:57287",
+    "CHEBI:57540",
+    "CHEBI:57783",
+    "CHEBI:57856",
+    "CHEBI:57945",
+    "CHEBI:58189",
+    "CHEBI:58349",
+    "CHEBI:59789"
+  ],
+  "no_measured_or_hypothetical_acyl_nodes_excluded": true,
+  "node_policy_sha256": "fd6aa99e8acb1fc7dcee7bd361055211e85c73b75c5e4fb42bb8fb2c1a5870a0",
+  "passed": true,
+  "policy_nodes": 119,
+  "regulatory_edges_preserved_count": 4,
+  "second_messenger_nodes_excluded_from_currency_panel": [
+    "Metab__CHEBI:16356_g",
+    "Metab__CHEBI:16356_n",
+    "Metab__CHEBI:17489_c",
+    "Metab__CHEBI:16356_c",
+    "Metab__CHEBI:17489_g",
+    "Metab__CHEBI:17489_e",
+    "Metab__CHEBI:16356_e"
+  ]
+}

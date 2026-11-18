@@ -1,3 +1,4 @@
+source("scripts/config/analysis_release.R")
 #' Dataset Configurations
 #'
 #' This file defines all dataset configurations used in the FCG liver analysis project.
@@ -99,10 +100,11 @@ DATASETS <- list(
 
   fcg_zonation = list(
     rna = list(
-      files = "data/RNA/scaled_RNA_zonation.csv",
-      metadata = "data/RNA/meta_data_df_zonation.csv",
+      files = analysis_path("current_fcg_zonation_csv"),
+      metadata = analysis_path("current_fcg_zonation_metadata"),
       split = FALSE,
-      source_rds = "data/RNA/fcg_zonation_pseudobulks.rds"
+      source_transport = analysis_path("current_fcg_zonation_transport"),
+      source_rds_local = analysis_path("current_fcg_zonation_rds")
     ),
     lipid = list(
       file = "data/metabolomics/Lipid_data_file_JPC_cleaned.csv",
@@ -304,6 +306,14 @@ validate_dataset <- function(dataset_name, check_split_only = FALSE) {
         all_exist <- FALSE
       } else {
         cat("  ✓ RNA metadata exists:", dataset$rna$metadata, "\n")
+      }
+    } else if (!is.null(dataset$rna$source_transport)) {
+      source("scripts/core/pseudobulk_csv.R",local=TRUE)
+      if(!file.exists(dataset$rna$source_transport)){
+        warning("Pseudobulk CSV transport not found: ",dataset$rna$source_transport);all_exist<-FALSE
+      }else{
+        x<-pb_components(dataset$rna$source_transport,verify=TRUE)
+        cat("  ✓ Verified pseudobulk CSV transport:",length(x$features),"genes x",length(x$cells),"profiles\n")
       }
     } else if (!is.null(dataset$rna$source_rds)) {
       # Check if source RDS exists

@@ -1,0 +1,4 @@
+graph,input_signed_edges,one_step_projection,changed_endpoint_occurrences,duplicate_signed_edges_removed,self_loop_signed_edges_removed,conflicting_sign_pairs,clean_signed_edges
+projected_curated,251998,True,58678,0,0,0,251998
+prebuilt_curated_ph73,251998,False,0,0,0,0,251998
+projected_rules_ph73,254589,True,58678,0,0,0,254589

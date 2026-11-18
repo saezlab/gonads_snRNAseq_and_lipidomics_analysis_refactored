@@ -1,0 +1,5 @@
+"iteration","edges_scored","edges_removed","scored_nodes","upstream_scored","max_level"
+1,30009,7564,2959,0,4
+2,22445,1201,2907,0,4
+3,21244,5,2857,0,4
+4,21239,0,2857,0,4

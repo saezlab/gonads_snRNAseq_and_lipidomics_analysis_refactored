@@ -1,0 +1,13 @@
+"edge_fingerprint_group","n_assignment_rows","n_candidate_source_nodes","candidate_source_nodes","candidate_chemical_names","measurement_features","mapping_policies","scored_sign_concordant_assignments"
+"edge_594e9381717838b8",2,1,"Metab__CHEBI:75728_unknown","SAG","DG(18:0_20:4);DG(38:4)","relaxed_compatible_more_specific",0
+"edge_62dc639c6d632785",1,1,"Metab__CHEBI:15756_unknown","hexadecanoic acid","FA(16:0)","relaxed_acid_base",0
+"edge_08e703eec870d543",5,5,"Metab__CHEBI:27997_unknown;Metab__CHEBI:28661_unknown;Metab__CHEBI:28716_unknown;Metab__CHEBI:53460_unknown;Metab__CHEBI:72004_unknown","all-cis-icosa-11,14,17-trienoic acid;elaidic acid;gamma-linolenic acid;hexadec-9-enoic acid;palmitoleic acid","FA(16:1);FA(18:1);FA(18:3);FA(20:3)","relaxed_same_formula_is_a_descendant",0
+"edge_1a413f68784b2e08",2,2,"Metab__CHEBI:36023_unknown;Metab__CHEBI:50464_unknown","cis-vaccenic acid;vaccenic acid","FA(18:1)","relaxed_same_formula_is_a_descendant",2
+"edge_0a081d9faed92854",2,2,"Metab__CHEBI:17351_unknown;Metab__CHEBI:92157_unknown","linoleic acid;octadeca-9,12-dienoic acid","FA(18:2)","relaxed_same_formula_is_a_descendant",2
+"edge_314cb873db4e1f41",1,1,"Metab__CHEBI:27432_unknown","alpha-linolenic acid","FA(18:3)","relaxed_same_formula_is_a_descendant",0
+"edge_bf0d7476984e8fb2",1,1,"Metab__CHEBI:53486_unknown","all-cis-icosa-8,11,14-trienoic acid","FA(20:3)","relaxed_same_formula_is_a_descendant",0
+"edge_50ab6a684cc11bc0",1,1,"Metab__CHEBI:36306_unknown","icosa-5,8,11,14-tetraenoic acid","FA(20:4)","relaxed_same_formula_is_a_descendant",0
+"edge_8eaf8f1c7b826ff7",1,1,"Metab__CHEBI:15843_unknown","arachidonic acid","FA(20:4)","relaxed_same_formula_is_a_descendant",0
+"edge_43996800063f2b56",1,1,"Metab__CHEBI:28125_unknown","docosahexaenoic acid","FA(22:6)","relaxed_same_formula_is_a_descendant",0
+"edge_1183a9daffa46143",1,1,"Metab__CHEBI:85403_unknown","lysophosphatidylserine","LPS(18:0)","relaxed_compatible_more_specific_acid_base",1
+"edge_a676d856866e6d4a",1,1,"Metab__CHEBI:83718_unknown","1,2-distearoyl-sn-glycero-3-phosphocholine","PC(18:0_18:0)","relaxed_compatible_more_specific",0

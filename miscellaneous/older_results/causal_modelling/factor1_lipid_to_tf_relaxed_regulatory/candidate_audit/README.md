@@ -1,0 +1,9 @@
+# Fingerprint-aware relaxed lipid-to-TF candidate audit
+
+This audit reads a completed score-first relaxed MOON run and does not refit its PKN, pruning, compression, RNA-coherence loop, or node scores.
+
+Candidate chemicals are topology seeds in the parent analysis. Factor 1 lipid weights are assignment-level annotations used for post-score sign agreement; they are not ULM inputs. A feature may map to multiple candidates, and a candidate may share an identical signed direct-outgoing-edge fingerprint with another candidate. The audit retains every assignment in `candidate_hypothesis_summary.csv` and collapses only selected identical fingerprint groups in `fingerprint_representative_solution/` for a non-duplicated illustrative network.
+
+`eligible_sign_consensus_fingerprint_summary.csv` recalculates the compact sign-consensus candidates and reports both raw source count and the number of independent direct-edge fingerprint groups. `candidate_edge_fingerprint_summary.csv` identifies the counterparts represented by each retained fingerprint. `candidate_to_observed_tf_shortest_paths.csv` provides one directed shortest route per retained representative and observed TF; it is a route index, not proof that a shortest path is biologically active.
+
+The direct regulatory-edge provenance for the illustrative network is in `fingerprint_representative_solution/selected_direct_regulatory_edges.csv`. In the current run, all selected direct evidence remains labelled exploratory, including historical STITCH v5 source data and relaxed chemical identity mappings.

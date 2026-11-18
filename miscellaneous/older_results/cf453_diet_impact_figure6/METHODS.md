@@ -1,0 +1,11 @@
+# Methods: direct CF453 diet effects
+
+RNA uses 18,486 genes detected in ≥7/56 zone profiles with nonzero expression variation. Supplied data numerically replays ln(1+10000×counts/profile-library) to <10^-15; this does not establish count-aggregation provenance. The eight sex/diet/zone means are fit using limma, mouse duplicateCorrelation, mean-variance trend and robust empirical Bayes. RNA effects are natural-log normalized-expression differences, not log2 fold changes.
+
+BH adjusts the three direct RNA contrasts jointly across 55,458 tests. A separate genes × four-contrast family covers diet×sex within PP/PC and diet×zone within female/male groups. The omnibus F jointly tests the three direct coefficients and has its own across-gene BH adjustment; omnibus significance need not imply that an individual contrast passes its different testing family.
+
+Three-way estimates and unadjusted probabilities exactly replay the earlier paired model. The current 137 BH discoveries replace the earlier 194-count reporting family: this analysis pools three-way tests with diet×sex and diet×zone, whereas the earlier family pooled them with the separate SD/WD sex×zone tests. The change in adjusted count reflects the testing family, not changed raw three-way evidence.
+
+Panel B ranks omnibus q, p and gene symbol, retaining at most 20 q≤0.05 genes. Panel C uses distinct primary-significant genes: one diet×sex, one diet×zone and two three-way examples. Its saved ranking rule is: Largest absolute estimated interaction among primary FDR<=0.05 genes; ties by q,p,gene; distinct genes for diet_sex, diet_zone and diet_sex_zone twice. Selection and full results are exported. Points are individual mice; fitted means and effect ranges use nominal 95% model intervals, not simultaneous or selection-adjusted intervals.
+
+Lipid intensities are supplied positive values on a log2 scale, modeled by sex×diet limma. Primary eligibility excludes standards/isotopes and unsupported classes and requires analytical QC CV≤30% (1,129 features). Diet×sex is (male WD−SD)−(female WD−SD), adjusted across all primary lipids. Displayed female/male simple effects retain their declared shared two-contrast BH family. No extra normalization or imputation is applied. This figure uses direct mean-effect tests, without correlation-network inference or network-selected examples.

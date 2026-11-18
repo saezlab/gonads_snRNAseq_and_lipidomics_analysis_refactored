@@ -1,0 +1,61 @@
+{
+  "chemical_to_protein_regulatory_evidence_preserved": 0,
+  "conventional_policy": "All declared currency nodes across every retained compartment, selected by the explicit frozen label panel; not hypothetical acyl pools, fatty acids or measured lipids.",
+  "currency_label_counts": {
+    "ADP": 9,
+    "AMP": 9,
+    "ATP": 9,
+    "CoA": 9,
+    "GDP": 6,
+    "GTP": 5,
+    "H(+)": 1,
+    "H2O": 10,
+    "NAD(+)": 1,
+    "NAD+": 6,
+    "NADH": 6,
+    "NADP(+)": 1,
+    "NADP+": 8,
+    "NADPH": 8,
+    "S-adenosyl-L-homocysteine": 1,
+    "S-adenosyl-L-methionine": 1,
+    "diphosphate": 1,
+    "phosphate": 1
+  },
+  "currency_nodes": 92,
+  "excluded_edge_source_label_counts": {
+    "ADP": 298,
+    "AMP": 83,
+    "ATP": 4113,
+    "CoA": 3071,
+    "GDP": 47,
+    "GTP": 92,
+    "H(+)": 301,
+    "H2O": 16691,
+    "NAD(+)": 148,
+    "NAD+": 1541,
+    "NADH": 422,
+    "NADP(+)": 29,
+    "NADP+": 913,
+    "NADPH": 3408,
+    "S-adenosyl-L-methionine": 171
+  },
+  "excluded_signed_substrate_edges": 31328,
+  "minimal_policy": "Only Metab__CHEBI:15377_unknown outgoing substrate connectors, the actual water bridge found in the initial selected expanded fit.",
+  "minimal_water_unknown_substrate_edges": 10842,
+  "output_hashes": {
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/support/cosmos_mouse/moon_currency_substrate_edges.csv": "79565f55bfdcdfb4af8b8a92067e3617b4129f36b063ee9e0ec0a55a47fb63c8",
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/support/cosmos_mouse/moon_currency_traversal_exclusions.csv": "45f5abdae0bcf6bc3706f9e2efce4fd2ff89d4208075d89eff73479405390beb"
+  },
+  "policy": "Remove only listed exact positive currency->enzyme_reaction_instance substrate_participation connectors in a separate scoring-PKN sensitivity. Retain incoming product edges, full reaction participants and all chemical->protein regulatory edges.",
+  "source_hashes": {
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/cosmos_mouse_pkn/edge_evidence.jsonl.gz": "4e8df5948f1c6c055bd721f8e846b8fd9a5c129dcd064ed295c4ac1cf267fa83",
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/cosmos_mouse_pkn_expanded_species/extension_edge_evidence.jsonl.gz": "5a18c23529e05ade6c7b21a741a4db6b4be4b8cd7369343494c03620b52a2c3e",
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/cosmos_mouse_pkn_expanded_species/nodes.jsonl": "5109a10c8da663f8224d81b4e30417d5c74c8d944619a74bd76bd8dfed734679",
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/cosmos_mouse_pkn_expanded_species/pkn_expanded_chain.csv": "114b206cbab6762d4f598c7b7ed65e696c7e118e06a28eefb66c9ceb70571c7e",
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/scripts/moon/ancillary/build_currency_traversal_policy.py": "6fc4c2c60cc7c61777206c0e669026d3857b1ddb1404108da6e5cfe26a21e885",
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/scripts/moon/ancillary/export_expanded_factor1_network.py": "9f564557ae3c7d86ac28b28d4d05563101ed5aa8eddefee7ed27c73381aed6a8"
+  },
+  "source_pkn_modified": false,
+  "source_reaction_records_modified": false,
+  "substrate_evidence_records": 31339
+}

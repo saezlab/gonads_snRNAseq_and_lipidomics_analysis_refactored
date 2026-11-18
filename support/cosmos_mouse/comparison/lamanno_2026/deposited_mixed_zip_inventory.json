@@ -1,0 +1,173 @@
+[
+  {
+    "name": "mixed/",
+    "method": 0,
+    "flags": 0,
+    "crc": 0,
+    "compressed": 0,
+    "uncompressed": 0,
+    "localoffset": 0
+  },
+  {
+    "name": "mixed/peaks_for_imputation_and_clustering.npy",
+    "method": 8,
+    "flags": 0,
+    "crc": 3274568800,
+    "compressed": 1071,
+    "uncompressed": 2067,
+    "localoffset": 64
+  },
+  {
+    "name": "mixed/structures.json",
+    "method": 8,
+    "flags": 0,
+    "crc": 3256461195,
+    "compressed": 36035,
+    "uncompressed": 532415,
+    "localoffset": 1238
+  },
+  {
+    "name": "mixed/structures.sdf",
+    "method": 8,
+    "flags": 0,
+    "crc": 3038340198,
+    "compressed": 21967217,
+    "uncompressed": 279544055,
+    "localoffset": 37352
+  },
+  {
+    "name": "mixed/tmpbadfeatures.npy",
+    "method": 8,
+    "flags": 0,
+    "crc": 967625519,
+    "compressed": 3114,
+    "uncompressed": 18036,
+    "localoffset": 22004647
+  },
+  {
+    "name": "mixed/manifest.json",
+    "method": 8,
+    "flags": 0,
+    "crc": 619348512,
+    "compressed": 467,
+    "uncompressed": 2365,
+    "localoffset": 22007843
+  },
+  {
+    "name": "mixed/eroded_annot.npy",
+    "method": 8,
+    "flags": 0,
+    "crc": 1848678399,
+    "compressed": 4177726,
+    "uncompressed": 308183168,
+    "localoffset": 22008387
+  },
+  {
+    "name": "mixed/experiments.json",
+    "method": 8,
+    "flags": 0,
+    "crc": 2934671574,
+    "compressed": 337206,
+    "uncompressed": 3100921,
+    "localoffset": 26186193
+  },
+  {
+    "name": "mixed/factor_to_lipid.npy",
+    "method": 8,
+    "flags": 0,
+    "crc": 429288875,
+    "compressed": 8021,
+    "uncompressed": 13568,
+    "localoffset": 26523479
+  },
+  {
+    "name": "mixed/go-basic.obo",
+    "method": 8,
+    "flags": 0,
+    "crc": 2372335392,
+    "compressed": 4321994,
+    "uncompressed": 31203206,
+    "localoffset": 26531583
+  },
+  {
+    "name": "mixed/graph_from_annotations.pickle",
+    "method": 8,
+    "flags": 0,
+    "crc": 2125251838,
+    "compressed": 120803,
+    "uncompressed": 1326769,
+    "localoffset": 30853653
+  },
+  {
+    "name": "mixed/mouse_connectivity_manifest.json",
+    "method": 8,
+    "flags": 0,
+    "crc": 619348512,
+    "compressed": 467,
+    "uncompressed": 2365,
+    "localoffset": 30974549
+  },
+  {
+    "name": "mixed/allen_name_to_annots.pkl",
+    "method": 8,
+    "flags": 0,
+    "crc": 1168268132,
+    "compressed": 25169,
+    "uncompressed": 94506,
+    "localoffset": 30975112
+  },
+  {
+    "name": "mixed/lipidclasscolors.h5ad",
+    "method": 8,
+    "flags": 0,
+    "crc": 516508232,
+    "compressed": 2497,
+    "uncompressed": 1064176,
+    "localoffset": 31000369
+  },
+  {
+    "name": "mixed/decoder_weights.pkl",
+    "method": 8,
+    "flags": 0,
+    "crc": 3941847764,
+    "compressed": 4305,
+    "uncompressed": 32492,
+    "localoffset": 31002951
+  },
+  {
+    "name": "mixed/gene2go",
+    "method": 8,
+    "flags": 0,
+    "crc": 3285663140,
+    "compressed": 1051077031,
+    "uncompressed": 4294967295,
+    "localoffset": 31007339
+  },
+  {
+    "name": "mixed/807.633871_xgb_model.joblib",
+    "method": 8,
+    "flags": 0,
+    "crc": 2929301775,
+    "compressed": 22538,
+    "uncompressed": 110994,
+    "localoffset": 1082084461
+  },
+  {
+    "name": "mixed/809.650753_xgb_model.joblib",
+    "method": 8,
+    "flags": 0,
+    "crc": 3401623583,
+    "compressed": 30304,
+    "uncompressed": 129361,
+    "localoffset": 1082107090
+  },
+  {
+    "name": "mixed/nucleidensity.npy",
+    "method": 8,
+    "flags": 0,
+    "crc": 2643284383,
+    "compressed": 136246336,
+    "uncompressed": 308183168,
+    "localoffset": 1082137485
+  }
+]

@@ -29,8 +29,8 @@ More edges do not establish molecular specificity or causal identifiability.
   gene-name queries for the seven validation genes.
 
 Downloads and SHA-256 hashes are retained in
-`results/cosmos_pkn_audit/manifest.json`; compressed source responses are in
-`results/cosmos_pkn_audit/raw/`. These freeze the observed responses, not all
+`results/causal_modelling/cosmos_pkn_audit/manifest.json`; compressed source responses are in
+`results/causal_modelling/cosmos_pkn_audit/raw/`. These freeze the observed responses, not all
 underlying database releases. The service does not supply a full build ledger.
 
 ## Important implementation findings
@@ -114,6 +114,14 @@ mapping has not yet been built. The generated inventory deliberately marks
 every mapping as `not_yet_mapped`.
 
 ## Proposed network layers
+
+**Implementation status, audited 15 September 2026:** this table records the
+original proposal. The completed conservative PKN uses GtoPdb for chemical→protein
+regulation; cached BRENDA/STITCH were placed in a separate exploratory variant,
+MRCLinksDB was excluded because its signs were assumed, and CellPhoneDB was not
+integrated. See the [resource audit](cosmos_lipid_regulation_resource_audit.md) and
+[measured-lipid coverage audit](cosmos_lipid_regulatory_measurement_coverage.md),
+which also documents specific fatty-acid candidates missed by the initial mapper.
 
 | Layer | Preferred resources | Admission rule |
 |---|---|---|
@@ -215,12 +223,12 @@ No direction-dependent MOON run or final input mapping was performed here.
 
 ## Reproduction and outputs
 
-Run `python3 scripts/exploration/audit_cosmos_pkn.py` from the project root.
+The historical probe is preserved at `miscellaneous/quick_tests/code/audit_cosmos_pkn.py`. It retains its original path assumptions and is not a current reproduction command; use `docs/CAUSAL_ANALYSIS_MAP.md` for active entry points.
 It uses the frozen compressed downloads and current local result files, verifies
 download checksums and validates output sign/uniqueness invariants. It was run
 successfully after implementation. No existing R workflow was modified or rerun.
 
-Outputs in `results/cosmos_pkn_audit/`: `summary.json`, resource sign audit,
+Outputs in `results/causal_modelling/cosmos_pkn_audit/`: `summary.json`, resource sign audit,
 lipid inventory, candidate protein backbone, quarantined sign conflicts,
 protein evidence, mouse SwissLipids enzyme records, and candidate-gene audit.
 The backbone is deliberately labelled a component, not a complete COSMOS PKN.

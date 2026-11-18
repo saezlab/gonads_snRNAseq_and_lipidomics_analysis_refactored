@@ -1,0 +1,11 @@
+mapping_policy,default_relaxed_policy,candidate_assignments,measurement_features,unique_pkn_source_nodes,default_relaxed_assignments,default_relaxed_measurement_features,feature_to_many_node_copies,cross_feature_source_node_collisions,resources
+strict_reported_identity,TRUE,0,0,0,0,0,0,0,
+relaxed_acid_base,TRUE,1,1,1,1,1,0,0,STITCH_directional_v5
+relaxed_same_formula_is_a_descendant,TRUE,14,7,14,14,7,6,0,BRENDA;GuideToPharmacology;STITCH_directional_v5
+relaxed_compatible_more_specific,TRUE,3,3,2,3,3,0,1,GuideToPharmacology;STITCH_directional_v5
+relaxed_compatible_more_specific_acid_base,TRUE,1,1,1,1,1,0,0,GuideToPharmacology
+annotation_only_compatible_lower_resolution,FALSE,0,0,0,0,0,0,0,
+annotation_only_compatible_headgroup_isomer,FALSE,0,0,0,0,0,0,0,
+annotation_only_hierarchy_class,FALSE,216,216,5,0,0,0,0,BRENDA;GuideToPharmacology
+annotation_only_hierarchy_ancestor,FALSE,0,0,0,0,0,0,0,
+all_candidate_assignments,FALSE,235,228,23,19,12,6,1,BRENDA;GuideToPharmacology;STITCH_directional_v5

@@ -1,0 +1,12 @@
+"version","contrast","genes","FDR_005","positive","negative","rho"
+"expanded_marker_score","zone_female_sham",18410,979,526,453,0.524844485465436
+"expanded_marker_score","zone_female_gdx",18410,692,337,355,0.524844485465436
+"expanded_marker_score","zone_male_sham",18410,1035,475,560,0.524844485465436
+"expanded_marker_score","zone_male_gdx",18410,640,318,322,0.524844485465436
+"expanded_marker_score","gdx_female_PC",18410,0,0,0,0.524844485465436
+"expanded_marker_score","gdx_female_PP",18410,0,0,0,0.524844485465436
+"expanded_marker_score","gdx_male_PC",18410,21,8,13,0.524844485465436
+"expanded_marker_score","gdx_male_PP",18410,19,3,16,0.524844485465436
+"expanded_marker_score","gdx_zone_female",18410,0,0,0,0.524844485465436
+"expanded_marker_score","gdx_zone_male",18410,0,0,0,0.524844485465436
+"expanded_marker_score","gdx_sex_zone",18410,0,0,0,0.524844485465436

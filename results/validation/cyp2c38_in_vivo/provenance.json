@@ -1,0 +1,36 @@
+{
+  "completed_at": "2026-10-06 14:58:42 UTC",
+  "seed": 20261006,
+  "permutations": 1999,
+  "bootstraps": 999,
+  "workers": 3,
+  "primary_features": 1237,
+  "QC30_features": 1215,
+  "shared_reference_features": 552,
+  "reference_mice": 43,
+  "reference_bootstrap_strata": {
+    "XXO": 10,
+    "XXT": 11,
+    "XYO": 11,
+    "XYT": 11
+  },
+  "checks": {
+    "reference_replay_max_difference": 5.5511e-16,
+    "weighted_unweighted_logFC_max_difference": 2.1316e-14,
+    "pooled_identity_max_difference": 8.8818e-16,
+    "interaction_identity_max_difference": 1.7764e-15
+  },
+  "package_versions": {
+    "limma": "3.68.5",
+    "statmod": "1.5.2",
+    "digest": "0.6.39",
+    "jsonlite": "2.0.0",
+    "decoupleR": "2.17.0"
+  },
+  "primary_model": "log2 supplied intensities; sex precision weights; robust/trend empirical Bayes",
+  "normalization_provenance": "Not available; no additional normalization/imputation applied",
+  "inferential_family": "Three primary concordance tests, two-sided stratified-permutation p with BH adjustment",
+  "exchangeability": "Genotype labels exchangeable within sex; no batch/litter metadata available",
+  "bootstrap_scope": "Whole animals; paired reference modalities; fixed feature selection; conditional percentile 95% intervals",
+  "limitations": "Relative/scaled abundance; heterozygous KO; unknown processing/litter/batch provenance; indirect associations do not identify substrates or flux"
+}

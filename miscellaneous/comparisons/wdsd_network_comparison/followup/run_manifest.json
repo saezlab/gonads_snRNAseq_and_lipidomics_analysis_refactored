@@ -1,0 +1,64 @@
+{
+  "date_UTC": "2026-10-07 11:02:58",
+  "args": [],
+  "settings": {
+    "seed": 20261007,
+    "random_permutations": 19999,
+    "identity_audit_draw": 0,
+    "identity_in_null_draw_count": false,
+    "null_bootstrap_draws": 4999,
+    "paired_stability_draws": 999,
+    "broad_null": "RNA-vector/lipid-vector independence across all 14 SD mice; sex structure may account for rejection",
+    "broad_report_p": "two-sided absolute coefficient-vector association tail with +1 correction",
+    "conditional_null": "RNA-vector/lipid-vector independence within each SD sex, retaining between-sex margins",
+    "conditional_report_p": "one-sided upper tail for positive reference alignment beyond shared sex structure, with +1 correction",
+    "paired_bootstrap": "paired SD mice within sex; paired reference mice within FCG group when available; stability only",
+    "fixed_universe": "observed eligible edges fixed before resampling; one undefined edge invalidates its summary vector",
+    "inference_limit": "conditional on fixed FCG reference and exchangeable mice; invalid-draw probabilities condition on valid draws; bootstrap size/power not calibrated",
+    "centered_sensitivity": "featurewise subtraction of each cohort's sex means, then Pearson; descriptive r/native ULM only on unchanged edge identities",
+    "nominal_ULM": "intercept OLS slope t and nominal p; dependent edges are not independent animals"
+  },
+  "coverage": [
+    {
+      "mapping": "strict",
+      "universe": "primary",
+      "original_edges": 192,
+      "matched_edges": 108,
+      "original_lipids": 64,
+      "matched_lipids": 36,
+      "original_genes": 25,
+      "matched_genes": 15
+    },
+    {
+      "mapping": "strict",
+      "universe": "full",
+      "original_edges": 8896,
+      "matched_edges": 5004,
+      "original_lipids": 64,
+      "matched_lipids": 36,
+      "original_genes": 139,
+      "matched_genes": 139
+    },
+    {
+      "mapping": "conditional_compatibility",
+      "universe": "primary",
+      "original_edges": 192,
+      "matched_edges": 117,
+      "original_lipids": 64,
+      "matched_lipids": 39,
+      "original_genes": 25,
+      "matched_genes": 16
+    },
+    {
+      "mapping": "conditional_compatibility",
+      "universe": "full",
+      "original_edges": 8896,
+      "matched_edges": 5421,
+      "original_lipids": 64,
+      "matched_lipids": 39,
+      "original_genes": 139,
+      "matched_genes": 139
+    }
+  ],
+  "interpretation": "strict species annotation primary; conditional alias compatibility sensitivity; pooled replication and beyond-sex checks distinct"
+}

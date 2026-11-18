@@ -1,0 +1,234 @@
+node_id,label,node_type,moon_score,upstream_lipid_weight,downstream_tf_activity,RNA_input,source,score,level,type,pkn_label,observed_features,score_semantics,reaction_id,catalysts
+Enzyme__03a97175be51bf61,Pm20d1 [RHEA:64118],enzyme_reaction_instance,-1.66058758339358,,,,Enzyme__03a97175be51bf61,-1.66058758339358,10,other,RHEA:64118 forward,,inferred_MOON_score,RHEA:64118,Gene__Pm20d1
+Enzyme__03f8af34500e1926,Ptgs1 [RHEA:23729],enzyme_reaction_instance,-2.6661306283062,,,,Enzyme__03f8af34500e1926,-2.6661306283062,6,other,RHEA:23729 forward,,inferred_MOON_score,RHEA:23729,Gene__Ptgs1
+Enzyme__0ea47fe7a907d0c4,Dgkd [RHEA:40324],enzyme_reaction_instance,-1.66058758339359,,,,Enzyme__0ea47fe7a907d0c4,-1.66058758339359,10,other,RHEA:40324 forward,,inferred_MOON_score,RHEA:40324,Gene__Dgkd
+Enzyme__12667ebc8b99b82a,Enpp2 [RHEA:38980],enzyme_reaction_instance,-2.59988349133069,,,,Enzyme__12667ebc8b99b82a,-2.59988349133069,12,other,RHEA:38980 forward,,inferred_MOON_score,RHEA:38980,Gene__Enpp2
+Enzyme__13c8fc971b38cedc,Pla2g15 [RHEA:57121],enzyme_reaction_instance,-1.66058758339358,,,,Enzyme__13c8fc971b38cedc,-1.66058758339358,10,other,RHEA:57121 forward,,inferred_MOON_score,RHEA:57121,Gene__Pla2g15
+Enzyme__17273b44210d6900,Dgka [RHEA:40324],enzyme_reaction_instance,-1.66058758339359,,,,Enzyme__17273b44210d6900,-1.66058758339359,10,other,RHEA:40324 forward,,inferred_MOON_score,RHEA:40324,Gene__Dgka
+Enzyme__1928f075c69b371f,Pm20d1 [RHEA:64110],enzyme_reaction_instance,-1.66058758339358,,,,Enzyme__1928f075c69b371f,-1.66058758339358,10,other,RHEA:64110 forward,,inferred_MOON_score,RHEA:64110,Gene__Pm20d1
+Enzyme__1cbc5a4cf067b7b1,Agpat3 [RHEA:42589],enzyme_reaction_instance,-1.66058758339359,,,,Enzyme__1cbc5a4cf067b7b1,-1.66058758339359,10,other,RHEA:42589 forward,,inferred_MOON_score,RHEA:42589,Gene__Agpat3
+Enzyme__225133901e3930b4,Ptgs1 [RHEA:42601],enzyme_reaction_instance,-2.6661306283062,,,,Enzyme__225133901e3930b4,-2.6661306283062,6,other,RHEA:42601 forward,,inferred_MOON_score,RHEA:42601,Gene__Ptgs1
+Enzyme__3276659070eec6a9,Ptgs1 [RHEA:42597],enzyme_reaction_instance,-7.44793207160655,,,,Enzyme__3276659070eec6a9,-7.44793207160655,8,other,RHEA:42597 forward,,inferred_MOON_score,RHEA:42597,Gene__Ptgs1
+Enzyme__3580c9c6f27aab7a,Pla2g4a [RHEA:41100],enzyme_reaction_instance,-1.66058758339358,,,,Enzyme__3580c9c6f27aab7a,-1.66058758339358,10,other,RHEA:41100 forward,,inferred_MOON_score,RHEA:41100,Gene__Pla2g4a
+Enzyme__383a88ef729fba13,Pla2g6 [RHEA:40520],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__383a88ef729fba13,-2.46006090302649,8,other,RHEA:40520 forward,,inferred_MOON_score,RHEA:40520,Gene__Pla2g6
+Enzyme__46e77e9bbbc92b71,Pla2g6 [RHEA:40832],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__46e77e9bbbc92b71,-2.46006090302649,8,other,RHEA:40832 forward,,inferred_MOON_score,RHEA:40832,Gene__Pla2g6
+Enzyme__4a58a7ad965af462,Ptges2 [RHEA:12894],enzyme_reaction_instance,-1.28661462678112,,,,Enzyme__4a58a7ad965af462,-1.28661462678112,6,other,RHEA:12894 forward,,inferred_MOON_score,RHEA:12894,Gene__Ptges2
+Enzyme__4e8ce6d7464c46f7,Pm20d1 [RHEA:51314],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__4e8ce6d7464c46f7,-2.46006090302649,8,other,RHEA:51314 forward,,inferred_MOON_score,RHEA:51314,Gene__Pm20d1
+Enzyme__5437b8b97842ff73,Pla2g6 [RHEA:40828],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__5437b8b97842ff73,-2.46006090302649,8,other,RHEA:40828 forward,,inferred_MOON_score,RHEA:40828,Gene__Pla2g6
+Enzyme__5bcfaa697da1543f,Pla2g4a [RHEA:40452],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__5bcfaa697da1543f,-2.46006090302649,8,other,RHEA:40452 forward,,inferred_MOON_score,RHEA:40452,Gene__Pla2g4a
+Enzyme__66d32df95e974c06,Mgll [RHEA:44729],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__66d32df95e974c06,-2.46006090302649,8,other,RHEA:44729 forward,,inferred_MOON_score,RHEA:44729,Gene__Mgll
+Enzyme__6f57cb2245263f65,Pm20d1 [RHEA:64117],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__6f57cb2245263f65,-2.46006090302649,8,other,RHEA:64117 forward,,inferred_MOON_score,RHEA:64117,Gene__Pm20d1
+Enzyme__7b395bbdff88f7d4,Pla2g4a [RHEA:41076],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__7b395bbdff88f7d4,-2.46006090302649,8,other,RHEA:41076 forward,,inferred_MOON_score,RHEA:41076,Gene__Pla2g4a
+Enzyme__7c22ae6351568cc7,Pla2g4a [RHEA:40520],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__7c22ae6351568cc7,-2.46006090302649,8,other,RHEA:40520 forward,,inferred_MOON_score,RHEA:40520,Gene__Pla2g4a
+Enzyme__840eb9cd3ec1733c,Pla2g10 [RHEA:40520],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__840eb9cd3ec1733c,-2.46006090302649,8,other,RHEA:40520 forward,,inferred_MOON_score,RHEA:40520,Gene__Pla2g10
+Enzyme__8482f805692d0553,Dgkb [RHEA:40324],enzyme_reaction_instance,-1.66058758339359,,,,Enzyme__8482f805692d0553,-1.66058758339359,10,other,RHEA:40324 forward,,inferred_MOON_score,RHEA:40324,Gene__Dgkb
+Enzyme__8fea3cca12964c23,Dgke [RHEA:40324],enzyme_reaction_instance,-1.66058758339359,,,,Enzyme__8fea3cca12964c23,-1.66058758339359,10,other,RHEA:40324 forward,,inferred_MOON_score,RHEA:40324,Gene__Dgke
+Enzyme__93e83c9a09420e34,Pm20d1 [RHEA:64109],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__93e83c9a09420e34,-2.46006090302649,8,other,RHEA:64109 forward,,inferred_MOON_score,RHEA:64109,Gene__Pm20d1
+Enzyme__a5d25442f6b6a0bd,Ptgs2 [RHEA:42601],enzyme_reaction_instance,-2.6661306283062,,,,Enzyme__a5d25442f6b6a0bd,-2.6661306283062,6,other,RHEA:42601 forward,,inferred_MOON_score,RHEA:42601,Gene__Ptgs2
+Enzyme__a6c0af90fcb6ae15,Faah [RHEA:26137],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__a6c0af90fcb6ae15,-2.46006090302649,8,other,RHEA:26137 forward,,inferred_MOON_score,RHEA:26137,Gene__Faah
+Enzyme__a74ebbc83717067e,Cbr1 [RHEA:24510],enzyme_reaction_instance,-1.80548763109625,,,,Enzyme__a74ebbc83717067e,-1.80548763109625,4,other,RHEA:24510 forward,,inferred_MOON_score,RHEA:24510,Gene__Cbr1
+Enzyme__a8a8e0033381dcc5,Faah [RHEA:64117],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__a8a8e0033381dcc5,-2.46006090302649,8,other,RHEA:64117 forward,,inferred_MOON_score,RHEA:64117,Gene__Faah
+Enzyme__aa48a3cb54777df8,Faah [RHEA:64109],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__aa48a3cb54777df8,-2.46006090302649,8,other,RHEA:64109 forward,,inferred_MOON_score,RHEA:64109,Gene__Faah
+Enzyme__ad63d70e0e91521d,Abhd12 [RHEA:44729],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__ad63d70e0e91521d,-2.46006090302649,8,other,RHEA:44729 forward,,inferred_MOON_score,RHEA:44729,Gene__Abhd12
+Enzyme__adfc0648b066f9a2,Dgkz [RHEA:40324],enzyme_reaction_instance,-1.66058758339359,,,,Enzyme__adfc0648b066f9a2,-1.66058758339359,10,other,RHEA:40324 forward,,inferred_MOON_score,RHEA:40324,Gene__Dgkz
+Enzyme__af466f72f6cab03c,Akr1b1 [RHEA:45314],enzyme_reaction_instance,-1.80548763109625,,,,Enzyme__af466f72f6cab03c,-1.80548763109625,4,other,RHEA:45314 forward,,inferred_MOON_score,RHEA:45314,Gene__Akr1b1
+Enzyme__b6e2169f095ce367,Chpt1 [RHEA:54345],enzyme_reaction_instance,-1.66058758339358,,,,Enzyme__b6e2169f095ce367,-1.66058758339358,10,other,RHEA:54345 forward,,inferred_MOON_score,RHEA:54345,Gene__Chpt1
+Enzyme__b905827513b64f17,Ptges [RHEA:12894],enzyme_reaction_instance,-1.28661462678112,,,,Enzyme__b905827513b64f17,-1.28661462678112,6,other,RHEA:12894 forward,,inferred_MOON_score,RHEA:12894,Gene__Ptges
+Enzyme__be517171308377b1,Abhd6 [RHEA:44729],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__be517171308377b1,-2.46006090302649,8,other,RHEA:44729 forward,,inferred_MOON_score,RHEA:44729,Gene__Abhd6
+Enzyme__bf54e29335b9d22c,Hpgds [RHEA:10601],enzyme_reaction_instance,-1.80548763109625,,,,Enzyme__bf54e29335b9d22c,-1.80548763109625,4,other,RHEA:10601 forward,,inferred_MOON_score,RHEA:10601,Gene__Hpgds
+Enzyme__c42c2a679103f8e3,Pm20d1 [RHEA:51313],enzyme_reaction_instance,-1.66058758339358,,,,Enzyme__c42c2a679103f8e3,-1.66058758339358,10,other,RHEA:51313 forward,,inferred_MOON_score,RHEA:51313,Gene__Pm20d1
+Enzyme__c87e22f0da6ee66a,Ptgs2 [RHEA:42597],enzyme_reaction_instance,-7.44793207160655,,,,Enzyme__c87e22f0da6ee66a,-7.44793207160655,8,other,RHEA:42597 forward,,inferred_MOON_score,RHEA:42597,Gene__Ptgs2
+Enzyme__ce01f9e08b711ecd,Lpin1 [RHEA:43293],enzyme_reaction_instance,-4.24061910629118,,,,Enzyme__ce01f9e08b711ecd,-4.24061910629118,12,other,RHEA:43293 forward,,inferred_MOON_score,RHEA:43293,Gene__Lpin1
+Enzyme__d48fb2fdf5f1ca42,Akr1b7 [RHEA:45314],enzyme_reaction_instance,-1.80548763109625,,,,Enzyme__d48fb2fdf5f1ca42,-1.80548763109625,4,other,RHEA:45314 forward,,inferred_MOON_score,RHEA:45314,Gene__Akr1b7
+Enzyme__d927c40d31cbbe18,Pla2g4e [RHEA:55257],enzyme_reaction_instance,-1.66058758339358,,,,Enzyme__d927c40d31cbbe18,-1.66058758339358,10,other,RHEA:55257 forward,,inferred_MOON_score,RHEA:55257,Gene__Pla2g4e
+Enzyme__dbc7bc4700d31479,Napepld [RHEA:45529],enzyme_reaction_instance,-1.66058758339358,,,,Enzyme__dbc7bc4700d31479,-1.66058758339358,10,other,RHEA:45529 forward,,inferred_MOON_score,RHEA:45529,Gene__Napepld
+Enzyme__e43f22ec7046158e,Aspg [RHEA:40828],enzyme_reaction_instance,-2.46006090302649,,,,Enzyme__e43f22ec7046158e,-2.46006090302649,8,other,RHEA:40828 forward,,inferred_MOON_score,RHEA:40828,Gene__Aspg
+Enzyme__eb8772b07f84d8f0,Aspg [RHEA:40960],enzyme_reaction_instance,-1.66058758339358,,,,Enzyme__eb8772b07f84d8f0,-1.66058758339358,10,other,RHEA:40960 forward,,inferred_MOON_score,RHEA:40960,Gene__Aspg
+Enzyme__ed96cbdbd301c38e,Dgkg [RHEA:40324],enzyme_reaction_instance,-1.66058758339359,,,,Enzyme__ed96cbdbd301c38e,-1.66058758339359,10,other,RHEA:40324 forward,,inferred_MOON_score,RHEA:40324,Gene__Dgkg
+Enzyme__f05bd607d078c336,Lpcat3 [RHEA:37480],enzyme_reaction_instance,-1.66058758339358,,,,Enzyme__f05bd607d078c336,-1.66058758339358,10,other,RHEA:37480 forward,,inferred_MOON_score,RHEA:37480,Gene__Lpcat3
+Enzyme__f15a667a47029be4,Ptgs2 [RHEA:23729],enzyme_reaction_instance,-2.6661306283062,,,,Enzyme__f15a667a47029be4,-2.6661306283062,6,other,RHEA:23729 forward,,inferred_MOON_score,RHEA:23729,Gene__Ptgs2
+Enzyme__f4e2c31415e1b057,Dgki [RHEA:40324],enzyme_reaction_instance,-1.66058758339359,,,,Enzyme__f4e2c31415e1b057,-1.66058758339359,10,other,RHEA:40324 forward,,inferred_MOON_score,RHEA:40324,Gene__Dgki
+Enzyme__f861bb871e995104,Dgkq [RHEA:40324],enzyme_reaction_instance,-1.66058758339359,,,,Enzyme__f861bb871e995104,-1.66058758339359,10,other,RHEA:40324 forward,,inferred_MOON_score,RHEA:40324,Gene__Dgkq
+Enzyme__fbec3106f9d15fce,Agpat4 [RHEA:42589],enzyme_reaction_instance,-1.66058758339359,,,,Enzyme__fbec3106f9d15fce,-1.66058758339359,10,other,RHEA:42589 forward,,inferred_MOON_score,RHEA:42589,Gene__Agpat4
+Gene__Abi1,Abi1,gene_product,-1.3095544199948,,,5.6288166590834e-05,Gene__Abi1,-1.3095544199948,2,other,Abi1,,inferred_MOON_score,,
+Gene__Abl1,Abl1,gene_product,-1.66263883078436,,,-0.000825561984568519,Gene__Abl1,-1.66263883078436,1,other,Abl1,,inferred_MOON_score,,
+Gene__Actb,Actb,gene_product,2.31130464891773,,,0.140684486079612,Gene__Actb,2.31130464891773,2,other,Actb,,inferred_MOON_score,,
+Gene__Ahr,Ahr,gene_product,,,-4.08905998983221,-0.960451096086679,Gene__Ahr,-4.08905998983221,0,level0,Ahr,,observed_RNA_derived_TF_activity,,
+Gene__Ahsa1,Ahsa1,gene_product,-1.78840931314295,,,0.00458227018263879,Gene__Ahsa1,-1.78840931314295,2,other,Ahsa1,,inferred_MOON_score,,
+Gene__Akt1s1,Akt1s1,gene_product,3.81714676010533,,,0.150370151066652,Gene__Akt1s1,3.81714676010533,2,other,Akt1s1,,inferred_MOON_score,,
+Gene__Apaf1,Apaf1,gene_product,1.79748710239277,,,-0.00145046841369138,Gene__Apaf1,1.79748710239277,3,other,Apaf1,,inferred_MOON_score,,
+Gene__Ar,Ar,gene_product,,,-3.92923529302436,-0.285926317400749,Gene__Ar,-3.92923529302436,0,level0,Ar,,observed_RNA_derived_TF_activity,,
+Gene__Areg,Areg,gene_product,-4.04787129063585,,,0.28064243427978,Gene__Areg,-4.04787129063585,2,other,Areg,,inferred_MOON_score,,
+Gene__Arhgap32,Arhgap32,gene_product,-2.61323309886488,,,0.00308484385247572,Gene__Arhgap32,-2.61323309886488,2,other,Arhgap32,,inferred_MOON_score,,
+Gene__Arx,Arx,gene_product,,,0.420080983378336,1.80862757996363e-05,Gene__Arx,0.420080983378336,0,level0,Arx,,observed_RNA_derived_TF_activity,,
+Gene__Atf2,Atf2,gene_product,,,0.318815309787933,-0.000816921305094382,Gene__Atf2,0.318815309787933,0,level0,Atf2,,observed_RNA_derived_TF_activity,,
+Gene__Aurka,Aurka,gene_product,-3.20734304098726,,,-0.00101962646437956,Gene__Aurka,-3.20734304098726,1,other,Aurka,,inferred_MOON_score,,
+Gene__Axl,Axl,gene_product,-1.91828959248906,,,4.51350747035727e-05,Gene__Axl,-1.91828959248906,2,other,Axl,,inferred_MOON_score,,
+Gene__Birc6,Birc6,gene_product,-1.53717855942479,,,-0.00173046032113114,Gene__Birc6,-1.53717855942479,2,other,Birc6,,inferred_MOON_score,,
+Gene__Brca1,Brca1,gene_product,,,-1.07897879461211,-0.198558998018515,Gene__Brca1,-1.07897879461211,0,level0,Brca1,,observed_RNA_derived_TF_activity,,
+Gene__Bub1,Bub1,gene_product,2.23599969735543,,,1.51956007953966e-05,Gene__Bub1,2.23599969735543,2,other,Bub1,,inferred_MOON_score,,
+Gene__Casp7,Casp7,gene_product,2.35168244782406,,,0.0143226944734276,Gene__Casp7,2.35168244782406,1,other,Casp7,,inferred_MOON_score,,
+Gene__Casp8,Casp8,gene_product,1.69583572853801,,,0.00868429300968307,Gene__Casp8,1.69583572853801,1,other,Casp8,,inferred_MOON_score,,
+Gene__Casp9,Casp9,gene_product,2.05608391999781,,,0.0035093688440839,Gene__Casp9,2.05608391999781,2,other,Casp9,,inferred_MOON_score,,
+Gene__Cbl,Cbl,gene_product,3.9478751099952,,,0.000432413747405643,Gene__Cbl,3.9478751099952,2,other,Cbl,,inferred_MOON_score,,
+Gene__Ccnd2,Ccnd2,gene_product,-1.50610971366729,,,-6.64845938070845e-05,Gene__Ccnd2,-1.50610971366729,2,other,Ccnd2,,inferred_MOON_score,,
+Gene__Cdh1,Cdh1,gene_product,-1.86027540353001,,,0.325703717462424,Gene__Cdh1,-1.86027540353001,2,other,Cdh1,,inferred_MOON_score,,
+Gene__Cdk6,Cdk6,gene_product,-2.04951726073553,,,-0.0125794980886674,Gene__Cdk6,-2.04951726073553,1,other,Cdk6,,inferred_MOON_score,,
+Gene__Cebpb,Cebpb,gene_product,,,-2.22283222360399,0.0582537858996904,Gene__Cebpb,-2.22283222360399,0,level0,Cebpb,,observed_RNA_derived_TF_activity,,
+Gene__Cep192,Cep192,gene_product,-2.56350239075711,,,0.00213584363887594,Gene__Cep192,-2.56350239075711,2,other,Cep192,,inferred_MOON_score,,
+Gene__Cflar,Cflar,gene_product,-1.38217358448554,,,-0.0237349256205641,Gene__Cflar,-1.38217358448554,2,other,Cflar,,inferred_MOON_score,,
+Gene__Creb1,Creb1,gene_product,,,-1.60838018898226,0.00537236599612764,Gene__Creb1,-1.60838018898226,0,level0,Creb1,,observed_RNA_derived_TF_activity,,
+Gene__Crebbp,Crebbp,gene_product,,,-0.0993086995543866,-0.0281366504915808,Gene__Crebbp,-0.0993086995543866,0,level0,Crebbp,,observed_RNA_derived_TF_activity,,
+Gene__Crem,Crem,gene_product,,,-0.784358358354636,0.0066587108562234,Gene__Crem,-0.784358358354636,0,level0,Crem,,observed_RNA_derived_TF_activity,,
+Gene__Crkl,Crkl,gene_product,-1.36759804846476,,,-0.0209272601017755,Gene__Crkl,-1.36759804846476,2,other,Crkl,,inferred_MOON_score,,
+Gene__Crtc2,Crtc2,gene_product,-1.74612832604892,,,0.00492234383799607,Gene__Crtc2,-1.74612832604892,1,other,Crtc2,,inferred_MOON_score,,
+Gene__Csf1,Csf1,gene_product,-1.41175011341001,,,-0.000481729156764886,Gene__Csf1,-1.41175011341001,3,other,Csf1,,inferred_MOON_score,,
+Gene__Csf3r,Csf3r,gene_product,-2.0367924302513,,,0.000125065884188376,Gene__Csf3r,-2.0367924302513,2,other,Csf3r,,inferred_MOON_score,,
+Gene__Ctnnb1,Ctnnb1,gene_product,,,-1.59574072495246,-0.00206977762148637,Gene__Ctnnb1,-1.59574072495246,0,level0,Ctnnb1,,observed_RNA_derived_TF_activity,,
+Gene__Dag1,Dag1,gene_product,1.95335287372461,,,0.000684678232910779,Gene__Dag1,1.95335287372461,2,other,Dag1,,inferred_MOON_score,,
+Gene__Dbp,Dbp,gene_product,,,-7.66088476896073,-0.0198886987848777,Gene__Dbp,-7.66088476896073,0,level0,Dbp,,observed_RNA_derived_TF_activity,,
+Gene__Ddit3,Ddit3,gene_product,,,-1.95607065222577,0.0269621015172519,Gene__Ddit3,-1.95607065222577,0,level0,Ddit3,,observed_RNA_derived_TF_activity,,
+Gene__Deptor,Deptor,gene_product,3.81714676010533,,,0.00525565270734159,Gene__Deptor,3.81714676010533,2,other,Deptor,,inferred_MOON_score,,
+Gene__Dlx5,Dlx5,gene_product,,,-1.0471897003371,0.000147599028862818,Gene__Dlx5,-1.0471897003371,0,level0,Dlx5,,observed_RNA_derived_TF_activity,,
+Gene__Dnm2,Dnm2,gene_product,-1.59605330531193,,,0.10758298486359,Gene__Dnm2,-1.59605330531193,3,other,Dnm2,,inferred_MOON_score,,
+Gene__Dnmt1,Dnmt1,gene_product,,,-0.471834939785896,0.00405410990775884,Gene__Dnmt1,-0.471834939785896,0,level0,Dnmt1,,observed_RNA_derived_TF_activity,,
+Gene__Dnmt3a,Dnmt3a,gene_product,,,-1.4729299251043,-0.000138973305072497,Gene__Dnmt3a,-1.4729299251043,0,level0,Dnmt3a,,observed_RNA_derived_TF_activity,,
+Gene__Efnb2,Efnb2,gene_product,-1.86601422739785,,,-0.000978576986168268,Gene__Efnb2,-1.86601422739785,2,other,Efnb2,,inferred_MOON_score,,
+Gene__Egf,Egf,gene_product,-3.72964880331219,,,-0.00277812331263604,Gene__Egf,-3.72964880331219,2,other,Egf,,inferred_MOON_score,,
+Gene__Egfr,Egfr,gene_product,-2.34460184570319,,,0.602923775962351,Gene__Egfr,-2.34460184570319,1,other,Egfr,,inferred_MOON_score,,
+Gene__Elk1,Elk1,gene_product,,,-1.51287406171898,0.171318395376272,Gene__Elk1,-1.51287406171898,0,level0,Elk1,,observed_RNA_derived_TF_activity,,
+Gene__Ep300,Ep300,gene_product,,,-1.15036805735473,0.00704425327348803,Gene__Ep300,-1.15036805735473,0,level0,Ep300,,observed_RNA_derived_TF_activity,,
+Gene__Epha3,Epha3,gene_product,-2.35168244782406,,,2.18722149455622e-05,Gene__Epha3,-2.35168244782406,1,other,Epha3,,inferred_MOON_score,,
+Gene__Ephb2,Ephb2,gene_product,-1.83662801953759,,,-0.0012371733377121,Gene__Ephb2,-1.83662801953759,2,other,Ephb2,,inferred_MOON_score,,
+Gene__Erbb2,Erbb2,gene_product,-4.71393401505054,,,3.89773147623535e-06,Gene__Erbb2,-4.71393401505054,1,other,Erbb2,,inferred_MOON_score,,
+Gene__Erbb4,Erbb4,gene_product,-3.8466808374944,,,0.00167178155813699,Gene__Erbb4,-3.8466808374944,1,other,Erbb4,,inferred_MOON_score,,
+Gene__Errfi1,Errfi1,gene_product,4.04787129063585,,,-0.000465620280871134,Gene__Errfi1,4.04787129063585,2,other,Errfi1,,inferred_MOON_score,,
+Gene__Esr1,Esr1,gene_product,,,-7.08874857626001,-1.14800698838773,Gene__Esr1,-7.08874857626001,0,level0,Esr1,,observed_RNA_derived_TF_activity,,
+Gene__Ets1,Ets1,gene_product,,,-0.919661950174839,-0.00239721055999932,Gene__Ets1,-0.919661950174839,0,level0,Ets1,,observed_RNA_derived_TF_activity,,
+Gene__Ets2,Ets2,gene_product,,,-1.47172419497271,-0.128263557108686,Gene__Ets2,-1.47172419497271,0,level0,Ets2,,observed_RNA_derived_TF_activity,,
+Gene__Flna,Flna,gene_product,1.65146893732546,,,5.0277222657373e-06,Gene__Flna,1.65146893732546,2,other,Flna,,inferred_MOON_score,,
+Gene__Fmnl2,Fmnl2,gene_product,2.23599969735543,,,0.010694302824182,Gene__Fmnl2,2.23599969735543,2,other,Fmnl2,,inferred_MOON_score,,
+Gene__Fos,Fos,gene_product,,,1.44728281088802,-0.0122788944082056,Gene__Fos,1.44728281088802,0,level0,Fos,,observed_RNA_derived_TF_activity,,
+Gene__Foxm1,Foxm1,gene_product,,,0.244056966889444,-4.02037342698916e-07,Gene__Foxm1,0.244056966889444,0,level0,Foxm1,,observed_RNA_derived_TF_activity,,
+Gene__Foxo1,Foxo1,gene_product,,,-1.49426525589203,-0.0606488029806425,Gene__Foxo1,-1.49426525589203,0,level0,Foxo1,,observed_RNA_derived_TF_activity,,
+Gene__Foxo3,Foxo3,gene_product,,,-2.61757255130362,0.00903261259115245,Gene__Foxo3,-2.61757255130362,0,level0,Foxo3,,observed_RNA_derived_TF_activity,,
+Gene__Fus,Fus,gene_product,-2.35168244782406,,,-0.00824546157633077,Gene__Fus,-2.35168244782406,1,other,Fus,,inferred_MOON_score,,
+Gene__Fyn,Fyn,gene_product,-3.00794430447953,,,-1.16322653798587e-05,Gene__Fyn,-3.00794430447953,1,other,Fyn,,inferred_MOON_score,,
+Gene__Gab1,Gab1,gene_product,-1.41914430480949,,,9.96558522217028e-05,Gene__Gab1,-1.41914430480949,3,other,Gab1,,inferred_MOON_score,,
+Gene__Gata2,Gata2,gene_product,,,-1.70020713774064,-7.96106654226512e-06,Gene__Gata2,-1.70020713774064,0,level0,Gata2,,observed_RNA_derived_TF_activity,,
+Gene__Ghr,Ghr,gene_product,-2.0367924302513,,,0.0188104665659059,Gene__Ghr,-2.0367924302513,2,other,Ghr,,inferred_MOON_score,,
+Gene__Gli1,Gli1,gene_product,,,-1.6047445866046,-0.000136929338148516,Gene__Gli1,-1.6047445866046,0,level0,Gli1,,observed_RNA_derived_TF_activity,,
+Gene__Grb10,Grb10,gene_product,-1.3095544199948,,,-0.0291776464449761,Gene__Grb10,-1.3095544199948,2,other,Grb10,,inferred_MOON_score,,
+Gene__Gsn,Gsn,gene_product,-1.79748710239277,,,-0.000105730224760827,Gene__Gsn,-1.79748710239277,3,other,Gsn,,inferred_MOON_score,,
+Gene__Gstp1,Gstp1,gene_product,-1.86027540353001,,,1.59870302394652,Gene__Gstp1,-1.86027540353001,2,other,Gstp1,,inferred_MOON_score,,
+Gene__Gstp2,Gstp2,gene_product,-1.86027540353001,,,0.354424613439945,Gene__Gstp2,-1.86027540353001,2,other,Gstp2,,inferred_MOON_score,,
+Gene__Haspin,Haspin,gene_product,2.23599969735543,,,-1.88472412024156e-05,Gene__Haspin,2.23599969735543,2,other,Haspin,,inferred_MOON_score,,
+Gene__Hdac2,Hdac2,gene_product,-2.91150102258533,,,0.00197673895336669,Gene__Hdac2,-2.91150102258533,1,other,Hdac2,,inferred_MOON_score,,
+Gene__Hnf4a,Hnf4a,gene_product,,,-4.09506350687871,-0.0097076881252197,Gene__Hnf4a,-4.09506350687871,0,level0,Hnf4a,,observed_RNA_derived_TF_activity,,
+Gene__Hsp90ab1,Hsp90ab1,gene_product,-2.35168244782406,,,0.533310006590284,Gene__Hsp90ab1,-2.35168244782406,1,other,Hsp90ab1,,inferred_MOON_score,,
+Gene__Ifngr1,Ifngr1,gene_product,-2.63878896976242,,,-0.000100345216139347,Gene__Ifngr1,-2.63878896976242,2,other,Ifngr1,,inferred_MOON_score,,
+Gene__Ifngr2,Ifngr2,gene_product,-2.63878896976242,,,5.93369361868462e-05,Gene__Ifngr2,-2.63878896976242,2,other,Ifngr2,,inferred_MOON_score,,
+Gene__Igf1r,Igf1r,gene_product,1.93432680461821,,,0.000141271090397189,Gene__Igf1r,1.93432680461821,2,other,Igf1r,,inferred_MOON_score,,
+Gene__Il10ra,Il10ra,gene_product,-2.0367924302513,,,-1.87463524123488e-06,Gene__Il10ra,-2.0367924302513,2,other,Il10ra,,inferred_MOON_score,,
+Gene__Il2rb,Il2rb,gene_product,-1.3196602238006,,,-8.7396571368625e-06,Gene__Il2rb,-1.3196602238006,2,other,Il2rb,,inferred_MOON_score,,
+Gene__Il7r,Il7r,gene_product,-3.80688404023373,,,-5.83827910009828e-05,Gene__Il7r,-3.80688404023373,2,other,Il7r,,inferred_MOON_score,,
+Gene__Insr,Insr,gene_product,1.51420460504284,,,-0.295760963720893,Gene__Insr,1.51420460504284,2,other,Insr,,inferred_MOON_score,,
+Gene__Irf3,Irf3,gene_product,,,-0.959882741098915,-0.00103580410373105,Gene__Irf3,-0.959882741098915,0,level0,Irf3,,observed_RNA_derived_TF_activity,,
+Gene__Jak1,Jak1,gene_product,-3.81472176329327,,,0.0853355104719982,Gene__Jak1,-3.81472176329327,1,other,Jak1,,inferred_MOON_score,,
+Gene__Jak3,Jak3,gene_product,-2.8426807822302,,,0.000692107156677651,Gene__Jak3,-2.8426807822302,1,other,Jak3,,inferred_MOON_score,,
+Gene__Jun,Jun,gene_product,,,1.51373427756343,0.045954004534162,Gene__Jun,1.51373427756343,0,level0,Jun,,observed_RNA_derived_TF_activity,,
+Gene__Kat5,Kat5,gene_product,,,0.027426217485796,0.000371244803924847,Gene__Kat5,0.027426217485796,0,level0,Kat5,,observed_RNA_derived_TF_activity,,
+Gene__Kat7,Kat7,gene_product,,,0.975820597109769,-0.00442575878712197,Gene__Kat7,0.975820597109769,0,level0,Kat7,,observed_RNA_derived_TF_activity,,
+Gene__Klf10,Klf10,gene_product,,,-3.24922835434819,-0.420502588913758,Gene__Klf10,-3.24922835434819,0,level0,Klf10,,observed_RNA_derived_TF_activity,,
+Gene__Lck,Lck,gene_product,-2.88680307221734,,,-0.0304015665361246,Gene__Lck,-2.88680307221734,1,other,Lck,,inferred_MOON_score,,
+Gene__Limk1,Limk1,gene_product,-2.39401660568412,,,0.058434788191584,Gene__Limk1,-2.39401660568412,2,other,Limk1,,inferred_MOON_score,,
+Gene__Lyn,Lyn,gene_product,-1.26968420036845,,,0.0103433877237504,Gene__Lyn,-1.26968420036845,1,other,Lyn,,inferred_MOON_score,,
+Gene__Mad2l1bp,Mad2l1bp,gene_product,-1.41397019770476,,,0.0222599731940419,Gene__Mad2l1bp,-1.41397019770476,3,other,Mad2l1bp,,inferred_MOON_score,,
+Gene__Map2k6,Map2k6,gene_product,-3.00794430447953,,,-0.00782481887999565,Gene__Map2k6,-3.00794430447953,1,other,Map2k6,,inferred_MOON_score,,
+Gene__Mapk14,Mapk14,gene_product,-1.82499291185112,,,-0.00168091437838378,Gene__Mapk14,-1.82499291185112,1,other,Mapk14,,inferred_MOON_score,,
+Gene__Mef2c,Mef2c,gene_product,,,-0.532360837320791,-0.000182404532905309,Gene__Mef2c,-0.532360837320791,0,level0,Mef2c,,observed_RNA_derived_TF_activity,,
+Gene__Mef2d,Mef2d,gene_product,,,-1.31256043992613,0.00677432497493967,Gene__Mef2d,-1.31256043992613,0,level0,Mef2d,,observed_RNA_derived_TF_activity,,
+Gene__Mtor,Mtor,gene_product,-4.71393401505054,,,-0.0179415169070314,Gene__Mtor,-4.71393401505054,1,other,Mtor,,inferred_MOON_score,,
+Gene__Mxd1,Mxd1,gene_product,,,0.768885411356166,0.00572429766257893,Gene__Mxd1,0.768885411356166,0,level0,Mxd1,,observed_RNA_derived_TF_activity,,
+Gene__Myc,Myc,gene_product,,,0.177426377515769,0.00434948516434607,Gene__Myc,0.177426377515769,0,level0,Myc,,observed_RNA_derived_TF_activity,,
+Gene__Myod1,Myod1,gene_product,,,-1.79491362741607,-0.0323712885302644,Gene__Myod1,-1.79491362741607,0,level0,Myod1,,observed_RNA_derived_TF_activity,,
+Gene__Nanog,Nanog,gene_product,,,1.14399505030704,0.0103749652808739,Gene__Nanog,1.14399505030704,0,level0,Nanog,,observed_RNA_derived_TF_activity,,
+Gene__Ncoa3,Ncoa3,gene_product,,,-2.00088576663278,0.146416019263003,Gene__Ncoa3,-2.00088576663278,0,level0,Ncoa3,,observed_RNA_derived_TF_activity,,
+Gene__Nedd9,Nedd9,gene_product,-2.0489864273436,,,0.000311700266743237,Gene__Nedd9,-2.0489864273436,2,other,Nedd9,,inferred_MOON_score,,
+Gene__Nfatc1,Nfatc1,gene_product,,,-1.49224528698675,0.00207517705859051,Gene__Nfatc1,-1.49224528698675,0,level0,Nfatc1,,observed_RNA_derived_TF_activity,,
+Gene__Nfe2l2,Nfe2l2,gene_product,,,3.77941615388038,-0.0089216227373512,Gene__Nfe2l2,3.77941615388038,0,level0,Nfe2l2,,observed_RNA_derived_TF_activity,,
+Gene__Nkx3-1,Nkx3-1,gene_product,,,0.239002737806531,0.141280681914995,Gene__Nkx3-1,0.239002737806531,0,level0,Nkx3-1,,observed_RNA_derived_TF_activity,,
+Gene__Notch1,Notch1,gene_product,,,-0.686455800398828,-0.0064502638237318,Gene__Notch1,-0.686455800398828,0,level0,Notch1,,observed_RNA_derived_TF_activity,,
+Gene__Nr3c1,Nr3c1,gene_product,,,-3.03457608918116,-0.00499151896773846,Gene__Nr3c1,-3.03457608918116,0,level0,Nr3c1,,observed_RNA_derived_TF_activity,,
+Gene__Nras,Nras,gene_product,1.52423362249448,,,0.00372492347562622,Gene__Nras,1.52423362249448,2,other,Nras,,inferred_MOON_score,,
+Gene__Nsd2,Nsd2,gene_product,-2.35168244782406,,,0.0167300230855414,Gene__Nsd2,-2.35168244782406,1,other,Nsd2,,inferred_MOON_score,,
+Gene__Pak1,Pak1,gene_product,-1.47693726761515,,,-0.000416547258332225,Gene__Pak1,-1.47693726761515,1,other,Pak1,,inferred_MOON_score,,
+Gene__Pdgfrb,Pdgfrb,gene_product,-1.2287355641424,,,4.44169563120982e-06,Gene__Pdgfrb,-1.2287355641424,2,other,Pdgfrb,,inferred_MOON_score,,
+Gene__Peli1,Peli1,gene_product,-1.31555594231059,,,0.0109954732646936,Gene__Peli1,-1.31555594231059,2,other,Peli1,,inferred_MOON_score,,
+Gene__Pin1,Pin1,gene_product,1.87185480977738,,,0.00133684856587092,Gene__Pin1,1.87185480977738,1,other,Pin1,,inferred_MOON_score,,
+Gene__Pin1rt1,Pin1rt1,gene_product,1.32856737324962,,,0.00363104919861637,Gene__Pin1rt1,1.32856737324962,1,other,Pin1rt1,,inferred_MOON_score,,
+Gene__Plcg1,Plcg1,gene_product,-1.12013205283004,,,0.0936373535458356,Gene__Plcg1,-1.12013205283004,2,other,Plcg1,,inferred_MOON_score,,
+Gene__Pld1,Pld1,gene_product,1.95335287372461,,,0.00118757102223773,Gene__Pld1,1.95335287372461,2,other,Pld1,,inferred_MOON_score,,
+Gene__Plk1,Plk1,gene_product,2.7498681427728,,,0.000115085535205785,Gene__Plk1,2.7498681427728,1,other,Plk1,,inferred_MOON_score,,
+Gene__Pou2f1,Pou2f1,gene_product,,,-0.546156835715764,-0.0192563096316964,Gene__Pou2f1,-0.546156835715764,0,level0,Pou2f1,,observed_RNA_derived_TF_activity,,
+Gene__Ppargc1a,Ppargc1a,gene_product,,,-1.69724935567535,-0.457452170235209,Gene__Ppargc1a,-1.69724935567535,0,level0,Ppargc1a,,observed_RNA_derived_TF_activity,,
+Gene__Prkaa1,Prkaa1,gene_product,1.82671895288065,,,0.0300261761175716,Gene__Prkaa1,1.82671895288065,1,other,Prkaa1,,inferred_MOON_score,,
+Gene__Prkca,Prkca,gene_product,2.40238477463879,,,-0.497060088396587,Gene__Prkca,2.40238477463879,1,other,Prkca,,inferred_MOON_score,,
+Gene__Prkdc,Prkdc,gene_product,-1.25113730913992,,,0.0333398304012085,Gene__Prkdc,-1.25113730913992,1,other,Prkdc,,inferred_MOON_score,,
+Gene__Ptger3,Ptger3,gene_product,-2.249923255863,,,0.00298877731099535,Gene__Ptger3,-2.249923255863,2,other,Ptger3,,inferred_MOON_score,,
+Gene__Ptk2,Ptk2,gene_product,1.14774450945683,,,-0.0010711601653142,Gene__Ptk2,1.14774450945683,1,other,Ptk2,,inferred_MOON_score,,
+Gene__Ptpn12,Ptpn12,gene_product,2.73470454975508,,,-0.00305157374365073,Gene__Ptpn12,2.73470454975508,2,other,Ptpn12,,inferred_MOON_score,,
+Gene__Ptprh,Ptprh,gene_product,2.30554666754361,,,-7.63504662757104e-05,Gene__Ptprh,2.30554666754361,2,other,Ptprh,,inferred_MOON_score,,
+Gene__Raf1,Raf1,gene_product,1.87204066236931,,,0.260288573696587,Gene__Raf1,1.87204066236931,1,other,Raf1,,inferred_MOON_score,,
+Gene__Rb1,Rb1,gene_product,,,-0.633966985143999,0.122981058190994,Gene__Rb1,-0.633966985143999,0,level0,Rb1,,observed_RNA_derived_TF_activity,,
+Gene__Rin1,Rin1,gene_product,-2.30739064964973,,,0.023812038571388,Gene__Rin1,-2.30739064964973,2,other,Rin1,,inferred_MOON_score,,
+Gene__Rps6kb1,Rps6kb1,gene_product,-2.8117699205044,,,0.562315992180248,Gene__Rps6kb1,-2.8117699205044,1,other,Rps6kb1,,inferred_MOON_score,,
+Gene__Rras,Rras,gene_product,1.52423362249448,,,0.0248507584745997,Gene__Rras,1.52423362249448,2,other,Rras,,inferred_MOON_score,,
+Gene__Runx2,Runx2,gene_product,,,-0.650938998265276,9.04142146244154e-05,Gene__Runx2,-0.650938998265276,0,level0,Runx2,,observed_RNA_derived_TF_activity,,
+Gene__Smad4,Smad4,gene_product,,,-3.04765020675206,0.0116732135707071,Gene__Smad4,-3.04765020675206,0,level0,Smad4,,observed_RNA_derived_TF_activity,,
+Gene__Snai1,Snai1,gene_product,,,1.27315002484186,2.47477887384755e-05,Gene__Snai1,1.27315002484186,0,level0,Snai1,,observed_RNA_derived_TF_activity,,
+Gene__Sox2,Sox2,gene_product,,,-0.145610434742855,2.73882137110382e-05,Gene__Sox2,-0.145610434742855,0,level0,Sox2,,observed_RNA_derived_TF_activity,,
+Gene__Sp7,Sp7,gene_product,,,-0.0353458461828719,5.6248021834147e-05,Gene__Sp7,-0.0353458461828719,0,level0,Sp7,,observed_RNA_derived_TF_activity,,
+Gene__Src,Src,gene_product,-1.6243235522323,,,-1.2098458405224e-06,Gene__Src,-1.6243235522323,1,other,Src,,inferred_MOON_score,,
+Gene__Srebf1,Srebf1,gene_product,,,-2.55971817290953,0.000219035912295736,Gene__Srebf1,-2.55971817290953,0,level0,Srebf1,,observed_RNA_derived_TF_activity,,
+Gene__Stat5a,Stat5a,gene_product,,,-1.64883466164484,-0.425185397655404,Gene__Stat5a,-1.64883466164484,0,level0,Stat5a,,observed_RNA_derived_TF_activity,,
+Gene__Stat5b,Stat5b,gene_product,,,-1.58842665338541,-0.15692468999026,Gene__Stat5b,-1.58842665338541,0,level0,Stat5b,,observed_RNA_derived_TF_activity,,
+Gene__Stk11,Stk11,gene_product,1.14969884164545,,,-0.000797534225408063,Gene__Stk11,1.14969884164545,1,other,Stk11,,inferred_MOON_score,,
+Gene__Tcf3,Tcf3,gene_product,,,-1.45236858316515,0.0013724215267415,Gene__Tcf3,-1.45236858316515,0,level0,Tcf3,,observed_RNA_derived_TF_activity,,
+Gene__Tfe3,Tfe3,gene_product,,,-2.63597794553712,0.210769593852009,Gene__Tfe3,-2.63597794553712,0,level0,Tfe3,,observed_RNA_derived_TF_activity,,
+Gene__Tgfa,Tgfa,gene_product,-4.04787129063585,,,0.207236813322895,Gene__Tgfa,-4.04787129063585,2,other,Tgfa,,inferred_MOON_score,,
+Gene__Tln1,Tln1,gene_product,1.95335287372461,,,-0.00094852871611364,Gene__Tln1,1.95335287372461,2,other,Tln1,,inferred_MOON_score,,
+Gene__Tp53,Tp53,gene_product,,,0.139708793955591,,Gene__Tp53,0.139708793955591,0,level0,Tp53,,observed_RNA_derived_TF_activity,,
+Gene__Tp73,Tp73,gene_product,,,0.481416551745305,,Gene__Tp73,0.481416551745305,0,level0,Tp73,,observed_RNA_derived_TF_activity,,
+Gene__Tpx2,Tpx2,gene_product,-2.56350239075711,,,0.000548098499644227,Gene__Tpx2,-2.56350239075711,2,other,Tpx2,,inferred_MOON_score,,
+Gene__Trip13,Trip13,gene_product,-1.86027540353001,,,0.0101583510379811,Gene__Trip13,-1.86027540353001,2,other,Trip13,,inferred_MOON_score,,
+Gene__Twist1,Twist1,gene_product,,,-0.0560395035822377,-3.25408370422987e-05,Gene__Twist1,-0.0560395035822377,0,level0,Twist1,,observed_RNA_derived_TF_activity,,
+Gene__Ulk1,Ulk1,gene_product,-1.85568234654352,,,-0.306424490586207,Gene__Ulk1,-1.85568234654352,2,other,Ulk1,,inferred_MOON_score,,
+Gene__Uri1,Uri1,gene_product,2.35168244782406,,,0.00516550352587444,Gene__Uri1,2.35168244782406,1,other,Uri1,,inferred_MOON_score,,
+Gene__Usf1,Usf1,gene_product,,,-2.62185332378935,0.000479114964802169,Gene__Usf1,-2.62185332378935,0,level0,Usf1,,observed_RNA_derived_TF_activity,,
+Gene__Vasp,Vasp,gene_product,1.75481370493672,,,0.0537766403233114,Gene__Vasp,1.75481370493672,2,other,Vasp,,inferred_MOON_score,,
+Gene__Vcl,Vcl,gene_product,1.95335287372461,,,0.643585984030441,Gene__Vcl,1.95335287372461,2,other,Vcl,,inferred_MOON_score,,
+Gene__Vhl,Vhl,gene_product,,,0.554386861346693,0.283736818455639,Gene__Vhl,0.554386861346693,0,level0,Vhl,,observed_RNA_derived_TF_activity,,
+Gene__Wwox,Wwox,gene_product,-1.73110227861664,,,-0.0084314722615915,Gene__Wwox,-1.73110227861664,1,other,Wwox,,inferred_MOON_score,,
+Gene__Ybx1,Ybx1,gene_product,,,1.04419730479329,0.170349487465333,Gene__Ybx1,1.04419730479329,0,level0,Ybx1,,observed_RNA_derived_TF_activity,,
+Gene__Yy1,Yy1,gene_product,,,1.05241896613831,-0.00148824943693606,Gene__Yy1,1.05241896613831,0,level0,Yy1,,observed_RNA_derived_TF_activity,,
+Metab__CHEBI:134022_unknown,"N-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-L-phenylalanine",metabolite,-1.67917574410447,,,,Metab__CHEBI:134022_unknown,-1.67917574410447,9,other,"N-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-L-phenylalanine",,inferred_MOON_score,,
+Metab__CHEBI:149697_unknown,"N-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-L-serine",metabolite,-1.67917574410447,,,,Metab__CHEBI:149697_unknown,-1.67917574410447,9,other,"N-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-L-serine",,inferred_MOON_score,,
+Metab__CHEBI:2700_unknown,"N-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-ethanolamine",metabolite,-1.67917574410447,,,,Metab__CHEBI:2700_unknown,-1.67917574410447,9,other,"N-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-ethanolamine",,inferred_MOON_score,,
+Metab__CHEBI:32395_unknown,CHEBI:15843,metabolite,-4.02065981625138,,,,Metab__CHEBI:32395_unknown,-4.02065981625138,7,other,CHEBI:15843,,inferred_MOON_score,,
+Metab__CHEBI:57404_unknown,PGF2α,metabolite,-1.73515486302823,,,,Metab__CHEBI:57404_unknown,-1.73515486302823,3,other,PGF2α,,inferred_MOON_score,,
+Metab__CHEBI:57405_unknown,CHEBI:15554,metabolite,-2.65845904699595,,,,Metab__CHEBI:57405_unknown,-2.65845904699595,5,other,CHEBI:15554,,inferred_MOON_score,,
+Metab__CHEBI:57406_unknown,PGD2,metabolite,-1.73515486302823,,,,Metab__CHEBI:57406_unknown,-1.73515486302823,3,other,PGD2,,inferred_MOON_score,,
+Metab__CHEBI:59002_unknown,CHEBI:58961,metabolite,-1.67917574410447,,,,Metab__CHEBI:59002_unknown,-1.67917574410447,9,other,CHEBI:58961,,inferred_MOON_score,,
+Metab__CHEBI:606564_unknown,CHEBI:15551,metabolite,-1.80741870791896,,,,Metab__CHEBI:606564_unknown,-1.80741870791896,5,other,CHEBI:15551,,inferred_MOON_score,,
+Metab__CHEBI:60657_unknown,"1,2-di-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine",metabolite,-1.67917574410447,,,,Metab__CHEBI:60657_unknown,-1.67917574410447,9,other,"1,2-di-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine",,inferred_MOON_score,,
+Metab__CHEBI:73858_unknown,LPC(18:0/0:0),metabolite,-1.1776480057903,-0.377351710183696,,,Metab__CHEBI:73858_unknown,-1.1776480057903,11,upstream_input,1-octadecanoyl-sn-glycero-3-phosphocholine,LPC(18:0/0:0),inferred_MOON_score,,
+Metab__CHEBI:74344_unknown,"1-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine",metabolite,-1.67917574410447,,,,Metab__CHEBI:74344_unknown,-1.67917574410447,9,other,"1-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine",,inferred_MOON_score,,
+Metab__CHEBI:74565_unknown,1-octadecanoyl-sn-glycero-3-phosphate,metabolite,-1.91160302094382,,,,Metab__CHEBI:74565_unknown,-1.91160302094382,11,other,1-octadecanoyl-sn-glycero-3-phosphate,,inferred_MOON_score,,
+Metab__CHEBI:74965_unknown,"1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine",metabolite,-1.67917574410447,,,,Metab__CHEBI:74965_unknown,-1.67917574410447,9,other,"1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine",,inferred_MOON_score,,
+Metab__CHEBI:75612_unknown,"1-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-glycerol",metabolite,-1.67917574410447,,,,Metab__CHEBI:75612_unknown,-1.67917574410447,9,other,"1-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-glycerol",,inferred_MOON_score,,
+Metab__CHEBI:75728_unknown,"1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycerol",metabolite,-2.98634370880728,,,,Metab__CHEBI:75728_unknown,-2.98634370880728,11,other,"1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycerol",,inferred_MOON_score,,
+Metab__CHEBI:76079_unknown,"2-(5Z,8Z,11Z,14Z)-eicosatetraenoyl-sn-glycero-3-phosphocholine",metabolite,-1.67917574410447,,,,Metab__CHEBI:76079_unknown,-1.67917574410447,9,other,"2-(5Z,8Z,11Z,14Z)-eicosatetraenoyl-sn-glycero-3-phosphocholine",,inferred_MOON_score,,
+Metab__CHEBI:77091_unknown,"1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphate",metabolite,-1.67917574410447,,,,Metab__CHEBI:77091_unknown,-1.67917574410447,9,other,"1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphate",,inferred_MOON_score,,
+Metab__CHEBI:82629_unknown,prostaglandin G2,metabolite,-7.40202025435145,,,,Metab__CHEBI:82629_unknown,-7.40202025435145,7,other,prostaglandin G2,,inferred_MOON_score,,
+Metab__CHEBI:85277_unknown,"N-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-1,2-di-(9Z-octadecenoyl)-sn-glycero-3-phosphoethanolamine",metabolite,-1.91160302094382,,,,Metab__CHEBI:85277_unknown,-1.91160302094382,11,other,"N-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-1,2-di-(9Z-octadecenoyl)-sn-glycero-3-phosphoethanolamine",,inferred_MOON_score,,

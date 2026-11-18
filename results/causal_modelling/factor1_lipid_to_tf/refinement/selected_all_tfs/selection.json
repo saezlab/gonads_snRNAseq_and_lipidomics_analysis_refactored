@@ -1,0 +1,30 @@
+{
+  "run_id": "ph73_lipid_precursor_all_tfs_pruning12_layers12",
+  "tf_panel": "all_tfs",
+  "exploratory_policy": "ph73_lipid_precursor",
+  "pruning_steps": 12,
+  "n_layers": 12,
+  "primary": 1.65,
+  "secondary": 1.1,
+  "edges": 455,
+  "nodes": 233,
+  "upstream_lipids": 1,
+  "downstream_tfs": 64,
+  "refitted": false,
+  "manually_trimmed": false,
+  "choice": "Representative exploratory all_tfs network below 500 edges; rounded secondary 1.10 avoids selecting immediately below the upstream score boundary 1.177648. Not a statistical or biological optimum.",
+  "limitations": "Only the existing acid/base-normalized sensitivity supports this network. Reaction participation encodes metabolic availability hypotheses, not demonstrated flux or direct measured-lipid signaling. All nonzero TF observations remain the primary panel; strong_tfs is separate.",
+  "reproduction": "Rscript scripts/moon/ancillary/refine_lipid_tf_thresholds.R --results=results/causal_modelling/factor1_lipid_to_tf --output=NEW_EMPTY_DIRECTORY",
+  "materialize_existing_refinement": "Rscript scripts/moon/ancillary/refine_lipid_tf_thresholds.R --select-only --results=results/causal_modelling/factor1_lipid_to_tf --output=results/causal_modelling/factor1_lipid_to_tf/refinement",
+  "export_command": "python3 'scripts/moon/ancillary/export_lipid_tf_network.py' '--results' '/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_lipid_to_tf/refinement/selected_all_tfs' '--pkn' 'results/causal_modelling/cosmos_mouse_pkn' '--input-mapping' 'results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_node_mapping.csv' '--prior-csv' 'results/causal_modelling/cosmos_mouse_pkn/pkn_lipid_curated_ph73.csv' '--node-catalog' 'results/causal_modelling/cosmos_mouse_pkn/nodes_ph73.jsonl' '--node-aliases' 'results/causal_modelling/cosmos_mouse_pkn/chemical_node_aliases.csv'",
+  "input_md5": {
+    "results/causal_modelling/factor1_lipid_to_tf/runs/ph73_lipid_precursor_all_tfs_pruning12_layers12/run_state.rds": "f1f8abf89b06f3f19c68fadfac737976",
+    "results/causal_modelling/factor1_lipid_to_tf/refinement/runs/ph73_lipid_precursor_all_tfs_pruning12_layers12/threshold_grid.csv": "7a3416b807ab3a426c71319a58724e20",
+    "scripts/moon/ancillary/export_lipid_tf_network.py": "00cf2080b5a22ce480b1a7ce43b66f43",
+    "results/causal_modelling/cosmos_mouse_pkn/pkn_lipid_curated_ph73.csv": "7125c45d62776f4baae1c992cf914d74",
+    "results/causal_modelling/cosmos_mouse_pkn/nodes_ph73.jsonl": "1e69ec94f038f7fef8beaf5b061b30fb",
+    "results/causal_modelling/cosmos_mouse_pkn/chemical_node_aliases.csv": "bb3d28f6d2d37072552c63501ce7eaa2",
+    "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_node_mapping.csv": "a8b91de78d8e2e57479dc02ba1aadcf5"
+  },
+  "selection_utc": "2026-09-15 12:28:09 UTC"
+}

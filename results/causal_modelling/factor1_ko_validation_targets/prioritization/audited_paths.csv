@@ -1,0 +1,111 @@
+set_id,rank,source_gene,readout,network,direction,path_sign,node_ids,levels,signs,another_target_on_path,minimum_inferred_absolute_score
+KO01,1,Pld1,PA(16:0_18:2),layers4,down,1,Gene__Pld1|Enzyme__3ab537025de48b33|Metab__MeasuredLipid:PA(16:0_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.75551487706833
+KO01,1,Pld1,PA(16:1_18:2),layers4,down,1,Gene__Pld1|Enzyme__7fcb15cb93c6e256|Metab__MeasuredLipid:PA(16:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.759873351349678
+KO01,1,Pld1,PA(18:1_18:2),layers4,down,1,Gene__Pld1|Enzyme__aecccacdc6888f8e|Metab__MeasuredLipid:PA(18:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.937392442632842
+KO02,2,Pld1,PA(16:0_18:2),layers6,down,1,Gene__Pld1|Enzyme__3ab537025de48b33|Metab__MeasuredLipid:PA(16:0_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.75551487706833
+KO02,2,Pld2,PA(16:0_18:2),layers6,down,1,Gene__Pld2|Enzyme__09c4d20a80eb4aec|Metab__MeasuredLipid:PA(16:0_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.75551487706833
+KO02,2,Pld1,PA(16:1_18:2),layers6,down,1,Gene__Pld1|Enzyme__7fcb15cb93c6e256|Metab__MeasuredLipid:PA(16:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.759873351349678
+KO02,2,Pld2,PA(16:1_18:2),layers6,down,1,Gene__Pld2|Enzyme__eeb74a04ae51bb67|Metab__MeasuredLipid:PA(16:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.759873351349678
+KO02,2,Pld1,PA(18:1_18:2),layers6,down,1,Gene__Pld1|Enzyme__aecccacdc6888f8e|Metab__MeasuredLipid:PA(18:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.937392442632842
+KO02,2,Pld2,PA(18:1_18:2),layers6,down,1,Gene__Pld2|Enzyme__66c127c6b2aa16c7|Metab__MeasuredLipid:PA(18:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.937392442632842
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__1031d491c0897b67|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__1a392013b227528d|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__2b6a7cc477cc5cdb|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__31913c753d4d14ed|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__348288be31178af7|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__7cfa22cd06d22924|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__8ba6b46793e1f25d|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__b467c530a2448ec3|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__bd4d986d2e874bd7|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__f05e150756f182ca|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__fbad02d42c53c872|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO03,3,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__3580c9c6f27aab7a|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO03,3,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__580f4dea36da42b8|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO03,3,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__7c22ae6351568cc7|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO03,3,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__cd1cf37bf154477f|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO04,4,Pld1,PA(16:0_18:2),layers4,down,1,Gene__Pld1|Enzyme__3ab537025de48b33|Metab__MeasuredLipid:PA(16:0_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.75551487706833
+KO04,4,Pld1,PA(16:1_18:2),layers4,down,1,Gene__Pld1|Enzyme__7fcb15cb93c6e256|Metab__MeasuredLipid:PA(16:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.759873351349678
+KO04,4,Pld1,PA(18:1_18:2),layers4,down,1,Gene__Pld1|Enzyme__aecccacdc6888f8e|Metab__MeasuredLipid:PA(18:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.937392442632842
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__1031d491c0897b67|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__1a392013b227528d|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__2b6a7cc477cc5cdb|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__31913c753d4d14ed|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__348288be31178af7|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__7cfa22cd06d22924|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__8ba6b46793e1f25d|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__b467c530a2448ec3|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__bd4d986d2e874bd7|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__f05e150756f182ca|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__fbad02d42c53c872|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO04,4,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__3580c9c6f27aab7a|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO04,4,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__580f4dea36da42b8|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO04,4,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__7c22ae6351568cc7|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO04,4,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__cd1cf37bf154477f|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO05,5,Plpp1,DG(16:0_22:6),layers4,down,1,Gene__Plpp1|Enzyme__bdf688bc434961f3|Metab__MeasuredLipid:DG(16:0_22:6)_unknown,"[2, 1, 0]","[1, 1]",False,0.92587342480391
+KO05,5,Plpp1,DG(18:0_20:4),layers4,down,1,Gene__Plpp1|Enzyme__f29ee0141580d22b|Metab__MeasuredLipid:DG(18:0_20:4)_unknown,"[2, 1, 0]","[1, 1]",False,0.933570507798707
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__1031d491c0897b67|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__1a392013b227528d|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__2b6a7cc477cc5cdb|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__31913c753d4d14ed|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__348288be31178af7|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__7cfa22cd06d22924|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__8ba6b46793e1f25d|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__b467c530a2448ec3|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__bd4d986d2e874bd7|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__f05e150756f182ca|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__fbad02d42c53c872|Metab__MeasuredLipid:LPC(18:0)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__1031d491c0897b67|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__1a392013b227528d|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__2b6a7cc477cc5cdb|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__31913c753d4d14ed|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__348288be31178af7|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__7cfa22cd06d22924|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__8ba6b46793e1f25d|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__b467c530a2448ec3|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__bd4d986d2e874bd7|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__f05e150756f182ca|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Pla2g4a,LPC(18:0),layers4,down,1,Gene__Pla2g4a|Enzyme__fbad02d42c53c872|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO06,6,Mapk1,LPC(18:0/0:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__3580c9c6f27aab7a|Metab__CHEBI:73858_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0/0:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__580f4dea36da42b8|Metab__CHEBI:73858_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0/0:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__7c22ae6351568cc7|Metab__CHEBI:73858_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Mapk1,LPC(18:0/0:0),layers4,down,1,Gene__Mapk1|Gene__Pla2g4a|Enzyme__cd1cf37bf154477f|Metab__CHEBI:73858_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.755423441146253
+KO06,6,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__3580c9c6f27aab7a|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO06,6,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__580f4dea36da42b8|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO06,6,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__7c22ae6351568cc7|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO06,6,Pla2g4a,LPC(18:0/0:0),layers4,down,1,Gene__Pla2g4a|Enzyme__cd1cf37bf154477f|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO07,7,Plcb1,DG(16:0_22:6),layers4,down,1,Gene__Plcb1|Enzyme__7ab4cb766cadeca7|Metab__MeasuredLipid:DG(16:0_22:6)_unknown,"[2, 1, 0]","[1, 1]",False,0.92587342480391
+KO07,7,Plcg1,DG(16:0_22:6),layers4,down,1,Gene__Plcg1|Enzyme__949f69a9195f7dc7|Metab__MeasuredLipid:DG(16:0_22:6)_unknown,"[2, 1, 0]","[1, 1]",False,0.92587342480391
+KO07,7,Plcb1,DG(18:0_20:4),layers4,down,1,Gene__Plcb1|Enzyme__f1bd9c60cce85bd2|Metab__MeasuredLipid:DG(18:0_20:4)_unknown,"[2, 1, 0]","[1, 1]",False,0.933570507798707
+KO07,7,Plcg1,DG(18:0_20:4),layers4,down,1,Gene__Plcg1|Enzyme__fc93bcf35cc2903e|Metab__MeasuredLipid:DG(18:0_20:4)_unknown,"[2, 1, 0]","[1, 1]",False,0.933570507798707
+KO07,7,Plcb1,DG(18:0_22:6),layers4,down,1,Gene__Plcb1|Enzyme__37a1699fe62da55b|Metab__MeasuredLipid:DG(18:0_22:6)_unknown,"[2, 1, 0]","[1, 1]",False,0.912837390533614
+KO07,7,Plcg1,DG(18:0_22:6),layers4,down,1,Gene__Plcg1|Enzyme__3160c0497be37afe|Metab__MeasuredLipid:DG(18:0_22:6)_unknown,"[2, 1, 0]","[1, 1]",False,0.912837390533614
+KO08,8,Pld1,PA(16:0_18:2),layers6,down,1,Gene__Pld1|Enzyme__3ab537025de48b33|Metab__MeasuredLipid:PA(16:0_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.75551487706833
+KO08,8,Pld2,PA(16:0_18:2),layers6,down,1,Gene__Pld2|Enzyme__09c4d20a80eb4aec|Metab__MeasuredLipid:PA(16:0_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.75551487706833
+KO08,8,Pld1,PA(16:1_18:2),layers6,down,1,Gene__Pld1|Enzyme__7fcb15cb93c6e256|Metab__MeasuredLipid:PA(16:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.759873351349678
+KO08,8,Pld2,PA(16:1_18:2),layers6,down,1,Gene__Pld2|Enzyme__eeb74a04ae51bb67|Metab__MeasuredLipid:PA(16:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.759873351349678
+KO08,8,Pld1,PA(18:1_18:2),layers6,down,1,Gene__Pld1|Enzyme__aecccacdc6888f8e|Metab__MeasuredLipid:PA(18:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.937392442632842
+KO08,8,Pld2,PA(18:1_18:2),layers6,down,1,Gene__Pld2|Enzyme__66c127c6b2aa16c7|Metab__MeasuredLipid:PA(18:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.937392442632842
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__1031d491c0897b67|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__1a392013b227528d|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__2b6a7cc477cc5cdb|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__31913c753d4d14ed|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__348288be31178af7|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__7cfa22cd06d22924|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__8ba6b46793e1f25d|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__b467c530a2448ec3|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__bd4d986d2e874bd7|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__f05e150756f182ca|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0),layers6,down,1,Gene__Pla2g4a|Enzyme__fbad02d42c53c872|Metab__MeasuredLipid:LPC(18:0)_unknown,"[2, 1, 0]","[1, 1]",False,0.906905847979632
+KO08,8,Pla2g4a,LPC(18:0/0:0),layers6,down,1,Gene__Pla2g4a|Enzyme__3580c9c6f27aab7a|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO08,8,Pla2g4a,LPC(18:0/0:0),layers6,down,1,Gene__Pla2g4a|Enzyme__580f4dea36da42b8|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO08,8,Pla2g4a,LPC(18:0/0:0),layers6,down,1,Gene__Pla2g4a|Enzyme__7c22ae6351568cc7|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO08,8,Pla2g4a,LPC(18:0/0:0),layers6,down,1,Gene__Pla2g4a|Enzyme__cd1cf37bf154477f|Metab__CHEBI:73858_unknown,"[2, 1, 0]","[1, 1]",False,1.16944693538311
+KO09,9,Rxra,PA(16:0_18:2),layers4,down,1,Gene__Rxra|Gene__Pld1|Enzyme__3ab537025de48b33|Metab__MeasuredLipid:PA(16:0_18:2)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",False,0.75551487706833
+KO09,9,Rxra,PA(16:1_18:2),layers4,down,1,Gene__Rxra|Gene__Pld1|Enzyme__7fcb15cb93c6e256|Metab__MeasuredLipid:PA(16:1_18:2)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",False,0.759873351349678
+KO09,9,Rxra,PA(18:1_18:2),layers4,down,1,Gene__Rxra|Gene__Pld1|Enzyme__aecccacdc6888f8e|Metab__MeasuredLipid:PA(18:1_18:2)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",False,0.937392442632842
+KO10,10,Rxra,PA(16:0_18:2),layers4,down,1,Gene__Rxra|Gene__Pld1|Enzyme__3ab537025de48b33|Metab__MeasuredLipid:PA(16:0_18:2)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.75551487706833
+KO10,10,Pld1,PA(16:0_18:2),layers4,down,1,Gene__Pld1|Enzyme__3ab537025de48b33|Metab__MeasuredLipid:PA(16:0_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.75551487706833
+KO10,10,Rxra,PA(16:1_18:2),layers4,down,1,Gene__Rxra|Gene__Pld1|Enzyme__7fcb15cb93c6e256|Metab__MeasuredLipid:PA(16:1_18:2)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.759873351349678
+KO10,10,Pld1,PA(16:1_18:2),layers4,down,1,Gene__Pld1|Enzyme__7fcb15cb93c6e256|Metab__MeasuredLipid:PA(16:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.759873351349678
+KO10,10,Rxra,PA(18:1_18:2),layers4,down,1,Gene__Rxra|Gene__Pld1|Enzyme__aecccacdc6888f8e|Metab__MeasuredLipid:PA(18:1_18:2)_unknown,"[3, 2, 1, 0]","[1, 1, 1]",True,0.937392442632842
+KO10,10,Pld1,PA(18:1_18:2),layers4,down,1,Gene__Pld1|Enzyme__aecccacdc6888f8e|Metab__MeasuredLipid:PA(18:1_18:2)_unknown,"[2, 1, 0]","[1, 1]",False,0.937392442632842

@@ -1,0 +1,21 @@
+{
+  "status": "complete",
+  "cohort": "CF453 only",
+  "mice": 28,
+  "mice_per_sex_diet": 7,
+  "modeled_genes": 18486,
+  "primary_lipids": 1129,
+  "bootstrap_draws_production": 999,
+  "seed": 20261030,
+  "panel_groups": 30,
+  "graphic_files": 90,
+  "source_tables": 30,
+  "independent_full_check_groups": 720,
+  "max_absolute_replay_difference": 1.509903e-13,
+  "density_checks": 2400,
+  "fresh_cli_replay_checks": 44,
+  "primary_correlations_BH_q_le_005": 0,
+  "visual_QA": "all PDFs rendered and inspected; vector SVG and PNG checks passed",
+  "assembly": "individual panels only",
+  "initial_run_note": "A trailing parser error followed live entry-file editing after numerical exports. Initial log preserved; current-source full reduced-draw CLI and plot refresh exit successfully. Production observed values reproduce exactly; all production resampling retains 999 draws."
+}

@@ -1,0 +1,4 @@
+"source","target","interaction","source_level","target_level","edge_sign_consistent"
+"Gene__Ppard","Gene__Nr1h3",1,1,0,TRUE
+"Gene__Ppard","Gene__Srebf1",-1,1,0,FALSE
+"Metab__CHEBI:50464_unknown","Gene__Ppard",-1,2,1,FALSE

@@ -1,0 +1,33 @@
+{
+  "fit_reference": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_tf_to_lipid_expanded_species/expanded_inputs",
+  "no_rescoring": true,
+  "source_fit_mode": "expanded",
+  "layer_consistent_extraction": true,
+  "extraction_edges": 30472,
+  "scoring_graph_unchanged": true,
+  "pruning_steps": 6,
+  "n_layers": 4,
+  "compression": "same_saved_safe_compressed_fit",
+  "grid_rows": 210,
+  "valid_pairs": 165,
+  "validated_pairs": 165,
+  "eligible_combinations": 16,
+  "selected_solution_available": true,
+  "selected": {
+    "primary": 0.75,
+    "secondary": 0.75,
+    "valid_pair": true,
+    "status": "ok",
+    "edges": 70,
+    "nodes": 63,
+    "upstream_tfs": 4,
+    "observed_lipids": 19,
+    "validated": true,
+    "eligible": true
+  },
+  "selection_policy": "Within-grid representative: 0<edges<500, >=2TFs and >=2observations; descending secondary then primary then observation/TF coverage then fewer edges. Not a calibrated optimum.",
+  "selected_TFs": ["Gene__Ahr", "Gene__Ar", "Gene__Rora", "Gene__Tbx2"],
+  "selected_lipids": ["Metab__MeasuredLipid:Cer(18:1;O2/14:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/16:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/17:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/19:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/23:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/25:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/25:1)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/26:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/26:1)_unknown", "Metab__MeasuredLipid:DG(14:0_16:0)_unknown", "Metab__MeasuredLipid:DG(15:0_22:6)_unknown", "Metab__MeasuredLipid:DG(16:0_22:6)_unknown", "Metab__MeasuredLipid:DG(18:0_20:4)_unknown", "Metab__MeasuredLipid:DG(18:0_22:6)_unknown", "Metab__MeasuredLipid:PA(16:0_18:2)_unknown", "Metab__MeasuredLipid:PA(16:1_18:2)_unknown", "Metab__MeasuredLipid:PA(18:1_18:2)_unknown"],
+  "interpretation": "Threshold sensitivity of saved fit; lower cutoffs indicate weaker numerical evidence, not calibrated significance.",
+  "finished_utc": "2026-10-06 10:38:57 UTC"
+}

@@ -1,0 +1,269 @@
+{
+  "review_date": "2026-10-13",
+  "scope": "Primary-source review for frozen-graph screening and separately labelled unscored TF hypotheses; no rescoring",
+  "sources": [
+    {
+      "id": "pld1_hep_ko_2023",
+      "title": "Inhibition of phospholipase D1 ameliorates hepatocyte steatosis and non-alcoholic fatty liver disease",
+      "year": 2023,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10149370/",
+      "doi": "10.1016/j.jhepr.2023.100726",
+      "verified_claim": "Hepatocyte Pld1 KO lowers PA/LPA under HFD; hepatic-cell PLD1 inhibition lowers PA/LPA; supports class direction, not our exact chain assignments.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "pld1_pld2_hepatocyte_2015",
+      "title": "Inhibited Insulin Signaling in Mouse Hepatocytes Is Associated with Increased Phosphatidic Acid but Not Diacylglycerol",
+      "year": 2015,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4319019/",
+      "doi": "10.1074/jbc.M114.602789",
+      "verified_claim": "PLD1 or PLD2 overexpression raises total PA without total DAG change in primary mouse hepatocytes; not direct evidence for compensation after KO.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "pld_products_2001",
+      "title": "Phospholipase D1b and D2a generate structurally identical phosphatidic acid species in mammalian cells",
+      "year": 2001,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11736663/",
+      "doi": "10.1042/0264-6021:3600707",
+      "verified_claim": "PLD1b/PLD2a produce similar PA profiles in mammalian cell lines, enriched in mono/diunsaturated chains.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "pld1_global_ko_2016",
+      "title": "Phospholipase D1 deficiency in mice causes nonalcoholic fatty liver disease via an autophagy defect",
+      "year": 2016,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5156943/",
+      "doi": "",
+      "verified_claim": "Whole-body Pld1 KO impairs autophagy, decreases lysosomal PA but not total PA, and increases hepatic TG; emphasizes compartment/context.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "plpp1_hepatocyte_2017",
+      "title": "Lysophosphatidic acid counteracts glucagon-induced hepatocyte glucose production via STAT3",
+      "year": 2017,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28273928/",
+      "doi": "10.1038/s41598-017-00210-y",
+      "verified_claim": "PLPP1 KO raises hepatocyte LPA; specific PA-to-DG species predictions are not tested.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "plpp_topology_2008",
+      "title": "Lipid phosphate phosphatases form homo- and hetero-oligomers: catalytic competency, subcellular distribution and function",
+      "year": 2008,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18215144/",
+      "doi": "10.1042/BJ20071607",
+      "verified_claim": "LPP catalytic site extracellular at plasma membrane or luminal at intracellular membranes; unknown compartment bulk PA routes conditional.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "pla2_species_1995",
+      "title": "Mammalian secreted and cytosolic phospholipase A2 show different specificities for phospholipid molecular species",
+      "year": 1995,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7496992/",
+      "doi": "",
+      "verified_claim": "Cytosolic PLA2 highly selective for sn2 20:4n6 phospholipid molecular species; retained arachidonoyl-LPC predictions require unusual position/species assumptions.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "enpp2_structure_2011",
+      "title": "Structural basis for substrate discrimination and integrin binding by autotaxin",
+      "year": 2011,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3064516/",
+      "doi": "10.1038/nsmb.1980",
+      "verified_claim": "Secreted autotaxin is LPC-to-LPA lysoPLD; no verified support for our diacyl-PC-to-PA catalyst assignment.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "plcg1_pi_1999",
+      "title": "Action of phosphatidylinositol-specific phospholipase Cgamma1 on soluble and micellar substrates. Separating effects on catalysis from modulation of the surface",
+      "year": 1999,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/9915811/",
+      "doi": "10.1074/jbc.274.5.2786",
+      "verified_claim": "Purified PLCgamma1 hydrolyzes unphosphorylated PI in detergent micelles; physiological specific-chain hepatocyte flux not established.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "plcb1_major_substrate_1997",
+      "title": "Membrane Binding of Phospholipases C-beta1 and C-beta2 Is Independent of Phosphatidylinositol 4,5-Bisphosphate and the alpha and betagamma Subunits of G Proteins",
+      "year": 1997,
+      "url": "https://pubs.acs.org/doi/10.1021/bi961606w",
+      "doi": "10.1021/bi961606w",
+      "verified_claim": "Identifies PIP2 as major physiological PLCbeta substrate; bulk PI measurement not identical to signaling phosphoinositide pool.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "ppara_hep_ko_2020",
+      "title": "Hepatocyte-specific deletion of Pparalpha promotes NAFLD in the context of obesity",
+      "year": 2020,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32300166/",
+      "doi": "10.1038/s41598-020-63579-3",
+      "verified_claim": "Hepatocyte Ppara KO affects hepatic lipidome and steatosis; not validation of selected Plpp1/DG direction.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "klf10_hep_ko_2021",
+      "title": "KLF10 integrates circadian timing and sugar signaling to coordinate hepatic metabolism",
+      "year": 2021,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8410083/",
+      "doi": "",
+      "verified_claim": "Hepatocyte-specific Klf10 deletion alters circadian and sugar-related hepatic metabolism.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "rora_hep_ko_2019",
+      "title": "Liver-specific RORalpha deletion does not affect the metabolic susceptibility to western style diet feeding",
+      "year": 2019,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6479759/",
+      "doi": "",
+      "verified_claim": "Conditional Rora deletion found no chow/WSD glucose/lipid phenotype in either sex; limits expected generic perturbation phenotype.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "gata6_hep_ko_2021",
+      "title": "GATA6 modulates the ductular reaction to bile duct ligation",
+      "year": 2021,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33486744/",
+      "doi": "10.1007/s12072-020-10119-w",
+      "verified_claim": "Gata6 hepatocyte deletion little structural/function impact; bile-duct context differs.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "gata_adult_2013",
+      "title": "Function of GATA Factors in the Adult Mouse Liver",
+      "year": 2013,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3867416/",
+      "doi": "10.1371/journal.pone.0083723",
+      "verified_claim": "Combined adult Gata4/Gata6 excision had modest phenotype; compensation test not guaranteed to amplify effects.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "ahr_liver_hfd_2016",
+      "title": "Aryl Hydrocarbon Receptor Plays Protective Roles against High Fat Diet-induced Hepatic Steatosis and the Subsequent Lipotoxicity via Direct Transcriptional Regulation of Socs3 Gene Expression",
+      "year": 2016,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4807284/",
+      "doi": "",
+      "verified_claim": "Liver Ahr deletion increased DG/TG under HFD; context opposes naive local Ahr-to-DG knockdown decrease.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "ahr_alcohol_2022",
+      "title": "Induction of the hepatic aryl hydrocarbon receptor by alcohol dysregulates autophagy and phospholipid metabolism via PPP2R2D",
+      "year": 2022,
+      "url": "https://www.nature.com/articles/s41467-022-33749-0",
+      "doi": "10.1038/s41467-022-33749-0",
+      "verified_claim": "Hepatic Ahr deletion improves alcoholic fatty liver; context-dependent net effects.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "rxra_liver_2000",
+      "title": "Hepatocyte-Specific Mutation Establishes Retinoid X Receptor alpha as a Heterodimeric Integrator of Multiple Physiological Processes in the Liver",
+      "year": 2000,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC85811/",
+      "doi": "",
+      "verified_claim": "Hepatocyte Rxra mutation compromises broad nuclear receptor pathways; less route-specific perturbation.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "rxra_lifespan_2001",
+      "title": "Selective ablation of retinoid X receptor alpha in hepatocytes impairs their lifespan and regenerative capacity",
+      "year": 2001,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11287642/",
+      "doi": "",
+      "verified_claim": "Hepatocyte Rxra loss can affect survival/regeneration; general-state confounding.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "nr2f1_context_2010",
+      "title": "NR2F1 and IRE1beta suppress MTP expression and lipoprotein assembly in undifferentiated intestinal epithelial cells",
+      "year": 2010,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2853776/",
+      "doi": "",
+      "verified_claim": "Intestinal-cell study states Nr2f1 not expressed in hepatocytes in that setting; local expression needs gating, not universal absence inference.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "pparg_not_ppara_2014",
+      "title": "Peroxisome Proliferator-Activated Receptor gamma Regulates the Expression of Lipid Phosphate Phosphohydrolase 1 in Human Vascular Endothelial Cells",
+      "year": 2014,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4052932/",
+      "doi": "10.1155/2014/740121",
+      "verified_claim": "PPARG stimulates PLPP1 in HUVECs; PPARA overexpression and agonist explicitly had no effect. Selected Ppara\u2192Plpp1 sole-source paralog mismatch.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "cebpb_not_cebpa_2010",
+      "title": "Mechanism of increased PLD1 gene expression during early adipocyte differentiation process of mouse cell line 3T3-L1",
+      "year": 2010,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19950202/",
+      "doi": "10.1002/jcb.22414",
+      "verified_claim": "C/EBPbeta but not C/EBPalpha increases PLD1 and binds promoter in 3T3L1 differentiation. Selected Cebpa\u2192Pld1 contradicted in source.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "rora_indirect_adipocyte_2009",
+      "title": "The orphan nuclear receptor RORalpha restrains adipocyte differentiation through a reduction of C/EBPbeta activity and perilipin gene expression",
+      "year": 2009,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19324970/",
+      "doi": "10.1210/me.2008-0277",
+      "verified_claim": "RORalpha suppresses CEBPB activity, indirectly inhibiting CEBPA induction in adipocytes. Not direct hepatocyte Rora\u2192Cebpa transcription validation.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "gata6_direction_mismatch_2008",
+      "title": "Oncogenic Ras upregulates NADPH oxidase 1 gene expression through MEK-ERK-dependent phosphorylation of GATA-6",
+      "year": 2008,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18454176/",
+      "doi": "10.1038/onc.2008.133",
+      "verified_claim": "ERK phosphorylates GATA6 and GATA6 activates NOX1 in CaCo2; no GATA6\u2192MAPK1 transcription. Selected edge sole source mismatches direction/mechanism.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "mapk_cpla2_1993",
+      "title": "cPLA2 is phosphorylated and activated by MAP kinase",
+      "year": 1993,
+      "url": "https://www.sciencedirect.com/science/article/pii/009286749390666E",
+      "doi": "10.1016/0092-8674(93)90666-E",
+      "verified_claim": "MAP kinase phosphorylation at cPLA2 S505 increases enzyme activity; supports kinase\u2192enzyme route independent of failed Gata6 edge; generic signaling evidence, not selected hepatic chains.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "rxra_vdr_pld1_2007",
+      "title": "Mechanism of vitamin D3-induced transcription of phospholipase D1 in HaCat human keratinocytes",
+      "year": 2007,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17433303/",
+      "doi": "10.1016/j.febslet.2007.03.073",
+      "verified_claim": "VitaminD/VDR/RXRA complex activates PLD1 promoter in HaCaT; correct RXRA identity but partner/ligand/cell conditional.",
+      "source_type": "primary_research"
+    },
+    {
+      "id": "rxra_pld1_retraction_2025",
+      "title": "Retraction of RXRA-regulated PLD1 cervical cancer study",
+      "year": 2025,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39888011/",
+      "verified_claim": "PMID32067228 retracted in2025; excluded as support for RXRA\u2192PLD1. Other unretracted contextual reference17433303 retained.",
+      "source_type": "primary_retraction_notice"
+    },
+    {
+      "id": "pld_functional_backup_brain_2020",
+      "title": "Phospholipase D1 Ablation Disrupts Mouse Longitudinal Hippocampal Axis Organization and Functioning",
+      "year": 2020,
+      "url": "https://www.med.uminho.pt/en/Research/Selected%20Publication/Santa-Marinha-et-al-2020.pdf",
+      "doi": "10.1016/j.celrep.2020.02.102",
+      "pmid": "32209478",
+      "verified_claim": "Mouse forebrain single PLD KOs retain PLD-dependent transphosphatidylation; double KO nearly abolishes it. Remaining isoform RNA/protein expression does not increase. Functional parallel-capacity precedent; not proof of liver compensation or our exact PA-species response.",
+      "source_type": "primary_research"
+    }
+  ],
+  "critical_issues": [
+    "Enpp2 diacyl-PC\u2192PA assignment unsupported by verified specific primary chemistry",
+    "Pla2g4a PUFA-retaining LPC recipes low-confidence specificity",
+    "Plpp1 unknown-compartment PA\u2192DG conditional on substrate accessibility",
+    "Plcb1/Plcg1 unphosphorylated PI hydrolysis chemically possible but physiological PIP2 pool not measured",
+    "Ppara\u2192Plpp1 paralog mismatch: PPARG studied; PPARA negative in sole cited paper",
+    "Cebpa\u2192Pld1 paralog mismatch: CEBPB positive, CEBPA explicitly negative",
+    "Gata6\u2192Mapk1 direction/mechanism mismatch: ERK\u2192GATA6 phosphorylation in sole paper",
+    "Rora\u2192Cebpa indirect adipocyte context, compounded by invalid Cebpa\u2192Pld1",
+    "Rxra\u2192Pld1 vitaminD/VDR heterodimer evidence in HaCaT; hepatocyte single gene direction conditional"
+  ]
+}

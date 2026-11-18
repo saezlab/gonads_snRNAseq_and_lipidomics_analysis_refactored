@@ -1,0 +1,11 @@
+collection,resource,availability,records,chemical_sources,target_proteins,positive_numeric_mor_records,negative_numeric_mor_records,passes_existing_regulation_export_gate_records,mapped_features_any_resolution,numeric_sign_caveat
+raw_mouse_service_cache,BRENDA,present_in_frozen_collection,786,457,350,131,655,772,163,Numeric mor does not by itself establish signed causal regulation; inspect sign_status and evidence tier.
+raw_mouse_service_cache,STITCH,present_in_frozen_collection,40428,4137,3033,20837,19591,40360,2,Numeric mor does not by itself establish signed causal regulation; inspect sign_status and evidence tier.
+raw_mouse_service_cache,MRCLinksDB,present_in_frozen_collection,641,237,341,641,0,0,4,Numeric mor does not by itself establish signed causal regulation; inspect sign_status and evidence tier.
+raw_mouse_service_cache,CellPhoneDB,not_assessable_no_resource_records_in_this_collection,0,0,0,0,0,0,0,Numeric mor does not by itself establish signed causal regulation; inspect sign_status and evidence tier.
+raw_mouse_service_cache,GuideToPharmacology,not_assessable_no_resource_records_in_this_collection,0,0,0,0,0,0,0,Numeric mor does not by itself establish signed causal regulation; inspect sign_status and evidence tier.
+retained_regulation_export,BRENDA,present_in_frozen_collection,772,455,345,128,644,772,163,Numeric mor does not by itself establish signed causal regulation; inspect sign_status and evidence tier.
+retained_regulation_export,STITCH,present_in_frozen_collection,40360,4137,3032,20808,19552,40360,2,Numeric mor does not by itself establish signed causal regulation; inspect sign_status and evidence tier.
+retained_regulation_export,MRCLinksDB,not_assessable_no_resource_records_in_this_collection,0,0,0,0,0,0,0,Numeric mor does not by itself establish signed causal regulation; inspect sign_status and evidence tier.
+retained_regulation_export,CellPhoneDB,not_assessable_no_resource_records_in_this_collection,0,0,0,0,0,0,0,Numeric mor does not by itself establish signed causal regulation; inspect sign_status and evidence tier.
+retained_regulation_export,GuideToPharmacology,present_in_frozen_collection,103,61,57,91,12,103,56,Numeric mor does not by itself establish signed causal regulation; inspect sign_status and evidence tier.

@@ -1,0 +1,28 @@
+{
+  "completed_at": "2026-10-07 01:19:31 UTC",
+  "seed": 20261007,
+  "bootstraps": 4999,
+  "permutations": 1999,
+  "workers": 3,
+  "calibration_datasets": 120,
+  "calibration_inner": 199,
+  "injection_datasets": 399,
+  "KO_model_replay_max_difference": 5.187e-13,
+  "network_archive_max_difference": 5.5511e-16,
+  "full_network_features": 1254,
+  "fixed_network_features": 828,
+  "full_matches": 856,
+  "fixed_matches": 552,
+  "model": "Unchanged 07b four-group sex-precision-weighted robust/trend limma on log2 supplied abundances",
+  "null": "Tested KO contrast equals zero for every lipid, retaining other group-effect nuisance parameters",
+  "wild_bootstrap": "Null-restricted means plus HC2-adjusted full-model residuals, shared Rademacher multiplier per mouse; refit weights and moderation",
+  "reference_sensitivity": "Same KO null draws; independent paired FCG bootstrap within XXO/XYO/XXT/XYT",
+  "nominal_ULM": "OLS-with-intercept slope t; nominal p treats lipid residual observations as independent",
+  "scope": "No signed correlation score, confidence intervals or FDR in follow-up concordance reporting; previous outputs retained",
+  "presentation_finalized_at": "2026-10-07 08:07:09 UTC",
+  "presentation_validation": "All native ULM and 40 empirical p-values independently replayed; all report links valid; PDF visual review and complete Markdown text parity passed",
+  "report_sha256": {
+    "README.md": "d3466c068a066472056ee6953f5bd6351a724fe70ca95da855d68c2bfa0318e0",
+    "Cyp2c38_ULM_networks_and_bootstrap.pdf": "db0a7320cba0fa0567bccf343175dba431456b7b693135f884cb3cbad908052a"
+  }
+}

@@ -1,0 +1,605 @@
+[
+  {
+    "name": "csv/",
+    "method": 0,
+    "flags": 0,
+    "crc": 0,
+    "compressed": 0,
+    "uncompressed": 0,
+    "localoffset": 0
+  },
+  {
+    "name": "csv/ALLANNOTATIONSCORES_20250215.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3839274824,
+    "compressed": 236334,
+    "uncompressed": 840256,
+    "localoffset": 62
+  },
+  {
+    "name": "csv/HMDB_complete.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1178337932,
+    "compressed": 3953439,
+    "uncompressed": 10116466,
+    "localoffset": 236490
+  },
+  {
+    "name": "csv/QuantitativeLCMS.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1089022268,
+    "compressed": 39325,
+    "uncompressed": 125560,
+    "localoffset": 4190008
+  },
+  {
+    "name": "csv/allenconnectome_contra.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3770895255,
+    "compressed": 87855,
+    "uncompressed": 249603,
+    "localoffset": 4229415
+  },
+  {
+    "name": "csv/acquisitions_metadata.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1341439895,
+    "compressed": 2623,
+    "uncompressed": 14560,
+    "localoffset": 4317358
+  },
+  {
+    "name": "csv/allenconnectome_ipsi.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 837772308,
+    "compressed": 95903,
+    "uncompressed": 260310,
+    "localoffset": 4320068
+  },
+  {
+    "name": "csv/Transitions_list_240527_CG.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2630048319,
+    "compressed": 5248,
+    "uncompressed": 22158,
+    "localoffset": 4416057
+  },
+  {
+    "name": "csv/brainlipids_unique.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3738253890,
+    "compressed": 5899,
+    "uncompressed": 18319,
+    "localoffset": 4421397
+  },
+  {
+    "name": "csv/callosalwm_annotated.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2429473922,
+    "compressed": 777,
+    "uncompressed": 3685,
+    "localoffset": 4427380
+  },
+  {
+    "name": "csv/celltype_lipidomes.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 90458863,
+    "compressed": 47890,
+    "uncompressed": 138070,
+    "localoffset": 4428243
+  },
+  {
+    "name": "csv/cleanedANNOTATIONS_20250215.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 155108994,
+    "compressed": 1476746,
+    "uncompressed": 4000345,
+    "localoffset": 4476217
+  },
+  {
+    "name": "csv/metrics_imputation_df.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 762208719,
+    "compressed": 35845,
+    "uncompressed": 77603,
+    "localoffset": 5953056
+  },
+  {
+    "name": "csv/posionmode_acs.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2299287011,
+    "compressed": 3151,
+    "uncompressed": 12473,
+    "localoffset": 5988988
+  },
+  {
+    "name": "csv/qLCMS_regions_fitzner.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1389656787,
+    "compressed": 70244,
+    "uncompressed": 199368,
+    "localoffset": 5992219
+  },
+  {
+    "name": "csv/reactions_linex_now.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2428800874,
+    "compressed": 23314,
+    "uncompressed": 109201,
+    "localoffset": 6062550
+  },
+  {
+    "name": "csv/xgb_genestolipids.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 919179231,
+    "compressed": 8173,
+    "uncompressed": 33465,
+    "localoffset": 6085949
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/",
+    "method": 0,
+    "flags": 0,
+    "crc": 0,
+    "compressed": 0,
+    "uncompressed": 0,
+    "localoffset": 6094205
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/brainlipids_unique-checkpoint.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3738253890,
+    "compressed": 5899,
+    "uncompressed": 18319,
+    "localoffset": 6094286
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/callosalwm_annotated-checkpoint.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2429473922,
+    "compressed": 777,
+    "uncompressed": 3685,
+    "localoffset": 6100299
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/celltype_lipidomes-checkpoint.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 90458863,
+    "compressed": 47890,
+    "uncompressed": 138070,
+    "localoffset": 6101192
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/cleanedANNOTATIONS_20250215-checkpoint.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 155108994,
+    "compressed": 1476746,
+    "uncompressed": 4000345,
+    "localoffset": 6149196
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/metrics_imputation_df-checkpoint.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 762208719,
+    "compressed": 35845,
+    "uncompressed": 77603,
+    "localoffset": 7626065
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/posionmode_acs-checkpoint.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2299287011,
+    "compressed": 3151,
+    "uncompressed": 12473,
+    "localoffset": 7662027
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/qLCMS_regions_fitzner-checkpoint.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1389656787,
+    "compressed": 70244,
+    "uncompressed": 199368,
+    "localoffset": 7665288
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/QuantitativeLCMS-checkpoint.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1089022268,
+    "compressed": 39325,
+    "uncompressed": 125560,
+    "localoffset": 7735649
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/reactions_linex_now-checkpoint.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2428800874,
+    "compressed": 23314,
+    "uncompressed": 109201,
+    "localoffset": 7775086
+  },
+  {
+    "name": "csv/.ipynb_checkpoints/xgb_genestolipids-checkpoint.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 919179231,
+    "compressed": 8173,
+    "uncompressed": 33465,
+    "localoffset": 7798515
+  },
+  {
+    "name": "csv/lcms_mar2022_withcounterions (2).txt",
+    "method": 8,
+    "flags": 0,
+    "crc": 1197193889,
+    "compressed": 12661,
+    "uncompressed": 39108,
+    "localoffset": 7806801
+  },
+  {
+    "name": "csv/fitzner_normalized.tsv",
+    "method": 8,
+    "flags": 0,
+    "crc": 4225108231,
+    "compressed": 41460,
+    "uncompressed": 632659,
+    "localoffset": 7819560
+  },
+  {
+    "name": "csv/goslin_output.tsv",
+    "method": 8,
+    "flags": 0,
+    "crc": 4186618936,
+    "compressed": 62881,
+    "uncompressed": 875620,
+    "localoffset": 7861104
+  },
+  {
+    "name": "csv/goslinfitzner_celltyoes.tsv",
+    "method": 8,
+    "flags": 0,
+    "crc": 510887340,
+    "compressed": 41744,
+    "uncompressed": 646349,
+    "localoffset": 7924064
+  },
+  {
+    "name": "csv/macosko_STalign/",
+    "method": 0,
+    "flags": 0,
+    "crc": 0,
+    "compressed": 0,
+    "uncompressed": 0,
+    "localoffset": 7965897
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_11__Macosko_44.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2966682430,
+    "compressed": 4497327,
+    "uncompressed": 9926281,
+    "localoffset": 7965975
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_12__Macosko_48.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 4145724281,
+    "compressed": 1586393,
+    "uncompressed": 3480097,
+    "localoffset": 12463402
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_14__Macosko_53.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2195917688,
+    "compressed": 1908158,
+    "uncompressed": 4179260,
+    "localoffset": 14049895
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_15__Macosko_55.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1014587361,
+    "compressed": 2009026,
+    "uncompressed": 4399093,
+    "localoffset": 15958153
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_16__Macosko_59.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3704395256,
+    "compressed": 4365068,
+    "uncompressed": 9631830,
+    "localoffset": 17967279
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_17__Macosko_61.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3483743147,
+    "compressed": 3281915,
+    "uncompressed": 7243037,
+    "localoffset": 22332447
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_18__Macosko_64.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 4105122708,
+    "compressed": 3145764,
+    "uncompressed": 6948098,
+    "localoffset": 25614462
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_19__Macosko_67.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3525802353,
+    "compressed": 3213426,
+    "uncompressed": 7094925,
+    "localoffset": 28760326
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_1__Macosko_14.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2829189241,
+    "compressed": 2254575,
+    "uncompressed": 5019693,
+    "localoffset": 31973852
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_22__Macosko_81.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2615173690,
+    "compressed": 3733181,
+    "uncompressed": 8271148,
+    "localoffset": 34228526
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_23__Macosko_81.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2187699194,
+    "compressed": 3735250,
+    "uncompressed": 8268767,
+    "localoffset": 37961807
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_24__Macosko_81.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3217383682,
+    "compressed": 3736396,
+    "uncompressed": 8268584,
+    "localoffset": 41697157
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_26__Macosko_86.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3838425586,
+    "compressed": 3481459,
+    "uncompressed": 7736126,
+    "localoffset": 45433653
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_27__Macosko_89.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2719425622,
+    "compressed": 3485473,
+    "uncompressed": 7760293,
+    "localoffset": 48915212
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_28__Macosko_91.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1579588401,
+    "compressed": 2820019,
+    "uncompressed": 6288433,
+    "localoffset": 52400785
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_29__Macosko_94.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2245182288,
+    "compressed": 3253074,
+    "uncompressed": 7230028,
+    "localoffset": 55220904
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_30__Macosko_96.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1560153446,
+    "compressed": 3034711,
+    "uncompressed": 6752410,
+    "localoffset": 58474078
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_32__Macosko_101.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 926626194,
+    "compressed": 1140446,
+    "uncompressed": 2564302,
+    "localoffset": 61508889
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_31__Macosko_99.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1638071483,
+    "compressed": 1401825,
+    "uncompressed": 3104672,
+    "localoffset": 62649436
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_3__Macosko_20.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1448595698,
+    "compressed": 2872334,
+    "uncompressed": 6370299,
+    "localoffset": 64051361
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_4__Macosko_23.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2436183016,
+    "compressed": 2710385,
+    "uncompressed": 6011932,
+    "localoffset": 66923794
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_7__Macosko_31.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1415284331,
+    "compressed": 4650184,
+    "uncompressed": 10291847,
+    "localoffset": 69634278
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_8__Macosko_34.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 4093950583,
+    "compressed": 4905662,
+    "uncompressed": 10841098,
+    "localoffset": 74284561
+  },
+  {
+    "name": "csv/macosko_STalign/MSI_9__Macosko_39.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2329264712,
+    "compressed": 4230438,
+    "uncompressed": 9326187,
+    "localoffset": 79190322
+  },
+  {
+    "name": "csv/allvsallcorr.h5ad",
+    "method": 8,
+    "flags": 0,
+    "crc": 283149526,
+    "compressed": 3564161867,
+    "uncompressed": 3891587545,
+    "localoffset": 83420859
+  },
+  {
+    "name": "csv/corereactions_wenzymes.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2024819849,
+    "compressed": 2637,
+    "uncompressed": 17885,
+    "localoffset": 3647582805
+  },
+  {
+    "name": "csv/islipizoneinoutconnection.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3925780782,
+    "compressed": 3542,
+    "uncompressed": 17249,
+    "localoffset": 3647585530
+  },
+  {
+    "name": "csv/ventricles.h5ad",
+    "method": 8,
+    "flags": 0,
+    "crc": 504207764,
+    "compressed": 20632155,
+    "uncompressed": 40915863,
+    "localoffset": 3647589163
+  },
+  {
+    "name": "csv/lipizone_celltype_correspondence_macoscko.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1453265920,
+    "compressed": 3482,
+    "uncompressed": 9662,
+    "localoffset": 3668221395
+  },
+  {
+    "name": "csv/index_connectome.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 2647471885,
+    "compressed": 38462765,
+    "uncompressed": 225881708,
+    "localoffset": 3668224984
+  },
+  {
+    "name": "csv/colocalization_all_levels.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1610909977,
+    "compressed": 49900,
+    "uncompressed": 229845,
+    "localoffset": 3706687831
+  },
+  {
+    "name": "csv/theyrecelltypeterritories.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 1131026747,
+    "compressed": 9558,
+    "uncompressed": 32128,
+    "localoffset": 3706737822
+  },
+  {
+    "name": "csv/celltypelipidome_viamatching_MERFISH.csv",
+    "method": 8,
+    "flags": 0,
+    "crc": 3784557465,
+    "compressed": 199838,
+    "uncompressed": 434000,
+    "localoffset": 3706747471
+  },
+  {
+    "name": "csv/relaxed_colocalization_all_levels.parquet",
+    "method": 8,
+    "flags": 0,
+    "crc": 779820862,
+    "compressed": 58737,
+    "uncompressed": 64927,
+    "localoffset": 3706947411
+  }
+]

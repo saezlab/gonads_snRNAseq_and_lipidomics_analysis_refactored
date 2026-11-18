@@ -1,0 +1,78 @@
+source,interaction,target,source_name,lipid_ontology_member,evidence_tier,resource,source_record_ids,references
+Metab__CHEBI:15343_unknown,1,Gene__Trpa1,acetaldehyde,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:22554,PMID:17970723
+Metab__CHEBI:15422_unknown,-1,Gene__Kcnj11,ATP,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:13897,PMID:7502040;PMID:8630239
+Metab__CHEBI:15422_unknown,1,Gene__P2rx4,ATP,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:18233|GtoPdb:interaction_record:18235,PMID:10694247;PMID:12213051
+Metab__CHEBI:15422_unknown,-1,Gene__Trpm4,ATP,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:22830,PMID:15670874
+Metab__CHEBI:15534_unknown,-1,Gene__Kcnj2,oleoyl-CoA,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:13783,PMID:15980413;PMID:16777940
+Metab__CHEBI:15544_unknown,1,Gene__Ptger1,prostaglandin E1,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:8148,PMID:9313928
+Metab__CHEBI:15544_unknown,1,Gene__Ptger2,prostaglandin E1,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:8213,PMID:9313928
+Metab__CHEBI:15544_unknown,1,Gene__Ptger3,prostaglandin E1,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:8281,PMID:9313928
+Metab__CHEBI:15544_unknown,1,Gene__Ptger4,prostaglandin E1,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:8378,PMID:9313928
+Metab__CHEBI:15544_unknown,1,Gene__Ptgir,prostaglandin E1,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12700,PMID:9313928
+Metab__CHEBI:15553_unknown,1,Gene__Ptgdr2,prostaglandin F2alpha,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:7407,PMID:12721327
+Metab__CHEBI:15553_unknown,1,Gene__Ptger1,prostaglandin F2alpha,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:8155,PMID:9313928
+Metab__CHEBI:15553_unknown,1,Gene__Ptger3,prostaglandin F2alpha,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:8293,PMID:9313928
+Metab__CHEBI:15553_unknown,1,Gene__Ptgfr,prostaglandin F2alpha,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:9437,PMID:9313928
+Metab__CHEBI:15555_unknown,1,Gene__Ptgdr,prostaglandin D2,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:7363,PMID:9313928
+Metab__CHEBI:15555_unknown,1,Gene__Ptgdr2,prostaglandin D2,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:7402,PMID:12721327;PMID:16030019
+Metab__CHEBI:15555_unknown,1,Gene__Ptger3,prostaglandin D2,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:8278,PMID:9313928
+Metab__CHEBI:15555_unknown,1,Gene__Ptgfr,prostaglandin D2,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:9434,PMID:9313928
+Metab__CHEBI:15650_unknown,1,Gene__Gpr17,leukotriene E4,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12093,PMID:18974869
+Metab__CHEBI:15746_unknown,-1,Gene__Kcnj2,spermine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:13782,PMID:7748552;PMID:8866861
+Metab__CHEBI:15746_unknown,-1,Gene__Trpm4,spermine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:22833,PMID:15670874
+Metab__CHEBI:15760_unknown,1,Gene__Taar1,tyramine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:22217|GtoPdb:interaction_record:22241,PMID:17212650;PMID:17218486;PMID:19725810;PMID:19892733
+Metab__CHEBI:15843_unknown,1,Gene__Trpv4,arachidonic acid,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:23100,PMID:12879072
+Metab__CHEBI:16236_unknown,1,Gene__Htr3a,ethanol,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:892,PMID:16257471;PMID:16520747;PMID:7541281;PMID:9518697
+Metab__CHEBI:16236_unknown,1,Gene__Kcnj3,ethanol,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:13812,PMID:10570485;PMID:10570486
+Metab__CHEBI:16236_unknown,1,Gene__Kcnj5,ethanol,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:13847,PMID:10570485;PMID:10570486
+Metab__CHEBI:16264_unknown,1,Gene__P2ry14,UDP-N-acetyl-alpha-D-glucosamine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:18380,PMID:11735218
+Metab__CHEBI:16285_unknown,1,Gene__Rxra,phytanic acid,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:20696,PMID:11690641;PMID:8617282
+Metab__CHEBI:16356_unknown,1,Gene__Hcn2,"3',5'-cyclic GMP",False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:11259,PMID:9634236
+Metab__CHEBI:16393_unknown,-1,Gene__Trpm7,sphingosine,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:22879,PMID:23145923
+Metab__CHEBI:16496_unknown,1,Gene__Nr1i2,"5beta-cholestane-3alpha,7alpha,12alpha-triol",True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:19936,PMID:12569201
+Metab__CHEBI:16584_unknown,-1,Gene__Trpa1,isopentenyl diphosphate,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:22637,PMID:20880407
+Metab__CHEBI:16610_unknown,-1,Gene__Kcnj2,spermidine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:13781,PMID:7748552
+Metab__CHEBI:16827_unknown,1,Gene__Nr3c1,corticosterone,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:10481,PMID:10611474;PMID:10747884;PMID:8282004
+Metab__CHEBI:16958_unknown,1,Gene__Mrgprd,beta-alanine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12338,PMID:15037633
+Metab__CHEBI:16978_unknown,1,Gene__Gpr17,leukotriene C4,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12090,PMID:18974869
+Metab__CHEBI:17134_unknown,1,Gene__Taar1,octopamine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:22228,PMID:17212650;PMID:19725810
+Metab__CHEBI:17148_unknown,-1,Gene__Kcnj2,putrescine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:13779,PMID:7748552;PMID:8866861
+Metab__CHEBI:17200_unknown,1,Gene__P2ry14,UDP-alpha-D-glucuronic acid,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:18377,PMID:11735218
+Metab__CHEBI:17489_unknown,1,Gene__Hcn1,"3',5'-cyclic AMP",False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:11246,PMID:11331358;PMID:11524455
+Metab__CHEBI:17489_unknown,1,Gene__Hcn2,"3',5'-cyclic AMP",False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:11258,PMID:9634236
+Metab__CHEBI:17552_unknown,1,Gene__Kcnj8,GDP,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:13875,PMID:9130167
+Metab__CHEBI:17659_unknown,1,Gene__Kcnj8,UDP,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:13879,PMID:9130167
+Metab__CHEBI:18295_unknown,1,Gene__Hrh3,histamine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:11709,PMID:12706455;PMID:15341517
+Metab__CHEBI:18295_unknown,1,Gene__Hrh4,histamine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:11813,PMID:11561071
+Metab__CHEBI:18344_unknown,1,Gene__Gpr35,kynurenic acid,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12151,PMID:16754668
+Metab__CHEBI:18397_unknown,1,Gene__Taar1,2-phenylethylamine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:22222,PMID:17212650;PMID:17218486;PMID:19725810
+Metab__CHEBI:18397_unknown,1,Gene__Taar4,2-phenylethylamine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12750,PMID:16878137
+Metab__CHEBI:19511_unknown,1,Gene__Trpv3,"2-cis,6-cis-farnesyl diphosphate",True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:23073,PMID:20395302
+Metab__CHEBI:27485_unknown,1,Gene__Ptgdr2,prostaglandin J2,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:7408,PMID:12721327
+Metab__CHEBI:28125_unknown,1,Gene__Rxra,"all-cis-docosa-4,7,10,13,16,19-hexaenoic acid",True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:20691,PMID:10529898;PMID:11690641
+Metab__CHEBI:28130_unknown,1,Gene__Ptgdr2,"13,14-dihydro-Delta(12)-prostaglandin J2",True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:7395,PMID:12721327
+Metab__CHEBI:28790_unknown,1,Gene__Htr1b,serotonin,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:160,PMID:1557407
+Metab__CHEBI:28790_unknown,1,Gene__Htr4,serotonin,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:951,PMID:8946946
+Metab__CHEBI:28790_unknown,1,Gene__Htr5a,serotonin,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:1017,PMID:11343685;PMID:8450829;PMID:8549774
+Metab__CHEBI:28790_unknown,1,Gene__Htr7,serotonin,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:1184,PMID:8394987
+Metab__CHEBI:30769_unknown,1,Gene__Trpv4,citric acid,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:23115,PMID:12692122
+Metab__CHEBI:33568_unknown,1,Gene__Adrb3,adrenaline,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:3705,PMID:8719421
+Metab__CHEBI:34146_unknown,1,Gene__Gpr31,12(S)-HETE,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12136,PMID:21712392
+Metab__CHEBI:34450_unknown,1,Gene__Trpv4,"5,6-EET",True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:23113,PMID:12879072
+Metab__CHEBI:37550_unknown,1,Gene__Gpr6,sphingosine 1-phosphate,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12232,PMID:12220620;PMID:14592418
+Metab__CHEBI:37550_unknown,1,Gene__S1pr1,sphingosine 1-phosphate,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:21097,PMID:14732717;PMID:17114004
+Metab__CHEBI:37550_unknown,1,Gene__S1pr2,sphingosine 1-phosphate,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:21125,PMID:14732717
+Metab__CHEBI:37550_unknown,1,Gene__S1pr3,sphingosine 1-phosphate,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:21145,PMID:14732717
+Metab__CHEBI:37550_unknown,1,Gene__S1pr4,sphingosine 1-phosphate,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:21174,PMID:14732717
+Metab__CHEBI:37550_unknown,1,Gene__S1pr5,sphingosine 1-phosphate,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:21198,PMID:11705398;PMID:14732717
+Metab__CHEBI:422_unknown,1,Gene__Hcar1,(S)-lactic acid,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:11193,PMID:19047060;PMID:20374963
+Metab__CHEBI:43689_unknown,1,Gene__Taar3,isopentylamine,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12749,PMID:16878137
+Metab__CHEBI:437204_unknown,1,Gene__Taar1,,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:22220,PMID:15146179;PMID:16451074;PMID:17497842
+Metab__CHEBI:52249_unknown,1,Gene__Gpr17,UDP-alpha-D-glucose,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12097,PMID:18974869
+Metab__CHEBI:52249_unknown,1,Gene__P2ry14,UDP-alpha-D-glucose,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:18373,PMID:11735218
+Metab__CHEBI:60479_unknown,1,Gene__Trpv2,lysophosphatidylcholine,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:23046,PMID:19321128;PMID:21147993
+Metab__CHEBI:64931_unknown,1,Gene__Trpv2,lysophosphatidyl-1D-myo-inositol,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:23047,PMID:19321128
+Metab__CHEBI:6498_unknown,1,Gene__Fpr-s1,lipoxin A4,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:9407,PMID:9151906
+Metab__CHEBI:67119_unknown,1,Gene__Gpr17,UDP-alpha-D-galactose,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:12095,PMID:18974869
+Metab__CHEBI:67119_unknown,1,Gene__P2ry14,UDP-alpha-D-galactose,False,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:18370,PMID:11735218
+Metab__CHEBI:75728_unknown,1,Gene__Trpc2,1-stearoyl-2-arachidonoyl-sn-glycerol,True,curated_mouse_current,GuideToPharmacology,GtoPdb:interaction_record:22649,PMID:14642279

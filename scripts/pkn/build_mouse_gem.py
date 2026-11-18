@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / 'support/cosmos_mouse/raw'
-OUT = ROOT / 'results/cosmos_mouse_pkn'
+OUT = ROOT / 'results/causal_modelling/cosmos_mouse_pkn'
 COMMIT = 'fc769ac1da421c4e4e9e1cf2a9aec3fe4f02ef6a'
 CORE = '{http://www.sbml.org/sbml/level3/version1/core}'
 FBC = '{http://www.sbml.org/sbml/level3/version1/fbc/version2}'

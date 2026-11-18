@@ -57,6 +57,7 @@ cat(strrep("=", 80), "\n\n")
 
 # Load configuration
 source("scripts/config/analysis_config.R")
+source("scripts/config/analysis_release.R")
 source("scripts/config/datasets.R")
 
 # Load support functions
@@ -801,31 +802,32 @@ cat(strrep("-", 80), "\n")
 cat("11. ZONATION PSEUDOBULK: SEURAT TO CSV CONVERSION\n")
 cat(strrep("-", 80), "\n\n")
 
-cat("Converting zonation-annotated hepatocyte pseudobulk from Seurat to CSV.\n")
+cat("Reading zonation-annotated hepatocyte pseudobulk CSV transport.\n")
 cat("These CSVs are consumed by workflow 05 (zonation analysis).\n\n")
 
-zonation_rds_path <- "data/RNA/fcg_zonation_pseudobulks.rds"
+zonation_rds_path <- analysis_path("current_fcg_zonation_transport")
 
 if (!file.exists(zonation_rds_path)) {
-  cat("WARNING: Zonation Seurat object not found at:", zonation_rds_path, "\n")
+  cat("WARNING: Zonation CSV transport not found at:", zonation_rds_path, "\n")
   cat("  Skipping zonation CSV generation.\n")
   cat("  Workflow 05 will use existing CSVs if available.\n\n")
 } else {
-  cat("Loading zonation Seurat object:", zonation_rds_path, "\n")
-  zonation_obj <- readRDS(zonation_rds_path)
+  cat("Loading zonation CSV transport:", zonation_rds_path, "\n")
+  source("scripts/core/pseudobulk_csv.R",local=TRUE)
+  zonation_obj <- pb_components(zonation_rds_path)
 
-  cat("  Pseudobulk samples:", ncol(zonation_obj), "\n")
-  cat("  Genes:", nrow(zonation_obj), "\n\n")
+  cat("  Pseudobulk samples:", length(zonation_obj$cells), "\n")
+  cat("  Genes:", length(zonation_obj$features), "\n\n")
 
   # Extract scaled data (compatible with Seurat v4 and v5)
   cat("Extracting scaled expression data...\n")
   zonation_scaled <- as.data.frame(
-    get_layer_data(zonation_obj, assay = "RNA", layer = "scale.data")
+    zonation_obj$layers$scale.data
   )
-  rownames(zonation_scaled) <- Features(zonation_obj[["RNA"]])
+  rownames(zonation_scaled) <- rownames(zonation_obj$layers$scale.data)
 
   # Extract metadata
-  zonation_meta <- as.data.frame(zonation_obj@meta.data)
+  zonation_meta <- as.data.frame(zonation_obj$meta.data)
   names(zonation_meta)[1] <- "sample"
 
   # Normalize sample name separators (hyphens -> underscores)
@@ -848,13 +850,13 @@ if (!file.exists(zonation_rds_path)) {
   # Save CSVs
   cat("Saving zonation CSVs...\n")
 
-  readr::write_csv(zonation_scaled, file.path(data_rna_dir, "scaled_RNA_zonation.csv"))
-  cat("  Saved:", file.path(data_rna_dir, "scaled_RNA_zonation.csv"),
-      "(", format(file.size(file.path(data_rna_dir, "scaled_RNA_zonation.csv")) / 1024^2, digits = 2), "MB)\n")
+  readr::write_csv(zonation_scaled, analysis_path("current_fcg_zonation_csv"))
+  cat("  Saved:", analysis_path("current_fcg_zonation_csv"),
+      "(", format(file.size(analysis_path("current_fcg_zonation_csv")) / 1024^2, digits = 2), "MB)\n")
 
   rownames(zonation_meta) <- NULL
-  readr::write_csv(zonation_meta, file.path(data_rna_dir, "meta_data_df_zonation.csv"))
-  cat("  Saved:", file.path(data_rna_dir, "meta_data_df_zonation.csv"), "\n\n")
+  readr::write_csv(zonation_meta, analysis_path("current_fcg_zonation_metadata"))
+  cat("  Saved:", analysis_path("current_fcg_zonation_metadata"), "\n\n")
 
   # Verify output
   cat("Verification:\n")
@@ -1005,8 +1007,8 @@ cat("  - data/RNA/scaled_RNA_1.csv\n")
 cat("  - data/RNA/scaled_RNA_2.csv\n")
 cat("  - data/RNA/scaled_RNA_3.csv\n")
 cat("  - data/RNA/meta_data_df.csv\n")
-cat("  - data/RNA/scaled_RNA_zonation.csv\n")
-cat("  - data/RNA/meta_data_df_zonation.csv\n")
+cat("  - ",analysis_path("current_fcg_zonation_csv"),"\n",sep="")
+cat("  - ",analysis_path("current_fcg_zonation_metadata"),"\n",sep="")
 cat("  - data/RNA/scaled_RNA_gdxhr_{1,2,3}.csv\n")
 cat("  - data/RNA/meta_data_df_gdxhr.csv\n")
 cat("  - results/qc/ (QC plots and reports)\n\n")

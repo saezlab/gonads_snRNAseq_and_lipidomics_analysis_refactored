@@ -1,0 +1,19 @@
+{
+  "seed": 20262007,
+  "workers": 3,
+  "calibration_datasets": 120,
+  "inner_bootstrap_draws": 199,
+  "injection_datasets_per_setting": 399,
+  "lambda": [0, 0.1, 0.2, 0.4, 0.8],
+  "matched_lipids_full": 856,
+  "matched_lipids_fixed": 552,
+  "data_generating_null": "No KO mean effects in either sex; original sex means and full four-group HC2 mouse residual covariance",
+  "tested_null": "Each tested contrast mean is zero for every lipid; estimated nuisance contrasts retained using the production weighted projection",
+  "shared_multipliers": "One independent Rademacher sign per whole mouse; shared across all lipid species and, within an inner draw, across three tested-contrast simulations",
+  "fitted_model": "Production sex-weighted limma; weights, trend and robust moderation refitted for every simulated dataset",
+  "references": "Both full and historical networks fixed; original feature selection conditioned upon",
+  "injection": "Known negative mean effects proportional to centered SD-standardized full-network r times original within-sex residual SD; unmatched features unshifted",
+  "injection_detection": "Fixed observed-data null bank 95th absolute ULM percentile; not a refitted prospective power calculation",
+  "conditioning": "Estimated residual covariance, independent/sign-symmetric mouse errors, actual sample counts, measured feature universe; unknown batch/litter effects unmodeled",
+  "interpretation": "Finite Monte Carlo calibration under a fitted scenario; does not establish universal calibration or power for the unknown true biological effect"
+}

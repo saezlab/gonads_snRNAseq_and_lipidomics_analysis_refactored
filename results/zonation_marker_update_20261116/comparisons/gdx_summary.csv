@@ -1,0 +1,12 @@
+"contrast","version_old","genes_old","FDR_005_old","positive_old","negative_old","rho_old","version_new","genes_new","FDR_005_new","positive_new","negative_new","rho_new"
+"gdx_female_PC","original_two_marker",18176,0,0,0,0.462094642778718,"expanded_marker_score",18410,0,0,0,0.524844485465436
+"gdx_female_PP","original_two_marker",18176,0,0,0,0.462094642778718,"expanded_marker_score",18410,0,0,0,0.524844485465436
+"gdx_male_PC","original_two_marker",18176,16,5,11,0.462094642778718,"expanded_marker_score",18410,21,8,13,0.524844485465436
+"gdx_male_PP","original_two_marker",18176,16,3,13,0.462094642778718,"expanded_marker_score",18410,19,3,16,0.524844485465436
+"gdx_sex_zone","original_two_marker",18176,0,0,0,0.462094642778718,"expanded_marker_score",18410,0,0,0,0.524844485465436
+"gdx_zone_female","original_two_marker",18176,2,2,0,0.462094642778718,"expanded_marker_score",18410,0,0,0,0.524844485465436
+"gdx_zone_male","original_two_marker",18176,0,0,0,0.462094642778718,"expanded_marker_score",18410,0,0,0,0.524844485465436
+"zone_female_gdx","original_two_marker",18176,689,334,355,0.462094642778718,"expanded_marker_score",18410,692,337,355,0.524844485465436
+"zone_female_sham","original_two_marker",18176,990,500,490,0.462094642778718,"expanded_marker_score",18410,979,526,453,0.524844485465436
+"zone_male_gdx","original_two_marker",18176,567,264,303,0.462094642778718,"expanded_marker_score",18410,640,318,322,0.524844485465436
+"zone_male_sham","original_two_marker",18176,1082,548,534,0.462094642778718,"expanded_marker_score",18410,1035,475,560,0.524844485465436

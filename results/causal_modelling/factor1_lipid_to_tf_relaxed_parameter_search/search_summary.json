@@ -1,0 +1,15 @@
+{
+  "analysis": "factor1_lipid_to_tf_relaxed_parameter_search",
+  "fits_requested": 18,
+  "fits_converged": 18,
+  "valid_threshold_pairs_per_fit": 24,
+  "strict_extractions_evaluated": 432,
+  "extraction_status": {
+    "empty": 406,
+    "invalid_threshold_pair": 108,
+    "ok": 26
+  },
+  "eligible_grid_rows": 10,
+  "unique_materialized_topologies": 3,
+  "interpretation": "The grid describes score-layer and coverage sensitivity within this exploratory PKN. It does not select a global optimum or establish causal regulation."
+}

@@ -1,0 +1,18 @@
+{
+  "analysis": "targeted_lipid_to_tf_threshold_refinement",
+  "frozen_runs": 7,
+  "threshold_evaluations": 1431,
+  "validated": 1431,
+  "eligible": 26,
+  "eligible_by_panel": {
+    "all_tfs": 26
+  },
+  "no_refitting": true,
+  "no_edge_trimming": true,
+  "no_observation_or_mapping_changes": true,
+  "selection": "No universal optimum asserted. all_tfs is the primary observation panel; strong_tfs is a separately reported sensitivity.",
+  "scope": "Targeted fine grids around the greatest coarse primary/secondary values yielding nonempty solutions. Not an exhaustive continuous search.",
+  "threshold_semantics": "Both cutoffs are strict absolute inferred-MOON-score thresholds. Observed TF activities are terminal and exempt. Thresholds are not calibrated confidence probabilities.",
+  "command_args": [],
+  "finished_utc": "2026-09-15 12:27:33 UTC"
+}

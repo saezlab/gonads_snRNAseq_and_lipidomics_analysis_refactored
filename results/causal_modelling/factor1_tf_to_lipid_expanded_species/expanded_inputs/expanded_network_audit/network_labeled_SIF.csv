@@ -1,0 +1,102 @@
+source,interaction,target,source_label,target_label,source_score_level,target_score_level,score_layer_adjacent,mechanisms,resources,reaction_ids,evidence_records,contains_species_rule_hypothesis,references_json,template_reaction_ids
+Enzyme__037cdebf8f86ad56,1,Metab__CHEBI:30823_unknown,Pnpla8 [RHEA:40820],(9Z)-octadecenoate,1,4,False,product_formation,Rhea,RHEA:40820,1,False,[],
+Enzyme__03a97175be51bf61,1,Metab__CHEBI:15377_unknown,Pm20d1 [RHEA:64118],H2O,3,2,True,product_formation,Rhea,RHEA:64118,1,False,[],
+Enzyme__03f8af34500e1926,1,Metab__CHEBI:15377_unknown,Ptgs1 [RHEA:23729],H2O,3,2,True,product_formation,Rhea,RHEA:23729,1,False,[],
+Enzyme__090e82d3671fa7de,1,Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown,Smpd2 [species rule ba63cac0],Cer(18:1;O2/24:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:ba63cac002e903173b52,1,True,[],RHEA:45301
+Enzyme__0986ec737fd7cdb4,1,Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown,Smpd4 [species rule b0cc04f6],Cer(18:1;O2/24:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Enzyme__0ff52490369f487a,1,Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown,Smpd2 [species rule f8325f37],Cer(18:1;O2/18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Enzyme__16c51e3729aae1ff,1,Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown,Smpd1 [species rule f8325f37],Cer(18:1;O2/18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Enzyme__18b36bc257af1d5d,1,Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown,Smpd5 [species rule b0cc04f6],Cer(18:1;O2/24:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Enzyme__1928f075c69b371f,1,Metab__CHEBI:15377_unknown,Pm20d1 [RHEA:64110],H2O,3,2,True,product_formation,Rhea,RHEA:64110,1,False,[],
+Enzyme__20ee1b0012d91652,1,Metab__CHEBI:15377_unknown,Pm20d1 [RHEA:51362],H2O,3,2,True,product_formation,Rhea,RHEA:51362,1,False,[],
+Enzyme__23fd98af32406057,1,Metab__CHEBI:15377_unknown,Cyp1b1 [RHEA:48717],H2O,3,2,True,product_formation,Rhea,RHEA:48717,1,False,[],
+Enzyme__28696be19cae4ccd,1,Metab__CHEBI:15377_unknown,Asah2 [RHEA:41301],H2O,3,2,True,product_formation,Rhea,RHEA:41301,1,False,[],
+Enzyme__2c39c9d85dcf36ba,1,Metab__CHEBI:15377_unknown,Pm20d1 [RHEA:51301],H2O,3,2,True,product_formation,Rhea,RHEA:51301,1,False,[],
+Enzyme__31e8495dc1f86891,1,Metab__CHEBI:7896_unknown,Plaat3 [RHEA:56441],hexadecanoate,1,4,False,product_formation,Rhea,RHEA:56441,1,False,[],
+Enzyme__37e9c85951cb686a,1,Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown,Enpp7 [species rule f8325f37],Cer(18:1;O2/18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Enzyme__383a88ef729fba13,1,Metab__CHEBI:32395_unknown,Pla2g6 [RHEA:40520],"(5Z,8Z,11Z,14Z)-eicosatetraenoate",1,4,False,product_formation,Rhea,RHEA:40520,1,False,[],
+Enzyme__391fe764f47697b3,1,Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown,Smpd3 [species rule f8325f37],Cer(18:1;O2/18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Enzyme__3ae292e719ab9b9d,1,Metab__CHEBI:15377_unknown,Cyp1a1 [RHEA:48717],H2O,3,2,True,product_formation,Rhea,RHEA:48717,1,False,[],
+Enzyme__3c67586e0fb55402,1,Metab__CHEBI:15377_unknown,Aldh3b2 [RHEA:33740],H2O,3,2,True,product_formation,Rhea,RHEA:33740,1,False,[],
+Enzyme__45f3f98eb1252844,1,Metab__CHEBI:15377_unknown,Alox5 [RHEA:32308],H2O,3,2,True,product_formation,Rhea,RHEA:32308,1,False,[],
+Enzyme__48295b5795b36dce,1,Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown,Enpp7 [species rule b0cc04f6],Cer(18:1;O2/24:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Enzyme__4f31ce72b1288e17,1,Metab__CHEBI:15377_unknown,Cyp1b1 [RHEA:48637],H2O,3,2,True,product_formation,Rhea,RHEA:48637,1,False,[],
+Enzyme__4fb1ae37a544c7ee,1,Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown,Smpd2 [species rule 05cee413],Cer(18:1;O2/18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:05cee4134f5dc3941f33,1,True,[],RHEA:45301
+Enzyme__536ffa90afa7a555,1,Metab__CHEBI:15377_unknown,Cyp1a1 [RHEA:37948],H2O,3,2,True,product_formation,Rhea,RHEA:37948,1,False,[],
+Enzyme__54c39cee039dd3d0,1,Metab__CHEBI:15377_unknown,Ptgs2 [RHEA:50853],H2O,3,2,True,product_formation,Rhea,RHEA:50853,1,False,[],
+Enzyme__59f304ea0637b9a3,1,Metab__MeasuredLipid:Cer(18:2;O2/18:0)_unknown,Smpd2 [species rule b2a17cd5],Cer(18:2;O2/18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b2a17cd5c46416996d99,1,True,[],RHEA:45301
+Enzyme__6a94af069033a311,1,Metab__CHEBI:15377_unknown,Dgat1 [RHEA:38380],H2O,3,2,True,product_formation,Rhea,RHEA:38380,1,False,[],
+Enzyme__71446355999aa164,1,Metab__CHEBI:15377_unknown,Cyp1b1 [RHEA:48633],H2O,3,2,True,product_formation,Rhea,RHEA:48633,1,False,[],
+Enzyme__7c22ae6351568cc7,1,Metab__CHEBI:32395_unknown,Pla2g4a [RHEA:40520],"(5Z,8Z,11Z,14Z)-eicosatetraenoate",1,4,False,product_formation,Rhea,RHEA:40520,1,False,[],
+Enzyme__840eb9cd3ec1733c,1,Metab__CHEBI:32395_unknown,Pla2g10 [RHEA:40520],"(5Z,8Z,11Z,14Z)-eicosatetraenoate",1,4,False,product_formation,Rhea,RHEA:40520,1,False,[],
+Enzyme__84e84cc60bcc527b,1,Metab__CHEBI:15377_unknown,Cyp1a1 [RHEA:48633],H2O,3,2,True,product_formation,Rhea,RHEA:48633,1,False,[],
+Enzyme__8881728617d0b9bc,1,Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown,Smpd3 [species rule ba63cac0],Cer(18:1;O2/24:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:ba63cac002e903173b52,1,True,[],RHEA:45301
+Enzyme__9435eeda62977158,1,Metab__CHEBI:15377_unknown,Pm20d1 [RHEA:51445],H2O,3,2,True,product_formation,Rhea,RHEA:51445,1,False,[],
+Enzyme__9ace01d6edfcf095,1,Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown,Smpd4 [species rule f8325f37],Cer(18:1;O2/18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Enzyme__9e8e4dd3a15bbec0,1,Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown,Smpd2 [species rule b0cc04f6],Cer(18:1;O2/24:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Enzyme__a1df8d48aed49e49,1,Metab__CHEBI:15377_unknown,Cyp1a1 [RHEA:48637],H2O,3,2,True,product_formation,Rhea,RHEA:48637,1,False,[],
+Enzyme__a470b5b5f49d2b98,1,Metab__CHEBI:15377_unknown,Cyp1b1 [RHEA:37948],H2O,3,2,True,product_formation,Rhea,RHEA:37948,1,False,[],
+Enzyme__aab701f12825d27b,1,Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown,Smpd3 [species rule 05cee413],Cer(18:1;O2/18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:05cee4134f5dc3941f33,1,True,[],RHEA:45301
+Enzyme__b417f27b74132dfd,1,Metab__CHEBI:15377_unknown,Asah2 [RHEA:38893],H2O,3,2,True,product_formation,Rhea,RHEA:38893,1,False,[],
+Enzyme__c42c2a679103f8e3,1,Metab__CHEBI:15377_unknown,Pm20d1 [RHEA:51313],H2O,3,2,True,product_formation,Rhea,RHEA:51313,1,False,[],
+Enzyme__cba8b9f7d399bc31,1,Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown,Smpd3 [species rule b0cc04f6],Cer(18:1;O2/24:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Enzyme__cc3a1c1240e9d52e,1,Metab__CHEBI:15377_unknown,Asah1 [RHEA:38893],H2O,3,2,True,product_formation,Rhea,RHEA:38893,1,False,[],
+Enzyme__e43ec2718ec397b1,1,Metab__CHEBI:15377_unknown,Alox12 [RHEA:53533],H2O,3,2,True,product_formation,Rhea,RHEA:53533,1,False,[],
+Enzyme__e4a68bf2c7eac113,1,Metab__CHEBI:15377_unknown,Ptgs2 [RHEA:50857],H2O,3,2,True,product_formation,Rhea,RHEA:50857,1,False,[],
+Enzyme__f15a667a47029be4,1,Metab__CHEBI:15377_unknown,Ptgs2 [RHEA:23729],H2O,3,2,True,product_formation,Rhea,RHEA:23729,1,False,[],
+Enzyme__f1ea18e22a18a371,1,Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown,Smpd5 [species rule f8325f37],Cer(18:1;O2/18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Enzyme__fa24b313960ac9a7,1,Metab__CHEBI:15377_unknown,Aldh3b1 [RHEA:33740],H2O,3,2,True,product_formation,Rhea,RHEA:33740,1,False,[],
+Enzyme__fab7b017a3c782c2,1,Metab__MeasuredLipid:Cer(18:2;O2/18:0)_unknown,Smpd3 [species rule b2a17cd5],Cer(18:2;O2/18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b2a17cd5c46416996d99,1,True,[],RHEA:45301
+Enzyme__fc7b0ad70ae80879,1,Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown,Smpd1 [species rule b0cc04f6],Cer(18:1;O2/24:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Gene__Alox12,1,Enzyme__e43ec2718ec397b1,Alox12,Alox12 [RHEA:53533],4,3,True,catalyst_enables_reaction,Rhea,RHEA:53533,1,False,[],
+Gene__Ar,1,Gene__Cyp1b1,Ar,Cyp1b1,4,4,False,transcription,OmniPath:grn,,1,False,"[""CollecTRI:19270430;CollecTRI2:19270430""]",
+Gene__Arnt,1,Gene__Alox12,Arnt,Alox12,4,4,False,transcription,OmniPath:grn,,1,False,"[""CollecTRI:20508969;CollecTRI2:20508969""]",
+Gene__Arnt,1,Gene__Cyp1a1,Arnt,Cyp1a1,4,4,False,transcription,OmniPath:grn,,1,False,"[""CollecTRI2:34782204;CollecTRI2:10207038;TRRUST:22387692;CollecTRI:16111650;CollecTRI2:32409577;CollecTRI2:28710019;CollecTRI2:11446831;CollecTRI2:8626473;CollecTRI2:9374477;CollecTRI2:10799651;CollecTRI2:19255421;TRRUST:12376470;CollecTRI2:7980646;CollecTRI2:26221077;SIGNOR:17012224;CollecTRI2:29666456;CollecTRI2:7700240;CollecTRI2:8824276;CollecTRI:17023418;CollecTRI2:20106901;CollecTRI2:24519526;CollecTRI2:12051661;CollecTRI2:19376845;CollecTRI2:9211913;CollecTRI2:27907195;CollecTRI2:22120949;CollecTRI2:22387692;CollecTRI2:27015123;CollecTRI2:20951181;CollecTRI2:17949687;CollecTRI2:12376470;CollecTRI2:18078967;CollecTRI2:18259752;CollecTRI2:22177959;CollecTRI2:24486526;CollecTRI:9374477;CollecTRI2:12002481;CollecTRI2:12573486;CollecTRI2:28882572;CollecTRI2:8524325;CollecTRI2:17607366;CollecTRI2:32283770;CollecTRI2:9717460;CollecTRI2:17191862;CollecTRI2:11809858;CollecTRI2:10103034;CollecTRI2:8631128;CollecTRI2:17012224;CollecTRI2:9418899;CollecTRI2:7791778;CollecTRI2:10395179;CollecTRI2:9703964;CollecTRI2:15837795;CollecTRI2:9547351;CollecTRI2:25522763;CollecTRI2:17023418;CollecTRI:15832810;TRRUST:19255421;CollecTRI2:18074135;CollecTRI:9717460;CollecTRI2:15313166;CollecTRI2:28481916;CollecTRI2:9632741;CollecTRI2:8666157;CollecTRI2:17707923;CollecTRI:12376470;CollecTRI:19376845;CollecTRI:8647831;TRRUST:19376845;CollecTRI2:10373624;CollecTRI2:27853106;TRRUST:8631128;CollecTRI2:34199736;CollecTRI:19255421;CollecTRI2:9208942;CollecTRI2:37958638;CollecTRI:17012224;CollecTRI2:11090948;CollecTRI2:35892579;CollecTRI2:19755658;CollecTRI2:38036013;CollecTRI2:11805098;CollecTRI2:8806843;CollecTRI:8631128;CollecTRI2:36876749;CollecTRI2:27101761;CollecTRI2:18096572;CollecTRI:19287966;CollecTRI2:21183436;CollecTRI2:35416668;CollecTRI2:32289173;CollecTRI:12369894;CollecTRI:22387692;DoRothEA:22387692;CollecTRI2:7581486;CollecTRI2:37169746""]",
+Gene__Cyp1a1,1,Enzyme__3ae292e719ab9b9d,Cyp1a1,Cyp1a1 [RHEA:48717],4,3,True,catalyst_enables_reaction,Rhea,RHEA:48717,1,False,[],
+Gene__Cyp1a1,1,Enzyme__536ffa90afa7a555,Cyp1a1,Cyp1a1 [RHEA:37948],4,3,True,catalyst_enables_reaction,Rhea,RHEA:37948,1,False,[],
+Gene__Cyp1a1,1,Enzyme__84e84cc60bcc527b,Cyp1a1,Cyp1a1 [RHEA:48633],4,3,True,catalyst_enables_reaction,Rhea,RHEA:48633,1,False,[],
+Gene__Cyp1a1,1,Enzyme__a1df8d48aed49e49,Cyp1a1,Cyp1a1 [RHEA:48637],4,3,True,catalyst_enables_reaction,Rhea,RHEA:48637,1,False,[],
+Gene__Cyp1b1,1,Enzyme__23fd98af32406057,Cyp1b1,Cyp1b1 [RHEA:48717],4,3,True,catalyst_enables_reaction,Rhea,RHEA:48717,1,False,[],
+Gene__Cyp1b1,1,Enzyme__4f31ce72b1288e17,Cyp1b1,Cyp1b1 [RHEA:48637],4,3,True,catalyst_enables_reaction,Rhea,RHEA:48637,1,False,[],
+Gene__Cyp1b1,1,Enzyme__71446355999aa164,Cyp1b1,Cyp1b1 [RHEA:48633],4,3,True,catalyst_enables_reaction,Rhea,RHEA:48633,1,False,[],
+Gene__Cyp1b1,1,Enzyme__a470b5b5f49d2b98,Cyp1b1,Cyp1b1 [RHEA:37948],4,3,True,catalyst_enables_reaction,Rhea,RHEA:37948,1,False,[],
+Metab__CHEBI:15377_unknown,1,Enzyme__037cdebf8f86ad56,H2O,Pnpla8 [RHEA:40820],2,1,True,substrate_participation,Rhea,RHEA:40820,1,False,[],
+Metab__CHEBI:15377_unknown,1,Enzyme__090e82d3671fa7de,H2O,Smpd2 [species rule ba63cac0],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:ba63cac002e903173b52,1,True,[],RHEA:45301
+Metab__CHEBI:15377_unknown,1,Enzyme__0986ec737fd7cdb4,H2O,Smpd4 [species rule b0cc04f6],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__0ff52490369f487a,H2O,Smpd2 [species rule f8325f37],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__16c51e3729aae1ff,H2O,Smpd1 [species rule f8325f37],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__18b36bc257af1d5d,H2O,Smpd5 [species rule b0cc04f6],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__31e8495dc1f86891,H2O,Plaat3 [RHEA:56441],2,1,True,substrate_participation,Rhea,RHEA:56441,1,False,[],
+Metab__CHEBI:15377_unknown,1,Enzyme__37e9c85951cb686a,H2O,Enpp7 [species rule f8325f37],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__383a88ef729fba13,H2O,Pla2g6 [RHEA:40520],2,1,True,substrate_participation,Rhea,RHEA:40520,1,False,[],
+Metab__CHEBI:15377_unknown,1,Enzyme__391fe764f47697b3,H2O,Smpd3 [species rule f8325f37],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__48295b5795b36dce,H2O,Enpp7 [species rule b0cc04f6],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__4fb1ae37a544c7ee,H2O,Smpd2 [species rule 05cee413],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:05cee4134f5dc3941f33,1,True,[],RHEA:45301
+Metab__CHEBI:15377_unknown,1,Enzyme__59f304ea0637b9a3,H2O,Smpd2 [species rule b2a17cd5],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b2a17cd5c46416996d99,1,True,[],RHEA:45301
+Metab__CHEBI:15377_unknown,1,Enzyme__7c22ae6351568cc7,H2O,Pla2g4a [RHEA:40520],2,1,True,substrate_participation,Rhea,RHEA:40520,1,False,[],
+Metab__CHEBI:15377_unknown,1,Enzyme__840eb9cd3ec1733c,H2O,Pla2g10 [RHEA:40520],2,1,True,substrate_participation,Rhea,RHEA:40520,1,False,[],
+Metab__CHEBI:15377_unknown,1,Enzyme__8881728617d0b9bc,H2O,Smpd3 [species rule ba63cac0],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:ba63cac002e903173b52,1,True,[],RHEA:45301
+Metab__CHEBI:15377_unknown,1,Enzyme__9ace01d6edfcf095,H2O,Smpd4 [species rule f8325f37],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__9e8e4dd3a15bbec0,H2O,Smpd2 [species rule b0cc04f6],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__aab701f12825d27b,H2O,Smpd3 [species rule 05cee413],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:05cee4134f5dc3941f33,1,True,[],RHEA:45301
+Metab__CHEBI:15377_unknown,1,Enzyme__cba8b9f7d399bc31,H2O,Smpd3 [species rule b0cc04f6],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__f1ea18e22a18a371,H2O,Smpd5 [species rule f8325f37],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f8325f37adac5218d482,1,True,[],RHEA:19254
+Metab__CHEBI:15377_unknown,1,Enzyme__fab7b017a3c782c2,H2O,Smpd3 [species rule b2a17cd5],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b2a17cd5c46416996d99,1,True,[],RHEA:45301
+Metab__CHEBI:15377_unknown,1,Enzyme__fc7b0ad70ae80879,H2O,Smpd1 [species rule b0cc04f6],2,1,True,substrate_participation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,1,True,[],RHEA:19254
+Metab__CHEBI:30823_unknown,1,Enzyme__20ee1b0012d91652,(9Z)-octadecenoate,Pm20d1 [RHEA:51362],4,3,True,substrate_participation,Rhea,RHEA:51362,1,False,[],
+Metab__CHEBI:30823_unknown,1,Enzyme__28696be19cae4ccd,(9Z)-octadecenoate,Asah2 [RHEA:41301],4,3,True,substrate_participation,Rhea,RHEA:41301,1,False,[],
+Metab__CHEBI:30823_unknown,1,Enzyme__2c39c9d85dcf36ba,(9Z)-octadecenoate,Pm20d1 [RHEA:51301],4,3,True,substrate_participation,Rhea,RHEA:51301,1,False,[],
+Metab__CHEBI:30823_unknown,1,Enzyme__6a94af069033a311,(9Z)-octadecenoate,Dgat1 [RHEA:38380],4,3,True,substrate_participation,Rhea,RHEA:38380,1,False,[],
+Metab__CHEBI:32395_unknown,1,Enzyme__03a97175be51bf61,"(5Z,8Z,11Z,14Z)-eicosatetraenoate",Pm20d1 [RHEA:64118],4,3,True,substrate_participation,Rhea,RHEA:64118,1,False,[],
+Metab__CHEBI:32395_unknown,1,Enzyme__03f8af34500e1926,"(5Z,8Z,11Z,14Z)-eicosatetraenoate",Ptgs1 [RHEA:23729],4,3,True,substrate_participation,Rhea,RHEA:23729,1,False,[],
+Metab__CHEBI:32395_unknown,1,Enzyme__1928f075c69b371f,"(5Z,8Z,11Z,14Z)-eicosatetraenoate",Pm20d1 [RHEA:64110],4,3,True,substrate_participation,Rhea,RHEA:64110,1,False,[],
+Metab__CHEBI:32395_unknown,1,Enzyme__45f3f98eb1252844,"(5Z,8Z,11Z,14Z)-eicosatetraenoate",Alox5 [RHEA:32308],4,3,True,substrate_participation,Rhea,RHEA:32308,1,False,[],
+Metab__CHEBI:32395_unknown,1,Enzyme__54c39cee039dd3d0,"(5Z,8Z,11Z,14Z)-eicosatetraenoate",Ptgs2 [RHEA:50853],4,3,True,substrate_participation,Rhea,RHEA:50853,1,False,[],
+Metab__CHEBI:32395_unknown,1,Enzyme__9435eeda62977158,"(5Z,8Z,11Z,14Z)-eicosatetraenoate",Pm20d1 [RHEA:51445],4,3,True,substrate_participation,Rhea,RHEA:51445,1,False,[],
+Metab__CHEBI:32395_unknown,1,Enzyme__c42c2a679103f8e3,"(5Z,8Z,11Z,14Z)-eicosatetraenoate",Pm20d1 [RHEA:51313],4,3,True,substrate_participation,Rhea,RHEA:51313,1,False,[],
+Metab__CHEBI:32395_unknown,1,Enzyme__e4a68bf2c7eac113,"(5Z,8Z,11Z,14Z)-eicosatetraenoate",Ptgs2 [RHEA:50857],4,3,True,substrate_participation,Rhea,RHEA:50857,1,False,[],
+Metab__CHEBI:32395_unknown,1,Enzyme__f15a667a47029be4,"(5Z,8Z,11Z,14Z)-eicosatetraenoate",Ptgs2 [RHEA:23729],4,3,True,substrate_participation,Rhea,RHEA:23729,1,False,[],
+Metab__CHEBI:7896_unknown,1,Enzyme__3c67586e0fb55402,hexadecanoate,Aldh3b2 [RHEA:33740],4,3,True,substrate_participation,Rhea,RHEA:33740,1,False,[],
+Metab__CHEBI:7896_unknown,1,Enzyme__b417f27b74132dfd,hexadecanoate,Asah2 [RHEA:38893],4,3,True,substrate_participation,Rhea,RHEA:38893,1,False,[],
+Metab__CHEBI:7896_unknown,1,Enzyme__cc3a1c1240e9d52e,hexadecanoate,Asah1 [RHEA:38893],4,3,True,substrate_participation,Rhea,RHEA:38893,1,False,[],
+Metab__CHEBI:7896_unknown,1,Enzyme__fa24b313960ac9a7,hexadecanoate,Aldh3b1 [RHEA:33740],4,3,True,substrate_participation,Rhea,RHEA:33740,1,False,[],

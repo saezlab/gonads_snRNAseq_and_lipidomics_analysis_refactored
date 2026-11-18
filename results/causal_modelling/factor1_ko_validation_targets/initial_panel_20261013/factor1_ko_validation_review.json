@@ -1,0 +1,277 @@
+{
+  "analysis": "factor1_tf_to_lipid_ko_validation_prioritization",
+  "review_date": "2026-10-13",
+  "experimental_system_assumption": "Primary mouse hepatocytes; upcoming model not yet confirmed",
+  "ranking_policy": "Expert judgement integrating chemical specificity, primary evidence, expression, branch interpretability and information from combinations; not rank by absolute MOON score",
+  "networks": {
+    "layers4": "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers4_lower_thresholds/expanded_network_audit",
+    "layers6": "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers6_lower_thresholds/expanded_network_audit"
+  },
+  "readout_groups": {
+    "PA3": [
+      "PA(16:0_18:2)",
+      "PA(16:1_18:2)",
+      "PA(18:1_18:2)"
+    ],
+    "DG2": [
+      "DG(16:0_22:6)",
+      "DG(18:0_20:4)"
+    ],
+    "DG3": [
+      "DG(16:0_22:6)",
+      "DG(18:0_20:4)",
+      "DG(18:0_22:6)"
+    ],
+    "LPC18": [
+      "LPC(18:0)",
+      "LPC(18:0/0:0)"
+    ]
+  },
+  "excluded_gene_edges": [
+    {
+      "source": "Gene__Ppara",
+      "target": "Gene__Plpp1",
+      "reason": "PMID24955089 studies PPARG; cannot support PPARA-specific edge",
+      "pmid": "24955089"
+    },
+    {
+      "source": "Gene__Cebpa",
+      "target": "Gene__Pld1",
+      "reason": "PMID19950202 supports CEBPB and explicitly not CEBPA",
+      "pmid": "19950202"
+    },
+    {
+      "source": "Gene__Gata6",
+      "target": "Gene__Mapk1",
+      "reason": "PMID18454176 describes ERK\u2192GATA6 phosphorylation, not GATA6\u2192MAPK1 transcription",
+      "pmid": "18454176"
+    }
+  ],
+  "excluded_catalyst_genes": [
+    {
+      "gene": "Enpp2",
+      "reason": "LPC\u2192LPA enzyme; diacyl-PC\u2192PA assignment lacks specific supporting evidence"
+    }
+  ],
+  "contextual_edges": [
+    {
+      "source": "Gene__Rxra",
+      "target": "Gene__Pld1",
+      "reason": "PMID17433303 supports ligand-dependent VDR/RXRA complex in human keratinocytes; hepatocyte transfer conditional",
+      "valid_reference": "17433303",
+      "retracted_reference": "32067228",
+      "retraction_notice": "39888011"
+    },
+    {
+      "source": "Gene__Rora",
+      "target": "Gene__Cebpa",
+      "reason": "PMID19324970 indirect adipocyte pathway via CEBPB, not established direct hepatocyte edge"
+    }
+  ],
+  "sources_file": "support/cosmos_mouse/ko_validation_literature_sources.json",
+  "sets": [
+    {
+      "rank": 1,
+      "set_id": "KO01",
+      "targets": [
+        "Pld1"
+      ],
+      "type": "Single",
+      "module": "PA production anchor",
+      "primary_readout_groups": [
+        "PA3"
+      ],
+      "local_direction": "down",
+      "rationale": "Most interpretable direct PC\u2192PA test; strongest hepatic biochemical evidence.",
+      "main_caveat": "Class-level hepatic evidence; exact-chain prediction conditional",
+      "source_ids": [
+        "pld1_hep_ko_2023"
+      ],
+      "prediction_status": "Conditional local production/control effect, not quantitative flux or a simulated intervention"
+    },
+    {
+      "rank": 2,
+      "set_id": "KO02",
+      "targets": [
+        "Pld1",
+        "Pld2"
+      ],
+      "type": "Pair",
+      "module": "Parallel PLD isoforms",
+      "primary_readout_groups": [
+        "PA3"
+      ],
+      "local_direction": "down",
+      "rationale": "Tests residual PC\u2192PA production through the second PLD isoform.",
+      "main_caveat": "Pld2 is selected only in six-layer sensitivity; compensation is a test, not assumed",
+      "source_ids": [
+        "pld1_pld2_hepatocyte_2015"
+      ],
+      "prediction_status": "Conditional local production/control effect, not quantitative flux or a simulated intervention"
+    },
+    {
+      "rank": 3,
+      "set_id": "KO03",
+      "targets": [
+        "Pla2g4a"
+      ],
+      "type": "Single",
+      "module": "PC acyl hydrolysis",
+      "primary_readout_groups": [
+        "LPC18"
+      ],
+      "local_direction": "down",
+      "rationale": "Tests the new lipid-remodelling layer with a chemically grounded retained18:0 readout.",
+      "main_caveat": "PUFA-retaining LPC hypotheses are exploratory rather than primary endpoints",
+      "source_ids": [
+        "pla2_species_1995"
+      ],
+      "prediction_status": "Conditional local production/control effect, not quantitative flux or a simulated intervention"
+    },
+    {
+      "rank": 4,
+      "set_id": "KO04",
+      "targets": [
+        "Pld1",
+        "Pla2g4a"
+      ],
+      "type": "Pair",
+      "module": "Parallel PC cleavage routes",
+      "primary_readout_groups": [
+        "PA3",
+        "LPC18"
+      ],
+      "local_direction": "down",
+      "rationale": "Tests PA and LPC product branches together, without an upstream TF extrapolation.",
+      "main_caveat": "No claim of additivity or synergy; compare both singles",
+      "source_ids": [
+        "pld1_hep_ko_2023",
+        "pla2_species_1995"
+      ],
+      "prediction_status": "Conditional local production/control effect, not quantitative flux or a simulated intervention"
+    },
+    {
+      "rank": 5,
+      "set_id": "KO05",
+      "targets": [
+        "Plpp1"
+      ],
+      "type": "Single",
+      "module": "PA dephosphorylation",
+      "primary_readout_groups": [
+        "DG2"
+      ],
+      "local_direction": "down",
+      "rationale": "Tests the proximal effector of the proposed PA\u2192DG branch.",
+      "main_caveat": "Extracellular/luminal catalytic topology; access to the measured PA pool is unresolved",
+      "source_ids": [
+        "plpp_topology_2008",
+        "plpp1_hepatocyte_2017"
+      ],
+      "prediction_status": "Conditional local production/control effect, not quantitative flux or a simulated intervention"
+    },
+    {
+      "rank": 6,
+      "set_id": "KO06",
+      "targets": [
+        "Mapk1",
+        "Pla2g4a"
+      ],
+      "type": "Pair",
+      "module": "Kinase\u2013lipase mediation",
+      "primary_readout_groups": [
+        "LPC18"
+      ],
+      "local_direction": "down",
+      "rationale": "Tests whether ERK2-associated signalling reaches the LPC phenotype through cPLA2.",
+      "main_caveat": "MAPK3 compensation, activation context and broad kinase effects; single MAPK1 control required",
+      "source_ids": [
+        "mapk_cpla2_1993"
+      ],
+      "prediction_status": "Conditional local production/control effect, not quantitative flux or a simulated intervention"
+    },
+    {
+      "rank": 7,
+      "set_id": "KO07",
+      "targets": [
+        "Plcb1",
+        "Plcg1"
+      ],
+      "type": "Pair",
+      "module": "Alternative PLC/DG routes",
+      "primary_readout_groups": [
+        "DG3"
+      ],
+      "local_direction": "down",
+      "rationale": "Tests two supported signalling phospholipases that share DAG endpoints.",
+      "main_caveat": "Physiological PIP2 pool is not the measured unphosphorylated PI pool; multiple PLC alternatives remain",
+      "source_ids": [
+        "plcg1_pi_1999",
+        "plcb1_major_substrate_1997"
+      ],
+      "prediction_status": "Conditional local production/control effect, not quantitative flux or a simulated intervention"
+    },
+    {
+      "rank": 8,
+      "set_id": "KO08",
+      "targets": [
+        "Pld1",
+        "Pld2",
+        "Pla2g4a"
+      ],
+      "type": "Triplet",
+      "module": "PLD isoforms plus PLA2",
+      "primary_readout_groups": [
+        "PA3",
+        "LPC18"
+      ],
+      "local_direction": "down",
+      "rationale": "Combines the redundancy experiment with an independent PC-remodelling output.",
+      "main_caveat": "Later-stage integration test; no universal improvement over pairs or additive magnitude",
+      "source_ids": [
+        "pld1_pld2_hepatocyte_2015",
+        "pla2_species_1995"
+      ],
+      "prediction_status": "Conditional local production/control effect, not quantitative flux or a simulated intervention"
+    },
+    {
+      "rank": 9,
+      "set_id": "KO09",
+      "targets": [
+        "Rxra"
+      ],
+      "type": "Single",
+      "module": "Conditional TF\u2013PLD1 route",
+      "primary_readout_groups": [
+        "PA3"
+      ],
+      "local_direction": "down",
+      "rationale": "Tests the remaining identity-supported nuclear-receptor\u2192PLD1 transcription hypothesis.",
+      "main_caveat": "VDR/vitaminD context and hepatocyte transfer unproven; evaluate PLD1 expression before lipid phenotype",
+      "source_ids": [
+        "rxra_vdr_pld1_2007"
+      ],
+      "prediction_status": "Conditional local production/control effect, not quantitative flux or a simulated intervention"
+    },
+    {
+      "rank": 10,
+      "set_id": "KO10",
+      "targets": [
+        "Rxra",
+        "Pld1"
+      ],
+      "type": "Pair",
+      "module": "Conditional TF\u2013enzyme epistasis",
+      "primary_readout_groups": [
+        "PA3"
+      ],
+      "local_direction": "down",
+      "rationale": "Tests whether the RXRA-associated PA effect is mediated by PLD1.",
+      "main_caveat": "Use both singles and require PLD1 downregulation after RXRA loss; no guaranteed epistasis",
+      "source_ids": [
+        "rxra_vdr_pld1_2007"
+      ],
+      "prediction_status": "Conditional local production/control effect, not quantitative flux or a simulated intervention"
+    }
+  ]
+}

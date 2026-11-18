@@ -1,0 +1,6 @@
+"file","role","bytes","sha256","source_rds_path","source_rds_sha256","source_rds_bytes"
+"counts_part001.csv","layer:counts",5564594,"8f49833f801dedb6455897a3eb6f58575ba82db556b47d7c3846e70a7bf5145f","data/RNA/zonation/current/fcg_zonation_pseudobulks_score.rds","f78e9c6c75d60ef5f5393d56573645de00069f1962a578cf30e79489eb97c46c",23710339
+"data_part001.csv","layer:data",29660238,"64c20edbcc89522ea3b3e69c66be735c323308541eef24434c80d34b7f0987ff","data/RNA/zonation/current/fcg_zonation_pseudobulks_score.rds","f78e9c6c75d60ef5f5393d56573645de00069f1962a578cf30e79489eb97c46c",23710339
+"scale.data_part001.csv","layer:scale.data",34100306,"687a5eed591d43e0f2056b76d4f10272762376ae7254a1e930b9cf97d325a8dd","data/RNA/zonation/current/fcg_zonation_pseudobulks_score.rds","f78e9c6c75d60ef5f5393d56573645de00069f1962a578cf30e79489eb97c46c",23710339
+"metadata_part001.csv","metadata",7853,"f69bde82cc76bd65d1c8c7c25751bc02d17020a3eb2874b777fd8739b8756ba8","data/RNA/zonation/current/fcg_zonation_pseudobulks_score.rds","f78e9c6c75d60ef5f5393d56573645de00069f1962a578cf30e79489eb97c46c",23710339
+"identities_part001.csv","identities",4982,"a01e06080849232057f449dc6b4f6f964735637b68c52e8f6eb7dd1370545baf","data/RNA/zonation/current/fcg_zonation_pseudobulks_score.rds","f78e9c6c75d60ef5f5393d56573645de00069f1962a578cf30e79489eb97c46c",23710339

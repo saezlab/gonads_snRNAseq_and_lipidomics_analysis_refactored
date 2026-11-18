@@ -1,0 +1,13 @@
+{
+  "fit_reference": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_filtered_expanded",
+  "no_rescoring": true,
+  "primary": [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.85, 2.15, 2.5, 3, 4, 5, 6, 8, 10],
+  "secondary": [0, 0.05, 0.1, 0.25, 0.4, 0.55, 0.75, 1, 1.075, 1.25, 1.5, 2, 2.5, 3],
+  "selection_policy": "Within-grid representative: 0<edges<500, >=2TFs and >=2observations; descending secondary then primary then observation/TF coverage then fewer edges. Not a calibrated optimum.",
+  "source_fit_mode": "expanded",
+  "command_args": ["--fit=results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_filtered_expanded", "--output=results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_filtered_expanded_lower_thresholds", "--layer-consistent"],
+  "layer_consistent_extraction": true,
+  "extraction_edges": 11288,
+  "scoring_graph_unchanged": true,
+  "started_utc": "2026-10-06 10:40:14 UTC"
+}

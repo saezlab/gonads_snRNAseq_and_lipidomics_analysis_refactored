@@ -1,0 +1,124 @@
+{
+  "deposited_draft": {
+    "edges": 4562,
+    "lipid_nodes": 675,
+    "mapping": {
+      "active_nodes": 611,
+      "additional_canonical_parser_equivalent_features": 0,
+      "additional_conditional_sum_projection_features": 267,
+      "identical_feature_matches_to_graph_products": 122,
+      "identical_historical_factor1_64_matches": 4,
+      "identical_normalized_original_shorthand_features": 125,
+      "match_type_counts": {
+        "conditional_sum_composition_projection": 267,
+        "identical_normalized_original_shorthand": 125
+      },
+      "matched_graph_nodes": 268,
+      "maximum_measurements_per_graph_node": 3,
+      "possible_feature_matches": 392,
+      "possible_feature_matches_to_graph_products": 377,
+      "possible_feature_matches_to_graph_sources": 389,
+      "possible_historical_factor1_64_matches": 16,
+      "product_nodes": 567,
+      "source_nodes": 570
+    },
+    "node_types": {
+      "Lipid": 675
+    },
+    "note": "Lipid-only annotation-derived draft; pooled enzyme/Rhea/Reactome annotations and inferred representative chain strings do not establish mouse species specificity or a signed signaling network.",
+    "pairs_equal_reactions_linex_csv": true,
+    "rhea_bearing_edges": 3620
+  },
+  "mapping": {
+    "affected_resolved_features": 51,
+    "chain_audit_assignments": 288,
+    "conditional_sum_projections": 91,
+    "historical_factor1_64_features": 64,
+    "historical_factor1_64_matches": 8,
+    "identical_reported_shorthand": 46,
+    "matched_table_nodes": 90,
+    "maximum_measurements_per_table_node": 3,
+    "measured_features": 1254,
+    "note": "These are reported-nomenclature overlaps; they are not chemical identity matches, validated reaction endpoints, or a proposed input vector. Every Factor1 lipid has a weight; the 64 flag is the historical correlation subset.",
+    "possible_table_matches": 137,
+    "retained_lyso_chain_absent": 172
+  },
+  "our_pkn": {
+    "accepted_product_endpoints": 128,
+    "accepted_product_endpoints_outside_table_matches": 96,
+    "build_counts": {
+      "core": {
+        "conflicting_pairs_excluded": 6119,
+        "edges": 231386,
+        "node_types": {
+          "enzyme_reaction_instance": 29820,
+          "gene_product": 9590,
+          "metabolite": 6691,
+          "protein_unmapped": 13
+        },
+        "nodes": 46114
+      },
+      "exploratory": {
+        "conflicting_pairs_excluded": 7115,
+        "edges": 303925,
+        "node_types": {
+          "enzyme_reaction_instance": 36860,
+          "gene_product": 10277,
+          "metabolite": 22887,
+          "protein_unmapped": 25
+        },
+        "nodes": 70049
+      },
+      "lipid_curated": {
+        "conflicting_pairs_excluded": 6121,
+        "edges": 251998,
+        "node_types": {
+          "enzyme_reaction_instance": 33504,
+          "gene_product": 9673,
+          "metabolite": 8967,
+          "protein_unmapped": 13
+        },
+        "nodes": 52157
+      },
+      "lipid_rules": {
+        "conflicting_pairs_excluded": 6121,
+        "edges": 254589,
+        "node_types": {
+          "enzyme_reaction_instance": 33953,
+          "gene_product": 9673,
+          "metabolite": 9116,
+          "protein_unmapped": 13
+        },
+        "nodes": 52755
+      }
+    },
+    "class_transformations": 8,
+    "instantiated_lipid_classes": 6,
+    "measured_rule_features": 149,
+    "measured_rule_instances": 149,
+    "overlap_note": "A table sum-node match and an accepted chain-resolved product endpoint have different evidence/resolution; this is descriptive set overlap only.",
+    "rhea_counts": {
+      "catalysts": 896,
+      "reaction_masters": 2826,
+      "reaction_variants": 5360
+    },
+    "table_enzyme_exact_symbols_present": 29,
+    "table_enzyme_symbols_with_active_rhea_instances": 27,
+    "table_enzyme_symbols_with_measured_rule_instances": 4,
+    "table_match_candidates_outside_accepted_product_endpoints": 105,
+    "table_matches_already_accepted_product_endpoints": 32,
+    "table_pairs_overlapping_summed_projection_of_our_rules": 4,
+    "union_table_matches_and_accepted_products": 233
+  },
+  "scope": "Deposited Table10 lipid component and older annotation-derived lipid graph; full signed CORNETO PKN was not located in the cited deposits.",
+  "table10": {
+    "class_transformations": 23,
+    "distinct_directed_pairs": 350,
+    "enzyme_symbols": 30,
+    "lipid_classes": 15,
+    "lipid_nodes": 113,
+    "reaction_rows": 350,
+    "row_enzyme_triplets": 522,
+    "sha256": "40da8d72675d3b25a9e491c381b405def77d09d016184fc6b01517f641fb9033"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "date_UTC": "2026-10-07 09:25:42",
+  "args": [],
+  "settings": {
+    "seed": 20261007,
+    "B": 4999,
+    "paired_B": 999,
+    "workers_requested": 1,
+    "workers_used": 1,
+    "exact_permutations": 5040,
+    "statistic": "Pearson association between frozen edge-coefficient vectors",
+    "null": "RNA-vector/lipid-vector independence within sex and standard diet",
+    "nominal_ULM": "intercept OLS slope t-statistic; dependent edge residuals, descriptive only",
+    "bootstrap": "independent empirical-marginal whole-mouse null bootstrap",
+    "paired_bootstrap": "paired whole mice within cohort; reference groups retained; stability only",
+    "diet_inference": "descriptive changes with 49 shared-zone joint mouse omissions; no diet p-value"
+  },
+  "focus_genes": [
+    "Mtmr11",
+    "Sult3a1",
+    "Abcb1a",
+    "Cyp2a4",
+    "Mindy3",
+    "Esco2",
+    "Kitl"
+  ],
+  "primary_interpretation": "frozen displayed edges; full universe complementary; four context comparisons",
+  "fill_sensitivity": "QC sensitivity added after input inspection and before association analysis",
+  "biological_units": "28 mice; 7 per sex/diet; shared bulk lipid profile across paired RNA zones",
+  "interpretation": "Native ULM p descriptive; exact pairing and marginal bootstrap impose no RNA-lipid association; diet changes descriptive",
+  "presentation_finalized_UTC": "2026-10-07T09:38:18.983624+00:00",
+  "presentation_refresh": "Final plot/report generation reused all saved statistical results; PCA padding and QC annotations corrected; no numerical analysis changed."
+}

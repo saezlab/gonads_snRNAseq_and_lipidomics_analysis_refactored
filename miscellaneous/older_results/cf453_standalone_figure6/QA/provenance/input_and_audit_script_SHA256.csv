@@ -1,0 +1,5 @@
+"path","bytes","sha256"
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/data/metabolomics/wdsd/lipidomics_cf453.csv",1274422,"2c0fd9bd10ecd20958a6a584992347b940b18d288cee9f5a2d5d8aa12d55c86d"
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/data/RNA/wdsd/wdsd_hep_pseudobulks.rds",8735698,"84c78bbebbf7c8bee15f39d65c54415fbd7779af4db88fbc487f7f5a5879165d"
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/data/RNA/wdsd/wdsd_zonation_pseudobulks.rds",16109671,"17f6c006202ea2ee19f2200a72447a3252c5f7db22c5f963a214d1fd74a73b16"
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/tests/qa_cf453_provenance.R",12859,"69d52581e3acfb9bbd7f2df9e866628f5b216b681bc2289e386953f8693c6248"

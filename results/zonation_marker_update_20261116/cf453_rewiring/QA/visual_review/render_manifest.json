@@ -1,0 +1,60 @@
+{
+  "panel_groups": 3,
+  "graphic_files": 9,
+  "versions": {
+    "pypdfium2": "5.13.0",
+    "pdfplumber": "0.11.9",
+    "pypdf": "6.21.4",
+    "Pillow": "13.0.0"
+  },
+  "records": [
+    {
+      "panel": "Fig6A_anchor_gene_shifts",
+      "pdf_pages": 1,
+      "text_characters": 818,
+      "pdf_bytes": 23685,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        3420,
+        2220
+      ],
+      "expected_png_pixels_300dpi": [
+        3420,
+        2220
+      ],
+      "out_of_page_text_characters": 0
+    },
+    {
+      "panel": "Fig6B_lipid_class_shift",
+      "pdf_pages": 1,
+      "text_characters": 1334,
+      "pdf_bytes": 10125,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2340,
+        2940
+      ],
+      "expected_png_pixels_300dpi": [
+        2340,
+        2940
+      ],
+      "out_of_page_text_characters": 0
+    },
+    {
+      "panel": "Fig6C_network_gain_loss",
+      "pdf_pages": 1,
+      "text_characters": 1105,
+      "pdf_bytes": 13023,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        3000,
+        2610
+      ],
+      "expected_png_pixels_300dpi": [
+        3000,
+        2610
+      ],
+      "out_of_page_text_characters": 0
+    }
+  ]
+}

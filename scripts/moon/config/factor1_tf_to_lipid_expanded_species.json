@@ -1,0 +1,46 @@
+{
+  "analysis": "factor1_tf_to_lipid_expanded_species",
+  "baseline_config": "scripts/moon/config/factor1_tf_to_lipid.json",
+  "pkn": "results/causal_modelling/cosmos_mouse_pkn_expanded_species/pkn_expanded_chain.rds",
+  "pkn_directory": "results/causal_modelling/cosmos_mouse_pkn_expanded_species",
+  "input_mapping": "results/causal_modelling/factor1_tf_to_lipid_expanded_species/inputs/input_mapping.csv",
+  "output": "results/causal_modelling/factor1_tf_to_lipid_expanded_species",
+  "expected_mapped_observations": 423,
+  "pruning_steps": 6,
+  "n_layers": 4,
+  "max_iterations": 10,
+  "primary": 1.85,
+  "secondary": 0.55,
+  "primary_grid": [
+    1.85,
+    2.15,
+    2.5,
+    3,
+    4,
+    5,
+    6,
+    8,
+    10
+  ],
+  "secondary_grid": [
+    0.55,
+    0.75,
+    1,
+    1.075,
+    1.25,
+    1.5,
+    2,
+    2.5,
+    3
+  ],
+  "focus_tfs": [
+    "Gene__Esr1",
+    "Gene__Nfic",
+    "Gene__Dbp"
+  ],
+  "input_md5": {
+    "results/causal_modelling/cosmos_mouse_pkn_expanded_species/pkn_expanded_chain.rds": "23511a8a8bf1416096f3898085a96b7a"
+  },
+  "input_policy": "Preserve frozen155 mappings; add268 one-to-one chain-compatible measured product features. Glucose/galactose conditional nodes excluded.",
+  "selection_policy": "Representative within recorded grid, not a calibrated optimum or replacement manuscript result."
+}

@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "panel_id": "alternating_compensation_panel_20261013",
+  "sets": 10,
+  "endpoint_rows": 27,
+  "audited_path_rows": 52,
+  "path_kind_counts": {
+    "frozen_screened_path": 44,
+    "source_corrected_extension": 8
+  },
+  "target_set_type_counts": {
+    "Single": 6,
+    "Pair": 4
+  },
+  "category_counts": {
+    "Enzyme-only": 5,
+    "TF-containing": 5
+  },
+  "strict_alternation_passed": true,
+  "all_pairs_share_endpoints": true,
+  "serial_co_target_paths_rejected": true,
+  "ranked_targets": [
+    "Cebpb",
+    "Pla2g4a",
+    "Plcb1",
+    "Plcg1",
+    "Pld1",
+    "Pld2",
+    "Plpp1",
+    "Pparg",
+    "Rxra"
+  ],
+  "additional_constituent_singles": [
+    "Plcb1",
+    "Plcg1",
+    "Pld2"
+  ],
+  "distinct_target_conditions_with_single_controls": 13,
+  "corrected_hypotheses": 2,
+  "corrected_source_levels_and_full_path_scores_null": true,
+  "sign_rule": "Functional loss(-1) times directed path signs; not baseline MOON score sign or Factor1 alignment",
+  "biological_screen": "Unsupported identities and ENPP2 omitted from frozen path copy; separately declared source-corrected prefixes are unscored hypotheses",
+  "scoring_performed": false,
+  "original_graphs_modified": false,
+  "frozen_graph_hashes_verified": true,
+  "ranking_policy": "Alternate enzyme-only and TF-containing experimental priorities; within-category expert judgement integrates chemistry, primary sources, expression, interpretability and compensation tests. Not a global confidence ranking or ranking by MOON score.",
+  "experimental_system_assumption": "Primary mouse hepatocytes; upcoming model not yet confirmed",
+  "finite_lipid_pool_or_flux_simulation": false,
+  "quantitative_additivity_or_compensation_predicted": false
+}

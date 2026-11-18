@@ -1,0 +1,42 @@
+{
+  "extraction": {
+    "primary": 0.5,
+    "secondary": 0.5,
+    "score_layer_constrained": true,
+    "candidate_edges": 9792,
+    "score_layer_edges": 2987,
+    "consistent_edges": 2748,
+    "final_edges": 5,
+    "final_nodes": 6,
+    "retained_upstream": 1,
+    "retained_observed": 2,
+    "all_edges_descend_one_score_level": true,
+    "all_nodes_on_seed_to_observation_walk": true
+  },
+  "candidate_metadata": {
+    "source_nodes": "Metab__CHEBI:85403_unknown",
+    "measurement_features": "LPS(18:0)",
+    "edge_fingerprint_groups": "edge_1183a9daffa46143",
+    "raw_upstream_candidate_nodes": 1,
+    "independent_edge_fingerprint_groups": 1,
+    "observed_tfs": ["Gene__Ar", "Gene__Esr1"],
+    "retained_observed_tfs": 2
+  },
+  "eligibility": {
+    "eligible": true,
+    "edges": 5,
+    "nodes": 6,
+    "source_nodes": "Metab__CHEBI:85403_unknown",
+    "measurement_features": "LPS(18:0)",
+    "edge_fingerprint_groups": "edge_1183a9daffa46143",
+    "raw_upstream_candidate_nodes": 1,
+    "independent_edge_fingerprint_groups": 1,
+    "observed_tfs": ["Gene__Ar", "Gene__Esr1"],
+    "retained_observed_tfs": 2
+  },
+  "topology_radius": 4,
+  "n_layers": 4,
+  "compression": "safe_same_children",
+  "extraction_policy": "strict_consecutive_score_layers",
+  "selection": "fixed exploratory LPS sensitivity"
+}

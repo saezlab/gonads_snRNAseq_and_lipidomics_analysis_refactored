@@ -1,0 +1,11 @@
+location,relationship,figure,source_part,path,width,height,sha256
+body.p0247,rId95,Figure1,word/media/image6.png,,,,
+body.p0256,rId96,Figure2,word/media/image7.png,,,,
+body.p0266,rId97,Figure3,word/media/image3.png,,,,
+body.p0277,rId98,Figure4,word/media/image9.png,results/zonation_marker_update_20261116/report/qa/manuscript_source_media/Figure4_image9.png,1580,2048,f2c969496fb6fe4f8502ff32b9a8f3c9629df39061869bec6c83577ace4f216c
+body.p0288,rId99,Figure5,word/media/image1.png,results/zonation_marker_update_20261116/report/qa/manuscript_source_media/Figure5_image1.png,2048,1442,e24776b85d6e7b2169855e878cce5b54e021f0dfcf69a227131b0e820c2bfa4a
+body.p0300,rId100,FigureS1,word/media/image2.png,,,,
+body.p0308,rId101,FigureS2,word/media/image8.png,,,,
+body.p0326,rId102,FigureS3,word/media/image4.png,,,,
+body.p0333,rId103,FigureS4,word/media/image10.png,results/zonation_marker_update_20261116/report/qa/manuscript_source_media/FigureS4_image10.png,2048,1942,0bbf01c264ace12ab7911a2157332166bd43f46506ab916dba91b53c5046fd6a
+body.p0341,rId105,FigureS5,word/media/image5.png,results/zonation_marker_update_20261116/report/qa/manuscript_source_media/FigureS5_image5.png,2048,1241,5ab5ede53ce130c3091dbbb208f4b9f5cec7afa16c28d0aefdf44f6c801b475b

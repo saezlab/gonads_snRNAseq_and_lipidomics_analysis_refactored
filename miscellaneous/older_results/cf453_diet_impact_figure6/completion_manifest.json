@@ -1,0 +1,27 @@
+{
+  "status": "complete",
+  "date": "2026-11-02",
+  "cohort": "CF453 only",
+  "mice": 28,
+  "mice_per_sex_diet": 7,
+  "modeled_genes": 18486,
+  "primary_lipids": 1129,
+  "panel_groups": 4,
+  "graphic_files": 12,
+  "source_tables": 4,
+  "primary_RNA_interaction_counts": {
+    "diet_sex": 166,
+    "diet_zone": 350,
+    "diet_sex_zone": 137
+  },
+  "joint_three_df_genes": 605,
+  "lipid_sex_diet_interactions": 267,
+  "primary_FDR_family": "all genes x 3 direct diet interactions",
+  "conditional_FDR_family": "all genes x 4 conditional interactions",
+  "independent_check_groups": 170,
+  "max_abs_replay_difference": 1.23900889548167e-13,
+  "fresh_CLI_replay_checks": 17,
+  "visual_QA": "All four PDFs rendered and inspected; vector SVG and 300dpi PNG verified",
+  "previous_panels": "preserved",
+  "assembly": "individual panels only"
+}

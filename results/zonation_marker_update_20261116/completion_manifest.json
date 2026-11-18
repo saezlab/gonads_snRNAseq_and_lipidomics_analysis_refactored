@@ -1,0 +1,55 @@
+{
+  "completed_at_utc": "2026-11-16T11:07:41.991476+00:00",
+  "status": "Completed pseudobulk-dependent scope; nucleus-level panels explicitly deferred",
+  "output_root": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/zonation_marker_update_20261116",
+  "branches": {
+    "FCG": "WF05 and zonation-dependent WF07 rerun",
+    "GDX": "Paired supporting analysis of supplied sham/GDX groups",
+    "diet_study": "WF14/15 model caches, WF16 Figure6 and both Figure6A alternatives"
+  },
+  "report_claims": 89,
+  "replacement_rows_including_pictured_edges": 113,
+  "panel_trace_rows": 23,
+  "independent_saved_fit_check_groups": 86,
+  "manuscript_ledger_integrity_groups": 16,
+  "historical_files_unchanged": 104,
+  "deferred_to_James": [
+    "Figure4A",
+    "FigureS4B",
+    "FigureS4C",
+    "Linked nucleus counts, proportions and composition tests",
+    "Confirm exact executed retained markers and settings for final Methods"
+  ],
+  "scientific_limits": [
+    "CF453 correlation and class associations remain exploratory; none of the tested correlation coefficients passes the declared BH family and all 120 class bootstrap intervals include zero.",
+    "Original threshold sensitivity and reoptimized selection are exported separately.",
+    "WF12 zonal references and WF13 cross-cohort analyses remain historical; do not mix compartment definitions."
+  ],
+  "manuscript_edited": false,
+  "artifacts": {
+    "report/zonation_update_report.pdf": {
+      "sha256": "df13328780afe29b129166c817ea82561c84cfa5ed9f5efad2066c5b0df8bb74",
+      "bytes": 44312
+    },
+    "report/zonation_update_report.html": {
+      "sha256": "5886eca065b5a0094e5a1cff8eba2c9c1a9ecf28afb6379e5c40ed97f5a40acd",
+      "bytes": 149619
+    },
+    "report/panel_trace.csv": {
+      "sha256": "5aee421f9458d596857dc168a1e9c4e9f3a1340f754dad8fa50114f0991b9381",
+      "bytes": 18059
+    },
+    "report/new_replacements.csv": {
+      "sha256": "a540c9a32f455c3cb90d66110f3270ecca718ac1127f2da8662999704890dba2",
+      "bytes": 41039
+    },
+    "inputs/import_manifest.csv": {
+      "sha256": "97345fdcd980d99a0efd49079d1861e0cc6bf2fac078d4e865fcab8700d4347a",
+      "bytes": 1338
+    },
+    "report/qa/layout_final/audit_summary.json": {
+      "sha256": "3c3136f77af26af99b5a847041bbe896eb3563ae944286fa90777755256f41e1",
+      "bytes": 831
+    }
+  }
+}

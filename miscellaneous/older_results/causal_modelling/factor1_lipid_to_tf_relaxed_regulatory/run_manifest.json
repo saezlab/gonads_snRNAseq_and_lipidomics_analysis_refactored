@@ -1,0 +1,34 @@
+{
+  "created_utc": "2026-09-16 10:17:37 UTC",
+  "config": {
+    "analysis": "factor1_lipid_to_tf_relaxed_regulatory",
+    "dependency_contract": "scripts/moon/config/factor1_tf_to_lipid.json",
+    "inputs": "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+    "pkn": "results/causal_modelling/cosmos_mouse_pkn_stitch_directional/pkn_exploratory_stitch_directional.rds",
+    "mapping": "results/causal_modelling/factor1_relaxed_lipid_regulatory_mapping/default_relaxed_measurement_assignments.csv",
+    "output": "results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory",
+    "pruning_steps": [4, 6, 8],
+    "n_layers": [2, 4, 6],
+    "primary_thresholds": [0.5, 1, 1.5, 2, 2.5, 3],
+    "secondary_thresholds": [0, 0.5, 1, 1.5, 2],
+    "max_iterations": 10,
+    "strong_tf_cutoff": 2,
+    "maximum_solution_edges_exclusive": 500,
+    "minimum_upstream_candidates": 1,
+    "minimum_downstream_tfs": 2,
+    "upstream_semantics": "Each relaxed chemical candidate is a topology seed. Its mapped Factor 1 lipid loading is retained as assignment-level sign-consistency evidence, not as a propagated activity or dose.",
+    "downstream_semantics": "All finite nonzero Factor 1 hepatocyte TF footprint activities; the abs(activity)>2 panel is a labelled observation-set sensitivity.",
+    "pkn_semantics": "Only direct chemical-to-protein and protein-to-protein edges from the directional-STITCH exploratory PKN are used. Reaction edges are excluded.",
+    "limitations": ["A relaxed chemical candidate can resolve unmeasured double-bond position, geometry, stereochemistry, sn position, or acid/base state.", "One measured lipid can map to multiple chemicals, and related chemical candidates can share direct regulatory edge fingerprints.", "MOON scores are generated from TF activities and PKN topology; copied Factor 1 lipid loadings are post-score annotations rather than independent score evidence.", "Measured bulk-liver lipid abundance does not establish hepatocyte ligand exposure, receptor engagement, or temporal ordering.", "The directional STITCH v5 source files are historical, and all candidate routes remain exploratory mechanistic hypotheses."]
+  },
+  "command_args": [],
+  "R_version": "R version 4.6.1 (2026-06-24)",
+  "packages": {
+    "cosmosR": "1.21.2",
+    "decoupleR": "2.17.0",
+    "igraph": "2.3.3",
+    "jsonlite": "2.0.0"
+  },
+  "cosmos_commit": "b2ed195738479c4ad204cace37fd11ae2fd02bb8",
+  "completed": true
+}

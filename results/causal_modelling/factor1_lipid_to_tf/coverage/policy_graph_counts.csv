@@ -1,0 +1,6 @@
+policy,edges,nodes,accepted_inputs_present,protein_to_protein,chemical_to_protein,lipid_to_reaction,reaction_to_lipid,protein_to_reaction
+direct_regulatory,52798,8502,0,52721,77,0,0,0
+unrestricted_diagnostic,254589,52755,155,52721,77,13531,12572,33953
+currency_removed_diagnostic,235149,52723,155,52721,77,13531,12572,33953
+lipid_precursor,78862,26241,155,52721,38,13531,12572,0
+ph73_lipid_precursor_sensitivity,78293,25783,6,52721,38,13341,12193,0

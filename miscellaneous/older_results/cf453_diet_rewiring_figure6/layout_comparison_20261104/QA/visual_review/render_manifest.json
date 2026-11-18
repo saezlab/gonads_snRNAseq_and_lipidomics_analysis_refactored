@@ -1,0 +1,29 @@
+{
+  "panel_groups": 2,
+  "records": [
+    {
+      "panel": "Fig6A_option1_heatmap",
+      "pdf_pages": 1,
+      "text_characters": 921,
+      "out_of_page_text": 0,
+      "vector_svg": true,
+      "png_pixels": [
+        2040,
+        2850
+      ],
+      "dpi": 300
+    },
+    {
+      "panel": "Fig6A_option2_paired_dots",
+      "pdf_pages": 1,
+      "text_characters": 970,
+      "out_of_page_text": 0,
+      "vector_svg": true,
+      "png_pixels": [
+        2700,
+        2400
+      ],
+      "dpi": 300
+    }
+  ]
+}

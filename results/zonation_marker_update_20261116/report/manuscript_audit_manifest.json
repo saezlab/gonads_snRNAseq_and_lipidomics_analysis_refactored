@@ -1,0 +1,11 @@
+{
+  "manuscript": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/manuscript/Cleland and Dugourd et al.docx",
+  "sha256_before": "ead9393bd639361f5a999b29c715c0a4a3deb182c7080cc6b83aafc01ff1c244",
+  "sha256_after": "ead9393bd639361f5a999b29c715c0a4a3deb182c7080cc6b83aafc01ff1c244",
+  "inventory_rows": 89,
+  "body_paragraphs": 401,
+  "OOXML_table_paragraphs": 0,
+  "locator_definition": "One-based direct w:body paragraph index, including blanks; not a rendered page number",
+  "document_unchanged": true,
+  "rendering": "No PDF rendered; source XML and embedded PNGs inspected only"
+}

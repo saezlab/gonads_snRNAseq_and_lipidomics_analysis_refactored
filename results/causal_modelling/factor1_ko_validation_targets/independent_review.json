@@ -1,0 +1,175 @@
+{
+  "passed": true,
+  "issues": [],
+  "checks_total": 25,
+  "checks_passed": 25,
+  "checks": [
+    {
+      "check": "10 unique ranked sets",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Strict five/five alternation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Six singles/four pairs/nine genes/13 conditions",
+      "passed": true,
+      "detail": {
+        "genes": [
+          "Cebpb",
+          "Pla2g4a",
+          "Plcb1",
+          "Plcg1",
+          "Pld1",
+          "Pld2",
+          "Plpp1",
+          "Pparg",
+          "Rxra"
+        ],
+        "additional_singles": [
+          "Plcb1",
+          "Plcg1",
+          "Pld2"
+        ]
+      }
+    },
+    {
+      "check": "Rank targets match configuration",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "27 endpoint rows/52 paths with44 frozen and8 corrected",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Two distinct corrected gene identities",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Corrected CSV source scores/levels blank, no inheritance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All52 paths: dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All52 paths: loss_signs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All52 paths: no_serial",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All52 paths: prefixes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All52 paths: frozen_edges",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All52 paths: frozen_scores",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Every pair readout supported separately by both targets",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All JSON corrected-prefix source/full-path scores null",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All14 source-manifest hashes match",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All8 frozen graph hashes remain unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All9 genes detected in each of4 historical controls;43 FCG hepatocyte samples",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "TF qualifier activities match actual frozen table",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All5 TF-containing sets flagged sign disagreement",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Corrected activating branches actually opposeFactor1 lipid signs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Rxra intermediary opposes weak footprint and excluded from seeds",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Report ranking is balanced allocation, not confidence",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Report species/compartment/TFtransfer/pool caveats present",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Report states nine genes/six singles/four pairs/13 conditions",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "summary": {
+    "sets": 10,
+    "enzyme_only_sets": 5,
+    "TF_containing_sets": 5,
+    "singles": 6,
+    "pairs": 4,
+    "unique_targets": 9,
+    "target_containing_conditions_with_constituent_singles": 13,
+    "endpoint_rows": 27,
+    "path_rows": 52,
+    "frozen_paths": 44,
+    "source_corrected_unscored_paths": 8
+  },
+  "report": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/docs/cosmos_factor1_ko_validation_targets.md",
+  "report_sha256": "db4b741f267bca8389355a2c72faf8f10f7242be02d1ec610257be7454d184f8",
+  "scope": "Independent read-only checks of final report/config/exports against frozen graphs, actual expression audit and original TF activity table. Primary-source claims checked against previously verified literature catalog; no new systematic source review, rescoring, or repository mutation.",
+  "material_qualifications": [
+    "Ranks alternate experimental priorities, not global success/confidence estimates.",
+    "Cebpb/Pparg prefixes are unscored extensions; source levels and full-path minima are null, and frozen downstream minima are not TF confidence.",
+    "All five TF-containing sets oppose supplied Factor1 footprint-to-lipid signs; report correctly identifies them as contextual biochemical follow-up rather than sign-coherent fitted Factor1 explanations.",
+    "Corrected TF regulatory transfer, RXRA/VDR ligand context and PLD2 residual capacity require measured gates before interpreting paired lipids.",
+    "Pairs share nominated outputs and no supporting path serially cotargets its partner, but actual compensation is unestablished.",
+    "PLPP1 substrate accessibility, PLC phosphoinositide pools and LPC annotation overlap remain explicit limitations.",
+    "Count detection supports historical-system feasibility only; future experimental model, activity and donor independence remain unconfirmed."
+  ]
+}

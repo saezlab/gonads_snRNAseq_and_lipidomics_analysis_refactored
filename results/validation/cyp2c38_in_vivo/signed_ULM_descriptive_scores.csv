@@ -1,0 +1,6 @@
+"statistic","source","condition","score","p_value","reference_set","inference_note"
+"ulm","Cyp2c38","pooled_KO_vs_WT",-1.47329071718018,0.141244721603124,"pooled","Edge-independence p-value is descriptive; negative signed score supports concordance"
+"ulm","Cyp2c38","female_KO_vs_WT",-1.49676695819776,0.135027523869942,"female","Edge-independence p-value is descriptive; negative signed score supports concordance"
+"ulm","Cyp2c38","male_KO_vs_WT",-3.96094070632847,8.44741389088273e-05,"male","Edge-independence p-value is descriptive; negative signed score supports concordance"
+"ulm","Cyp2c38","female_KO_vs_WT",6.74882679987189,3.79014006991669e-11,"pooled","Edge-independence p-value is descriptive; negative signed score supports concordance"
+"ulm","Cyp2c38","male_KO_vs_WT",-5.86591272672604,7.71639606622352e-09,"pooled","Edge-independence p-value is descriptive; negative signed score supports concordance"

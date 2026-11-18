@@ -1,0 +1,22 @@
+{
+  "nodes": 233,
+  "edges": 455,
+  "upstream_lipids": 1,
+  "downstream_tfs": 64,
+  "reachable_input_pairs": 64,
+  "path_class_counts": {
+    "indirect_metabolic_availability_hypothesis": 64
+  },
+  "regulatory_transitions": 2,
+  "direct_measured_lipid_regulatory_edges_in_solution": 0,
+  "accepted_mapping_nodes": 155,
+  "direct_exact_mapped_lipid_regulatory_edges_in_full_pkn": 0,
+  "species_rule_edges": 0,
+  "representative_path_policy": "One shortest path per reachable input pair; greatest minimum absolute inferred MOON score; deterministic signed-edge tie breaking in the shortest-path DAG. Level-zero observed TF activities excluded from score bottleneck. Not all alternative routes are enumerated.",
+  "interpretation": "No exact-mapped measured lipid has an eligible direct regulatory edge in the full PKN. Any selected routes with a later chemical-to-protein transition nominate indirect metabolic availability hypotheses, not direct signaling lipids or confirmed biochemical precursors.",
+  "prior_csv": "results/causal_modelling/cosmos_mouse_pkn/pkn_lipid_curated_ph73.csv",
+  "node_catalog": "results/causal_modelling/cosmos_mouse_pkn/nodes_ph73.jsonl",
+  "node_aliases": "results/causal_modelling/cosmos_mouse_pkn/chemical_node_aliases.csv",
+  "explicit_node_alias_count": 3656,
+  "evidence_projection": "Only explicitly supplied one-step node aliases; original endpoints and mapping bases retained; no identities inferred and no solution scores changed."
+}

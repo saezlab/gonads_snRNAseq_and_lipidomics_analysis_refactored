@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+         http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+<!-- Created by igraph -->
+  <key id="v_name" for="node" attr.name="name" attr.type="string"/>
+  <key id="v_score" for="node" attr.name="score" attr.type="double"/>
+  <key id="v_level" for="node" attr.name="level" attr.type="double"/>
+  <key id="v_type" for="node" attr.name="type" attr.type="string"/>
+  <key id="v_RNA_input" for="node" attr.name="RNA_input" attr.type="double"/>
+  <key id="v_candidate_assignment_ids" for="node" attr.name="candidate_assignment_ids" attr.type="string"/>
+  <key id="v_candidate_measurement_features" for="node" attr.name="candidate_measurement_features" attr.type="string"/>
+  <key id="v_candidate_measurement_values" for="node" attr.name="candidate_measurement_values" attr.type="string"/>
+  <key id="v_candidate_factor1_abs_ranks" for="node" attr.name="candidate_factor1_abs_ranks" attr.type="string"/>
+  <key id="v_candidate_pkn_source_chebi" for="node" attr.name="candidate_pkn_source_chebi" attr.type="string"/>
+  <key id="v_candidate_pkn_source_names" for="node" attr.name="candidate_pkn_source_names" attr.type="string"/>
+  <key id="v_candidate_mapping_policies" for="node" attr.name="candidate_mapping_policies" attr.type="string"/>
+  <key id="v_candidate_edge_fingerprint_groups" for="node" attr.name="candidate_edge_fingerprint_groups" attr.type="string"/>
+  <key id="v_candidate_assignment_signs_agree" for="node" attr.name="candidate_assignment_signs_agree" attr.type="string"/>
+  <key id="v_candidate_assignment_statuses" for="node" attr.name="candidate_assignment_statuses" attr.type="string"/>
+  <key id="e_interaction" for="edge" attr.name="interaction" attr.type="double"/>
+  <key id="e_consistency" for="edge" attr.name="consistency" attr.type="boolean"/>
+  <graph id="G" edgedefault="directed">
+    <node id="n0">
+      <data key="v_name">Gene__Ar</data>
+      <data key="v_score">-3.92923529302436</data>
+      <data key="v_level">0</data>
+      <data key="v_type">level0</data>
+      <data key="v_RNA_input">-0.285926317400749</data>
+      <data key="v_candidate_assignment_ids">NA</data>
+      <data key="v_candidate_measurement_features">NA</data>
+      <data key="v_candidate_measurement_values">NA</data>
+      <data key="v_candidate_factor1_abs_ranks">NA</data>
+      <data key="v_candidate_pkn_source_chebi">NA</data>
+      <data key="v_candidate_pkn_source_names">NA</data>
+      <data key="v_candidate_mapping_policies">NA</data>
+      <data key="v_candidate_edge_fingerprint_groups">NA</data>
+      <data key="v_candidate_assignment_signs_agree">NA</data>
+      <data key="v_candidate_assignment_statuses">NA</data>
+    </node>
+    <node id="n1">
+      <data key="v_name">Gene__Esr1</data>
+      <data key="v_score">-7.08874857626001</data>
+      <data key="v_level">0</data>
+      <data key="v_type">level0</data>
+      <data key="v_RNA_input">-1.14800698838773</data>
+      <data key="v_candidate_assignment_ids">NA</data>
+      <data key="v_candidate_measurement_features">NA</data>
+      <data key="v_candidate_measurement_values">NA</data>
+      <data key="v_candidate_factor1_abs_ranks">NA</data>
+      <data key="v_candidate_pkn_source_chebi">NA</data>
+      <data key="v_candidate_pkn_source_names">NA</data>
+      <data key="v_candidate_mapping_policies">NA</data>
+      <data key="v_candidate_edge_fingerprint_groups">NA</data>
+      <data key="v_candidate_assignment_signs_agree">NA</data>
+      <data key="v_candidate_assignment_statuses">NA</data>
+    </node>
+    <node id="n2">
+      <data key="v_name">Gene__Gnai1</data>
+      <data key="v_score">-0.645868729603776</data>
+      <data key="v_level">2</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">0.0147364848886301</data>
+      <data key="v_candidate_assignment_ids">NA</data>
+      <data key="v_candidate_measurement_features">NA</data>
+      <data key="v_candidate_measurement_values">NA</data>
+      <data key="v_candidate_factor1_abs_ranks">NA</data>
+      <data key="v_candidate_pkn_source_chebi">NA</data>
+      <data key="v_candidate_pkn_source_names">NA</data>
+      <data key="v_candidate_mapping_policies">NA</data>
+      <data key="v_candidate_edge_fingerprint_groups">NA</data>
+      <data key="v_candidate_assignment_signs_agree">NA</data>
+      <data key="v_candidate_assignment_statuses">NA</data>
+    </node>
+    <node id="n3">
+      <data key="v_name">Gene__Gpr34</data>
+      <data key="v_score">-0.682625258803454</data>
+      <data key="v_level">3</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">2.16627075097478e-06</data>
+      <data key="v_candidate_assignment_ids">NA</data>
+      <data key="v_candidate_measurement_features">NA</data>
+      <data key="v_candidate_measurement_values">NA</data>
+      <data key="v_candidate_factor1_abs_ranks">NA</data>
+      <data key="v_candidate_pkn_source_chebi">NA</data>
+      <data key="v_candidate_pkn_source_names">NA</data>
+      <data key="v_candidate_mapping_policies">NA</data>
+      <data key="v_candidate_edge_fingerprint_groups">NA</data>
+      <data key="v_candidate_assignment_signs_agree">NA</data>
+      <data key="v_candidate_assignment_statuses">NA</data>
+    </node>
+    <node id="n4">
+      <data key="v_name">Gene__Src</data>
+      <data key="v_score">-1.06682230079567</data>
+      <data key="v_level">1</data>
+      <data key="v_type">other</data>
+      <data key="v_RNA_input">-1.2098458405224e-06</data>
+      <data key="v_candidate_assignment_ids">NA</data>
+      <data key="v_candidate_measurement_features">NA</data>
+      <data key="v_candidate_measurement_values">NA</data>
+      <data key="v_candidate_factor1_abs_ranks">NA</data>
+      <data key="v_candidate_pkn_source_chebi">NA</data>
+      <data key="v_candidate_pkn_source_names">NA</data>
+      <data key="v_candidate_mapping_policies">NA</data>
+      <data key="v_candidate_edge_fingerprint_groups">NA</data>
+      <data key="v_candidate_assignment_signs_agree">NA</data>
+      <data key="v_candidate_assignment_statuses">NA</data>
+    </node>
+    <node id="n5">
+      <data key="v_name">Metab__CHEBI:85403_unknown</data>
+      <data key="v_score">-0.534151488841444</data>
+      <data key="v_level">4</data>
+      <data key="v_type">upstream_input</data>
+      <data key="v_candidate_assignment_ids">map_9cfdefb004ecb7b9</data>
+      <data key="v_candidate_measurement_features">LPS(18:0)</data>
+      <data key="v_candidate_measurement_values">-0.081634690619835498</data>
+      <data key="v_candidate_factor1_abs_ranks">933</data>
+      <data key="v_candidate_pkn_source_chebi">CHEBI:85403</data>
+      <data key="v_candidate_pkn_source_names">lysophosphatidylserine</data>
+      <data key="v_candidate_mapping_policies">relaxed_compatible_more_specific_acid_base</data>
+      <data key="v_candidate_edge_fingerprint_groups">edge_1183a9daffa46143</data>
+      <data key="v_candidate_assignment_signs_agree">TRUE</data>
+      <data key="v_candidate_assignment_statuses">scored_sign_concordant</data>
+    </node>
+    <edge source="n2" target="n4">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+    </edge>
+    <edge source="n3" target="n2">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+    </edge>
+    <edge source="n4" target="n0">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+    </edge>
+    <edge source="n4" target="n1">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+    </edge>
+    <edge source="n5" target="n3">
+      <data key="e_interaction">1</data>
+      <data key="e_consistency">true</data>
+    </edge>
+  </graph>
+</graphml>

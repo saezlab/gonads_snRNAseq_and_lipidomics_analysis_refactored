@@ -1,0 +1,87 @@
+"check","max_abs_difference"
+"FCG all coefficients from independent GLS",7.32747196252603e-15
+"FCG all residual variances",9.99200722162641e-15
+"FCG full coefficient covariance",1.29286394726492e-16
+"FCG posterior variances",9.99200722162641e-15
+"FCG all moderated statistics",1.06581410364015e-13
+"FCG all moderated probabilities",3.80806497446429e-14
+"FCG exported effect portal_vs_Central",3.3584246494911e-15
+"FCG exported t portal_vs_Central",5.6843418860808e-14
+"FCG exported p portal_vs_Central",6.66133814775094e-15
+"FCG per-contrast BH portal_vs_Central",8.54871728961371e-15
+"FCG exported effect testes_vs_ova",7.32747196252603e-15
+"FCG exported t testes_vs_ova",9.2370555648813e-14
+"FCG exported p testes_vs_ova",8.43769498715119e-15
+"FCG per-contrast BH testes_vs_ova",1.17683640610267e-14
+"FCG exported effect portalova_vs_centralova",3.71924713249427e-15
+"FCG exported t portalova_vs_centralova",6.3948846218409e-14
+"FCG exported p portalova_vs_centralova",1.98729921407903e-14
+"FCG per-contrast BH portalova_vs_centralova",1.31006316905768e-14
+"FCG exported effect portaltestes_vs_centraltestes",2.22044604925031e-15
+"FCG exported t portaltestes_vs_centraltestes",6.01740879346835e-14
+"FCG exported p portaltestes_vs_centraltestes",3.80806497446429e-14
+"FCG per-contrast BH portaltestes_vs_centraltestes",1.59872115546023e-14
+"FCG exported effect centraltestes_vs_centralova",4.05231403988182e-15
+"FCG exported t centraltestes_vs_centralova",5.6843418860808e-14
+"FCG exported p centraltestes_vs_centralova",9.54791801177635e-15
+"FCG per-contrast BH centraltestes_vs_centralova",1.14352971536391e-14
+"FCG exported effect portaltestes_vs_portalova",4.10782519111308e-15
+"FCG exported t portaltestes_vs_portalova",1.06581410364015e-13
+"FCG exported p portaltestes_vs_portalova",1.0991207943789e-14
+"FCG per-contrast BH portaltestes_vs_portalova",1.33226762955019e-14
+"FCG exported effect testes_effect_zonation",4.16333634234434e-15
+"FCG exported t testes_effect_zonation",7.8159700933611e-14
+"FCG exported p testes_effect_zonation",1.73194791841524e-14
+"FCG per-contrast BH testes_effect_zonation",3.27515792264421e-14
+"FCG entropy operating-point objective",0
+"FCG operating point is objective maximum",0
+"FCG all selected gene-lipid coefficients including non-parenthetical lipids TPP",6.66133814775094e-16
+"FCG all selected gene-lipid coefficients including non-parenthetical lipids TPC",7.7715611723761e-16
+"FCG all selected gene-lipid coefficients including non-parenthetical lipids OPP",6.66133814775094e-16
+"FCG all selected gene-lipid coefficients including non-parenthetical lipids OPC",6.66133814775094e-16
+"CF453 model cache all coefficients from independent GLS",5.32907051820075e-15
+"CF453 model cache all residual variances",3.88578058618805e-16
+"CF453 model cache full coefficient covariance",2.22044604925031e-16
+"CF453 model cache posterior variances",3.88578058618805e-16
+"CF453 model cache all moderated statistics",3.97903932025656e-13
+"CF453 model cache all moderated probabilities",6.26165785888588e-14
+"CF453 model BH primary_interactions",0
+"CF453 model BH secondary_zonation",0
+"CF453 model BH secondary_diet_by_zone",0
+"CF453 model BH secondary_diet_zonation",0
+"CF453 model BH secondary_sex_by_zone",0
+"CF453 direct primary all coefficients from independent GLS",5.77315972805081e-15
+"CF453 direct primary all residual variances",3.88578058618805e-16
+"CF453 direct primary full coefficient covariance",3.33066907387547e-16
+"CF453 direct primary posterior variances",3.88578058618805e-16
+"CF453 direct primary all moderated statistics",8.21565038222616e-14
+"CF453 direct primary all moderated probabilities",4.78506123613442e-14
+"CF453 direct BH primary",0
+"CF453 direct conditional all coefficients from independent GLS",6.21724893790088e-15
+"CF453 direct conditional all residual variances",3.88578058618805e-16
+"CF453 direct conditional full coefficient covariance",4.44089209850063e-16
+"CF453 direct conditional posterior variances",3.88578058618805e-16
+"CF453 direct conditional all moderated statistics",8.5043083686287e-14
+"CF453 direct conditional all moderated probabilities",4.94049245958195e-14
+"CF453 direct BH conditional",0
+"CF453 anchors use new direct interaction annotations",0
+"CF453 saved programme correlations female_PP SD",6.66133814775094e-16
+"CF453 saved programme correlations female_PP WD",4.44089209850063e-16
+"CF453 saved programme correlations female_PC SD",4.44089209850063e-16
+"CF453 saved programme correlations female_PC WD",5.55111512312578e-16
+"CF453 saved programme correlations male_PP SD",5.55111512312578e-16
+"CF453 saved programme correlations male_PP WD",5.55111512312578e-16
+"CF453 saved programme correlations male_PC SD",4.44089209850063e-16
+"CF453 saved programme correlations male_PC WD",5.55111512312578e-16
+"Every plotted Mtmr11 experimental KD t remains unchanged",0
+"historical ULM independently reconstructed on all661 experimental targets",4.44089209850063e-15
+"historical all-background ULM probability",2.22143230910237e-27
+"historical matched lipid point count",0
+"historical complete KD background count",0
+"historical matched-only plotted Pearson r",3.88578058618805e-16
+"revised ULM independently reconstructed on all661 experimental targets",2.66453525910038e-15
+"revised all-background ULM probability",9.69352280335579e-27
+"revised matched lipid point count",0
+"revised complete KD background count",0
+"revised matched-only plotted Pearson r",2.22044604925031e-16
+"Figure5F has345 matched points, distinct from22 reference mice and661 ULM background features",0

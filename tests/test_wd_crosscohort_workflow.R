@@ -1,0 +1,23 @@
+# CLI/source-loading and output protection checks; actual raw validation is separate.
+source("scripts/workflows/13_wd_crosscohort_robustness.R")
+expect_error <- function(expr, text) {
+  z <- tryCatch({ force(expr); NULL }, error = identity)
+  stopifnot(inherits(z, "error"), grepl(text, conditionMessage(z), fixed = TRUE))
+}
+expect_error(wp3_run("--unexpected"), "Unknown or repeated")
+expect_error(wp3_run(c("--output=a", "--output=b")), "Duplicate option")
+expect_error(wp3_run(c("--validate-only", "--report-only")), "Choose validation")
+expect_error(wp3_run("--bootstraps=2"), "integer >= 19")
+expect_error(wp3_run("--paired-bootstraps=19.5"), "integer >= 19")
+expect_error(wp3_run(c("--fcg-comparison-only", "--report-only")), "Choose validation")
+expect_error(wp3_run("--comparison-output=unused"), "requires --fcg-comparison-only")
+expect_error(wp3_run(c("--fcg-comparison-only", "--bootstraps=19")), "reuses saved draw banks")
+expect_error(wp3_run(c("--fcg-comparison-only", "--output=/private/tmp/no_such_WP3_saved_run")), "requires saved original WP3")
+existing <- tempfile("wp3_existing_"); dir.create(existing)
+sentinel <- file.path(existing, "preserved.txt"); writeLines("preserve these bytes", sentinel)
+before <- readBin(sentinel, "raw", file.info(sentinel)$size)
+expect_error(wp3_run(paste0("--output=", existing)), "Output directory is not empty")
+expect_error(wp3_fcg_output_guard(existing), "Comparison output directory is not empty")
+stopifnot(identical(before, readBin(sentinel, "raw", file.info(sentinel)$size)))
+unlink(existing, recursive = TRUE)
+cat("WP3 CLI guards, source loading and nonempty-output protection passed.\n")

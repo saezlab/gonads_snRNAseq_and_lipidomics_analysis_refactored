@@ -1,0 +1,655 @@
+{
+  "panel_groups": 30,
+  "export_files": 90,
+  "formats": {
+    "PDF": 30,
+    "SVG": 30,
+    "PNG": 30
+  },
+  "contact_sheets": 5,
+  "render_versions": {
+    "pypdfium2": "5.14.0",
+    "pdfplumber": "0.11.9",
+    "pypdf": "6.10.0",
+    "Pillow": "12.3.0"
+  },
+  "records": [
+    {
+      "panel": "Fig6A_SD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        680,
+        702
+      ],
+      "text_characters": 315,
+      "pdf_bytes": 1020013,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        1890,
+        1950
+      ],
+      "expected_png_pixels_300dpi": [
+        1890,
+        1950
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6A_WD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        680,
+        702
+      ],
+      "text_characters": 315,
+      "pdf_bytes": 1021017,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        1890,
+        1950
+      ],
+      "expected_png_pixels_300dpi": [
+        1890,
+        1950
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6B_design",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        906,
+        474
+      ],
+      "text_characters": 295,
+      "pdf_bytes": 6622,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2520,
+        1320
+      ],
+      "expected_png_pixels_300dpi": [
+        2520,
+        1320
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6C_SD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        756,
+        1080
+      ],
+      "text_characters": 647,
+      "pdf_bytes": 6106,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2100,
+        3000
+      ],
+      "expected_png_pixels_300dpi": [
+        2100,
+        3000
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6C_pair_density_SD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        777,
+        1004
+      ],
+      "text_characters": 963,
+      "pdf_bytes": 9271,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2160,
+        2790
+      ],
+      "expected_png_pixels_300dpi": [
+        2160,
+        2790
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6C_WD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        756,
+        1080
+      ],
+      "text_characters": 647,
+      "pdf_bytes": 6107,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2100,
+        3000
+      ],
+      "expected_png_pixels_300dpi": [
+        2100,
+        3000
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6C_pair_density_WD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        777,
+        1004
+      ],
+      "text_characters": 955,
+      "pdf_bytes": 9226,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2160,
+        2790
+      ],
+      "expected_png_pixels_300dpi": [
+        2160,
+        2790
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6D_female_pericentral_SD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        798,
+        582
+      ],
+      "text_characters": 350,
+      "pdf_bytes": 7244,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2220,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2220,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6D_female_pericentral_WD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        798,
+        582
+      ],
+      "text_characters": 350,
+      "pdf_bytes": 7257,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2220,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2220,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6D_female_periportal_SD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        798,
+        582
+      ],
+      "text_characters": 324,
+      "pdf_bytes": 7193,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2220,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2220,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6D_female_periportal_WD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        798,
+        582
+      ],
+      "text_characters": 325,
+      "pdf_bytes": 7210,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2220,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2220,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6D_male_pericentral_SD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        798,
+        582
+      ],
+      "text_characters": 353,
+      "pdf_bytes": 7107,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2220,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2220,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6D_male_pericentral_WD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        798,
+        582
+      ],
+      "text_characters": 354,
+      "pdf_bytes": 7211,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2220,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2220,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6D_male_periportal_SD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        798,
+        582
+      ],
+      "text_characters": 355,
+      "pdf_bytes": 6987,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2220,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2220,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6D_male_periportal_WD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        798,
+        582
+      ],
+      "text_characters": 355,
+      "pdf_bytes": 7095,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2220,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2220,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6E_diet_zonation",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        821,
+        852
+      ],
+      "text_characters": 707,
+      "pdf_bytes": 9105,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2280,
+        2370
+      ],
+      "expected_png_pixels_300dpi": [
+        2280,
+        2370
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6F_female_pericentral",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        680,
+        518
+      ],
+      "text_characters": 337,
+      "pdf_bytes": 7173,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        1890,
+        1440
+      ],
+      "expected_png_pixels_300dpi": [
+        1890,
+        1440
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6F_female_periportal",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        680,
+        518
+      ],
+      "text_characters": 336,
+      "pdf_bytes": 7198,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        1890,
+        1440
+      ],
+      "expected_png_pixels_300dpi": [
+        1890,
+        1440
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6F_male_pericentral",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        680,
+        518
+      ],
+      "text_characters": 340,
+      "pdf_bytes": 7139,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        1890,
+        1440
+      ],
+      "expected_png_pixels_300dpi": [
+        1890,
+        1440
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "Fig6F_male_periportal",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        680,
+        518
+      ],
+      "text_characters": 344,
+      "pdf_bytes": 7271,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        1890,
+        1440
+      ],
+      "expected_png_pixels_300dpi": [
+        1890,
+        1440
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "FigS6_PCA_RNA",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        734,
+        582
+      ],
+      "text_characters": 134,
+      "pdf_bytes": 8118,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2040,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2040,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "FigS6_PCA_Lipids",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        734,
+        582
+      ],
+      "text_characters": 100,
+      "pdf_bytes": 6633,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2040,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2040,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "FigS6_lipid_sex_SD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        734,
+        582
+      ],
+      "text_characters": 226,
+      "pdf_bytes": 71346,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2040,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2040,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "FigS6_lipid_sex_WD",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        734,
+        582
+      ],
+      "text_characters": 241,
+      "pdf_bytes": 72074,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2040,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2040,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "FigS6_lipid_diet_female",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        734,
+        582
+      ],
+      "text_characters": 232,
+      "pdf_bytes": 71583,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2040,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2040,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "FigS6_lipid_diet_male",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        734,
+        582
+      ],
+      "text_characters": 251,
+      "pdf_bytes": 71697,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2040,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2040,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "FigS6_lipid_sex_diet",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        734,
+        582
+      ],
+      "text_characters": 262,
+      "pdf_bytes": 71208,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2040,
+        1620
+      ],
+      "expected_png_pixels_300dpi": [
+        2040,
+        1620
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "FigS6_display_threshold",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        734,
+        528
+      ],
+      "text_characters": 171,
+      "pdf_bytes": 5205,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2040,
+        1470
+      ],
+      "expected_png_pixels_300dpi": [
+        2040,
+        1470
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "FigS6_lipid_quality",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        842,
+        540
+      ],
+      "text_characters": 303,
+      "pdf_bytes": 4992,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2340,
+        1500
+      ],
+      "expected_png_pixels_300dpi": [
+        2340,
+        1500
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    },
+    {
+      "panel": "FigS6_zonation_markers",
+      "pdf_pages": 1,
+      "rendered_pdf_pixels": [
+        777,
+        993
+      ],
+      "text_characters": 206,
+      "pdf_bytes": 25934,
+      "svg_contains_raster_images": false,
+      "png_pixels": [
+        2160,
+        2760
+      ],
+      "expected_png_pixels_300dpi": [
+        2160,
+        2760
+      ],
+      "out_of_page_text_characters": 0,
+      "out_of_page_text_examples": []
+    }
+  ],
+  "visual_inspection": {
+    "review_date": "2026-10-30",
+    "panel_groups_reviewed": 30,
+    "method": "Every PDF rendered and inspected through five contact sheets; main scientific panels additionally inspected at larger size.",
+    "result": "No clipping or missing glyphs found. A labels have white backgrounds; PCA legends fit; density colorbar is vector.",
+    "review_only_contacts": "contact_01.png through contact_05.png; these are QA artifacts, not an assembled manuscript figure."
+  }
+}

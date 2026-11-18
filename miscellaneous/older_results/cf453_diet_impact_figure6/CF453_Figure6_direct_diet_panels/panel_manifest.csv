@@ -1,0 +1,13 @@
+panel,family,file,format,width_in,height_in,source_table
+Fig6A_direct_RNA_interactions,A,panels/Fig6A_direct_RNA_interactions.pdf,PDF,10.2,4.7,source_data/Fig6A_direct_RNA_interactions.csv
+Fig6A_direct_RNA_interactions,A,panels/Fig6A_direct_RNA_interactions.svg,SVG,10.2,4.7,source_data/Fig6A_direct_RNA_interactions.csv
+Fig6A_direct_RNA_interactions,A,panels/Fig6A_direct_RNA_interactions.png,PNG,10.2,4.7,source_data/Fig6A_direct_RNA_interactions.csv
+Fig6B_conditional_diet_effects,B,panels/Fig6B_conditional_diet_effects.pdf,PDF,9.3,6.8,source_data/Fig6B_conditional_diet_effects.csv
+Fig6B_conditional_diet_effects,B,panels/Fig6B_conditional_diet_effects.svg,SVG,9.3,6.8,source_data/Fig6B_conditional_diet_effects.csv
+Fig6B_conditional_diet_effects,B,panels/Fig6B_conditional_diet_effects.png,PNG,9.3,6.8,source_data/Fig6B_conditional_diet_effects.csv
+Fig6C_mouse_examples,C,panels/Fig6C_mouse_examples.pdf,PDF,8.4,6.8,source_data/Fig6C_mouse_examples.csv
+Fig6C_mouse_examples,C,panels/Fig6C_mouse_examples.svg,SVG,8.4,6.8,source_data/Fig6C_mouse_examples.csv
+Fig6C_mouse_examples,C,panels/Fig6C_mouse_examples.png,PNG,8.4,6.8,source_data/Fig6C_mouse_examples.csv
+Fig6D_lipid_diet_effects,D,panels/Fig6D_lipid_diet_effects.pdf,PDF,6.6,6.4,source_data/Fig6D_lipid_diet_effects.csv
+Fig6D_lipid_diet_effects,D,panels/Fig6D_lipid_diet_effects.svg,SVG,6.6,6.4,source_data/Fig6D_lipid_diet_effects.csv
+Fig6D_lipid_diet_effects,D,panels/Fig6D_lipid_diet_effects.png,PNG,6.6,6.4,source_data/Fig6D_lipid_diet_effects.csv

@@ -1,0 +1,18 @@
+{
+  "user_direction": "lipids -> TFs",
+  "factor": "Factor1",
+  "orientation": {
+    "label": "testes_positive_Factor1_coordinate",
+    "multiplier": 1,
+    "saved_coordinate_group_means": [-0.742290715464663, 0.708550228398085],
+    "scope": "same_multiplier_for_TF_activities_RNA_loadings_lipid_loadings_and_sample_coordinates",
+    "interpretation": "positive_agrees_with_testes_associated_Factor1_not_a_direct_differential_effect"
+  },
+  "mapping": "Relaxed feature-to-chemical assignments; collisions remain separate rows and are never summed or averaged.",
+  "upstream": "Candidate chemical node IDs are topology seeds only. Their numeric seed values are not MOON measurements.",
+  "downstream": "The selected sensitivity uses PKN-present Factor 1 hepatocyte TF footprint activities with absolute activity greater than 2. Ar and Esr1 are supplied terminal observations, not independently predicted validation targets.",
+  "score_construction": "ULM scores are calculated with upstream_input=NULL. Factor 1 lipid loadings are joined afterwards for assignment-level sign concordance.",
+  "pkn_policy": "Only direct chemical-to-protein and protein-to-protein edges from the directionality-audited STITCH exploratory PKN are used. Reaction and metabolite-to-metabolite edges are excluded.",
+  "timing": "Cross-sectional signatures; no temporal ordering or direct hepatocyte ligand exposure is inferred.",
+  "limitations": ["A relaxed chemical candidate can resolve unmeasured double-bond position, geometry, stereochemistry, sn position, or acid/base state.", "One measured lipid can map to multiple chemicals, and related chemical candidates can share direct regulatory edge fingerprints.", "MOON scores are generated from TF activities and PKN topology; copied Factor 1 lipid loadings are post-score annotations rather than independent score evidence.", "Measured bulk-liver lipid abundance does not establish hepatocyte ligand exposure, receptor engagement, or temporal ordering.", "The selected route is a low-threshold sensitivity: no compact strict score-layer solution remained when either tested cutoff exceeded 0.5.", "The directional STITCH v5 source files are historical, and all candidate routes remain exploratory mechanistic hypotheses."]
+}

@@ -1,0 +1,34 @@
+{
+  "workflow": "13_wd_crosscohort_robustness_FCG_extension",
+  "completed_UTC": "2026-10-14 16:16:56 UTC",
+  "args": [
+    "--fcg-comparison-only",
+    "--comparison-output=/private/tmp/wp3_fcg_extension_cli_replay_20261014"
+  ],
+  "base_files_preserved": [
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/wd_crosscohort_robustness/contexts.rds",
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/wd_crosscohort_robustness/analysis.rds"
+  ],
+  "settings": {
+    "seed": 20261014,
+    "FCG_paired_seed": 20365743,
+    "B": 4999,
+    "paired_B": 999,
+    "contrast": "delta_r = cor(CF459 WD, original FCG SD) - cor(CF459 WD, CF453 WD); positive means closer to original FCG SD on the same fixed edges",
+    "cohort_age_labels": "User-corrected 14 October 2026: CF459 3-month WD, original FCG 3-month SD, CF453 10-month WD. Age at sampling is user-supplied cohort provenance; no diet-duration or strain inference.",
+    "age_report_note": "Ages clarified by the user on 14 October 2026: CF459 male WD and original male FCG SD mice were 3 months old; CF453 male WD mice were 10 months old. These are ages at sampling, not established diet durations.",
+    "age_figure_note": "User-confirmed ages: CF459 WD 3 months; original FCG SD 3 months; CF453 WD 10 months.",
+    "fixed_universe": "Identical original WP3 strict shared 610-lipid male full/displayed edge universe; no new feature selection",
+    "FCG_replay": "Fresh original male RNA/log2-lipid matrices replay archived Figure 5 coefficients before matching by gene and exact reference_lipid",
+    "null": "24 CF459 pairing permutations and existing 4999 empirical-marginal CF459 null draws conditional on fixed original FCG coefficients; two-sided absolute ULM equivalent to absolute r at fixed edge count",
+    "paired": "Original independent CF453/CF459 paired mouse banks reused; one additional independent FCG bank paired across RNA/lipids within 11 XXT and 11 XYT; the SAME CF459 draw enters both anchor comparisons and both zones",
+    "direct_comparison": "Observed delta and paired/omission delta stability are descriptive. Delta-positive bootstrap fraction is conditional on defined draws, not a null P or posterior probability.",
+    "undefined": "Any undefined frozen edge invalidates its entire coefficient vector; delta requires both anchor comparisons defined; no dynamic edge deletion",
+    "exact_zero_null_correction": "Integer source-identity contingency independence certifies all feature covariances mathematically zero; finite roundoff coefficients are set exactly zero, making coefficient-vector r undefined. No absolute coefficient threshold is used. Original WP3 null outputs are preserved and historical discrepancies recorded in null_degeneracy_ledger.",
+    "omissions": "Original 39 WD omission configurations plus all 22 original-FCG single omissions; both zones share indices",
+    "nominal_ULM": "Native intercept slope t; nominal edge-level P descriptive because edges share genes/lipids/mice",
+    "limitations": "FC459 n4, original selected FCG network, genotype/sample-size and cohort processing differences; age and diet are confounded across cohorts. No causal separation of age, diet, strain, diet duration or technical batch."
+  },
+  "provenance_note": "This CLI replay in a fresh temporary destination is identical to the production comparison analysis.rds; its input/code/session records accompany that identical saved analysis. Original base outputs remain byte-preserved.",
+  "saved_analysis_sha256": "875c9c623ca875722fd6846957e800bde07f9d2ce0807c93278a4765f864c5b0"
+}

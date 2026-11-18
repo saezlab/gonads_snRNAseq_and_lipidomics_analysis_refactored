@@ -1,0 +1,16 @@
+{
+  "lipidbrainatlas": {
+    "sha": "3fd1f0db7763b781689f39e3cf835c5635560f31",
+    "author_date": "2025-10-15T13:07:56Z",
+    "committer_date": "2025-10-15T13:07:56Z",
+    "message": "Update README.md",
+    "html_url": "https://github.com/lamanno-epfl/lipidbrainatlas/commit/3fd1f0db7763b781689f39e3cf835c5635560f31"
+  },
+  "EUCLID": {
+    "sha": "ca3812a0fa316b55999c471f41ae603656c648d1",
+    "author_date": "2026-03-20T18:30:47Z",
+    "committer_date": "2026-03-20T18:30:47Z",
+    "message": "uploaded lipizone-aware dissection table generator for bulk lipidomics analyses",
+    "html_url": "https://github.com/lamanno-epfl/EUCLID/commit/ca3812a0fa316b55999c471f41ae603656c648d1"
+  }
+}

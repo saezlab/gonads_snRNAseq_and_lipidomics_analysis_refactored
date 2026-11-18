@@ -1,0 +1,104 @@
+{
+  "date_Europe_London": "2026-10-09",
+  "scope": "WP1/WP2 organization, local byte-preserving input import, pooled-first combined WP2 report",
+  "primary_numeric_outputs_preserved": true,
+  "historical_phase_hash_records_preserved": true,
+  "current_organization_files": [
+    {
+      "path": "AGENTS.md",
+      "SHA256": "629872b7f995ae81ca060d6dfda432fed94e8d1a9353b00a214ba2fcc8248ee5"
+    },
+    {
+      "path": "README.md",
+      "SHA256": "cb5aafb86efc0b4ff0a3dc76868d86b207238d38ab4560ceb6502e3556be95ef"
+    },
+    {
+      "path": "docs/AGENT_GUIDE.md",
+      "SHA256": "a30c2389b544d612cf4913cca25923f944b9e4fe9e2d6e5a090a8c4f0973343d"
+    },
+    {
+      "path": "data/WP1_WP2_INPUTS.md",
+      "SHA256": "08f09d3685dfe5029a4511b431d77c6ab91c6847afa170e1c4b4797e6415d984"
+    },
+    {
+      "path": "data/wp1_wp2_input_migration_manifest.csv",
+      "SHA256": "2cdb8df2b4298c20ccc54129514d7a3686a06dd7d9e05a5ebc20391eaccd2f3f"
+    },
+    {
+      "path": ".gitignore",
+      "SHA256": "498c95d895ee875e31a8a6ccb8e3c0a968f025be47a0dcbe0c0c5a60fceb179c"
+    },
+    {
+      "path": "tests/README.md",
+      "SHA256": "c6006b9219d771ab3c7b16bb4d628482fbbbe2d85696f2b75a1cd147a0865b8c"
+    },
+    {
+      "path": "scripts/workflows/11_cyp2c38_in_vivo_validation.R",
+      "SHA256": "902d48cadac188a1356c6872dd1943976bfee321e1d25bcc18750be65364012d"
+    },
+    {
+      "path": "scripts/workflows/12_wdsd_network_comparison.R",
+      "SHA256": "8596f0212358d692b2613ae8da3826f49f89a9407fbedab6cd8667883fed6cb6"
+    },
+    {
+      "path": "scripts/core/wp1_workflow.R",
+      "SHA256": "eec9bdc93077aca9c2153f469fdef730509a7093acaf6453b54118c4abecc84b"
+    },
+    {
+      "path": "scripts/core/wp2_workflow.R",
+      "SHA256": "54faefde7a2c6e39201f4ea166a92670db494c4565cc399c8886ea42049e6cfb"
+    },
+    {
+      "path": "scripts/core/wp2_report.R",
+      "SHA256": "606a9af989d94da1ee86fe40ccc2878612a881413ffcc6dc07af4634f0294a6b"
+    },
+    {
+      "path": "scripts/reports/build_wp2_report_pdf.py",
+      "SHA256": "646e71f8b8006ab52e0f6c727402d58141c5c4aabb059a4ee5af0f98c6852b8e"
+    },
+    {
+      "path": "tests/test_work_package_workflows.R",
+      "SHA256": "81c565fc90ea6e4bf09a8da3d081f1bb112275bd7fce36222a8774f1f0f5a9cc"
+    },
+    {
+      "path": "tests/test_wp1_wp2_local_inputs.R",
+      "SHA256": "3ee3c03cac8ddf0716129b3a8ea745e426efd64bc30fca35ffcc61dc2311889f"
+    },
+    {
+      "path": "docs/workflow_plans/11_cyp2c38_in_vivo_validation.md",
+      "SHA256": "cfda9f733b0454bc79d856329d7dc33b528f281965537716f4eb8a9e066b0d5b"
+    },
+    {
+      "path": "docs/workflow_plans/12_wdsd_network_comparison.md",
+      "SHA256": "82aea5ab708511fe77c23bdd3fd3bd6737fe7ce736f40fd9d881aa891aeea0f1"
+    },
+    {
+      "path": "docs/workflow_plans/05b_wdsd_network_comparison.md",
+      "SHA256": "02a45899c8605f9b293ec50a71002a46db2117679306bb436e065b61f0a15a8a"
+    },
+    {
+      "path": "docs/workflow_plans/05c_wdsd_lipid_overlap_and_pooled_network.md",
+      "SHA256": "471f82853afcd8b5dbf01315a7998cb48b1d115579bde9e89fc4f27e43f67fce"
+    },
+    {
+      "path": "docs/workflow_plans/07b_cyp2c38_in_vivo_validation.md",
+      "SHA256": "4f1f606b0f9338c373f664bd53d2b2a4342a19792e653ecaf598734c2caf35e1"
+    },
+    {
+      "path": "docs/workflow_plans/07c_cyp2c38_ulm_resampling.md",
+      "SHA256": "8dad922aa510eb14461c9c5a7cad4b2520b869e27015aee67e191c093d310462"
+    },
+    {
+      "path": "docs/workflow_plans/_meta_cross_workflow_overview.md",
+      "SHA256": "f6105dcb1ca70bd272e89bdaec4590d3f3d8baa037a148a2d002a029e832fd9b"
+    }
+  ],
+  "verification": {
+    "input_copies": 6,
+    "verified_total_bytes": 30965755,
+    "WP1": "Complete reduced-draw smoke; four base tables within1e-10 and ten observed native ULM rows exactly equal",
+    "WP2": "Complete fresh default run; 12 numeric tables within1e-10, 16 primary resampling/index banks identical"
+  },
+  "execution_evidence": "tests/outputs/wp1_wp2_migration/new_workflow_execution.json",
+  "resampling_evidence": "tests/outputs/wp1_wp2_migration/default_full_resampling_replay.json"
+}

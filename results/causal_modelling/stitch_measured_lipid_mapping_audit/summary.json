@@ -1,0 +1,21 @@
+{
+  "caveat": "STITCH v5 source directionality and score/text-mining admission are audited in the overlay, but v5 source files were last modified in 2016. A candidate chemical match does not establish direct hepatocyte regulation, temporal ordering, or a valid duplicated MOON input.",
+  "conditional_feature_to_stitch_source_matches": 16,
+  "direct_exact_measured_feature_to_stitch_source_matches": 0,
+  "existing_factor1_input_nodes_matching_stitch_sources": 0,
+  "factor1_existing_inputs": 155,
+  "features_with_any_audited_mapping": 9,
+  "features_with_any_audited_mapping_that_are_existing_factor1_inputs": 0,
+  "measured_features": 1254,
+  "overlay_final_graph_edges": 284602,
+  "overlay_raw_retained_evidence_rows": 7481,
+  "overlay_raw_source_chemicals": 1986,
+  "overlay_validation_all_checks_pass": true,
+  "purpose": "Measured-lipid identity audit against raw directionality-audited STITCH chemical sources; no PKN modification or MOON scoring.",
+  "relation_policy": {
+    "exact_CHEBI_identity": "Same canonical ChEBI identifier after alternate-ID resolution.",
+    "explicit_conjugate_acid_base": "A directly recorded ChEBI conjugate acid/base counterpart, without a structural-class or isomer inference.",
+    "same_formula_is_a_descendant": "Same-formula and same-charge ChEBI is_a descendant of the exact feature chemical or its explicit acid/base counterpart. This is a structural-isomer/position sensitivity, not direct feature identity."
+  },
+  "stitch_overlay_source_caveat": "STITCH v5.0 source files were last modified 2016-08-16. The retained edges have auditable directionality but remain exploratory; their direction does not establish currentness, direct mouse experimental support, hepatocyte context, or lipid measurement identity. A current STRING v12 alias snapshot supplies exact ENSMUSP-to-UniProt identity because the publisher no longer exposes a matched v5 alias archive; this affects identifier provenance, not raw action orientation."
+}

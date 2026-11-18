@@ -1,0 +1,23 @@
+{
+  "analysis": "factor1_lipid_to_tf_saved_score_diagnostic",
+  "final_graph_rescoring_only": true,
+  "coherence_refitting": false,
+  "extraction_rerun": false,
+  "input_mapping_changed": false,
+  "saved_runs": 16,
+  "frozen_input_lipids": 155,
+  "all_saved_scores_reproduced": true,
+  "maximum_score_difference": 0,
+  "statuses": {
+    "absent_from_policy_graph": 2384,
+    "inferred_returned": 8,
+    "inferred_upstream_sign_conflict": 3,
+    "not_retained_after_topology_pruning": 72,
+    "not_scored_despite_topology_support_within_requested_layers": 3,
+    "shortest_endpoint_distance_exceeds_requested_layers": 10
+  },
+  "score_semantics": "Signed ULM enrichment/activity scores, not p-values, probabilities, confidence bounds, reaction flux, or direct ligand activity.",
+  "support_semantics": "Signed outgoing children in the final compressed PKN at the immediately previous returned MOON level, with that compressed layer as background. This describes structural score support, not independent experiments.",
+  "pruning_semantics": "Distances use the final compressed scoring graph and do not replace the recorded iterative MOON pruning ledger.",
+  "normalization_caveat": "All scored runs belong to the optional existing pH7.3-normalized precursor sensitivity; primary graph hypotheses remain absent."
+}

@@ -1,0 +1,24 @@
+{
+  "revision": "alternating_compensation_panel_20261013",
+  "request": "Alternate enzyme-only and TF-containing KO/KD sets and use compensation prevention as the rationale for pairs/triplets",
+  "initial_sources": "initial_panel_20261013/",
+  "initial_outputs": "prioritization/",
+  "current_outputs": "alternating_prioritization/",
+  "rank_sequence": [
+    "Pld1",
+    "Rxra",
+    "Pld1 + Pld2",
+    "Cebpb",
+    "Pla2g4a",
+    "Cebpb + Pld2",
+    "Plpp1",
+    "Pparg",
+    "Plcb1 + Plcg1",
+    "Rxra + Pld2"
+  ],
+  "original_MOON_graphs_modified": false,
+  "new_scoring": false,
+  "PKN_mutation": false,
+  "corrected_TF_edges": "Separately labelled unscored literature hypotheses; no inherited scores; frozen Factor 1 sign disagreements explicit",
+  "validation": "Full export, validation-only and independent QA passed; original graph/source hashes verified"
+}

@@ -1,0 +1,8 @@
+"comparison","n_sig_genes","n_upregulated","n_downregulated"
+"portal_vs_Central",7989,3867,4122
+"testes_vs_ova",4449,2881,1568
+"portalova_vs_centralova",4969,2663,2306
+"portaltestes_vs_centraltestes",7221,3369,3852
+"centraltestes_vs_centralova",4372,2878,1494
+"portaltestes_vs_portalova",3500,2175,1325
+"testes_effect_zonation",2101,809,1292

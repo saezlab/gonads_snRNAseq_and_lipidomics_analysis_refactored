@@ -1,0 +1,21 @@
+{
+  "analysis": "factor1_lipid_to_tf_relaxed",
+  "direction": "conditional relaxed lipid candidate -> TF footprint activity",
+  "tf_panel": "strong_tfs",
+  "pruning_steps": 4,
+  "n_layers": 4,
+  "primary": 0.5,
+  "secondary": 0.5,
+  "mapping_rows": 19,
+  "unique_candidate_chemical_nodes": 18,
+  "direct_signaling_edges": 57850,
+  "candidate_measurement_features": "LPS(18:0)",
+  "candidate_source_nodes": "Metab__CHEBI:85403_unknown",
+  "independent_edge_fingerprint_groups": 1,
+  "observed_tfs": ["Gene__Ar", "Gene__Esr1"],
+  "nodes": 6,
+  "edges": 5,
+  "score_explanation_edges": 9,
+  "reference_reproduced": true,
+  "interpretation": "Fixed low-threshold exploratory sensitivity. The copied Factor 1 lipid loading is a post-score sign-consistency annotation; Ar and Esr1 are supplied terminal TF observations, not independent validation targets."
+}

@@ -1,0 +1,6 @@
+"file","description","pages"
+"plots/pooled_conservation.pdf","Fixed Figure 3 displayed and full sparse universes; pooled and sex-centered coefficients",1
+"plots/pooled_null_checks.pdf","Whole-mouse null checks distinguish overall correspondence from alignment beyond shared sex structure",1
+"plots/Cyp_pooled_conservation.pdf","Predefined four Cyp genes on original displayed species pairs",1
+"plots/selected_pooled_pairs.pdf","Actual SD measurements selected from original Cyp pairs without using new correlation strength",1
+"plots/lipid_overlap_audit.pdf","Class coverage and complete molecular-annotation loss partition, separating safe joins from candidates",2

@@ -1,0 +1,35 @@
+{
+  "all_candidate_assignments": 235,
+  "all_candidate_measurement_features": 228,
+  "analysis": "factor1_relaxed_lipid_to_regulatory_pkn_mapping",
+  "default_cross_feature_source_node_collisions": 1,
+  "default_feature_to_many_node_copies": 6,
+  "default_mapping_policies": {
+    "relaxed_acid_base": 1,
+    "relaxed_compatible_more_specific": 3,
+    "relaxed_compatible_more_specific_acid_base": 1,
+    "relaxed_same_formula_is_a_descendant": 14,
+    "strict_reported_identity": 0
+  },
+  "default_relaxed_assignments": 19,
+  "default_relaxed_measurement_features": 12,
+  "default_relaxed_source_nodes": 18,
+  "default_relaxed_strict_identity_assignments": 0,
+  "final_signed_regulatory_source_chemicals": 2348,
+  "input_measurements": 1254,
+  "no_moon_scoring_performed": true,
+  "resource_policy": {
+    "excluded": [
+      "MRCLinksDB",
+      "CellPhoneDB_nonpeptidic_adapter",
+      "STITCH_cached_service_layer"
+    ],
+    "included": [
+      "GuideToPharmacology",
+      "BRENDA",
+      "STITCH_directional_v5"
+    ]
+  },
+  "scoring_requirement": "Score each unique source node once as a topology seed; retain collision rows and use assignment-specific sign consistency and path extraction without counting duplicate node inputs twice.",
+  "stitch_caveat": "STITCH v5.0 source files were last modified 2016-08-16. The retained edges have auditable directionality but remain exploratory; their direction does not establish currentness, direct mouse experimental support, hepatocyte context, or lipid measurement identity. A current STRING v12 alias snapshot supplies exact ENSMUSP-to-UniProt identity because the publisher no longer exposes a matched v5 alias archive; this affects identifier provenance, not raw action orientation."
+}

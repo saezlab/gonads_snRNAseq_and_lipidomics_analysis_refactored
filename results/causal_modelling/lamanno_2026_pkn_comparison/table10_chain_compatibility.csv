@@ -1,0 +1,289 @@
+table_csv_row,feature_id,measured_canonical,direction,table_reagent,table_product,table_enzyme,retained_lyso_chain_present
+2,PC(16:0_22:6),PC 16:0_22:6,acylation,LPC 16:0,PC 38:6,"('Lpcat1', 'Lpcat2')",True
+3,PC(16:0_20:4),PC 16:0_20:4,acylation,LPC 16:0,PC 36:4,"('Lpcat1', 'Lpcat2')",True
+4,PC(16:0_18:2),PC 16:0_18:2,acylation,LPC 16:0,PC 34:2,"('Lpcat1', 'Lpcat2')",True
+5,PC(14:0_16:0),PC 14:0_16:0,acylation,LPC 16:0,PC 30:0,"('Lpcat1', 'Lpcat2')",True
+6,PC(16:0_16:1),PC 16:0_16:1,acylation,LPC 16:0,PC 32:1,"('Lpcat1', 'Lpcat2')",True
+7,PC(16:0_16:0),PC 16:0_16:0,acylation,LPC 16:0,PC 32:0,"('Lpcat1', 'Lpcat2')",True
+8,PC(16:0_18:1),PC 16:0_18:1,acylation,LPC 16:0,PC 34:1,"('Lpcat1', 'Lpcat2')",True
+9,PC(16:0_18:0),PC 16:0_18:0,acylation,LPC 16:0,PC 34:0,"('Lpcat1', 'Lpcat2')",True
+10,PC(18:1_18:2),PC 18:1_18:2,acylation,LPC 16:0,PC 36:3,"('Lpcat1', 'Lpcat2')",False
+11,PC(18:0_18:2),PC 18:0_18:2,acylation,LPC 16:0,PC 36:2,"('Lpcat1', 'Lpcat2')",False
+12,PC(18:0_18:1),PC 18:0_18:1,acylation,LPC 16:0,PC 36:1,"('Lpcat1', 'Lpcat2')",False
+13,PC(18:1_20:4),PC 18:1_20:4,acylation,LPC 16:0,PC 38:5,"('Lpcat1', 'Lpcat2')",False
+14,PC(18:0_20:4),PC 18:0_20:4,acylation,LPC 16:0,PC 38:4,"('Lpcat1', 'Lpcat2')",False
+15,PC(18:1_20:1),PC 18:1_20:1,acylation,LPC 16:0,PC 38:2,"('Lpcat1', 'Lpcat2')",False
+15,PC(18:0_20:2),PC 18:0_20:2,acylation,LPC 16:0,PC 38:2,"('Lpcat1', 'Lpcat2')",False
+16,PC(20:0_18:1),PC 18:1_20:0,acylation,LPC 16:0,PC 38:1,"('Lpcat1', 'Lpcat2')",False
+16,PC(18:0_20:1),PC 18:0_20:1,acylation,LPC 16:0,PC 38:1,"('Lpcat1', 'Lpcat2')",False
+18,PC(16:0_22:6),PC 16:0_22:6,hydrolysis,PC 38:6,LPC 16:0,Pla2g2a,True
+19,PC(16:0_22:6),PC 16:0_22:6,hydrolysis,PC 38:6,LPC 22:6,Pla2g2a,True
+20,PC(16:0_22:6),PC 16:0_22:6,hydrolysis,PC 38:6,LPC 18:1,Pla2g2a,False
+21,PC(16:0_22:6),PC 16:0_22:6,hydrolysis,PC 38:6,LPC 20:4,Pla2g2a,False
+22,PC(16:0_20:4),PC 16:0_20:4,hydrolysis,PC 36:4,LPC 16:0,Pla2g2a,True
+23,PC(16:0_20:4),PC 16:0_20:4,hydrolysis,PC 36:4,LPC 20:4,Pla2g2a,True
+24,PC(16:0_20:4),PC 16:0_20:4,hydrolysis,PC 36:4,LPC 18:1,Pla2g2a,False
+26,PC(16:0_18:2),PC 16:0_18:2,hydrolysis,PC 34:2,LPC 16:0,Pla2g2a,True
+27,PC(16:0_18:2),PC 16:0_18:2,hydrolysis,PC 34:2,LPC 18:1,Pla2g2a,False
+28,PC(14:0_16:0),PC 14:0_16:0,hydrolysis,PC 30:0,LPC 16:0,Pla2g2a,True
+29,PC(16:0_16:1),PC 16:0_16:1,hydrolysis,PC 32:1,LPC 18:1,Pla2g2a,False
+30,PC(16:0_16:1),PC 16:0_16:1,hydrolysis,PC 32:1,LPC 16:0,Pla2g2a,True
+32,PC(16:0_16:0),PC 16:0_16:0,hydrolysis,PC 32:0,LPC 18:0,Pla2g2a,False
+33,PC(16:0_16:0),PC 16:0_16:0,hydrolysis,PC 32:0,LPC 16:0,Pla2g2a,True
+35,PC(16:0_18:1),PC 16:0_18:1,hydrolysis,PC 34:1,LPC 20:1,Pla2g2a,False
+36,PC(16:0_18:1),PC 16:0_18:1,hydrolysis,PC 34:1,LPC 16:0,Pla2g2a,True
+37,PC(16:0_18:1),PC 16:0_18:1,hydrolysis,PC 34:1,LPC 18:1,Pla2g2a,True
+38,PC(16:0_18:1),PC 16:0_18:1,hydrolysis,PC 34:1,LPC 18:0,Pla2g2a,False
+40,PC(16:0_18:0),PC 16:0_18:0,hydrolysis,PC 34:0,LPC 16:0,Pla2g2a,True
+41,PC(16:0_18:0),PC 16:0_18:0,hydrolysis,PC 34:0,LPC 18:0,Pla2g2a,True
+42,PC(18:1_18:2),PC 18:1_18:2,hydrolysis,PC 36:3,LPC 16:0,Pla2g2a,False
+43,PC(18:1_18:2),PC 18:1_18:2,hydrolysis,PC 36:3,LPC 18:0,Pla2g2a,False
+44,PC(18:1_18:2),PC 18:1_18:2,hydrolysis,PC 36:3,LPC 18:1,Pla2g2a,True
+45,PC(18:0_18:2),PC 18:0_18:2,hydrolysis,PC 36:2,LPC 16:0,Pla2g2a,False
+46,PC(18:0_18:2),PC 18:0_18:2,hydrolysis,PC 36:2,LPC 20:1,Pla2g2a,False
+47,PC(18:0_18:2),PC 18:0_18:2,hydrolysis,PC 36:2,LPC 18:0,Pla2g2a,True
+48,PC(18:0_18:2),PC 18:0_18:2,hydrolysis,PC 36:2,LPC 18:1,Pla2g2a,False
+50,PC(18:0_18:1),PC 18:0_18:1,hydrolysis,PC 36:1,LPC 16:0,Pla2g2a,False
+51,PC(18:0_18:1),PC 18:0_18:1,hydrolysis,PC 36:1,LPC 20:1,Pla2g2a,False
+52,PC(18:0_18:1),PC 18:0_18:1,hydrolysis,PC 36:1,LPC 18:1,Pla2g2a,True
+53,PC(18:0_18:1),PC 18:0_18:1,hydrolysis,PC 36:1,LPC 18:0,Pla2g2a,True
+55,PC(18:1_20:4),PC 18:1_20:4,hydrolysis,PC 38:5,LPC 16:0,Pla2g2a,False
+56,PC(18:1_20:4),PC 18:1_20:4,hydrolysis,PC 38:5,LPC 18:0,Pla2g2a,False
+57,PC(18:1_20:4),PC 18:1_20:4,hydrolysis,PC 38:5,LPC 18:1,Pla2g2a,True
+58,PC(18:1_20:4),PC 18:1_20:4,hydrolysis,PC 38:5,LPC 20:4,Pla2g2a,True
+60,PC(18:0_20:4),PC 18:0_20:4,hydrolysis,PC 38:4,LPC 16:0,Pla2g2a,False
+61,PC(18:0_20:4),PC 18:0_20:4,hydrolysis,PC 38:4,LPC 18:0,Pla2g2a,True
+62,PC(18:0_20:4),PC 18:0_20:4,hydrolysis,PC 38:4,LPC 20:4,Pla2g2a,True
+63,PC(18:0_20:4),PC 18:0_20:4,hydrolysis,PC 38:4,LPC 18:1,Pla2g2a,False
+64,PC(18:0_20:4),PC 18:0_20:4,hydrolysis,PC 38:4,LPC 20:1,Pla2g2a,False
+66,PC(18:1_20:1),PC 18:1_20:1,hydrolysis,PC 38:2,LPC 16:0,Pla2g2a,False
+66,PC(18:0_20:2),PC 18:0_20:2,hydrolysis,PC 38:2,LPC 16:0,Pla2g2a,False
+67,PC(18:1_20:1),PC 18:1_20:1,hydrolysis,PC 38:2,LPC 18:0,Pla2g2a,False
+67,PC(18:0_20:2),PC 18:0_20:2,hydrolysis,PC 38:2,LPC 18:0,Pla2g2a,True
+68,PC(18:1_20:1),PC 18:1_20:1,hydrolysis,PC 38:2,LPC 18:1,Pla2g2a,True
+68,PC(18:0_20:2),PC 18:0_20:2,hydrolysis,PC 38:2,LPC 18:1,Pla2g2a,False
+69,PC(18:1_20:1),PC 18:1_20:1,hydrolysis,PC 38:2,LPC 20:1,Pla2g2a,True
+69,PC(18:0_20:2),PC 18:0_20:2,hydrolysis,PC 38:2,LPC 20:1,Pla2g2a,False
+70,PC(20:0_18:1),PC 18:1_20:0,hydrolysis,PC 38:1,LPC 16:0,Pla2g2a,False
+70,PC(18:0_20:1),PC 18:0_20:1,hydrolysis,PC 38:1,LPC 16:0,Pla2g2a,False
+71,PC(20:0_18:1),PC 18:1_20:0,hydrolysis,PC 38:1,LPC 18:0,Pla2g2a,False
+71,PC(18:0_20:1),PC 18:0_20:1,hydrolysis,PC 38:1,LPC 18:0,Pla2g2a,True
+72,PC(20:0_18:1),PC 18:1_20:0,hydrolysis,PC 38:1,LPC 20:1,Pla2g2a,False
+72,PC(18:0_20:1),PC 18:0_20:1,hydrolysis,PC 38:1,LPC 20:1,Pla2g2a,True
+73,PC(20:0_18:1),PC 18:1_20:0,hydrolysis,PC 38:1,LPC 18:1,Pla2g2a,True
+73,PC(18:0_20:1),PC 18:0_20:1,hydrolysis,PC 38:1,LPC 18:1,Pla2g2a,False
+74,PC(16:0_22:6),PC 16:0_22:6,acylation,LPC 18:1,PC 38:6,"('Lpcat1', 'Lpcat2')",False
+75,PC(18:0_22:6),PC 18:0_22:6,acylation,LPC 18:1,PC 40:6,"('Lpcat1', 'Lpcat2')",False
+76,PC(18:1_22:6),PC 18:1_22:6,acylation,LPC 18:1,PC 40:7,"('Lpcat1', 'Lpcat2')",True
+77,PC(16:0_20:4),PC 16:0_20:4,acylation,LPC 18:1,PC 36:4,"('Lpcat1', 'Lpcat2')",False
+78,PC(16:0_18:2),PC 16:0_18:2,acylation,LPC 18:1,PC 34:2,"('Lpcat1', 'Lpcat2')",False
+79,PC(17:0_18:1),PC 17:0_18:1,acylation,LPC 18:1,PC 35:1,"('Lpcat1', 'Lpcat2')",True
+80,PC(24:0_18:1),PC 18:1_24:0,acylation,LPC 18:1,PC 42:1,"('Lpcat1', 'Lpcat2')",True
+81,PC(16:0_16:1),PC 16:0_16:1,acylation,LPC 18:1,PC 32:1,"('Lpcat1', 'Lpcat2')",False
+82,PC(16:0_18:1),PC 16:0_18:1,acylation,LPC 18:1,PC 34:1,"('Lpcat1', 'Lpcat2')",True
+83,PC(18:1_18:2),PC 18:1_18:2,acylation,LPC 18:1,PC 36:3,"('Lpcat1', 'Lpcat2')",True
+84,PC(18:0_18:2),PC 18:0_18:2,acylation,LPC 18:1,PC 36:2,"('Lpcat1', 'Lpcat2')",False
+85,PC(18:0_18:1),PC 18:0_18:1,acylation,LPC 18:1,PC 36:1,"('Lpcat1', 'Lpcat2')",True
+86,PC(18:1_20:4),PC 18:1_20:4,acylation,LPC 18:1,PC 38:5,"('Lpcat1', 'Lpcat2')",True
+87,PC(18:0_20:4),PC 18:0_20:4,acylation,LPC 18:1,PC 38:4,"('Lpcat1', 'Lpcat2')",False
+88,PC(18:1_20:1),PC 18:1_20:1,acylation,LPC 18:1,PC 38:2,"('Lpcat1', 'Lpcat2')",True
+88,PC(18:0_20:2),PC 18:0_20:2,acylation,LPC 18:1,PC 38:2,"('Lpcat1', 'Lpcat2')",False
+89,PC(20:0_18:1),PC 18:1_20:0,acylation,LPC 18:1,PC 38:1,"('Lpcat1', 'Lpcat2')",True
+89,PC(18:0_20:1),PC 18:0_20:1,acylation,LPC 18:1,PC 38:1,"('Lpcat1', 'Lpcat2')",False
+90,PC(20:0_20:4),PC 20:0_20:4,acylation,LPC 18:1,PC 40:4,"('Lpcat1', 'Lpcat2')",False
+90,PC(18:0_22:4),PC 18:0_22:4,acylation,LPC 18:1,PC 40:4,"('Lpcat1', 'Lpcat2')",False
+91,PC(22:0_18:2),PC 18:2_22:0,acylation,LPC 18:1,PC 40:2,"('Lpcat1', 'Lpcat2')",False
+93,PC(18:0_22:6),PC 18:0_22:6,hydrolysis,PC 40:6,LPC 18:0,Pla2g2a,True
+94,PC(18:0_22:6),PC 18:0_22:6,hydrolysis,PC 40:6,LPC 22:6,Pla2g2a,True
+95,PC(18:0_22:6),PC 18:0_22:6,hydrolysis,PC 40:6,LPC 18:1,Pla2g2a,False
+96,PC(18:0_22:6),PC 18:0_22:6,hydrolysis,PC 40:6,LPC 20:1,Pla2g2a,False
+97,PC(18:0_22:6),PC 18:0_22:6,hydrolysis,PC 40:6,LPC 20:4,Pla2g2a,False
+99,PC(18:1_22:6),PC 18:1_22:6,hydrolysis,PC 40:7,LPC 18:1,Pla2g2a,True
+100,PC(18:1_22:6),PC 18:1_22:6,hydrolysis,PC 40:7,LPC 22:6,Pla2g2a,True
+101,PC(18:1_22:6),PC 18:1_22:6,hydrolysis,PC 40:7,LPC 20:4,Pla2g2a,False
+102,PC(17:0_18:1),PC 17:0_18:1,hydrolysis,PC 35:1,LPC 18:1,Pla2g2a,True
+103,PC(24:0_18:1),PC 18:1_24:0,hydrolysis,PC 42:1,LPC 18:1,Pla2g2a,True
+104,PC(20:0_20:4),PC 20:0_20:4,hydrolysis,PC 40:4,LPC 18:0,Pla2g2a,False
+104,PC(18:0_22:4),PC 18:0_22:4,hydrolysis,PC 40:4,LPC 18:0,Pla2g2a,True
+105,PC(20:0_20:4),PC 20:0_20:4,hydrolysis,PC 40:4,LPC 18:1,Pla2g2a,False
+105,PC(18:0_22:4),PC 18:0_22:4,hydrolysis,PC 40:4,LPC 18:1,Pla2g2a,False
+106,PC(20:0_20:4),PC 20:0_20:4,hydrolysis,PC 40:4,LPC 20:4,Pla2g2a,True
+106,PC(18:0_22:4),PC 18:0_22:4,hydrolysis,PC 40:4,LPC 20:4,Pla2g2a,False
+107,PC(20:0_20:4),PC 20:0_20:4,hydrolysis,PC 40:4,LPC 20:1,Pla2g2a,False
+107,PC(18:0_22:4),PC 18:0_22:4,hydrolysis,PC 40:4,LPC 20:1,Pla2g2a,False
+109,PC(22:0_18:2),PC 18:2_22:0,hydrolysis,PC 40:2,LPC 18:0,Pla2g2a,False
+110,PC(22:0_18:2),PC 18:2_22:0,hydrolysis,PC 40:2,LPC 18:1,Pla2g2a,False
+111,PC(22:0_18:2),PC 18:2_22:0,hydrolysis,PC 40:2,LPC 20:1,Pla2g2a,False
+112,PC(18:0_22:6),PC 18:0_22:6,acylation,LPC 18:0,PC 40:6,"('Lpcat1', 'Lpcat2')",True
+113,PC(22:0_18:1),PC 18:1_22:0,acylation,LPC 18:0,PC 40:1,"('Lpcat1', 'Lpcat2')",False
+114,PC(16:0_16:0),PC 16:0_16:0,acylation,LPC 18:0,PC 32:0,"('Lpcat1', 'Lpcat2')",False
+115,PC(16:0_18:1),PC 16:0_18:1,acylation,LPC 18:0,PC 34:1,"('Lpcat1', 'Lpcat2')",False
+116,PC(16:0_18:0),PC 16:0_18:0,acylation,LPC 18:0,PC 34:0,"('Lpcat1', 'Lpcat2')",True
+117,PC(16:0_19:0),PC 16:0_19:0,acylation,LPC 18:0,PC 35:0,"('Lpcat1', 'Lpcat2')",False
+118,PC(18:1_18:2),PC 18:1_18:2,acylation,LPC 18:0,PC 36:3,"('Lpcat1', 'Lpcat2')",False
+119,PC(18:0_18:2),PC 18:0_18:2,acylation,LPC 18:0,PC 36:2,"('Lpcat1', 'Lpcat2')",True
+120,PC(18:0_18:1),PC 18:0_18:1,acylation,LPC 18:0,PC 36:1,"('Lpcat1', 'Lpcat2')",True
+121,PC(18:1_20:4),PC 18:1_20:4,acylation,LPC 18:0,PC 38:5,"('Lpcat1', 'Lpcat2')",False
+122,PC(18:0_20:4),PC 18:0_20:4,acylation,LPC 18:0,PC 38:4,"('Lpcat1', 'Lpcat2')",True
+123,PC(18:1_20:1),PC 18:1_20:1,acylation,LPC 18:0,PC 38:2,"('Lpcat1', 'Lpcat2')",False
+123,PC(18:0_20:2),PC 18:0_20:2,acylation,LPC 18:0,PC 38:2,"('Lpcat1', 'Lpcat2')",True
+124,PC(20:0_18:1),PC 18:1_20:0,acylation,LPC 18:0,PC 38:1,"('Lpcat1', 'Lpcat2')",False
+124,PC(18:0_20:1),PC 18:0_20:1,acylation,LPC 18:0,PC 38:1,"('Lpcat1', 'Lpcat2')",True
+125,PC(20:0_20:4),PC 20:0_20:4,acylation,LPC 18:0,PC 40:4,"('Lpcat1', 'Lpcat2')",False
+125,PC(18:0_22:4),PC 18:0_22:4,acylation,LPC 18:0,PC 40:4,"('Lpcat1', 'Lpcat2')",True
+126,PC(22:0_18:2),PC 18:2_22:0,acylation,LPC 18:0,PC 40:2,"('Lpcat1', 'Lpcat2')",False
+127,PC(22:0_18:1),PC 18:1_22:0,hydrolysis,PC 40:1,LPC 18:0,Pla2g2a,False
+128,PC(22:0_18:1),PC 18:1_22:0,hydrolysis,PC 40:1,LPC 20:1,Pla2g2a,False
+129,PC(16:0_19:0),PC 16:0_19:0,hydrolysis,PC 35:0,LPC 18:0,Pla2g2a,False
+131,PC(16:0_22:6),PC 16:0_22:6,acylation,LPC 20:4,PC 38:6,"('Lpcat1', 'Lpcat2')",False
+132,PC(18:0_22:6),PC 18:0_22:6,acylation,LPC 20:4,PC 40:6,"('Lpcat1', 'Lpcat2')",False
+133,PC(18:1_22:6),PC 18:1_22:6,acylation,LPC 20:4,PC 40:7,"('Lpcat1', 'Lpcat2')",False
+134,PC(16:0_20:4),PC 16:0_20:4,acylation,LPC 20:4,PC 36:4,"('Lpcat1', 'Lpcat2')",True
+135,PC(18:1_20:4),PC 18:1_20:4,acylation,LPC 20:4,PC 38:5,"('Lpcat1', 'Lpcat2')",True
+136,PC(16:1_22:6),PC 16:1_22:6,acylation,LPC 20:4,PC 38:7,"('Lpcat1', 'Lpcat2')",False
+136,PC(18:2_20:5),PC 18:2_20:5,acylation,LPC 20:4,PC 38:7,"('Lpcat1', 'Lpcat2')",False
+137,PC(18:0_20:4),PC 18:0_20:4,acylation,LPC 20:4,PC 38:4,"('Lpcat1', 'Lpcat2')",True
+138,PC(20:0_20:4),PC 20:0_20:4,acylation,LPC 20:4,PC 40:4,"('Lpcat1', 'Lpcat2')",True
+138,PC(18:0_22:4),PC 18:0_22:4,acylation,LPC 20:4,PC 40:4,"('Lpcat1', 'Lpcat2')",False
+139,PC(16:1_22:6),PC 16:1_22:6,hydrolysis,PC 38:7,LPC 22:6,Pla2g2a,True
+139,PC(18:2_20:5),PC 18:2_20:5,hydrolysis,PC 38:7,LPC 22:6,Pla2g2a,False
+140,PC(16:1_22:6),PC 16:1_22:6,hydrolysis,PC 38:7,LPC 20:4,Pla2g2a,False
+140,PC(18:2_20:5),PC 18:2_20:5,hydrolysis,PC 38:7,LPC 20:4,Pla2g2a,False
+141,PC(18:0_22:6),PC 18:0_22:6,acylation,LPC 20:1,PC 40:6,"('Lpcat1', 'Lpcat2')",False
+142,PC(22:0_18:1),PC 18:1_22:0,acylation,LPC 20:1,PC 40:1,"('Lpcat1', 'Lpcat2')",False
+143,PC(16:0_18:1),PC 16:0_18:1,acylation,LPC 20:1,PC 34:1,"('Lpcat1', 'Lpcat2')",False
+144,PC(19:0_18:1),PC 18:1_19:0,acylation,LPC 20:1,PC 37:1,"('Lpcat1', 'Lpcat2')",False
+145,PC(18:0_18:2),PC 18:0_18:2,acylation,LPC 20:1,PC 36:2,"('Lpcat1', 'Lpcat2')",False
+146,PC(18:0_18:1),PC 18:0_18:1,acylation,LPC 20:1,PC 36:1,"('Lpcat1', 'Lpcat2')",False
+147,PC(18:0_20:4),PC 18:0_20:4,acylation,LPC 20:1,PC 38:4,"('Lpcat1', 'Lpcat2')",False
+148,PC(18:1_20:1),PC 18:1_20:1,acylation,LPC 20:1,PC 38:2,"('Lpcat1', 'Lpcat2')",True
+148,PC(18:0_20:2),PC 18:0_20:2,acylation,LPC 20:1,PC 38:2,"('Lpcat1', 'Lpcat2')",False
+149,PC(20:0_18:1),PC 18:1_20:0,acylation,LPC 20:1,PC 38:1,"('Lpcat1', 'Lpcat2')",False
+149,PC(18:0_20:1),PC 18:0_20:1,acylation,LPC 20:1,PC 38:1,"('Lpcat1', 'Lpcat2')",True
+150,PC(20:0_20:4),PC 20:0_20:4,acylation,LPC 20:1,PC 40:4,"('Lpcat1', 'Lpcat2')",False
+150,PC(18:0_22:4),PC 18:0_22:4,acylation,LPC 20:1,PC 40:4,"('Lpcat1', 'Lpcat2')",False
+151,PC(22:0_18:2),PC 18:2_22:0,acylation,LPC 20:1,PC 40:2,"('Lpcat1', 'Lpcat2')",False
+152,PC(19:0_18:1),PC 18:1_19:0,hydrolysis,PC 37:1,LPC 20:1,Pla2g2a,False
+153,PC(16:0_22:6),PC 16:0_22:6,acylation,LPC 22:6,PC 38:6,"('Lpcat1', 'Lpcat2')",True
+154,PC(18:0_22:6),PC 18:0_22:6,acylation,LPC 22:6,PC 40:6,"('Lpcat1', 'Lpcat2')",True
+155,PC(18:1_22:6),PC 18:1_22:6,acylation,LPC 22:6,PC 40:7,"('Lpcat1', 'Lpcat2')",True
+156,PC(17:0_22:6),PC 17:0_22:6,acylation,LPC 22:6,PC 39:6,"('Lpcat1', 'Lpcat2')",True
+157,PC(16:1_22:6),PC 16:1_22:6,acylation,LPC 22:6,PC 38:7,"('Lpcat1', 'Lpcat2')",True
+157,PC(18:2_20:5),PC 18:2_20:5,acylation,LPC 22:6,PC 38:7,"('Lpcat1', 'Lpcat2')",False
+158,PC(17:0_22:6),PC 17:0_22:6,hydrolysis,PC 39:6,LPC 22:6,Pla2g2a,True
+159,PG(18:1_22:5),PG 18:1_22:5,acylation,LPG 20:1,PG 40:6,Lpgat1,False
+160,PG(18:0_18:2),PG 18:0_18:2,acylation,LPG 20:1,PG 36:2,Lpgat1,False
+161,PG(16:0_18:1),PG 16:0_18:1,acylation,LPG 20:1,PG 34:1,Lpgat1,False
+163,PG(18:0_18:1),PG 18:0_18:1,acylation,LPG 20:1,PG 36:1,Lpgat1,False
+165,PG(18:1_20:2),PG 18:1_20:2,acylation,LPG 20:1,PG 38:3,Lpgat1,False
+167,PG(18:1_22:4),PG 18:1_22:4,acylation,LPG 20:1,PG 40:5,Lpgat1,False
+168,PG(18:1_22:3),PG 18:1_22:3,acylation,LPG 20:1,PG 40:4,Lpgat1,False
+169,PG(18:1_22:5),PG 18:1_22:5,hydrolysis,PG 40:6,LPG 20:1,Pla2g2a,False
+170,PG(18:0_18:2),PG 18:0_18:2,hydrolysis,PG 36:2,LPG 20:1,Pla2g2a,False
+171,PG(16:0_18:1),PG 16:0_18:1,hydrolysis,PG 34:1,LPG 20:1,Pla2g2a,False
+173,PG(18:0_18:1),PG 18:0_18:1,hydrolysis,PG 36:1,LPG 20:1,Pla2g2a,False
+175,PG(18:1_20:2),PG 18:1_20:2,hydrolysis,PG 38:3,LPG 20:1,Pla2g2a,False
+177,PG(18:1_22:4),PG 18:1_22:4,hydrolysis,PG 40:5,LPG 20:1,Pla2g2a,False
+178,PG(18:1_22:3),PG 18:1_22:3,hydrolysis,PG 40:4,LPG 20:1,Pla2g2a,False
+179,PA(16:0_18:1),PA 16:0_18:1,acylation,LPA 18:1,PA 34:1,"('Agpat1', 'Agpat2')",True
+183,PA(16:0_16:1),PA 16:0_16:1,acylation,LPA 18:1,PA 32:1,"('Agpat1', 'Agpat2')",False
+184,PA(16:0_20:4),PA 16:0_20:4,acylation,LPA 18:1,PA 36:4,"('Agpat1', 'Agpat2')",False
+187,PA(18:0_20:4),PA 18:0_20:4,acylation,LPA 18:1,PA 38:4,"('Agpat1', 'Agpat2')",False
+189,PA(16:0_18:1),PA 16:0_18:1,hydrolysis,PA 34:1,LPA 18:1,Pla2g2a,True
+193,PA(16:0_16:1),PA 16:0_16:1,hydrolysis,PA 32:1,LPA 18:1,Pla2g2a,False
+194,PA(16:0_20:4),PA 16:0_20:4,hydrolysis,PA 36:4,LPA 18:1,Pla2g2a,False
+197,PA(18:0_20:4),PA 18:0_20:4,hydrolysis,PA 38:4,LPA 18:1,Pla2g2a,False
+199,PS(18:0_18:1),PS 18:0_18:1,acylation,LPS 16:0,PS 36:1,Mboat2,False
+202,PS(16:0_20:4),PS 16:0_20:4,acylation,LPS 16:0,PS 36:4,Mboat2,True
+203,PS(16:0_20:3),PS 16:0_20:3,acylation,LPS 16:0,PS 36:3,Mboat2,True
+205,PS(18:0_18:2),PS 18:0_18:2,acylation,LPS 16:0,PS 36:2,Mboat2,False
+207,PS(18:1_20:4),PS 18:1_20:4,acylation,LPS 16:0,PS 38:5,Mboat2,False
+208,PS(18:0_18:1),PS 18:0_18:1,hydrolysis,PS 36:1,LPS 16:0,Pla2g2a,False
+212,PS(16:0_20:4),PS 16:0_20:4,hydrolysis,PS 36:4,LPS 16:0,Pla2g2a,True
+213,PS(16:0_20:3),PS 16:0_20:3,hydrolysis,PS 36:3,LPS 16:0,Pla2g2a,True
+216,PS(18:0_18:2),PS 18:0_18:2,hydrolysis,PS 36:2,LPS 16:0,Pla2g2a,False
+219,PS(18:1_20:4),PS 18:1_20:4,hydrolysis,PS 38:5,LPS 16:0,Pla2g2a,False
+220,PE(18:0_22:6),PE 18:0_22:6,acylation,LPE 22:6,PE 40:6,"('Mboat1', 'Mboat2')",True
+222,PE(16:0_22:6),PE 16:0_22:6,acylation,LPE 22:6,PE 38:6,"('Mboat1', 'Mboat2')",True
+223,PE(18:1_22:6),PE 18:1_22:6,acylation,LPE 22:6,PE 40:7,"('Mboat1', 'Mboat2')",True
+224,PE(16:1_22:6),PE 16:1_22:6,acylation,LPE 22:6,PE 38:7,"('Mboat1', 'Mboat2')",True
+225,PE(20:0_22:6),PE 20:0_22:6,acylation,LPE 22:6,PE 42:6,"('Mboat1', 'Mboat2')",True
+226,PE(18:0_22:6),PE 18:0_22:6,hydrolysis,PE 40:6,LPE 22:6,Pla2g2a,True
+227,PE(18:0_22:6),PE 18:0_22:6,hydrolysis,PE 40:6,LPE 18:0,Pla2g2a,True
+228,PE(18:0_22:6),PE 18:0_22:6,hydrolysis,PE 40:6,LPE 18:1,Pla2g2a,False
+229,PE(18:0_22:6),PE 18:0_22:6,hydrolysis,PE 40:6,LPE 22:4,Pla2g2a,False
+235,PE(16:0_22:6),PE 16:0_22:6,hydrolysis,PE 38:6,LPE 22:6,Pla2g2a,True
+236,PE(16:0_22:6),PE 16:0_22:6,hydrolysis,PE 38:6,LPE 18:1,Pla2g2a,False
+238,PE(18:1_22:6),PE 18:1_22:6,hydrolysis,PE 40:7,LPE 22:6,Pla2g2a,True
+239,PE(18:1_22:6),PE 18:1_22:6,hydrolysis,PE 40:7,LPE 18:1,Pla2g2a,True
+240,PE(18:1_22:6),PE 18:1_22:6,hydrolysis,PE 40:7,LPE 22:4,Pla2g2a,False
+242,PE(16:1_22:6),PE 16:1_22:6,hydrolysis,PE 38:7,LPE 22:6,Pla2g2a,True
+244,PE(20:0_22:6),PE 20:0_22:6,hydrolysis,PE 42:6,LPE 22:6,Pla2g2a,True
+245,PE(20:0_22:6),PE 20:0_22:6,hydrolysis,PE 42:6,LPE 20:0,Pla2g2a,True
+246,PE(20:0_22:6),PE 20:0_22:6,hydrolysis,PE 42:6,LPE 22:4,Pla2g2a,False
+247,PE(20:0_22:6),PE 20:0_22:6,hydrolysis,PE 42:6,LPE 22:1,Pla2g2a,False
+249,PE(18:0_22:6),PE 18:0_22:6,acylation,LPE 22:4,PE 40:6,"('Mboat1', 'Mboat2')",False
+251,PE(18:1_22:6),PE 18:1_22:6,acylation,LPE 22:4,PE 40:7,"('Mboat1', 'Mboat2')",False
+252,PE(18:0_22:4),PE 18:0_22:4,acylation,LPE 22:4,PE 40:4,"('Mboat1', 'Mboat2')",True
+253,PE(18:0_20:4),PE 18:0_20:4,acylation,LPE 22:4,PE 38:4,"('Mboat1', 'Mboat2')",False
+254,PE(20:0_22:6),PE 20:0_22:6,acylation,LPE 22:4,PE 42:6,"('Mboat1', 'Mboat2')",False
+255,PE(18:0_22:4),PE 18:0_22:4,hydrolysis,PE 40:4,LPE 22:4,Pla2g2a,True
+256,PE(18:0_22:4),PE 18:0_22:4,hydrolysis,PE 40:4,LPE 18:0,Pla2g2a,True
+257,PE(18:0_22:4),PE 18:0_22:4,hydrolysis,PE 40:4,LPE 18:1,Pla2g2a,False
+258,PE(18:0_22:4),PE 18:0_22:4,hydrolysis,PE 40:4,LPE 22:1,Pla2g2a,False
+259,PE(18:0_22:4),PE 18:0_22:4,hydrolysis,PE 40:4,LPE 20:0,Pla2g2a,False
+261,PE(18:0_20:4),PE 18:0_20:4,hydrolysis,PE 38:4,LPE 22:4,Pla2g2a,False
+262,PE(18:0_20:4),PE 18:0_20:4,hydrolysis,PE 38:4,LPE 18:0,Pla2g2a,True
+263,PE(18:0_20:4),PE 18:0_20:4,hydrolysis,PE 38:4,LPE 18:1,Pla2g2a,False
+265,PE(18:0_22:6),PE 18:0_22:6,acylation,LPE 18:1,PE 40:6,"('Mboat1', 'Mboat2')",False
+266,PE(16:0_22:6),PE 16:0_22:6,acylation,LPE 18:1,PE 38:6,"('Mboat1', 'Mboat2')",False
+267,PE(18:1_22:6),PE 18:1_22:6,acylation,LPE 18:1,PE 40:7,"('Mboat1', 'Mboat2')",True
+268,PE(18:0_22:4),PE 18:0_22:4,acylation,LPE 18:1,PE 40:4,"('Mboat1', 'Mboat2')",False
+269,PE(18:0_18:1),PE 18:0_18:1,acylation,LPE 18:1,PE 36:1,"('Mboat1', 'Mboat2')",True
+270,PE(18:0_20:1),PE 18:0_20:1,acylation,LPE 18:1,PE 38:1,"('Mboat1', 'Mboat2')",False
+271,PE(18:0_20:4),PE 18:0_20:4,acylation,LPE 18:1,PE 38:4,"('Mboat1', 'Mboat2')",False
+272,PE(18:0_18:1),PE 18:0_18:1,hydrolysis,PE 36:1,LPE 22:1,Pla2g2a,False
+273,PE(18:0_18:1),PE 18:0_18:1,hydrolysis,PE 36:1,LPE 20:0,Pla2g2a,False
+274,PE(18:0_18:1),PE 18:0_18:1,hydrolysis,PE 36:1,LPE 18:1,Pla2g2a,True
+275,PE(18:0_18:1),PE 18:0_18:1,hydrolysis,PE 36:1,LPE 18:0,Pla2g2a,True
+278,PE(18:0_20:1),PE 18:0_20:1,hydrolysis,PE 38:1,LPE 22:1,Pla2g2a,False
+279,PE(18:0_20:1),PE 18:0_20:1,hydrolysis,PE 38:1,LPE 18:0,Pla2g2a,True
+280,PE(18:0_20:1),PE 18:0_20:1,hydrolysis,PE 38:1,LPE 18:1,Pla2g2a,False
+281,PE(18:0_20:1),PE 18:0_20:1,hydrolysis,PE 38:1,LPE 20:0,Pla2g2a,False
+284,PE(18:0_22:6),PE 18:0_22:6,acylation,LPE 18:0,PE 40:6,"('Mboat1', 'Mboat2')",True
+285,PE(18:0_22:4),PE 18:0_22:4,acylation,LPE 18:0,PE 40:4,"('Mboat1', 'Mboat2')",True
+286,PE(16:0_18:0),PE 16:0_18:0,acylation,LPE 18:0,PE 34:0,"('Mboat1', 'Mboat2')",True
+287,PE(18:0_18:1),PE 18:0_18:1,acylation,LPE 18:0,PE 36:1,"('Mboat1', 'Mboat2')",True
+288,PE(18:0_18:0),PE 18:0_18:0,acylation,LPE 18:0,PE 36:0,"('Mboat1', 'Mboat2')",True
+289,PE(18:0_20:1),PE 18:0_20:1,acylation,LPE 18:0,PE 38:1,"('Mboat1', 'Mboat2')",True
+290,PE(18:0_20:4),PE 18:0_20:4,acylation,LPE 18:0,PE 38:4,"('Mboat1', 'Mboat2')",True
+291,PE(16:0_18:0),PE 16:0_18:0,hydrolysis,PE 34:0,LPE 20:0,Pla2g2a,False
+292,PE(16:0_18:0),PE 16:0_18:0,hydrolysis,PE 34:0,LPE 18:0,Pla2g2a,True
+294,PE(18:0_18:0),PE 18:0_18:0,hydrolysis,PE 36:0,LPE 20:0,Pla2g2a,False
+295,PE(18:0_18:0),PE 18:0_18:0,hydrolysis,PE 36:0,LPE 18:0,Pla2g2a,True
+297,PE(18:0_22:4),PE 18:0_22:4,acylation,LPE 20:0,PE 40:4,"('Mboat1', 'Mboat2')",False
+298,PE(16:0_18:0),PE 16:0_18:0,acylation,LPE 20:0,PE 34:0,"('Mboat1', 'Mboat2')",False
+299,PE(18:0_18:1),PE 18:0_18:1,acylation,LPE 20:0,PE 36:1,"('Mboat1', 'Mboat2')",False
+300,PE(18:0_18:0),PE 18:0_18:0,acylation,LPE 20:0,PE 36:0,"('Mboat1', 'Mboat2')",False
+301,PE(18:0_20:1),PE 18:0_20:1,acylation,LPE 20:0,PE 38:1,"('Mboat1', 'Mboat2')",False
+302,PE(20:0_22:6),PE 20:0_22:6,acylation,LPE 20:0,PE 42:6,"('Mboat1', 'Mboat2')",True
+303,PE(18:0_22:4),PE 18:0_22:4,acylation,LPE 22:1,PE 40:4,"('Mboat1', 'Mboat2')",False
+304,PE(18:0_18:1),PE 18:0_18:1,acylation,LPE 22:1,PE 36:1,"('Mboat1', 'Mboat2')",False
+305,PE(18:0_20:1),PE 18:0_20:1,acylation,LPE 22:1,PE 38:1,"('Mboat1', 'Mboat2')",False
+306,PE(20:0_22:6),PE 20:0_22:6,acylation,LPE 22:1,PE 42:6,"('Mboat1', 'Mboat2')",False
+335,PC(O-18:1_16:0),PC O-18:1/16:0,hydrolysis,PC O-34:1,LPC O-18:0,Pla2g2a,False
+336,PC(O-18:1_16:0),PC O-18:1/16:0,hydrolysis,PC O-34:1,LPC O-16:0,Pla2g2a,False
+337,PC(O-18:1_16:0),PC O-18:1/16:0,hydrolysis,PC O-34:1,LPC 18:1,Pla2g2a,False
+338,PC(O-18:1_16:0),PC O-18:1/16:0,acylation,LPC O-18:0,PC O-34:1,"('Lpcat1', 'Lpcat2')",False
+339,PC(O-16:0_16:0),PC O-16:0/16:0,acylation,LPC O-18:0,PC O-32:0,"('Lpcat1', 'Lpcat2')",False
+340,PC(O-18:0_18:1),PC O-18:0/18:1,acylation,LPC O-18:0,PC O-36:1,"('Lpcat1', 'Lpcat2')",True
+341,PC(O-18:1_16:0),PC O-18:1/16:0,acylation,LPC O-16:0,PC O-34:1,"('Lpcat1', 'Lpcat2')",False
+342,PC(O-16:0_16:0),PC O-16:0/16:0,acylation,LPC O-16:0,PC O-32:0,"('Lpcat1', 'Lpcat2')",True
+343,PC(O-18:0_18:1),PC O-18:0/18:1,acylation,LPC O-16:0,PC O-36:1,"('Lpcat1', 'Lpcat2')",False
+344,PC(O-16:0_16:0),PC O-16:0/16:0,hydrolysis,PC O-32:0,LPC O-18:0,Pla2g2a,False
+345,PC(O-16:0_16:0),PC O-16:0/16:0,hydrolysis,PC O-32:0,LPC O-16:0,Pla2g2a,True
+346,PC(O-16:0_16:0),PC O-16:0/16:0,hydrolysis,PC O-32:0,LPC 16:0,Pla2g2a,True
+347,PC(O-18:0_18:1),PC O-18:0/18:1,hydrolysis,PC O-36:1,LPC O-18:0,Pla2g2a,True
+348,PC(O-18:0_18:1),PC O-18:0/18:1,hydrolysis,PC O-36:1,LPC O-16:0,Pla2g2a,False
+349,PC(O-18:0_18:1),PC O-18:0/18:1,hydrolysis,PC O-36:1,LPC 18:1,Pla2g2a,True
+350,PC(O-18:0_18:1),PC O-18:0/18:1,hydrolysis,PC O-36:1,LPC 20:1,Pla2g2a,False

@@ -1,0 +1,4 @@
+"topology_hash","n_grid_rows","materialized_solution_ref","tf_panels","pruning_steps","n_layers","threshold_pairs","measurement_features","upstream_source_nodes","observed_tfs","edges","nodes"
+"3f2880864d1fd8aba990f8b8db93ed1d",6,"runs/direct_strong_tfs_pruning4_layers4/solutions/T0007","strong_tfs","4;6;8","4;6","0.5/0.5","LPS(18:0)","Metab__CHEBI:85403_unknown","2",5,6
+"c7757e9b4ddcad373e919f6036fef93a",2,"runs/direct_all_tfs_pruning6_layers6/solutions/T0007","all_tfs","6;8","6","0.5/0.5","FA(18:1);LPS(18:0)","Metab__CHEBI:27997_unknown;Metab__CHEBI:85403_unknown","15",25,25
+"f169d7ed3965a86f528bf503d2d00c49",2,"runs/direct_all_tfs_pruning4_layers4/solutions/T0007","all_tfs","4","4;6","0.5/0.5","FA(16:0);LPS(18:0)","Metab__CHEBI:15756_unknown;Metab__CHEBI:85403_unknown","2",4,6

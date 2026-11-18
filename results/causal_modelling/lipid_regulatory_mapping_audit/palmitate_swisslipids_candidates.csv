@@ -1,0 +1,3 @@
+feature_id,swisslipids_id,match_type,matched_abbreviation,candidate_canonical,candidate_nomenclature_level,via_swisslipids_id,in_lipid_de,in_factor1,measured_canonical,measured_nomenclature_level,swisslipids_level,name,abbreviation,chebi_ids,class_ids,parent_ids,lipidmaps_ids,hmdb_ids
+FA(16:0),SLM:000000510,exact_reported_resolution,FA(16:0),FA 16:0,FULL_STRUCTURE,,True,False,FA 16:0,FULL_STRUCTURE,Isomeric subspecies,hexadecanoate,FA(16:0),CHEBI:7896,SLM:000389800,,LMFA01010001,HMDB00220
+FA(16:0),SLM:000001261,exact_reported_resolution,FA(16:0),FA 16:0,FULL_STRUCTURE,,True,False,FA 16:0,FULL_STRUCTURE,Species,hexadecanoate,FA(16:0),CHEBI:78123,SLM:000389800,,,

@@ -1,0 +1,26 @@
+{
+  "analysis": "factor1_tf_to_lipid",
+  "inputs": "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+  "pkn": "results/causal_modelling/cosmos_mouse_pkn/pkn_lipid_rules.rds",
+  "pkn_directory": "results/causal_modelling/cosmos_mouse_pkn",
+  "input_mapping": "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_node_mapping.csv",
+  "output": "results/causal_modelling/factor1_tf_to_lipid",
+  "pruning_steps": 6,
+  "n_layers": 4,
+  "max_iterations": 10,
+  "tf_cutoff": 2,
+  "primary": 1.85,
+  "secondary": 0.55,
+  "focus_tfs": ["Gene__Esr1", "Gene__Nfic", "Gene__Dbp"],
+  "reference_run": "miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth4_compressed",
+  "reference_compression": "miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/topology_radius_6/compressed/compression.rds",
+  "reference_solution": "miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03",
+  "reference_all_scores": "miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/score_retention/radius6_depth4_compressed_scores_all.csv",
+  "packages": {"cosmosR": "1.21.2", "decoupleR": "2.17.0", "igraph": "2.3.3", "jsonlite": "2.0.0"},
+  "cosmos_commit": "b2ed195738479c4ad204cace37fd11ae2fd02bb8",
+  "input_md5": {
+    "results/causal_modelling/cosmos_mouse_pkn/pkn_lipid_rules.rds": "be8da3886f19f8b121a389e442113edd",
+    "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds": "679f0f336499ec59106eb2107bb49ec4",
+    "scripts/moon/moon_safe_helpers.R": "86be2ca41edc65841f7674209c8b36fd"
+  }
+}

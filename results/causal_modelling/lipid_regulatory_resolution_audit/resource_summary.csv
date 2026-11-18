@@ -1,0 +1,6 @@
+resource,evidence_tier,candidate_features,newly_detected_features,regulatory_chemicals,features_with_curated_edge_candidates,features_with_exploratory_edge_candidates,historical_factor1_features,candidate_features_list,formula_incompatible_rows
+MRCLinksDB,excluded_unsigned_association,11,9,13,0,0,0,FA(14:0)|FA(16:0)|FA(16:1)|FA(18:1)|FA(18:2)|FA(18:3)|FA(20:3)|FA(20:4)|FA(20:5)|FA(22:6)|LPS(18:0),0
+STITCH,cached_stitch_fallback,13,11,28,0,13,0,FA(14:0)|FA(16:0)|FA(16:1)|FA(18:1)|FA(18:2)|FA(18:3)|FA(20:3)|FA(20:4)|FA(20:5)|FA(22:4)|FA(22:5)|FA(22:6)|PC(36:2),3
+BRENDA,cached_brenda_fallback,2,2,2,0,1,0,FA(18:1)|FA(20:4),0
+GuideToPharmacology,curated_mouse_current,2,2,2,2,2,0,FA(20:4)|FA(22:6),0
+GuideToPharmacology,curated_mouse_current_secondary_chemical_mapping,1,0,1,0,1,0,LPS(18:0),0

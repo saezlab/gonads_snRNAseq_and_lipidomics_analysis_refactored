@@ -1,0 +1,151 @@
+{
+  "analysis": "factor1_tf_to_lipid_expanded_chain",
+  "assumptions": [
+    "Original TF/RNA/regulon vectors and factor orientation are retained by the downstream R workflow; this script only prepares the lipid ledger.",
+    "Each loading is assigned once. Alternative ChEBI/measured identities may remain unobserved intermediates in the PKN.",
+    "LPC(20:0/0:0) retains frozen CHEBI:74968_unknown, although only its new MeasuredLipid alias is an active product; primary candidate coverage419 therefore yields418 chosen product endpoints.",
+    "Four other original observations are substrate-only. They remain in the comparison input ledger and must pass the usual directed topology preparation.",
+    "Unreported sn positions, DG occupancy, double-bond positions, stereochemistry and enzyme molecular specificity remain conditional reaction hypotheses.",
+    "Bulk-liver lipid loadings and hepatocyte TF activities retain the cell-type scope of the frozen analysis.",
+    "Reaction projection encodes catalyst/substrate participation and product formation; it is not a stoichiometric flux or signed concentration model.",
+    "CSV weights retain frozen exported numeric text; read full-precision values from factor1_inputs.rds by feature ID when creating the R input vector and check agreement within export precision."
+  ],
+  "counts": {
+    "active_PKN_nodes": 66621,
+    "all_weights_finite_nonzero": 1254,
+    "chain_candidate_product_features": 419,
+    "chosen_active_product_endpoints": 418,
+    "chosen_nonproduct_observations": 5,
+    "chosen_observations": 423,
+    "frozen_observations_preserved": 155,
+    "full_weight_features": 1254,
+    "mapping_methods": {
+      "new_one_to_one_measured_lipid_product": 268,
+      "preserve_frozen_accepted_node": 155
+    },
+    "multi_product_alias_features": 5,
+    "newly_mapped_features": 268,
+    "original_active_product_features": 128
+  },
+  "eligibility_checks": {
+    "all_chosen_ids_present": true,
+    "conditional_glycan_identities_excluded": true,
+    "finite_nonzero_weights": true,
+    "frozen_identities_and_CSV_values_retained": true,
+    "frozen_mapping_and_full_weights_identical": true,
+    "new_ids_are_active_product_endpoints": true,
+    "no_feature_loading_copied_to_alternative_nodes": true,
+    "unique_feature_ids": true,
+    "unique_node_ids": true
+  },
+  "mapping_policy": "Preserve all 155 frozen accepted nodes and values; add one explicit MeasuredLipid product node for each newly eligible feature.",
+  "multi_product_alias_cases": [
+    {
+      "feature_id": "LPC(16:0)",
+      "is_active_product": true,
+      "mapping_method": "preserve_frozen_accepted_node",
+      "node_id": "Metab__CHEBI:64563_unknown",
+      "product_candidates": "Metab__CHEBI:64563_unknown|Metab__MeasuredLipid:LPC(16:0)_unknown",
+      "weight": "0.0643051799917948"
+    },
+    {
+      "feature_id": "LPC(14:0/0:0)",
+      "is_active_product": true,
+      "mapping_method": "preserve_frozen_accepted_node",
+      "node_id": "Metab__CHEBI:64489_unknown",
+      "product_candidates": "Metab__CHEBI:64489_unknown|Metab__MeasuredLipid:LPC(14:0/0:0)_unknown",
+      "weight": "0.0751666475290262"
+    },
+    {
+      "feature_id": "LPC(16:0/0:0)",
+      "is_active_product": true,
+      "mapping_method": "preserve_frozen_accepted_node",
+      "node_id": "Metab__CHEBI:72998_unknown",
+      "product_candidates": "Metab__CHEBI:72998_unknown|Metab__MeasuredLipid:LPC(16:0/0:0)_unknown",
+      "weight": "0.0867879339772561"
+    },
+    {
+      "feature_id": "LPC(17:0/0:0)",
+      "is_active_product": true,
+      "mapping_method": "preserve_frozen_accepted_node",
+      "node_id": "Metab__CHEBI:74340_unknown",
+      "product_candidates": "Metab__CHEBI:74340_unknown|Metab__MeasuredLipid:LPC(17:0/0:0)_unknown",
+      "weight": "-0.0104537856325495"
+    },
+    {
+      "feature_id": "LPC(18:0/0:0)",
+      "is_active_product": true,
+      "mapping_method": "preserve_frozen_accepted_node",
+      "node_id": "Metab__CHEBI:73858_unknown",
+      "product_candidates": "Metab__CHEBI:73858_unknown|Metab__MeasuredLipid:LPC(18:0/0:0)_unknown",
+      "weight": "-0.377351710183696"
+    }
+  ],
+  "no_scoring_performed": true,
+  "nonproduct_observations": [
+    {
+      "feature_id": "PI(17:0_22:6)",
+      "is_active_product": false,
+      "mapping_method": "preserve_frozen_accepted_node",
+      "node_id": "Metab__MeasuredLipid:PI(17:0_22:6)_unknown",
+      "product_candidates": "",
+      "weight": "-0.00790185967445494"
+    },
+    {
+      "feature_id": "DG(16:0_22:5)",
+      "is_active_product": false,
+      "mapping_method": "preserve_frozen_accepted_node",
+      "node_id": "Metab__MeasuredLipid:DG(16:0_22:5)_unknown",
+      "product_candidates": "",
+      "weight": "-0.0241158478474059"
+    },
+    {
+      "feature_id": "DG(18:1_22:1)",
+      "is_active_product": false,
+      "mapping_method": "preserve_frozen_accepted_node",
+      "node_id": "Metab__MeasuredLipid:DG(18:1_22:1)_unknown",
+      "product_candidates": "",
+      "weight": "1.40181739339647"
+    },
+    {
+      "feature_id": "DG(22:1_22:6)",
+      "is_active_product": false,
+      "mapping_method": "preserve_frozen_accepted_node",
+      "node_id": "Metab__MeasuredLipid:DG(22:1_22:6)_unknown",
+      "product_candidates": "",
+      "weight": "2.46623968224454"
+    },
+    {
+      "feature_id": "LPC(20:0/0:0)",
+      "is_active_product": false,
+      "mapping_method": "preserve_frozen_accepted_node",
+      "node_id": "Metab__CHEBI:74968_unknown",
+      "product_candidates": "Metab__MeasuredLipid:LPC(20:0/0:0)_unknown",
+      "weight": "0.114539498928745"
+    }
+  ],
+  "orientation": {
+    "interpretation": "Common factor-axis orientation; not a direct testes-minus-ovaries differential effect.",
+    "label": "testes_positive_Factor1_coordinate",
+    "multiplier": 1,
+    "saved_coordinate_group_means": {
+      "Ovaries": -0.7422907154646632,
+      "Testes": 0.708550228398085
+    }
+  },
+  "output_files": [
+    "input_mapping.csv",
+    "nodes.csv",
+    "mapping_audit.json"
+  ],
+  "sha256": {
+    "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds": "e9ff6c6602863d4c246722e1b8f06970e724ce6bc71388aa6005416e5cc5a4ac",
+    "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_node_mapping.csv": "88f8b9d3d4d2df506441fab6832ad44802670e3ce8c35aabeac3316579af305d",
+    "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_weights_all.csv": "33e6db7b590bf553f72052563cc36a0faf84c1137b7eaca26c368f56049e1d86",
+    "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_model_audit.json": "13ece8b7ee209a3fecdff6fcc1d32fbf2e9b65f23e40cebcfdb5ab857134ea04",
+    "results/causal_modelling/cosmos_mouse_pkn_expanded_species/measured_product_candidate_inventory.csv": "9d2a8a41747d43f7b0931f8a94163c65bab6e7da903c3f455e2577d37f390bac",
+    "results/causal_modelling/cosmos_mouse_pkn_expanded_species/nodes.jsonl": "5109a10c8da663f8224d81b4e30417d5c74c8d944619a74bd76bd8dfed734679",
+    "results/causal_modelling/cosmos_mouse_pkn_expanded_species/pkn_expanded_chain.csv": "114b206cbab6762d4f598c7b7ed65e696c7e118e06a28eefb66c9ceb70571c7e",
+    "scripts/moon/ancillary/prepare_expanded_factor1_mapping.py": "4925307f7c5d9ea78408d642c6ed31ccad108b1c73f966addb22274501c4b95d"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "original_path": "docs/cosmos_factor1_ko_validation_targets.md",
+    "snapshot": "cosmos_factor1_ko_validation_targets.md",
+    "sha256": "db4b741f267bca8389355a2c72faf8f10f7242be02d1ec610257be7454d184f8"
+  },
+  {
+    "original_path": "output/pdf/cosmos_factor1_ko_validation_targets.pdf",
+    "snapshot": "cosmos_factor1_ko_validation_targets.pdf",
+    "sha256": "9002c470d98a4c2f7c6b1834566977757f11200033a1a94ae20d2fc1158ad777"
+  },
+  {
+    "original_path": "scripts/reports/render_cosmos_ko_validation_pdf.py",
+    "snapshot": "render_cosmos_ko_validation_pdf.py",
+    "sha256": "abd0106dea613158f5d58fbab548ef62b982baa2af51b901ecb01468b2fc1ca3"
+  },
+  {
+    "original_path": "results/causal_modelling/factor1_ko_validation_targets/pdf_export_audit.json",
+    "snapshot": "pdf_export_audit.json",
+    "sha256": "8d3d52f64ecea3ecf12ae20d0644a1a60413ef2964379c2366609b4055a10584"
+  }
+]

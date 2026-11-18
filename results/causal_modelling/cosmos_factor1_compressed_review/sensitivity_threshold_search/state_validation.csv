@@ -1,9 +1,0 @@
-"run_id","original_final_edges","scoring_final_edges","merged_original_nodes","same_compressed_group_same_score","final_original_projects_to_scored_pkn"
-"radius6_depth4_compressed_inputs_only",35275,25039,3391,TRUE,TRUE
-"radius6_depth8_compressed_inputs_only",34228,24054,3415,TRUE,TRUE
-"radius12_depth8_compressed",37175,28808,3021,TRUE,TRUE
-"radius4_depth8_compressed",13643,12127,597,TRUE,TRUE
-"radius5_depth8_compressed",26686,21051,2136,TRUE,TRUE
-"radius7_depth8_compressed",36230,27867,3062,TRUE,TRUE
-"radius6_depth4_compressed_prescore_rna",34556,27006,2729,TRUE,TRUE
-"radius6_depth8_compressed_prescore_rna",33580,26030,2729,TRUE,TRUE

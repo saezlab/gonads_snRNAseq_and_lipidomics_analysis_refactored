@@ -1,0 +1,53 @@
+{
+  "analysis": "factor1_lipid_to_tf_relaxed",
+  "inputs": "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+  "pkn": "results/causal_modelling/cosmos_mouse_pkn_stitch_directional/pkn_exploratory_stitch_directional.rds",
+  "mapping": "results/causal_modelling/factor1_relaxed_lipid_regulatory_mapping/default_relaxed_measurement_assignments.csv",
+  "direct_evidence": "results/causal_modelling/factor1_relaxed_lipid_regulatory_mapping/candidate_assignment_regulatory_edges.csv",
+  "output": "results/causal_modelling/factor1_lipid_to_tf_relaxed",
+  "selected": {
+    "tf_panel": "strong_tfs",
+    "pruning_steps": 4,
+    "n_layers": 4,
+    "primary": 0.5,
+    "secondary": 0.5,
+    "expected_measurement_feature": "LPS(18:0)",
+    "expected_source_node": "Metab__CHEBI:85403_unknown",
+    "expected_observed_tfs": ["Gene__Ar", "Gene__Esr1"],
+    "reference_fit": "results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory/runs/direct_strong_tfs_pruning4_layers4/run_state.rds",
+    "reference_solution": "results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory/score_layer_constrained/solutions/direct_strong_tfs_pruning4_layers4__p0.5__s0.5",
+    "reference_fit_md5": "2323d219e4264163016ccd2dd9403443",
+    "reference_solution_sif_md5": "b634332c7624025e6c848fe417370046"
+  },
+  "max_iterations": 10,
+  "strong_tf_cutoff": 2,
+  "maximum_solution_edges_exclusive": 500,
+  "minimum_independent_edge_fingerprint_groups": 1,
+  "minimum_downstream_tfs": 2,
+  "packages": {
+    "cosmosR": "1.21.2",
+    "decoupleR": "2.17.0",
+    "igraph": "2.3.3",
+    "jsonlite": "2.0.0"
+  },
+  "cosmos_commit": "b2ed195738479c4ad204cace37fd11ae2fd02bb8",
+  "input_md5": {
+    "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds": "679f0f336499ec59106eb2107bb49ec4",
+    "results/causal_modelling/cosmos_mouse_pkn_stitch_directional/pkn_exploratory_stitch_directional.rds": "e7305870a6cfb9b376d6c11009cea9f7",
+    "results/causal_modelling/factor1_relaxed_lipid_regulatory_mapping/default_relaxed_measurement_assignments.csv": "f045abeb2dddb02d4b7370d3317b0bfe",
+    "results/causal_modelling/factor1_relaxed_lipid_regulatory_mapping/candidate_assignment_regulatory_edges.csv": "1237e8fecd4728e3063b0ba7af42b544",
+    "results/causal_modelling/cosmos_mouse_pkn_stitch_directional/edge_evidence.jsonl.gz": "cac4b19fdc84432447b527a6be9a7854",
+    "scripts/moon/moon_safe_helpers.R": "86be2ca41edc65841f7674209c8b36fd"
+  },
+  "upstream_semantics": "Each relaxed chemical candidate is a topology seed. Its mapped Factor 1 lipid loading is retained as assignment-level sign-consistency evidence, not as a propagated activity or dose.",
+  "downstream_semantics": "The selected sensitivity uses PKN-present Factor 1 hepatocyte TF footprint activities with absolute activity greater than 2. Ar and Esr1 are supplied terminal observations, not independently predicted validation targets.",
+  "pkn_semantics": "Only direct chemical-to-protein and protein-to-protein edges from the directionality-audited STITCH exploratory PKN are used. Reaction and metabolite-to-metabolite edges are excluded.",
+  "limitations": [
+    "A relaxed chemical candidate can resolve unmeasured double-bond position, geometry, stereochemistry, sn position, or acid/base state.",
+    "One measured lipid can map to multiple chemicals, and related chemical candidates can share direct regulatory edge fingerprints.",
+    "MOON scores are generated from TF activities and PKN topology; copied Factor 1 lipid loadings are post-score annotations rather than independent score evidence.",
+    "Measured bulk-liver lipid abundance does not establish hepatocyte ligand exposure, receptor engagement, or temporal ordering.",
+    "The selected route is a low-threshold sensitivity: no compact strict score-layer solution remained when either tested cutoff exceeded 0.5.",
+    "The directional STITCH v5 source files are historical, and all candidate routes remain exploratory mechanistic hypotheses."
+  ]
+}

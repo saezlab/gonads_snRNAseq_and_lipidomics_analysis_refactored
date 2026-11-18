@@ -1,0 +1,265 @@
+source,score,level,type,RNA_input,node_id,label,pkn_label,node_type,reaction_id,catalysts,compartment,chemical_id,measurement_feature_id,candidate_identity_condition,factor1_weight,moon_score
+Enzyme__018944c965056900,-2.34439100746808,3,other,,Enzyme__018944c965056900,Ptgs2 [RHEA:48817],RHEA:48817 forward,enzyme_reaction_instance,RHEA:48817,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__037cdebf8f86ad56,-1.1709066482569,1,other,,Enzyme__037cdebf8f86ad56,Pnpla8 [RHEA:40820],RHEA:40820 forward,enzyme_reaction_instance,RHEA:40820,Gene__Pnpla8,,,,,,-1.1709066482569
+Enzyme__03a97175be51bf61,-2.34439100746808,3,other,,Enzyme__03a97175be51bf61,Pm20d1 [RHEA:64118],RHEA:64118 forward,enzyme_reaction_instance,RHEA:64118,Gene__Pm20d1,,,,,,-2.34439100746808
+Enzyme__03f8af34500e1926,-2.34439100746808,3,other,,Enzyme__03f8af34500e1926,Ptgs1 [RHEA:23729],RHEA:23729 forward,enzyme_reaction_instance,RHEA:23729,Gene__Ptgs1,,,,,,-2.34439100746808
+Enzyme__090e82d3671fa7de,-4.35974024023324,1,other,,Enzyme__090e82d3671fa7de,Smpd2 [species rule ba63cac0],EXPANDED_LIPID_RULE:ba63cac002e903173b52,enzyme_reaction_instance,EXPANDED_LIPID_RULE:ba63cac002e903173b52,Gene__Smpd2,,,,,,-4.35974024023324
+Enzyme__0986ec737fd7cdb4,-4.35974024023324,1,other,,Enzyme__0986ec737fd7cdb4,Smpd4 [species rule b0cc04f6],EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,enzyme_reaction_instance,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,Gene__Smpd4,,,,,,-4.35974024023324
+Enzyme__0b76cc5ac614cb09,-2.34439100746808,3,other,,Enzyme__0b76cc5ac614cb09,Ptgs2 [RHEA:45293],RHEA:45293 forward,enzyme_reaction_instance,RHEA:45293,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__0e2420d57eb4e586,-2.34439100746808,3,other,,Enzyme__0e2420d57eb4e586,Ptgs2 [RHEA:50197],RHEA:50197 forward,enzyme_reaction_instance,RHEA:50197,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__0ff52490369f487a,-3.53767485123988,1,other,,Enzyme__0ff52490369f487a,Smpd2 [species rule f8325f37],EXPANDED_LIPID_RULE:f8325f37adac5218d482,enzyme_reaction_instance,EXPANDED_LIPID_RULE:f8325f37adac5218d482,Gene__Smpd2,,,,,,-3.53767485123988
+Enzyme__11c37b6b9d75eee2,-1.89307771026387,1,other,,Enzyme__11c37b6b9d75eee2,Smpd1 [species rule 05c00a47],EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,enzyme_reaction_instance,EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,Gene__Smpd1,,,,,,-1.89307771026387
+Enzyme__12676a2b7c9b4293,-2.34439100746808,3,other,,Enzyme__12676a2b7c9b4293,Ptgs2 [RHEA:48805],RHEA:48805 forward,enzyme_reaction_instance,RHEA:48805,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__12bec69d6ab328d1,-2.01772643655529,1,other,,Enzyme__12bec69d6ab328d1,Smpd2 [species rule 81227748],EXPANDED_LIPID_RULE:81227748ebd67027a92e,enzyme_reaction_instance,EXPANDED_LIPID_RULE:81227748ebd67027a92e,Gene__Smpd2,,,,,,-2.01772643655529
+Enzyme__164a24ec57815d59,-2.34439100746808,3,other,,Enzyme__164a24ec57815d59,Ptgs2 [RHEA:50861],RHEA:50861 forward,enzyme_reaction_instance,RHEA:50861,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__16c51e3729aae1ff,-3.53767485123988,1,other,,Enzyme__16c51e3729aae1ff,Smpd1 [species rule f8325f37],EXPANDED_LIPID_RULE:f8325f37adac5218d482,enzyme_reaction_instance,EXPANDED_LIPID_RULE:f8325f37adac5218d482,Gene__Smpd1,,,,,,-3.53767485123988
+Enzyme__186d759faf7c225d,-2.34439100746808,3,other,,Enzyme__186d759faf7c225d,Ptgs1 [RHEA:75456],RHEA:75456 forward,enzyme_reaction_instance,RHEA:75456,Gene__Ptgs1,,,,,,-2.34439100746808
+Enzyme__1893ce49f28632aa,-2.34439100746808,3,other,,Enzyme__1893ce49f28632aa,Ptgs2 [RHEA:48809],RHEA:48809 forward,enzyme_reaction_instance,RHEA:48809,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__18b36bc257af1d5d,-4.35974024023324,1,other,,Enzyme__18b36bc257af1d5d,Smpd5 [species rule b0cc04f6],EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,enzyme_reaction_instance,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,Gene__Smpd5,,,,,,-4.35974024023324
+Enzyme__1928f075c69b371f,-2.34439100746808,3,other,,Enzyme__1928f075c69b371f,Pm20d1 [RHEA:64110],RHEA:64110 forward,enzyme_reaction_instance,RHEA:64110,Gene__Pm20d1,,,,,,-2.34439100746808
+Enzyme__1956faad52d99023,-2.34439100746808,3,other,,Enzyme__1956faad52d99023,Alox5 [RHEA:50845],RHEA:50845 forward,enzyme_reaction_instance,RHEA:50845,Gene__Alox5,,,,,,-2.34439100746808
+Enzyme__1d40399ceadaaf53,-2.70273304655288,1,other,,Enzyme__1d40399ceadaaf53,Smpd2 [species rule 95723a98],EXPANDED_LIPID_RULE:95723a981e43d985f54f,enzyme_reaction_instance,EXPANDED_LIPID_RULE:95723a981e43d985f54f,Gene__Smpd2,,,,,,-2.70273304655288
+Enzyme__1f354a58be007d12,-2.01772643655529,1,other,,Enzyme__1f354a58be007d12,Smpd2 [species rule e3cdef8c],EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,enzyme_reaction_instance,EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,Gene__Smpd2,,,,,,-2.01772643655529
+Enzyme__20ee1b0012d91652,-2.34439100746808,3,other,,Enzyme__20ee1b0012d91652,Pm20d1 [RHEA:51362],RHEA:51362 forward,enzyme_reaction_instance,RHEA:51362,Gene__Pm20d1,,,,,,-2.34439100746808
+Enzyme__2212764a397696b3,-2.34439100746808,3,other,,Enzyme__2212764a397696b3,Ptgs2 [RHEA:48837],RHEA:48837 forward,enzyme_reaction_instance,RHEA:48837,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__225133901e3930b4,-2.34439100746808,3,other,,Enzyme__225133901e3930b4,Ptgs1 [RHEA:42601],RHEA:42601 forward,enzyme_reaction_instance,RHEA:42601,Gene__Ptgs1,,,,,,-2.34439100746808
+Enzyme__23fd98af32406057,-2.34439100746808,3,other,,Enzyme__23fd98af32406057,Cyp1b1 [RHEA:48717],RHEA:48717 forward,enzyme_reaction_instance,RHEA:48717,Gene__Cyp1b1,,,,,,-2.34439100746808
+Enzyme__265207a0d044c352,-2.34439100746808,3,other,,Enzyme__265207a0d044c352,Ptgs1 [RHEA:75460],RHEA:75460 forward,enzyme_reaction_instance,RHEA:75460,Gene__Ptgs1,,,,,,-2.34439100746808
+Enzyme__28696be19cae4ccd,-2.34439100746808,3,other,,Enzyme__28696be19cae4ccd,Asah2 [RHEA:41301],RHEA:41301 forward,enzyme_reaction_instance,RHEA:41301,Gene__Asah2,,,,,,-2.34439100746808
+Enzyme__2c39c9d85dcf36ba,-2.34439100746808,3,other,,Enzyme__2c39c9d85dcf36ba,Pm20d1 [RHEA:51301],RHEA:51301 forward,enzyme_reaction_instance,RHEA:51301,Gene__Pm20d1,,,,,,-2.34439100746808
+Enzyme__2db5c15d9daf7fa4,-2.44066244233235,1,other,,Enzyme__2db5c15d9daf7fa4,Smpd5 [species rule 647cb249],EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,enzyme_reaction_instance,EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,Gene__Smpd5,,,,,,-2.44066244233235
+Enzyme__2fbfa5b874575305,-2.34439100746808,3,other,,Enzyme__2fbfa5b874575305,Alox5 [RHEA:50269],RHEA:50269 forward,enzyme_reaction_instance,RHEA:50269,Gene__Alox5,,,,,,-2.34439100746808
+Enzyme__31342de4777394c3,-2.44066244233235,1,other,,Enzyme__31342de4777394c3,Smpd1 [species rule 647cb249],EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,enzyme_reaction_instance,EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,Gene__Smpd1,,,,,,-2.44066244233235
+Enzyme__31b96cd155ccb57f,-1.90600446566981,1,other,,Enzyme__31b96cd155ccb57f,Smpd2 [species rule 6935f2ee],EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,enzyme_reaction_instance,EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,Gene__Smpd2,,,,,,-1.90600446566981
+Enzyme__31e8495dc1f86891,-1.1709066482569,1,other,,Enzyme__31e8495dc1f86891,Plaat3 [RHEA:56441],RHEA:56441 forward,enzyme_reaction_instance,RHEA:56441,Gene__Plaat3,,,,,,-1.1709066482569
+Enzyme__326e4c189acd8c1d,-2.34439100746808,3,other,,Enzyme__326e4c189acd8c1d,Ptgs2 [RHEA:54217],RHEA:54217 forward,enzyme_reaction_instance,RHEA:54217,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__356d9b9956e0b179,-2.34439100746808,3,other,,Enzyme__356d9b9956e0b179,Ptgs2 [RHEA:48821],RHEA:48821 forward,enzyme_reaction_instance,RHEA:48821,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__370abb21977adb50,-2.34439100746808,3,other,,Enzyme__370abb21977adb50,Ptgs2 [RHEA:75448],RHEA:75448 forward,enzyme_reaction_instance,RHEA:75448,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__37e9c85951cb686a,-3.53767485123988,1,other,,Enzyme__37e9c85951cb686a,Enpp7 [species rule f8325f37],EXPANDED_LIPID_RULE:f8325f37adac5218d482,enzyme_reaction_instance,EXPANDED_LIPID_RULE:f8325f37adac5218d482,Gene__Enpp7,,,,,,-3.53767485123988
+Enzyme__383a88ef729fba13,-1.1709066482569,1,other,,Enzyme__383a88ef729fba13,Pla2g6 [RHEA:40520],RHEA:40520 forward,enzyme_reaction_instance,RHEA:40520,Gene__Pla2g6,,,,,,-1.1709066482569
+Enzyme__38b98177ee5fcb3d,-2.44066244233235,1,other,,Enzyme__38b98177ee5fcb3d,Enpp7 [species rule 647cb249],EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,enzyme_reaction_instance,EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,Gene__Enpp7,,,,,,-2.44066244233235
+Enzyme__391fe764f47697b3,-3.53767485123988,1,other,,Enzyme__391fe764f47697b3,Smpd3 [species rule f8325f37],EXPANDED_LIPID_RULE:f8325f37adac5218d482,enzyme_reaction_instance,EXPANDED_LIPID_RULE:f8325f37adac5218d482,Gene__Smpd3,,,,,,-3.53767485123988
+Enzyme__3ae292e719ab9b9d,-2.34439100746808,3,other,,Enzyme__3ae292e719ab9b9d,Cyp1a1 [RHEA:48717],RHEA:48717 forward,enzyme_reaction_instance,RHEA:48717,Gene__Cyp1a1,,,,,,-2.34439100746808
+Enzyme__3c67586e0fb55402,-2.34439100746808,3,other,,Enzyme__3c67586e0fb55402,Aldh3b2 [RHEA:33740],RHEA:33740 forward,enzyme_reaction_instance,RHEA:33740,Gene__Aldh3b2,,,,,,-2.34439100746808
+Enzyme__45f3f98eb1252844,-2.34439100746808,3,other,,Enzyme__45f3f98eb1252844,Alox5 [RHEA:32308],RHEA:32308 forward,enzyme_reaction_instance,RHEA:32308,Gene__Alox5,,,,,,-2.34439100746808
+Enzyme__482633c6865f7c3c,-1.89307771026387,1,other,,Enzyme__482633c6865f7c3c,Smpd4 [species rule 05c00a47],EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,enzyme_reaction_instance,EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,Gene__Smpd4,,,,,,-1.89307771026387
+Enzyme__48295b5795b36dce,-4.35974024023324,1,other,,Enzyme__48295b5795b36dce,Enpp7 [species rule b0cc04f6],EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,enzyme_reaction_instance,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,Gene__Enpp7,,,,,,-4.35974024023324
+Enzyme__4c5f5227eca37f6b,-2.34439100746808,3,other,,Enzyme__4c5f5227eca37f6b,Ptgs2 [RHEA:50849],RHEA:50849 forward,enzyme_reaction_instance,RHEA:50849,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__4ccc6418a83a1f3c,-2.44066244233235,1,other,,Enzyme__4ccc6418a83a1f3c,Smpd3 [species rule 647cb249],EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,enzyme_reaction_instance,EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,Gene__Smpd3,,,,,,-2.44066244233235
+Enzyme__4f31ce72b1288e17,-2.34439100746808,3,other,,Enzyme__4f31ce72b1288e17,Cyp1b1 [RHEA:48637],RHEA:48637 forward,enzyme_reaction_instance,RHEA:48637,Gene__Cyp1b1,,,,,,-2.34439100746808
+Enzyme__4f6655f9dde518bb,-2.01772643655529,1,other,,Enzyme__4f6655f9dde518bb,Smpd4 [species rule e3cdef8c],EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,enzyme_reaction_instance,EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,Gene__Smpd4,,,,,,-2.01772643655529
+Enzyme__4fb1ae37a544c7ee,-3.53767485123988,1,other,,Enzyme__4fb1ae37a544c7ee,Smpd2 [species rule 05cee413],EXPANDED_LIPID_RULE:05cee4134f5dc3941f33,enzyme_reaction_instance,EXPANDED_LIPID_RULE:05cee4134f5dc3941f33,Gene__Smpd2,,,,,,-3.53767485123988
+Enzyme__536ffa90afa7a555,-2.34439100746808,3,other,,Enzyme__536ffa90afa7a555,Cyp1a1 [RHEA:37948],RHEA:37948 forward,enzyme_reaction_instance,RHEA:37948,Gene__Cyp1a1,,,,,,-2.34439100746808
+Enzyme__54c39cee039dd3d0,-2.34439100746808,3,other,,Enzyme__54c39cee039dd3d0,Ptgs2 [RHEA:50853],RHEA:50853 forward,enzyme_reaction_instance,RHEA:50853,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__56c2d5d522198630,-2.34439100746808,3,other,,Enzyme__56c2d5d522198630,Ptgs2 [RHEA:75456],RHEA:75456 forward,enzyme_reaction_instance,RHEA:75456,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__56efac4c647592a6,-2.34439100746808,3,other,,Enzyme__56efac4c647592a6,Ptgs1 [RHEA:75452],RHEA:75452 forward,enzyme_reaction_instance,RHEA:75452,Gene__Ptgs1,,,,,,-2.34439100746808
+Enzyme__588deae6523a1199,-1.90600446566981,1,other,,Enzyme__588deae6523a1199,Enpp7 [species rule 6935f2ee],EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,enzyme_reaction_instance,EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,Gene__Enpp7,,,,,,-1.90600446566981
+Enzyme__58c122a5d65fc6df,-1.89307771026387,1,other,,Enzyme__58c122a5d65fc6df,Smpd5 [species rule 05c00a47],EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,enzyme_reaction_instance,EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,Gene__Smpd5,,,,,,-1.89307771026387
+Enzyme__59f304ea0637b9a3,-3.11042396708035,1,other,,Enzyme__59f304ea0637b9a3,Smpd2 [species rule b2a17cd5],EXPANDED_LIPID_RULE:b2a17cd5c46416996d99,enzyme_reaction_instance,EXPANDED_LIPID_RULE:b2a17cd5c46416996d99,Gene__Smpd2,,,,,,-3.11042396708035
+Enzyme__5a9ac2ba1acbb997,-2.34439100746808,3,other,,Enzyme__5a9ac2ba1acbb997,Ptgs2 [RHEA:75460],RHEA:75460 forward,enzyme_reaction_instance,RHEA:75460,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__5ad66daa63e4c640,-2.34439100746808,3,other,,Enzyme__5ad66daa63e4c640,Ptgs2 [RHEA:48857],RHEA:48857 forward,enzyme_reaction_instance,RHEA:48857,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__5ae2e2ebea5c9a73,-2.34439100746808,3,other,,Enzyme__5ae2e2ebea5c9a73,Alox5 [RHEA:39108],RHEA:39108 forward,enzyme_reaction_instance,RHEA:39108,Gene__Alox5,,,,,,-2.34439100746808
+Enzyme__64374ff84c92a1d7,-2.34439100746808,3,other,,Enzyme__64374ff84c92a1d7,Ptgs1 [RHEA:75448],RHEA:75448 forward,enzyme_reaction_instance,RHEA:75448,Gene__Ptgs1,,,,,,-2.34439100746808
+Enzyme__66b9643a8e6c0e51,-2.34439100746808,3,other,,Enzyme__66b9643a8e6c0e51,Alox5 [RHEA:85592],RHEA:85592 forward,enzyme_reaction_instance,RHEA:85592,Gene__Alox5,,,,,,-2.34439100746808
+Enzyme__6a94af069033a311,-2.34439100746808,3,other,,Enzyme__6a94af069033a311,Dgat1 [RHEA:38380],RHEA:38380 forward,enzyme_reaction_instance,RHEA:38380,Gene__Dgat1,,,,,,-2.34439100746808
+Enzyme__6b66ca3e678edc9f,-2.44066244233235,1,other,,Enzyme__6b66ca3e678edc9f,Smpd3 [species rule 455592d2],EXPANDED_LIPID_RULE:455592d269b93cc96998,enzyme_reaction_instance,EXPANDED_LIPID_RULE:455592d269b93cc96998,Gene__Smpd3,,,,,,-2.44066244233235
+Enzyme__6d27539504b372b6,-2.70273304655288,1,other,,Enzyme__6d27539504b372b6,Smpd5 [species rule 95723a98],EXPANDED_LIPID_RULE:95723a981e43d985f54f,enzyme_reaction_instance,EXPANDED_LIPID_RULE:95723a981e43d985f54f,Gene__Smpd5,,,,,,-2.70273304655288
+Enzyme__713f207f60ea2cbd,-2.34439100746808,3,other,,Enzyme__713f207f60ea2cbd,Ptgs2 [RHEA:50201],RHEA:50201 forward,enzyme_reaction_instance,RHEA:50201,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__71446355999aa164,-2.34439100746808,3,other,,Enzyme__71446355999aa164,Cyp1b1 [RHEA:48633],RHEA:48633 forward,enzyme_reaction_instance,RHEA:48633,Gene__Cyp1b1,,,,,,-2.34439100746808
+Enzyme__7a3f3124d4168a24,-2.01772643655529,1,other,,Enzyme__7a3f3124d4168a24,Smpd3 [species rule e3cdef8c],EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,enzyme_reaction_instance,EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,Gene__Smpd3,,,,,,-2.01772643655529
+Enzyme__7af812ae12d2d247,-1.89307771026387,1,other,,Enzyme__7af812ae12d2d247,Enpp7 [species rule 05c00a47],EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,enzyme_reaction_instance,EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,Gene__Enpp7,,,,,,-1.89307771026387
+Enzyme__7c22ae6351568cc7,-1.1709066482569,1,other,,Enzyme__7c22ae6351568cc7,Pla2g4a [RHEA:40520],RHEA:40520 forward,enzyme_reaction_instance,RHEA:40520,Gene__Pla2g4a,,,,,,-1.1709066482569
+Enzyme__840eb9cd3ec1733c,-1.1709066482569,1,other,,Enzyme__840eb9cd3ec1733c,Pla2g10 [RHEA:40520],RHEA:40520 forward,enzyme_reaction_instance,RHEA:40520,Gene__Pla2g10,,,,,,-1.1709066482569
+Enzyme__843990b46ce55294,-2.70273304655288,1,other,,Enzyme__843990b46ce55294,Smpd1 [species rule 95723a98],EXPANDED_LIPID_RULE:95723a981e43d985f54f,enzyme_reaction_instance,EXPANDED_LIPID_RULE:95723a981e43d985f54f,Gene__Smpd1,,,,,,-2.70273304655288
+Enzyme__84e30643b49db0f9,-1.89307771026387,1,other,,Enzyme__84e30643b49db0f9,Smpd3 [species rule 2c32eff7],EXPANDED_LIPID_RULE:2c32eff7f6ded0b48057,enzyme_reaction_instance,EXPANDED_LIPID_RULE:2c32eff7f6ded0b48057,Gene__Smpd3,,,,,,-1.89307771026387
+Enzyme__84e84cc60bcc527b,-2.34439100746808,3,other,,Enzyme__84e84cc60bcc527b,Cyp1a1 [RHEA:48633],RHEA:48633 forward,enzyme_reaction_instance,RHEA:48633,Gene__Cyp1a1,,,,,,-2.34439100746808
+Enzyme__8881728617d0b9bc,-4.35974024023324,1,other,,Enzyme__8881728617d0b9bc,Smpd3 [species rule ba63cac0],EXPANDED_LIPID_RULE:ba63cac002e903173b52,enzyme_reaction_instance,EXPANDED_LIPID_RULE:ba63cac002e903173b52,Gene__Smpd3,,,,,,-4.35974024023324
+Enzyme__8a2c5cde5e5f2ebe,-2.01772643655529,1,other,,Enzyme__8a2c5cde5e5f2ebe,Enpp7 [species rule e3cdef8c],EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,enzyme_reaction_instance,EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,Gene__Enpp7,,,,,,-2.01772643655529
+Enzyme__9190c082497beb81,-2.44066244233235,1,other,,Enzyme__9190c082497beb81,Smpd2 [species rule 647cb249],EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,enzyme_reaction_instance,EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,Gene__Smpd2,,,,,,-2.44066244233235
+Enzyme__926331ce3f0ec321,-2.34439100746808,3,other,,Enzyme__926331ce3f0ec321,Ptgs2 [RHEA:50865],RHEA:50865 forward,enzyme_reaction_instance,RHEA:50865,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__92946923a5510be3,-2.34439100746808,3,other,,Enzyme__92946923a5510be3,Ptgs2 [RHEA:48841],RHEA:48841 forward,enzyme_reaction_instance,RHEA:48841,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__9435eeda62977158,-2.34439100746808,3,other,,Enzyme__9435eeda62977158,Pm20d1 [RHEA:51445],RHEA:51445 forward,enzyme_reaction_instance,RHEA:51445,Gene__Pm20d1,,,,,,-2.34439100746808
+Enzyme__9755ae40ee82afe7,-2.44066244233235,1,other,,Enzyme__9755ae40ee82afe7,Smpd4 [species rule 647cb249],EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,enzyme_reaction_instance,EXPANDED_LIPID_RULE:647cb249a25741fdf6e5,Gene__Smpd4,,,,,,-2.44066244233235
+Enzyme__98a4632c95d37387,-1.89307771026387,1,other,,Enzyme__98a4632c95d37387,Smpd2 [species rule 05c00a47],EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,enzyme_reaction_instance,EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,Gene__Smpd2,,,,,,-1.89307771026387
+Enzyme__98c8e3820b4d59d9,-2.34439100746808,3,other,,Enzyme__98c8e3820b4d59d9,Ptgs2 [RHEA:53677],RHEA:53677 forward,enzyme_reaction_instance,RHEA:53677,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__998a153338134df0,-2.70273304655288,1,other,,Enzyme__998a153338134df0,Enpp7 [species rule 95723a98],EXPANDED_LIPID_RULE:95723a981e43d985f54f,enzyme_reaction_instance,EXPANDED_LIPID_RULE:95723a981e43d985f54f,Gene__Enpp7,,,,,,-2.70273304655288
+Enzyme__9ace01d6edfcf095,-3.53767485123988,1,other,,Enzyme__9ace01d6edfcf095,Smpd4 [species rule f8325f37],EXPANDED_LIPID_RULE:f8325f37adac5218d482,enzyme_reaction_instance,EXPANDED_LIPID_RULE:f8325f37adac5218d482,Gene__Smpd4,,,,,,-3.53767485123988
+Enzyme__9be6b9acac1917a9,-2.70273304655288,1,other,,Enzyme__9be6b9acac1917a9,Smpd3 [species rule eb95d632],EXPANDED_LIPID_RULE:eb95d632a4ec9cf9ad49,enzyme_reaction_instance,EXPANDED_LIPID_RULE:eb95d632a4ec9cf9ad49,Gene__Smpd3,,,,,,-2.70273304655288
+Enzyme__9ca3e7df22f3221a,-1.90600446566981,1,other,,Enzyme__9ca3e7df22f3221a,Smpd3 [species rule 6935f2ee],EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,enzyme_reaction_instance,EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,Gene__Smpd3,,,,,,-1.90600446566981
+Enzyme__9e8e4dd3a15bbec0,-4.35974024023324,1,other,,Enzyme__9e8e4dd3a15bbec0,Smpd2 [species rule b0cc04f6],EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,enzyme_reaction_instance,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,Gene__Smpd2,,,,,,-4.35974024023324
+Enzyme__9fc9bc76037dc3d7,-1.90600446566981,1,other,,Enzyme__9fc9bc76037dc3d7,Smpd3 [species rule 547df3a4],EXPANDED_LIPID_RULE:547df3a4f27cbdda0652,enzyme_reaction_instance,EXPANDED_LIPID_RULE:547df3a4f27cbdda0652,Gene__Smpd3,,,,,,-1.90600446566981
+Enzyme__a1df8d48aed49e49,-2.34439100746808,3,other,,Enzyme__a1df8d48aed49e49,Cyp1a1 [RHEA:48637],RHEA:48637 forward,enzyme_reaction_instance,RHEA:48637,Gene__Cyp1a1,,,,,,-2.34439100746808
+Enzyme__a339405d4b65c3ad,-2.34439100746808,3,other,,Enzyme__a339405d4b65c3ad,Ptgs2 [RHEA:50449],RHEA:50449 forward,enzyme_reaction_instance,RHEA:50449,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__a470b5b5f49d2b98,-2.34439100746808,3,other,,Enzyme__a470b5b5f49d2b98,Cyp1b1 [RHEA:37948],RHEA:37948 forward,enzyme_reaction_instance,RHEA:37948,Gene__Cyp1b1,,,,,,-2.34439100746808
+Enzyme__a4e64b0ce2b25e29,-2.44066244233235,1,other,,Enzyme__a4e64b0ce2b25e29,Smpd2 [species rule 455592d2],EXPANDED_LIPID_RULE:455592d269b93cc96998,enzyme_reaction_instance,EXPANDED_LIPID_RULE:455592d269b93cc96998,Gene__Smpd2,,,,,,-2.44066244233235
+Enzyme__a5d25442f6b6a0bd,-2.34439100746808,3,other,,Enzyme__a5d25442f6b6a0bd,Ptgs2 [RHEA:42601],RHEA:42601 forward,enzyme_reaction_instance,RHEA:42601,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__aab701f12825d27b,-3.53767485123988,1,other,,Enzyme__aab701f12825d27b,Smpd3 [species rule 05cee413],EXPANDED_LIPID_RULE:05cee4134f5dc3941f33,enzyme_reaction_instance,EXPANDED_LIPID_RULE:05cee4134f5dc3941f33,Gene__Smpd3,,,,,,-3.53767485123988
+Enzyme__acae99e947b48dd1,-2.34439100746808,3,other,,Enzyme__acae99e947b48dd1,Ch25h [RHEA:21105],RHEA:21105 forward,enzyme_reaction_instance,RHEA:21105,Gene__Ch25h,,,,,,-2.34439100746808
+Enzyme__b219a58f5391d13d,-2.01772643655529,1,other,,Enzyme__b219a58f5391d13d,Smpd3 [species rule 81227748],EXPANDED_LIPID_RULE:81227748ebd67027a92e,enzyme_reaction_instance,EXPANDED_LIPID_RULE:81227748ebd67027a92e,Gene__Smpd3,,,,,,-2.01772643655529
+Enzyme__b417f27b74132dfd,-2.34439100746808,3,other,,Enzyme__b417f27b74132dfd,Asah2 [RHEA:38893],RHEA:38893 forward,enzyme_reaction_instance,RHEA:38893,Gene__Asah2,,,,,,-2.34439100746808
+Enzyme__b4a085268f032f09,-2.34439100746808,3,other,,Enzyme__b4a085268f032f09,Ptgs2 [RHEA:53681],RHEA:53681 forward,enzyme_reaction_instance,RHEA:53681,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__b5fef72c0bf99683,-2.34439100746808,3,other,,Enzyme__b5fef72c0bf99683,Ch25h [RHEA:46133],RHEA:46133 forward,enzyme_reaction_instance,RHEA:46133,Gene__Ch25h,,,,,,-2.34439100746808
+Enzyme__b647f8587d90d5ac,-2.70273304655288,1,other,,Enzyme__b647f8587d90d5ac,Smpd4 [species rule 95723a98],EXPANDED_LIPID_RULE:95723a981e43d985f54f,enzyme_reaction_instance,EXPANDED_LIPID_RULE:95723a981e43d985f54f,Gene__Smpd4,,,,,,-2.70273304655288
+Enzyme__b7b15ab396b07493,-2.01772643655529,1,other,,Enzyme__b7b15ab396b07493,Smpd5 [species rule e3cdef8c],EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,enzyme_reaction_instance,EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,Gene__Smpd5,,,,,,-2.01772643655529
+Enzyme__b86318a5e3897fda,-2.34439100746808,3,other,,Enzyme__b86318a5e3897fda,Alox5 [RHEA:17962],RHEA:17962 forward,enzyme_reaction_instance,RHEA:17962,Gene__Alox5,,,,,,-2.34439100746808
+Enzyme__b8c1dbf0a3c80d59,-1.90600446566981,1,other,,Enzyme__b8c1dbf0a3c80d59,Smpd5 [species rule 6935f2ee],EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,enzyme_reaction_instance,EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,Gene__Smpd5,,,,,,-1.90600446566981
+Enzyme__bdd91021de0b9aab,-2.34439100746808,3,other,,Enzyme__bdd91021de0b9aab,Ptgs2 [RHEA:54209],RHEA:54209 forward,enzyme_reaction_instance,RHEA:54209,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__be5883d0cad2340c,-2.34439100746808,3,other,,Enzyme__be5883d0cad2340c,Ptgs2 [RHEA:75452],RHEA:75452 forward,enzyme_reaction_instance,RHEA:75452,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__c089a71ad47805d3,-2.34439100746808,3,other,,Enzyme__c089a71ad47805d3,Ptgs2 [RHEA:48813],RHEA:48813 forward,enzyme_reaction_instance,RHEA:48813,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__c32356edb131930f,-2.34439100746808,3,other,,Enzyme__c32356edb131930f,Ptgs2 [RHEA:53685],RHEA:53685 forward,enzyme_reaction_instance,RHEA:53685,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__c42c2a679103f8e3,-2.34439100746808,3,other,,Enzyme__c42c2a679103f8e3,Pm20d1 [RHEA:51313],RHEA:51313 forward,enzyme_reaction_instance,RHEA:51313,Gene__Pm20d1,,,,,,-2.34439100746808
+Enzyme__cba8b9f7d399bc31,-4.35974024023324,1,other,,Enzyme__cba8b9f7d399bc31,Smpd3 [species rule b0cc04f6],EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,enzyme_reaction_instance,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,Gene__Smpd3,,,,,,-4.35974024023324
+Enzyme__cc3a1c1240e9d52e,-2.34439100746808,3,other,,Enzyme__cc3a1c1240e9d52e,Asah1 [RHEA:38893],RHEA:38893 forward,enzyme_reaction_instance,RHEA:38893,Gene__Asah1,,,,,,-2.34439100746808
+Enzyme__d4b96decc4f6df14,-2.01772643655529,1,other,,Enzyme__d4b96decc4f6df14,Smpd1 [species rule e3cdef8c],EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,enzyme_reaction_instance,EXPANDED_LIPID_RULE:e3cdef8c6fe2fb85aff3,Gene__Smpd1,,,,,,-2.01772643655529
+Enzyme__d6adf4e8fd1a3178,-2.70273304655288,1,other,,Enzyme__d6adf4e8fd1a3178,Smpd3 [species rule 95723a98],EXPANDED_LIPID_RULE:95723a981e43d985f54f,enzyme_reaction_instance,EXPANDED_LIPID_RULE:95723a981e43d985f54f,Gene__Smpd3,,,,,,-2.70273304655288
+Enzyme__e211d8ebab6f09ac,-1.89307771026387,1,other,,Enzyme__e211d8ebab6f09ac,Smpd2 [species rule 2c32eff7],EXPANDED_LIPID_RULE:2c32eff7f6ded0b48057,enzyme_reaction_instance,EXPANDED_LIPID_RULE:2c32eff7f6ded0b48057,Gene__Smpd2,,,,,,-1.89307771026387
+Enzyme__e2b51da83371e832,-1.90600446566981,1,other,,Enzyme__e2b51da83371e832,Smpd1 [species rule 6935f2ee],EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,enzyme_reaction_instance,EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,Gene__Smpd1,,,,,,-1.90600446566981
+Enzyme__e43ec2718ec397b1,-2.34439100746808,3,other,,Enzyme__e43ec2718ec397b1,Alox12 [RHEA:53533],RHEA:53533 forward,enzyme_reaction_instance,RHEA:53533,Gene__Alox12,,,,,,-2.34439100746808
+Enzyme__e4a68bf2c7eac113,-2.34439100746808,3,other,,Enzyme__e4a68bf2c7eac113,Ptgs2 [RHEA:50857],RHEA:50857 forward,enzyme_reaction_instance,RHEA:50857,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__e7044b791beaab85,-1.90600446566981,1,other,,Enzyme__e7044b791beaab85,Smpd2 [species rule 547df3a4],EXPANDED_LIPID_RULE:547df3a4f27cbdda0652,enzyme_reaction_instance,EXPANDED_LIPID_RULE:547df3a4f27cbdda0652,Gene__Smpd2,,,,,,-1.90600446566981
+Enzyme__e986947ed22df075,-2.34439100746808,3,other,,Enzyme__e986947ed22df075,Ptgs2 [RHEA:50433],RHEA:50433 forward,enzyme_reaction_instance,RHEA:50433,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__f15a667a47029be4,-2.34439100746808,3,other,,Enzyme__f15a667a47029be4,Ptgs2 [RHEA:23729],RHEA:23729 forward,enzyme_reaction_instance,RHEA:23729,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__f1ea18e22a18a371,-3.53767485123988,1,other,,Enzyme__f1ea18e22a18a371,Smpd5 [species rule f8325f37],EXPANDED_LIPID_RULE:f8325f37adac5218d482,enzyme_reaction_instance,EXPANDED_LIPID_RULE:f8325f37adac5218d482,Gene__Smpd5,,,,,,-3.53767485123988
+Enzyme__f5caf21558473243,-2.34439100746808,3,other,,Enzyme__f5caf21558473243,Ptgs2 [RHEA:48853],RHEA:48853 forward,enzyme_reaction_instance,RHEA:48853,Gene__Ptgs2,,,,,,-2.34439100746808
+Enzyme__f65ca9bb3d332529,-1.90600446566981,1,other,,Enzyme__f65ca9bb3d332529,Smpd4 [species rule 6935f2ee],EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,enzyme_reaction_instance,EXPANDED_LIPID_RULE:6935f2ee25f18e65ba2d,Gene__Smpd4,,,,,,-1.90600446566981
+Enzyme__fa24b313960ac9a7,-2.34439100746808,3,other,,Enzyme__fa24b313960ac9a7,Aldh3b1 [RHEA:33740],RHEA:33740 forward,enzyme_reaction_instance,RHEA:33740,Gene__Aldh3b1,,,,,,-2.34439100746808
+Enzyme__fab7b017a3c782c2,-3.11042396708035,1,other,,Enzyme__fab7b017a3c782c2,Smpd3 [species rule b2a17cd5],EXPANDED_LIPID_RULE:b2a17cd5c46416996d99,enzyme_reaction_instance,EXPANDED_LIPID_RULE:b2a17cd5c46416996d99,Gene__Smpd3,,,,,,-3.11042396708035
+Enzyme__fb16b73c5f2bd9ba,-2.70273304655288,1,other,,Enzyme__fb16b73c5f2bd9ba,Smpd2 [species rule eb95d632],EXPANDED_LIPID_RULE:eb95d632a4ec9cf9ad49,enzyme_reaction_instance,EXPANDED_LIPID_RULE:eb95d632a4ec9cf9ad49,Gene__Smpd2,,,,,,-2.70273304655288
+Enzyme__fc7b0ad70ae80879,-4.35974024023324,1,other,,Enzyme__fc7b0ad70ae80879,Smpd1 [species rule b0cc04f6],EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,enzyme_reaction_instance,EXPANDED_LIPID_RULE:b0cc04f64bb40601c093,Gene__Smpd1,,,,,,-4.35974024023324
+Enzyme__fedde46c123768ca,-1.89307771026387,1,other,,Enzyme__fedde46c123768ca,Smpd3 [species rule 05c00a47],EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,enzyme_reaction_instance,EXPANDED_LIPID_RULE:05c00a47285c73e76cb2,Gene__Smpd3,,,,,,-1.89307771026387
+Gene__Abl1,0.767809595794958,3,other,-0.000825561984568519,Gene__Abl1,Abl1,Abl1,gene_product,,,,,,,,0.767809595794958
+Gene__Actb,-1.02810418694693,3,other,0.140684486079612,Gene__Actb,Actb,Actb,gene_product,,,,,,,,-1.02810418694693
+Gene__Actn1,-1.02810418694693,3,other,0.000692630168713277,Gene__Actn1,Actn1,Actn1,gene_product,,,,,,,,-1.02810418694693
+Gene__Akt1,-1.02928502374998,4,other,-0.00114920605777741,Gene__Akt1,Akt1,Akt1,gene_product,,,,,,,,-1.02928502374998
+Gene__Alox12,-3.16870991104995,4,other,-1.78184550170142e-05,Gene__Alox12,Alox12,Alox12,gene_product,,,,,,,,-3.16870991104995
+Gene__Alox5,-5.57510770856294,4,other,0.000101903261628303,Gene__Alox5,Alox5,Alox5,gene_product,,,,,,,,-5.57510770856294
+Gene__Ar,-1.16684266821696,4,upstream_input,-0.285926317400749,Gene__Ar,Ar,Ar,gene_product,,,,,,,,-1.16684266821696
+Gene__Arnt,-1.07006517671456,4,upstream_input,0.0497382017668538,Gene__Arnt,Arnt,Arnt,gene_product,,,,,,,,-1.07006517671456
+Gene__Bcar1,-0.672172820617316,4,other,0.000429435010858265,Gene__Bcar1,Bcar1,Bcar1,gene_product,,,,,,,,-0.672172820617316
+Gene__Bcl3,-0.659190890066034,4,other,0.115727557613255,Gene__Bcl3,Bcl3,Bcl3,gene_product,,,,,,,,-0.659190890066034
+Gene__Bmal1,-2.05915435767359,4,other,,Gene__Bmal1,Bmal1,Bmal1,gene_product,,,,,,,,-2.05915435767359
+Gene__Brca1,-0.724690790967954,4,other,-0.198558998018515,Gene__Brca1,Brca1,Brca1,gene_product,,,,,,,,-0.724690790967954
+Gene__Capn1,1.09312417711157,4,other,0.104996185541171,Gene__Capn1,Capn1,Capn1,gene_product,,,,,,,,1.09312417711157
+Gene__Cd19,-2.04176239646036,4,other,2.5913001307886e-07,Gene__Cd19,Cd19,Cd19,gene_product,,,,,,,,-2.04176239646036
+Gene__Cdkn2b,1.3953080497633,4,other,0.000358889433532143,Gene__Cdkn2b,Cdkn2b,Cdkn2b,gene_product,,,,,,,,1.3953080497633
+Gene__Ch25h,-4.5162280107267,4,other,1.55255775009475e-34,Gene__Ch25h,Ch25h,Ch25h,gene_product,,,,,,,,-4.5162280107267
+Gene__Chuk,-2.03917457209818,4,other,0.0178064499003731,Gene__Chuk,Chuk,Chuk,gene_product,,,,,,,,-2.03917457209818
+Gene__Crebbp,-0.995699595232408,4,other,-0.0281366504915808,Gene__Crebbp,Crebbp,Crebbp,gene_product,,,,,,,,-0.995699595232408
+Gene__Csnk1g1,-2.04176239646037,4,other,-0.0176506861244982,Gene__Csnk1g1,Csnk1g1,Csnk1g1,gene_product,,,,,,,,-2.04176239646037
+Gene__Csnk2a1,-0.85831513440116,3,other,-0.0183905121393901,Gene__Csnk2a1,Csnk2a1,Csnk2a1,gene_product,,,,,,,,-0.85831513440116
+Gene__Cttn,-2.24324307728998,4,other,0.00067005310797183,Gene__Cttn,Cttn,Cttn,gene_product,,,,,,,,-2.24324307728998
+Gene__Cxcr4,-0.858990397648108,4,other,-1.8805447841422e-05,Gene__Cxcr4,Cxcr4,Cxcr4,gene_product,,,,,,,,-0.858990397648108
+Gene__Cyp1a1,-3.16870991104995,4,other,-0.00103528160495306,Gene__Cyp1a1,Cyp1a1,Cyp1a1,gene_product,,,,,,,,-3.16870991104995
+Gene__Cyp1b1,-3.16870991104995,4,other,0.0275887896524154,Gene__Cyp1b1,Cyp1b1,Cyp1b1,gene_product,,,,,,,,-3.16870991104995
+Gene__Drd2,-2.67139877088044,4,other,-0.000922053120683158,Gene__Drd2,Drd2,Drd2,gene_product,,,,,,,,-2.67139877088044
+Gene__Drd3,-2.67139877088044,4,other,-0.00048737245496576,Gene__Drd3,Drd3,Drd3,gene_product,,,,,,,,-2.67139877088044
+Gene__Dvl3,-0.767809595794958,3,other,0.000461202850612177,Gene__Dvl3,Dvl3,Dvl3,gene_product,,,,,,,,-0.767809595794958
+Gene__Dyrk1a,-1.10888613603235,4,other,-0.3803877768579,Gene__Dyrk1a,Dyrk1a,Dyrk1a,gene_product,,,,,,,,-1.10888613603235
+Gene__E2f1,-2.84199356579243,4,other,0.127486699687396,Gene__E2f1,E2f1,E2f1,gene_product,,,,,,,,-2.84199356579243
+Gene__Ednrb,-3.04396061744664,4,other,-4.90315486561728e-06,Gene__Ednrb,Ednrb,Ednrb,gene_product,,,,,,,,-3.04396061744664
+Gene__Egr1,-0.831959500590337,3,other,-0.143671535729743,Gene__Egr1,Egr1,Egr1,gene_product,,,,,,,,-0.831959500590337
+Gene__Elavl1,-2.04176239646036,4,other,-0.00592768760549749,Gene__Elavl1,Elavl1,Elavl1,gene_product,,,,,,,,-2.04176239646036
+Gene__Epas1,-1.44063852242185,4,other,-0.313075750970566,Gene__Epas1,Epas1,Epas1,gene_product,,,,,,,,-1.44063852242185
+Gene__Erbb2,-0.767809595794958,3,other,3.89773147623535e-06,Gene__Erbb2,Erbb2,Erbb2,gene_product,,,,,,,,-0.767809595794958
+Gene__Ets1,-3.25760465774861,4,other,-0.00239721055999932,Gene__Ets1,Ets1,Ets1,gene_product,,,,,,,,-3.25760465774861
+Gene__Ets2,-0.978363026837162,3,other,-0.128263557108686,Gene__Ets2,Ets2,Ets2,gene_product,,,,,,,,-0.978363026837162
+Gene__Fgf1,-2.77861650758973,4,other,-0.676955241691742,Gene__Fgf1,Fgf1,Fgf1,gene_product,,,,,,,,-2.77861650758973
+Gene__Fgf2,-2.50605186694023,4,other,-9.1611264783682e-05,Gene__Fgf2,Fgf2,Fgf2,gene_product,,,,,,,,-2.50605186694023
+Gene__Fgf4,-2.04176239646037,4,other,0,Gene__Fgf4,Fgf4,Fgf4,gene_product,,,,,,,,-2.04176239646037
+Gene__Fgf5,-2.04176239646037,4,other,-8.48482135899336e-05,Gene__Fgf5,Fgf5,Fgf5,gene_product,,,,,,,,-2.04176239646037
+Gene__Fgfr2,-0.767809595794958,3,other,0.180876272015935,Gene__Fgfr2,Fgfr2,Fgfr2,gene_product,,,,,,,,-0.767809595794958
+Gene__Fosb,-1.44063852242185,4,other,-0.000164662820818974,Gene__Fosb,Fosb,Fosb,gene_product,,,,,,,,-1.44063852242185
+Gene__Fosl1,-0.695115830236696,4,other,-0.000925413537256089,Gene__Fosl1,Fosl1,Fosl1,gene_product,,,,,,,,-0.695115830236696
+Gene__Frs2,-0.858990397648109,4,other,-3.91577308402212e-05,Gene__Frs2,Frs2,Frs2,gene_product,,,,,,,,-0.858990397648109
+Gene__Fzd1,-2.50605186694023,4,other,-0.00362999880268598,Gene__Fzd1,Fzd1,Fzd1,gene_product,,,,,,,,-2.50605186694023
+Gene__Fzd2,-2.50605186694023,4,other,-5.19045733216898e-06,Gene__Fzd2,Fzd2,Fzd2,gene_product,,,,,,,,-2.50605186694023
+Gene__Gab1,-0.767809595794958,3,other,9.96558522217028e-05,Gene__Gab1,Gab1,Gab1,gene_product,,,,,,,,-0.767809595794958
+Gene__Gata2,-1.44063852242185,4,other,-7.96106654226512e-06,Gene__Gata2,Gata2,Gata2,gene_product,,,,,,,,-1.44063852242185
+Gene__Gata6,-1.7136190053056,4,upstream_input,-0.0107319274083759,Gene__Gata6,Gata6,Gata6,gene_product,,,,,,,,-1.7136190053056
+Gene__Gnai2,-2.11613455937752,4,other,0.000444780542780292,Gene__Gnai2,Gnai2,Gnai2,gene_product,,,,,,,,-2.11613455937752
+Gene__Grb2,-1.90442073752272,4,other,-0.000206456268802587,Gene__Grb2,Grb2,Grb2,gene_product,,,,,,,,-1.90442073752272
+Gene__Hif1a,-0.726146727647678,3,other,-0.00370275597465786,Gene__Hif1a,Hif1a,Hif1a,gene_product,,,,,,,,-0.726146727647678
+Gene__Irs1,-1.17679173871352,4,other,-0.167989406521555,Gene__Irs1,Irs1,Irs1,gene_product,,,,,,,,-1.17679173871352
+Gene__Jak1,-1.91307394014322,4,other,0.0853355104719982,Gene__Jak1,Jak1,Jak1,gene_product,,,,,,,,-1.91307394014322
+Gene__Jak2,-2.3452214878921,4,other,5.00851140851746e-05,Gene__Jak2,Jak2,Jak2,gene_product,,,,,,,,-2.3452214878921
+Gene__Kat7,-1.56660921926316,4,other,-0.00442575878712197,Gene__Kat7,Kat7,Kat7,gene_product,,,,,,,,-1.56660921926316
+Gene__Kdr,-0.767809595794958,3,other,-1.30804446187194e-05,Gene__Kdr,Kdr,Kdr,gene_product,,,,,,,,-0.767809595794958
+Gene__Klf2,-0.856652573223473,4,other,-1.18105647894669e-05,Gene__Klf2,Klf2,Klf2,gene_product,,,,,,,,-0.856652573223473
+Gene__Klf5,-2.46551000402443,4,other,-3.9343495119238e-07,Gene__Klf5,Klf5,Klf5,gene_product,,,,,,,,-2.46551000402443
+Gene__Lat,-0.767809595794958,3,other,7.73566519987053e-05,Gene__Lat,Lat,Lat,gene_product,,,,,,,,-0.767809595794958
+Gene__Lck,-0.767809595794958,3,other,-0.0304015665361246,Gene__Lck,Lck,Lck,gene_product,,,,,,,,-0.767809595794958
+Gene__Lmo2,-1.44063852242185,4,other,-1.76815807213851e-05,Gene__Lmo2,Lmo2,Lmo2,gene_product,,,,,,,,-1.44063852242185
+Gene__Lyn,-0.767809595794958,3,other,0.0103433877237504,Gene__Lyn,Lyn,Lyn,gene_product,,,,,,,,-0.767809595794958
+Gene__Map2k1,-2.11262568938756,4,other,0.0696018532719784,Gene__Map2k1,Map2k1,Map2k1,gene_product,,,,,,,,-2.11262568938756
+Gene__Map2k2,-2.11262568938756,4,other,0.28253644438361,Gene__Map2k2,Map2k2,Map2k2,gene_product,,,,,,,,-2.11262568938756
+Gene__Map3k1,-2.11262568938756,4,other,0.227528489364679,Gene__Map3k1,Map3k1,Map3k1,gene_product,,,,,,,,-2.11262568938756
+Gene__Map3k7,-1.21624832725788,4,other,0.00506313542879643,Gene__Map3k7,Map3k7,Map3k7,gene_product,,,,,,,,-1.21624832725788
+Gene__Map4k1,-1.34666893867989,4,other,-0.000287486979438,Gene__Map4k1,Map4k1,Map4k1,gene_product,,,,,,,,-1.34666893867989
+Gene__Mapk1,-0.681430678650685,3,other,-0.00067651235997343,Gene__Mapk1,Mapk1,Mapk1,gene_product,,,,,,,,-0.681430678650685
+Gene__Mapk14,-0.56147012488802,3,other,-0.00168091437838378,Gene__Mapk14,Mapk14,Mapk14,gene_product,,,,,,,,-0.56147012488802
+Gene__Mapk3,-0.945790489016664,3,other,-0.0306109392285926,Gene__Mapk3,Mapk3,Mapk3,gene_product,,,,,,,,-0.945790489016664
+Gene__Maz,-0.627221985915736,4,other,0.000325964270515987,Gene__Maz,Maz,Maz,gene_product,,,,,,,,-0.627221985915736
+Gene__Mef2a,-1.85011767747993,4,other,-0.0163179834149838,Gene__Mef2a,Mef2a,Mef2a,gene_product,,,,,,,,-1.85011767747993
+Gene__Mef2c,-1.60315921544167,4,other,-0.000182404532905309,Gene__Mef2c,Mef2c,Mef2c,gene_product,,,,,,,,-1.60315921544167
+Gene__Meis1,-2.00954621289928,4,other,-0.000142096440767172,Gene__Meis1,Meis1,Meis1,gene_product,,,,,,,,-2.00954621289928
+Gene__Met,-1.37195073491521,4,other,-0.00198906360206921,Gene__Met,Met,Met,gene_product,,,,,,,,-1.37195073491521
+Gene__Myb,-2.42588157134201,4,other,-9.34070242383987e-06,Gene__Myb,Myb,Myb,gene_product,,,,,,,,-2.42588157134201
+Gene__Myc,-0.726146727647677,3,other,0.00434948516434607,Gene__Myc,Myc,Myc,gene_product,,,,,,,,-0.726146727647677
+Gene__Myod1,-1.55521260765631,4,other,-0.0323712885302644,Gene__Myod1,Myod1,Myod1,gene_product,,,,,,,,-1.55521260765631
+Gene__Ncoa1,-2.04764253315389,4,other,0.2382814152108,Gene__Ncoa1,Ncoa1,Ncoa1,gene_product,,,,,,,,-2.04764253315389
+Gene__Neurod1,-2.46505458128617,4,other,-0.00018251477114906,Gene__Neurod1,Neurod1,Neurod1,gene_product,,,,,,,,-2.46505458128617
+Gene__Nfatc1,-2.42485695955894,4,other,0.00207517705859051,Gene__Nfatc1,Nfatc1,Nfatc1,gene_product,,,,,,,,-2.42485695955894
+Gene__Nkx3-1,-1.94278046179013,4,other,0.141280681914995,Gene__Nkx3-1,Nkx3-1,Nkx3-1,gene_product,,,,,,,,-1.94278046179013
+Gene__Notch1,-1.39530804976331,4,other,-0.0064502638237318,Gene__Notch1,Notch1,Notch1,gene_product,,,,,,,,-1.39530804976331
+Gene__Ntrk1,-0.767809595794958,3,other,0.43570686010683,Gene__Ntrk1,Ntrk1,Ntrk1,gene_product,,,,,,,,-0.767809595794958
+Gene__Oxtr,-3.04396061744664,4,other,-0.000110071885702927,Gene__Oxtr,Oxtr,Oxtr,gene_product,,,,,,,,-3.04396061744664
+Gene__Pax6,-0.767809595794958,3,other,-0.00186552137809972,Gene__Pax6,Pax6,Pax6,gene_product,,,,,,,,-0.767809595794958
+Gene__Pdgfb,-2.04176239646036,4,other,9.035868393547e-05,Gene__Pdgfb,Pdgfb,Pdgfb,gene_product,,,,,,,,-2.04176239646036
+Gene__Pdgfc,-2.50605186694023,4,other,-0.000607323048134444,Gene__Pdgfc,Pdgfc,Pdgfc,gene_product,,,,,,,,-2.50605186694023
+Gene__Pdgfrb,-0.767809595794958,3,other,4.44169563120982e-06,Gene__Pdgfrb,Pdgfrb,Pdgfrb,gene_product,,,,,,,,-0.767809595794958
+Gene__Pdpk1,-0.867355962537603,4,other,0.0341929796678381,Gene__Pdpk1,Pdpk1,Pdpk1,gene_product,,,,,,,,-0.867355962537603
+Gene__Pdx1,-1.111985651317,4,other,-0.00562334652195082,Gene__Pdx1,Pdx1,Pdx1,gene_product,,,,,,,,-1.111985651317
+Gene__Pim1,-2.03752741501286,4,other,0.841165679919074,Gene__Pim1,Pim1,Pim1,gene_product,,,,,,,,-2.03752741501286
+Gene__Plk1,-1.86881010643432,4,other,0.000115085535205785,Gene__Plk1,Plk1,Plk1,gene_product,,,,,,,,-1.86881010643432
+Gene__Ppara,-0.726146727647677,3,upstream_input,-0.189762056804844,Gene__Ppara,Ppara,Ppara,gene_product,,,,,,,,-0.726146727647677
+Gene__Ppargc1a,-1.50467902136584,4,other,-0.457452170235209,Gene__Ppargc1a,Ppargc1a,Ppargc1a,gene_product,,,,,,,,-1.50467902136584
+Gene__Prkca,1.14285137524197,3,other,-0.497060088396587,Gene__Prkca,Prkca,Prkca,gene_product,,,,,,,,1.14285137524197
+Gene__Prkcd,-0.762382323752252,3,other,0.0534417443724915,Gene__Prkcd,Prkcd,Prkcd,gene_product,,,,,,,,-0.762382323752252
+Gene__Prox1,-2.47961324624733,4,other,-0.165250220808662,Gene__Prox1,Prox1,Prox1,gene_product,,,,,,,,-2.47961324624733
+Gene__Ptgs1,-4.5162280107267,4,other,-8.3462950848014e-07,Gene__Ptgs1,Ptgs1,Ptgs1,gene_product,,,,,,,,-4.5162280107267
+Gene__Ptgs2,-10.1537859200593,4,other,2.33203824302832e-05,Gene__Ptgs2,Ptgs2,Ptgs2,gene_product,,,,,,,,-10.1537859200593
+Gene__Ptk2b,-1.70433532116415,4,other,0.000116868583482489,Gene__Ptk2b,Ptk2b,Ptk2b,gene_product,,,,,,,,-1.70433532116415
+Gene__Ptpn1,3.47320945865371,4,other,-9.51068422477554e-07,Gene__Ptpn1,Ptpn1,Ptpn1,gene_product,,,,,,,,3.47320945865371
+Gene__Ptpn11,3.93110602747076,4,other,0.0302361937845002,Gene__Ptpn11,Ptpn11,Ptpn11,gene_product,,,,,,,,3.93110602747076
+Gene__Ptpn6,3.34621217749476,4,other,-0.00365062873766319,Gene__Ptpn6,Ptpn6,Ptpn6,gene_product,,,,,,,,3.34621217749476
+Gene__Ptpn7,2.43325853981889,4,other,-1.6982864707113e-05,Gene__Ptpn7,Ptpn7,Ptpn7,gene_product,,,,,,,,2.43325853981889
+Gene__Raf1,-2.11262568938756,4,other,0.260288573696587,Gene__Raf1,Raf1,Raf1,gene_product,,,,,,,,-2.11262568938756
+Gene__Ret,-2.70165770487254,4,other,0.000365809861540959,Gene__Ret,Ret,Ret,gene_product,,,,,,,,-2.70165770487254
+Gene__Rora,-1.45117708849717,4,upstream_input,-0.003839426334717,Gene__Rora,Rora,Rora,gene_product,,,,,,,,-1.45117708849717
+Gene__Runx1,-0.85402050811946,4,other,3.9496518511364e-05,Gene__Runx1,Runx1,Runx1,gene_product,,,,,,,,-0.85402050811946
+Gene__Sdc4,-1.89586772064844,4,other,-0.0484696741532776,Gene__Sdc4,Sdc4,Sdc4,gene_product,,,,,,,,-1.89586772064844
+Gene__Shc1,-1.53924615953404,4,other,0.0377218990762574,Gene__Shc1,Shc1,Shc1,gene_product,,,,,,,,-1.53924615953404
+Gene__Smpd1,-3.06802584711944,2,other,0.160651948945845,Gene__Smpd1,Smpd1,Smpd1,gene_product,,,,,,,,-3.06802584711944
+Gene__Sos1,-0.59291328659344,4,other,0.00271273447427564,Gene__Sos1,Sos1,Sos1,gene_product,,,,,,,,-0.59291328659344
+Gene__Srf,-2.09138419635436,4,other,0.0015701695233928,Gene__Srf,Srf,Srf,gene_product,,,,,,,,-2.09138419635436
+Gene__Stat1,-0.767809595794958,3,other,-0.00271941852803255,Gene__Stat1,Stat1,Stat1,gene_product,,,,,,,,-0.767809595794958
+Gene__Syk,-0.767809595794958,3,other,-7.24533715439831e-06,Gene__Syk,Syk,Syk,gene_product,,,,,,,,-0.767809595794958
+Gene__Tal1,-2.11177722696479,4,other,0.00116702662571381,Gene__Tal1,Tal1,Tal1,gene_product,,,,,,,,-2.11177722696479
+Gene__Tcf12,-2.04176239646037,4,other,-0.337664260844443,Gene__Tcf12,Tcf12,Tcf12,gene_product,,,,,,,,-2.04176239646037
+Gene__Tek,-2.04176239646036,4,other,-5.76948821360151e-06,Gene__Tek,Tek,Tek,gene_product,,,,,,,,-2.04176239646036
+Gene__Vav1,-0.767809595794958,3,other,-1.75019604552037e-06,Gene__Vav1,Vav1,Vav1,gene_product,,,,,,,,-0.767809595794958
+Gene__Vav2,-0.767809595794958,3,other,-0.00196201052893208,Gene__Vav2,Vav2,Vav2,gene_product,,,,,,,,-0.767809595794958
+Gene__Vav3,-0.767809595794958,3,other,-2.09779978458092e-06,Gene__Vav3,Vav3,Vav3,gene_product,,,,,,,,-0.767809595794958
+Gene__Zap70,-3.14699890024433,4,other,-0.0950753383382995,Gene__Zap70,Zap70,Zap70,gene_product,,,,,,,,-3.14699890024433
+Metab__CHEBI:15377_unknown,-3.32469841426356,2,other,,Metab__CHEBI:15377_unknown,H2O,H2O,metabolite,,,unknown,CHEBI:15377,,,,-3.32469841426356
+Metab__CHEBI:30823_unknown,-6.48947420595619,4,other,,Metab__CHEBI:30823_unknown,(9Z)-octadecenoate,(9Z)-octadecenoate,metabolite,,,unknown,CHEBI:30823,,,,-6.48947420595619
+Metab__CHEBI:32395_unknown,-8.80112645847353,4,other,,Metab__CHEBI:32395_unknown,"(5Z,8Z,11Z,14Z)-eicosatetraenoate","(5Z,8Z,11Z,14Z)-eicosatetraenoate",metabolite,,,unknown,CHEBI:32395,,,,-8.80112645847353
+Metab__CHEBI:7896_unknown,-4.5162280107267,4,other,,Metab__CHEBI:7896_unknown,hexadecanoate,hexadecanoate,metabolite,,,unknown,CHEBI:7896,,,,-4.5162280107267
+Metab__MeasuredLipid:Cer(18:1;O2/14:0)_unknown,-0.946619491673815,0,level0,,Metab__MeasuredLipid:Cer(18:1;O2/14:0)_unknown,Cer(18:1;O2/14:0),Cer(18:1;O2/14:0),metabolite,,,unknown,MeasuredLipid:Cer(18:1;O2/14:0),Cer(18:1;O2/14:0),,-0.946619491673815,
+Metab__MeasuredLipid:Cer(18:1;O2/17:0)_unknown,-1.06260117774754,0,level0,,Metab__MeasuredLipid:Cer(18:1;O2/17:0)_unknown,Cer(18:1;O2/17:0),Cer(18:1;O2/17:0),metabolite,,,unknown,MeasuredLipid:Cer(18:1;O2/17:0),Cer(18:1;O2/17:0),,-1.06260117774754,
+Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown,-1.42748700402455,0,level0,,Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown,Cer(18:1;O2/18:0),Cer(18:1;O2/18:0),metabolite,,,unknown,MeasuredLipid:Cer(18:1;O2/18:0),Cer(18:1;O2/18:0),,-1.42748700402455,
+Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown,-1.77857956620418,0,level0,,Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown,Cer(18:1;O2/24:4),Cer(18:1;O2/24:4),metabolite,,,unknown,MeasuredLipid:Cer(18:1;O2/24:4),Cer(18:1;O2/24:4),,-1.77857956620418,
+Metab__MeasuredLipid:Cer(18:1;O2/25:0)_unknown,-0.75821612773838,0,level0,,Metab__MeasuredLipid:Cer(18:1;O2/25:0)_unknown,Cer(18:1;O2/25:0),Cer(18:1;O2/25:0),metabolite,,,unknown,MeasuredLipid:Cer(18:1;O2/25:0),Cer(18:1;O2/25:0),,-0.75821612773838,
+Metab__MeasuredLipid:Cer(18:1;O2/25:1)_unknown,-0.70822076639685,0,level0,,Metab__MeasuredLipid:Cer(18:1;O2/25:1)_unknown,Cer(18:1;O2/25:1),Cer(18:1;O2/25:1),metabolite,,,unknown,MeasuredLipid:Cer(18:1;O2/25:1),Cer(18:1;O2/25:1),,-0.70822076639685,
+Metab__MeasuredLipid:Cer(18:1;O2/26:0)_unknown,-0.702430440986584,0,level0,,Metab__MeasuredLipid:Cer(18:1;O2/26:0)_unknown,Cer(18:1;O2/26:0),Cer(18:1;O2/26:0),metabolite,,,unknown,MeasuredLipid:Cer(18:1;O2/26:0),Cer(18:1;O2/26:0),,-0.702430440986584,
+Metab__MeasuredLipid:Cer(18:2;O2/18:0)_unknown,-1.24170957539945,0,level0,,Metab__MeasuredLipid:Cer(18:2;O2/18:0)_unknown,Cer(18:2;O2/18:0),Cer(18:2;O2/18:0),metabolite,,,unknown,MeasuredLipid:Cer(18:2;O2/18:0),Cer(18:2;O2/18:0),,-1.24170957539945,

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "roles": ["current_fcg_zonation", "current_gdx_zonation", "current_wdsd_zonation", "wdsd_hepatocytes", "historical_wdsd_zonation", "wd_cell_types", "wd_zonation"],
+  "exact_roundtrip_audit": "docs/provenance/pseudobulk_csv_roundtrip.json",
+  "tests": ["seven real three-layer bitwise source comparisons", "forced CSV column splitting below a 10000-byte limit", "ordered factor and unused-level preservation", "literal NA versus missing/empty strings", "quotes, commas and multiline metadata", "integer/logical metadata preservation", "17-digit binary64 edge cases", "payload tamper rejection", "nucleus-style metadata export rejection", "actual CSV import without SeuratObject loaded"],
+  "scientific_models_run": false,
+  "approved_results_changed": false,
+  "original_rds_preserved": true,
+  "helper_sha256": "d22fa6873314818654033d680e9ad259a26b8168b3851b05170f7d0a448cc400",
+  "exporter_sha256": "cfea2905b4714c0e5a624147ec1cba53b5178547b989547e8190a997a77149d9",
+  "test_sha256": "368cc079d10365c8522505dda5e57ce5c5b079c030d763cd0a00a03b5dd1b3a4",
+  "parser": {
+    "implementation": "jsonlite numeric parser; base R parsing is avoided for exact decimal roundtrip",
+    "jsonlite": "2.0.0"
+  },
+  "R_version": "R version 4.6.2 (2026-10-29)"
+}

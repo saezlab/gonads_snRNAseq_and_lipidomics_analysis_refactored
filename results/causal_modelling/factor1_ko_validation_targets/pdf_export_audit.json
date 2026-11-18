@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "pdf": "output/pdf/cosmos_factor1_ko_validation_targets.pdf",
+  "pdf_sha256": "028b4bca1a3817a5d9e4e9915e97d183fa20fd6b716bb1d0dbf2098fba2cf810",
+  "markdown_source": "docs/cosmos_factor1_ko_validation_targets.md",
+  "markdown_sha256": "d28d47d4f9297990050ea2e31c8db357989c9f5974273ea399496e05dc4bc881",
+  "pagecount": 9,
+  "matched_source_units_and_table_cells": 160,
+  "unique_citation_urls": 18,
+  "inhibitory_symbol_preserved": true,
+  "all_nine_pages_visually_inspected": true,
+  "ranking_unchanged": true,
+  "original_MOON_graphs_unchanged": true,
+  "new_fit": false,
+  "renderer_script": "scripts/reports/render_cosmos_ko_validation_pdf.py",
+  "independent_review": "results/causal_modelling/factor1_ko_validation_targets/route_annotation_revision_20261013/independent_review.json",
+  "independent_review_passed": true,
+  "visual_review": {
+    "all_nine_pages_inspected": true,
+    "landscape_ranking_pages": [
+      3
+    ],
+    "landscape_route_pages": [
+      4,
+      5
+    ],
+    "repeated_route_table_headers": true,
+    "no_clipped_or_overlapping_text_observed": true
+  }
+}

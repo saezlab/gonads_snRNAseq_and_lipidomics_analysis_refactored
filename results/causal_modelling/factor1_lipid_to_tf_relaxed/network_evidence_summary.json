@@ -1,0 +1,11 @@
+{
+  "analysis": "factor1_lipid_to_tf_relaxed_selected_export",
+  "network_edges": 5,
+  "network_nodes": 6,
+  "provenance_rows": 5,
+  "direct_chemical_edges": 1,
+  "direct_mapping_evidence_rows": 1,
+  "pkn_evidence_md5": "cac4b19fdc84432447b527a6be9a7854",
+  "mapping_evidence_md5": "1237e8fecd4728e3063b0ba7af42b544",
+  "interpretation": "Edge records preserve assembled PKN and relaxed-mapping provenance. They do not establish lipid identity, liver exposure, receptor occupancy, or causal regulation in this experiment."
+}

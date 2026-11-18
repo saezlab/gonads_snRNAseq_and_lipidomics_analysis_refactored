@@ -1,0 +1,7 @@
+"statistic","source","condition","score","p_value","gonade_zonation","version","on_target","q_on_target_BH"
+"ulm","cyp2b9","cyp2b9",2.15286444049265,0.03169161393502,"ova_portal","historical",TRUE,0.04753742090253
+"ulm","mtmr11","mtmr11",-7.21110348212749,1.52760732552027e-12,"testes_portal","historical",TRUE,4.58282197656081e-12
+"ulm","sult3a1","sult3a1",1.86251492070937,0.0629753305618821,"ova_central","historical",TRUE,0.0629753305618821
+"ulm","cyp2b9","cyp2b9",2.33351103863955,0.0199211627032523,"ova_portal","revised",TRUE,0.0298817440548785
+"ulm","mtmr11","mtmr11",-6.79113555530861,2.48750448748644e-11,"testes_portal","revised",TRUE,7.46251346245932e-11
+"ulm","sult3a1","sult3a1",1.76609512420222,0.077842843612048,"ova_central","revised",TRUE,0.077842843612048

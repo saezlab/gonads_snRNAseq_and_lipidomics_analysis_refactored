@@ -1,0 +1,7 @@
+"role","path","sha256"
+"FCG_counts","data/RNA/fcg_pseudobulks.rds","acba13798b3485d31d1175132975a265cde26dbbca1b254cdc2211bc951ceeb5"
+"culture_counts","data/RNA/legacy/merged_counts_matrix_250508_VH00211_433_AACVFM3HV_with_gene_symbols_and_groups.csv","d121c4c82ed816edf0d0c107e910ba84bb2fecaa73db5d258dc5103223aff519"
+"selected_network","results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers4_lower_thresholds/network_ATT.csv","353f2793fff8772450a3cbc0d6788b84037d01485041700c63de69ad4a2ad918"
+"Factor1_inputs","results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds","e9ff6c6602863d4c246722e1b8f06970e724ce6bc71388aa6005416e5cc5a4ac"
+"entry_point","/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/scripts/moon/ancillary/audit_factor1_ko_expression.R","84dd0518e5735ae51646860adde51b7fcfbf34874ee802d213e7598e02d606ee"
+"support_functions","scripts/config/support_functions.R","de61cd138a9969531406cf6db7b43de281609897b010da2e61d560aa593e39aa"

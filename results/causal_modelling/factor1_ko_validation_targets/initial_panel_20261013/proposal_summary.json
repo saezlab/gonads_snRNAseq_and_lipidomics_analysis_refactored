@@ -1,0 +1,31 @@
+{
+  "review_date": "2026-10-13",
+  "report": "docs/cosmos_factor1_ko_validation_targets.md",
+  "ranked_sets": 10,
+  "unique_target_genes": 8,
+  "additional_single_controls": [
+    "Pld2",
+    "Mapk1",
+    "Plcb1",
+    "Plcg1"
+  ],
+  "distinct_target_containing_conditions_with_singles": 14,
+  "three_way_interaction_extra_pair": [
+    "Pld2",
+    "Pla2g4a"
+  ],
+  "first_pilot_sets": [
+    "KO01",
+    "KO02",
+    "KO03"
+  ],
+  "experimental_system_assumption": "Primary mouse hepatocytes; forthcoming model unspecified",
+  "KO_direction_rule": "-1 \u00d7 signed path product under a local monotone branch assumption",
+  "ranking_is_expert_judgement": true,
+  "new_MOON_fit": false,
+  "PKN_changed": false,
+  "conditional_only_sets": [
+    "KO09",
+    "KO10"
+  ]
+}

@@ -1,0 +1,3 @@
+"package","version","archive_url","md5","installed_library"
+"statmod","1.5.2","https://cloud.r-project.org/bin/macosx/sonoma-arm64/contrib/4.6/statmod_1.5.2.tgz","6d9c4881d82782fbd347197be486292d","/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/.local/R-library"
+"limma","3.68.5","https://bioconductor.org/packages/release/bioc/bin/macosx/sonoma-arm64/contrib/4.6/limma_3.68.5.tgz","3feec182f3e9d7a77ce6a4c4d1043b53","/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/.local/R-library"

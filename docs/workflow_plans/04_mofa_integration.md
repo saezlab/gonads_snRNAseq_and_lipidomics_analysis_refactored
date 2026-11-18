@@ -89,3 +89,10 @@ source("scripts/visualization/heatmaps.R")
 2. `prepare_mofa_input()` now filters RNA and lipidomics to their sample intersection.
 3. `results/mofa/main_model_RNA_lipid_weight.RData` is important for lookup, but current workflow 06 no longer consumes it.
 4. Workflow 07 consumes `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`.
+5. Workflow 12 pooled phase (former 05c) consumes the sparse species-level Figure 3 branch instead:
+   192 lipid-gene pairs from `hepatocyte_TF_gene_lipid_network_full_SIF.csv`
+   and its 139-by-64 `gene_lipid_correlations_factor1.csv` precursor.
+   The revised figure's "FULL SPECIES-LEVEL NETWORK" label does not refer
+   to the permissive 33%-tail network. Workflow 12 replays frozen values,
+   preserves top-three membership (minimum |r| approximately 0.5847), and
+   never retrains MOFA or imposes a new 0.65 threshold.

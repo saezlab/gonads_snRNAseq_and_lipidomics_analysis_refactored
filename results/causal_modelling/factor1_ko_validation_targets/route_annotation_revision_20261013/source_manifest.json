@@ -1,0 +1,26 @@
+[
+  {
+    "path": "docs/cosmos_factor1_ko_validation_targets.md",
+    "sha256": "d28d47d4f9297990050ea2e31c8db357989c9f5974273ea399496e05dc4bc881"
+  },
+  {
+    "path": "scripts/reports/render_cosmos_ko_validation_pdf.py",
+    "sha256": "b19cea56bbe75280c85f3a9ca1a4ced4bc5598ff3ef9ee41da50dd86eadd3e16"
+  },
+  {
+    "path": "output/pdf/cosmos_factor1_ko_validation_targets.pdf",
+    "sha256": "028b4bca1a3817a5d9e4e9915e97d183fa20fd6b716bb1d0dbf2098fba2cf810"
+  },
+  {
+    "path": "results/causal_modelling/factor1_ko_validation_targets/route_annotation_revision_20261013/full_tf_route_audit.json",
+    "sha256": "27a60f6aa6dc7b1f63c3eda1972ebdca4ba02209f2b7be560b8d9071f5791f01"
+  },
+  {
+    "path": "results/causal_modelling/factor1_ko_validation_targets/route_annotation_revision_20261013/full_tf_to_lipid_routes.csv",
+    "sha256": "513fd92f7e765640532b730c4f6aefa27a685b1694bbf4f3b22228fc5e3b51fa"
+  },
+  {
+    "path": "results/causal_modelling/factor1_ko_validation_targets/route_annotation_revision_20261013/route_audit_runner_snapshot.py",
+    "sha256": "f4b60c741dc3c836c8c0282b3a78c909e71f0e69eca52013715d50a57099622f"
+  }
+]

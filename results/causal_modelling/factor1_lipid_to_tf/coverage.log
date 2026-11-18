@@ -1,0 +1,8 @@
+{
+  "output": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_lipid_to_tf/coverage",
+  "accepted_input_nodes": 155,
+  "direct_regulatory_input_nodes": 0,
+  "topology_configurations": 40,
+  "endpoint_pairs": 1032,
+  "source_resources_modified": false
+}

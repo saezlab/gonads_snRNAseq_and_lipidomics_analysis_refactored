@@ -1,0 +1,13 @@
+{
+  "run_id": "ph73_lipid_precursor_all_tfs_pruning12_layers12",
+  "tf_panel": "all_tfs",
+  "primary_start": 1.5,
+  "primary_end": 1.85,
+  "secondary_start": 1,
+  "secondary_end": 1.2,
+  "upstream_first_edge_secondary_bound": 1.1776480057903,
+  "strict_greater_than": true,
+  "step": 0.025,
+  "threshold_pairs": 150,
+  "fit_path": "results/causal_modelling/factor1_lipid_to_tf/runs/ph73_lipid_precursor_all_tfs_pruning12_layers12/run_state.rds"
+}

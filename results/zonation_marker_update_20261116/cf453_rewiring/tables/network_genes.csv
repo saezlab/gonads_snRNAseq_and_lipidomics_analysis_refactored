@@ -1,0 +1,5 @@
+"context","sex","zone","gene","n_edges","status"
+"female_PP","female","PP","Fmo3",6,"Exploratory selected example"
+"female_PC","female","PC","Cyp3a41a",6,"Exploratory selected example"
+"male_PP","male","PP","Col27a1",6,"Exploratory selected example"
+"male_PC","male","PC","Osbpl3",6,"Exploratory selected example"

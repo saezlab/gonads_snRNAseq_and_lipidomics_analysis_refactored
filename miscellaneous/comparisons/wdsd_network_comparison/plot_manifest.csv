@@ -1,0 +1,8 @@
+"file","description"
+"plots/Figure6_draft.pdf","Figure 6 draft: frozen displayed pairs, baseline conservation and diet comparison"
+"plots/baseline_conservation.pdf","Baseline conservation: original displayed and full eligible pairs"
+"plots/diet_network_comparison.pdf","Diet comparison: original displayed and full eligible pairs"
+"plots/Mtmr11_coefficients.pdf","Mtmr11 diet coefficient comparison: full and original displayed pairs"
+"plots/Mtmr11_selected_pairs.pdf","Mtmr11 selected molecular pairs: seven SD and seven WD mice per panel"
+"plots/changing_pairs.pdf","Descriptively selected changing pairs and their actual mouse measurements"
+"plots/QC_diagnostics.pdf","Lipid/RNA PCAs, seven-injection QC CV and aggregate zonation marker diagnostics"

@@ -101,6 +101,20 @@ class ReactionTests(unittest.TestCase):
             finally:
                 module.OUT = original
 
+    def test_cached_stitch_is_never_reassembled_from_a_stale_regulation_table(self):
+        import assemble_mouse_pkn as module
+        b = empty_builder()
+        original = module.OUT
+        with tempfile.TemporaryDirectory() as directory:
+            module.OUT = Path(directory)
+            try:
+                (module.OUT / 'regulation_edges.csv').write_text('resource\nSTITCH\n')
+                b.regulatory()
+                self.assertEqual(b.evidence, [])
+                self.assertEqual(b.exclusions['cached_STITCH_raw_actor_orientation_unavailable'], 1)
+            finally:
+                module.OUT = original
+
 
 if __name__ == '__main__':
     unittest.main()

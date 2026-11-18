@@ -1,5 +1,32 @@
 # Workflow 01: Data Preparation and QC
 
+## CSV transport update - 18 November 2026
+
+Section11 now reads `current_fcg_zonation_transport` through the plain-matrix
+`pb_components()` reader. `DATASETS$fcg_zonation$rna$source_transport` is the public
+source; `source_rds_local` records the excluded local original only. Dataset
+source validation verifies CSV payload/content hashes without Seurat. The isolated
+section11 conversion was executed and matches the approved current CSV values and
+order. Full whole-cell preparation still remains an optional local preprocessing
+step; downstream scientific defaults start from supplied pseudobulk CSVs.
+
+---
+
+## Current input routing - 16 November 2026
+
+The optional FCG zonation conversion in section11 reads `current_fcg_zonation_rds`
+and writes `current_fcg_zonation_csv` / `current_fcg_zonation_metadata` through
+`scripts/config/analysis_release.R`. These resolve to the expanded-marker inputs
+under `data/RNA/zonation/current/`. Whole-hepatocyte and the distinct GDXHR
+conversions retain their original inputs and biological designs. The targeted
+section11 conversion was executed in an isolated directory and exactly reproduced
+the current FCG matrix and metadata; no canonical input was overwritten.
+
+The section descriptions below retain historical line numbers and paths where
+useful for provenance; the registry takes precedence for current zonation routing.
+
+---
+
 **Script:** `scripts/workflows/01_data_preparation_qc.R`  
 **Lines:** ~1021  
 **Purpose:** Convert preprocessed pseudobulk Seurat objects into CSV matrices/metadata for downstream workflows, run QC checks, and generate exploratory PCA plots.

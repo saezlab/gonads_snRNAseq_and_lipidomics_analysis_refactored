@@ -1,0 +1,9 @@
+mapping_tier,mapping_tier_description,candidate_identity_records,features_with_candidate_identity,candidate_identity_records_active_in_pkn,features_with_active_pkn_node,unique_active_pkn_metabolite_nodes,unique_active_pkn_reaction_instances
+existing_measured_species_rule,"Existing measured-species LINEX2 rule node in pkn_lipid_rules; this is a chain-matched reaction hypothesis, not a curated ChEBI species reaction.",149,149,149,149,149,449
+exact_reported_resolution,SwissLipids candidate with the same canonical shorthand at the reported nomenclature resolution and a ChEBI identifier.,129,128,7,7,7,308
+compatible_more_specific,"SwissLipids candidate carrying extra structural detail. It may resolve sn position, double-bond position/geometry, or stereochemistry, so it is not restricted to positional isomers.",300,219,234,180,182,801
+compatible_lower_resolution,"SwissLipids aggregate species candidate. It can preserve class and total carbon:double-bond composition, but not the measured acyl-chain partition.",173,173,1,1,1,6
+compatible_headgroup_isomer,"Compatible SwissLipids headgroup isomer, such as a glucose/galactose alternative for an unresolved hexosylceramide.",5,5,0,0,0,0
+generic_diacyl_class_template,"Generic Rhea 1,2-diacyl class participant used by the measured-species rule builder. This is a broad class-template stress test, not a species or sn-position mapping.",522,329,387,329,13,516
+hierarchy_class,SwissLipids class-level annotation. It intentionally discards molecular species identity.,5438,1241,895,750,64,857
+hierarchy_ancestor,SwissLipids non-class ancestor annotation. It is broader than the measured species and may overlap a compatible candidate.,242,242,7,7,2,7

@@ -1,0 +1,5 @@
+"iteration","edges_scored","edges_removed","scored_nodes","topology_seed_nodes","max_level"
+1,28746,7420,2913,10,4
+2,21326,1179,2863,10,4
+3,20147,5,2816,10,4
+4,20142,0,2816,10,4

@@ -32,7 +32,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / "support/cosmos_mouse/raw"
-OUT = ROOT / "results/cosmos_mouse_pkn"
+OUT = ROOT / "results/causal_modelling/cosmos_mouse_pkn"
 RHEA = "http://rdf.rhea-db.org/"
 RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 RDFS = "http://www.w3.org/2000/01/rdf-schema#"
@@ -432,7 +432,7 @@ if __name__ == "__main__":
     parser.add_argument("--download", action="store_true", help="Refresh Rhea sources (requires public network access)")
     parser.add_argument("--self-test", action="store_true", help="Run parser semantic regression checks only")
     parser.add_argument("--mouse-uniprot", type=Path, default=RAW / "uniprot_mouse.tsv.gz")
-    parser.add_argument("--swisslipids-enzymes", type=Path, default=ROOT / "results/cosmos_pkn_audit/raw/swisslipids-enzymes.tsv.gz")
+    parser.add_argument("--swisslipids-enzymes", type=Path, default=ROOT / "results/causal_modelling/cosmos_pkn_audit/raw/swisslipids-enzymes.tsv.gz")
     options = parser.parse_args()
     if options.self_test:
         self_test()

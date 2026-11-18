@@ -1,0 +1,7 @@
+{
+  "selected_solution_available": false,
+  "reason": "No threshold pair met compact coverage criteria",
+  "fit_reference": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_tf_to_lipid_expanded_species/frozen_inputs_control",
+  "no_rescoring": true,
+  "selection_policy": "Within-grid representative: 0<edges<500, >=2TFs and >=2observations; descending secondary then primary then observation/TF coverage then fewer edges. Not a calibrated optimum."
+}

@@ -1,0 +1,43 @@
+{
+  "review_date": "2026-10-13",
+  "revision": "alternating_compensation_panel",
+  "report": "docs/cosmos_factor1_ko_validation_targets.md",
+  "current_exports": "results/causal_modelling/factor1_ko_validation_targets/alternating_prioritization",
+  "ranked_sets": 10,
+  "enzyme_only_sets": 5,
+  "TF_containing_sets": 5,
+  "single_sets": 6,
+  "pair_sets": 4,
+  "triplet_sets": 0,
+  "unique_target_genes": 9,
+  "unique_TFs": [
+    "Rxra",
+    "Cebpb",
+    "Pparg"
+  ],
+  "additional_single_controls": [
+    "Pld2",
+    "Plcb1",
+    "Plcg1"
+  ],
+  "distinct_target_containing_conditions_with_singles": 13,
+  "source_corrected_unscored_TFs": [
+    "Cebpb",
+    "Pparg"
+  ],
+  "TF_transfer_and_mediator_gated_sets": [
+    "KO02",
+    "KO04",
+    "KO06",
+    "KO08",
+    "KO10"
+  ],
+  "compensation_interpretation": "Anticipated retained same-output production, not proven adaptive hepatic upregulation; TF/Pld2 pairs require functional PLD1 reduction and retained PLD2",
+  "triplet_policy": "No third backup justified by current source evidence; add only after establishing retained same-output route after pair",
+  "experimental_system_assumption": "Primary mouse hepatocytes; forthcoming model unspecified",
+  "KO_direction_rule": "-1 \u00d7 signed path product under a local monotone branch assumption",
+  "ranking_is_expert_judgement": true,
+  "new_MOON_fit": false,
+  "PKN_changed": false,
+  "original_graphs_changed": false
+}

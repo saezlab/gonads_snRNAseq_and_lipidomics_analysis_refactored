@@ -1,0 +1,87 @@
+{
+  "study": "Fusar Bassini et al. The lipidomic architecture of the mouse brain. Nature (2026).",
+  "doi": "10.1038/s41586-026-11050-0",
+  "retrieved_date": "2026-10-02",
+  "article_url": "https://www.nature.com/articles/s41586-026-11050-0",
+  "supplementary_methods_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-026-11050-0/MediaObjects/41586_2026_11050_MOESM1_ESM.docx",
+  "supplementary_tables_url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41586-026-11050-0/MediaObjects/41586_2026_11050_MOESM3_ESM.zip",
+  "code_repository": "https://github.com/lamanno-epfl/lipidbrainatlas",
+  "code_snapshot_commit": "3fd1f0db7763b781689f39e3cf835c5635560f31",
+  "code_archive": "https://zenodo.org/records/20702555",
+  "data_archive": "https://zenodo.org/records/15379565",
+  "supplied_table_equals_published_table_equals_deposited_corereactions_wenzymes": true,
+  "interpretation": "Table10 is declared used for CORNETO by the supplementary-table guide, but is only the lipid reaction component. The older annotation-derived graph is a lipid-only draft; neither is the full signed signaling/enzyme/lipid CORNETO PKN.",
+  "graph_export_policy": "Remote pickle inspected using an inert type replacement reader; no remote Python classes or constructors executed. Plain CSV exports retain node/edge attribute values for inspection. Graph inference flags and representative molecular_string values do not establish measured chain identities.",
+  "members": [
+    {
+      "local_file": "LaManno_SuppTable10.csv",
+      "archive": "published supplementary tables and Zenodo csv.zip",
+      "member": "2025-06-14969CD-s3/LaManno_SuppTable10.csv / csv/corereactions_wenzymes.csv"
+    },
+    {
+      "local_file": "reactions_linex_now.csv",
+      "archive": "Zenodo csv.zip",
+      "member": "csv/reactions_linex_now.csv"
+    },
+    {
+      "local_file": "graph_from_annotations_nodes.csv",
+      "archive": "Zenodo mixed.zip",
+      "member": "mixed/graph_from_annotations.pickle",
+      "export": "plain node-attribute inventory"
+    },
+    {
+      "local_file": "graph_from_annotations_edges.csv",
+      "archive": "Zenodo mixed.zip",
+      "member": "mixed/graph_from_annotations.pickle",
+      "export": "plain edge-attribute inventory"
+    }
+  ],
+  "files": [
+    {
+      "path": "support/cosmos_mouse/comparison/lamanno_2026/LaManno_SuppTable10.csv",
+      "bytes": 17885,
+      "sha256": "40da8d72675d3b25a9e491c381b405def77d09d016184fc6b01517f641fb9033"
+    },
+    {
+      "path": "support/cosmos_mouse/comparison/lamanno_2026/cited_repo_snapshot_metadata.json",
+      "bytes": 689,
+      "sha256": "77a7000a651156909408983fce1fae0ef4fc7130d9cba5cd38d053e015017011"
+    },
+    {
+      "path": "support/cosmos_mouse/comparison/lamanno_2026/deposited_csv_zip_inventory.json",
+      "bytes": 13346,
+      "sha256": "f9b11faf952b0027b0c1d609b1fbe93c9dc937c528d52a4c9870a3343343054c"
+    },
+    {
+      "path": "support/cosmos_mouse/comparison/lamanno_2026/deposited_mixed_zip_inventory.json",
+      "bytes": 3539,
+      "sha256": "a79b19f0b4c4f94e77c79e79108fb1181c6a987c796e8c3596a38fb5891c5498"
+    },
+    {
+      "path": "support/cosmos_mouse/comparison/lamanno_2026/graph_annotations_member.bin",
+      "bytes": 120896,
+      "sha256": "31615f653ef68f03622891d8ee64714d848907c0e7ecfd3957e9c9b03c6fae78"
+    },
+    {
+      "path": "support/cosmos_mouse/comparison/lamanno_2026/graph_from_annotations_edges.csv",
+      "bytes": 2485375,
+      "sha256": "b1ef6291bb940e90cfa051501e72bd1cc502dc6af5b0a06f775dcad966929613"
+    },
+    {
+      "path": "support/cosmos_mouse/comparison/lamanno_2026/graph_from_annotations_nodes.csv",
+      "bytes": 375815,
+      "sha256": "0020ecebcd0ad48db066449a001b82cd893c798683999adf14010ff72a753c4b"
+    },
+    {
+      "path": "support/cosmos_mouse/comparison/lamanno_2026/reactions_linex_now.csv",
+      "bytes": 109201,
+      "sha256": "9bca29b0843b848370154ee0666b8ee987d6f4ce5f6e068edf75f76e19f27d2d"
+    },
+    {
+      "path": "support/cosmos_mouse/comparison/lamanno_2026/read_graph_annotations_inert.py",
+      "bytes": 3607,
+      "sha256": "a070b225f0f928cee6b82136db81e9bb9726090365746a5b39ed8eb4706613f2"
+    }
+  ],
+  "graph_export_reproduction": "Run read_graph_annotations_inert.py in this source directory; graph_annotations_member.bin is the original ZIP local header plus compressed graph member obtained from the deposit, not a newly generated graph."
+}

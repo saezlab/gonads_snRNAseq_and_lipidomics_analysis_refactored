@@ -28,8 +28,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / "support/cosmos_mouse/raw"
-OUT = ROOT / "results/cosmos_mouse_pkn"
-CACHED = ROOT / "results/cosmos_pkn_audit/raw/om-mouse-pkn.json.gz"
+OUT = ROOT / "results/causal_modelling/cosmos_mouse_pkn"
+CACHED = ROOT / "results/causal_modelling/cosmos_pkn_audit/raw/om-mouse-pkn.json.gz"
 BASE = "https://www.guidetopharmacology.org/DATA/"
 GTOP_FILES = ("interactions.csv", "ligand_id_mapping.csv", "ligands.csv",
               "targets_and_families.csv")
@@ -455,6 +455,10 @@ def main():
         if resource == "MRCLinksDB":
             reject(resource, row_id, "upstream_assumed_sign_not_regulatory_evidence", row["source"], row["target"],
                    "Upstream adapter assigns +1 to all ligand and transporter associations.")
+            continue
+        if resource == "STITCH":
+            reject(resource, row_id, "cached_STITCH_raw_actor_orientation_unavailable", row["source"], row["target"],
+                   "The cache lost raw A/B endpoint order and a_is_acting. Use build_stitch_directional.py with raw STITCH archives instead.")
             continue
         if row["source_type"] != "small_molecule" or row["target_type"] != "protein" or row["mor"] not in {-1, 1}:
             reject(resource, row_id, "not_signed_chemical_to_protein", row["source"], row["target"])

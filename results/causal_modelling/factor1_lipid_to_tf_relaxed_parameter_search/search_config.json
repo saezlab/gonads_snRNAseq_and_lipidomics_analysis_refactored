@@ -1,0 +1,16 @@
+{
+  "analysis": "factor1_lipid_to_tf_relaxed_parameter_search",
+  "base_analysis": "factor1_lipid_to_tf_relaxed",
+  "pruning_steps": [4, 6, 8],
+  "n_layers": [2, 4, 6],
+  "tf_panels": ["all_tfs", "strong_tfs"],
+  "primary_thresholds": [0.5, 1, 1.5, 2, 2.5, 3],
+  "secondary_thresholds": [0, 0.5, 1, 1.5, 2],
+  "threshold_policy": "primary >= secondary >= 0; strict absolute cutoffs use >",
+  "extraction_policy": "Strict score-layer extraction only: source level = target level + 1, signed-edge consistency, source-to-observed-TF walk, and copied-measurement sign agreement.",
+  "eligibility_policy": "0 < edges < 500; secondary > 0; at least one independent direct-edge fingerprint group; at least two observed TFs.",
+  "duplicate_policy": "Identical signed SIFs are materialized once and all threshold/run occurrences are retained in score_layer_stability.csv.",
+  "selection_policy": "Materialize every compact strict score-layer solution. Collapse duplicate signed-edge topologies in the stability table. Do not label an automatic optimum.",
+  "command_args": [],
+  "started_utc": "2026-09-16 12:56:29 UTC"
+}

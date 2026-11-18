@@ -1,0 +1,40 @@
+{
+  "config": {
+    "analysis": "factor1_tf_to_lipid_expanded_species",
+    "baseline_config": "scripts/moon/config/factor1_tf_to_lipid.json",
+    "pkn": "results/causal_modelling/cosmos_mouse_pkn_expanded_species/pkn_expanded_chain.rds",
+    "pkn_directory": "results/causal_modelling/cosmos_mouse_pkn_expanded_species",
+    "input_mapping": "results/causal_modelling/factor1_tf_to_lipid_expanded_species/inputs/input_mapping.csv",
+    "output": "results/causal_modelling/factor1_tf_to_lipid_expanded_species",
+    "expected_mapped_observations": 423,
+    "pruning_steps": 6,
+    "n_layers": 4,
+    "max_iterations": 10,
+    "primary": 1.85,
+    "secondary": 0.55,
+    "primary_grid": [1.85, 2.15, 2.5, 3, 4, 5, 6, 8, 10],
+    "secondary_grid": [0.55, 0.75, 1, 1.075, 1.25, 1.5, 2, 2.5, 3],
+    "focus_tfs": ["Gene__Esr1", "Gene__Nfic", "Gene__Dbp"],
+    "input_md5": {
+      "results/causal_modelling/cosmos_mouse_pkn_expanded_species/pkn_expanded_chain.rds": "23511a8a8bf1416096f3898085a96b7a"
+    },
+    "input_policy": "Preserve frozen155 mappings; add268 one-to-one chain-compatible measured product features. Glucose/galactose conditional nodes excluded.",
+    "selection_policy": "Representative within recorded grid, not a calibrated optimum or replacement manuscript result."
+  },
+  "mode": "frozen_control",
+  "pruning_steps": 6,
+  "n_layers": 4,
+  "orientation": {
+    "label": "testes_positive_Factor1_coordinate",
+    "multiplier": 1,
+    "saved_coordinate_group_means": [-0.742290715464663, 0.708550228398085],
+    "scope": "same_multiplier_for_TF_activities_RNA_loadings_lipid_loadings_and_sample_coordinates",
+    "interpretation": "positive_agrees_with_testes_associated_Factor1_not_a_direct_differential_effect"
+  },
+  "command_args": ["--mode=frozen_control", "--output=results/causal_modelling/factor1_tf_to_lipid_expanded_species/frozen_inputs_control"],
+  "input_policy": "Frozen155 observations verbatim; new graph only",
+  "compression": "Identical signed children; protect all input and TF-regulon IDs",
+  "terminal_observation_policy": "Remove all outgoing edges from observed lipids before preparation/scoring",
+  "RNA_policy": "Same frozen RNA TF-target sign coherence; no new expression filter",
+  "started_utc": "2026-10-06 10:31:05 UTC"
+}

@@ -1,0 +1,33 @@
+{
+  "workflow": "13_wd_crosscohort_robustness",
+  "args": [],
+  "completed_analysis_UTC": "2026-10-14 09:12:57 UTC",
+  "settings": {
+    "seed": 20261014,
+    "B": 4999,
+    "paired_B": 999,
+    "statistic": "Pearson association between frozen CF453 WD and CF459 WD edge-coefficient vectors",
+    "primary_universe": "all observed-measurable common frozen FCG-context edges; no CF453/CF459 coefficient threshold",
+    "secondary_universe": "displayed FCG edges within the same observed-measurable common set",
+    "exact_primary": "24 complete CF459 lipid-vector pairing permutations, conditional on observed CF453 coefficients",
+    "exact_complementary": "5040 complete CF453 lipid-vector pairing permutations, conditional on observed CF459 coefficients",
+    "exact_identity_included": true,
+    "null_statistic": "absolute coefficient-vector r, equivalent to absolute ULM at fixed edge count",
+    "null_hypothesis": "RNA-vector/lipid-vector independence in the permuted or null-resampled cohort; not coefficient equality",
+    "bootstrap": "independent empirical-marginal CF459 RNA/lipid whole-mouse vectors; fixed observed CF453 anchor; approximate null",
+    "p_value_convention": "exact exceedances/valid enumeration; Monte Carlo (1+exceedances)/(1+valid draws), including ties",
+    "undefined_draws": "undefined edge invalidates the entire frozen vector; no draw-specific edge deletion; P conditional on defined draws",
+    "completion_bounds": "allocate all undefined null draws to either nonexceedance or exceedance; mathematical bounds, not confidence intervals or calibrated corrections",
+    "nominal_ULM": "intercept OLS slope t-statistic; dependent edge residuals make nominal P descriptive",
+    "paired_bootstrap": "paired whole mice sampled independently within each cohort; both zones share indices; stability only",
+    "loco": "28 joint omissions plus seven CF453-only and four CF459-only omissions; same mice in both zones; descriptive stability",
+    "limitations": "CF459 n=4; neither cohort age/background equivalence nor within-CF459 SD versus WD effects are identified"
+  },
+  "primary_contexts": ["male_periportal", "male_pericentral"],
+  "sensitivities": ["CF453_QC30", "CF453_Fill50", "RNA_data"],
+  "predefined_gene": "Mtmr11",
+  "imported_inputs": "data/wp3_input_migration_manifest.csv",
+  "CF459_WD_provenance": "Supplied WD-only cohort/meeting designation; f-ctrl/m-ctrl metadata is not SD",
+  "cohort_metadata_unknown": ["exact_age", "strain_background", "diet_formulation_and_exposure", "batch_litter", "upstream_processing"],
+  "limitations": ["The supplied files are processed pseudobulks; per-mouse and per-zone nucleus counts, doublet/QC summaries and composition metadata are absent.", "Only ScaleData.RNA is recorded in each command history. The upstream normalization, missing-value treatment, imputation and nuclear zonation gate cannot be established from these objects.", "Row scaling the stored data layer reproduces scale.data numerically; it supplies a transparent scaling sensitivity but no independent normalization validation.", "Lipid intensity positivity and QC CV describe the supplied export, without establishing raw-data detection, batch correction or normalization provenance.", "No animal or lipid is removed on the basis of a network association, apparent biological outlier or favorable result. The QC-CV <=30% set is a sensitivity only.", "Strict canonical labels preserve chain order, separators, ether prefixes and oxygenation. Formatting agreement is not independent chemical identification; ambiguous annotations must not be forced into matches.", "Each mouse contributes two RNA zones but one whole-liver lipid profile. Twenty-eight mice remain the biological sample count.", "CF459 is WD-only according to the meeting; f-ctrl/m-ctrl metadata labels do not identify standard-diet controls. There is no within-CF459 diet contrast.", "Four CF459 male mice are the primary cross-cohort group; the four females are retained only for input/sex-map QC and original scaling-roster diagnostics.", "Exact ages, genetic background, diet formulation/exposure, litter and batch details remain unavailable; the meeting described qualitative cohort differences only.", "No analytical QC columns, adduct, retention time/mass-to-charge or Fill percentage are supplied for CF459; QC-CV and annotation-field sensitivities cannot be inferred.", "Only ScaleData.RNA is recorded. Upstream normalization, raw detection, missing-value treatment/imputation and nucleus-level QC/gating cannot be reconstructed.", "RNA primary uses existing scale.data unchanged. Row scaling stored data across each complete original object is diagnostic and does not independently validate normalization.", "Nucleus contributions, composition and doublet/QC summaries are unavailable. Supplied count totals and detected genes are aggregate profile diagnostics only.", "Strict canonical labels preserve chain order, separators, ether prefixes and oxygenation. Formatting agreement does not independently confirm molecular identity; alignment IDs are not cross-cohort identifiers.", "Each mouse contributes two RNA zones and one bulk liver lipid profile; zone profiles are not independent animals. No outcome-based animal/feature exclusions are applied."]
+}

@@ -1,0 +1,7 @@
+resource,resource_status,raw_regulation_evidence_rows,surviving_regulation_evidence_rows,surviving_source_chemicals,surviving_signed_source_target_triples,candidate_assignments_all,candidate_measurement_features_all,default_relaxed_candidate_assignments,default_relaxed_measurement_features,policy_note
+BRENDA,included_final_directional_exploratory_pkn,772,749,450,710,164,164,1,1,Cached signed activity-modulation fallback; original source chemistry and per-edge provenance are incomplete.
+GuideToPharmacology,included_final_directional_exploratory_pkn,103,98,60,96,58,58,5,5,Current mouse curated chemical-protein layer; secondary chemical mappings remain annotated.
+STITCH_directional_v5,included_final_directional_exploratory_pkn,7481,7336,1978,4243,16,9,16,9,Raw chemical-actor directional layer; source release is historical (2016) and exploratory.
+MRCLinksDB,excluded_unsigned_annotation,0,0,0,0,0,0,0,0,"Excluded: cached sign is unconditional, including transport; it is not signed regulatory evidence."
+CellPhoneDB_nonpeptidic_adapter,excluded_human_only_unsigned_annotation,0,0,0,0,0,0,0,0,Excluded: human-only adapter assigns a positive sign without a checked effect; it is not projected to mouse.
+STITCH_cached_service_layer,replaced_not_used,0,0,0,0,0,0,0,0,Not used: orientation-unknown cached STITCH rows were replaced by raw chemical-actor directional STITCH v5 evidence.

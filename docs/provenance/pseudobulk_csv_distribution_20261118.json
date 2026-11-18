@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-18",
+  "policy": {
+    "serialized_RNA_Seurat_inputs_in_commit": false,
+    "RNA_CSV_maximum_bytes_exclusive": 50000000,
+    "source_objects_retained_locally": true,
+    "individual_nuclei_exported": false
+  },
+  "roles": [
+    "current_fcg_zonation",
+    "current_gdx_zonation",
+    "current_wdsd_zonation",
+    "wdsd_hepatocytes",
+    "historical_wdsd_zonation",
+    "wd_cell_types",
+    "wd_zonation"
+  ],
+  "source_export_roundtrip": {
+    "three_layers_bitwise_identical": true,
+    "metadata_identities_identical": true,
+    "source_objects_preserved": true,
+    "maximum_absolute_error": 0,
+    "largest_export_CSV_bytes": 34100306,
+    "detail": "docs/provenance/pseudobulk_csv_roundtrip.json"
+  },
+  "transport_edge_case_tests": "docs/provenance/pseudobulk_csv_transport_qa.json",
+  "consumer_checks": {
+    "groups": 85,
+    "passed": true,
+    "source_pseudobulk_RDS_reads_forbidden": true,
+    "staged_FCG_GDX_tables_identical_to_approved": true
+  },
+  "git_only_tree_smoke": {
+    "passed": true,
+    "candidate_files": 2864,
+    "RNA_object_files_present": 0,
+    "source_pseudobulk_readRDS_forbidden": true,
+    "validated": [
+      "Workflow17 current inputs",
+      "Workflow05 engine input interface",
+      "current CF453 intake",
+      "CF459 intake",
+      "fresh Workflow17 CSV staging"
+    ],
+    "scientific_models_run": false,
+    "runtime": "Same installed R environment; repository code/data limited to prospective Git tree"
+  },
+  "independent_commit_audit": {
+    "ready": true,
+    "RNA_CSV_file_count": 55,
+    "largest_RNA_CSV": {
+      "path": "data/RNA/pseudobulk_csv/current_fcg_zonation/scale.data_part001.csv",
+      "bytes": 34100306,
+      "git_state": "untracked_nonignored"
+    },
+    "RNA_input_policy": {
+      "forbidden_rna_objects": [],
+      "rna_csv_at_or_above_50MB": [],
+      "other_data_objects_for_review": [
+        {
+          "path": "data/metabolomics/lipidomic.RData",
+          "bytes": 307456,
+          "git_state": "tracked"
+        }
+      ],
+      "obvious_single_cell_objects_elsewhere": [],
+      "obvious_single_cell_inputs_anywhere": [],
+      "hdf5_containers_for_review": [
+        {
+          "path": "results/mofa/RNA/mofa_res_10factor.hdf5",
+          "bytes": 41422895,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        },
+        {
+          "path": "results/mofa/RNA/mofa_res_11factor.hdf5",
+          "bytes": 42202926,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        },
+        {
+          "path": "results/mofa/RNA/mofa_res_12factor.hdf5",
+          "bytes": 42945394,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        },
+        {
+          "path": "results/mofa/RNA/mofa_res_13factor.hdf5",
+          "bytes": 43694945,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        },
+        {
+          "path": "results/mofa/RNA/mofa_res_14factor.hdf5",
+          "bytes": 44444001,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        },
+        {
+          "path": "results/mofa/RNA/mofa_res_15factor.hdf5",
+          "bytes": 45171629,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        },
+        {
+          "path": "results/mofa/RNA/mofa_res_5factor.hdf5",
+          "bytes": 38450027,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        },
+        {
+          "path": "results/mofa/RNA/mofa_res_6factor.hdf5",
+          "bytes": 39198755,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        },
+        {
+          "path": "results/mofa/RNA/mofa_res_7factor.hdf5",
+          "bytes": 39938779,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        },
+        {
+          "path": "results/mofa/RNA/mofa_res_8factor.hdf5",
+          "bytes": 39939038,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        },
+        {
+          "path": "results/mofa/RNA/mofa_res_9factor.hdf5",
+          "bytes": 40683392,
+          "git_state": "tracked",
+          "classification": "MOFA fitted model"
+        }
+      ]
+    },
+    "all_seven_transports_independently_verified": true
+  },
+  "scientific_models_run": false,
+  "approved_scientific_outputs_changed": false,
+  "git_staging_commit_push_performed": false,
+  "provenance_routing_regression": {
+    "changed_same_basename_RDS_uses_actual_local_SHA": true,
+    "frozen_expected_SHA_uses_verified_CSV_even_with_conflicting_local_file": true,
+    "source_RDS_deserialization_forbidden_in_targeted_fixture": true
+  }
+}

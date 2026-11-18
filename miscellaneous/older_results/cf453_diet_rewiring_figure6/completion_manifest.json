@@ -1,0 +1,28 @@
+{
+  "status": "complete",
+  "date": "2026-11-02",
+  "cohort": "28 approximately 10-month-old wild-type mice; seven per sex/diet",
+  "analysis": "Standalone selected zonation programmes and exploratory SD/WD association changes",
+  "numerical_check_groups": 677,
+  "numerical_max_abs_difference": 1.66533453693773e-15,
+  "final_export_check_groups": 102,
+  "fresh_cli_numerical_object": "Exactly identical across all 16 top-level components",
+  "panel_groups": 3,
+  "graphic_exports": 9,
+  "source_csvs": 3,
+  "pdf_visual_review": "All three individually rendered and inspected; final bounds/vector/300-dpi checks passed",
+  "anchor_selections": 40,
+  "distinct_anchor_genes": 34,
+  "correlation_tests": 76772,
+  "correlations_BH_q_005": 0,
+  "class_95pct_bootstrap_ranges_excluding_zero": 0,
+  "selected_networks": 4,
+  "selected_network_edges": 24,
+  "interpretation": "Class changes and threshold-defined gained/lost examples remain exploratory; bootstrap stability conditions on selection.",
+  "evidence": [
+    "QA/independent_actual/independent_checks.csv",
+    "QA/independent_actual/independent_export_checks.csv",
+    "QA/visual_review/render_manifest.json",
+    "provenance_sha256.csv"
+  ]
+}

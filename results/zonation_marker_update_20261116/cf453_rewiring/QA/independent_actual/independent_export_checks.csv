@@ -1,0 +1,103 @@
+"check","max_abs_difference"
+"Complete fresh models-only CLI object is exactly identical to production",0
+"Exactly three independent panel groups and nine alternative graphics exports",0
+"A exact anchor source join gene",0
+"A exact anchor source join anchor_diet",0
+"A exact anchor source join sex",0
+"A exact anchor source join zone",0
+"A exact anchor source join anchor_effect",2.22044604925031e-15
+"A exact anchor source join anchor_q",4.85722573273506e-17
+"A exact anchor source join own_q",4.60785923306339e-19
+"A exact anchor source join other_t",4.9960036108132e-16
+"A exact anchor source join eligible",0
+"A exact anchor source join context",0
+"A exact anchor source join rank",0
+"A exact anchor source join x_SD",4.2632564145606e-14
+"A exact anchor source join effect_female_SD",5.55111512312578e-16
+"A exact anchor source join y_SD",3.5527136788005e-14
+"A exact anchor source join effect_male_SD",4.66293670342566e-15
+"A exact anchor source join x_WD",4.61852778244065e-14
+"A exact anchor source join effect_female_WD",1.33226762955019e-15
+"A exact anchor source join y_WD",3.5527136788005e-14
+"A exact anchor source join effect_male_WD",1.99840144432528e-15
+"A exact anchor source join threeway_effect",4.9960036108132e-16
+"A exact anchor source join threeway_p",4.44089209850063e-16
+"A exact anchor source join threeway_q",5.55111512312578e-16
+"A exact anchor source join conditional_q",5.55111512312578e-16
+"A arrows start in their selection diet, female coordinate",0
+"A arrows start in their selection diet, male coordinate",0
+"A arrows end in the other diet, female coordinate",0
+"A arrows end in the other diet, male coordinate",0
+"A line styles use the direct three-way adjusted test",0
+"B exact fixed-denominator source join lipid_class",0
+"B exact fixed-denominator source join n_genes",0
+"B exact fixed-denominator source join n_lipids",0
+"B exact fixed-denominator source join n_pairs_class",0
+"B exact fixed-denominator source join n_pairs_rest",0
+"B exact fixed-denominator source join hits_SD",0
+"B exact fixed-denominator source join hits_rest_SD",0
+"B exact fixed-denominator source join rate_SD",4.9960036108132e-16
+"B exact fixed-denominator source join rest_SD",4.9960036108132e-16
+"B exact fixed-denominator source join E_SD",4.44089209850063e-16
+"B exact fixed-denominator source join mean_abs_excess_SD",4.85722573273506e-16
+"B exact fixed-denominator source join hits_WD",0
+"B exact fixed-denominator source join hits_rest_WD",0
+"B exact fixed-denominator source join rate_WD",4.71844785465692e-16
+"B exact fixed-denominator source join rest_WD",4.9960036108132e-16
+"B exact fixed-denominator source join E_WD",4.71844785465692e-16
+"B exact fixed-denominator source join mean_abs_excess_WD",4.16333634234434e-16
+"B exact fixed-denominator source join delta_E",4.85722573273506e-16
+"B exact fixed-denominator source join delta_rate",4.44089209850063e-16
+"B exact fixed-denominator source join delta_mean_abs_excess",4.9960036108132e-16
+"B exact fixed-denominator source join context",0
+"B exact fixed-denominator source join sex",0
+"B exact fixed-denominator source join zone",0
+"B exact fixed-denominator source join bootstrap_low",4.9960036108132e-16
+"B exact fixed-denominator source join bootstrap_high",4.9960036108132e-16
+"B exact fixed-denominator source join bootstrap_valid",0
+"B exact fixed-denominator source join bootstrap_requested",0
+"B exact fixed-denominator source join bootstrap_direction",4.9960036108132e-16
+"B displayed units are excess-rate percentage points",9.76996261670138e-15
+"B markers mean conditional directional stability, not p values",0
+"B printed cell values match the displayed percentage-point scale",0
+"C exact selected-edge source join context",0
+"C exact selected-edge source join sex",0
+"C exact selected-edge source join zone",0
+"C exact selected-edge source join gene",0
+"C exact selected-edge source join lipid",0
+"C exact selected-edge source join lipid_label",0
+"C exact selected-edge source join lipid_class",0
+"C exact selected-edge source join r_SD",4.44089209850063e-16
+"C exact selected-edge source join r_WD",4.44089209850063e-16
+"C exact selected-edge source join delta_r",4.88498130835069e-15
+"C exact selected-edge source join delta_abs",4.44089209850063e-16
+"C exact selected-edge source join direction",0
+"C exact selected-edge source join loo_robust",0
+"C exact selected-edge source join loo_separation_min",5.55111512312578e-16
+"C exact selected-edge source join bootstrap_valid",0
+"C exact selected-edge source join bootstrap_requested",0
+"C exact selected-edge source join bootstrap_direction",1.11022302462516e-16
+"C exact selected-edge source join bootstrap_high",4.44089209850063e-16
+"C exact selected-edge source join bootstrap_low",4.44089209850063e-16
+"C exact selected-edge source join network_eligible",0
+"C exact selected-edge source join p_SD",4.44089209850063e-16
+"C exact selected-edge source join p_WD",4.44089209850063e-16
+"C exact selected-edge source join q_SD",4.44089209850063e-16
+"C exact selected-edge source join q_WD",4.44089209850063e-16
+"C exact selected-edge source join display_rank",0
+"C gain/loss edge colours follow the saved strength-change category",0
+"C edge width shows absolute change in correlation strength",0
+"C printed SD-to-WD coefficients exactly match the selected pairs",0
+"C representative source join context",0
+"C representative source join sex",0
+"C representative source join zone",0
+"C representative source join gene",0
+"C representative source join n_edges",0
+"C representative source join status",0
+"Pure-vector SVG Fig6A_anchor_gene_shifts.svg",0
+"Pure-vector SVG Fig6B_lipid_class_shift.svg",0
+"Pure-vector SVG Fig6C_network_gain_loss.svg",0
+"300-dpi PNG dimensions Fig6A_anchor_gene_shifts.png",0
+"300-dpi PNG dimensions Fig6B_lipid_class_shift.png",0
+"300-dpi PNG dimensions Fig6C_network_gain_loss.png",0
+"Every recorded input, parent, code and plan SHA256 matches the final saved file",0

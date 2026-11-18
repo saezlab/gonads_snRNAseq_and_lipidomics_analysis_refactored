@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "exact_signed_edges": true,
+  "exact_score_node_ids_and_levels": true,
+  "exact_compression_map": true,
+  "tolerance": 1e-10,
+  "max_score_difference": 0,
+  "max_selected_att_score_difference": 4.44089209850063e-15
+}

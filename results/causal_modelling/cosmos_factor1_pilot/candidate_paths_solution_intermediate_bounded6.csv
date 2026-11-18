@@ -1,1 +1,0 @@
-path_id,upstream_tf,upstream_label,downstream_node,downstream_label,edge_count,net_sign,upstream_activity,downstream_weight,agrees_with_upstream_activity_and_weight,minimum_absolute_inferred_score,reaction_ids,species_rule_reactions,resources,path_labels,path_node_ids

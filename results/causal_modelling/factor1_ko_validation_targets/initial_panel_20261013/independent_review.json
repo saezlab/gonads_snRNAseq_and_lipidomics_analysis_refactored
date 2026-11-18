@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "review_date": "2026-10-13",
+  "independent_signed_path_inventories_exact_matches": 59,
+  "ranked_sets": 10,
+  "endpoint_rows": 31,
+  "ranked_paths": 110,
+  "types": {
+    "singles": 4,
+    "pairs": 5,
+    "triplets": 1
+  },
+  "unsupported_edges_or_Enpp2_on_ranked_paths": false,
+  "all_Pld2_sets_use_six_layer_support": true,
+  "source_network_hashes_unchanged": true,
+  "additional_single_controls": [
+    "Pld2",
+    "Mapk1",
+    "Plcb1",
+    "Plcg1"
+  ],
+  "four_extra_singles_yield_conditions": 14,
+  "complete_triplet_factorial_needs_Pld2_Pla2g4a_pair": true,
+  "conditional_RXRA_language_reviewed": true,
+  "no_new_scoring_or_synergy_claims": true,
+  "reviewer": "Independent subagent comparison against separately enumerated graph paths and control-set combinations"
+}

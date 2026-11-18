@@ -1,0 +1,65 @@
+{
+  "baseline_accepted_active_product_features": 128,
+  "baseline_edges": 254589,
+  "baseline_unfiltered_reachable_product_features": {
+    "12": 125,
+    "4": 72,
+    "6": 125,
+    "8": 125
+  },
+  "eligible_explicit_chain_features": 553,
+  "exclusions": {
+    "fixed_sphingobase_template_incompatible": 46,
+    "retained_chain_incompatible": 22670,
+    "sphingolipid_oxygen_template_incompatible": 15,
+    "template_sn_incompatible": 160
+  },
+  "expanded_reaction_hypotheses": 3230,
+  "frozen_tf_seeds": 49,
+  "graphs": {
+    "chain_compatible": {
+      "added_edges": 76443,
+      "candidate_measured_product_features": 419,
+      "edges": 331032,
+      "mapping_is_proposed_input_vector": false,
+      "new_candidate_measured_product_features": 291,
+      "nodes": 66621,
+      "unfiltered_reachable_product_features": {
+        "12": 419,
+        "4": 339,
+        "6": 389,
+        "8": 419
+      }
+    },
+    "glycan_conditional": {
+      "added_edges": 76883,
+      "candidate_measured_product_features": 431,
+      "edges": 331472,
+      "mapping_is_proposed_input_vector": false,
+      "new_candidate_measured_product_features": 303,
+      "nodes": 66731,
+      "unfiltered_reachable_product_features": {
+        "12": 431,
+        "4": 349,
+        "6": 401,
+        "8": 431
+      }
+    }
+  },
+  "new_reaction_families": {
+    "Pemt serial methylation": 153,
+    "acyl-CoA acylation": 668,
+    "coupled sphingomyelin synthase": 1054,
+    "diacyl headgroup": 42,
+    "glycosphingolipid headgroup": 54,
+    "hydrolysis": 1215,
+    "sphingomyelin hydrolysis": 44
+  },
+  "no_measurement_assignment_finalized": true,
+  "no_omics_scoring_performed": true,
+  "tiers": {
+    "chain_compatible": 3176,
+    "glycan_conditional": 54
+  },
+  "topology_scope": "Unfiltered directed reachability from frozen49TFseed IDs; ignores activity signs, RNA filtering, cofactors/AND availability and scores; not MOON preparation"
+}

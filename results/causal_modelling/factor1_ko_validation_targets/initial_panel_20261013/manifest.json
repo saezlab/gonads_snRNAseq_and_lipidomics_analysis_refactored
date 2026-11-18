@@ -1,0 +1,50 @@
+{
+  "purpose": "Preserve initial ranked-panel sources before requested alternating compensation-focused revision; initial prioritization outputs remain in prioritization/",
+  "files": [
+    {
+      "original_path": "docs/cosmos_factor1_ko_validation_targets.md",
+      "snapshot_file": "cosmos_factor1_ko_validation_targets.md",
+      "sha256": "83ab9a76f1d50c8a883e1568cb357cb0d8078f7fad3329340028d238452fb463"
+    },
+    {
+      "original_path": "support/cosmos_mouse/factor1_ko_validation_review.json",
+      "snapshot_file": "factor1_ko_validation_review.json",
+      "sha256": "82fcba9bf86efbf788a4bfe554ac4452f95d4b236d886b2f7fc1d210b3fd73d0"
+    },
+    {
+      "original_path": "scripts/moon/ancillary/propose_factor1_ko_validation.py",
+      "snapshot_file": "propose_factor1_ko_validation.py",
+      "sha256": "61fda7c1389f8ca4f1face703b43982c69c8ed852fc0a2da484279b3f35ea81a"
+    },
+    {
+      "original_path": "support/cosmos_mouse/ko_validation_literature_sources.json",
+      "snapshot_file": "ko_validation_literature_sources.json",
+      "sha256": "8a4ac1a83c14194eef11778549ba10c237e21d9c55516aad9282057b77f1a5b8"
+    },
+    {
+      "original_path": "results/causal_modelling/factor1_ko_validation_targets/proposal_summary.json",
+      "snapshot_file": "proposal_summary.json",
+      "sha256": "4c65d8b40c13874bc1e1c8985a519863ad700dae85d3b7fadd1bd9f0484d3731"
+    },
+    {
+      "original_path": "docs/workflow_plans/moon_factor1_ko_validation_prioritization.md",
+      "snapshot_file": "moon_factor1_ko_validation_prioritization.md",
+      "sha256": "e7dfceaf09186ccb27727f690286e0e7d5a3f506238cadaf306ec3a9453968db"
+    },
+    {
+      "original_path": "results/causal_modelling/factor1_ko_validation_targets/independent_review.json",
+      "snapshot_file": "independent_review.json",
+      "sha256": "1ee08ea046d3112d5affd5177af2a2ef66f5b6d72314c3ea3057ea1bdeb1ed44"
+    },
+    {
+      "original_path": "results/causal_modelling/factor1_ko_validation_targets/output_manifest.csv",
+      "snapshot_file": "output_manifest.csv",
+      "sha256": "8e7350a8bb05132a9bf79eb2603a9d2b447d7cb643a277fd01d35c48b2d17f98"
+    },
+    {
+      "original_path": "results/causal_modelling/factor1_ko_validation_targets/README.md",
+      "snapshot_file": "README.md",
+      "sha256": "c35a5ef26afb5577f9b7180d8ce0d4944df0e06deb4667e00a9a824d4b8f8638"
+    }
+  ]
+}

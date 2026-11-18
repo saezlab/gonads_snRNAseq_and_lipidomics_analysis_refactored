@@ -1,0 +1,18 @@
+{
+  "analysis": "factor1_lipid_to_tf",
+  "ph73_sensitivity_enabled": true,
+  "policies": ["direct_regulation", "lipid_precursor", "ph73_lipid_precursor"],
+  "runs": 72,
+  "runs_scored": 16,
+  "status_counts": {
+    "insufficient_observations_for_ULM": 8,
+    "no_directed_input_to_observation_topology": 24,
+    "no_mapped_upstream_nodes": 24,
+    "scored": 16
+  },
+  "threshold_evaluations": 752,
+  "eligible_candidates": 0,
+  "strict_direct_signalling_supported": false,
+  "primary_lipid_precursor_supported": false,
+  "interpretation": "No direct measured-lipid signaling claim without an eligible regulatory path. Normalized-policy candidates, if present, remain separate metabolic-availability hypotheses requiring co-substrate inspection."
+}

@@ -1,0 +1,53 @@
+{
+  "all_representative_routes_score_layer_aligned": 0,
+  "all_representative_routes_with_currency_bridges": 33,
+  "complete_master_reactions": 71,
+  "currency_audit_policy": "Explicit label panel of water/proton, CoA, ATP/ADP/AMP/GTP/GDP, NAD(P)(H), phosphate/diphosphate, SAM/SAH. A bridge requires both incoming and outgoing selected edges. This is an audit panel, not exhaustive biochemical classification.",
+  "currency_bridges": 1,
+  "currency_nodes": 1,
+  "currency_role_counts": {
+    "reaction_product_to_reaction_substrate_bridge": 1
+  },
+  "exact_evidence_records": 620,
+  "final_pkn_completeness_assessed": true,
+  "independent_checks": {
+    "all_nodes_on_input_to_observation_walk": true,
+    "downstream_observations_are_terminal": true,
+    "edge_score_sign_consistency": true,
+    "exact_eligible_signed_provenance": true,
+    "exact_pkn_membership": true,
+    "finite_unique_score_ids": true
+  },
+  "inputs_or_fit_or_pkn_modified": false,
+  "limitations": [
+    "No flux, kinetics, concentration control, joint co-substrate availability or atom balance is inferred.",
+    "Generated species/catalyst alternatives are hypotheses, not independent observations.",
+    "Shortest representative paths do not enumerate every alternative path/walk.",
+    "The currency-free and catalyst-only route audits reuse fixed scores and do not refit MOON."
+  ],
+  "observed_lipids_with_routes": {
+    "all": 8,
+    "catalyst_only": 7,
+    "score_layer_aligned": 0,
+    "without_currency_bridges": 7
+  },
+  "participant_connectors_missing_from_full": 0,
+  "participant_connectors_missing_from_solution": 495,
+  "participant_policy": "Each oriented master participant and selected catalyst has its original +1 connector checked separately in full PKN, optional final scoring PKN, and solution. Presence is bookkeeping; no joint availability/stoichiometric feasibility inferred.",
+  "participant_rows": 763,
+  "route_counts": {
+    "all": 40,
+    "catalyst_only": 35,
+    "score_layer_aligned": 0,
+    "without_currency_bridges": 35
+  },
+  "route_policy": "One shortest path per reachable TF/observation pair; ties maximize inferred-score bottleneck, then deterministic predecessor ID. Level-0 weights excluded from bottleneck.",
+  "score_layer_audit_policy": "An edge can directly carry recursive scoring evidence only when source level equals target level plus one. The score-layer-aligned route audit keeps only these edges; sign-consistent extracted topology may additionally contain non-adjacent or backward-layer edges. This audit reuses fixed scores and does not quantify each child's contribution.",
+  "scoring_performed": false,
+  "selected_observed_lipids": 8,
+  "selected_reaction_instances": 128,
+  "selected_upstream_tfs": 5,
+  "solution_edges": 617,
+  "solution_edges_adjacent_in_score_layers": 374,
+  "solution_nodes": 264
+}

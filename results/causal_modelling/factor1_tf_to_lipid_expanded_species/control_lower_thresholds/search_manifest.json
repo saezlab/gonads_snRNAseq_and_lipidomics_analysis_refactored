@@ -1,0 +1,10 @@
+{
+  "fit_reference": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_tf_to_lipid_expanded_species/frozen_inputs_control",
+  "no_rescoring": true,
+  "primary": [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.85, 2.15, 2.5, 3],
+  "secondary": [0, 0.05, 0.1, 0.25, 0.4, 0.55, 0.75, 1],
+  "selection_policy": "Within-grid representative: 0<edges<500, >=2TFs and >=2observations; descending secondary then primary then observation/TF coverage then fewer edges. Not a calibrated optimum.",
+  "source_fit_mode": "frozen_control",
+  "command_args": ["--fit=results/causal_modelling/factor1_tf_to_lipid_expanded_species/frozen_inputs_control", "--output=results/causal_modelling/factor1_tf_to_lipid_expanded_species/control_lower_thresholds"],
+  "started_utc": "2026-10-06 10:36:43 UTC"
+}

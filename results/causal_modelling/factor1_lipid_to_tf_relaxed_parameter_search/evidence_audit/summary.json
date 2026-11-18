@@ -1,0 +1,17 @@
+{
+  "search": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_lipid_to_tf_relaxed_parameter_search",
+  "analysis_config": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_lipid_to_tf_relaxed_parameter_search/analysis_config.json",
+  "parameter_search_config": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_lipid_to_tf_relaxed_parameter_search/parameter_search_config.json",
+  "pkn": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/cosmos_mouse_pkn_stitch_directional/pkn_exploratory_stitch_directional.rds",
+  "pkn_evidence_ledger": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/cosmos_mouse_pkn_stitch_directional/edge_evidence.jsonl.gz",
+  "materialized_solutions": 3,
+  "unique_selected_signed_edges": 28,
+  "provenance_rows_written": 50,
+  "frozen_input_md5": {
+    "results/causal_modelling/cosmos_mouse_pkn_stitch_directional/pkn_exploratory_stitch_directional.rds": "e7305870a6cfb9b376d6c11009cea9f7",
+    "results/causal_modelling/cosmos_mouse_pkn_stitch_directional/edge_evidence.jsonl.gz": "cac4b19fdc84432447b527a6be9a7854"
+  },
+  "pkn_evidence_sha256": "a1f67df483f1f728c8c8d3a5b0b8dabcecf8f4332df59f654fa7c4e19ce7a5b9",
+  "script_sha256": "ee5cb06452033e15f573a1834edc83055610b2e1c71fa236fbc618df846ae236",
+  "interpretation": "Each retained strict score-layer edge is linked to the assembled PKN evidence ledger. This provenance audit does not establish lipid exposure, tissue context, receptor engagement, or causal regulation in this experiment."
+}

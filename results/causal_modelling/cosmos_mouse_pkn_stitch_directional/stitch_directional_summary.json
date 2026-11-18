@@ -1,0 +1,40 @@
+{
+  "caveat": "STITCH v5.0 source files were last modified 2016-08-16. The retained edges have auditable directionality but remain exploratory; their direction does not establish currentness, direct mouse experimental support, hepatocyte context, or lipid measurement identity. A current STRING v12 alias snapshot supplies exact ENSMUSP-to-UniProt identity because the publisher no longer exposes a matched v5 alias archive; this affects identifier provenance, not raw action orientation.",
+  "counts": {
+    "action_score_below_threshold": 309346,
+    "base_non_STITCH_evidence_rows": 294546,
+    "baseline_exploratory_edges": 303925,
+    "cached_STITCH_rows_removed": 40360,
+    "chemical_has_ambiguous_current_CHEBI_mapping": 923,
+    "chemical_has_no_current_unique_CHEBI_mapping": 8652,
+    "detailed_link_missing": 0,
+    "detailed_link_textmining_at_or_above_threshold": 8457,
+    "directional_layer_nodes_added": 1312,
+    "directional_overlay_conflicting_pairs": 6190,
+    "directional_overlay_exploratory_edges": 284602,
+    "directional_projected_signed_triples_quarantined": 93,
+    "directional_projected_signed_triples_surviving_graph_conflict_filter": 4243,
+    "directional_raw_pairs_pending_after_mapping": 0,
+    "directional_unique_projected_signed_triples": 4336,
+    "mapped_action_records_before_detailed_link_filter": 15938,
+    "mouse_protein_has_no_frozen_UniProt_mapping": 3661,
+    "raw_action_is_not_explicitly_signed": 270846,
+    "raw_action_records": 71116338,
+    "raw_actor_is_not_STITCH_chemical": 35487222,
+    "raw_chemical_is_not_acting_partner": 35019750,
+    "retained_directional_STITCH_evidence_rows": 7481,
+    "source_level_directional_signed_actions": 29174
+  },
+  "directionality_policy": {
+    "acting_flag": "a_is_acting == t",
+    "conflicts": "opposing signs for an assembled pair are excluded; no majority vote",
+    "mapping": "unique current ChEBI via frozen UniChem and unique mouse UniProt via frozen STRING aliases",
+    "maximum_detailed_link_textmining_exclusive": 700,
+    "minimum_action_score": 700,
+    "raw_actor": "item_id_a must be CIDm/CIDs chemical",
+    "raw_receiver": "item_id_b must be 10090.ENSMUSP protein",
+    "sign": "raw action exactly activation/inhibition; mode is provenance only"
+  },
+  "no_omics_scoring_performed": true,
+  "purpose": "Separate exploratory overlay replacing all orientation-unknown cached STITCH evidence with raw directionally auditable STITCH records."
+}

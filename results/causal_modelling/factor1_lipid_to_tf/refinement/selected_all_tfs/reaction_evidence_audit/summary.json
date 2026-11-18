@@ -1,0 +1,11 @@
+{
+  "selected_network_edges": 455,
+  "selected_network_nodes": 233,
+  "selected_reaction_nodes": 51,
+  "distinct_reaction_accessions": 31,
+  "selected_regulatory_evidence_rows": 2,
+  "scoring_performed": false,
+  "source_PKN_or_fit_modified": false,
+  "reaction_equations_source": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/cosmos_mouse_pkn/rhea_reactions.jsonl",
+  "participant_node_presence_semantics": "One-step frozen alias lookup for the participant's unknown-compartment node; absence/presence is graph bookkeeping, not a concentration or co-substrate measurement."
+}

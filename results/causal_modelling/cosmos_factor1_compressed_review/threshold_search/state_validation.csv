@@ -1,5 +1,0 @@
-"run_id","original_final_edges","scoring_final_edges","merged_original_nodes","same_compressed_group_same_score","final_original_projects_to_scored_pkn"
-"radius6_depth4_compressed",35304,27746,2720,TRUE,TRUE
-"radius6_depth5_compressed",34402,26844,2720,TRUE,TRUE
-"radius6_depth6_compressed",34334,26776,2720,TRUE,TRUE
-"radius6_depth7_compressed",34318,26760,2720,TRUE,TRUE

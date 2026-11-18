@@ -1,0 +1,8 @@
+{
+  "original_report_path": "docs/cosmos_factor1_expanded_moon_rerun.md",
+  "original_sha256": "9097fe6914e56305e941158a580521cb8331a9e902623d9b53cec5cd593dec00",
+  "original_frozen_bytes": "results/causal_modelling/factor1_ko_validation_targets/source_snapshots/cosmos_factor1_expanded_moon_rerun_20261006.md",
+  "current_report_sha256": "d48352047a29867edc4957fb070bf70a625752c7903d392668ebe85db49b4d90",
+  "change": "Added explicit 13October source-level interpretation advisory; historical body retained",
+  "graphs_scores_PKN_changed": false
+}

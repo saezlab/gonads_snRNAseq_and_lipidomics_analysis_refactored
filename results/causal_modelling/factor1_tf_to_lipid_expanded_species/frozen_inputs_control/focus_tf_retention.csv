@@ -1,0 +1,4 @@
+"source","in_initial_upstream","in_pruned_pkn","unchanged_by_compression","in_final_scoring_pkn","score","level","compressed_source","upstream_activity","input_tf","returned_by_moon","sign_agrees","retention_reason","in_solution"
+"Gene__Esr1",TRUE,TRUE,TRUE,TRUE,-0.140509397120106,3,"Gene__Esr1",-7.08874857626001,TRUE,TRUE,TRUE,"returned",FALSE
+"Gene__Nfic",TRUE,TRUE,TRUE,TRUE,0.919224995697547,4,"Gene__Nfic",-4.34923126849243,TRUE,FALSE,FALSE,"upstream_sign_conflict",FALSE
+"Gene__Dbp",TRUE,TRUE,TRUE,TRUE,0.747066771609025,4,"Gene__Dbp",-7.66088476896073,TRUE,FALSE,FALSE,"upstream_sign_conflict",FALSE

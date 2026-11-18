@@ -1,0 +1,63 @@
+{
+  "analysis": "Factor1 TF activities to downstream lipid loadings; expanded chain-compatible PKN",
+  "preferred_fit": "currency_v2_expanded_layers4",
+  "preferred_extraction": "currency_v2_expanded_layers4_lower_thresholds",
+  "sensitivity_fit": "currency_v2_expanded_layers6",
+  "sensitivity_extraction": "currency_v2_expanded_layers6_lower_thresholds",
+  "primary_result": {
+    "primary": 0.75,
+    "secondary": 0.75,
+    "valid_pair": true,
+    "status": "ok",
+    "edges": 138,
+    "nodes": 94,
+    "upstream_tfs": 8,
+    "observed_lipids": 13,
+    "validated": true,
+    "eligible": true
+  },
+  "sensitivity_result": {
+    "primary": 0.75,
+    "secondary": 0.75,
+    "valid_pair": true,
+    "status": "ok",
+    "edges": 177,
+    "nodes": 117,
+    "upstream_tfs": 9,
+    "observed_lipids": 13,
+    "validated": true,
+    "eligible": true
+  },
+  "primary_TFs": [
+    "Gene__Ahr",
+    "Gene__Gata6",
+    "Gene__Klf10",
+    "Gene__Nr2f1",
+    "Gene__Nr4a2",
+    "Gene__Ppara",
+    "Gene__Rora",
+    "Gene__Tbx2"
+  ],
+  "primary_lipid_features": [
+    "Metab__CHEBI:73858_unknown",
+    "Metab__MeasuredLipid:DG(16:0_22:6)_unknown",
+    "Metab__MeasuredLipid:DG(18:0_20:4)_unknown",
+    "Metab__MeasuredLipid:DG(18:0_22:6)_unknown",
+    "Metab__MeasuredLipid:LPC(18:0)_unknown",
+    "Metab__MeasuredLipid:LPC(19:1)_unknown",
+    "Metab__MeasuredLipid:LPC(19:1/0:0)_unknown",
+    "Metab__MeasuredLipid:LPC(20:4)_unknown",
+    "Metab__MeasuredLipid:LPC(20:5)_unknown",
+    "Metab__MeasuredLipid:LPC(22:4)_unknown",
+    "Metab__MeasuredLipid:PA(16:0_18:2)_unknown",
+    "Metab__MeasuredLipid:PA(16:1_18:2)_unknown",
+    "Metab__MeasuredLipid:PA(18:1_18:2)_unknown"
+  ],
+  "choice_reason": "Four layers and six layers have the same highest qualifying grid cutoffs and the same13 readouts; prefer four layers for fewer nodes/edges.",
+  "threshold_status": "Strict absolute score cutoffs 0.75/0.75; exploratory sensitivity, not calibrated statistical confidence.",
+  "currency_policy": "Only explicit generic cofactor substrate-participation edges removed; full reaction masters and chemical-to-protein regulation retained.",
+  "currency_policy_file": "support/cosmos_mouse/moon_currency_substrate_edges_v2.csv",
+  "score_support_policy": "Every displayed edge goes from score level k to k-1; TF\u2192observation connectivity and edge signs verified.",
+  "unfiltered_strong_cutoff_network_status": "Rejected mechanistic interpretation: all101edge representative TF\u2192Cer routes depend on H2O bridge and lack consecutive scoring support. Retained as audit material.",
+  "baseline_status": "Prior manuscript fit remains the separately frozen selected analysis; this sensitivity changes graph, observation background and extraction policy."
+}

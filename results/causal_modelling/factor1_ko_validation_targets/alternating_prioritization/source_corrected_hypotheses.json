@@ -1,0 +1,32 @@
+[
+  {
+    "hypothesis_id": "H_CEBPB_PLD1",
+    "source_gene": "Cebpb",
+    "mediator_gene": "Pld1",
+    "interaction": 1,
+    "source_ids": [
+      "cebpb_not_cebpa_2010"
+    ],
+    "pmid": "19950202",
+    "original_misassigned_source_gene": "Cebpa",
+    "context": "cAMP-driven early adipocyte differentiation in mouse3T3-L1 cells; transfer to hepatocytes unproven",
+    "path_kind": "source_corrected_extension",
+    "scored_by_MOON": false,
+    "required_gate": "CEBPB loss must lower functional PLD1 in the intended hepatocytes before assigning the PA prediction"
+  },
+  {
+    "hypothesis_id": "H_PPARG_PLPP1",
+    "source_gene": "Pparg",
+    "mediator_gene": "Plpp1",
+    "interaction": 1,
+    "source_ids": [
+      "pparg_not_ppara_2014"
+    ],
+    "pmid": "24955089",
+    "original_misassigned_source_gene": "Ppara",
+    "context": "PPARG-dependent PLPP1/LPP1 promoter regulation in human vascular endothelial cells; transfer and lipid-pool accessibility in hepatocytes unproven",
+    "path_kind": "source_corrected_extension",
+    "scored_by_MOON": false,
+    "required_gate": "PPARG loss must lower functional PLPP1 and the relevant PA-to-DG contribution before assigning the DG prediction"
+  }
+]

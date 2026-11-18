@@ -5,6 +5,36 @@
 .DS_Store
 omnipathr-log/**
 **.rds
+# RNA input transport is split pseudobulk CSV only, each file <50,000,000 bytes.
+# Seurat/single-cell/pseudobulk objects remain local; model/causal RDS policies
+# below are separate and are not weakened by this RNA-input exclusion.
+/data/RNA/**/*.[rR][dD][sS]
+/data/RNA/**/*.[rR][dD][aA]
+/data/RNA/**/*.[rR][dD][aA][tT][aA]
+/data/RNA/**/*.[hH]5
+/data/RNA/**/*.[hH][dD][fF]5
+/data/RNA/**/*.[hH]5[aA][dD]
+/data/RNA/**/*.[hH]5[sS][eE][uU][rR][aA][tT]
+/data/RNA/**/*.[hH]5[mM][uU]
+/data/RNA/**/*.[lL][oO][oO][mM]
+/data/RNA/**/*.[qQ][sS]
+/data/RNA/**/*.[qQ][sS]2
+/data/RNA/**/*.[pP][kK][lL]
+/data/RNA/**/*.[pP][iI][cC][kK][lL][eE]
+/data/RNA/**/*.[zZ][aA][rR][rR]/
+/data/RNA/**/filtered_feature_bc_matrix/
+/data/RNA/**/raw_feature_bc_matrix/
+/data/RNA/**/*.rds.*
+/data/RNA/**/*.RData.*
+/data/RNA/**/*.h5ad.*
+/data/RNA/**/*.[mM][tT][xX]
+/data/RNA/**/*.[gG][zZ]
+/data/RNA/**/*.[bB][zZ]2
+/data/RNA/**/*.[xX][zZ]
+/data/RNA/**/*.[zZ][sS][tT]
+/data/RNA/**/*.[zZ][iI][pP]
+/data/RNA/**/*.[tT][aA][rR]
+/data/RNA/**/*.[tT][gG][zZ]
 # Preserve frozen COSMOS inputs, scoring states, and solutions for audit.
 !results/causal_modelling/**/*.rds
 .RDataTmp
@@ -18,17 +48,28 @@ GSE90277/GSE90277_RAW.tar
 tests/outputs/**
 tests/logs/**
 Rplots.pdf
+.local/R-library/
 __pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+/tmp/
+/output/
+.claude/settings.local.json
 
 # Large legacy data and superseded MOFA models
 data/RNA/legacy/
 results/mofa/RNA/old_*/
-**/legacy/
+# Archive source code remains visible to Git; only generated legacy data is
+# excluded. Do not use a repository-wide **/legacy/ exclusion.
+results/mofa/networks/legacy/
+results/multi-omic/legacy/
 
 # Datasets not yet integrated
 data/westernDiet/
 
 # Workflow run logs
+/results/runs/
 results/wf*_run.log
 results/wf*_rerun.log
 
@@ -48,3 +89,115 @@ tmp_*.txt
 # Manuscript drafts and generated writing assets
 manuscript/
 scripts/james/
+
+# Archived local state and generated material stay on disk, outside the normal
+# source commit. Archive documentation/code and migration manifests stay visible.
+/miscellaneous/local/
+/miscellaneous/data/
+/miscellaneous/results/
+/miscellaneous/output/
+/miscellaneous/outputs/
+/miscellaneous/logs/
+/miscellaneous/generated/
+/miscellaneous/test_outputs/
+# This unused serialized RNA dataset is archival data, not archived source code.
+# Retain its local bytes and migration/recovery records; do not publish the object.
+/miscellaneous/older_code/unused/SRP009615/rse_gene.Rdata
+# Actual dated cleanup archive: retain compact documentation/provenance while
+# keeping old scientific payloads on disk rather than duplicating them in Git.
+/miscellaneous/older_results/**
+!/miscellaneous/older_results/**/
+!/miscellaneous/older_results/**/*.md
+!/miscellaneous/older_results/**/README.txt
+!/miscellaneous/older_results/**/sessionInfo.txt
+!/miscellaneous/older_results/**/*manifest*.csv
+!/miscellaneous/older_results/**/*manifest*.json
+!/miscellaneous/older_results/**/*provenance*.csv
+!/miscellaneous/older_results/**/*sha256*.csv
+# Minimal full-precision inputs/reference states still consumed by active MOON.
+# Exact paths and SHA256 contracts: docs/provenance/active_frozen_dependencies.json
+!/miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds
+!/miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_node_mapping.csv
+!/miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_hepatocyte_tf_activities_mapped.csv
+!/miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_weights_all.csv
+!/miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_model_audit.json
+!/miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth4_compressed/run_state.rds
+!/miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth4_compressed/pkn_final_scoring.rds
+!/miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/topology_radius_6/compressed/compression.rds
+!/miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/network_SIF.csv
+!/miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/score_retention/radius6_depth4_compressed_scores_all.csv
+!/miscellaneous/older_results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory/runs/direct_strong_tfs_pruning4_layers4/run_state.rds
+!/miscellaneous/older_results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory/score_layer_constrained/solutions/direct_strong_tfs_pruning4_layers4__p0.5__s0.5/network_SIF.csv
+!/miscellaneous/older_results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory/score_layer_constrained/solutions/direct_strong_tfs_pruning4_layers4__p0.5__s0.5/network_ATT.csv
+/miscellaneous/older_inputs/**
+!/miscellaneous/older_inputs/**/
+!/miscellaneous/older_inputs/**/*.md
+!/miscellaneous/older_inputs/**/README.txt
+!/miscellaneous/older_inputs/**/*manifest*.csv
+!/miscellaneous/older_inputs/**/*manifest*.json
+!/miscellaneous/older_inputs/**/*provenance*.csv
+!/miscellaneous/older_inputs/**/*sha256*.csv
+/miscellaneous/comparisons/**
+!/miscellaneous/comparisons/**/
+!/miscellaneous/comparisons/**/*.md
+!/miscellaneous/comparisons/**/README.txt
+!/miscellaneous/comparisons/**/*manifest*.csv
+!/miscellaneous/comparisons/**/*manifest*.json
+!/miscellaneous/comparisons/**/*provenance*.csv
+!/miscellaneous/comparisons/**/*sha256*.csv
+/miscellaneous/quick_tests/**/*.log
+/miscellaneous/quick_tests/**/test_output*.txt
+/miscellaneous/quick_tests/**/workflow*_*.txt
+/miscellaneous/quick_tests/**/*.pdf
+/miscellaneous/quick_tests/**/*.png
+/miscellaneous/quick_tests/**/*.zip
+/miscellaneous/refactoring/**/*.log
+/miscellaneous/refactoring/**/test_output*.txt
+/miscellaneous/refactoring/**/workflow*_output*.txt
+/miscellaneous/refactoring/**/workflow*_test*.txt
+
+# Downloaded STITCH source databases exceed GitHub's regular Git file limit.
+# Retain local copies; commit their source/checksum manifests and import code.
+/support/cosmos_mouse/raw/stitch_actions_10090_v5.0.tsv.gz
+/support/cosmos_mouse/raw/stitch_links_detailed_10090_v5.0.tsv.gz
+
+# Historical CF453 full-pair exports are regenerated from code and input data.
+/results/cf453_standalone_figure6/tables/edges.csv
+/results/cf453_standalone_figure6/tables/diet_edge_changes.csv
+
+# The current release itself remains intact locally. Git includes its panels,
+# compact source tables, methods, numerical QA summaries and provenance, while
+# excluding duplicate inputs and reproducible runtime/bulk artifacts.
+/results/zonation_marker_update_20261116/**/*.RData
+/results/zonation_marker_update_20261116/**/*.Rdata
+/results/zonation_marker_update_20261116/**/*.rda
+/results/zonation_marker_update_20261116/**/*.zip
+/results/zonation_marker_update_20261116/**/*.log
+/results/zonation_marker_update_20261116/logs/
+/results/zonation_marker_update_20261116/**/QA/cli_replay/
+/results/zonation_marker_update_20261116/**/QA/standardized_sensitivity/
+/results/zonation_marker_update_20261116/QA/fcg_visual/
+/results/zonation_marker_update_20261116/report/qa/layout_*/
+/results/zonation_marker_update_20261116/report/qa/manuscript_source_media/
+# Full private manuscript extraction and HTML are author-facing local artifacts.
+# Keep the public PDF, numeric replacements and portable panel index visible.
+/results/zonation_marker_update_20261116/report/manuscript_paragraph_locations.csv
+/results/zonation_marker_update_20261116/report/manuscript_zonation_context_scan.csv
+/results/zonation_marker_update_20261116/report/manuscript_numeric_inventory.csv
+/results/zonation_marker_update_20261116/report/zonation_update_report.html
+/results/zonation_marker_update_20261116/cf453_layouts/QA/rendered/
+/results/zonation_marker_update_20261116/inputs/**/scaled_RNA*.csv
+/results/zonation_marker_update_20261116/inputs/**/meta_data_df*.csv
+/results/zonation_marker_update_20261116/inputs/preprocessing_reference/*.docx
+/results/zonation_marker_update_20261116/cf453_models/tables/
+/results/zonation_marker_update_20261116/cf453_direct_diet/tables/
+/results/zonation_marker_update_20261116/cf453_rewiring/tables/edges.csv
+/results/zonation_marker_update_20261116/cf453_rewiring/tables/eligibility.csv
+/results/zonation_marker_update_20261116/gdx_zonation/old_results.csv
+/results/zonation_marker_update_20261116/gdx_zonation/new_results.csv
+/results/zonation_marker_update_20261116/comparisons/gdx_old_new.csv
+/results/zonation_marker_update_20261116/comparisons/fcg_gene_statistics_old_vs_new.csv
+/results/zonation_marker_update_20261116/comparisons/fcg_reselected_network_edges_old_vs_new.csv
+/results/zonation_marker_update_20261116/comparisons/fcg_fixed_historical_pairs_old_vs_new.csv
+/results/zonation_marker_update_20261116/comparisons/cf453_primary_gene_changes.csv
+/results/zonation_marker_update_20261116/comparisons/cf453_direct_diet_gene_changes.csv

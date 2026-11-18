@@ -1,4 +1,0 @@
-"name","primary","secondary","nodes","edges","upstream_tfs","downstream_nodes"
-"relaxed",1,0,3647,13246,14,11
-"primary",1.7,1,473,1676,8,4
-"strict",2,1.5,187,537,3,2

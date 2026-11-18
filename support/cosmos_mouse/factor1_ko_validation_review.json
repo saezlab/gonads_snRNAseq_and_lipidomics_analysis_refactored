@@ -1,0 +1,460 @@
+{
+  "analysis": "factor1_tf_to_lipid_ko_validation_prioritization",
+  "review_date": "2026-10-13",
+  "experimental_system_assumption": "Primary mouse hepatocytes; upcoming model not yet confirmed",
+  "ranking_policy": "Alternate enzyme-only and TF-containing experimental priorities; within-category expert judgement integrates chemistry, primary sources, expression, interpretability and compensation tests. Not a global confidence ranking or ranking by MOON score.",
+  "networks": {
+    "layers4": "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers4_lower_thresholds/expanded_network_audit",
+    "layers6": "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers6_lower_thresholds/expanded_network_audit"
+  },
+  "readout_groups": {
+    "PA3": [
+      "PA(16:0_18:2)",
+      "PA(16:1_18:2)",
+      "PA(18:1_18:2)"
+    ],
+    "DG2": [
+      "DG(16:0_22:6)",
+      "DG(18:0_20:4)"
+    ],
+    "DG3": [
+      "DG(16:0_22:6)",
+      "DG(18:0_20:4)",
+      "DG(18:0_22:6)"
+    ],
+    "LPC18": [
+      "LPC(18:0)",
+      "LPC(18:0/0:0)"
+    ]
+  },
+  "excluded_gene_edges": [
+    {
+      "source": "Gene__Ppara",
+      "target": "Gene__Plpp1",
+      "reason": "PMID24955089 studies PPARG; cannot support PPARA-specific edge",
+      "pmid": "24955089"
+    },
+    {
+      "source": "Gene__Cebpa",
+      "target": "Gene__Pld1",
+      "reason": "PMID19950202 supports CEBPB and explicitly not CEBPA",
+      "pmid": "19950202"
+    },
+    {
+      "source": "Gene__Gata6",
+      "target": "Gene__Mapk1",
+      "reason": "PMID18454176 describes ERK\u2192GATA6 phosphorylation, not GATA6\u2192MAPK1 transcription",
+      "pmid": "18454176"
+    }
+  ],
+  "excluded_catalyst_genes": [
+    {
+      "gene": "Enpp2",
+      "reason": "LPC\u2192LPA enzyme; diacyl-PC\u2192PA assignment lacks specific supporting evidence"
+    }
+  ],
+  "contextual_edges": [
+    {
+      "source": "Gene__Rxra",
+      "target": "Gene__Pld1",
+      "reason": "PMID17433303 supports ligand-dependent VDR/RXRA complex in human keratinocytes; hepatocyte transfer conditional",
+      "valid_reference": "17433303",
+      "retracted_reference": "32067228",
+      "retraction_notice": "39888011"
+    },
+    {
+      "source": "Gene__Rora",
+      "target": "Gene__Cebpa",
+      "reason": "PMID19324970 indirect adipocyte pathway via CEBPB, not established direct hepatocyte edge"
+    }
+  ],
+  "sources_file": "support/cosmos_mouse/ko_validation_literature_sources.json",
+  "sets": [
+    {
+      "rank": 1,
+      "set_id": "KO01",
+      "targets": [
+        "Pld1"
+      ],
+      "type": "Single",
+      "category": "Enzyme-only",
+      "module": "PA production anchor",
+      "primary_readout_groups": [
+        "PA3"
+      ],
+      "local_direction": "down",
+      "rationale": "Direct PC-to-PA branch and strongest hepatic biochemical anchor",
+      "main_caveat": "Exact measured-chain production remains conditional",
+      "source_ids": [
+        "pld1_hep_ko_2023"
+      ],
+      "prediction_status": "Conditional local branch expectation; no concentration/flux intervention simulation, quantitative additivity, compensation induction or inherited corrected-TF score",
+      "conditional_gates": [
+        "Verify target engagement and contribution of the nominated branch to the measured pool"
+      ],
+      "compensation": null
+    },
+    {
+      "rank": 2,
+      "set_id": "KO02",
+      "targets": [
+        "Rxra"
+      ],
+      "type": "Single",
+      "category": "TF-containing",
+      "module": "Conditional TF-to-PLD1 route",
+      "primary_readout_groups": [
+        "PA3"
+      ],
+      "local_direction": "down",
+      "rationale": "Test the remaining source-supported receptor-complex-to-primary-enzyme hypothesis",
+      "main_caveat": "VDR/vitaminD context and hepatic transfer unproven; frozen footprint is below original upstream cutoff",
+      "source_ids": [
+        "rxra_vdr_pld1_2007"
+      ],
+      "prediction_status": "Conditional local branch expectation; no concentration/flux intervention simulation, quantitative additivity, compensation induction or inherited corrected-TF score",
+      "conditional_gates": [
+        "Establish relevant VDR/ligand context",
+        "RXRA loss must reduce functional PLD1 before attributing a PA effect to this arm"
+      ],
+      "compensation": null
+    },
+    {
+      "rank": 3,
+      "set_id": "KO03",
+      "targets": [
+        "Pld1",
+        "Pld2"
+      ],
+      "type": "Pair",
+      "category": "Enzyme-only",
+      "module": "Parallel PLD isoforms",
+      "primary_readout_groups": [
+        "PA3"
+      ],
+      "local_direction": "down",
+      "rationale": "Test residual PC-to-PA production through the alternative PLD isoform",
+      "main_caveat": "Pld2 is present only in six-layer sensitivity; compensation is not assumed",
+      "source_ids": [
+        "pld1_pld2_hepatocyte_2015",
+        "pld_functional_backup_brain_2020"
+      ],
+      "prediction_status": "Conditional local branch expectation; no concentration/flux intervention simulation, quantitative additivity, compensation induction or inherited corrected-TF score",
+      "conditional_gates": [
+        "Verify target engagement and cell health in each constituent single and pair",
+        "Confirm each proposed alternative route contributes to the shared lipid pool; additional effect is a test, not guaranteed"
+      ],
+      "compensation": {
+        "primary_route_target": "Pld1",
+        "backup_route_target": "Pld2",
+        "primary_route": "Pld1 -> PC-to-PA reaction -> PA3",
+        "backup_route": "Pld2 -> alternative PC-to-PA reaction -> PA3",
+        "shared_output_group": "PA3",
+        "rationale": "Parallel enzymes can contribute to the same PA output; test whether PLD2 retains output after PLD1 loss",
+        "compensation_established": false,
+        "functional_capacity_precedent": {
+          "source_id": "pld_functional_backup_brain_2020",
+          "context": "Mouse forebrain; no remaining-isoform RNA/protein induction",
+          "interpretation": "Parallel functional capacity precedent, not proof of liver compensation or exact measured PA-species response"
+        }
+      }
+    },
+    {
+      "rank": 4,
+      "set_id": "KO04",
+      "targets": [
+        "Cebpb"
+      ],
+      "type": "Single",
+      "category": "TF-containing",
+      "module": "Source-corrected TF-to-PLD1 hypothesis",
+      "primary_readout_groups": [
+        "PA3"
+      ],
+      "local_direction": "down",
+      "rationale": "Test the beta-family identity supported by the originally misassigned CEBPA citation",
+      "main_caveat": "Unscored mouse-adipocyte-to-hepatocyte extension; negative Factor1 footprint disagrees with positive PA loadings",
+      "source_ids": [
+        "cebpb_not_cebpa_2010"
+      ],
+      "prediction_status": "Conditional local branch expectation; no concentration/flux intervention simulation, quantitative additivity, compensation induction or inherited corrected-TF score",
+      "conditional_gates": [
+        "CEBPB loss must reduce functional PLD1 in the intended hepatocytes",
+        "Do not interpret the extension as a fitted, sign-coherent Factor1 explanation"
+      ],
+      "compensation": null
+    },
+    {
+      "rank": 5,
+      "set_id": "KO05",
+      "targets": [
+        "Pla2g4a"
+      ],
+      "type": "Single",
+      "category": "Enzyme-only",
+      "module": "PC acyl hydrolysis",
+      "primary_readout_groups": [
+        "LPC18"
+      ],
+      "local_direction": "down",
+      "rationale": "Test PC deacylation with the most chemically credible retained18:0 LPC readout",
+      "main_caveat": "LPC18 assay annotations can overlap; PUFA-retaining LPC hypotheses exploratory",
+      "source_ids": [
+        "pla2_species_1995"
+      ],
+      "prediction_status": "Conditional local branch expectation; no concentration/flux intervention simulation, quantitative additivity, compensation induction or inherited corrected-TF score",
+      "conditional_gates": [
+        "Verify target engagement and contribution of the nominated branch to the measured pool"
+      ],
+      "compensation": null
+    },
+    {
+      "rank": 6,
+      "set_id": "KO06",
+      "targets": [
+        "Cebpb",
+        "Pld2"
+      ],
+      "type": "Pair",
+      "category": "TF-containing",
+      "module": "TF primary route plus alternative PLD enzyme",
+      "primary_readout_groups": [
+        "PA3"
+      ],
+      "local_direction": "down",
+      "rationale": "Suppress proposed CEBPB-dependent primary PLD1 production together with alternative PLD2 output",
+      "main_caveat": "Unscored TF extension; both shared-pool relevance and remaining PLD2 activity must be established",
+      "source_ids": [
+        "cebpb_not_cebpa_2010",
+        "pld1_pld2_hepatocyte_2015",
+        "pld_functional_backup_brain_2020"
+      ],
+      "prediction_status": "Conditional local branch expectation; no concentration/flux intervention simulation, quantitative additivity, compensation induction or inherited corrected-TF score",
+      "conditional_gates": [
+        "Verify target engagement and cell health in each constituent single and pair",
+        "Confirm each proposed alternative route contributes to the shared lipid pool; additional effect is a test, not guaranteed",
+        "CEBPB loss must reduce functional PLD1",
+        "Verify PLD2 remains functionally available after CEBPB loss"
+      ],
+      "compensation": {
+        "primary_route_target": "Cebpb",
+        "backup_route_target": "Pld2",
+        "primary_route": "Cebpb -> proposed Pld1 regulation -> PC-to-PA reaction -> PA3",
+        "backup_route": "Pld2 -> alternative PC-to-PA reaction -> PA3",
+        "shared_output_group": "PA3",
+        "rationale": "TF loss may reduce the primary PLD1 route without removing the alternative PLD2 enzyme; test residual alternative output",
+        "compensation_established": false,
+        "functional_capacity_precedent": {
+          "source_id": "pld_functional_backup_brain_2020",
+          "context": "Mouse forebrain; no remaining-isoform RNA/protein induction",
+          "interpretation": "Parallel functional capacity precedent, not proof of liver compensation or exact measured PA-species response"
+        }
+      }
+    },
+    {
+      "rank": 7,
+      "set_id": "KO07",
+      "targets": [
+        "Plpp1"
+      ],
+      "type": "Single",
+      "category": "Enzyme-only",
+      "module": "PA dephosphorylation",
+      "primary_readout_groups": [
+        "DG2"
+      ],
+      "local_direction": "down",
+      "rationale": "Test the proximal PA-to-DG effector without unsupported PPARA attribution",
+      "main_caveat": "Extracellular/luminal topology and relevant bulk PA pool access unresolved",
+      "source_ids": [
+        "plpp_topology_2008",
+        "plpp1_hepatocyte_2017"
+      ],
+      "prediction_status": "Conditional local branch expectation; no concentration/flux intervention simulation, quantitative additivity, compensation induction or inherited corrected-TF score",
+      "conditional_gates": [
+        "Verify target engagement and contribution of the nominated branch to the measured pool"
+      ],
+      "compensation": null
+    },
+    {
+      "rank": 8,
+      "set_id": "KO08",
+      "targets": [
+        "Pparg"
+      ],
+      "type": "Single",
+      "category": "TF-containing",
+      "module": "Source-corrected TF-to-PLPP1 hypothesis",
+      "primary_readout_groups": [
+        "DG2"
+      ],
+      "local_direction": "down",
+      "rationale": "Test the gamma identity supported by the misassigned PPARA citation",
+      "main_caveat": "Unscored endothelial-to-hepatocyte extension; below upstream cutoff and positive footprint disagrees with negative DG loadings",
+      "source_ids": [
+        "pparg_not_ppara_2014"
+      ],
+      "prediction_status": "Conditional local branch expectation; no concentration/flux intervention simulation, quantitative additivity, compensation induction or inherited corrected-TF score",
+      "conditional_gates": [
+        "PPARG loss must reduce functional PLPP1 in the intended hepatocytes",
+        "Confirm access to the measured PA/DG pool; distinguish broader PPARG lipid effects",
+        "Do not interpret the extension as a fitted, sign-coherent Factor1 explanation"
+      ],
+      "compensation": null
+    },
+    {
+      "rank": 9,
+      "set_id": "KO09",
+      "targets": [
+        "Plcb1",
+        "Plcg1"
+      ],
+      "type": "Pair",
+      "category": "Enzyme-only",
+      "module": "Alternative PLC contributions to DG",
+      "primary_readout_groups": [
+        "DG3"
+      ],
+      "local_direction": "down",
+      "rationale": "Test whether two alternative signaling phospholipase routes sustain the same DG readouts",
+      "main_caveat": "Physiological PIP2 pool differs from measured unphosphorylated PI; other PLCs remain",
+      "source_ids": [
+        "plcg1_pi_1999",
+        "plcb1_major_substrate_1997"
+      ],
+      "prediction_status": "Conditional local branch expectation; no concentration/flux intervention simulation, quantitative additivity, compensation induction or inherited corrected-TF score",
+      "conditional_gates": [
+        "Verify target engagement and cell health in each constituent single and pair",
+        "Confirm each proposed alternative route contributes to the shared lipid pool; additional effect is a test, not guaranteed",
+        "Establish relevant signaling substrate/receptor context for both PLC routes"
+      ],
+      "compensation": {
+        "primary_route_target": "Plcb1",
+        "backup_route_target": "Plcg1",
+        "primary_route": "Plcb1 -> candidate PI/PLC-associated DG reaction -> DG3",
+        "backup_route": "Plcg1 -> alternative candidate PI/PLC-associated DG reaction -> DG3",
+        "shared_output_group": "DG3",
+        "rationale": "Two distinct PLC proteins can contribute to shared DG outputs; test residual output rather than assuming compensatory induction",
+        "compensation_established": false
+      }
+    },
+    {
+      "rank": 10,
+      "set_id": "KO10",
+      "targets": [
+        "Rxra",
+        "Pld2"
+      ],
+      "type": "Pair",
+      "category": "TF-containing",
+      "module": "Conditional receptor route plus alternative PLD enzyme",
+      "primary_readout_groups": [
+        "PA3"
+      ],
+      "local_direction": "down",
+      "rationale": "Test whether alternative PLD2 output masks reduced RXRA-dependent primary PLD1 production",
+      "main_caveat": "VDR/ligand and hepatic transfer conditional; require PLD1 reduction and PLD2 remaining activity",
+      "source_ids": [
+        "rxra_vdr_pld1_2007",
+        "pld1_pld2_hepatocyte_2015",
+        "pld_functional_backup_brain_2020"
+      ],
+      "prediction_status": "Conditional local branch expectation; no concentration/flux intervention simulation, quantitative additivity, compensation induction or inherited corrected-TF score",
+      "conditional_gates": [
+        "Verify target engagement and cell health in each constituent single and pair",
+        "Confirm each proposed alternative route contributes to the shared lipid pool; additional effect is a test, not guaranteed",
+        "RXRA loss must reduce functional PLD1 in relevant VDR/ligand context",
+        "Verify PLD2 remains functionally available after RXRA loss"
+      ],
+      "compensation": {
+        "primary_route_target": "Rxra",
+        "backup_route_target": "Pld2",
+        "primary_route": "Rxra/VDR/ligand -> context-dependent Pld1 regulation -> PC-to-PA reaction -> PA3",
+        "backup_route": "Pld2 -> alternative PC-to-PA reaction -> PA3",
+        "shared_output_group": "PA3",
+        "rationale": "TF loss may reduce primary PLD1 production while PLD2 provides an alternative output route; test the residual output",
+        "compensation_established": false,
+        "functional_capacity_precedent": {
+          "source_id": "pld_functional_backup_brain_2020",
+          "context": "Mouse forebrain; no remaining-isoform RNA/protein induction",
+          "interpretation": "Parallel functional capacity precedent, not proof of liver compensation or exact measured PA-species response"
+        }
+      }
+    }
+  ],
+  "panel_id": "alternating_compensation_panel_20261013",
+  "tf_targets": [
+    "Rxra",
+    "Cebpb",
+    "Pparg"
+  ],
+  "strict_alternation": true,
+  "combination_policy": "parallel_compensation_only; shared lipid endpoints; no serial co-target on a supporting path",
+  "frozen_tf_activity_file": "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_hepatocyte_tf_activities_mapped.csv",
+  "original_upstream_absolute_activity_cutoff": 2,
+  "frozen_graph_hashes": {
+    "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers4_lower_thresholds/expanded_network_audit/network_labeled_ATT.csv": "66d17d4a2b1eb2486b1727c11989af669b1b3add5b65619df26e93509b5a920f",
+    "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers4_lower_thresholds/expanded_network_audit/network_labeled_SIF.csv": "5faf86dc61f1b4d485c568717a0557affbc9d6d2a90b4f024a5c4beb3c290249",
+    "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers4_lower_thresholds/network_ATT.csv": "353f2793fff8772450a3cbc0d6788b84037d01485041700c63de69ad4a2ad918",
+    "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers4_lower_thresholds/network_SIF.csv": "5e15ab340bdc4f4b346304fbfb5c6c7f2216abb80c33643a0adcd9dbf47fd9da",
+    "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers6_lower_thresholds/expanded_network_audit/network_labeled_ATT.csv": "07c811c5e100fea2022ac42b2984fd50d00be031146f17a4665a7878ad996fca",
+    "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers6_lower_thresholds/expanded_network_audit/network_labeled_SIF.csv": "928f3bbda95cacf4beec8dce7014bdd202cfee48aaa856b54e83d11ca33750e8",
+    "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers6_lower_thresholds/network_ATT.csv": "3f9851c52097a65c950ced1c9adc2ea068ca600089bb1570e6fdea3090504ade",
+    "results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_v2_expanded_layers6_lower_thresholds/network_SIF.csv": "db0caeb023621758ba793abd0fce7b1a88fc7af7eb864a9f50395865d613b6cf"
+  },
+  "source_corrected_hypotheses": [
+    {
+      "hypothesis_id": "H_CEBPB_PLD1",
+      "source_gene": "Cebpb",
+      "mediator_gene": "Pld1",
+      "interaction": 1,
+      "source_ids": [
+        "cebpb_not_cebpa_2010"
+      ],
+      "pmid": "19950202",
+      "original_misassigned_source_gene": "Cebpa",
+      "context": "cAMP-driven early adipocyte differentiation in mouse3T3-L1 cells; transfer to hepatocytes unproven",
+      "path_kind": "source_corrected_extension",
+      "scored_by_MOON": false,
+      "required_gate": "CEBPB loss must lower functional PLD1 in the intended hepatocytes before assigning the PA prediction"
+    },
+    {
+      "hypothesis_id": "H_PPARG_PLPP1",
+      "source_gene": "Pparg",
+      "mediator_gene": "Plpp1",
+      "interaction": 1,
+      "source_ids": [
+        "pparg_not_ppara_2014"
+      ],
+      "pmid": "24955089",
+      "original_misassigned_source_gene": "Ppara",
+      "context": "PPARG-dependent PLPP1/LPP1 promoter regulation in human vascular endothelial cells; transfer and lipid-pool accessibility in hepatocytes unproven",
+      "path_kind": "source_corrected_extension",
+      "scored_by_MOON": false,
+      "required_gate": "PPARG loss must lower functional PLPP1 and the relevant PA-to-DG contribution before assigning the DG prediction"
+    }
+  ],
+  "tf_evidence_qualifiers": {
+    "Rxra": {
+      "frozen_factor1_activity": -0.749567173468872,
+      "supplied_upstream_input": false,
+      "evidence_status": "Frozen fitted intermediary, not an accepted upstream TF measurement; ligand/VDR-dependent hepatic transfer conditional",
+      "factor1_alignment": "Negative measured footprint is opposite the positive frozen intermediary score and positive PA3 loadings; it was below the original activity cutoff and was not used as an upstream constraint",
+      "inherited_score_from_other_TF": false
+    },
+    "Cebpb": {
+      "frozen_factor1_activity": -2.22283222360399,
+      "supplied_upstream_input": true,
+      "evidence_status": "Source-corrected, unscored CEBPB-to-PLD1 extension; not present in selected solution",
+      "factor1_alignment": "Negative frozen CEBPB footprint times a positive proposed path opposes positive PA3 loadings; this is not a sign-coherent explanation of Factor1",
+      "inherited_score_from_other_TF": false
+    },
+    "Pparg": {
+      "frozen_factor1_activity": 1.20235013693179,
+      "supplied_upstream_input": false,
+      "evidence_status": "Source-corrected, unscored PPARG-to-PLPP1 extension; marked absent from original mapped PKN and below upstream cutoff",
+      "factor1_alignment": "Positive frozen PPARG footprint times a positive proposed path opposes negative DG2 loadings; this is not a sign-coherent explanation of Factor1",
+      "inherited_score_from_other_TF": false
+    }
+  }
+}

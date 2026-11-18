@@ -1,0 +1,48 @@
+{
+  "frozen_baseline_unchanged": true,
+  "hypothesis_scope": "Conditional species chemistry with explicit mapping/isomer assumptions",
+  "inputs": [
+    {
+      "path": "scripts/pkn/build_expanded_lipid_rules.py",
+      "sha256": "dfad2890f1cd68f4d55e3c44409ee2f208d1824ea629fefcdff5ea82b5848c26"
+    },
+    {
+      "path": "scripts/pkn/expanded_lipid_matching.py",
+      "sha256": "7733b1eaede932acdfe790f5bb90a4b411e63fd06d76a50f8b014c804bb6503c"
+    },
+    {
+      "path": "support/cosmos_mouse/expanded_species_templates.json",
+      "sha256": "8ef4ea391f0492a1c97196603f05f0f398c7f067bdb952a342d55a9caaf9a66f"
+    },
+    {
+      "path": "support/cosmos_mouse/raw/uniprot_mouse.tsv.gz",
+      "sha256": "61e908219c7e849111c2205e336034f2b8768cf9a08a377df357db52e5936511"
+    },
+    {
+      "path": "results/causal_modelling/lipid_reaction_target_mapping_audit/feature_reaction_target_inventory.csv",
+      "sha256": "06a856278457e7b6c94b7d98676f0b138e63fd2b43e2de4c7dd5755c6c7535d1"
+    },
+    {
+      "path": "results/causal_modelling/factor1_tf_to_lipid/upstream_input.csv",
+      "sha256": "8ebd117ab46d3144eb9a94993c628e94d07397a10502279d4f915c476dd9b7ad"
+    },
+    {
+      "path": "results/causal_modelling/cosmos_mouse_pkn/rhea_reactions.jsonl",
+      "sha256": "f9fd2405ebccc0a1caa9b29620469ee40cd26cdfafba775d14de7f9e23f48f6a"
+    },
+    {
+      "path": "results/causal_modelling/cosmos_mouse_pkn/mapping_features.csv",
+      "sha256": "c6b8efc5fe22cd3e1f3aba93211d8b1d48d2c0bc78aa37e7c0c2e3d99d54f15e"
+    },
+    {
+      "path": "results/causal_modelling/cosmos_mouse_pkn/pkn_lipid_rules.csv",
+      "sha256": "cf1ffc29e716ef3a90f617ae49bbd739fe163b7d604ac6e26e0e13fd445f9e4f"
+    },
+    {
+      "path": "results/causal_modelling/cosmos_mouse_pkn/nodes.jsonl",
+      "sha256": "9bdbefe2b336ea5e09835ebd8132fa6a260eaab5861219280d9f306d482b7e8c"
+    }
+  ],
+  "measurement_assignment": "No new MOON input vectors created; audit candidate ledger before scoring",
+  "node_projection": "Positive catalyst/substrate participation and product formation; no inferred flux or regulatory sign"
+}

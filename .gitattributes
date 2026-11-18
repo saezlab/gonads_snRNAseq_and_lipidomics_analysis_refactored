@@ -20,6 +20,7 @@
 *.yml           text eol=lf
 *.yaml          text eol=lf
 *.toml          text eol=lf
+*.svg           text eol=lf
 *.history       text eol=lf
 .gitignore      text eol=lf
 .gitattributes  text eol=lf
@@ -56,3 +57,26 @@ refactoring_docs/workflow2_test_fixed.txt binary
 # Preserve their original line endings as well as their binary payloads.
 results/causal_modelling/** -text !eol
 support/cosmos_mouse/raw/** -text !eol
+
+# These inputs, release artifacts and archived files already have SHA256
+# provenance. Preserve exact bytes when adding them from macOS or Windows;
+# source files still receive ordinary text diffs where Git detects text.
+data/RNA/zonation/current/** -text !eol
+data/RNA/pseudobulk_csv/** -text !eol
+results/zonation_marker_update_20261116/** -text !eol
+miscellaneous/** -text !eol
+
+# New frozen inputs, engine copies and provenance must retain their recorded
+# byte-level identities when staged and checked out on another platform.
+data/metabolomics/cyp2c38ko/** -text !eol
+data/metabolomics/fcg/** -text !eol
+data/metabolomics/wd/** -text !eol
+data/metabolomics/wdsd/** -text !eol
+data/wp*_input_migration_manifest.csv -text !eol
+docs/provenance/** -text !eol
+docs/analysis_catalog.csv -text !eol
+scripts/core/engines/** -text !eol
+scripts/moon/archive/** -text !eol
+results/validation/cyp2c38_in_vivo/** -text !eol
+support/cosmos_mouse/comparison/** -text !eol
+support/cosmos_mouse/moon_currency_*.csv -text !eol

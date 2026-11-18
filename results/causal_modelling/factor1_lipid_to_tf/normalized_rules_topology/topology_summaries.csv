@@ -1,0 +1,17 @@
+graph,tf_endpoint_set,observed_tfs,maximum_shortest_path_edges,reachable_input_lipids,reachable_tf_endpoints,reachable_pairs
+prebuilt_curated_ph73,all_mapped_tfs,353,6,1,1,1
+prebuilt_curated_ph73,all_mapped_tfs,353,8,1,1,1
+prebuilt_curated_ph73,all_mapped_tfs,353,12,2,208,416
+prebuilt_curated_ph73,all_mapped_tfs,353,unbounded,2,287,574
+prebuilt_curated_ph73,abs_activity_gt_2,49,6,1,13,13
+prebuilt_curated_ph73,abs_activity_gt_2,49,8,1,47,47
+prebuilt_curated_ph73,abs_activity_gt_2,49,12,2,48,88
+prebuilt_curated_ph73,abs_activity_gt_2,49,unbounded,2,48,96
+projected_rules_ph73,all_mapped_tfs,353,6,1,1,1
+projected_rules_ph73,all_mapped_tfs,353,8,1,1,1
+projected_rules_ph73,all_mapped_tfs,353,12,2,208,416
+projected_rules_ph73,all_mapped_tfs,353,unbounded,2,287,574
+projected_rules_ph73,abs_activity_gt_2,49,6,1,13,13
+projected_rules_ph73,abs_activity_gt_2,49,8,1,47,47
+projected_rules_ph73,abs_activity_gt_2,49,12,2,48,88
+projected_rules_ph73,abs_activity_gt_2,49,unbounded,2,48,96

@@ -1,0 +1,187 @@
+{
+  "date": "2026-11-16",
+  "current_release": "expanded_markers_20261116",
+  "scope": "Repository organization, default promotion and GitHub commit preparation; no staging, commit or push",
+  "migration": {
+    "main_files": 1231,
+    "causal_files": 1284,
+    "files_total": 2515,
+    "data_deleted": false,
+    "manifest": "docs/provenance/repository_migration_20261116.csv",
+    "causal_manifest": "docs/provenance/causal_cleanup_20261116.csv"
+  },
+  "canonical_input_copies": 11,
+  "fresh_FCG_GDX_science_equivalence_checks": 48,
+  "current_release_scientific_invariant_checks": 23,
+  "public_tree_setup": {
+    "passed": true,
+    "candidate_files_copied_as_hardlinks": 2810,
+    "private_manuscript_absent": true,
+    "old_CF453_bulk_cache_absent": true,
+    "new_CF453_generated_cache_absent": true,
+    "runtime": "Same installed R environment; code/data limited to prospective Git tree",
+    "checks": [
+      {
+        "command": [
+          "Rscript",
+          "scripts/workflows/17_expanded_marker_zonation_update.R",
+          "--validate-only"
+        ],
+        "returncode": 0,
+        "output": "Current scientific inputs, frozen engines and unchanged KD fits validated; no outputs written.\n"
+      },
+      {
+        "command": [
+          "Rscript",
+          "scripts/workflows/05_zonation_analysis.R",
+          "--validate-only"
+        ],
+        "returncode": 0,
+        "output": "FCG input dimensions: 20123 genes x 86 profiles; 43 mice\n         \n          Pericentral Periportal\n  Ovaries          21         21\n  Testes           22         22\nCurrent expanded-marker FCG inputs and isolated engine validated; no files changed.\n"
+      },
+      {
+        "command": [
+          "Rscript",
+          "scripts/workflows/07_validation_experiments.R",
+          "--global-only",
+          "--validate-only"
+        ],
+        "returncode": 0,
+        "output": "Independent KD/global/structural inputs and frozen-engine extraction validated; no files changed.\n"
+      }
+    ]
+  },
+  "report_path_checks": {
+    "historical_edges_resolved": 24,
+    "manifest_files": 5,
+    "panel_and_source_paths_resolved": 252,
+    "passed": true,
+    "approved_outputs_modified": false
+  },
+  "preservation": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "Repository moved/snapshot bytes",
+        "passed": true,
+        "total": 1231,
+        "available": 1231,
+        "missing": 0
+      },
+      {
+        "check": "Causal moved bytes",
+        "passed": true,
+        "total": 1284,
+        "available": 1284,
+        "missing": 0
+      },
+      {
+        "check": "Approved scientific/run-record bytes",
+        "passed": true,
+        "total": 458,
+        "available": 458,
+        "missing": 0
+      },
+      {
+        "check": "Canonical expanded-marker inputs",
+        "passed": true,
+        "total": 11,
+        "available": 11,
+        "missing": 0
+      },
+      {
+        "check": "Original 104 historical references via relocation resolver",
+        "passed": true,
+        "total": 104,
+        "available": 104,
+        "missing": 0
+      },
+      {
+        "check": "Registry: current_root",
+        "passed": true,
+        "total": 1,
+        "available": 1,
+        "missing": 0
+      },
+      {
+        "check": "Registry: current_fcg_zonation_rds",
+        "passed": true,
+        "total": 1,
+        "available": 1,
+        "missing": 0
+      },
+      {
+        "check": "Registry: current_gdx_zonation_rds",
+        "passed": true,
+        "total": 1,
+        "available": 1,
+        "missing": 0
+      },
+      {
+        "check": "Registry: current_wdsd_zonation_rds",
+        "passed": true,
+        "total": 1,
+        "available": 1,
+        "missing": 0
+      },
+      {
+        "check": "Registry: engine_fcg05",
+        "passed": true,
+        "total": 1,
+        "available": 1,
+        "missing": 0
+      },
+      {
+        "check": "Registry: engine_validation07",
+        "passed": true,
+        "total": 1,
+        "available": 1,
+        "missing": 0
+      },
+      {
+        "check": "Portable panel/source paths",
+        "passed": true,
+        "total": 62,
+        "available": 62,
+        "missing": 0
+      },
+      {
+        "check": "Maintained navigation documents",
+        "passed": true,
+        "total": 8,
+        "available": 8,
+        "missing": 0
+      }
+    ],
+    "byte_mismatches": [],
+    "missing_payloads": [],
+    "full_archive_required": true,
+    "excluded_local_metadata": [
+      "results/zonation_marker_update_20261116/.DS_Store"
+    ],
+    "no_models_fitted": true,
+    "no_source_or_results_modified": true
+  },
+  "causal_QA": "docs/provenance/causal_cleanup_20261116_qa.json",
+  "active_frozen_references": "docs/provenance/active_frozen_dependencies.json",
+  "recovery_map": "docs/provenance/archive_recovery.csv",
+  "known_limits": [
+    "Optional MOON full-fit environment retains its pre-existing decoupleR2.17.0 pin; installed2.9.7 fails the full-fit gate. Saved-artifact/extraction checks pass.",
+    "Private manuscript audit and excluded historical/raw payloads require the documented optional inputs.",
+    "One frozen KO output README retains its original PDF link; the causal map records the relocated PDF."
+  ],
+  "github_preparation": "Run python3 scripts/maintenance/audit_github_readiness.py --strict for the final prospective tree and inclusion checks.",
+  "independent_validation_reproduction": {
+    "KD_t_table": "identical after lipid-ID alignment; tied rows may reorder",
+    "global_ULM": "exact",
+    "structural_regressions": "exact",
+    "entry": "Rscript scripts/workflows/07_validation_experiments.R --global-only --output=<fresh>",
+    "approved_outputs_modified": false
+  },
+  "R_files_parse_checked": 72,
+  "PDF_spot_QA": {
+    "files_opened": 44,
+    "rendered_panels_inspected": 13,
+    "issues": 0
+  }
+}

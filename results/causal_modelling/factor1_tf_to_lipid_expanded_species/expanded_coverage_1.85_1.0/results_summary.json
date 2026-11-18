@@ -1,0 +1,30 @@
+{
+  "fit_reference": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_tf_to_lipid_expanded_species/expanded_inputs",
+  "no_rescoring": true,
+  "source_fit_mode": "expanded",
+  "pruning_steps": 6,
+  "n_layers": 4,
+  "compression": "same_saved_safe_compressed_fit",
+  "grid_rows": 1,
+  "valid_pairs": 1,
+  "validated_pairs": 1,
+  "eligible_combinations": 1,
+  "selected_solution_available": true,
+  "selected": {
+    "primary": 1.85,
+    "secondary": 1,
+    "valid_pair": true,
+    "status": "ok",
+    "edges": 206,
+    "nodes": 121,
+    "upstream_tfs": 2,
+    "observed_lipids": 8,
+    "validated": true,
+    "eligible": true
+  },
+  "selection_policy": "Within-grid representative: 0<edges<500, >=2TFs and >=2observations; descending secondary then primary then observation/TF coverage then fewer edges. Not a calibrated optimum.",
+  "selected_TFs": ["Gene__Ar", "Gene__Arnt"],
+  "selected_lipids": ["Metab__MeasuredLipid:Cer(18:1;O2/14:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/17:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/18:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/24:4)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/25:0)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/25:1)_unknown", "Metab__MeasuredLipid:Cer(18:1;O2/26:0)_unknown", "Metab__MeasuredLipid:Cer(18:2;O2/18:0)_unknown"],
+  "interpretation": "Threshold sensitivity of saved fit; lower cutoffs indicate weaker numerical evidence, not calibrated significance.",
+  "finished_utc": "2026-10-06 10:36:17 UTC"
+}

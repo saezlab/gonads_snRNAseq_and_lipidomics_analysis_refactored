@@ -15,9 +15,9 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / 'results/cosmos_mouse_pkn'
+OUT = ROOT / 'results/causal_modelling/cosmos_mouse_pkn'
 RAW = ROOT / 'support/cosmos_mouse/raw'
-AUDIT = ROOT / 'results/cosmos_pkn_audit'
+AUDIT = ROOT / 'results/causal_modelling/cosmos_pkn_audit'
 VARIANTS = ['core', 'lipid_curated', 'lipid_rules', 'exploratory']
 
 
@@ -214,6 +214,12 @@ class Builder:
 
     def regulatory(self):
         for row in table(OUT / 'regulation_edges.csv'):
+            # The cache-normalized STITCH export lost raw actor orientation.
+            # A direction-safe STITCH layer is assembled separately from raw
+            # source records by build_stitch_directional.py.
+            if row['resource'] == 'STITCH':
+                self.exclusions['cached_STITCH_raw_actor_orientation_unavailable'] += 1
+                continue
             sign = int(row['interaction'])
             # Fresh native evidence in curated; cached fallbacks only in sensitivity network.
             tier = row['evidence_tier']

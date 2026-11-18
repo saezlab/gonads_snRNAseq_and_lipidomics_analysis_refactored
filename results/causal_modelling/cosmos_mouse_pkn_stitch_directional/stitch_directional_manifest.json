@@ -1,0 +1,110 @@
+{
+  "base_edge_evidence_sha256": "4e8df5948f1c6c055bd721f8e846b8fd9a5c129dcd064ed295c4ac1cf267fa83",
+  "base_graph_csv_sha256": {
+    "pkn_core.csv": "72b1d8cd2f12bf1e448874c8712c74489c6b01255171ee6206be3805d8f67c66",
+    "pkn_exploratory.csv": "a5a1cae1588d29a5d8cfb21085c47035a7b5f7dd21e1082509faffcc8ca446c8",
+    "pkn_lipid_curated.csv": "5728f2c4591883ed0c0ea1f8f47eaa81db92d305b553fd5a29e48daebbd66d87",
+    "pkn_lipid_rules.csv": "cf1ffc29e716ef3a90f617ae49bbd739fe163b7d604ac6e26e0e13fd445f9e4f"
+  },
+  "base_lipid_rules_sha256": "cf1ffc29e716ef3a90f617ae49bbd739fe163b7d604ac6e26e0e13fd445f9e4f",
+  "base_pkn": "results/causal_modelling/cosmos_mouse_pkn",
+  "builder": "scripts/pkn/build_stitch_directional.py",
+  "builder_sha256": "88376cc2c37508d9f0b0e6da428af4d5dd0d36dd89bb0fc06e6a074d27464468",
+  "created_utc": "2026-09-15T15:11:30.111202+00:00",
+  "historical_source_caveat": "STITCH v5.0 source files were last modified 2016-08-16. The retained edges have auditable directionality but remain exploratory; their direction does not establish currentness, direct mouse experimental support, hepatocyte context, or lipid measurement identity. A current STRING v12 alias snapshot supplies exact ENSMUSP-to-UniProt identity because the publisher no longer exposes a matched v5 alias archive; this affects identifier provenance, not raw action orientation.",
+  "outputs": {
+    "conflicts_exploratory_stitch_directional.csv": {
+      "bytes": 151338,
+      "sha256": "6ddb380f8ea0982fbbbebc880e8e6605c32bb68d32907ea11258e2df09364e08"
+    },
+    "edge_evidence.jsonl.gz": {
+      "bytes": 6179878,
+      "sha256": "a1f67df483f1f728c8c8d3a5b0b8dabcecf8f4332df59f654fa7c4e19ce7a5b9"
+    },
+    "nodes.csv": {
+      "bytes": 7567640,
+      "sha256": "71277ef9ac5ff53609070a8e3ddbd3a08f01e9c99815b706dea632e6accb14d7"
+    },
+    "nodes.jsonl": {
+      "bytes": 15133074,
+      "sha256": "00ce9f365194d99fbf0aafcb6776096eafdc46f89f35bc3d153d897565129dcf"
+    },
+    "pkn_exploratory_stitch_directional.csv": {
+      "bytes": 12782807,
+      "sha256": "f2d7d4d1f35722eadf13633928a7738f6df36acbc1b58d6734c09b5e87fa676c"
+    },
+    "regulation_edges.csv": {
+      "bytes": 10620611,
+      "sha256": "71685ea091317427f4f60e57da309de52444f0789bfdaf8f9872497908f9b36a"
+    },
+    "stitch_directional_evidence.csv": {
+      "bytes": 11384270,
+      "sha256": "4c2cbfe047c3d40010ee8be62d0366227abb0222a29eae977154b69eb0049869"
+    },
+    "stitch_directional_exclusions.csv": {
+      "bytes": 528,
+      "sha256": "ae57a1670b909e4bb97e29063a4886552ca1ab3ee05d6c2be9e8ed60fcf88f3a"
+    },
+    "stitch_directional_mapping_review.csv": {
+      "bytes": 1261684,
+      "sha256": "add28a2f61ceb328d56ca6e4315fb709223572194800dcbcb4efbb4143d6939b"
+    },
+    "stitch_directional_summary.json": {
+      "bytes": 2455,
+      "sha256": "bfe7a80e01db9a7e3a6e731b0699f6fd436a45e7595dc629fd8da4eecd691490"
+    }
+  },
+  "policy": {
+    "acting_flag": "a_is_acting == t",
+    "conflicts": "opposing signs for an assembled pair are excluded; no majority vote",
+    "mapping": "unique current ChEBI via frozen UniChem and unique mouse UniProt via frozen STRING aliases",
+    "maximum_detailed_link_textmining_exclusive": 700,
+    "minimum_action_score": 700,
+    "raw_actor": "item_id_a must be CIDm/CIDs chemical",
+    "raw_receiver": "item_id_b must be 10090.ENSMUSP protein",
+    "sign": "raw action exactly activation/inhibition; mode is provenance only"
+  },
+  "sources": [
+    {
+      "file": "support/cosmos_mouse/raw/stitch_actions_10090_v5.0.tsv.gz",
+      "sha256_compressed": "041d0881487c775fda7687ea72aa88ea807d99a48b4c3ef3f9e95bcdba6fcab0",
+      "sha256_uncompressed": "feeadb517cc2f36fa6dbbe83c68c2e4550605a03386c6dd940112df74e793232",
+      "url": "http://stitch-db.org/download/actions.v5.0/10090.actions.v5.0.tsv.gz",
+      "version": "STITCH 5.0; HTTP last-modified 2016-08-16"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/stitch_links_detailed_10090_v5.0.tsv.gz",
+      "sha256_compressed": "3c14fa8b40950cc397aa9f2fa5185e83b22131e9bbbce3aabf54251c1b5e18ba",
+      "sha256_uncompressed": "5b3f524d7702575e6a9570d142aaacf384d02ed8943c202808bd2d603b2775df",
+      "url": "http://stitch-db.org/download/protein_chemical.links.detailed.v5.0/10090.protein_chemical.links.detailed.v5.0.tsv.gz",
+      "version": "STITCH 5.0; HTTP last-modified 2016-08-16"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/string_aliases_10090_v12.0.txt.gz",
+      "sha256_compressed": "2f1ccd371548d9db5784d341984209431a26573c3b34f16161bfe9052168159c",
+      "url": "https://stringdb-static.org/download/protein.aliases.v12.0/10090.protein.aliases.v12.0.txt.gz",
+      "version": "STRING v12.0 exact UniProt_AC aliases"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/unichem_chebi_to_pubchem_20260912.tsv.gz",
+      "sha256_compressed": "c57f108744f1bf80badbac9cce886bfbaa7b9e17ed0a9bc8160b976997cbd58f",
+      "url": "https://ftp.ebi.ac.uk/pub/databases/chembl/UniChem/data/wholeSourceMapping/src_id7/src7src22.txt.gz",
+      "version": "UniChem whole-source mapping, listed 2026-09-12"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/uniprot_mouse.tsv.gz",
+      "sha256_compressed": "61e908219c7e849111c2205e336034f2b8768cf9a08a377df357db52e5936511",
+      "version": "frozen mouse UniProt export used by base PKN"
+    },
+    {
+      "file": "support/cosmos_mouse/raw/regulation_chebi.obo.gz",
+      "sha256_compressed": "ba1efac7ba5d2a956d3512b7287849caee3d7b402759ffe6f777a38d20443c36",
+      "version": "frozen current ChEBI snapshot used by base PKN"
+    },
+    {
+      "file": "results/causal_modelling/cosmos_mouse_pkn/regulation_chebi_aliases.csv",
+      "sha256": "57dd67656033f23ad409342ac8bec50048ec543460adb4696c6fcabf5073c1e4",
+      "version": "base PKN ChEBI alternate-ID table"
+    }
+  ]
+}

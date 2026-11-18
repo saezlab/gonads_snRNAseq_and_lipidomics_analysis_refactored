@@ -1,0 +1,7 @@
+"stratum","gonadal_type","universe","n_edges","n_mice","file"
+"pooled","Ovaries_and_Testes","full",1254,43,"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/validation/cyp2c38_in_vivo/ulm_followup/networks/Cyp2c38_pooled_full_SIF.csv"
+"pooled","Ovaries_and_Testes","fixed828",828,43,"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/validation/cyp2c38_in_vivo/ulm_followup/networks/Cyp2c38_pooled_fixed828_SIF.csv"
+"female","Ovaries","full",1254,21,"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/validation/cyp2c38_in_vivo/ulm_followup/networks/Cyp2c38_ovaries_full_SIF.csv"
+"female","Ovaries","fixed828",828,21,"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/validation/cyp2c38_in_vivo/ulm_followup/networks/Cyp2c38_ovaries_fixed828_SIF.csv"
+"male","Testes","full",1254,22,"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/validation/cyp2c38_in_vivo/ulm_followup/networks/Cyp2c38_testes_full_SIF.csv"
+"male","Testes","fixed828",828,22,"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/validation/cyp2c38_in_vivo/ulm_followup/networks/Cyp2c38_testes_fixed828_SIF.csv"

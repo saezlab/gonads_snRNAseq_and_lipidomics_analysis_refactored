@@ -1,10 +1,14 @@
 # Factor 1 TF-to-lipid MOON parameter search
 
+Historical analysis record. Result folders were archived unchanged on 16 November 2026. See [the causal analysis map](CAUSAL_ANALYSIS_MAP.md) for current entry points and the frozen-reference dependencies. Commands using archived implementations retain historical assumptions.
+
+> **Workflow cleanup, 2026-09-15:** The active selected-result entry point is `scripts/moon/run_factor1_tf_to_lipid.R`; see `scripts/moon/README.md`. Its refit from the frozen mapped inputs and PKN reproduced the selected 388-edge/153-node graph, scores and expected-TF exclusions, with evidence export and plots. The exploratory scripts below are preserved under `scripts/moon/archive/2026-09/`; their original path assumptions remain historical. Old `results/cosmos_*` references below identify files now under `results/causal_modelling/cosmos_*`. Historical command lists are provenance, not current reproduction commands.
+
 > **Recommendation superseded by the [compressed-network review](cosmos_factor1_compressed_review.md) (2026-09-09).** The U5/U4 runs below genuinely bypassed same-children compression. Their higher cutoffs do not justify preferring them over compressed inference. Keep them as historical representation diagnostics. The new primary exploratory candidate uses compression, radius 6/depth 4, cutoffs 1.85/0.55 and 388 edges; a compressed radius-12/depth-8 alternative has 468 edges at 2.15/1.075. The new review also establishes that Esr1, Nfic and Dbp were removed by post-score sign filtering, not pre-score pruning.
 
 Run date: 2026-09-09. This extends the initial Factor 1 MOON pilot using
-`results/cosmos_mouse_pkn/pkn_lipid_rules.rds` and the frozen, exact-mapped
-Factor 1 input bundle in `results/cosmos_factor1_pilot/inputs/`. It is an
+`results/causal_modelling/cosmos_mouse_pkn/pkn_lipid_rules.rds` and the frozen, exact-mapped
+Factor 1 input bundle in `miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/`. It is an
 extraction and score-propagation sensitivity analysis; it does not refit MOFA,
 change the PKN, or introduce new measurements.
 
@@ -129,11 +133,11 @@ mechanisms.
 
 The historical uncompressed U5 network is available as:
 
-- `results/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed/solution_p2_05_s1_60_SIF.csv`
-- `results/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed/solution_p2_05_s1_60_ATT.csv`
-- `results/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed/solution_p2_05_s1_60.graphml`
-- `results/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed/candidate_paths_solution_p2_05_s1_60.csv`
-- `results/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed/network_evidence_solution_p2_05_s1_60_reactions.csv`
+- `miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed/solution_p2_05_s1_60_SIF.csv`
+- `miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed/solution_p2_05_s1_60_ATT.csv`
+- `miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed/solution_p2_05_s1_60.graphml`
+- `miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed/candidate_paths_solution_p2_05_s1_60.csv`
+- `miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed/network_evidence_solution_p2_05_s1_60_reactions.csv`
 
 The compact U4 counterpart is in the analogous
 `runs/radius6_depth4_uncompressed/solution_p1_90_s1_60_*` files. Its
@@ -141,26 +145,25 @@ illustrative route figure is
 `runs/radius6_depth4_uncompressed/figures/candidate_paths_solution_p1_90_s1_60_network.pdf`.
 
 The exhaustive grid, cross-configuration rankings and plots are in
-`results/cosmos_factor1_parameter_search/summary/`. The independent validation
+`miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/summary/`. The independent validation
 of all saved radius-6 representatives is in
-`results/cosmos_factor1_parameter_search/refined_candidate_validation.md`; the
+`miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/refined_candidate_validation.md`; the
 direct U4/U5/C4 comparison is in
-`results/cosmos_factor1_parameter_search/refined_candidate_audit/refined_candidate_comparison.md`.
+`miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/refined_candidate_audit/refined_candidate_comparison.md`.
 
-## Reproduction
+## Historical execution commands
 
-Run from the repository root after the Factor 1 input bundle has been prepared:
+The following records the historical experiment sequence. Archived scripts retain their original path dependencies and are not active reproduction commands:
 
 ```sh
-Rscript scripts/moon/audit_factor1_depth_topology.R
-Rscript scripts/moon/search_factor1_parameter_space.R --phase=coarse --topology-radius=6
-Rscript scripts/moon/search_factor1_parameter_space.R --phase=refine --topology-radius=6
-Rscript scripts/moon/search_factor1_parameter_space.R --phase=coarse --topology-radius=7 --compression=uncompressed
-Rscript scripts/moon/search_factor1_parameter_space.R --phase=refine --topology-radius=7 --compression=uncompressed
-python3 scripts/moon/summarize_factor1_parameter_search.py --grid results/cosmos_factor1_parameter_search/parameter_grid.csv
-Rscript scripts/moon/audit_refined_candidates.R
-python3 scripts/moon/export_factor1_network.py --results results/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed --stem solution_p2_05_s1_60
+Rscript scripts/moon/archive/2026-09/audit_factor1_depth_topology.R
+Rscript scripts/moon/archive/2026-09/search_factor1_parameter_space.R --phase=coarse --topology-radius=6
+Rscript scripts/moon/archive/2026-09/search_factor1_parameter_space.R --phase=refine --topology-radius=6
+Rscript scripts/moon/archive/2026-09/search_factor1_parameter_space.R --phase=coarse --topology-radius=7 --compression=uncompressed
+Rscript scripts/moon/archive/2026-09/search_factor1_parameter_space.R --phase=refine --topology-radius=7 --compression=uncompressed
+python3 scripts/moon/archive/2026-09/summarize_factor1_parameter_search.py --grid miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/parameter_grid.csv
+Rscript scripts/moon/archive/2026-09/audit_refined_candidates.R
+python3 scripts/moon/archive/2026-09/export_factor1_network.py --results miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth5_uncompressed --stem solution_p2_05_s1_60
 ```
 
-The radius-12 stress test is already in the saved grid. To repeat it explicitly,
-run the coarse command with `--topology-radius=12 --depths=6 --compression=uncompressed`.
+The historical radius-12 stress test is already in the saved grid; its original coarse-run options were `--topology-radius=12 --depths=6 --compression=uncompressed`.

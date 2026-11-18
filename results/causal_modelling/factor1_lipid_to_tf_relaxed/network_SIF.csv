@@ -1,0 +1,6 @@
+"source","target","interaction","consistency"
+"Gene__Gnai1","Gene__Src",1,TRUE
+"Gene__Gpr34","Gene__Gnai1",1,TRUE
+"Gene__Src","Gene__Ar",1,TRUE
+"Gene__Src","Gene__Esr1",1,TRUE
+"Metab__CHEBI:85403_unknown","Gene__Gpr34",1,TRUE

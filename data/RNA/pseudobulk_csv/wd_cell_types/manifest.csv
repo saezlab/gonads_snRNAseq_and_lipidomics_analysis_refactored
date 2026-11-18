@@ -1,0 +1,6 @@
+"file","role","bytes","sha256","source_rds_path","source_rds_sha256","source_rds_bytes"
+"counts_part001.csv","layer:counts",2178713,"a425c50b135693cbb4c063ec59e8f46731ff3f7c7b9ae968d40d07f602661958","data/RNA/wd/wd_pseudobulks.rds","004169276a8240b6c1dc71c5a86c2398f488475a3a323d9c8d00de3b6136f59f",9191775
+"data_part001.csv","layer:data",11645566,"ad490cd2e7aa91a0e5dcda25366abd3ae507b5be88b92af7431a072ae961daa5","data/RNA/wd/wd_pseudobulks.rds","004169276a8240b6c1dc71c5a86c2398f488475a3a323d9c8d00de3b6136f59f",9191775
+"scale.data_part001.csv","layer:scale.data",15601699,"0f1e7fdfa4f081ac8834aad995c2da19b4841128e81b84975660dfd5f14bee2e","data/RNA/wd/wd_pseudobulks.rds","004169276a8240b6c1dc71c5a86c2398f488475a3a323d9c8d00de3b6136f59f",9191775
+"metadata_part001.csv","metadata",4073,"98579b19469f10ec448df56b4d86cadcdb025d0eac3e2e539f4e67d4e4b28161","data/RNA/wd/wd_pseudobulks.rds","004169276a8240b6c1dc71c5a86c2398f488475a3a323d9c8d00de3b6136f59f",9191775
+"identities_part001.csv","identities",2592,"9c4660de61d3d998b3b5b453e08dbc2b5d9ed7957c6a15dbd0932992be8a7600","data/RNA/wd/wd_pseudobulks.rds","004169276a8240b6c1dc71c5a86c2398f488475a3a323d9c8d00de3b6136f59f",9191775

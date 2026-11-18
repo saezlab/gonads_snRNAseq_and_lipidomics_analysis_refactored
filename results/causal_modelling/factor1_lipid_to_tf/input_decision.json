@@ -1,0 +1,23 @@
+{
+  "user_direction": "lipids -> TFs",
+  "factor": "Factor1",
+  "orientation": {
+    "label": "testes_positive_Factor1_coordinate",
+    "multiplier": 1,
+    "saved_coordinate_group_means": [-0.742290715464663, 0.708550228398085],
+    "scope": "same_multiplier_for_TF_activities_RNA_loadings_lipid_loadings_and_sample_coordinates",
+    "interpretation": "positive_agrees_with_testes_associated_Factor1_not_a_direct_differential_effect"
+  },
+  "upstream": "Existing exact-mapped Factor 1 lipid feature weights; abundance association is a candidate availability proxy, not ligand potency or a perturbation.",
+  "downstream": "All finite, nonzero PKN-present hepatocyte Factor 1 TF footprint activities; abs(activity)>2 is a separately labelled observation-set sensitivity.",
+  "rna": "Separate RNA loading vector for internal TF-target coherence; not protein activity.",
+  "ph73_sensitivity_enabled": true,
+  "inherited_mapping": "Frozen exact species mapping; no hierarchy proxy or new chemical identity assignment.",
+  "factor_view_variance_percent": {
+    "hepatocyte_RNA": 8.906,
+    "lipid": 29.958
+  },
+  "stability": "Previously audited descriptive consistency across fitted factor-number choices; no resampling validation.",
+  "timing": "Cross-sectional bulk-liver lipid and hepatocyte RNA signatures; no temporal ordering inferred.",
+  "limitations": ["Measured bulk-liver lipid abundance does not establish hepatocyte subcellular ligand exposure.", "Substrate-to-reaction edges encode potential participation, not reaction flux or net product formation.", "Lipid-only reaction paths can require unmeasured co-substrates; full reaction equations must be inspected.", "Observed TF inputs are terminal, so observation-set choice changes the topology and scoring background.", "A high inferred score is prior-guided alignment, not causal validation."]
+}

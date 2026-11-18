@@ -1,0 +1,178 @@
+source,interaction,target,source_label,target_label,source_score_level,target_score_level,score_layer_adjacent,mechanisms,resources,reaction_ids,evidence_records,contains_species_rule_hypothesis,references_json,template_reaction_ids
+Enzyme__06f25e00a674da58,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 21223cd9],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:21223cd9a4af0e288ae1,1,True,[],RHEA:15802
+Enzyme__09c4d20a80eb4aec,1,Metab__MeasuredLipid:PA(16:0_18:2)_unknown,Pld2 [species rule 0d5fd1e9],PA(16:0_18:2),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:0d5fd1e954462a3e8d64,1,True,[],
+Enzyme__0edde2cc4d71ab38,1,Metab__MeasuredLipid:LPC(19:1/0:0)_unknown,Pla2g4a [species rule 6ef6f8c7],LPC(19:1/0:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:6ef6f8c7ab722458d9d5,1,True,[],RHEA:15802
+Enzyme__1031d491c0897b67,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule ed45c640],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:ed45c6400956d9f89130,1,True,[],RHEA:15802
+Enzyme__13ff881fae9cf52c,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 983ea879],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:983ea8791eaf0a1488cb,1,True,[],RHEA:15802
+Enzyme__1559f76b2687a77d,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule d37c412f],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:d37c412f259a1dd55a7a,1,True,[],RHEA:15802
+Enzyme__17a938e4b2bf8081,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 16dd0389],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:16dd0389ccb5c6cb3033,1,True,[],RHEA:15802
+Enzyme__18046ca34e8f044b,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 49628017],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:496280174172b04df811,1,True,[],RHEA:15802
+Enzyme__1a392013b227528d,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule fd948c87],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:fd948c873f4f291a55e7,1,True,[],RHEA:15802
+Enzyme__1fb1c2f2e3320612,1,Metab__MeasuredLipid:LPC(19:1/0:0)_unknown,Pla2g4a [species rule 583c1abc],LPC(19:1/0:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:583c1abc0d3b6227d282,1,True,[],RHEA:15802
+Enzyme__28c7d353218b2e79,1,Metab__MeasuredLipid:LPC(22:4)_unknown,Pla2g4a [species rule ed4cc0c2],LPC(22:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:ed4cc0c22db9137b8dcb,1,True,[],RHEA:15802
+Enzyme__2a296eff4607ece0,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule a6ba5480],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:a6ba5480f20ac0728268,1,True,[],RHEA:15802
+Enzyme__2b6a7cc477cc5cdb,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule 39fb9402],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:39fb94024346c3940f2d,1,True,[],RHEA:15802
+Enzyme__3160c0497be37afe,1,Metab__MeasuredLipid:DG(18:0_22:6)_unknown,Plcg1 [species rule 32333a12],DG(18:0_22:6),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:32333a12126a6b53d37f,1,True,[],
+Enzyme__31913c753d4d14ed,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule 6748a502],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:6748a5026791f4de773f,1,True,[],RHEA:15802
+Enzyme__348288be31178af7,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule 782ec0c8],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:782ec0c82b2f399bd09d,1,True,[],RHEA:15802
+Enzyme__3580c9c6f27aab7a,1,Metab__CHEBI:73858_unknown,Pla2g4a [RHEA:41100],1-octadecanoyl-sn-glycero-3-phosphocholine,1,0,True,product_formation,Rhea,RHEA:41100,1,False,[],
+Enzyme__37a1699fe62da55b,1,Metab__MeasuredLipid:DG(18:0_22:6)_unknown,Plcb1 [species rule 32333a12],DG(18:0_22:6),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:32333a12126a6b53d37f,1,True,[],
+Enzyme__3ab537025de48b33,1,Metab__MeasuredLipid:PA(16:0_18:2)_unknown,Pld1 [species rule 0d5fd1e9],PA(16:0_18:2),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:0d5fd1e954462a3e8d64,1,True,[],
+Enzyme__3b2ef9509603405a,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule eb982394],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:eb982394ff6baeb6dabd,1,True,[],RHEA:15802
+Enzyme__445635f8c7daf98c,1,Metab__MeasuredLipid:DG(16:0_22:6)_unknown,Plcb2 [species rule ac533084],DG(16:0_22:6),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:ac533084303f2b7100f3,1,True,[],
+Enzyme__580f4dea36da42b8,1,Metab__CHEBI:73858_unknown,Pla2g4a [RHEA:41088],1-octadecanoyl-sn-glycero-3-phosphocholine,1,0,True,product_formation,Rhea,RHEA:41088,1,False,[],
+Enzyme__5ac81c0e2b8a5149,1,Metab__MeasuredLipid:DG(18:0_20:4)_unknown,Plcb2 [species rule 6b427fbc],DG(18:0_20:4),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:6b427fbcab24aea02b3f,1,True,[],
+Enzyme__5ddd988c17aca23e,1,Metab__MeasuredLipid:LPC(19:1)_unknown,Pla2g4a [species rule 95dfbcc7],LPC(19:1),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:95dfbcc785fb62c58871,1,True,[],RHEA:15802
+Enzyme__6249f67c09877ba6,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 65ae0e06],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:65ae0e060fe4691ed771,1,True,[],RHEA:15802
+Enzyme__62a19ceaf431a288,1,Metab__MeasuredLipid:LPC(20:5)_unknown,Pla2g4a [species rule 1721f21e],LPC(20:5),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:1721f21ed257000c88f7,1,True,[],RHEA:15802
+Enzyme__66c127c6b2aa16c7,1,Metab__MeasuredLipid:PA(18:1_18:2)_unknown,Pld2 [species rule ef511242],PA(18:1_18:2),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:ef5112420a6f6986c169,1,True,[],
+Enzyme__6e7e8564b3d2a601,1,Metab__MeasuredLipid:PA(16:0_18:2)_unknown,Enpp2 [species rule 0d5fd1e9],PA(16:0_18:2),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:0d5fd1e954462a3e8d64,1,True,[],
+Enzyme__7182b1bc2985d325,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule ec1bcb07],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:ec1bcb07fe2c54821627,1,True,[],RHEA:15802
+Enzyme__73336ed34ce28d30,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 67b85606],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:67b85606d08002b42917,1,True,[],RHEA:15802
+Enzyme__7a22bdccb0425f46,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 017e07b5],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:017e07b5e1e286d160db,1,True,[],RHEA:15802
+Enzyme__7ab4cb766cadeca7,1,Metab__MeasuredLipid:DG(16:0_22:6)_unknown,Plcb1 [species rule ac533084],DG(16:0_22:6),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:ac533084303f2b7100f3,1,True,[],
+Enzyme__7c22ae6351568cc7,1,Metab__CHEBI:73858_unknown,Pla2g4a [RHEA:40520],1-octadecanoyl-sn-glycero-3-phosphocholine,1,0,True,product_formation,Rhea,RHEA:40520,1,False,[],
+Enzyme__7cfa22cd06d22924,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule 3253cf48],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:3253cf48e87ce1ff78f5,1,True,[],RHEA:15802
+Enzyme__7fcb15cb93c6e256,1,Metab__MeasuredLipid:PA(16:1_18:2)_unknown,Pld1 [species rule 32dcd26f],PA(16:1_18:2),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:32dcd26fc41dfdb29191,1,True,[],
+Enzyme__848b2697044f765c,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 992184e5],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:992184e5c6f10a529d34,1,True,[],RHEA:15802
+Enzyme__87442e0c41a796d6,1,Metab__MeasuredLipid:LPC(20:5)_unknown,Pla2g4a [species rule bc296cf1],LPC(20:5),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:bc296cf15262edb543dc,1,True,[],RHEA:15802
+Enzyme__887d76cdb73fdf86,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule de64f4a9],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:de64f4a952f717ec1de1,1,True,[],RHEA:15802
+Enzyme__8b9f4b81db47e6c1,1,Metab__MeasuredLipid:DG(18:0_22:6)_unknown,Plcb2 [species rule 32333a12],DG(18:0_22:6),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:32333a12126a6b53d37f,1,True,[],
+Enzyme__8ba6b46793e1f25d,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule 6b3f6b37],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:6b3f6b377e7e5891fa62,1,True,[],RHEA:15802
+Enzyme__949f69a9195f7dc7,1,Metab__MeasuredLipid:DG(16:0_22:6)_unknown,Plcg1 [species rule ac533084],DG(16:0_22:6),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:ac533084303f2b7100f3,1,True,[],
+Enzyme__9ce4259c2552d718,1,Metab__MeasuredLipid:LPC(19:1)_unknown,Pla2g4a [species rule 8def668e],LPC(19:1),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:8def668e44bb2e6eb7ac,1,True,[],RHEA:15802
+Enzyme__9e0800251ebad15e,1,Metab__MeasuredLipid:LPC(20:5)_unknown,Pla2g4a [species rule 708f0ae7],LPC(20:5),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:708f0ae792338653445b,1,True,[],RHEA:15802
+Enzyme__a6a0212553147f34,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 894d3645],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:894d36456b1b38d2ea15,1,True,[],RHEA:15802
+Enzyme__a8b5cfcf48e54f81,1,Metab__MeasuredLipid:LPC(19:1/0:0)_unknown,Pla2g4a [species rule 63e2ceb7],LPC(19:1/0:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:63e2ceb7dbe2a029d0ba,1,True,[],RHEA:15802
+Enzyme__aae6226318749d4c,1,Metab__MeasuredLipid:LPC(20:5)_unknown,Pla2g4a [species rule cfde4d09],LPC(20:5),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:cfde4d09b05507c1f928,1,True,[],RHEA:15802
+Enzyme__aecccacdc6888f8e,1,Metab__MeasuredLipid:PA(18:1_18:2)_unknown,Pld1 [species rule ef511242],PA(18:1_18:2),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:ef5112420a6f6986c169,1,True,[],
+Enzyme__b467c530a2448ec3,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule df833a96],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:df833a9631b826c76d64,1,True,[],RHEA:15802
+Enzyme__bd4d986d2e874bd7,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule 3a52b6c6],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:3a52b6c6f119f43c82f1,1,True,[],RHEA:15802
+Enzyme__bdf688bc434961f3,1,Metab__MeasuredLipid:DG(16:0_22:6)_unknown,Plpp1 [species rule 6940437d],DG(16:0_22:6),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:6940437d85c790b86fb9,1,True,[],
+Enzyme__c249d6bcbdeb7f2e,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 0d25407f],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:0d25407f48d3a03d163f,1,True,[],RHEA:15802
+Enzyme__c76079b4276a795e,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 3fec1594],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:3fec1594cedc9fc952b1,1,True,[],RHEA:15802
+Enzyme__c84acf046f0c8338,1,Metab__MeasuredLipid:LPC(19:1)_unknown,Pla2g4a [species rule f92870e3],LPC(19:1),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f92870e3a72f44e7b553,1,True,[],RHEA:15802
+Enzyme__cd1cf37bf154477f,1,Metab__CHEBI:73858_unknown,Pla2g4a [RHEA:41308],1-octadecanoyl-sn-glycero-3-phosphocholine,1,0,True,product_formation,Rhea,RHEA:41308,1,False,[],
+Enzyme__cf0b15ea581c2d02,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule 2fb5128a],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:2fb5128a43a96ac4767b,1,True,[],RHEA:15802
+Enzyme__d94256490020a701,1,Metab__MeasuredLipid:PA(16:1_18:2)_unknown,Enpp2 [species rule 32dcd26f],PA(16:1_18:2),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:32dcd26fc41dfdb29191,1,True,[],
+Enzyme__dcf91a51ad10ecfe,1,Metab__MeasuredLipid:LPC(20:5)_unknown,Pla2g4a [species rule 45f3be8c],LPC(20:5),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:45f3be8c07296a0077c4,1,True,[],RHEA:15802
+Enzyme__e116b429fbedd6c8,1,Metab__MeasuredLipid:LPC(20:5)_unknown,Pla2g4a [species rule 7f911755],LPC(20:5),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:7f911755a3f1b343c36f,1,True,[],RHEA:15802
+Enzyme__e3edb37af1774e34,1,Metab__MeasuredLipid:LPC(20:4)_unknown,Pla2g4a [species rule cf6f8711],LPC(20:4),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:cf6f87110b0970ff7c2d,1,True,[],RHEA:15802
+Enzyme__eeb74a04ae51bb67,1,Metab__MeasuredLipid:PA(16:1_18:2)_unknown,Pld2 [species rule 32dcd26f],PA(16:1_18:2),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:32dcd26fc41dfdb29191,1,True,[],
+Enzyme__f05e150756f182ca,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule 9d9f9aed],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:9d9f9aed20abc5e5948d,1,True,[],RHEA:15802
+Enzyme__f1bd9c60cce85bd2,1,Metab__MeasuredLipid:DG(18:0_20:4)_unknown,Plcb1 [species rule 6b427fbc],DG(18:0_20:4),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:6b427fbcab24aea02b3f,1,True,[],
+Enzyme__f29ee0141580d22b,1,Metab__MeasuredLipid:DG(18:0_20:4)_unknown,Plpp1 [species rule f5747b04],DG(18:0_20:4),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:f5747b04cc0904c333ad,1,True,[],
+Enzyme__faf4ef24daa34a22,1,Metab__MeasuredLipid:PA(18:1_18:2)_unknown,Enpp2 [species rule ef511242],PA(18:1_18:2),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:ef5112420a6f6986c169,1,True,[],
+Enzyme__fbad02d42c53c872,1,Metab__MeasuredLipid:LPC(18:0)_unknown,Pla2g4a [species rule 563c0c34],LPC(18:0),1,0,True,product_formation,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:563c0c341b90f421b34c,1,True,[],RHEA:15802
+Enzyme__fc93bcf35cc2903e,1,Metab__MeasuredLipid:DG(18:0_20:4)_unknown,Plcg1 [species rule 6b427fbc],DG(18:0_20:4),1,0,True,product_formation,LINEX2_rule,LIPID_RULE:6b427fbcab24aea02b3f,1,True,[],
+Gene__Ahr,1,Gene__Btk,Ahr,Btk,4,3,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI:15728486""]",
+Gene__Btk,1,Gene__Plcg1,Btk,Plcg1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""SPIKE_LC:15184383;ProtMapper:15010370;ProtMapper:9550384;SPIKE:15184383;HPRD:15184383;SIGNOR:31431692""]",
+Gene__Cebpa,1,Gene__Pld1,Cebpa,Pld1,3,2,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI:19950202;CollecTRI2:19950202""]",
+Gene__Ednra,1,Gene__Gna11,Ednra,Gna11,4,3,True,signaling,OmniPath:ppi,,1,False,"[""SPIKE_LC:16189514;Cellinker:7882989;HPRD:10789830""]",
+Gene__Ednra,1,Gene__Gna14,Ednra,Gna14,4,3,True,signaling,OmniPath:ppi,,1,False,"[""SIGNOR:31160049""]",
+Gene__Ednra,1,Gene__Gnai1,Ednra,Gnai1,4,3,True,signaling,OmniPath:ppi,,1,False,"[""SIGNOR:31160049""]",
+Gene__Ednra,1,Gene__Gnaq,Ednra,Gnaq,4,3,True,signaling,OmniPath:ppi,,1,False,"[""SIGNOR:31160049;SIGNOR:15475516""]",
+Gene__Ednra,1,Gene__Gnas,Ednra,Gnas,4,3,True,signaling,OmniPath:ppi,,4,False,"[""SIGNOR:31160049"", ""SIGNOR:31160049"", ""SIGNOR:31160049"", ""SIGNOR:31160049""]",
+Gene__Enpp2,1,Enzyme__6e7e8564b3d2a601,Enpp2,Enpp2 [species rule 0d5fd1e9],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:0d5fd1e954462a3e8d64,1,True,[],
+Gene__Enpp2,1,Enzyme__d94256490020a701,Enpp2,Enpp2 [species rule 32dcd26f],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:32dcd26fc41dfdb29191,1,True,[],
+Gene__Enpp2,1,Enzyme__faf4ef24daa34a22,Enpp2,Enpp2 [species rule ef511242],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:ef5112420a6f6986c169,1,True,[],
+Gene__Fgf2,1,Gene__Fgfr2,Fgf2,Fgfr2,4,3,True,signaling,OmniPath:ppi,,1,False,"[""Lit-BM-17:26267536;IntAct:10830168;Lit-BM-17:11390973;Cellinker:25772309;SignaLink3:23331499;SPIKE_LC:17145710;ProtMapper:18332103;SignaLink3:8663044;CellTalkDB:16597617;Lit-BM-17:10950949;Lit-BM-17:17981115;HINT:1697263;SPIKE_LC:17981115;SIGNOR:11390973;ConnectomeDB2025:10950949;ICELLNET:25772309;Cellinker:8663044;LRdb:16597617;Lit-BM-17:11121055;HINT:11390973;IntAct:11390973;HPMR:8663044;HINT:10830168;SIGNOR:7687739;connectomeDB2020:8663044;HINT:33961781""]",
+Gene__Fgf2,1,Gene__Fgfr3,Fgf2,Fgfr3,4,3,True,signaling,OmniPath:ppi,,1,False,"[""Cellinker:8663044;Cellinker:10574949;CellTalkDB:16597617;HPMR:8663044;HPRD:10574949;LRdb:16597617;SIGNOR:15780951;connectomeDB2020:10574949;connectomeDB2020:8663044;SIGNOR:22298955;Cellinker:25772309;DIP:9045692;ConnectomeDB2025:10574949;ICELLNET:25772309""]",
+Gene__Fgf2,1,Gene__Fgfr4,Fgf2,Fgfr4,4,3,True,signaling,OmniPath:ppi,,1,False,"[""Cellinker:8530375;Cellinker:8663044;CellTalkDB:16597617;LRdb:16597617;connectomeDB2020:8530375;connectomeDB2020:8663044;SIGNOR:1385111;Cellinker:25772309;DIP:7680645;HPRD:8530375;ConnectomeDB2025:10950949;ICELLNET:25772309""]",
+Gene__Fgfr2,1,Gene__Plcg1,Fgfr2,Plcg1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""DIP:24440983;KEA:16038803;KEA:15144186;HINT:24440983;KEA:1689310;KEA:8657103;IntAct:24440983;KEA:17081983;KEA:12601080;KEA:16153436;KEA:1708307;HPRD:7999363;KEA:8885868;HINT:15629145;KEA:7682059;KEA:15592455;KEA:16126727""]",
+Gene__Fgfr3,1,Gene__Plcg1,Fgfr3,Plcg1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""ACSN:17496910;KEA:16038803;KEA:15144186;KEA:1689310;KEA:8657103;KEA:17081983;KEA:1708307;KEA:12601080;KEA:16153436;ProtMapper:29030113;KEA:8885868;KEA:7682059;KEA:15592455;KEA:16126727""]",
+Gene__Fgfr4,1,Gene__Plcg1,Fgfr4,Plcg1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""ACSN:17496910;KEA:16038803;KEA:15144186;KEA:1689310;KEA:8657103;KEA:17081983;KEA:1708307;KEA:12601080;KEA:16153436;KEA:8885868;KEA:7682059;HPRD:7518429;KEA:15592455;KEA:16126727""]",
+Gene__Foxo1,1,Gene__Ppara,Foxo1,Ppara,4,3,True,signaling,OmniPath:ppi,,1,False,"[""SPIKE:18391971;SPIKE_LC:18391971""]",
+Gene__Gata6,1,Gene__Mapk1,Gata6,Mapk1,4,3,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI:18454176""]",
+Gene__Gna11,1,Gene__Plcb1,Gna11,Plcb1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""SIGNOR:27515033;CA1:12578375""]",
+Gene__Gna11,1,Gene__Plcb2,Gna11,Plcb2,3,2,True,signaling,OmniPath:ppi,,1,False,"[""SPIKE:3017978;SPIKE:1333052;SPIKE_LC:3017978;SPIKE_LC:1333052""]",
+Gene__Gna14,1,Gene__Plcb1,Gna14,Plcb1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""SIGNOR:1334487""]",
+Gene__Gnai1,-1,Gene__Pld2,Gnai1,Pld2,3,2,True,signaling,OmniPath:ppi,,1,False,"[""SIGNOR:9148895""]",
+Gene__Gnaq,1,Gene__Plcb1,Gnaq,Plcb1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""HINT:16754659;CA1:1322796;SIGNOR:8245028;CA1:1846707;BioGRID:11753430;HPRD:11753430;Lit-BM-17:11753430;CA1:1309799;Lit-BM-17:16754659;HINT:11753430;HPRD:12193606;CA1:8387502""]",
+Gene__Gnas,1,Gene__Plcb1,Gnas,Plcb1,3,2,True,signaling,OmniPath:ppi,,4,False,"[""SIGNOR:8245028"", ""SIGNOR:8245028"", ""SIGNOR:8245028"", ""SIGNOR:8245028""]",
+Gene__Gnb3,1,Gene__Plcg1,Gnb3,Plcg1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""SIGNOR:23074268""]",
+Gene__Hoxa10,1,Gene__Ednra,Hoxa10,Ednra,5,4,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI:20371740;CollecTRI2:20371740""]",
+Gene__Hoxa10,1,Gene__Fgf2,Hoxa10,Fgf2,5,4,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI2:24089521;CollecTRI:24089521;CollecTRI2:22493287;CollecTRI2:23038246;CollecTRI2:27340869""]",
+Gene__Hoxa10,1,Gene__Foxo1,Hoxa10,Foxo1,5,4,True,signaling,OmniPath:ppi,,1,False,"[""HPRD:12493691;SPIKE_LC:18391971;SPIKE:18391971""]",
+Gene__Hoxa10,1,Gene__Hoxa9,Hoxa10,Hoxa9,5,4,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI2:31443434;CollecTRI:15681849""]",
+Gene__Hoxa10,1,Gene__Ptger3,Hoxa10,Ptger3,5,4,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI:10379898;CollecTRI2:10379898""]",
+Gene__Hoxa9,1,Gene__Kdr,Hoxa9,Kdr,4,3,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI2:22944570;CollecTRI2:17019814;CollecTRI2:15928198;CollecTRI:15928198""]",
+Gene__Kdr,1,Gene__Plcg1,Kdr,Plcg1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""HINT:9398617;HINT:12598525;SIGNOR:16835467;ProtMapper:15212693;MPPI:10672011;HPRD:12598525;HINT:10672011""]",
+Gene__Klf10,-1,Gene__Mycn,Klf10,Mycn,4,3,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI2:17951258;CollecTRI2:23671190;CollecTRI:17951258;CollecTRI2:33559506""]",
+Gene__Klf10,1,Gene__Kdr,Klf10,Kdr,4,3,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI:21828131;CollecTRI2:21828131""]",
+Gene__Mapk1,1,Gene__Pla2g4a,Mapk1,Pla2g4a,3,2,True,signaling,OmniPath:ppi,,1,False,"[""KEA:17570479;dbPTM:9468497;KEA:9468497;ACSN:17178906;KEA:8381049;ACSN:15547943;PhosphoSite:18632668;BioGRID:9468497;PhosphoSite:32559461;ACSN:19114553;ProtMapper:9468497;PhosphoSite:8636128;KEA:10978317;dbPTM:8381049;ACSN:19541618;BioGRID:21185392;SIGNOR:9468497;ACSN:18775330;PhosphoSite:9468497;ACSN:8381049;KEA:8636128;KEA:17081983;phosphoELM:9468497;ProtMapper:15212693;PhosphoSite:11737068;ACSN:19565474;PhosphoSite:12576304;PhosphoSite:7766652;PhosphoSite:18280113;PhosphoSite:12885780""]",
+Gene__Mapk1,1,Gene__Plcb1,Mapk1,Plcb1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""ProtMapper:11287604;SPIKE:11481231;HPRD:11481231;SIGNOR:11287604;SPIKE_LC:11481231""]",
+Gene__Mycn,1,Gene__Enpp2,Mycn,Enpp2,3,2,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI2:22975311;CollecTRI2:11346880;CollecTRI:11346880""]",
+Gene__Nr2f1,1,Gene__Rxra,Nr2f1,Rxra,4,3,True,signaling,OmniPath:ppi,,1,False,"[""SignaLink3:10900149;HPRD:1311101;SIGNOR:10900149;SignaLink3:23331499""]",
+Gene__Nr4a2,1,Gene__Rxra,Nr4a2,Rxra,4,3,True,signaling,OmniPath:ppi,,1,False,"[""Lit-BM-17:15604093;SignaLink3:7705655;HPRD:7758108;SignaLink3:15604093;SignaLink3:7758108;Lit-BM-17:7705655;SignaLink3:12122012;HINT:7705655;SPIKE_LC:16189514;HPRD:15604093;HPRD:7705655;SignaLink3:23331499""]",
+Gene__Ntrk2,1,Gene__Plcg1,Ntrk2,Plcg1,3,2,True,signaling,OmniPath:ppi,,1,False,"[""KEA:16038803;Lit-BM-17:10092678;KEA:15144186;Lit-BM-17:12074588;KEA:1689310;KEA:8657103;KEA:17081983;KEA:1708307;KEA:12601080;KEA:16153436;KEA:8885868;SIGNOR:20445044;KEA:7682059;HPRD:12419535;HINT:12074588;HINT:10092678;KEA:15592455;KEA:16126727""]",
+Gene__Pla2g4a,1,Enzyme__06f25e00a674da58,Pla2g4a,Pla2g4a [species rule 21223cd9],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:21223cd9a4af0e288ae1,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__0edde2cc4d71ab38,Pla2g4a,Pla2g4a [species rule 6ef6f8c7],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:6ef6f8c7ab722458d9d5,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__1031d491c0897b67,Pla2g4a,Pla2g4a [species rule ed45c640],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:ed45c6400956d9f89130,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__13ff881fae9cf52c,Pla2g4a,Pla2g4a [species rule 983ea879],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:983ea8791eaf0a1488cb,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__1559f76b2687a77d,Pla2g4a,Pla2g4a [species rule d37c412f],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:d37c412f259a1dd55a7a,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__17a938e4b2bf8081,Pla2g4a,Pla2g4a [species rule 16dd0389],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:16dd0389ccb5c6cb3033,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__18046ca34e8f044b,Pla2g4a,Pla2g4a [species rule 49628017],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:496280174172b04df811,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__1a392013b227528d,Pla2g4a,Pla2g4a [species rule fd948c87],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:fd948c873f4f291a55e7,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__1fb1c2f2e3320612,Pla2g4a,Pla2g4a [species rule 583c1abc],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:583c1abc0d3b6227d282,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__28c7d353218b2e79,Pla2g4a,Pla2g4a [species rule ed4cc0c2],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:ed4cc0c22db9137b8dcb,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__2a296eff4607ece0,Pla2g4a,Pla2g4a [species rule a6ba5480],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:a6ba5480f20ac0728268,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__2b6a7cc477cc5cdb,Pla2g4a,Pla2g4a [species rule 39fb9402],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:39fb94024346c3940f2d,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__31913c753d4d14ed,Pla2g4a,Pla2g4a [species rule 6748a502],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:6748a5026791f4de773f,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__348288be31178af7,Pla2g4a,Pla2g4a [species rule 782ec0c8],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:782ec0c82b2f399bd09d,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__3580c9c6f27aab7a,Pla2g4a,Pla2g4a [RHEA:41100],2,1,True,catalyst_enables_reaction,Rhea,RHEA:41100,1,False,[],
+Gene__Pla2g4a,1,Enzyme__3b2ef9509603405a,Pla2g4a,Pla2g4a [species rule eb982394],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:eb982394ff6baeb6dabd,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__580f4dea36da42b8,Pla2g4a,Pla2g4a [RHEA:41088],2,1,True,catalyst_enables_reaction,Rhea,RHEA:41088,1,False,[],
+Gene__Pla2g4a,1,Enzyme__5ddd988c17aca23e,Pla2g4a,Pla2g4a [species rule 95dfbcc7],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:95dfbcc785fb62c58871,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__6249f67c09877ba6,Pla2g4a,Pla2g4a [species rule 65ae0e06],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:65ae0e060fe4691ed771,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__62a19ceaf431a288,Pla2g4a,Pla2g4a [species rule 1721f21e],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:1721f21ed257000c88f7,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__7182b1bc2985d325,Pla2g4a,Pla2g4a [species rule ec1bcb07],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:ec1bcb07fe2c54821627,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__73336ed34ce28d30,Pla2g4a,Pla2g4a [species rule 67b85606],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:67b85606d08002b42917,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__7a22bdccb0425f46,Pla2g4a,Pla2g4a [species rule 017e07b5],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:017e07b5e1e286d160db,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__7c22ae6351568cc7,Pla2g4a,Pla2g4a [RHEA:40520],2,1,True,catalyst_enables_reaction,Rhea,RHEA:40520,1,False,[],
+Gene__Pla2g4a,1,Enzyme__7cfa22cd06d22924,Pla2g4a,Pla2g4a [species rule 3253cf48],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:3253cf48e87ce1ff78f5,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__848b2697044f765c,Pla2g4a,Pla2g4a [species rule 992184e5],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:992184e5c6f10a529d34,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__87442e0c41a796d6,Pla2g4a,Pla2g4a [species rule bc296cf1],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:bc296cf15262edb543dc,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__887d76cdb73fdf86,Pla2g4a,Pla2g4a [species rule de64f4a9],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:de64f4a952f717ec1de1,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__8ba6b46793e1f25d,Pla2g4a,Pla2g4a [species rule 6b3f6b37],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:6b3f6b377e7e5891fa62,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__9ce4259c2552d718,Pla2g4a,Pla2g4a [species rule 8def668e],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:8def668e44bb2e6eb7ac,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__9e0800251ebad15e,Pla2g4a,Pla2g4a [species rule 708f0ae7],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:708f0ae792338653445b,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__a6a0212553147f34,Pla2g4a,Pla2g4a [species rule 894d3645],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:894d36456b1b38d2ea15,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__a8b5cfcf48e54f81,Pla2g4a,Pla2g4a [species rule 63e2ceb7],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:63e2ceb7dbe2a029d0ba,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__aae6226318749d4c,Pla2g4a,Pla2g4a [species rule cfde4d09],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:cfde4d09b05507c1f928,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__b467c530a2448ec3,Pla2g4a,Pla2g4a [species rule df833a96],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:df833a9631b826c76d64,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__bd4d986d2e874bd7,Pla2g4a,Pla2g4a [species rule 3a52b6c6],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:3a52b6c6f119f43c82f1,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__c249d6bcbdeb7f2e,Pla2g4a,Pla2g4a [species rule 0d25407f],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:0d25407f48d3a03d163f,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__c76079b4276a795e,Pla2g4a,Pla2g4a [species rule 3fec1594],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:3fec1594cedc9fc952b1,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__c84acf046f0c8338,Pla2g4a,Pla2g4a [species rule f92870e3],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:f92870e3a72f44e7b553,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__cd1cf37bf154477f,Pla2g4a,Pla2g4a [RHEA:41308],2,1,True,catalyst_enables_reaction,Rhea,RHEA:41308,1,False,[],
+Gene__Pla2g4a,1,Enzyme__cf0b15ea581c2d02,Pla2g4a,Pla2g4a [species rule 2fb5128a],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:2fb5128a43a96ac4767b,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__dcf91a51ad10ecfe,Pla2g4a,Pla2g4a [species rule 45f3be8c],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:45f3be8c07296a0077c4,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__e116b429fbedd6c8,Pla2g4a,Pla2g4a [species rule 7f911755],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:7f911755a3f1b343c36f,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__e3edb37af1774e34,Pla2g4a,Pla2g4a [species rule cf6f8711],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:cf6f87110b0970ff7c2d,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__f05e150756f182ca,Pla2g4a,Pla2g4a [species rule 9d9f9aed],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:9d9f9aed20abc5e5948d,1,True,[],RHEA:15802
+Gene__Pla2g4a,1,Enzyme__fbad02d42c53c872,Pla2g4a,Pla2g4a [species rule 563c0c34],2,1,True,catalyst_enables_reaction,Measured_species_rule_expanded,EXPANDED_LIPID_RULE:563c0c341b90f421b34c,1,True,[],RHEA:15802
+Gene__Plcb1,1,Enzyme__37a1699fe62da55b,Plcb1,Plcb1 [species rule 32333a12],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:32333a12126a6b53d37f,1,True,[],
+Gene__Plcb1,1,Enzyme__7ab4cb766cadeca7,Plcb1,Plcb1 [species rule ac533084],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:ac533084303f2b7100f3,1,True,[],
+Gene__Plcb1,1,Enzyme__f1bd9c60cce85bd2,Plcb1,Plcb1 [species rule 6b427fbc],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:6b427fbcab24aea02b3f,1,True,[],
+Gene__Plcb2,1,Enzyme__445635f8c7daf98c,Plcb2,Plcb2 [species rule ac533084],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:ac533084303f2b7100f3,1,True,[],
+Gene__Plcb2,1,Enzyme__5ac81c0e2b8a5149,Plcb2,Plcb2 [species rule 6b427fbc],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:6b427fbcab24aea02b3f,1,True,[],
+Gene__Plcb2,1,Enzyme__8b9f4b81db47e6c1,Plcb2,Plcb2 [species rule 32333a12],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:32333a12126a6b53d37f,1,True,[],
+Gene__Plcg1,1,Enzyme__3160c0497be37afe,Plcg1,Plcg1 [species rule 32333a12],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:32333a12126a6b53d37f,1,True,[],
+Gene__Plcg1,1,Enzyme__949f69a9195f7dc7,Plcg1,Plcg1 [species rule ac533084],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:ac533084303f2b7100f3,1,True,[],
+Gene__Plcg1,1,Enzyme__fc93bcf35cc2903e,Plcg1,Plcg1 [species rule 6b427fbc],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:6b427fbcab24aea02b3f,1,True,[],
+Gene__Pld1,1,Enzyme__3ab537025de48b33,Pld1,Pld1 [species rule 0d5fd1e9],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:0d5fd1e954462a3e8d64,1,True,[],
+Gene__Pld1,1,Enzyme__7fcb15cb93c6e256,Pld1,Pld1 [species rule 32dcd26f],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:32dcd26fc41dfdb29191,1,True,[],
+Gene__Pld1,1,Enzyme__aecccacdc6888f8e,Pld1,Pld1 [species rule ef511242],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:ef5112420a6f6986c169,1,True,[],
+Gene__Pld2,1,Enzyme__09c4d20a80eb4aec,Pld2,Pld2 [species rule 0d5fd1e9],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:0d5fd1e954462a3e8d64,1,True,[],
+Gene__Pld2,1,Enzyme__66c127c6b2aa16c7,Pld2,Pld2 [species rule ef511242],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:ef5112420a6f6986c169,1,True,[],
+Gene__Pld2,1,Enzyme__eeb74a04ae51bb67,Pld2,Pld2 [species rule 32dcd26f],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:32dcd26fc41dfdb29191,1,True,[],
+Gene__Plpp1,1,Enzyme__bdf688bc434961f3,Plpp1,Plpp1 [species rule 6940437d],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:6940437d85c790b86fb9,1,True,[],
+Gene__Plpp1,1,Enzyme__f29ee0141580d22b,Plpp1,Plpp1 [species rule f5747b04],2,1,True,catalyst_enables_reaction,LINEX2_rule,LIPID_RULE:f5747b04cc0904c333ad,1,True,[],
+Gene__Ppara,1,Gene__Plpp1,Ppara,Plpp1,3,2,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI2:24955089;CollecTRI:24955089""]",
+Gene__Ptger3,1,Gene__Gnai1,Ptger3,Gnai1,4,3,True,signaling,OmniPath:ppi,,1,False,"[""SIGNOR:12038972;SIGNOR:31160049;HINT:36103815;HINT:37478163""]",
+Gene__Ptger3,1,Gene__Gnb3,Ptger3,Gnb3,4,3,True,signaling,OmniPath:ppi,,1,False,"[""SIGNOR:12038972""]",
+Gene__Rora,-1,Gene__Cebpa,Rora,Cebpa,4,3,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI2:19324970;CollecTRI:19324970""]",
+Gene__Rora,1,Gene__Ntrk2,Rora,Ntrk2,4,3,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI2:28608249;CollecTRI2:23697635;CollecTRI:28608249;SIGNOR:28608249;CollecTRI:23697635""]",
+Gene__Rxra,1,Gene__Pld1,Rxra,Pld1,3,2,True,transcription,OmniPath:grn,,1,False,"[""TRRUST:17433303;CollecTRI:17433303;CollecTRI2:17433303;HTRIdb:17433303;CollecTRI2:32067228""]",
+Gene__Tbx2,-1,Gene__Mycn,Tbx2,Mycn,4,3,True,transcription,OmniPath:grn,,1,False,"[""CollecTRI2:15843407;CollecTRI2:34638504;CollecTRI2:30451831;CollecTRI:15843407;CollecTRI2:33410138""]",

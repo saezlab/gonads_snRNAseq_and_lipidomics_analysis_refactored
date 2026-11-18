@@ -1,6 +1,10 @@
 # Factor 1 TF-to-lipid MOON pilot
 
-Run date: 2026-09-08. Input prior: `results/cosmos_mouse_pkn/pkn_lipid_rules.rds`.
+Historical analysis record. Result folders were archived unchanged on 16 November 2026. See [the causal analysis map](CAUSAL_ANALYSIS_MAP.md) for current entry points and the frozen-reference dependencies. Commands using archived implementations retain historical assumptions.
+
+> **Workflow cleanup, 2026-09-15:** The active selected-result entry point is `scripts/moon/run_factor1_tf_to_lipid.R`; see `scripts/moon/README.md`. Its refit from the frozen mapped inputs and PKN reproduced the selected 388-edge/153-node graph, scores and expected-TF exclusions, with evidence export and plots. The exploratory scripts below are preserved under `scripts/moon/archive/2026-09/`; their original path assumptions remain historical. Old `results/cosmos_*` references below identify files now under `results/causal_modelling/cosmos_*`. Historical command lists are provenance, not current reproduction commands.
+
+Run date: 2026-09-08. Input prior: `results/causal_modelling/cosmos_mouse_pkn/pkn_lipid_rules.rds`.
 
 > The expanded depth and threshold search in
 > `docs/cosmos_factor1_moon_parameter_search.md` supersedes this pilot for
@@ -59,7 +63,7 @@ from variance explained in the omics views. Existing fits with different initial
 factor counts show strong coordinate agreement, but no bootstrap or repeated-seed
 stability analysis was performed.
 
-See `results/cosmos_factor1_pilot/inputs/README.md` for input schemas, source
+See `miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/README.md` for input schemas, source
 hashes, model alignment, TF target counts, mapping exclusions and reproduction.
 
 ## Scoring and extraction
@@ -166,7 +170,7 @@ activities. Their absence is therefore a sign conflict, not missing PKN coverage
 
 ## Files to inspect
 
-All paths below are relative to `results/cosmos_factor1_pilot/`:
+All paths below are relative to `miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/`:
 
 - `uncompressed_sensitivity/solution_primary_{SIF,ATT}.csv`: independently
   converged uncompressed network at the tutorial thresholds; the integrated
@@ -190,26 +194,25 @@ All paths below are relative to `results/cosmos_factor1_pilot/`:
   `tf_unconstrained_compression_audit.csv`, and `score_support_README.md`: why
   endpoint scores and compression affect the result.
 
-## Reproduce
+## Historical execution commands
 
-Run from the repository root. The input README documents the Python model-audit
-dependencies; the scoring stage uses installed R packages and frozen local data.
+The following lists the historical pipeline with its scripts at their archived locations. It requires the original path context or explicit migration; use the active workflow above for the selected manuscript result. The input README records the original Python model-audit dependencies.
 
 ```sh
-Rscript scripts/moon/prepare_factor1_inputs.R
-python3 scripts/moon/audit_factor1_model.py
-Rscript scripts/moon/map_factor1_inputs.R
+Rscript scripts/moon/archive/2026-09/prepare_factor1_inputs.R
+python3 scripts/moon/archive/2026-09/audit_factor1_model.py
+Rscript scripts/moon/archive/2026-09/map_factor1_inputs.R
 Rscript scripts/moon/moon_safe_helpers.R
-Rscript scripts/moon/run_factor1_moon.R
-Rscript scripts/moon/audit_factor1_thresholds.R
-Rscript scripts/moon/run_factor1_moon.R --no-compression
-Rscript scripts/moon/audit_score_support.R
-Rscript scripts/moon/compare_factor1_runs.R
-python3 scripts/moon/export_factor1_network.py --stem solution_primary
-python3 scripts/moon/export_factor1_network.py --stem solution_relaxed
-python3 scripts/moon/export_factor1_network.py --stem solution_intermediate
-python3 scripts/moon/export_factor1_network.py --results results/cosmos_factor1_pilot/uncompressed_sensitivity --stem solution_primary
-python3 scripts/moon/export_factor1_network.py --results results/cosmos_factor1_pilot/uncompressed_sensitivity --stem solution_strict
+Rscript scripts/moon/archive/2026-09/run_factor1_moon.R
+Rscript scripts/moon/archive/2026-09/audit_factor1_thresholds.R
+Rscript scripts/moon/archive/2026-09/run_factor1_moon.R --no-compression
+Rscript scripts/moon/archive/2026-09/audit_score_support.R
+Rscript scripts/moon/archive/2026-09/compare_factor1_runs.R
+python3 scripts/moon/archive/2026-09/export_factor1_network.py --stem solution_primary
+python3 scripts/moon/archive/2026-09/export_factor1_network.py --stem solution_relaxed
+python3 scripts/moon/archive/2026-09/export_factor1_network.py --stem solution_intermediate
+python3 scripts/moon/archive/2026-09/export_factor1_network.py --results miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/uncompressed_sensitivity --stem solution_primary
+python3 scripts/moon/archive/2026-09/export_factor1_network.py --results miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/uncompressed_sensitivity --stem solution_strict
 ```
 
 The helper's synthetic tests cover protected duplicate groups, actual and zero

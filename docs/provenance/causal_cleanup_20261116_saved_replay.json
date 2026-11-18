@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "scope": "Saved-artifact hashes, reference comparisons and extraction replay only",
+  "model_refitted": false,
+  "new_scores_computed": false,
+  "frozen_artifacts_written": false,
+  "forward": {
+    "passed": true,
+    "exact_signed_edges": true,
+    "exact_score_node_ids_and_levels": true,
+    "exact_compression_map": true,
+    "tolerance": 1e-10,
+    "max_returned_score_difference": 0,
+    "max_diagnostic_score_difference": 0,
+    "saved_extraction_identical": true,
+    "edges": 388,
+    "nodes": 153,
+    "dependency_hashes": 3
+  },
+  "relaxed": {
+    "passed": true,
+    "exact_signed_edges": true,
+    "exact_score_node_ids_and_levels": true,
+    "exact_compression_map": true,
+    "tolerance": 1e-10,
+    "max_score_difference": 0,
+    "max_selected_att_score_difference": 4.44089209850063e-15,
+    "saved_extraction_identical": true,
+    "edges": 5,
+    "nodes": 6,
+    "dependency_hashes": 6
+  },
+  "reverse_dependency_contract": true,
+  "software": [
+    {
+      "package": "cosmosR",
+      "required": "1.21.2",
+      "installed": "1.21.2",
+      "matches": true,
+      "_row": "cosmosR"
+    },
+    {
+      "package": "decoupleR",
+      "required": "2.17.0",
+      "installed": "2.9.7",
+      "matches": false,
+      "_row": "decoupleR"
+    },
+    {
+      "package": "igraph",
+      "required": "2.3.3",
+      "installed": "2.3.3",
+      "matches": true,
+      "_row": "igraph"
+    },
+    {
+      "package": "jsonlite",
+      "required": "2.0.0",
+      "installed": "2.0.0",
+      "matches": true,
+      "_row": "jsonlite"
+    }
+  ],
+  "cosmos_commit_matches": true,
+  "full_fit_environment_ready": false,
+  "full_fit_contract": "Unchanged: full-fit validate-only still requires the pinned software versions"
+}

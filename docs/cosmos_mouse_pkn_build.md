@@ -7,7 +7,7 @@ vectors have been selected.
 
 ## Deliverables and intended use
 
-Outputs are in `results/cosmos_mouse_pkn/`. Each `pkn_*.csv` has exactly
+The immutable base-build outputs are in `results/causal_modelling/cosmos_mouse_pkn/`. Each `pkn_*.csv` has exactly
 `source,interaction,target`, with numeric signs ±1. Matching `.rds` files contain
 the same three-column R data frames. `r_validation.json` records validation
 against the installed `cosmosR::meta_network_cleanup()` implementation.
@@ -18,7 +18,7 @@ against the installed `cosmosR::meta_network_cleanup()` implementation.
 | `pkn_lipid_curated` | Core plus direction-annotated mouse Rhea/SwissLipids chemistry and fresh, structurally screened GtoPdb metabolite–protein activity records |
 | `pkn_lipid_curated_ph73` | Optional chemical-identity sensitivity view of the curated network; ChEBI aliases and explicit acid/base relations support normalization to a Rhea pH7.3 target |
 | `pkn_lipid_rules` | Curated network plus explicitly hypothetical species-level reactions instantiated from mouse-supported templates and matched measured acyl chains |
-| `pkn_exploratory` | Adds species rules, uncertain-direction Rhea possibilities, enzyme-complex enabling approximations, secondary chemical mappings, unverified legacy accessions and cached BRENDA/STITCH evidence |
+| `pkn_exploratory` | Original base exploratory graph: adds species rules, uncertain-direction Rhea possibilities, enzyme-complex enabling approximations, secondary chemical mappings, unverified legacy accessions and cached BRENDA/STITCH evidence |
 
 Use `pkn_lipid_curated` for the initial resource-based analysis and keep the
 exploratory graph separate. All graphs are qualitative models, including the
@@ -40,9 +40,13 @@ The curated expansion has exact ChEBI matches for only **7 of 1,254 measured
 features and none of the 64 Factor 1 lipids**. It has compatible structural
 candidates for 181 features and hierarchy matches for 750; these do not count
 as exact coverage. The separate rule extension connects 149 measured features,
-including seven Factor 1 lipids. Thus the first build is useful for testing
-mechanistic hypotheses, but does not solve comprehensive molecular-species
-coverage.
+including seven Factor 1 lipids. This is an any-role count: 123 of the 149 are
+product-side endpoints, 100 are substrates, 74 occupy both roles and 26 are
+substrate-only. The direction-aware audit is in
+`docs/cosmos_lipid_reaction_target_mapping_audit.md` and
+`results/causal_modelling/lipid_reaction_target_mapping_audit/`. Thus the first
+build is useful for testing mechanistic hypotheses, but does not solve
+comprehensive molecular-species coverage.
 
 One explicit rule hypothesis is
 `PC(20:0_22:6) → Ptdss1-associated reaction → PS(20:0_22:6)`, from mouse catalyst
@@ -72,14 +76,49 @@ measured species. The complete reaction also retains the non-lipid participants.
   relationships, alternative IDs and lipid ancestry. The Rhea-synchronized
   ChEBI hierarchy is also preserved separately.
 - Cached BRENDA/STITCH from the audited April 21 COSMOS service components are
-  included only in `pkn_exploratory`. These have weaker reconstructable
-  provenance than fresh resources and are not represented as newly refreshed.
+  included only in the original `pkn_exploratory`. These have weaker
+  reconstructable provenance than fresh resources and are not represented as
+  newly refreshed. Cached STITCH is excluded from the separate
+  directionality-audited overlay because its original actor order cannot be
+  recovered.
 
 `build_manifest.json` hashes source downloads, local feature inputs, build code
 and outputs. The individual resource manifests contain URLs, queries and
 versions. Frozen raw sources are in `support/cosmos_mouse/raw/`; the direct
 OmniPath and cached fallback responses also depend on
-`results/cosmos_pkn_audit/raw/`. Preserve these when moving the build.
+`results/causal_modelling/cosmos_pkn_audit/raw/`. Preserve these when moving the build.
+
+## Directionality-audited STITCH overlay
+
+[`results/causal_modelling/cosmos_mouse_pkn_stitch_directional/`](../results/causal_modelling/cosmos_mouse_pkn_stitch_directional/)
+is a sibling exploratory overlay, not a revision of the immutable base exports
+or the selected `pkn_lipid_rules` analysis resource. It removes every cached
+STITCH evidence row and imports raw mouse STITCH v5 records only when the raw
+chemical is partner A, acts on the mouse protein partner B (`a_is_acting=t`),
+has an explicit signed action and action score of at least 700, and has
+detailed-link text mining below 700. It derives signs from `action`, preserves
+all raw evidence and mapping fields, and quarantines opposing signs after
+combining evidence with the non-STITCH base graph. The source files are dated
+16 August 2016, so this is directionality-audited rather than a current or
+conservative resource.
+
+Build and validate it from the project root with:
+
+```sh
+python3 scripts/pkn/test_stitch_directional.py
+python3 scripts/pkn/build_stitch_directional.py
+python3 scripts/pkn/validate_stitch_directional_overlay.py
+Rscript scripts/pkn/validate_stitch_directional_overlay.R \
+  results/causal_modelling/cosmos_mouse_pkn_stitch_directional
+```
+
+The output includes `pkn_exploratory_stitch_directional.csv/.rds`, complete
+edge and node ledgers, source/exclusion/mapping audits, a manifest and Python/
+R validation reports. It remains separate from `pkn_lipid_rules`. It is used
+only by the explicitly named relaxed lipid-to-TF sensitivity, after its own
+conditional measurement-to-chemical mapping audit; it is not used by the
+manuscript TF-to-lipid or original reaction-network lipid-to-TF fits. Its raw
+directionality does not establish a liver mechanism.
 
 ## Reaction representation
 
@@ -195,8 +234,11 @@ the metabolite namespace and remain distinct from curated ChEBI species.
 The rule pairs table, master records and manifest retain exact matches,
 template participants, references and assumptions. Actual graph coverage is
 reported separately as `species_rule_connected`, never counted as curated exact
-coverage. These rules use feature identities, not correlation or abundance
-signs, so they do not encode the observed RNA–lipid association as prior truth.
+coverage. This field means that a feature occurs on either side of a rule, not
+that it is a downstream product; see the direction-aware audit for separate
+substrate/product counts. These rules use feature identities, not correlation or
+abundance signs, so they do not encode the observed RNA–lipid association as
+prior truth.
 
 ## Quality controls and limitations
 
@@ -261,3 +303,12 @@ Other current builders use Python's standard library. R requires `cosmosR` and
 - [SwissLipids downloads](https://www.swisslipids.org/api/index.php/downloadData)
 - [Guide to Pharmacology downloads](https://www.guidetopharmacology.org/download.jsp)
 - [ChEBI](https://www.ebi.ac.uk/chebi/)
+
+## Repository path repair (16 November 2026)
+
+Base builders and cache consumers now consistently use
+`results/causal_modelling/cosmos_mouse_pkn/` and
+`results/causal_modelling/cosmos_pkn_audit/`. Frozen outputs and their embedded
+source/hash manifests were preserved. `Rscript scripts/pkn/validate_export.R
+--validate-only` checks saved CSVs without rewriting RDS or validation files.
+The full builder was not rerun during cleanup. See `docs/CAUSAL_ANALYSIS_MAP.md`.

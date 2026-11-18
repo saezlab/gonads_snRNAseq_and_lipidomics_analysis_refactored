@@ -1,0 +1,830 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2130" height="1744" viewBox="0 0 2130 1744">
+<rect width="100%" height="100%" fill="white"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#555"/></marker></defs>
+<g font-family="Arial,sans-serif" fill="#222">
+<text x="25" y="30" font-size="21">Factor 1: measured lipid to TF hypothesis routes</text>
+<text x="25" y="54" font-size="13">Purple edges: actual chemical–protein activity modulation. Grey: other signed PKN edges. Dashed: species-rule hypothesis.</text>
+<text x="25" y="76" font-size="13">Blue: measured lipid. Yellow: other chemical. Grey: reaction instance. Green: protein. Red: observed TF endpoint.</text>
+<text x="25" y="98" font-size="13">Showing 12 of 64 representative shortest routes; no scores are rescaled or refitted.</text>
+<text x="25" y="142" font-size="13">LPC(18:0/0:0) → Esr1: indirect_metabolic_availability_hypothesis; 11 edges</text>
+<rect x="25" y="156" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="172" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="191" x2="181" y2="191" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="181" font-size="15" fill="#555">+</text>
+<rect x="185" y="156" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="172" font-size="11">Lpcat3</text>
+<text x="190" y="187" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="191" x2="341" y2="191" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="181" font-size="15" fill="#555">+</text>
+<rect x="345" y="156" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="172" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="187" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="202" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="217" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="191" x2="501" y2="191" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="181" font-size="15" fill="#555">+</text>
+<rect x="505" y="156" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="172" font-size="11">Pla2g6</text>
+<text x="510" y="187" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="191" x2="661" y2="191" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="181" font-size="15" fill="#555">+</text>
+<rect x="665" y="156" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="172" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="191" x2="821" y2="191" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="181" font-size="15" fill="#555">+</text>
+<rect x="825" y="156" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="172" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="191" x2="981" y2="191" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="181" font-size="15" fill="#555">+</text>
+<rect x="985" y="156" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="172" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="191" x2="1141" y2="191" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="181" font-size="15" fill="#555">+</text>
+<rect x="1145" y="156" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="172" font-size="11">Akr1b1</text>
+<text x="1150" y="187" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="191" x2="1301" y2="191" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="181" font-size="15" fill="#555">+</text>
+<rect x="1305" y="156" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="172" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="191" x2="1461" y2="191" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="181" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="156" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="172" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="191" x2="1621" y2="191" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="181" font-size="15" fill="#555">+</text>
+<rect x="1625" y="156" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="172" font-size="11">Egfr</text>
+<title>Gene__Egfr: Egfr</title>
+<line x1="1751" y1="191" x2="1781" y2="191" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="181" font-size="15" fill="#555">+</text>
+<rect x="1785" y="156" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1790" y="172" font-size="11">Esr1</text>
+<title>Gene__Esr1: Esr1</title>
+<text x="25" y="276" font-size="13">LPC(18:0/0:0) → Sox2: indirect_metabolic_availability_hypothesis; 11 edges</text>
+<rect x="25" y="290" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="306" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="325" x2="181" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="315" font-size="15" fill="#555">+</text>
+<rect x="185" y="290" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="306" font-size="11">Lpcat3</text>
+<text x="190" y="321" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="325" x2="341" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="315" font-size="15" fill="#555">+</text>
+<rect x="345" y="290" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="306" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="321" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="336" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="351" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="325" x2="501" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="315" font-size="15" fill="#555">+</text>
+<rect x="505" y="290" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="306" font-size="11">Pla2g6</text>
+<text x="510" y="321" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="325" x2="661" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="315" font-size="15" fill="#555">+</text>
+<rect x="665" y="290" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="306" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="325" x2="821" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="315" font-size="15" fill="#555">+</text>
+<rect x="825" y="290" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="306" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="325" x2="981" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="315" font-size="15" fill="#555">+</text>
+<rect x="985" y="290" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="306" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="325" x2="1141" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="315" font-size="15" fill="#555">+</text>
+<rect x="1145" y="290" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="306" font-size="11">Akr1b1</text>
+<text x="1150" y="321" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="325" x2="1301" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="315" font-size="15" fill="#555">+</text>
+<rect x="1305" y="290" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="306" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="325" x2="1461" y2="325" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="315" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="290" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="306" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="325" x2="1621" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="315" font-size="15" fill="#555">+</text>
+<rect x="1625" y="290" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="306" font-size="11">Egfr</text>
+<title>Gene__Egfr: Egfr</title>
+<line x1="1751" y1="325" x2="1781" y2="325" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="315" font-size="15" fill="#555">+</text>
+<rect x="1785" y="290" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1790" y="306" font-size="11">Sox2</text>
+<title>Gene__Sox2: Sox2</title>
+<text x="25" y="410" font-size="13">LPC(18:0/0:0) → Stat5a: indirect_metabolic_availability_hypothesis; 11 edges</text>
+<rect x="25" y="424" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="440" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="459" x2="181" y2="459" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="449" font-size="15" fill="#555">+</text>
+<rect x="185" y="424" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="440" font-size="11">Lpcat3</text>
+<text x="190" y="455" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="459" x2="341" y2="459" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="449" font-size="15" fill="#555">+</text>
+<rect x="345" y="424" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="440" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="455" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="470" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="485" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="459" x2="501" y2="459" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="449" font-size="15" fill="#555">+</text>
+<rect x="505" y="424" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="440" font-size="11">Pla2g6</text>
+<text x="510" y="455" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="459" x2="661" y2="459" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="449" font-size="15" fill="#555">+</text>
+<rect x="665" y="424" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="440" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="459" x2="821" y2="459" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="449" font-size="15" fill="#555">+</text>
+<rect x="825" y="424" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="440" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="459" x2="981" y2="459" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="449" font-size="15" fill="#555">+</text>
+<rect x="985" y="424" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="440" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="459" x2="1141" y2="459" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="449" font-size="15" fill="#555">+</text>
+<rect x="1145" y="424" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="440" font-size="11">Akr1b1</text>
+<text x="1150" y="455" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="459" x2="1301" y2="459" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="449" font-size="15" fill="#555">+</text>
+<rect x="1305" y="424" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="440" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="459" x2="1461" y2="459" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="449" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="424" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="440" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="459" x2="1621" y2="459" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="449" font-size="15" fill="#555">+</text>
+<rect x="1625" y="424" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="440" font-size="11">Egfr</text>
+<title>Gene__Egfr: Egfr</title>
+<line x1="1751" y1="459" x2="1781" y2="459" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="449" font-size="15" fill="#555">+</text>
+<rect x="1785" y="424" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1790" y="440" font-size="11">Stat5a</text>
+<title>Gene__Stat5a: Stat5a</title>
+<text x="25" y="544" font-size="13">LPC(18:0/0:0) → Stat5b: indirect_metabolic_availability_hypothesis; 11 edges</text>
+<rect x="25" y="558" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="574" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="593" x2="181" y2="593" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="583" font-size="15" fill="#555">+</text>
+<rect x="185" y="558" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="574" font-size="11">Lpcat3</text>
+<text x="190" y="589" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="593" x2="341" y2="593" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="583" font-size="15" fill="#555">+</text>
+<rect x="345" y="558" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="574" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="589" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="604" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="619" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="593" x2="501" y2="593" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="583" font-size="15" fill="#555">+</text>
+<rect x="505" y="558" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="574" font-size="11">Pla2g6</text>
+<text x="510" y="589" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="593" x2="661" y2="593" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="583" font-size="15" fill="#555">+</text>
+<rect x="665" y="558" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="574" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="593" x2="821" y2="593" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="583" font-size="15" fill="#555">+</text>
+<rect x="825" y="558" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="574" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="593" x2="981" y2="593" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="583" font-size="15" fill="#555">+</text>
+<rect x="985" y="558" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="574" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="593" x2="1141" y2="593" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="583" font-size="15" fill="#555">+</text>
+<rect x="1145" y="558" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="574" font-size="11">Akr1b1</text>
+<text x="1150" y="589" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="593" x2="1301" y2="593" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="583" font-size="15" fill="#555">+</text>
+<rect x="1305" y="558" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="574" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="593" x2="1461" y2="593" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="583" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="558" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="574" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="593" x2="1621" y2="593" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="583" font-size="15" fill="#555">+</text>
+<rect x="1625" y="558" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="574" font-size="11">Egfr</text>
+<title>Gene__Egfr: Egfr</title>
+<line x1="1751" y1="593" x2="1781" y2="593" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="583" font-size="15" fill="#555">+</text>
+<rect x="1785" y="558" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1790" y="574" font-size="11">Stat5b</text>
+<title>Gene__Stat5b: Stat5b</title>
+<text x="25" y="678" font-size="13">LPC(18:0/0:0) → Ar: indirect_metabolic_availability_hypothesis; 12 edges</text>
+<rect x="25" y="692" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="708" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="727" x2="181" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="717" font-size="15" fill="#555">+</text>
+<rect x="185" y="692" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="708" font-size="11">Lpcat3</text>
+<text x="190" y="723" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="727" x2="341" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="717" font-size="15" fill="#555">+</text>
+<rect x="345" y="692" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="708" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="723" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="738" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="753" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="727" x2="501" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="717" font-size="15" fill="#555">+</text>
+<rect x="505" y="692" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="708" font-size="11">Pla2g6</text>
+<text x="510" y="723" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="727" x2="661" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="717" font-size="15" fill="#555">+</text>
+<rect x="665" y="692" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="708" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="727" x2="821" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="717" font-size="15" fill="#555">+</text>
+<rect x="825" y="692" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="708" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="727" x2="981" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="717" font-size="15" fill="#555">+</text>
+<rect x="985" y="692" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="708" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="727" x2="1141" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="717" font-size="15" fill="#555">+</text>
+<rect x="1145" y="692" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="708" font-size="11">Akr1b1</text>
+<text x="1150" y="723" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="727" x2="1301" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="717" font-size="15" fill="#555">+</text>
+<rect x="1305" y="692" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="708" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="727" x2="1461" y2="727" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="717" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="692" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="708" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="727" x2="1621" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="717" font-size="15" fill="#555">+</text>
+<rect x="1625" y="692" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="708" font-size="11">Egfr</text>
+<title>Gene__Egfr: Egfr</title>
+<line x1="1751" y1="727" x2="1781" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="717" font-size="15" fill="#555">+</text>
+<rect x="1785" y="692" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1790" y="708" font-size="11">Fus</text>
+<title>Gene__Fus: Fus</title>
+<line x1="1911" y1="727" x2="1941" y2="727" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1923" y="717" font-size="15" fill="#555">+</text>
+<rect x="1945" y="692" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1950" y="708" font-size="11">Ar</text>
+<title>Gene__Ar: Ar</title>
+<text x="25" y="812" font-size="13">LPC(18:0/0:0) → Brca1: indirect_metabolic_availability_hypothesis; 12 edges</text>
+<rect x="25" y="826" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="842" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="861" x2="181" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="851" font-size="15" fill="#555">+</text>
+<rect x="185" y="826" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="842" font-size="11">Lpcat3</text>
+<text x="190" y="857" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="861" x2="341" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="851" font-size="15" fill="#555">+</text>
+<rect x="345" y="826" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="842" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="857" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="872" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="887" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="861" x2="501" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="851" font-size="15" fill="#555">+</text>
+<rect x="505" y="826" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="842" font-size="11">Pla2g6</text>
+<text x="510" y="857" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="861" x2="661" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="851" font-size="15" fill="#555">+</text>
+<rect x="665" y="826" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="842" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="861" x2="821" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="851" font-size="15" fill="#555">+</text>
+<rect x="825" y="826" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="842" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="861" x2="981" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="851" font-size="15" fill="#555">+</text>
+<rect x="985" y="826" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="842" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="861" x2="1141" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="851" font-size="15" fill="#555">+</text>
+<rect x="1145" y="826" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="842" font-size="11">Akr1b1</text>
+<text x="1150" y="857" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="861" x2="1301" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="851" font-size="15" fill="#555">+</text>
+<rect x="1305" y="826" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="842" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="861" x2="1461" y2="861" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="851" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="826" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="842" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="861" x2="1621" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="851" font-size="15" fill="#555">+</text>
+<rect x="1625" y="826" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="842" font-size="11">Src</text>
+<title>Gene__Src: Src</title>
+<line x1="1751" y1="861" x2="1781" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="851" font-size="15" fill="#555">+</text>
+<rect x="1785" y="826" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1790" y="842" font-size="11">Aurka</text>
+<title>Gene__Aurka: Aurka</title>
+<line x1="1911" y1="861" x2="1941" y2="861" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1923" y="851" font-size="15" fill="#555">+</text>
+<rect x="1945" y="826" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1950" y="842" font-size="11">Brca1</text>
+<title>Gene__Brca1: Brca1</title>
+<text x="25" y="946" font-size="13">LPC(18:0/0:0) → Cebpb: indirect_metabolic_availability_hypothesis; 12 edges</text>
+<rect x="25" y="960" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="976" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="995" x2="181" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="985" font-size="15" fill="#555">+</text>
+<rect x="185" y="960" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="976" font-size="11">Lpcat3</text>
+<text x="190" y="991" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="995" x2="341" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="985" font-size="15" fill="#555">+</text>
+<rect x="345" y="960" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="976" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="991" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="1006" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="1021" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="995" x2="501" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="985" font-size="15" fill="#555">+</text>
+<rect x="505" y="960" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="976" font-size="11">Pla2g6</text>
+<text x="510" y="991" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="995" x2="661" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="985" font-size="15" fill="#555">+</text>
+<rect x="665" y="960" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="976" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="995" x2="821" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="985" font-size="15" fill="#555">+</text>
+<rect x="825" y="960" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="976" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="995" x2="981" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="985" font-size="15" fill="#555">+</text>
+<rect x="985" y="960" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="976" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="995" x2="1141" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="985" font-size="15" fill="#555">+</text>
+<rect x="1145" y="960" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="976" font-size="11">Akr1b1</text>
+<text x="1150" y="991" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="995" x2="1301" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="985" font-size="15" fill="#555">+</text>
+<rect x="1305" y="960" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="976" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="995" x2="1461" y2="995" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="985" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="960" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="976" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="995" x2="1621" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="985" font-size="15" fill="#555">+</text>
+<rect x="1625" y="960" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="976" font-size="11">Src</text>
+<title>Gene__Src: Src</title>
+<line x1="1751" y1="995" x2="1781" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="985" font-size="15" fill="#555">+</text>
+<rect x="1785" y="960" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1790" y="976" font-size="11">Abl1</text>
+<title>Gene__Abl1: Abl1</title>
+<line x1="1911" y1="995" x2="1941" y2="995" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1923" y="985" font-size="15" fill="#555">+</text>
+<rect x="1945" y="960" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1950" y="976" font-size="11">Cebpb</text>
+<title>Gene__Cebpb: Cebpb</title>
+<text x="25" y="1080" font-size="13">LPC(18:0/0:0) → Ctnnb1: indirect_metabolic_availability_hypothesis; 12 edges</text>
+<rect x="25" y="1094" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="1110" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="1129" x2="181" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="1119" font-size="15" fill="#555">+</text>
+<rect x="185" y="1094" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="1110" font-size="11">Lpcat3</text>
+<text x="190" y="1125" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="1129" x2="341" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="1119" font-size="15" fill="#555">+</text>
+<rect x="345" y="1094" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="1110" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="1125" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="1140" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="1155" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="1129" x2="501" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="1119" font-size="15" fill="#555">+</text>
+<rect x="505" y="1094" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="1110" font-size="11">Pla2g6</text>
+<text x="510" y="1125" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="1129" x2="661" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="1119" font-size="15" fill="#555">+</text>
+<rect x="665" y="1094" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="1110" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="1129" x2="821" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="1119" font-size="15" fill="#555">+</text>
+<rect x="825" y="1094" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="1110" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="1129" x2="981" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="1119" font-size="15" fill="#555">+</text>
+<rect x="985" y="1094" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="1110" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="1129" x2="1141" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="1119" font-size="15" fill="#555">+</text>
+<rect x="1145" y="1094" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="1110" font-size="11">Akr1b1</text>
+<text x="1150" y="1125" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="1129" x2="1301" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="1119" font-size="15" fill="#555">+</text>
+<rect x="1305" y="1094" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="1110" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="1129" x2="1461" y2="1129" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="1119" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="1094" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="1110" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="1129" x2="1621" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="1119" font-size="15" fill="#555">+</text>
+<rect x="1625" y="1094" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="1110" font-size="11">Src</text>
+<title>Gene__Src: Src</title>
+<line x1="1751" y1="1129" x2="1781" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="1119" font-size="15" fill="#555">+</text>
+<rect x="1785" y="1094" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1790" y="1110" font-size="11">Aurka</text>
+<title>Gene__Aurka: Aurka</title>
+<line x1="1911" y1="1129" x2="1941" y2="1129" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1923" y="1119" font-size="15" fill="#555">+</text>
+<rect x="1945" y="1094" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1950" y="1110" font-size="11">Ctnnb1</text>
+<title>Gene__Ctnnb1: Ctnnb1</title>
+<text x="25" y="1214" font-size="13">LPC(18:0/0:0) → Dbp: indirect_metabolic_availability_hypothesis; 12 edges</text>
+<rect x="25" y="1228" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="1244" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="1263" x2="181" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="1253" font-size="15" fill="#555">+</text>
+<rect x="185" y="1228" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="1244" font-size="11">Lpcat3</text>
+<text x="190" y="1259" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="1263" x2="341" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="1253" font-size="15" fill="#555">+</text>
+<rect x="345" y="1228" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="1244" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="1259" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="1274" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="1289" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="1263" x2="501" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="1253" font-size="15" fill="#555">+</text>
+<rect x="505" y="1228" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="1244" font-size="11">Pla2g6</text>
+<text x="510" y="1259" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="1263" x2="661" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="1253" font-size="15" fill="#555">+</text>
+<rect x="665" y="1228" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="1244" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="1263" x2="821" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="1253" font-size="15" fill="#555">+</text>
+<rect x="825" y="1228" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="1244" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="1263" x2="981" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="1253" font-size="15" fill="#555">+</text>
+<rect x="985" y="1228" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="1244" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="1263" x2="1141" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="1253" font-size="15" fill="#555">+</text>
+<rect x="1145" y="1228" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="1244" font-size="11">Akr1b1</text>
+<text x="1150" y="1259" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="1263" x2="1301" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="1253" font-size="15" fill="#555">+</text>
+<rect x="1305" y="1228" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="1244" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="1263" x2="1461" y2="1263" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="1253" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="1228" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="1244" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="1263" x2="1621" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="1253" font-size="15" fill="#555">+</text>
+<rect x="1625" y="1228" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="1244" font-size="11">Egfr</text>
+<title>Gene__Egfr: Egfr</title>
+<line x1="1751" y1="1263" x2="1781" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="1253" font-size="15" fill="#555">+</text>
+<rect x="1785" y="1228" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1790" y="1244" font-size="11">Jak1</text>
+<title>Gene__Jak1: Jak1</title>
+<line x1="1911" y1="1263" x2="1941" y2="1263" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1923" y="1253" font-size="15" fill="#555">+</text>
+<rect x="1945" y="1228" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1950" y="1244" font-size="11">Dbp</text>
+<title>Gene__Dbp: Dbp</title>
+<text x="25" y="1348" font-size="13">LPC(18:0/0:0) → Irf3: indirect_metabolic_availability_hypothesis; 12 edges</text>
+<rect x="25" y="1362" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="1378" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="1397" x2="181" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="1387" font-size="15" fill="#555">+</text>
+<rect x="185" y="1362" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="1378" font-size="11">Lpcat3</text>
+<text x="190" y="1393" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="1397" x2="341" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="1387" font-size="15" fill="#555">+</text>
+<rect x="345" y="1362" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="1378" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="1393" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="1408" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="1423" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="1397" x2="501" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="1387" font-size="15" fill="#555">+</text>
+<rect x="505" y="1362" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="1378" font-size="11">Pla2g6</text>
+<text x="510" y="1393" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="1397" x2="661" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="1387" font-size="15" fill="#555">+</text>
+<rect x="665" y="1362" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="1378" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="1397" x2="821" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="1387" font-size="15" fill="#555">+</text>
+<rect x="825" y="1362" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="1378" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="1397" x2="981" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="1387" font-size="15" fill="#555">+</text>
+<rect x="985" y="1362" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="1378" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="1397" x2="1141" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="1387" font-size="15" fill="#555">+</text>
+<rect x="1145" y="1362" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="1378" font-size="11">Akr1b1</text>
+<text x="1150" y="1393" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="1397" x2="1301" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="1387" font-size="15" fill="#555">+</text>
+<rect x="1305" y="1362" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="1378" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="1397" x2="1461" y2="1397" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="1387" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="1362" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="1378" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="1397" x2="1621" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="1387" font-size="15" fill="#555">+</text>
+<rect x="1625" y="1362" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="1378" font-size="11">Src</text>
+<title>Gene__Src: Src</title>
+<line x1="1751" y1="1397" x2="1781" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="1387" font-size="15" fill="#555">+</text>
+<rect x="1785" y="1362" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1790" y="1378" font-size="11">Abl1</text>
+<title>Gene__Abl1: Abl1</title>
+<line x1="1911" y1="1397" x2="1941" y2="1397" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1923" y="1387" font-size="15" fill="#555">+</text>
+<rect x="1945" y="1362" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1950" y="1378" font-size="11">Irf3</text>
+<title>Gene__Irf3: Irf3</title>
+<text x="25" y="1482" font-size="13">LPC(18:0/0:0) → Kat5: indirect_metabolic_availability_hypothesis; 12 edges</text>
+<rect x="25" y="1496" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="1512" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="1531" x2="181" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="1521" font-size="15" fill="#555">+</text>
+<rect x="185" y="1496" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="1512" font-size="11">Lpcat3</text>
+<text x="190" y="1527" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="1531" x2="341" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="1521" font-size="15" fill="#555">+</text>
+<rect x="345" y="1496" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="1512" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="1527" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="1542" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="1557" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="1531" x2="501" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="1521" font-size="15" fill="#555">+</text>
+<rect x="505" y="1496" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="1512" font-size="11">Pla2g6</text>
+<text x="510" y="1527" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="1531" x2="661" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="1521" font-size="15" fill="#555">+</text>
+<rect x="665" y="1496" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="1512" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="1531" x2="821" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="1521" font-size="15" fill="#555">+</text>
+<rect x="825" y="1496" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="1512" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="1531" x2="981" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="1521" font-size="15" fill="#555">+</text>
+<rect x="985" y="1496" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="1512" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="1531" x2="1141" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="1521" font-size="15" fill="#555">+</text>
+<rect x="1145" y="1496" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="1512" font-size="11">Akr1b1</text>
+<text x="1150" y="1527" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="1531" x2="1301" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="1521" font-size="15" fill="#555">+</text>
+<rect x="1305" y="1496" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="1512" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="1531" x2="1461" y2="1531" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="1521" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="1496" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="1512" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="1531" x2="1621" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="1521" font-size="15" fill="#555">+</text>
+<rect x="1625" y="1496" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="1512" font-size="11">Src</text>
+<title>Gene__Src: Src</title>
+<line x1="1751" y1="1531" x2="1781" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="1521" font-size="15" fill="#555">+</text>
+<rect x="1785" y="1496" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1790" y="1512" font-size="11">Abl1</text>
+<title>Gene__Abl1: Abl1</title>
+<line x1="1911" y1="1531" x2="1941" y2="1531" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1923" y="1521" font-size="15" fill="#555">−</text>
+<rect x="1945" y="1496" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1950" y="1512" font-size="11">Kat5</text>
+<title>Gene__Kat5: Kat5</title>
+<text x="25" y="1616" font-size="13">LPC(18:0/0:0) → Ncoa3: indirect_metabolic_availability_hypothesis; 12 edges</text>
+<rect x="25" y="1630" width="126" height="72" rx="6" fill="#b9d8f2" stroke="#777"/>
+<text x="30" y="1646" font-size="11">LPC(18:0/0:0)</text>
+<title>Metab__CHEBI:73858_unknown: LPC(18:0/0:0)</title>
+<line x1="151" y1="1665" x2="181" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="163" y="1655" font-size="15" fill="#555">+</text>
+<rect x="185" y="1630" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="190" y="1646" font-size="11">Lpcat3</text>
+<text x="190" y="1661" font-size="11">[RHEA:37480]</text>
+<title>Enzyme__f05bd607d078c336: Lpcat3 [RHEA:37480]</title>
+<line x1="311" y1="1665" x2="341" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="323" y="1655" font-size="15" fill="#555">+</text>
+<rect x="345" y="1630" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="350" y="1646" font-size="11">1-octadecanoyl-2-(</text>
+<text x="350" y="1661" font-size="11">5Z,8Z,11Z,14Z-eico</text>
+<text x="350" y="1676" font-size="11">satetraenoyl)-sn-g</text>
+<text x="350" y="1691" font-size="11">lycero-3-phosphoch</text>
+<title>Metab__CHEBI:74965_unknown: 1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine</title>
+<line x1="471" y1="1665" x2="501" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="483" y="1655" font-size="15" fill="#555">+</text>
+<rect x="505" y="1630" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="510" y="1646" font-size="11">Pla2g6</text>
+<text x="510" y="1661" font-size="11">[RHEA:40520]</text>
+<title>Enzyme__383a88ef729fba13: Pla2g6 [RHEA:40520]</title>
+<line x1="631" y1="1665" x2="661" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="643" y="1655" font-size="15" fill="#555">+</text>
+<rect x="665" y="1630" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="670" y="1646" font-size="11">CHEBI:15843</text>
+<title>Metab__CHEBI:32395_unknown: CHEBI:15843</title>
+<line x1="791" y1="1665" x2="821" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="803" y="1655" font-size="15" fill="#555">+</text>
+<rect x="825" y="1630" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="830" y="1646" font-size="11">Ptgs1 [RHEA:23729]</text>
+<title>Enzyme__03f8af34500e1926: Ptgs1 [RHEA:23729]</title>
+<line x1="951" y1="1665" x2="981" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="963" y="1655" font-size="15" fill="#555">+</text>
+<rect x="985" y="1630" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="990" y="1646" font-size="11">CHEBI:15554</text>
+<title>Metab__CHEBI:57405_unknown: CHEBI:15554</title>
+<line x1="1111" y1="1665" x2="1141" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1123" y="1655" font-size="15" fill="#555">+</text>
+<rect x="1145" y="1630" width="126" height="72" rx="6" fill="#ddd" stroke="#777"/>
+<text x="1150" y="1646" font-size="11">Akr1b1</text>
+<text x="1150" y="1661" font-size="11">[RHEA:45314]</text>
+<title>Enzyme__af466f72f6cab03c: Akr1b1 [RHEA:45314]</title>
+<line x1="1271" y1="1665" x2="1301" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1283" y="1655" font-size="15" fill="#555">+</text>
+<rect x="1305" y="1630" width="126" height="72" rx="6" fill="#f8e5a4" stroke="#777"/>
+<text x="1310" y="1646" font-size="11">PGF2α</text>
+<title>Metab__CHEBI:57404_unknown: PGF2α</title>
+<line x1="1431" y1="1665" x2="1461" y2="1665" stroke="#823cad" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1443" y="1655" font-size="15" fill="#823cad">+</text>
+<rect x="1465" y="1630" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1470" y="1646" font-size="11">Ptger3</text>
+<title>Gene__Ptger3: Ptger3</title>
+<line x1="1591" y1="1665" x2="1621" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1603" y="1655" font-size="15" fill="#555">+</text>
+<rect x="1625" y="1630" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1630" y="1646" font-size="11">Src</text>
+<title>Gene__Src: Src</title>
+<line x1="1751" y1="1665" x2="1781" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1763" y="1655" font-size="15" fill="#555">+</text>
+<rect x="1785" y="1630" width="126" height="72" rx="6" fill="#c1dfbf" stroke="#777"/>
+<text x="1790" y="1646" font-size="11">Abl1</text>
+<title>Gene__Abl1: Abl1</title>
+<line x1="1911" y1="1665" x2="1941" y2="1665" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1923" y="1655" font-size="15" fill="#555">+</text>
+<rect x="1945" y="1630" width="126" height="72" rx="6" fill="#f0b4b8" stroke="#777"/>
+<text x="1950" y="1646" font-size="11">Ncoa3</text>
+<title>Gene__Ncoa3: Ncoa3</title>
+</g>
+</svg>

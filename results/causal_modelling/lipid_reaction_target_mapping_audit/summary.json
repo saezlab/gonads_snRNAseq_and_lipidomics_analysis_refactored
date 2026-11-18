@@ -1,0 +1,161 @@
+{
+  "scope": "Directed product-side coverage for the frozen pkn_lipid_rules and selected Factor 1 TF-to-lipid MOON replay. A product candidate requires an active Enzyme__ -> Metab__ product_formation edge; compatible and hierarchy mappings are excluded.",
+  "definitions": {
+    "species_rule_connected": "Feature appears on either substrate or product side of a measured-species rule.",
+    "product_candidate": "Feature is a species-rule product or has an exact SwissLipids-to-ChEBI candidate that is an active reaction product. It can still be excluded from the frozen input vector if its exact ChEBI identity is ambiguous.",
+    "accepted_product_endpoint": "Frozen accepted input whose selected node has an active incoming product_formation edge."
+  },
+  "counts": {
+    "all_measured_features": 1254,
+    "historical_factor1_64_features": 64,
+    "rule_instances": 149,
+    "rule_catalyst_specific_product_edges": 449,
+    "rule_connected_features": 149,
+    "rule_substrate_features": 100,
+    "rule_product_features": 123,
+    "rule_substrate_only_features": 26,
+    "rule_product_only_features": 49,
+    "rule_both_side_features": 74,
+    "all_panel_exact_chemical_product_candidate_features": 6,
+    "all_panel_any_product_candidate_features": 129,
+    "all_panel_any_product_candidate_percent": 10.287,
+    "frozen_accepted_input_nodes": 155,
+    "frozen_accepted_product_endpoints": 128,
+    "frozen_accepted_rule_product_endpoints": 123,
+    "frozen_accepted_exact_chebi_product_endpoints": 5,
+    "frozen_accepted_nonproduct_nodes": 27,
+    "frozen_accepted_rule_substrate_only_nodes": 26,
+    "frozen_accepted_nonrule_nonproduct_nodes": 1,
+    "selected_topology_retained_downstream_nodes": 74,
+    "selected_topology_retained_product_nodes": 74,
+    "selected_solution_level0_endpoints": 3,
+    "selected_solution_level0_product_endpoints": 3
+  },
+  "notable_feature_sets": {
+    "candidate_product_but_not_accepted_as_active_product_endpoint": [
+      "FA(16:0)"
+    ],
+    "accepted_nonproduct_nodes": [
+      "DG(16:0_22:5)",
+      "DG(18:1_22:1)",
+      "DG(22:1_22:6)",
+      "LPC(20:0/0:0)",
+      "PC(12:0_18:2)",
+      "PC(16:0_20:4)",
+      "PC(18:0_18:1)",
+      "PC(18:0_18:2)",
+      "PC(18:0_20:3)",
+      "PC(18:0_22:5)",
+      "PC(18:1_20:4)",
+      "PC(19:0_22:6)",
+      "PC(20:0_22:6)",
+      "PC(20:1_22:6)",
+      "PC(22:0_18:1)",
+      "PC(22:1_20:4)",
+      "PI(16:0_18:2)",
+      "PI(16:0_22:6)",
+      "PI(17:0_20:4)",
+      "PI(17:0_22:6)",
+      "PI(18:0_20:4)",
+      "PI(18:0_22:4)",
+      "PI(18:0_22:6)",
+      "PI(18:1_18:2)",
+      "PI(18:1_22:6)",
+      "PI(18:3_20:4)",
+      "PI(19:0_20:4)"
+    ],
+    "historical_factor1_product_candidates": [
+      "DG(24:0_18:2)",
+      "DG(24:1_18:2)",
+      "PE(22:1_22:6)",
+      "PS(20:0_22:6)"
+    ],
+    "selected_solution_product_features": [
+      "DG(20:0_18:1)",
+      "DG(24:0_18:2)",
+      "DG(24:1_18:2)"
+    ]
+  },
+  "checks": {
+    "all_rule_records_have_declared_lr_or_rl_direction": true,
+    "all_rule_records_are_projected_without_synthetic_reverse": true,
+    "all_rule_sources_are_substrates": true,
+    "all_rule_targets_are_products": true,
+    "all_catalyst_specific_rule_product_edges_are_active": true,
+    "no_active_product_evidence_lost_to_signed_edge_conflicts": true,
+    "all_selected_topology_downstream_inputs_are_product_nodes": true,
+    "all_selected_solution_level0_endpoints_are_product_nodes": true
+  },
+  "population_summary": [
+    {
+      "population": "all_measured_features",
+      "features": 1254,
+      "species_rule_connected": 149,
+      "species_rule_substrates": 100,
+      "species_rule_products": 123,
+      "species_rule_substrate_only": 26,
+      "species_rule_product_only": 49,
+      "species_rule_both": 74,
+      "exact_chemical_product_candidates": 6,
+      "any_product_candidate": 129,
+      "accepted_input_nodes": 155,
+      "accepted_input_product_nodes": 128
+    },
+    {
+      "population": "historical_factor1_64",
+      "features": 64,
+      "species_rule_connected": 7,
+      "species_rule_substrates": 5,
+      "species_rule_products": 4,
+      "species_rule_substrate_only": 3,
+      "species_rule_product_only": 2,
+      "species_rule_both": 2,
+      "exact_chemical_product_candidates": 0,
+      "any_product_candidate": 4,
+      "accepted_input_nodes": 7,
+      "accepted_input_product_nodes": 4
+    },
+    {
+      "population": "frozen_accepted_inputs",
+      "features": 155,
+      "species_rule_connected": 149,
+      "species_rule_substrates": 100,
+      "species_rule_products": 123,
+      "species_rule_substrate_only": 26,
+      "species_rule_product_only": 49,
+      "species_rule_both": 74,
+      "exact_chemical_product_candidates": 5,
+      "any_product_candidate": 128,
+      "accepted_input_nodes": 155,
+      "accepted_input_product_nodes": 128
+    },
+    {
+      "population": "selected_topology_retained_inputs",
+      "features": 74,
+      "species_rule_connected": 69,
+      "species_rule_substrates": 43,
+      "species_rule_products": 69,
+      "species_rule_substrate_only": 0,
+      "species_rule_product_only": 26,
+      "species_rule_both": 43,
+      "exact_chemical_product_candidates": 5,
+      "any_product_candidate": 74,
+      "accepted_input_nodes": 74,
+      "accepted_input_product_nodes": 74
+    },
+    {
+      "population": "selected_solution_level0_endpoints",
+      "features": 3,
+      "species_rule_connected": 3,
+      "species_rule_substrates": 3,
+      "species_rule_products": 3,
+      "species_rule_substrate_only": 0,
+      "species_rule_product_only": 0,
+      "species_rule_both": 3,
+      "exact_chemical_product_candidates": 0,
+      "any_product_candidate": 3,
+      "accepted_input_nodes": 3,
+      "accepted_input_product_nodes": 3
+    }
+  ]
+}

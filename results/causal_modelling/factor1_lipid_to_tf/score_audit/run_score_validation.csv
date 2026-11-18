@@ -1,0 +1,17 @@
+"run_id","tf_panel","pruning_steps","n_layers","final_compressed_edges","final_original_edges","prepared_lipid_inputs","prepared_tf_observations","inferred_and_observed_compressed_nodes","inferred_and_observed_original_nodes","input_lipids_with_any_inferred_score","input_lipids_returned","input_lipids_sign_excluded","realized_max_level","max_saved_score_difference","max_saved_compressed_score_difference","excluded_node_ids","retained_score_comparison_passed"
+"ph73_lipid_precursor_all_tfs_pruning12_layers4","all_tfs",12,4,8060,9733,2,208,1314,1341,0,0,0,4,0,0,"",TRUE
+"ph73_lipid_precursor_all_tfs_pruning12_layers6","all_tfs",12,6,8060,9733,2,208,1356,1479,1,0,1,6,0,0,"Metab__CHEBI:72998_unknown",TRUE
+"ph73_lipid_precursor_all_tfs_pruning12_layers8","all_tfs",12,8,8060,9733,2,208,1441,1686,1,0,1,8,0,0,"Metab__CHEBI:72998_unknown",TRUE
+"ph73_lipid_precursor_all_tfs_pruning12_layers12","all_tfs",12,12,8060,9733,2,208,1706,2452,2,1,1,12,0,0,"Metab__CHEBI:72998_unknown",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning6_layers4","strong_tfs",6,4,80,88,1,13,30,30,0,0,0,2,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning6_layers6","strong_tfs",6,6,80,88,1,13,30,30,0,0,0,2,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning6_layers8","strong_tfs",6,8,80,88,1,13,30,30,0,0,0,2,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning6_layers12","strong_tfs",6,12,80,88,1,13,30,30,0,0,0,2,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning8_layers4","strong_tfs",8,4,18445,18548,1,47,2386,2399,0,0,0,4,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning8_layers6","strong_tfs",8,6,18443,18546,1,47,2438,2454,1,1,0,6,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning8_layers8","strong_tfs",8,8,18443,18546,1,47,2438,2454,1,1,0,6,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning8_layers12","strong_tfs",8,12,18443,18546,1,47,2438,2454,1,1,0,6,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning12_layers4","strong_tfs",12,4,21239,23022,2,48,2857,2883,0,0,0,4,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning12_layers6","strong_tfs",12,6,21236,23019,2,48,2959,3025,1,1,0,6,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning12_layers8","strong_tfs",12,8,21236,23019,2,48,3032,3245,1,1,0,8,0,0,"",TRUE
+"ph73_lipid_precursor_strong_tfs_pruning12_layers12","strong_tfs",12,12,21236,23019,2,48,3322,4069,2,2,0,12,0,0,"",TRUE

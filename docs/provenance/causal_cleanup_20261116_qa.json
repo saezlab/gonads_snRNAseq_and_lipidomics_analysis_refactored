@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "moved_files": 1284,
+  "moved_result_folders": 4,
+  "moved_bytes": 226366946,
+  "all_moved_sha256_unchanged": true,
+  "existing_script_archive_verified": 29,
+  "compiled_python_files": 35,
+  "active_selected_output_manifest_files_checked": 83,
+  "active_output_manifest_mismatches": [],
+  "causal_markdown_links_broken": [],
+  "full_fit_validate_only": [
+    {
+      "script": "scripts/moon/run_factor1_tf_to_lipid.R",
+      "exit_code": 1,
+      "message": "Error in moon_read_config(config_path) : \n  Selected-result replay requires decoupleR 2.17.0\nExecution halted",
+      "expected_preexisting_version_gate": true
+    },
+    {
+      "script": "scripts/moon/run_factor1_lipid_to_tf.R",
+      "exit_code": 1,
+      "message": "Error in moon_read_config(cfg$dependency_contract) : \n  Selected-result replay requires decoupleR 2.17.0\nExecution halted",
+      "expected_preexisting_version_gate": true
+    },
+    {
+      "script": "scripts/moon/run_factor1_lipid_to_tf_relaxed.R",
+      "exit_code": 1,
+      "message": "Error in relaxed_read_config(config_path) : \n  Relaxed selected replay requires decoupleR 2.17.0\nExecution halted",
+      "expected_preexisting_version_gate": true
+    }
+  ],
+  "no_model_refits": true,
+  "no_new_scores": true,
+  "scientific_settings_changed": false,
+  "pkn_saved_export_validate_only": {
+    "passed": true,
+    "graphs": 5,
+    "files_written": false
+  },
+  "pkn_semantic_tests": {
+    "passed": true,
+    "tests": 7
+  },
+  "stitch_semantic_tests": {
+    "passed": true,
+    "tests": 7
+  },
+  "saved_extraction_replay": "docs/provenance/causal_cleanup_20261116_saved_replay.json",
+  "ko_expression_validation": {
+    "passed": true,
+    "mode": "--validate-only",
+    "input_path": "miscellaneous/older_inputs/legacy_rna/merged_counts_matrix_250508_VH00211_433_AACVFM3HV_with_gene_symbols_and_groups.csv",
+    "FCG_genes": 20123,
+    "FCG_pseudobulks": 215,
+    "hepatocyte_mice": 43,
+    "culture_gene_rows": 55973,
+    "culture_libraries": 24,
+    "culture_control_libraries": 4,
+    "files_written": false,
+    "models_refitted": false
+  },
+  "remaining_active_legacy_rna_literals": "Only explicit old-to-new migration mappings remain in analysis_release.json and organize_repository.py"
+}

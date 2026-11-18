@@ -1,0 +1,357 @@
+reaction_id,enzyme_instance,participant_role,master_record_side,participant_index,participant_node,participant_name,stoichiometry,measurement_feature_id,unmeasured,node_in_full_pkn,connector_in_full_pkn,node_in_final_pkn,connector_in_final_pkn,node_in_solution,connector_in_solution
+EXPANDED_LIPID_RULE:017e07b5e1e286d160db,Enzyme__7a22bdccb0425f46,substrates,substrates,0,Metab__MeasuredLipid:PC(24:1_20:4)_unknown,PC(24:1_20:4),1,PC(24:1_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:017e07b5e1e286d160db,Enzyme__7a22bdccb0425f46,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:017e07b5e1e286d160db,Enzyme__7a22bdccb0425f46,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:017e07b5e1e286d160db,Enzyme__7a22bdccb0425f46,products,products,1,Metab__HypotheticalAcyl:FA(24:1)_unknown,unmeasured FA(24:1),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:017e07b5e1e286d160db,Enzyme__7a22bdccb0425f46,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:017e07b5e1e286d160db,Enzyme__7a22bdccb0425f46,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:0d25407f48d3a03d163f,Enzyme__c249d6bcbdeb7f2e,substrates,substrates,0,Metab__MeasuredLipid:PC(19:1_20:4)_unknown,PC(19:1_20:4),1,PC(19:1_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:0d25407f48d3a03d163f,Enzyme__c249d6bcbdeb7f2e,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:0d25407f48d3a03d163f,Enzyme__c249d6bcbdeb7f2e,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:0d25407f48d3a03d163f,Enzyme__c249d6bcbdeb7f2e,products,products,1,Metab__HypotheticalAcyl:FA(19:1)_unknown,unmeasured FA(19:1),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:0d25407f48d3a03d163f,Enzyme__c249d6bcbdeb7f2e,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:0d25407f48d3a03d163f,Enzyme__c249d6bcbdeb7f2e,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:16dd0389ccb5c6cb3033,Enzyme__17a938e4b2bf8081,substrates,substrates,0,Metab__MeasuredLipid:PC(22:0_20:4)_unknown,PC(22:0_20:4),1,PC(22:0_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:16dd0389ccb5c6cb3033,Enzyme__17a938e4b2bf8081,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:16dd0389ccb5c6cb3033,Enzyme__17a938e4b2bf8081,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:16dd0389ccb5c6cb3033,Enzyme__17a938e4b2bf8081,products,products,1,Metab__HypotheticalAcyl:FA(22:0)_unknown,unmeasured FA(22:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:16dd0389ccb5c6cb3033,Enzyme__17a938e4b2bf8081,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:16dd0389ccb5c6cb3033,Enzyme__17a938e4b2bf8081,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:1721f21ed257000c88f7,Enzyme__62a19ceaf431a288,substrates,substrates,0,Metab__MeasuredLipid:PC(18:2_20:5)_unknown,PC(18:2_20:5),1,PC(18:2_20:5),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:1721f21ed257000c88f7,Enzyme__62a19ceaf431a288,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:1721f21ed257000c88f7,Enzyme__62a19ceaf431a288,products,products,0,Metab__MeasuredLipid:LPC(20:5)_unknown,LPC(20:5),1,LPC(20:5),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:1721f21ed257000c88f7,Enzyme__62a19ceaf431a288,products,products,1,Metab__HypotheticalAcyl:FA(18:2)_unknown,unmeasured FA(18:2),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:1721f21ed257000c88f7,Enzyme__62a19ceaf431a288,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:1721f21ed257000c88f7,Enzyme__62a19ceaf431a288,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:21223cd9a4af0e288ae1,Enzyme__06f25e00a674da58,substrates,substrates,0,Metab__MeasuredLipid:PC(17:0_20:4)_unknown,PC(17:0_20:4),1,PC(17:0_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:21223cd9a4af0e288ae1,Enzyme__06f25e00a674da58,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:21223cd9a4af0e288ae1,Enzyme__06f25e00a674da58,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:21223cd9a4af0e288ae1,Enzyme__06f25e00a674da58,products,products,1,Metab__HypotheticalAcyl:FA(17:0)_unknown,unmeasured FA(17:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:21223cd9a4af0e288ae1,Enzyme__06f25e00a674da58,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:21223cd9a4af0e288ae1,Enzyme__06f25e00a674da58,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:2fb5128a43a96ac4767b,Enzyme__cf0b15ea581c2d02,substrates,substrates,0,Metab__MeasuredLipid:PC(17:1_20:4)_unknown,PC(17:1_20:4),1,PC(17:1_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:2fb5128a43a96ac4767b,Enzyme__cf0b15ea581c2d02,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:2fb5128a43a96ac4767b,Enzyme__cf0b15ea581c2d02,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:2fb5128a43a96ac4767b,Enzyme__cf0b15ea581c2d02,products,products,1,Metab__HypotheticalAcyl:FA(17:1)_unknown,unmeasured FA(17:1),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:2fb5128a43a96ac4767b,Enzyme__cf0b15ea581c2d02,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:2fb5128a43a96ac4767b,Enzyme__cf0b15ea581c2d02,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:3253cf48e87ce1ff78f5,Enzyme__7cfa22cd06d22924,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_20:1)_unknown,PC(18:0_20:1),1,PC(18:0_20:1),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:3253cf48e87ce1ff78f5,Enzyme__7cfa22cd06d22924,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:3253cf48e87ce1ff78f5,Enzyme__7cfa22cd06d22924,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:3253cf48e87ce1ff78f5,Enzyme__7cfa22cd06d22924,products,products,1,Metab__HypotheticalAcyl:FA(20:1)_unknown,unmeasured FA(20:1),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:3253cf48e87ce1ff78f5,Enzyme__7cfa22cd06d22924,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:3253cf48e87ce1ff78f5,Enzyme__7cfa22cd06d22924,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:39fb94024346c3940f2d,Enzyme__2b6a7cc477cc5cdb,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_20:3)_unknown,PC(18:0_20:3),1,PC(18:0_20:3),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:39fb94024346c3940f2d,Enzyme__2b6a7cc477cc5cdb,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:39fb94024346c3940f2d,Enzyme__2b6a7cc477cc5cdb,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:39fb94024346c3940f2d,Enzyme__2b6a7cc477cc5cdb,products,products,1,Metab__HypotheticalAcyl:FA(20:3)_unknown,unmeasured FA(20:3),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:39fb94024346c3940f2d,Enzyme__2b6a7cc477cc5cdb,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:39fb94024346c3940f2d,Enzyme__2b6a7cc477cc5cdb,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:3a52b6c6f119f43c82f1,Enzyme__bd4d986d2e874bd7,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_20:2)_unknown,PC(18:0_20:2),1,PC(18:0_20:2),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:3a52b6c6f119f43c82f1,Enzyme__bd4d986d2e874bd7,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:3a52b6c6f119f43c82f1,Enzyme__bd4d986d2e874bd7,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:3a52b6c6f119f43c82f1,Enzyme__bd4d986d2e874bd7,products,products,1,Metab__HypotheticalAcyl:FA(20:2)_unknown,unmeasured FA(20:2),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:3a52b6c6f119f43c82f1,Enzyme__bd4d986d2e874bd7,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:3a52b6c6f119f43c82f1,Enzyme__bd4d986d2e874bd7,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:3fec1594cedc9fc952b1,Enzyme__c76079b4276a795e,substrates,substrates,0,Metab__MeasuredLipid:PC(22:1_20:4)_unknown,PC(22:1_20:4),1,PC(22:1_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:3fec1594cedc9fc952b1,Enzyme__c76079b4276a795e,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:3fec1594cedc9fc952b1,Enzyme__c76079b4276a795e,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:3fec1594cedc9fc952b1,Enzyme__c76079b4276a795e,products,products,1,Metab__HypotheticalAcyl:FA(22:1)_unknown,unmeasured FA(22:1),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:3fec1594cedc9fc952b1,Enzyme__c76079b4276a795e,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:3fec1594cedc9fc952b1,Enzyme__c76079b4276a795e,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:45f3be8c07296a0077c4,Enzyme__dcf91a51ad10ecfe,substrates,substrates,0,Metab__MeasuredLipid:PC(14:0_20:5)_unknown,PC(14:0_20:5),1,PC(14:0_20:5),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:45f3be8c07296a0077c4,Enzyme__dcf91a51ad10ecfe,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:45f3be8c07296a0077c4,Enzyme__dcf91a51ad10ecfe,products,products,0,Metab__MeasuredLipid:LPC(20:5)_unknown,LPC(20:5),1,LPC(20:5),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:45f3be8c07296a0077c4,Enzyme__dcf91a51ad10ecfe,products,products,1,Metab__HypotheticalAcyl:FA(14:0)_unknown,unmeasured FA(14:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:45f3be8c07296a0077c4,Enzyme__dcf91a51ad10ecfe,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:45f3be8c07296a0077c4,Enzyme__dcf91a51ad10ecfe,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:496280174172b04df811,Enzyme__18046ca34e8f044b,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_20:4)_unknown,PC(18:0_20:4),1,PC(18:0_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:496280174172b04df811,Enzyme__18046ca34e8f044b,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:496280174172b04df811,Enzyme__18046ca34e8f044b,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:496280174172b04df811,Enzyme__18046ca34e8f044b,products,products,1,Metab__HypotheticalAcyl:FA(18:0)_unknown,unmeasured FA(18:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:496280174172b04df811,Enzyme__18046ca34e8f044b,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:496280174172b04df811,Enzyme__18046ca34e8f044b,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:563c0c341b90f421b34c,Enzyme__fbad02d42c53c872,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_18:2)_unknown,PC(18:0_18:2),1,PC(18:0_18:2),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:563c0c341b90f421b34c,Enzyme__fbad02d42c53c872,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:563c0c341b90f421b34c,Enzyme__fbad02d42c53c872,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:563c0c341b90f421b34c,Enzyme__fbad02d42c53c872,products,products,1,Metab__HypotheticalAcyl:FA(18:2)_unknown,unmeasured FA(18:2),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:563c0c341b90f421b34c,Enzyme__fbad02d42c53c872,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:563c0c341b90f421b34c,Enzyme__fbad02d42c53c872,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:583c1abc0d3b6227d282,Enzyme__1fb1c2f2e3320612,substrates,substrates,0,Metab__MeasuredLipid:PC(19:1_18:2)_unknown,PC(19:1_18:2),1,PC(19:1_18:2),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:583c1abc0d3b6227d282,Enzyme__1fb1c2f2e3320612,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:583c1abc0d3b6227d282,Enzyme__1fb1c2f2e3320612,products,products,0,Metab__MeasuredLipid:LPC(19:1/0:0)_unknown,LPC(19:1/0:0),1,LPC(19:1/0:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:583c1abc0d3b6227d282,Enzyme__1fb1c2f2e3320612,products,products,1,Metab__HypotheticalAcyl:FA(18:2)_unknown,unmeasured FA(18:2),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:583c1abc0d3b6227d282,Enzyme__1fb1c2f2e3320612,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:583c1abc0d3b6227d282,Enzyme__1fb1c2f2e3320612,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:63e2ceb7dbe2a029d0ba,Enzyme__a8b5cfcf48e54f81,substrates,substrates,0,Metab__MeasuredLipid:PC(19:1_22:6)_unknown,PC(19:1_22:6),1,PC(19:1_22:6),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:63e2ceb7dbe2a029d0ba,Enzyme__a8b5cfcf48e54f81,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:63e2ceb7dbe2a029d0ba,Enzyme__a8b5cfcf48e54f81,products,products,0,Metab__MeasuredLipid:LPC(19:1/0:0)_unknown,LPC(19:1/0:0),1,LPC(19:1/0:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:63e2ceb7dbe2a029d0ba,Enzyme__a8b5cfcf48e54f81,products,products,1,Metab__HypotheticalAcyl:FA(22:6)_unknown,unmeasured FA(22:6),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:63e2ceb7dbe2a029d0ba,Enzyme__a8b5cfcf48e54f81,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:63e2ceb7dbe2a029d0ba,Enzyme__a8b5cfcf48e54f81,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:65ae0e060fe4691ed771,Enzyme__6249f67c09877ba6,substrates,substrates,0,Metab__MeasuredLipid:PC(20:4_22:6)_unknown,PC(20:4_22:6),1,PC(20:4_22:6),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:65ae0e060fe4691ed771,Enzyme__6249f67c09877ba6,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:65ae0e060fe4691ed771,Enzyme__6249f67c09877ba6,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:65ae0e060fe4691ed771,Enzyme__6249f67c09877ba6,products,products,1,Metab__HypotheticalAcyl:FA(22:6)_unknown,unmeasured FA(22:6),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:65ae0e060fe4691ed771,Enzyme__6249f67c09877ba6,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:65ae0e060fe4691ed771,Enzyme__6249f67c09877ba6,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:6748a5026791f4de773f,Enzyme__31913c753d4d14ed,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_18:1)_unknown,PC(18:0_18:1),1,PC(18:0_18:1),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:6748a5026791f4de773f,Enzyme__31913c753d4d14ed,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:6748a5026791f4de773f,Enzyme__31913c753d4d14ed,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:6748a5026791f4de773f,Enzyme__31913c753d4d14ed,products,products,1,Metab__HypotheticalAcyl:FA(18:1)_unknown,unmeasured FA(18:1),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:6748a5026791f4de773f,Enzyme__31913c753d4d14ed,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:6748a5026791f4de773f,Enzyme__31913c753d4d14ed,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:67b85606d08002b42917,Enzyme__73336ed34ce28d30,substrates,substrates,0,Metab__MeasuredLipid:PC(19:0_20:4)_unknown,PC(19:0_20:4),1,PC(19:0_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:67b85606d08002b42917,Enzyme__73336ed34ce28d30,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:67b85606d08002b42917,Enzyme__73336ed34ce28d30,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:67b85606d08002b42917,Enzyme__73336ed34ce28d30,products,products,1,Metab__HypotheticalAcyl:FA(19:0)_unknown,unmeasured FA(19:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:67b85606d08002b42917,Enzyme__73336ed34ce28d30,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:67b85606d08002b42917,Enzyme__73336ed34ce28d30,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:6b3f6b377e7e5891fa62,Enzyme__8ba6b46793e1f25d,substrates,substrates,0,Metab__MeasuredLipid:PC(16:0_18:0)_unknown,PC(16:0_18:0),1,PC(16:0_18:0),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:6b3f6b377e7e5891fa62,Enzyme__8ba6b46793e1f25d,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:6b3f6b377e7e5891fa62,Enzyme__8ba6b46793e1f25d,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:6b3f6b377e7e5891fa62,Enzyme__8ba6b46793e1f25d,products,products,1,Metab__HypotheticalAcyl:FA(16:0)_unknown,unmeasured FA(16:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:6b3f6b377e7e5891fa62,Enzyme__8ba6b46793e1f25d,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:6b3f6b377e7e5891fa62,Enzyme__8ba6b46793e1f25d,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:6ef6f8c7ab722458d9d5,Enzyme__0edde2cc4d71ab38,substrates,substrates,0,Metab__MeasuredLipid:PC(19:1_20:4)_unknown,PC(19:1_20:4),1,PC(19:1_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:6ef6f8c7ab722458d9d5,Enzyme__0edde2cc4d71ab38,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:6ef6f8c7ab722458d9d5,Enzyme__0edde2cc4d71ab38,products,products,0,Metab__MeasuredLipid:LPC(19:1/0:0)_unknown,LPC(19:1/0:0),1,LPC(19:1/0:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:6ef6f8c7ab722458d9d5,Enzyme__0edde2cc4d71ab38,products,products,1,Metab__HypotheticalAcyl:FA(20:4)_unknown,unmeasured FA(20:4),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:6ef6f8c7ab722458d9d5,Enzyme__0edde2cc4d71ab38,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:6ef6f8c7ab722458d9d5,Enzyme__0edde2cc4d71ab38,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:708f0ae792338653445b,Enzyme__9e0800251ebad15e,substrates,substrates,0,Metab__MeasuredLipid:PC(20:4_20:5)_unknown,PC(20:4_20:5),1,PC(20:4_20:5),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:708f0ae792338653445b,Enzyme__9e0800251ebad15e,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:708f0ae792338653445b,Enzyme__9e0800251ebad15e,products,products,0,Metab__MeasuredLipid:LPC(20:5)_unknown,LPC(20:5),1,LPC(20:5),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:708f0ae792338653445b,Enzyme__9e0800251ebad15e,products,products,1,Metab__HypotheticalAcyl:FA(20:4)_unknown,unmeasured FA(20:4),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:708f0ae792338653445b,Enzyme__9e0800251ebad15e,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:708f0ae792338653445b,Enzyme__9e0800251ebad15e,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:782ec0c82b2f399bd09d,Enzyme__348288be31178af7,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_22:5)_unknown,PC(18:0_22:5),1,PC(18:0_22:5),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:782ec0c82b2f399bd09d,Enzyme__348288be31178af7,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:782ec0c82b2f399bd09d,Enzyme__348288be31178af7,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:782ec0c82b2f399bd09d,Enzyme__348288be31178af7,products,products,1,Metab__HypotheticalAcyl:FA(22:5)_unknown,unmeasured FA(22:5),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:782ec0c82b2f399bd09d,Enzyme__348288be31178af7,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:782ec0c82b2f399bd09d,Enzyme__348288be31178af7,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:7f911755a3f1b343c36f,Enzyme__e116b429fbedd6c8,substrates,substrates,0,Metab__MeasuredLipid:PC(15:0_20:5)_unknown,PC(15:0_20:5),1,PC(15:0_20:5),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:7f911755a3f1b343c36f,Enzyme__e116b429fbedd6c8,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:7f911755a3f1b343c36f,Enzyme__e116b429fbedd6c8,products,products,0,Metab__MeasuredLipid:LPC(20:5)_unknown,LPC(20:5),1,LPC(20:5),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:7f911755a3f1b343c36f,Enzyme__e116b429fbedd6c8,products,products,1,Metab__HypotheticalAcyl:FA(15:0)_unknown,unmeasured FA(15:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:7f911755a3f1b343c36f,Enzyme__e116b429fbedd6c8,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:7f911755a3f1b343c36f,Enzyme__e116b429fbedd6c8,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:894d36456b1b38d2ea15,Enzyme__a6a0212553147f34,substrates,substrates,0,Metab__MeasuredLipid:PC(16:1_20:4)_unknown,PC(16:1_20:4),1,PC(16:1_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:894d36456b1b38d2ea15,Enzyme__a6a0212553147f34,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:894d36456b1b38d2ea15,Enzyme__a6a0212553147f34,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:894d36456b1b38d2ea15,Enzyme__a6a0212553147f34,products,products,1,Metab__HypotheticalAcyl:FA(16:1)_unknown,unmeasured FA(16:1),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:894d36456b1b38d2ea15,Enzyme__a6a0212553147f34,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:894d36456b1b38d2ea15,Enzyme__a6a0212553147f34,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:8def668e44bb2e6eb7ac,Enzyme__9ce4259c2552d718,substrates,substrates,0,Metab__MeasuredLipid:PC(19:1_20:4)_unknown,PC(19:1_20:4),1,PC(19:1_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:8def668e44bb2e6eb7ac,Enzyme__9ce4259c2552d718,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:8def668e44bb2e6eb7ac,Enzyme__9ce4259c2552d718,products,products,0,Metab__MeasuredLipid:LPC(19:1)_unknown,LPC(19:1),1,LPC(19:1),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:8def668e44bb2e6eb7ac,Enzyme__9ce4259c2552d718,products,products,1,Metab__HypotheticalAcyl:FA(20:4)_unknown,unmeasured FA(20:4),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:8def668e44bb2e6eb7ac,Enzyme__9ce4259c2552d718,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:8def668e44bb2e6eb7ac,Enzyme__9ce4259c2552d718,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:95dfbcc785fb62c58871,Enzyme__5ddd988c17aca23e,substrates,substrates,0,Metab__MeasuredLipid:PC(19:1_18:2)_unknown,PC(19:1_18:2),1,PC(19:1_18:2),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:95dfbcc785fb62c58871,Enzyme__5ddd988c17aca23e,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:95dfbcc785fb62c58871,Enzyme__5ddd988c17aca23e,products,products,0,Metab__MeasuredLipid:LPC(19:1)_unknown,LPC(19:1),1,LPC(19:1),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:95dfbcc785fb62c58871,Enzyme__5ddd988c17aca23e,products,products,1,Metab__HypotheticalAcyl:FA(18:2)_unknown,unmeasured FA(18:2),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:95dfbcc785fb62c58871,Enzyme__5ddd988c17aca23e,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:95dfbcc785fb62c58871,Enzyme__5ddd988c17aca23e,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:983ea8791eaf0a1488cb,Enzyme__13ff881fae9cf52c,substrates,substrates,0,Metab__MeasuredLipid:PC(24:0_20:4)_unknown,PC(24:0_20:4),1,PC(24:0_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:983ea8791eaf0a1488cb,Enzyme__13ff881fae9cf52c,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:983ea8791eaf0a1488cb,Enzyme__13ff881fae9cf52c,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:983ea8791eaf0a1488cb,Enzyme__13ff881fae9cf52c,products,products,1,Metab__HypotheticalAcyl:FA(24:0)_unknown,unmeasured FA(24:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:983ea8791eaf0a1488cb,Enzyme__13ff881fae9cf52c,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:983ea8791eaf0a1488cb,Enzyme__13ff881fae9cf52c,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:992184e5c6f10a529d34,Enzyme__848b2697044f765c,substrates,substrates,0,Metab__MeasuredLipid:PC(14:0_20:4)_unknown,PC(14:0_20:4),1,PC(14:0_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:992184e5c6f10a529d34,Enzyme__848b2697044f765c,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:992184e5c6f10a529d34,Enzyme__848b2697044f765c,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:992184e5c6f10a529d34,Enzyme__848b2697044f765c,products,products,1,Metab__HypotheticalAcyl:FA(14:0)_unknown,unmeasured FA(14:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:992184e5c6f10a529d34,Enzyme__848b2697044f765c,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:992184e5c6f10a529d34,Enzyme__848b2697044f765c,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:9d9f9aed20abc5e5948d,Enzyme__f05e150756f182ca,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_22:4)_unknown,PC(18:0_22:4),1,PC(18:0_22:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:9d9f9aed20abc5e5948d,Enzyme__f05e150756f182ca,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:9d9f9aed20abc5e5948d,Enzyme__f05e150756f182ca,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:9d9f9aed20abc5e5948d,Enzyme__f05e150756f182ca,products,products,1,Metab__HypotheticalAcyl:FA(22:4)_unknown,unmeasured FA(22:4),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:9d9f9aed20abc5e5948d,Enzyme__f05e150756f182ca,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:9d9f9aed20abc5e5948d,Enzyme__f05e150756f182ca,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:a6ba5480f20ac0728268,Enzyme__2a296eff4607ece0,substrates,substrates,0,Metab__MeasuredLipid:PC(20:4_20:5)_unknown,PC(20:4_20:5),1,PC(20:4_20:5),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:a6ba5480f20ac0728268,Enzyme__2a296eff4607ece0,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:a6ba5480f20ac0728268,Enzyme__2a296eff4607ece0,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:a6ba5480f20ac0728268,Enzyme__2a296eff4607ece0,products,products,1,Metab__HypotheticalAcyl:FA(20:5)_unknown,unmeasured FA(20:5),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:a6ba5480f20ac0728268,Enzyme__2a296eff4607ece0,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:a6ba5480f20ac0728268,Enzyme__2a296eff4607ece0,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:bc296cf15262edb543dc,Enzyme__87442e0c41a796d6,substrates,substrates,0,Metab__MeasuredLipid:PC(20:5_22:6)_unknown,PC(20:5_22:6),1,PC(20:5_22:6),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:bc296cf15262edb543dc,Enzyme__87442e0c41a796d6,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:bc296cf15262edb543dc,Enzyme__87442e0c41a796d6,products,products,0,Metab__MeasuredLipid:LPC(20:5)_unknown,LPC(20:5),1,LPC(20:5),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:bc296cf15262edb543dc,Enzyme__87442e0c41a796d6,products,products,1,Metab__HypotheticalAcyl:FA(22:6)_unknown,unmeasured FA(22:6),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:bc296cf15262edb543dc,Enzyme__87442e0c41a796d6,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:bc296cf15262edb543dc,Enzyme__87442e0c41a796d6,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:cf6f87110b0970ff7c2d,Enzyme__e3edb37af1774e34,substrates,substrates,0,Metab__MeasuredLipid:PC(20:0_20:4)_unknown,PC(20:0_20:4),1,PC(20:0_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:cf6f87110b0970ff7c2d,Enzyme__e3edb37af1774e34,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:cf6f87110b0970ff7c2d,Enzyme__e3edb37af1774e34,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:cf6f87110b0970ff7c2d,Enzyme__e3edb37af1774e34,products,products,1,Metab__HypotheticalAcyl:FA(20:0)_unknown,unmeasured FA(20:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:cf6f87110b0970ff7c2d,Enzyme__e3edb37af1774e34,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:cf6f87110b0970ff7c2d,Enzyme__e3edb37af1774e34,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:cfde4d09b05507c1f928,Enzyme__aae6226318749d4c,substrates,substrates,0,Metab__MeasuredLipid:PC(18:3_20:5)_unknown,PC(18:3_20:5),1,PC(18:3_20:5),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:cfde4d09b05507c1f928,Enzyme__aae6226318749d4c,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:cfde4d09b05507c1f928,Enzyme__aae6226318749d4c,products,products,0,Metab__MeasuredLipid:LPC(20:5)_unknown,LPC(20:5),1,LPC(20:5),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:cfde4d09b05507c1f928,Enzyme__aae6226318749d4c,products,products,1,Metab__HypotheticalAcyl:FA(18:3)_unknown,unmeasured FA(18:3),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:cfde4d09b05507c1f928,Enzyme__aae6226318749d4c,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:cfde4d09b05507c1f928,Enzyme__aae6226318749d4c,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:d37c412f259a1dd55a7a,Enzyme__1559f76b2687a77d,substrates,substrates,0,Metab__MeasuredLipid:PC(15:0_20:4)_unknown,PC(15:0_20:4),1,PC(15:0_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:d37c412f259a1dd55a7a,Enzyme__1559f76b2687a77d,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:d37c412f259a1dd55a7a,Enzyme__1559f76b2687a77d,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:d37c412f259a1dd55a7a,Enzyme__1559f76b2687a77d,products,products,1,Metab__HypotheticalAcyl:FA(15:0)_unknown,unmeasured FA(15:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:d37c412f259a1dd55a7a,Enzyme__1559f76b2687a77d,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:d37c412f259a1dd55a7a,Enzyme__1559f76b2687a77d,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:de64f4a952f717ec1de1,Enzyme__887d76cdb73fdf86,substrates,substrates,0,Metab__MeasuredLipid:PC(18:1_20:4)_unknown,PC(18:1_20:4),1,PC(18:1_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:de64f4a952f717ec1de1,Enzyme__887d76cdb73fdf86,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:de64f4a952f717ec1de1,Enzyme__887d76cdb73fdf86,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:de64f4a952f717ec1de1,Enzyme__887d76cdb73fdf86,products,products,1,Metab__HypotheticalAcyl:FA(18:1)_unknown,unmeasured FA(18:1),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:de64f4a952f717ec1de1,Enzyme__887d76cdb73fdf86,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:de64f4a952f717ec1de1,Enzyme__887d76cdb73fdf86,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:df833a9631b826c76d64,Enzyme__b467c530a2448ec3,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_22:6)_unknown,PC(18:0_22:6),1,PC(18:0_22:6),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:df833a9631b826c76d64,Enzyme__b467c530a2448ec3,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:df833a9631b826c76d64,Enzyme__b467c530a2448ec3,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:df833a9631b826c76d64,Enzyme__b467c530a2448ec3,products,products,1,Metab__HypotheticalAcyl:FA(22:6)_unknown,unmeasured FA(22:6),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:df833a9631b826c76d64,Enzyme__b467c530a2448ec3,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:df833a9631b826c76d64,Enzyme__b467c530a2448ec3,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:eb982394ff6baeb6dabd,Enzyme__3b2ef9509603405a,substrates,substrates,0,Metab__MeasuredLipid:PC(20:4_20:4)_unknown,PC(20:4_20:4),1,PC(20:4_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:eb982394ff6baeb6dabd,Enzyme__3b2ef9509603405a,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:eb982394ff6baeb6dabd,Enzyme__3b2ef9509603405a,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:eb982394ff6baeb6dabd,Enzyme__3b2ef9509603405a,products,products,1,Metab__HypotheticalAcyl:FA(20:4)_unknown,unmeasured FA(20:4),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:eb982394ff6baeb6dabd,Enzyme__3b2ef9509603405a,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:eb982394ff6baeb6dabd,Enzyme__3b2ef9509603405a,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:ec1bcb07fe2c54821627,Enzyme__7182b1bc2985d325,substrates,substrates,0,Metab__MeasuredLipid:PC(16:0_20:4)_unknown,PC(16:0_20:4),1,PC(16:0_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:ec1bcb07fe2c54821627,Enzyme__7182b1bc2985d325,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:ec1bcb07fe2c54821627,Enzyme__7182b1bc2985d325,products,products,0,Metab__MeasuredLipid:LPC(20:4)_unknown,LPC(20:4),1,LPC(20:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:ec1bcb07fe2c54821627,Enzyme__7182b1bc2985d325,products,products,1,Metab__HypotheticalAcyl:FA(16:0)_unknown,unmeasured FA(16:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:ec1bcb07fe2c54821627,Enzyme__7182b1bc2985d325,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:ec1bcb07fe2c54821627,Enzyme__7182b1bc2985d325,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:ed45c6400956d9f89130,Enzyme__1031d491c0897b67,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_18:0)_unknown,PC(18:0_18:0),1,PC(18:0_18:0),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:ed45c6400956d9f89130,Enzyme__1031d491c0897b67,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:ed45c6400956d9f89130,Enzyme__1031d491c0897b67,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:ed45c6400956d9f89130,Enzyme__1031d491c0897b67,products,products,1,Metab__HypotheticalAcyl:FA(18:0)_unknown,unmeasured FA(18:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:ed45c6400956d9f89130,Enzyme__1031d491c0897b67,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:ed45c6400956d9f89130,Enzyme__1031d491c0897b67,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:ed4cc0c22db9137b8dcb,Enzyme__28c7d353218b2e79,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_22:4)_unknown,PC(18:0_22:4),1,PC(18:0_22:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:ed4cc0c22db9137b8dcb,Enzyme__28c7d353218b2e79,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:ed4cc0c22db9137b8dcb,Enzyme__28c7d353218b2e79,products,products,0,Metab__MeasuredLipid:LPC(22:4)_unknown,LPC(22:4),1,LPC(22:4),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:ed4cc0c22db9137b8dcb,Enzyme__28c7d353218b2e79,products,products,1,Metab__HypotheticalAcyl:FA(18:0)_unknown,unmeasured FA(18:0),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:ed4cc0c22db9137b8dcb,Enzyme__28c7d353218b2e79,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:ed4cc0c22db9137b8dcb,Enzyme__28c7d353218b2e79,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:f92870e3a72f44e7b553,Enzyme__c84acf046f0c8338,substrates,substrates,0,Metab__MeasuredLipid:PC(19:1_22:6)_unknown,PC(19:1_22:6),1,PC(19:1_22:6),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:f92870e3a72f44e7b553,Enzyme__c84acf046f0c8338,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:f92870e3a72f44e7b553,Enzyme__c84acf046f0c8338,products,products,0,Metab__MeasuredLipid:LPC(19:1)_unknown,LPC(19:1),1,LPC(19:1),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:f92870e3a72f44e7b553,Enzyme__c84acf046f0c8338,products,products,1,Metab__HypotheticalAcyl:FA(22:6)_unknown,unmeasured FA(22:6),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:f92870e3a72f44e7b553,Enzyme__c84acf046f0c8338,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:f92870e3a72f44e7b553,Enzyme__c84acf046f0c8338,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:fd948c873f4f291a55e7,Enzyme__1a392013b227528d,substrates,substrates,0,Metab__MeasuredLipid:PC(18:0_20:4)_unknown,PC(18:0_20:4),1,PC(18:0_20:4),False,True,True,True,False,False,False
+EXPANDED_LIPID_RULE:fd948c873f4f291a55e7,Enzyme__1a392013b227528d,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:fd948c873f4f291a55e7,Enzyme__1a392013b227528d,products,products,0,Metab__MeasuredLipid:LPC(18:0)_unknown,LPC(18:0),1,LPC(18:0),False,True,True,True,True,True,True
+EXPANDED_LIPID_RULE:fd948c873f4f291a55e7,Enzyme__1a392013b227528d,products,products,1,Metab__HypotheticalAcyl:FA(20:4)_unknown,unmeasured FA(20:4),1,,True,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:fd948c873f4f291a55e7,Enzyme__1a392013b227528d,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+EXPANDED_LIPID_RULE:fd948c873f4f291a55e7,Enzyme__1a392013b227528d,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__3ab537025de48b33,substrates,substrates,0,Metab__MeasuredLipid:PC(16:0_18:2)_unknown,PC(16:0_18:2),1,,False,True,True,True,False,False,False
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__3ab537025de48b33,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__3ab537025de48b33,products,products,0,Metab__MeasuredLipid:PA(16:0_18:2)_unknown,PA(16:0_18:2),1,,False,True,True,True,True,True,True
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__3ab537025de48b33,products,products,1,Metab__CHEBI:15354_unknown,choline,1,,False,True,True,False,False,False,False
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__3ab537025de48b33,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__3ab537025de48b33,catalyst,catalysts,,Gene__Pld1,Pld1,,,False,True,True,True,True,True,True
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__6e7e8564b3d2a601,substrates,substrates,0,Metab__MeasuredLipid:PC(16:0_18:2)_unknown,PC(16:0_18:2),1,,False,True,True,True,False,False,False
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__6e7e8564b3d2a601,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__6e7e8564b3d2a601,products,products,0,Metab__MeasuredLipid:PA(16:0_18:2)_unknown,PA(16:0_18:2),1,,False,True,True,True,True,True,True
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__6e7e8564b3d2a601,products,products,1,Metab__CHEBI:15354_unknown,choline,1,,False,True,True,False,False,False,False
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__6e7e8564b3d2a601,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:0d5fd1e954462a3e8d64,Enzyme__6e7e8564b3d2a601,catalyst,catalysts,,Gene__Enpp2,Enpp2,,,False,True,True,True,True,True,True
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__3160c0497be37afe,substrates,substrates,0,Metab__MeasuredLipid:PI(18:0_22:6)_unknown,PI(18:0_22:6),1,,False,True,True,False,False,False,False
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__3160c0497be37afe,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__3160c0497be37afe,products,products,0,Metab__CHEBI:58433_unknown,1D-myo-inositol 1-phosphate,1,,False,True,True,False,False,False,False
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__3160c0497be37afe,products,products,1,Metab__MeasuredLipid:DG(18:0_22:6)_unknown,DG(18:0_22:6),1,,False,True,True,True,True,True,True
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__3160c0497be37afe,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__3160c0497be37afe,catalyst,catalysts,,Gene__Plcg1,Plcg1,,,False,True,True,True,True,True,True
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__37a1699fe62da55b,substrates,substrates,0,Metab__MeasuredLipid:PI(18:0_22:6)_unknown,PI(18:0_22:6),1,,False,True,True,False,False,False,False
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__37a1699fe62da55b,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__37a1699fe62da55b,products,products,0,Metab__CHEBI:58433_unknown,1D-myo-inositol 1-phosphate,1,,False,True,True,False,False,False,False
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__37a1699fe62da55b,products,products,1,Metab__MeasuredLipid:DG(18:0_22:6)_unknown,DG(18:0_22:6),1,,False,True,True,True,True,True,True
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__37a1699fe62da55b,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:32333a12126a6b53d37f,Enzyme__37a1699fe62da55b,catalyst,catalysts,,Gene__Plcb1,Plcb1,,,False,True,True,True,True,True,True
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__7fcb15cb93c6e256,substrates,substrates,0,Metab__MeasuredLipid:PC(16:1_18:2)_unknown,PC(16:1_18:2),1,,False,True,True,True,False,False,False
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__7fcb15cb93c6e256,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__7fcb15cb93c6e256,products,products,0,Metab__MeasuredLipid:PA(16:1_18:2)_unknown,PA(16:1_18:2),1,,False,True,True,True,True,True,True
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__7fcb15cb93c6e256,products,products,1,Metab__CHEBI:15354_unknown,choline,1,,False,True,True,False,False,False,False
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__7fcb15cb93c6e256,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__7fcb15cb93c6e256,catalyst,catalysts,,Gene__Pld1,Pld1,,,False,True,True,True,True,True,True
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__d94256490020a701,substrates,substrates,0,Metab__MeasuredLipid:PC(16:1_18:2)_unknown,PC(16:1_18:2),1,,False,True,True,True,False,False,False
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__d94256490020a701,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__d94256490020a701,products,products,0,Metab__MeasuredLipid:PA(16:1_18:2)_unknown,PA(16:1_18:2),1,,False,True,True,True,True,True,True
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__d94256490020a701,products,products,1,Metab__CHEBI:15354_unknown,choline,1,,False,True,True,False,False,False,False
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__d94256490020a701,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:32dcd26fc41dfdb29191,Enzyme__d94256490020a701,catalyst,catalysts,,Gene__Enpp2,Enpp2,,,False,True,True,True,True,True,True
+LIPID_RULE:6940437d85c790b86fb9,Enzyme__bdf688bc434961f3,substrates,substrates,0,Metab__MeasuredLipid:PA(16:0_22:6)_unknown,PA(16:0_22:6),1,,False,True,True,True,False,False,False
+LIPID_RULE:6940437d85c790b86fb9,Enzyme__bdf688bc434961f3,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:6940437d85c790b86fb9,Enzyme__bdf688bc434961f3,products,products,0,Metab__MeasuredLipid:DG(16:0_22:6)_unknown,DG(16:0_22:6),1,,False,True,True,True,True,True,True
+LIPID_RULE:6940437d85c790b86fb9,Enzyme__bdf688bc434961f3,products,products,1,Metab__CHEBI:43474_unknown,phosphate,1,,False,True,True,False,False,False,False
+LIPID_RULE:6940437d85c790b86fb9,Enzyme__bdf688bc434961f3,catalyst,catalysts,,Gene__Plpp1,Plpp1,,,False,True,True,True,True,True,True
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__f1bd9c60cce85bd2,substrates,substrates,0,Metab__MeasuredLipid:PI(18:0_20:4)_unknown,PI(18:0_20:4),1,,False,True,True,False,False,False,False
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__f1bd9c60cce85bd2,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__f1bd9c60cce85bd2,products,products,0,Metab__CHEBI:58433_unknown,1D-myo-inositol 1-phosphate,1,,False,True,True,False,False,False,False
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__f1bd9c60cce85bd2,products,products,1,Metab__MeasuredLipid:DG(18:0_20:4)_unknown,DG(18:0_20:4),1,,False,True,True,True,True,True,True
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__f1bd9c60cce85bd2,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__f1bd9c60cce85bd2,catalyst,catalysts,,Gene__Plcb1,Plcb1,,,False,True,True,True,True,True,True
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__fc93bcf35cc2903e,substrates,substrates,0,Metab__MeasuredLipid:PI(18:0_20:4)_unknown,PI(18:0_20:4),1,,False,True,True,False,False,False,False
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__fc93bcf35cc2903e,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__fc93bcf35cc2903e,products,products,0,Metab__CHEBI:58433_unknown,1D-myo-inositol 1-phosphate,1,,False,True,True,False,False,False,False
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__fc93bcf35cc2903e,products,products,1,Metab__MeasuredLipid:DG(18:0_20:4)_unknown,DG(18:0_20:4),1,,False,True,True,True,True,True,True
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__fc93bcf35cc2903e,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:6b427fbcab24aea02b3f,Enzyme__fc93bcf35cc2903e,catalyst,catalysts,,Gene__Plcg1,Plcg1,,,False,True,True,True,True,True,True
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__7ab4cb766cadeca7,substrates,substrates,0,Metab__MeasuredLipid:PI(16:0_22:6)_unknown,PI(16:0_22:6),1,,False,True,True,False,False,False,False
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__7ab4cb766cadeca7,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__7ab4cb766cadeca7,products,products,0,Metab__CHEBI:58433_unknown,1D-myo-inositol 1-phosphate,1,,False,True,True,False,False,False,False
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__7ab4cb766cadeca7,products,products,1,Metab__MeasuredLipid:DG(16:0_22:6)_unknown,DG(16:0_22:6),1,,False,True,True,True,True,True,True
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__7ab4cb766cadeca7,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__7ab4cb766cadeca7,catalyst,catalysts,,Gene__Plcb1,Plcb1,,,False,True,True,True,True,True,True
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__949f69a9195f7dc7,substrates,substrates,0,Metab__MeasuredLipid:PI(16:0_22:6)_unknown,PI(16:0_22:6),1,,False,True,True,False,False,False,False
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__949f69a9195f7dc7,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__949f69a9195f7dc7,products,products,0,Metab__CHEBI:58433_unknown,1D-myo-inositol 1-phosphate,1,,False,True,True,False,False,False,False
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__949f69a9195f7dc7,products,products,1,Metab__MeasuredLipid:DG(16:0_22:6)_unknown,DG(16:0_22:6),1,,False,True,True,True,True,True,True
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__949f69a9195f7dc7,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:ac533084303f2b7100f3,Enzyme__949f69a9195f7dc7,catalyst,catalysts,,Gene__Plcg1,Plcg1,,,False,True,True,True,True,True,True
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__aecccacdc6888f8e,substrates,substrates,0,Metab__MeasuredLipid:PC(18:1_18:2)_unknown,PC(18:1_18:2),1,,False,True,True,True,False,False,False
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__aecccacdc6888f8e,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__aecccacdc6888f8e,products,products,0,Metab__MeasuredLipid:PA(18:1_18:2)_unknown,PA(18:1_18:2),1,,False,True,True,True,True,True,True
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__aecccacdc6888f8e,products,products,1,Metab__CHEBI:15354_unknown,choline,1,,False,True,True,False,False,False,False
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__aecccacdc6888f8e,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__aecccacdc6888f8e,catalyst,catalysts,,Gene__Pld1,Pld1,,,False,True,True,True,True,True,True
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__faf4ef24daa34a22,substrates,substrates,0,Metab__MeasuredLipid:PC(18:1_18:2)_unknown,PC(18:1_18:2),1,,False,True,True,True,False,False,False
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__faf4ef24daa34a22,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__faf4ef24daa34a22,products,products,0,Metab__MeasuredLipid:PA(18:1_18:2)_unknown,PA(18:1_18:2),1,,False,True,True,True,True,True,True
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__faf4ef24daa34a22,products,products,1,Metab__CHEBI:15354_unknown,choline,1,,False,True,True,False,False,False,False
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__faf4ef24daa34a22,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+LIPID_RULE:ef5112420a6f6986c169,Enzyme__faf4ef24daa34a22,catalyst,catalysts,,Gene__Enpp2,Enpp2,,,False,True,True,True,True,True,True
+LIPID_RULE:f5747b04cc0904c333ad,Enzyme__f29ee0141580d22b,substrates,substrates,0,Metab__MeasuredLipid:PA(18:0_20:4)_unknown,PA(18:0_20:4),1,,False,True,True,True,False,False,False
+LIPID_RULE:f5747b04cc0904c333ad,Enzyme__f29ee0141580d22b,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+LIPID_RULE:f5747b04cc0904c333ad,Enzyme__f29ee0141580d22b,products,products,0,Metab__MeasuredLipid:DG(18:0_20:4)_unknown,DG(18:0_20:4),1,,False,True,True,True,True,True,True
+LIPID_RULE:f5747b04cc0904c333ad,Enzyme__f29ee0141580d22b,products,products,1,Metab__CHEBI:43474_unknown,phosphate,1,,False,True,True,False,False,False,False
+LIPID_RULE:f5747b04cc0904c333ad,Enzyme__f29ee0141580d22b,catalyst,catalysts,,Gene__Plpp1,Plpp1,,,False,True,True,True,True,True,True
+RHEA:40520,Enzyme__7c22ae6351568cc7,substrates,substrates,0,Metab__CHEBI:74965_unknown,"1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine",1,,False,True,True,True,True,False,False
+RHEA:40520,Enzyme__7c22ae6351568cc7,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+RHEA:40520,Enzyme__7c22ae6351568cc7,products,products,0,Metab__CHEBI:73858_unknown,1-octadecanoyl-sn-glycero-3-phosphocholine,1,,False,True,True,True,True,True,True
+RHEA:40520,Enzyme__7c22ae6351568cc7,products,products,1,Metab__CHEBI:32395_unknown,"(5Z,8Z,11Z,14Z)-eicosatetraenoate",1,,False,True,True,True,True,False,False
+RHEA:40520,Enzyme__7c22ae6351568cc7,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+RHEA:40520,Enzyme__7c22ae6351568cc7,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+RHEA:41088,Enzyme__580f4dea36da42b8,substrates,substrates,0,Metab__CHEBI:78022_unknown,"1-octadecanoyl-2-(9Z,12Z,15Z-octadecatrienoyl)-sn-glycero-3-phosphocholine",1,,False,True,True,False,False,False,False
+RHEA:41088,Enzyme__580f4dea36da42b8,substrates,substrates,1,Metab__CHEBI:17754_unknown,glycerol,1,,False,True,True,True,True,False,False
+RHEA:41088,Enzyme__580f4dea36da42b8,products,products,0,Metab__CHEBI:75610_unknown,"1-(9Z,12Z,15Z-octadecatrienoyl)-glycerol",1,,False,True,True,True,True,False,False
+RHEA:41088,Enzyme__580f4dea36da42b8,products,products,1,Metab__CHEBI:73858_unknown,1-octadecanoyl-sn-glycero-3-phosphocholine,1,,False,True,True,True,True,True,True
+RHEA:41088,Enzyme__580f4dea36da42b8,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+RHEA:41100,Enzyme__3580c9c6f27aab7a,substrates,substrates,0,Metab__CHEBI:74965_unknown,"1-octadecanoyl-2-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-sn-glycero-3-phosphocholine",1,,False,True,True,True,True,False,False
+RHEA:41100,Enzyme__3580c9c6f27aab7a,substrates,substrates,1,Metab__CHEBI:17754_unknown,glycerol,1,,False,True,True,True,True,False,False
+RHEA:41100,Enzyme__3580c9c6f27aab7a,products,products,0,Metab__CHEBI:75612_unknown,"1-(5Z,8Z,11Z,14Z-eicosatetraenoyl)-glycerol",1,,False,True,True,True,True,False,False
+RHEA:41100,Enzyme__3580c9c6f27aab7a,products,products,1,Metab__CHEBI:73858_unknown,1-octadecanoyl-sn-glycero-3-phosphocholine,1,,False,True,True,True,True,True,True
+RHEA:41100,Enzyme__3580c9c6f27aab7a,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True
+RHEA:41308,Enzyme__cd1cf37bf154477f,substrates,substrates,0,Metab__CHEBI:78022_unknown,"1-octadecanoyl-2-(9Z,12Z,15Z-octadecatrienoyl)-sn-glycero-3-phosphocholine",1,,False,True,True,False,False,False,False
+RHEA:41308,Enzyme__cd1cf37bf154477f,substrates,substrates,1,Metab__CHEBI:15377_unknown,H2O,1,,False,True,True,False,False,False,False
+RHEA:41308,Enzyme__cd1cf37bf154477f,products,products,0,Metab__CHEBI:32387_unknown,"(9Z,12Z,15Z)-octadecatrienoate",1,,False,True,True,False,False,False,False
+RHEA:41308,Enzyme__cd1cf37bf154477f,products,products,1,Metab__CHEBI:73858_unknown,1-octadecanoyl-sn-glycero-3-phosphocholine,1,,False,True,True,True,True,True,True
+RHEA:41308,Enzyme__cd1cf37bf154477f,products,products,2,Metab__CHEBI:15378_unknown,H(+),1,,False,True,True,False,False,False,False
+RHEA:41308,Enzyme__cd1cf37bf154477f,catalyst,catalysts,,Gene__Pla2g4a,Pla2g4a,,,False,True,True,True,True,True,True

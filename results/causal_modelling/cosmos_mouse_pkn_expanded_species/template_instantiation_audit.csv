@@ -1,0 +1,34 @@
+reaction_id,family,transformation,instances,sphingobase_scope,glycan_conditions
+RHEA:12938,acyl-CoA acylation,LPC -> PC,329,,
+RHEA:32996,acyl-CoA acylation,LPE -> PE,109,,
+RHEA:70600,acyl-CoA acylation,LPE -> PE,109,,
+RHEA:19710,acyl-CoA acylation,LPA -> PA,5,,
+RHEA:33192,acyl-CoA acylation,LPS -> PS,29,,
+RHEA:33196,acyl-CoA acylation,LPI -> PI,38,,
+RHEA:33204,acyl-CoA acylation,LPG -> PG,49,,
+RHEA:15802,hydrolysis,PC -> LPC,329,,
+RHEA:18690,hydrolysis,PC -> LPC,169,,
+RHEA:44665,hydrolysis,PC -> LPC,329,,
+RHEA:44605,hydrolysis,PE -> LPE,109,,
+RHEA:44409,hydrolysis,PE -> LPE,109,,
+RHEA:42213,hydrolysis,PS -> LPS,29,,
+RHEA:35264,hydrolysis,PI -> LPI,38,,
+RHEA:44649,hydrolysis,PA -> LPA,5,,
+RHEA:44417,hydrolysis,PG -> LPG,49,,
+RHEA:67429,hydrolysis,PG -> LPG,49,,
+RHEA:19254,sphingomyelin hydrolysis,SM -> Cer,17,fixed18:1;O2,
+RHEA:45301,sphingomyelin hydrolysis,SM -> Cer,27,variableO2,
+RHEA:18766,coupled sphingomyelin synthase,Cer -> SM,527,fixed18:1;O2,
+RHEA:18767,coupled sphingomyelin synthase,SM -> Cer,527,fixed18:1;O2,
+RHEA:12089,glycosphingolipid headgroup,Cer -> HexCer,10,fixed18:1;O2,glucose
+RHEA:13094,glycosphingolipid headgroup,Cer -> HexCer,10,fixed18:1;O2,galactose
+RHEA:13270,glycosphingolipid headgroup,HexCer -> Cer,10,fixed18:1;O2,glucose
+RHEA:14298,glycosphingolipid headgroup,HexCer -> Cer,10,fixed18:1;O2,galactose
+RHEA:43413,glycosphingolipid headgroup,HexCer -> Cer,14,variableO2,galactose
+RHEA:31496,glycosphingolipid headgroup,HexCer -> Hex2Cer,0,fixed18:1;O2,glucose -> galactose(1->4)glucose
+RHEA:62553,glycosphingolipid headgroup,HexCer -> Hex2Cer,0,variableO2,glucose -> galactose(1->4)glucose
+RHEA:20829,diacyl headgroup,PS -> PE,21,,
+RHEA:27607,diacyl headgroup,PE -> PS,21,,
+RHEA:11165,Pemt serial methylation,PE -> PE-NMe,51,,
+RHEA:32736,Pemt serial methylation,PE-NMe -> PE-NMe2,51,,
+RHEA:32740,Pemt serial methylation,PE-NMe2 -> PC,51,,

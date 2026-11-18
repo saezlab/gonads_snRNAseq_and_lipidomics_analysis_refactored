@@ -1,0 +1,19 @@
+"message","call"
+"The following aesthetics were dropped during statistical transformation: label.
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?","NULL"
+"Removed 345 rows containing missing values or values outside the scale range
+(`geom_segment()`).","NULL"
+"Removed 5845 rows containing missing values or values outside the scale range
+(`geom_text_repel()`).","NULL"
+"The following aesthetics were dropped during statistical transformation: label.
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?","NULL"
+"Removed 345 rows containing missing values or values outside the scale range
+(`geom_segment()`).","NULL"
+"Removed 13260 rows containing missing values or values outside the scale range
+(`geom_text_repel()`).","NULL"

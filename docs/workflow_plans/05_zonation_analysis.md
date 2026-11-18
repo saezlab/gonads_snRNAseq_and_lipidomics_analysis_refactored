@@ -1,5 +1,28 @@
 # Workflow 05: Zonation Analysis
 
+## Current execution entry - 16 November 2026
+
+`scripts/workflows/05_zonation_analysis.R` is now a source-safe entry for the
+validated expanded-marker adapter in `scripts/core/zonation_update_fcg.R`.
+It reads the registry's current FCG CSV/metadata by default and writes an isolated
+`fcg05/` below `--output`. `--validate-only` checks inputs, dependencies and the
+prepared runtime without writing. A completed checkpoint is never overwritten;
+use a fresh output directory. Workflow17 coordinates the complete current chain.
+
+The previous full script is preserved byte-for-byte as
+`scripts/core/engines/05_zonation_analysis_legacy.R`; section/line descriptions
+below refer to that engine. The adapter preserves the approved explicit condition
+order, empty-category correction, fresh pathway calculation and measured-lipid
+identity checks. Historical comparison inputs/networks are explicit registry
+roles and are used only by retrospective audit modes. Default scientific output
+requires no old zonation models or archived CF453 network files.
+
+A fresh current-only FCG/GDX execution passed48 approved-run scientific/source
+equivalence checks. Runtime scripts, warnings and patch details are retained in
+each fresh output. Cleanup verification files are local QA, not scientific results.
+
+---
+
 **Script:** `scripts/workflows/05_zonation_analysis.R`  
 **Lines:** ~2720  
 **Purpose:** Analyze hepatocyte periportal/pericentral zonation, gonad-by-zonation interactions, sex-specific zonation-biased genes, zonation-specific gene-lipid networks, and lipid-class zonation associations.
@@ -166,3 +189,67 @@ Zone assignment is then based on the sign of `portaltestes_vs_centraltestes` or 
 2. The active input is the workflow 01 CSV pair, not a Seurat RDS.
 3. Section 5 deliberately blocks on mouse ID because each mouse contributes both zonation pseudobulks.
 4. Section 14 depends on workflow 03's lipid DE and lipid-class enrichment outputs.
+
+## Frozen Reference Consumer Added October 2026
+
+Workflow 12 zonation phase (former 05b) implements meeting WP2 using this workflow's four full and
+displayed Figure 5 networks as immutable references. It independently replays
+the gene-lipid branch using the original zonation RNA, log2 lipid abundance and
+mouse metadata, preserving genes that also have a TF attribute label. It then
+compares the same eligible pairs with paired CF453 SD/WD measurements. See
+`12_wdsd_network_comparison.md` and the preserved phase plan
+`05b_wdsd_network_comparison.md`. This extension does not modify or rerun
+Workflow 05 and writes only its separate results directory.
+
+## Expanded-marker FCG rerun, 16 November 2026
+
+The isolated adapter `scripts/core/zonation_update_fcg.R`, invoked through
+`scripts/reports/run_zonation_update_fcg.R`, reruns this workflow against the
+staged expanded-marker FCG zonation export under
+`results/zonation_marker_update_20261116/inputs/fcg/`. Historical inputs,
+workflow defaults and `results/zonation/` remain unchanged. Its versioned
+runtime copy and outputs are in `runtime/` and `fcg05/` under the update root.
+See Workflow 17 for the coordinated multi-cohort revision scope.
+
+The adapter preserves the seven blocked limma contrasts and original
+selection/correlation calculations. It explicitly orders the four conditions
+before using the legacy positional contrast vectors; an old-input replay
+reproduces every archived contrast (maximum absolute t difference below
+`5e-12`). Pathway ULM is computed fresh (`minsize=15`) instead of loading the
+old cache. One compatibility repair changes absent-category lookup to a scalar
+zero via `sum(proportion[zonation == "no_association"])`; lipid denominators
+and the entropy formula are preserved. Reoptimization on the historical inputs
+still selects 5.4, whereas revised inputs select 4.4.
+
+Verified selected-gene counts are 78 historical, 173 at the revised optimum,
+and 82 for revised inputs at the fixed historical cutoff 5.4. Both operating
+points, membership changes and fixed historical gene–lipid pair coefficients
+are exported under `comparisons/`; this separates input effects from changes
+caused by threshold reoptimization. Measured target identity, rather than
+parentheses in target names, identifies lipid features in comparison tables,
+retaining CoQ8, CoQ9 and Uridine-5-diphosphoacetylglucosamine in the full
+1,254-feature universe.
+
+Panel paths and source tables are listed in `fcg_panel_manifest.csv`; numerical
+keys are in `fcg_metric_ledger.csv`. The adapter supplies Figure 4B, Figure
+5A/B-counts/C/D and the S5A threshold panel, with Figure 5F from the validation
+branch. It does not regenerate nucleus composition or marker-QC panels.
+The historical Figure 5C butterfly groups by lipid differential-abundance sex
+direction and pooled PP/PC gene association. That calculation is retained and
+explicitly documented; an additional class-fraction heatmap uses the actual
+four gene-sex/zone contexts and has a separate source table/manifest entry.
+
+The Figure 4B manuscript claim is reproduced from the WF05 sex-FDR set:
+historical 2,783/4,276 (1,441 PC; 1,342 PP), revised 2,901/4,449
+(1,539 PC; 1,362 PP). A separate audit holds the unchanged WF02 whole-hepatocyte
+sex-FDR set fixed at 4,103 genes. Display colouring in the faithful WF05
+scatter remains the original absolute-t threshold, rather than these FDR
+claim sets. Existing legend sign and sample-size discrepancies are recorded
+separately from the marker update.
+
+The entry accepts `--validate-only`, `--input=...`, `--output=...`, and
+`--postprocess-only`; completed model outputs cannot be overwritten by the
+default analysis call. `--postprocess-only --rerun-zonal-validation` refreshes
+the dependent validation without rerunning WF05. Runtime adaptations,
+source/fit hashes, execution logs and warning tables are retained in the
+versioned output root.

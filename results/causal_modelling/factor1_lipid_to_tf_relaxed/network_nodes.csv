@@ -1,0 +1,7 @@
+source,score,level,type,RNA_input,candidate_assignment_ids,candidate_measurement_features,candidate_measurement_values,candidate_factor1_abs_ranks,candidate_pkn_source_chebi,candidate_pkn_source_names,candidate_mapping_policies,candidate_edge_fingerprint_groups,candidate_assignment_signs_agree,candidate_assignment_statuses,label,node_type,resource
+Gene__Ar,-3.92923529302436,0,level0,-0.285926317400749,,,,,,,,,,,Ar,gene_product,
+Gene__Esr1,-7.08874857626001,0,level0,-1.14800698838773,,,,,,,,,,,Esr1,gene_product,
+Gene__Gnai1,-0.645868729603776,2,other,0.0147364848886301,,,,,,,,,,,Gnai1,gene_product,
+Gene__Gpr34,-0.682625258803454,3,other,2.16627075097478e-06,,,,,,,,,,,Gpr34,gene_product,
+Gene__Src,-1.06682230079567,1,other,-1.2098458405224e-06,,,,,,,,,,,Src,gene_product,
+Metab__CHEBI:85403_unknown,-0.534151488841444,4,upstream_input,,map_9cfdefb004ecb7b9,LPS(18:0),-0.081634690619835498,933,CHEBI:85403,lysophosphatidylserine,relaxed_compatible_more_specific_acid_base,edge_1183a9daffa46143,TRUE,scored_sign_concordant,lysophosphatidylserine,metabolite,

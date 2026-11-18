@@ -1,0 +1,535 @@
+{
+  "analysis": "factor1_lipid_to_tf_coverage_audit",
+  "scientific_refit_performed": false,
+  "input_mapping_changed": false,
+  "source_pkn_changed": false,
+  "measured_features": 1254,
+  "accepted_frozen_input_nodes": 155,
+  "accepted_exact_chebi_nodes": 6,
+  "accepted_measured_species_rule_nodes": 149,
+  "all_mapped_tf_observations": 353,
+  "strong_tf_observations": 49,
+  "current_regulatory_edges": 77,
+  "current_regulatory_chemical_sources": 49,
+  "current_lipid_regulatory_edges": 38,
+  "current_lipid_regulatory_sources": 23,
+  "accepted_inputs_with_direct_regulatory_edges": 0,
+  "all_measured_exact_current_regulation_same_id": 0,
+  "all_measured_exact_current_regulation_including_acid_base": 0,
+  "graph_policies": [
+    {
+      "policy": "direct_regulatory",
+      "edges": 52798,
+      "nodes": 8502,
+      "accepted_inputs_present": 0,
+      "protein_to_protein": 52721,
+      "chemical_to_protein": 77,
+      "lipid_to_reaction": 0,
+      "reaction_to_lipid": 0,
+      "protein_to_reaction": 0
+    },
+    {
+      "policy": "unrestricted_diagnostic",
+      "edges": 254589,
+      "nodes": 52755,
+      "accepted_inputs_present": 155,
+      "protein_to_protein": 52721,
+      "chemical_to_protein": 77,
+      "lipid_to_reaction": 13531,
+      "reaction_to_lipid": 12572,
+      "protein_to_reaction": 33953
+    },
+    {
+      "policy": "currency_removed_diagnostic",
+      "edges": 235149,
+      "nodes": 52723,
+      "accepted_inputs_present": 155,
+      "protein_to_protein": 52721,
+      "chemical_to_protein": 77,
+      "lipid_to_reaction": 13531,
+      "reaction_to_lipid": 12572,
+      "protein_to_reaction": 33953
+    },
+    {
+      "policy": "lipid_precursor",
+      "edges": 78862,
+      "nodes": 26241,
+      "accepted_inputs_present": 155,
+      "protein_to_protein": 52721,
+      "chemical_to_protein": 38,
+      "lipid_to_reaction": 13531,
+      "reaction_to_lipid": 12572,
+      "protein_to_reaction": 0
+    },
+    {
+      "policy": "ph73_lipid_precursor_sensitivity",
+      "edges": 78293,
+      "nodes": 25783,
+      "accepted_inputs_present": 6,
+      "protein_to_protein": 52721,
+      "chemical_to_protein": 38,
+      "lipid_to_reaction": 13341,
+      "reaction_to_lipid": 12193,
+      "protein_to_reaction": 0
+    }
+  ],
+  "topology_summaries": [
+    {
+      "policy": "direct_regulatory",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 6,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "direct_regulatory",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 8,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "direct_regulatory",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 12,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "direct_regulatory",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": "unbounded",
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "direct_regulatory",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 6,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "direct_regulatory",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 8,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "direct_regulatory",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 12,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "direct_regulatory",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": "unbounded",
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "unrestricted_diagnostic",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 6,
+      "reachable_measured_lipids": 83,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 83,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "unrestricted_diagnostic",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 8,
+      "reachable_measured_lipids": 93,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 93,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "unrestricted_diagnostic",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 12,
+      "reachable_measured_lipids": 94,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 94,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "unrestricted_diagnostic",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": "unbounded",
+      "reachable_measured_lipids": 94,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 94,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "unrestricted_diagnostic",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 6,
+      "reachable_measured_lipids": 83,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 83,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "unrestricted_diagnostic",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 8,
+      "reachable_measured_lipids": 93,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 93,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "unrestricted_diagnostic",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 12,
+      "reachable_measured_lipids": 94,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 94,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "unrestricted_diagnostic",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": "unbounded",
+      "reachable_measured_lipids": 94,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 94,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "currency_removed_diagnostic",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 6,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "currency_removed_diagnostic",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 8,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "currency_removed_diagnostic",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 12,
+      "reachable_measured_lipids": 4,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 4,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "currency_removed_diagnostic",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": "unbounded",
+      "reachable_measured_lipids": 87,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 87,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "currency_removed_diagnostic",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 6,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "currency_removed_diagnostic",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 8,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "currency_removed_diagnostic",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 12,
+      "reachable_measured_lipids": 4,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 4,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "currency_removed_diagnostic",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": "unbounded",
+      "reachable_measured_lipids": 87,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 87,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "lipid_precursor",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 6,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "lipid_precursor",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 8,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "lipid_precursor",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 12,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "lipid_precursor",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": "unbounded",
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "lipid_precursor",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 6,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "lipid_precursor",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 8,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "lipid_precursor",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 12,
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "lipid_precursor",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": "unbounded",
+      "reachable_measured_lipids": 0,
+      "reachable_tf_endpoints": 0,
+      "reachable_lipid_tf_pairs": 0,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "ph73_lipid_precursor_sensitivity",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 6,
+      "reachable_measured_lipids": 1,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 1,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "ph73_lipid_precursor_sensitivity",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 8,
+      "reachable_measured_lipids": 1,
+      "reachable_tf_endpoints": 1,
+      "reachable_lipid_tf_pairs": 1,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "ph73_lipid_precursor_sensitivity",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": 12,
+      "reachable_measured_lipids": 2,
+      "reachable_tf_endpoints": 208,
+      "reachable_lipid_tf_pairs": 416,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "ph73_lipid_precursor_sensitivity",
+      "tf_endpoint_set": "all_mapped_tfs",
+      "n_tf_observations": 353,
+      "maximum_shortest_path_edges": "unbounded",
+      "reachable_measured_lipids": 2,
+      "reachable_tf_endpoints": 287,
+      "reachable_lipid_tf_pairs": 574,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "ph73_lipid_precursor_sensitivity",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 6,
+      "reachable_measured_lipids": 1,
+      "reachable_tf_endpoints": 13,
+      "reachable_lipid_tf_pairs": 13,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "ph73_lipid_precursor_sensitivity",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 8,
+      "reachable_measured_lipids": 1,
+      "reachable_tf_endpoints": 47,
+      "reachable_lipid_tf_pairs": 47,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "ph73_lipid_precursor_sensitivity",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": 12,
+      "reachable_measured_lipids": 2,
+      "reachable_tf_endpoints": 48,
+      "reachable_lipid_tf_pairs": 88,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    },
+    {
+      "policy": "ph73_lipid_precursor_sensitivity",
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "n_tf_observations": 49,
+      "maximum_shortest_path_edges": "unbounded",
+      "reachable_measured_lipids": 2,
+      "reachable_tf_endpoints": 48,
+      "reachable_lipid_tf_pairs": 96,
+      "distance_semantics": "directed shortest path; TF observations terminal; not iterative MOON pruning or scoring"
+    }
+  ],
+  "mapping_opportunity_counts": [
+    {
+      "evidence_tier": "cached_brenda_fallback",
+      "match_type": "hierarchy_class",
+      "identity_relation": "explicit_ChEBI_alias_or_conjugate_acid_base",
+      "measured_features": 163
+    },
+    {
+      "evidence_tier": "cached_stitch_fallback",
+      "match_type": "compatible_more_specific",
+      "identity_relation": "explicit_ChEBI_alias_or_conjugate_acid_base",
+      "measured_features": 1
+    },
+    {
+      "evidence_tier": "cached_stitch_fallback",
+      "match_type": "exact_reported_resolution",
+      "identity_relation": "explicit_ChEBI_alias_or_conjugate_acid_base",
+      "measured_features": 1
+    },
+    {
+      "evidence_tier": "curated_mouse_current",
+      "match_type": "compatible_more_specific",
+      "identity_relation": "same_identifier",
+      "measured_features": 2
+    },
+    {
+      "evidence_tier": "curated_mouse_current",
+      "match_type": "hierarchy_class",
+      "identity_relation": "same_identifier",
+      "measured_features": 53
+    },
+    {
+      "evidence_tier": "curated_mouse_current_secondary_chemical_mapping",
+      "match_type": "compatible_more_specific",
+      "identity_relation": "explicit_ChEBI_alias_or_conjugate_acid_base",
+      "measured_features": 1
+    }
+  ],
+  "currency_diagnostic_exclusions": {
+    "CHEBI:15378": "H(+) / proton",
+    "CHEBI:15377": "water",
+    "CHEBI:18367": "inorganic phosphate",
+    "CHEBI:33019": "diphosphate",
+    "CHEBI:15379": "oxygen",
+    "CHEBI:10545": "electron"
+  },
+  "distance_semantics": "Shortest directed endpoint distance after making the indicated TF observations terminal. Not MOON scoring, significance, or iterative pruning.",
+  "precursor_policy": "Only lipid-to-reaction-to-lipid traversal, curated lipid-to-protein regulation and protein-to-protein edges. No protein-to-reaction edges, no nonlipid chemical nodes, no class mapping. Reactions are pairwise traversal hypotheses, not measured flux.",
+  "ph73_policy": "Existing curated pH7.3 graph; explicit frozen acid/base alias map. Original six exact ChEBI inputs are used where present; measured-species rules are not appended. This is a sensitivity, not a replacement of the original PKN.",
+  "interpretation_caveats": [
+    "No direct signaling-ligand assignment follows from substrate participation.",
+    "LPC16 -> PC(16:0/22:6) -> DHA is an acyl-remodeling cycle requiring unmeasured DHA-CoA and regenerating LPC. It does not establish net DHA synthesis or a causal effect of LPC abundance.",
+    "The 49-strong-TF endpoint policy permits weak measured TFs such as Rxra to act as intermediates; the all-TF policy makes them observations and stops there.",
+    "Broad-class and more-specific mapping candidates remain opportunities, never causal edges or automatic input assignments.",
+    "Cached STITCH/BRENDA evidence is reported separately and is never incorporated into exported graphs.",
+    "Unrestricted and currency-only graphs are diagnostics; cofactor shortcuts can create misleading connectivity."
+  ]
+}

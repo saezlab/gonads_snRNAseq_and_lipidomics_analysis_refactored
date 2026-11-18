@@ -1,5 +1,9 @@
 # Factor 1 MOON: compressed alternatives and TF retention audit
 
+Historical analysis record. Result folders were archived unchanged on 16 November 2026. See [the causal analysis map](CAUSAL_ANALYSIS_MAP.md) for current entry points and the frozen-reference dependencies. Commands using archived implementations retain historical assumptions.
+
+> **Workflow cleanup, 2026-09-15:** The active selected-result entry point is `scripts/moon/run_factor1_tf_to_lipid.R`; see `scripts/moon/README.md`. Its refit from the frozen mapped inputs and PKN reproduced the selected 388-edge/153-node graph, scores and expected-TF exclusions, with evidence export and plots. The exploratory scripts below are preserved under `scripts/moon/archive/2026-09/`; their original path assumptions remain historical. Old `results/cosmos_*` references below identify files now under `results/causal_modelling/cosmos_*`. Historical command lists are provenance, not current reproduction commands.
+
 Completed 2026-09-09. This review supersedes the representation preference in
 [the previous parameter-search report](cosmos_factor1_moon_parameter_search.md).
 All previous outputs remain available as historical sensitivity results.
@@ -26,7 +30,7 @@ compression, topology or RNA-coherence alternatives resolves that conflict.
 
 ## What was actually compressed
 
-The previous uncompressed branch in `scripts/moon/search_factor1_parameter_space.R`
+The previous uncompressed branch in `scripts/moon/archive/2026-09/search_factor1_parameter_space.R`
 passes every node as protected to `moon_safe_compress()`. The wrapper finds no
 eligible groups and never calls `cosmosR::compress_same_children()`. The scored
 graph is exactly the original 44,127-edge, 6,673-node prepared PKN.
@@ -57,7 +61,7 @@ elimination of all redundancy. The initial compressed graph still contains
 protected IDs. Child merging and subsequent edge deletion can also create new
 equivalences. No new bug was found in the wrapper's declared contract.
 Full implementation findings and counts are in
-[`compression_method_audit.md`](../results/cosmos_factor1_compressed_review/compression_method_audit.md).
+[`compression_method_audit.md`](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/compression_method_audit.md).
 
 ## Search design and compressed solutions
 
@@ -241,22 +245,22 @@ inputs and current PKN. The narrow DG coverage remains a substantive limitation.
 
 ## Deliverables
 
-All outputs are under `results/cosmos_factor1_compressed_review/`:
+All outputs are under `miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/`:
 
-- [Broader compressed GraphML](../results/cosmos_factor1_compressed_review/threshold_search/C03/network.graphml),
-  [SIF](../results/cosmos_factor1_compressed_review/threshold_search/C03/network_SIF.csv),
-  [node attributes](../results/cosmos_factor1_compressed_review/threshold_search/C03/network_ATT.csv),
-  and [illustrative routes PDF](../results/cosmos_factor1_compressed_review/threshold_search/C03/figures/candidate_paths_network_network.pdf).
-- [Higher-cutoff compressed GraphML](../results/cosmos_factor1_compressed_review/sensitivity_threshold_search/C01/network.graphml)
-  and [routes PDF](../results/cosmos_factor1_compressed_review/sensitivity_threshold_search/C01/figures/candidate_paths_network_network.pdf).
-- [Complete baseline score-retention table](../results/cosmos_factor1_compressed_review/score_retention/radius6_depth4_compressed_scores_all.csv):
+- [Broader compressed GraphML](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/network.graphml),
+  [SIF](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/network_SIF.csv),
+  [node attributes](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/network_ATT.csv),
+  and [illustrative routes PDF](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/figures/candidate_paths_network_network.pdf).
+- [Higher-cutoff compressed GraphML](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/sensitivity_threshold_search/C01/network.graphml)
+  and [routes PDF](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/sensitivity_threshold_search/C01/figures/candidate_paths_network_network.pdf).
+- [Complete baseline score-retention table](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/score_retention/radius6_depth4_compressed_scores_all.csv):
   2,238 original-ID rows before sign filtering, 2,207 returned, 31 upstream
   sign conflicts. Explicit flags distinguish returned scores, excluded scores
   and membership of each baseline solution.
-- [Detailed TF audit](../results/cosmos_factor1_compressed_review/tf_audit/README.md),
-  [baseline search](../results/cosmos_factor1_compressed_review/threshold_search/README.md),
-  [sensitivity search](../results/cosmos_factor1_compressed_review/sensitivity_threshold_search/README.md)
-  and [summary figure](../results/cosmos_factor1_compressed_review/figures/compressed_review_summary.pdf).
+- [Detailed TF audit](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/tf_audit/README.md),
+  [baseline search](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/README.md),
+  [sensitivity search](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/sensitivity_threshold_search/README.md)
+  and [summary figure](../miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/figures/compressed_review_summary.pdf).
 
 Search directories contain every tested cutoff, selected candidates, endpoint
 margins, shortest routes and independent validation. Scoring directories retain
@@ -266,27 +270,25 @@ Provenance-enriched exports distinguish curated edges from measured-species rule
 hypotheses. The installed cosmosR version is 1.21.2, commit
 `b2ed195738479c4ad204cace37fd11ae2fd02bb8`; environment records are retained.
 
-## Reproduction
+## Historical execution commands
 
-Run from the repository root with the existing pilot and parameter-search
-inputs. Scripts were executed after implementation; all saved-state validation
-and exported-network checks passed.
+The following records the historical experiment sequence at the scripts’ archived locations. These scripts were executed before archival; saved-state validation and exported-network checks passed. Their original path assumptions remain unchanged, so use the active entry point above for current reproduction.
 
 ```sh
-Rscript scripts/moon/audit_factor1_focus_tf_retention.R
-Rscript scripts/moon/run_factor1_compressed_sensitivities.R
-Rscript scripts/moon/run_factor1_compressed_sensitivities.R --radii=6 --depth=4 --prescore-rna
-Rscript scripts/moon/run_factor1_compressed_sensitivities.R --radii=6 --depth=8 --prescore-rna
-Rscript scripts/moon/run_factor1_inputs_only_compression.R --depth=4
-Rscript scripts/moon/run_factor1_inputs_only_compression.R --depth=8
-Rscript scripts/moon/validate_factor1_compressed_tf_sensitivities.R
-Rscript scripts/moon/search_compressed_threshold_review.R
-Rscript scripts/moon/search_compressed_threshold_review.R --sensitivity
-Rscript scripts/moon/audit_compressed_candidate_neighborhood.R
-Rscript scripts/moon/export_compressed_score_retention.R
-Rscript scripts/moon/plot_compressed_review.R
-python3 scripts/moon/export_factor1_network.py --results results/cosmos_factor1_compressed_review/threshold_search/C03 --stem network
-python3 scripts/moon/export_factor1_network.py --results results/cosmos_factor1_compressed_review/sensitivity_threshold_search/C01 --stem network
+Rscript scripts/moon/archive/2026-09/audit_factor1_focus_tf_retention.R
+Rscript scripts/moon/archive/2026-09/run_factor1_compressed_sensitivities.R
+Rscript scripts/moon/archive/2026-09/run_factor1_compressed_sensitivities.R --radii=6 --depth=4 --prescore-rna
+Rscript scripts/moon/archive/2026-09/run_factor1_compressed_sensitivities.R --radii=6 --depth=8 --prescore-rna
+Rscript scripts/moon/archive/2026-09/run_factor1_inputs_only_compression.R --depth=4
+Rscript scripts/moon/archive/2026-09/run_factor1_inputs_only_compression.R --depth=8
+Rscript scripts/moon/archive/2026-09/validate_factor1_compressed_tf_sensitivities.R
+Rscript scripts/moon/archive/2026-09/search_compressed_threshold_review.R
+Rscript scripts/moon/archive/2026-09/search_compressed_threshold_review.R --sensitivity
+Rscript scripts/moon/archive/2026-09/audit_compressed_candidate_neighborhood.R
+Rscript scripts/moon/archive/2026-09/export_compressed_score_retention.R
+Rscript scripts/moon/archive/2026-09/plot_compressed_review.R
+python3 scripts/moon/archive/2026-09/export_factor1_network.py --results miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03 --stem network
+python3 scripts/moon/archive/2026-09/export_factor1_network.py --results miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/sensitivity_threshold_search/C01 --stem network
 ```
 
 These optional analyses do not alter workflows 00–10, the MOFA fit, accepted

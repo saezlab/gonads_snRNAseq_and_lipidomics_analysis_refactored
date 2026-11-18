@@ -24,7 +24,7 @@ import re
 import tarfile
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "results/cosmos_mouse_pkn"
+OUT = ROOT / "results/causal_modelling/cosmos_mouse_pkn"
 RAW = ROOT / "support/cosmos_mouse/raw"
 COMMIT = "04e0099655a6b7a8cb57aaeca7b1301b3524079d"
 

@@ -1,0 +1,95 @@
+{
+  "analysis": "one_step_normalized_rules_lipid_to_tf_topology",
+  "scientific_refit_performed": false,
+  "source_pkn_modified": false,
+  "measurement_mapping_modified": false,
+  "accepted_input_nodes": 155,
+  "accepted_input_ids_changed_by_alias_map": 0,
+  "nontrivial_alias_chains": 0,
+  "projected_curated_equals_prebuilt_curated": true,
+  "added_normalized_rule_edges_before_precursor_filter": 2591,
+  "added_normalized_rule_edges_after_precursor_filter": 898,
+  "graph_counts": [
+    {
+      "graph": "prebuilt_curated_ph73",
+      "signed_edges": 78293,
+      "nodes": 25783,
+      "accepted_inputs_present": 6,
+      "accepted_inputs_absent": 149,
+      "protein_to_reaction_edges": 0,
+      "nonlipid_chemical_nodes": 0
+    },
+    {
+      "graph": "projected_rules_ph73",
+      "signed_edges": 79191,
+      "nodes": 26381,
+      "accepted_inputs_present": 155,
+      "accepted_inputs_absent": 0,
+      "protein_to_reaction_edges": 0,
+      "nonlipid_chemical_nodes": 0
+    }
+  ],
+  "cleanup": [
+    {
+      "graph": "projected_curated",
+      "input_signed_edges": 251998,
+      "one_step_projection": true,
+      "changed_endpoint_occurrences": 58678,
+      "duplicate_signed_edges_removed": 0,
+      "self_loop_signed_edges_removed": 0,
+      "conflicting_sign_pairs": 0,
+      "clean_signed_edges": 251998
+    },
+    {
+      "graph": "prebuilt_curated_ph73",
+      "input_signed_edges": 251998,
+      "one_step_projection": false,
+      "changed_endpoint_occurrences": 0,
+      "duplicate_signed_edges_removed": 0,
+      "self_loop_signed_edges_removed": 0,
+      "conflicting_sign_pairs": 0,
+      "clean_signed_edges": 251998
+    },
+    {
+      "graph": "projected_rules_ph73",
+      "input_signed_edges": 254589,
+      "one_step_projection": true,
+      "changed_endpoint_occurrences": 58678,
+      "duplicate_signed_edges_removed": 0,
+      "self_loop_signed_edges_removed": 0,
+      "conflicting_sign_pairs": 0,
+      "clean_signed_edges": 254589
+    }
+  ],
+  "comparisons": [
+    {
+      "tf_endpoint_set": "all_mapped_tfs",
+      "added_endpoint_pairs": 0,
+      "lost_endpoint_pairs": 0,
+      "changed_shortest_distances": 0,
+      "added_reachable_input_candidates": 0,
+      "base_corridor_signed_edges": 14592,
+      "rules_corridor_signed_edges": 14592,
+      "added_corridor_signed_edges": 0,
+      "lost_corridor_signed_edges": 0
+    },
+    {
+      "tf_endpoint_set": "abs_activity_gt_2",
+      "added_endpoint_pairs": 0,
+      "lost_endpoint_pairs": 0,
+      "changed_shortest_distances": 0,
+      "added_reachable_input_candidates": 0,
+      "base_corridor_signed_edges": 32549,
+      "rules_corridor_signed_edges": 32549,
+      "added_corridor_signed_edges": 0,
+      "lost_corridor_signed_edges": 0
+    }
+  ],
+  "reachable_input_features": [
+    "LPC(16:0/0:0)",
+    "LPC(18:0/0:0)"
+  ],
+  "semantics": "Directed endpoint shortest paths after making the specified TF observations terminal; unsigned reachability, not activity or significance. The additional corridor comparison is not iterative MOON pruning.",
+  "policy": "Exactly the lipid precursor categories from audit_lipid_tf_coverage.py: protein->protein, lipid->protein, lipid->reaction, reaction->lipid. No protein->reaction or nonlipid chemicals. Explicit one-step node alias projection; no measured input ID changes or new biological edges.",
+  "conflict_policy": "Deduplicate identical signed edges and remove selfloops; if opposing sign pairs exist, report them and refuse reachability analysis. No conflicts or selfloops occurred for these inputs."
+}

@@ -1,0 +1,5 @@
+"group","pooled_KO_vs_WT","female_KO_vs_WT","male_KO_vs_WT","interaction_M_minus_F"
+"F_WT",-0.5,-1,0,1
+"F_KO",0.5,1,0,-1
+"M_WT",-0.5,0,-1,-1
+"M_KO",0.5,0,1,1

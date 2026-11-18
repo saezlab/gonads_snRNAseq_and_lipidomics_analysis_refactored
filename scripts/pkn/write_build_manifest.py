@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / 'results/cosmos_mouse_pkn'
+OUT = ROOT / 'results/causal_modelling/cosmos_mouse_pkn'
 
 
 def digest(path):
@@ -18,7 +18,7 @@ def digest(path):
 
 def main():
     raw = sorted((ROOT / 'support/cosmos_mouse/raw').glob('*'))
-    raw += [ROOT / 'results/cosmos_pkn_audit/raw' / name for name in
+    raw += [ROOT / 'results/causal_modelling/cosmos_pkn_audit/raw' / name for name in
             ['om-fresh-grn.tsv.gz', 'om-fresh-ppi.tsv.gz', 'om-mouse-pkn.json.gz',
              'swisslipids-enzymes.tsv.gz']]
     inputs = [ROOT / p for p in ['results/lipidomic/gonade_type_ttop.csv',
@@ -34,7 +34,7 @@ def main():
                                   'support/cosmos_mouse/README.md']],
                   upstream_version_manifests=[str(p.relative_to(ROOT)) for p in outputs
                                              if 'manifest' in p.name or p.name=='mapping_metadata.json'],
-                  cached_protein_export_urls_manifest='results/cosmos_pkn_audit/manifest.json')
+                  cached_protein_export_urls_manifest='results/causal_modelling/cosmos_pkn_audit/manifest.json')
     (OUT / 'build_manifest.json').write_text(json.dumps(result, indent=2) + '\n')
     print(f'Hashed {len(result["raw_sources"])} source snapshots, {len(code)} scripts and {len(outputs)} outputs.')
 

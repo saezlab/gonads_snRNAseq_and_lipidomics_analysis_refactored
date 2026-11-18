@@ -1,0 +1,48 @@
+{
+  "directories": [
+    {
+      "old_path": "results/causal_modelling/cosmos_factor1_pilot",
+      "new_path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot",
+      "files": 222,
+      "bytes": 42081787,
+      "role": "historical pilot and frozen mapped inputs",
+      "dependency": "inputs/ remains required by active MOON and PKN audits"
+    },
+    {
+      "old_path": "results/causal_modelling/cosmos_factor1_parameter_search",
+      "new_path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search",
+      "files": 364,
+      "bytes": 82146342,
+      "role": "historical parameter search and selected reference state",
+      "dependency": "radius6_depth4_compressed state and compression remain required by selected replay"
+    },
+    {
+      "old_path": "results/causal_modelling/cosmos_factor1_compressed_review",
+      "new_path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review",
+      "files": 333,
+      "bytes": 65926107,
+      "role": "historical selection and sensitivity evidence",
+      "dependency": "C03 solution and score-retention CSV remain required by selected replay"
+    },
+    {
+      "old_path": "results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory",
+      "new_path": "miscellaneous/older_results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory",
+      "files": 364,
+      "bytes": 36204830,
+      "role": "legacy discovery and selected relaxed reference",
+      "dependency": "selected strong-TF pruning4/layers4 state and strict solution remain required by active relaxed replay"
+    }
+  ],
+  "policy": "Frozen file bytes and embedded provenance preserved; current consumers use explicit archive paths",
+  "additional_files": [
+    {
+      "old_path": "scripts/exploration/audit_cosmos_pkn.py",
+      "new_path": "miscellaneous/quick_tests/code/audit_cosmos_pkn.py",
+      "bytes": 7880,
+      "sha256": "fe03392772b0b8164a69ac4e88884a897d9aa67125bb4a2819fc034403834901",
+      "reason": "Historical feasibility probe, superseded by active PKN builders and audited workflows",
+      "role": "historical quick probe; not a supported current entry point",
+      "dependency": "No active executable imports; original root/path assumptions retained for provenance"
+    }
+  ]
+}

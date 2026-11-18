@@ -1,0 +1,35 @@
+{
+  "all_checks_pass": true,
+  "checks": {
+    "action_score_meets_cutoff": true,
+    "base_evidence_hash_unchanged": true,
+    "base_lipid_rules_hash_unchanged": true,
+    "base_pkn_core.csv_hash_unchanged": true,
+    "base_pkn_exploratory.csv_hash_unchanged": true,
+    "base_pkn_lipid_curated.csv_hash_unchanged": true,
+    "base_pkn_lipid_rules.csv_hash_unchanged": true,
+    "detailed_textmining_below_cutoff": true,
+    "directional_evidence_count_matches_full_ledger": true,
+    "graph_is_exact_projection_of_full_evidence_ledger": true,
+    "no_cached_STITCH_in_full_evidence_ledger": true,
+    "no_cached_STITCH_in_regulation_ledger": true,
+    "no_duplicate_source_target_pairs": true,
+    "no_self_loops": true,
+    "nonempty_directional_evidence": true,
+    "opposing_sign_pairs_excluded": true,
+    "raw_action_is_explicitly_signed": true,
+    "raw_actor_is_chemical": true,
+    "raw_chemical_is_acting_partner": true,
+    "raw_receiver_is_mouse_ENSMUSP": true,
+    "sign_derived_from_raw_action": true
+  },
+  "counts": {
+    "directional_evidence_rows": 7481,
+    "directional_projected_signed_triples_quarantined": 93,
+    "directional_projected_signed_triples_surviving_graph_conflict_filter": 4243,
+    "final_conflicting_pairs": 6190,
+    "final_exploratory_edges": 284602,
+    "unique_directional_projected_signed_triples": 4336
+  },
+  "no_omics_scoring_performed": true
+}

@@ -1,0 +1,5 @@
+"source","target","interaction","consistency"
+"Gene__Gnao1","Gene__Hes1",-1,TRUE
+"Gene__Gpr34","Gene__Gnao1",1,TRUE
+"Metab__CHEBI:15756_unknown","Gene__Sp1",1,TRUE
+"Metab__CHEBI:85403_unknown","Gene__Gpr34",1,TRUE

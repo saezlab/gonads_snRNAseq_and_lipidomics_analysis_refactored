@@ -1,0 +1,33 @@
+{
+  "fit_reference": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_tf_to_lipid_expanded_species/currency_filtered_expanded_layers6",
+  "no_rescoring": true,
+  "source_fit_mode": "expanded",
+  "layer_consistent_extraction": true,
+  "extraction_edges": 15048,
+  "scoring_graph_unchanged": true,
+  "pruning_steps": 6,
+  "n_layers": 6,
+  "compression": "same_saved_safe_compressed_fit",
+  "grid_rows": 210,
+  "valid_pairs": 165,
+  "validated_pairs": 165,
+  "eligible_combinations": 12,
+  "selected_solution_available": true,
+  "selected": {
+    "primary": 0.75,
+    "secondary": 0.75,
+    "valid_pair": true,
+    "status": "ok",
+    "edges": 177,
+    "nodes": 117,
+    "upstream_tfs": 9,
+    "observed_lipids": 13,
+    "validated": true,
+    "eligible": true
+  },
+  "selection_policy": "Within-grid representative: 0<edges<500, >=2TFs and >=2observations; descending secondary then primary then observation/TF coverage then fewer edges. Not a calibrated optimum.",
+  "selected_TFs": ["Gene__Ahr", "Gene__Gata6", "Gene__Hoxa10", "Gene__Klf10", "Gene__Nr2f1", "Gene__Nr4a2", "Gene__Ppara", "Gene__Rora", "Gene__Tbx2"],
+  "selected_lipids": ["Metab__CHEBI:73858_unknown", "Metab__MeasuredLipid:DG(16:0_22:6)_unknown", "Metab__MeasuredLipid:DG(18:0_20:4)_unknown", "Metab__MeasuredLipid:DG(18:0_22:6)_unknown", "Metab__MeasuredLipid:LPC(18:0)_unknown", "Metab__MeasuredLipid:LPC(19:1)_unknown", "Metab__MeasuredLipid:LPC(19:1/0:0)_unknown", "Metab__MeasuredLipid:LPC(20:4)_unknown", "Metab__MeasuredLipid:LPC(20:5)_unknown", "Metab__MeasuredLipid:LPC(22:4)_unknown", "Metab__MeasuredLipid:PA(16:0_18:2)_unknown", "Metab__MeasuredLipid:PA(16:1_18:2)_unknown", "Metab__MeasuredLipid:PA(18:1_18:2)_unknown"],
+  "interpretation": "Threshold sensitivity of saved fit; lower cutoffs indicate weaker numerical evidence, not calibrated significance.",
+  "finished_utc": "2026-10-06 10:41:21 UTC"
+}

@@ -1,0 +1,2 @@
+measurement_panel,features,existing_factor1_inputs,existing_rule_nodes,existing_exact_chebi_nodes,existing_input_nodes_that_are_directional_stitch_sources,interpretation
+all_1254_factor1_lipids,1254,155,149,6,0,Measured-species rule nodes and the six frozen exact ChEBI nodes are tested separately from relaxed candidate identities.

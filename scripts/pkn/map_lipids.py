@@ -24,7 +24,7 @@ from pygoslin.parser.Parser import LipidParser
 from pygoslin.domain.LipidLevel import LipidLevel
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / 'results/cosmos_mouse_pkn'
+OUT = ROOT / 'results/causal_modelling/cosmos_mouse_pkn'
 RAW = ROOT / 'support/cosmos_mouse/raw'
 URL = 'https://www.swisslipids.org/api/file.php?cas=download_files&file=lipids.tsv'
 PARSER = LipidParser()

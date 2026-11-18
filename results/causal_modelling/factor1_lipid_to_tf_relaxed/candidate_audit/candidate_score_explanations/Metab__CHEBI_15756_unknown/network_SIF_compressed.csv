@@ -1,0 +1,15 @@
+"source","target","interaction","source_level","target_level","edge_sign_consistent"
+"Gene__Fhl2","Gene__Ar",1,1,0,TRUE
+"Gene__Sp1","Gene__Ar",1,1,0,TRUE
+"Gene__Sp1","Gene__Esr1",1,1,0,TRUE
+"Gene__Sp1","Gene__Fhl2",1,1,1,TRUE
+"Gene__Sp1","Gene__Foxa1",-1,1,0,FALSE
+"Gene__Sp1","Gene__Gata6",1,1,0,TRUE
+"Gene__Sp1","Gene__Hnf4a",1,1,0,TRUE
+"Gene__Sp1","Gene__Nr3c1",1,1,0,TRUE
+"Gene__Sp1","Gene__Ppara",1,1,0,TRUE
+"Gene__Sp1","Gene__Rora",1,1,0,TRUE
+"Gene__Sp1","Gene__Srebf2",1,1,0,TRUE
+"Gene__Sp1","Gene__Tbx2",1,1,0,TRUE
+"Metab__CHEBI:15756_unknown","Gene__Fhl2",1,2,1,TRUE
+"Metab__CHEBI:15756_unknown","Gene__Sp1",1,2,1,TRUE

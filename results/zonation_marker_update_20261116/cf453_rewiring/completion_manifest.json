@@ -1,0 +1,17 @@
+{
+  "input": "score-based zonation pseudobulk",
+  "modeled_genes": 18604,
+  "primary_lipids": 1129,
+  "anchor_selections": 40,
+  "unique_anchor_genes": 35,
+  "bootstrap_draws": 999,
+  "numerical_check_groups": 678,
+  "max_abs_difference": 1.1102e-15,
+  "direct_model_checks": 170,
+  "layout_checks": 70,
+  "fresh_cli_replay": true,
+  "pdf_groups": 3,
+  "layout_pdf_groups": 2,
+  "interpretation": "Selected-programme exploratory associations; zero individual BH-significant correlations; all class percentile intervals include zero",
+  "numerical_RDS": "rewiring_analysis.rds"
+}

@@ -1,0 +1,5 @@
+panel,panel_features,signed_frozen_exact_features,signed_compatible_candidate_features,signed_exact_or_compatible_unique_union,unsigned_exact_or_compatible_features,all_exact_or_compatible_unique_union,signed_broad_class_features,signed_any_annotation_unique_union,new_resolution_candidate_features,current_curated_exact_features,specific_candidate_feature_ids
+all_measurements,1254,1,16,16,13,16,216,232,11,0,DG(18:0_20:4)|DG(38:4)|FA(14:0)|FA(16:0)|FA(16:1)|FA(18:1)|FA(18:2)|FA(18:3)|FA(20:3)|FA(20:4)|FA(20:5)|FA(22:4)|FA(22:5)|FA(22:6)|LPS(18:0)|PC(36:2)
+accepted_155_inputs,155,0,1,1,1,1,28,29,0,0,DG(18:0_20:4)
+historical_64_factor1_lipids,64,0,0,0,0,0,2,2,0,0,
+two_lpc_candidates,2,0,0,0,0,0,2,2,0,0,

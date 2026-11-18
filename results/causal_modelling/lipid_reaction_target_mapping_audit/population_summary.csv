@@ -1,0 +1,6 @@
+population,features,species_rule_connected,species_rule_substrates,species_rule_products,species_rule_substrate_only,species_rule_product_only,species_rule_both,exact_chemical_product_candidates,any_product_candidate,accepted_input_nodes,accepted_input_product_nodes
+all_measured_features,1254,149,100,123,26,49,74,6,129,155,128
+historical_factor1_64,64,7,5,4,3,2,2,0,4,7,4
+frozen_accepted_inputs,155,149,100,123,26,49,74,5,128,155,128
+selected_topology_retained_inputs,74,69,43,69,0,26,43,5,74,74,74
+selected_solution_level0_endpoints,3,3,3,3,0,0,3,0,3,3,3

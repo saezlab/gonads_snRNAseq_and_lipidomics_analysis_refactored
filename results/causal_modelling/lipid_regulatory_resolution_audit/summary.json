@@ -1,0 +1,80 @@
+{
+  "analysis": "regulatory_composition_resolution_audit",
+  "measured_features": 1254,
+  "features_with_exact_chebi_terms": 128,
+  "candidate_features": 14,
+  "new_candidate_features": 11,
+  "mapping_changed": false,
+  "pkn_changed": false,
+  "moon_refit": false,
+  "limitations": [
+    "These are conditional identities, not accepted measurements or signed species-specific edges.",
+    "is_a may preserve unresolved positional, stereochemical or chain-branching alternatives.",
+    "A missing source match is not evidence of biological absence.",
+    "Only features already carrying exact reported-resolution ChEBI terms are screened.",
+    "MRCLinksDB records are unsigned associations; their adapter's +1 is not used here.",
+    "Simple FA candidates additionally require compatible elemental composition; other lipid classes need manual structure review."
+  ],
+  "resources": [
+    {
+      "resource": "MRCLinksDB",
+      "evidence_tier": "excluded_unsigned_association",
+      "candidate_features": 11,
+      "newly_detected_features": 9,
+      "regulatory_chemicals": 13,
+      "features_with_curated_edge_candidates": 0,
+      "features_with_exploratory_edge_candidates": 0,
+      "historical_factor1_features": 0,
+      "candidate_features_list": "FA(14:0)|FA(16:0)|FA(16:1)|FA(18:1)|FA(18:2)|FA(18:3)|FA(20:3)|FA(20:4)|FA(20:5)|FA(22:6)|LPS(18:0)",
+      "formula_incompatible_rows": 0
+    },
+    {
+      "resource": "STITCH",
+      "evidence_tier": "cached_stitch_fallback",
+      "candidate_features": 13,
+      "newly_detected_features": 11,
+      "regulatory_chemicals": 28,
+      "features_with_curated_edge_candidates": 0,
+      "features_with_exploratory_edge_candidates": 13,
+      "historical_factor1_features": 0,
+      "candidate_features_list": "FA(14:0)|FA(16:0)|FA(16:1)|FA(18:1)|FA(18:2)|FA(18:3)|FA(20:3)|FA(20:4)|FA(20:5)|FA(22:4)|FA(22:5)|FA(22:6)|PC(36:2)",
+      "formula_incompatible_rows": 3
+    },
+    {
+      "resource": "BRENDA",
+      "evidence_tier": "cached_brenda_fallback",
+      "candidate_features": 2,
+      "newly_detected_features": 2,
+      "regulatory_chemicals": 2,
+      "features_with_curated_edge_candidates": 0,
+      "features_with_exploratory_edge_candidates": 1,
+      "historical_factor1_features": 0,
+      "candidate_features_list": "FA(18:1)|FA(20:4)",
+      "formula_incompatible_rows": 0
+    },
+    {
+      "resource": "GuideToPharmacology",
+      "evidence_tier": "curated_mouse_current",
+      "candidate_features": 2,
+      "newly_detected_features": 2,
+      "regulatory_chemicals": 2,
+      "features_with_curated_edge_candidates": 2,
+      "features_with_exploratory_edge_candidates": 2,
+      "historical_factor1_features": 0,
+      "candidate_features_list": "FA(20:4)|FA(22:6)",
+      "formula_incompatible_rows": 0
+    },
+    {
+      "resource": "GuideToPharmacology",
+      "evidence_tier": "curated_mouse_current_secondary_chemical_mapping",
+      "candidate_features": 1,
+      "newly_detected_features": 0,
+      "regulatory_chemicals": 1,
+      "features_with_curated_edge_candidates": 0,
+      "features_with_exploratory_edge_candidates": 1,
+      "historical_factor1_features": 0,
+      "candidate_features_list": "LPS(18:0)",
+      "formula_incompatible_rows": 0
+    }
+  ]
+}

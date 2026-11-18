@@ -1,0 +1,14 @@
+"source","target","interaction","source_level","target_level","edge_sign_consistent"
+"Gene__Rxra","Gene__Ar",1,1,0,FALSE
+"Gene__Rxra","Gene__Hnf4a",-1,1,0,TRUE
+"Gene__Rxra","Gene__Nr0b2",1,1,0,TRUE
+"Gene__Rxra","Gene__Nr1h3",1,1,0,FALSE
+"Gene__Rxra","Gene__Nr1i2",1,1,0,FALSE
+"Gene__Rxra","Gene__Nr1i3",1,1,0,FALSE
+"Gene__Rxra","Gene__Nr2f1",1,1,0,TRUE
+"Gene__Rxra","Gene__Nr3c1",1,1,0,FALSE
+"Gene__Rxra","Gene__Nr4a2",1,1,0,TRUE
+"Gene__Rxra","Gene__Ppara",1,1,0,FALSE
+"Gene__Rxra","Gene__Rarb",1,1,0,TRUE
+"Gene__Rxra","Gene__Srebf1",1,1,0,FALSE
+"Metab__CHEBI:28125_unknown","Gene__Rxra",1,2,1,TRUE

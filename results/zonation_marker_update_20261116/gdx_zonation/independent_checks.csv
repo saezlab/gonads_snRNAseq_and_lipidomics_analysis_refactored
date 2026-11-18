@@ -1,0 +1,9 @@
+"check","max_abs_difference"
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/data/RNA/gdx_zonation_pseudobulks.rds baseGLScontrast_replay",2.55351295663786e-15
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/data/RNA/gdx_zonation_pseudobulks.rds simple_zonation BH",0
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/data/RNA/gdx_zonation_pseudobulks.rds conditional_gdx BH",0
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/data/RNA/gdx_zonation_pseudobulks.rds gdx_zonation_interactions BH",0
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/zonation_marker_update_20261116/inputs/gdx/gdx_zonation_pseudobulks_score.rds baseGLScontrast_replay",2.44249065417534e-15
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/zonation_marker_update_20261116/inputs/gdx/gdx_zonation_pseudobulks_score.rds simple_zonation BH",0
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/zonation_marker_update_20261116/inputs/gdx/gdx_zonation_pseudobulks_score.rds conditional_gdx BH",0
+"/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/zonation_marker_update_20261116/inputs/gdx/gdx_zonation_pseudobulks_score.rds gdx_zonation_interactions BH",0

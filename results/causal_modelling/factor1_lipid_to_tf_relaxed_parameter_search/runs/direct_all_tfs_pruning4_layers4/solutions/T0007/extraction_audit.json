@@ -1,0 +1,43 @@
+{
+  "extraction": {
+    "primary": 0.5,
+    "secondary": 0.5,
+    "score_layer_constrained": true,
+    "candidate_edges": 3051,
+    "score_layer_edges": 1386,
+    "consistent_edges": 1077,
+    "final_edges": 4,
+    "final_nodes": 6,
+    "retained_upstream": 2,
+    "retained_observed": 2,
+    "all_edges_descend_one_score_level": true,
+    "all_nodes_on_seed_to_observation_walk": true
+  },
+  "candidate_metadata": {
+    "source_nodes": ["Metab__CHEBI:15756_unknown", "Metab__CHEBI:85403_unknown"],
+    "measurement_features": ["FA(16:0)", "LPS(18:0)"],
+    "edge_fingerprint_groups": ["edge_1183a9daffa46143", "edge_62dc639c6d632785"],
+    "raw_upstream_candidate_nodes": 2,
+    "independent_edge_fingerprint_groups": 2,
+    "observed_tfs": ["Gene__Hes1", "Gene__Sp1"],
+    "retained_observed_tfs": 2
+  },
+  "eligibility": {
+    "eligible": true,
+    "edges": 4,
+    "nodes": 6,
+    "source_nodes": ["Metab__CHEBI:15756_unknown", "Metab__CHEBI:85403_unknown"],
+    "measurement_features": ["FA(16:0)", "LPS(18:0)"],
+    "edge_fingerprint_groups": ["edge_1183a9daffa46143", "edge_62dc639c6d632785"],
+    "raw_upstream_candidate_nodes": 2,
+    "independent_edge_fingerprint_groups": 2,
+    "observed_tfs": ["Gene__Hes1", "Gene__Sp1"],
+    "retained_observed_tfs": 2
+  },
+  "run_id": "direct_all_tfs_pruning4_layers4",
+  "tf_panel": "all_tfs",
+  "pruning_steps": 4,
+  "n_layers": 4,
+  "topology_hash": "f169d7ed3965a86f528bf503d2d00c49",
+  "interpretation": "Strict layer-consecutive score-path sensitivity; not a calibrated causal confidence estimate."
+}

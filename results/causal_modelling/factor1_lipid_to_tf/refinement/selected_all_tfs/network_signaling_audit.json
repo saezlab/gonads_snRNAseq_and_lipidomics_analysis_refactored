@@ -1,0 +1,38 @@
+{
+  "accepted_mapping_nodes": 155,
+  "direct_exact_mapped_lipid_regulatory_edges_in_full_pkn": 0,
+  "direct_measured_lipid_regulatory_edges_in_solution": 0,
+  "downstream_tfs": 64,
+  "edges": 455,
+  "evidence_projection": "Only explicitly supplied one-step node aliases; original endpoints and mapping bases retained; no identities inferred and no solution scores changed.",
+  "explicit_node_alias_count": 3656,
+  "input_sha256": {
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_lipid_to_tf/refinement/selected_all_tfs/network_ATT.csv": "f5e299af6f465f6173a11892d76950e37c18618a26c296f622e107a580c66a82",
+    "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/factor1_lipid_to_tf/refinement/selected_all_tfs/network_SIF.csv": "b62ec7312d6c2734213497d2e43e8831053dc3e2a3042de4a25feec00a096c48",
+    "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_node_mapping.csv": "88f8b9d3d4d2df506441fab6832ad44802670e3ce8c35aabeac3316579af305d",
+    "results/causal_modelling/cosmos_mouse_pkn/chemical_node_aliases.csv": "d726e1ccc11bdc200e9e774fd1a7d0143bddf56014c6e9310a7b66c960f97481",
+    "results/causal_modelling/cosmos_mouse_pkn/edge_evidence.jsonl.gz": "4e8df5948f1c6c055bd721f8e846b8fd9a5c129dcd064ed295c4ac1cf267fa83",
+    "results/causal_modelling/cosmos_mouse_pkn/nodes_ph73.jsonl": "e0ca22ebaac9be450421849269284461b849b13bf4a12cc6879de7b6f9fe585e",
+    "results/causal_modelling/cosmos_mouse_pkn/pkn_lipid_curated_ph73.csv": "25b2e26e5c96e39e1ff12fb5fa1ec3b70ca40e9d845ca540ceb453cd26511d7a"
+  },
+  "interpretation": "No exact-mapped measured lipid has an eligible direct regulatory edge in the full PKN. Any selected routes with a later chemical-to-protein transition nominate indirect metabolic availability hypotheses, not direct signaling lipids or confirmed biochemical precursors.",
+  "limitations": [
+    "A directed signed route is a prior-knowledge hypothesis, not evidence of causality, flux or biochemical feasibility in hepatocytes.",
+    "Reaction instances encode substrate participation, product formation and catalyst availability; they do not implement mass balance or enzyme kinetics.",
+    "The actual regulatory chemical may be an unmeasured metabolite or co-product; its abundance or availability is not independently established.",
+    "Shortest-route classifications do not summarize every alternative walk through the solution.",
+    "Lipid weights and RNA-derived TF activities are observational measurements on different scales; MOON scores are inferred statistics."
+  ],
+  "node_aliases": "results/causal_modelling/cosmos_mouse_pkn/chemical_node_aliases.csv",
+  "node_catalog": "results/causal_modelling/cosmos_mouse_pkn/nodes_ph73.jsonl",
+  "nodes": 233,
+  "path_class_counts": {
+    "indirect_metabolic_availability_hypothesis": 64
+  },
+  "prior_csv": "results/causal_modelling/cosmos_mouse_pkn/pkn_lipid_curated_ph73.csv",
+  "reachable_input_pairs": 64,
+  "regulatory_transitions": 2,
+  "representative_path_policy": "One shortest path per reachable input pair; greatest minimum absolute inferred MOON score; deterministic signed-edge tie breaking in the shortest-path DAG. Level-zero observed TF activities excluded from score bottleneck. Not all alternative routes are enumerated.",
+  "species_rule_edges": 0,
+  "upstream_lipids": 1
+}

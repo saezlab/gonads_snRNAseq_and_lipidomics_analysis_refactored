@@ -1,0 +1,2 @@
+pkn_source_node,pkn_source_chebi,pkn_source_name,n_measurement_features,measurement_features,candidate_measurement_values,resolution_required,required_decision
+Metab__CHEBI:75728_unknown,CHEBI:75728,SAG,2,DG(18:0_20:4);DG(38:4),-0.11951312181587;-0.270359633375235,TRUE,Score this source node once as a unique topology seed; preserve both measurement assignments for assignment-specific sign-consistency and path-extraction review.

@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-09-15 12:19:11 UTC",
+  "config": {
+    "analysis": "factor1_lipid_to_tf",
+    "dependency_contract": "scripts/moon/config/factor1_tf_to_lipid.json",
+    "inputs": "results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+    "input_directory": "results/causal_modelling/cosmos_factor1_pilot/inputs",
+    "pkn_directory": "results/causal_modelling/cosmos_mouse_pkn",
+    "output": "results/causal_modelling/factor1_lipid_to_tf",
+    "pruning_steps": [6, 8, 12],
+    "n_layers": [4, 6, 8, 12],
+    "primary_thresholds": [0.5, 1, 1.5, 1.85, 2, 2.5, 3],
+    "secondary_thresholds": [0, 0.25, 0.5, 0.55, 0.75, 1, 1.5, 2],
+    "max_iterations": 10,
+    "strong_tf_cutoff": 2,
+    "maximum_solution_edges_exclusive": 500,
+    "minimum_upstream_lipids": 1,
+    "minimum_downstream_tfs": 2,
+    "primary_policies": ["direct_regulation", "lipid_precursor"],
+    "optional_policy": "ph73_lipid_precursor",
+    "upstream_semantics": "Existing exact-mapped Factor 1 lipid feature weights; abundance association is a candidate availability proxy, not ligand potency or a perturbation.",
+    "downstream_semantics": "All finite, nonzero PKN-present hepatocyte Factor 1 TF footprint activities; abs(activity)>2 is a separately labelled observation-set sensitivity.",
+    "rna_semantics": "Separate RNA loading vector for internal TF-target coherence; not protein activity.",
+    "direction": "Original signed PKN direction: lipid -> regulatory protein -> TF, optionally via lipid-only metabolic availability hypotheses.",
+    "ph73_semantics": "Existing ChEBI acid/base-normalized curated PKN; no lipid-class mapping, no cached STITCH/BRENDA. Requires explicit --include-ph73 option.",
+    "limitations": ["Measured bulk-liver lipid abundance does not establish hepatocyte subcellular ligand exposure.", "Substrate-to-reaction edges encode potential participation, not reaction flux or net product formation.", "Lipid-only reaction paths can require unmeasured co-substrates; full reaction equations must be inspected.", "Observed TF inputs are terminal, so observation-set choice changes the topology and scoring background.", "A high inferred score is prior-guided alignment, not causal validation."]
+  },
+  "command_args": "--include-ph73",
+  "R_version": "R version 4.6.1 (2026-06-24)",
+  "packages": {
+    "cosmosR": "1.21.2",
+    "decoupleR": "2.17.0",
+    "igraph": "2.3.3",
+    "jsonlite": "2.0.0"
+  },
+  "cosmos_commit": "b2ed195738479c4ad204cace37fd11ae2fd02bb8",
+  "completed": true
+}

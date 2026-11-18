@@ -1,0 +1,123 @@
+{
+  "analysis": "consolidated_lipid_regulatory_coverage_annotations",
+  "features": 1254,
+  "annotation_only": true,
+  "mapping_changed": false,
+  "pkn_changed": false,
+  "moon_refit": false,
+  "panel_unions": [
+    {
+      "panel": "all_measurements",
+      "panel_features": 1254,
+      "signed_frozen_exact_features": 1,
+      "signed_compatible_candidate_features": 16,
+      "signed_exact_or_compatible_unique_union": 16,
+      "unsigned_exact_or_compatible_features": 13,
+      "all_exact_or_compatible_unique_union": 16,
+      "signed_broad_class_features": 216,
+      "signed_any_annotation_unique_union": 232,
+      "new_resolution_candidate_features": 11,
+      "current_curated_exact_features": 0,
+      "specific_candidate_feature_ids": "DG(18:0_20:4)|DG(38:4)|FA(14:0)|FA(16:0)|FA(16:1)|FA(18:1)|FA(18:2)|FA(18:3)|FA(20:3)|FA(20:4)|FA(20:5)|FA(22:4)|FA(22:5)|FA(22:6)|LPS(18:0)|PC(36:2)"
+    },
+    {
+      "panel": "accepted_155_inputs",
+      "panel_features": 155,
+      "signed_frozen_exact_features": 0,
+      "signed_compatible_candidate_features": 1,
+      "signed_exact_or_compatible_unique_union": 1,
+      "unsigned_exact_or_compatible_features": 1,
+      "all_exact_or_compatible_unique_union": 1,
+      "signed_broad_class_features": 28,
+      "signed_any_annotation_unique_union": 29,
+      "new_resolution_candidate_features": 0,
+      "current_curated_exact_features": 0,
+      "specific_candidate_feature_ids": "DG(18:0_20:4)"
+    },
+    {
+      "panel": "historical_64_factor1_lipids",
+      "panel_features": 64,
+      "signed_frozen_exact_features": 0,
+      "signed_compatible_candidate_features": 0,
+      "signed_exact_or_compatible_unique_union": 0,
+      "unsigned_exact_or_compatible_features": 0,
+      "all_exact_or_compatible_unique_union": 0,
+      "signed_broad_class_features": 2,
+      "signed_any_annotation_unique_union": 2,
+      "new_resolution_candidate_features": 0,
+      "current_curated_exact_features": 0,
+      "specific_candidate_feature_ids": ""
+    },
+    {
+      "panel": "two_lpc_candidates",
+      "panel_features": 2,
+      "signed_frozen_exact_features": 0,
+      "signed_compatible_candidate_features": 0,
+      "signed_exact_or_compatible_unique_union": 0,
+      "unsigned_exact_or_compatible_features": 0,
+      "all_exact_or_compatible_unique_union": 0,
+      "signed_broad_class_features": 2,
+      "signed_any_annotation_unique_union": 2,
+      "new_resolution_candidate_features": 0,
+      "current_curated_exact_features": 0,
+      "specific_candidate_feature_ids": ""
+    }
+  ],
+  "per_evidence_group_all_measurements": [
+    {
+      "evidence_group": "BRENDA_cached_signed",
+      "exact": 0,
+      "compatible": 2,
+      "broad_class": 163,
+      "new_resolution": 2,
+      "exact_or_compatible_union": 2
+    },
+    {
+      "evidence_group": "GtoPdb_primary_curated_signed",
+      "exact": 0,
+      "compatible": 4,
+      "broad_class": 53,
+      "new_resolution": 2,
+      "exact_or_compatible_union": 4
+    },
+    {
+      "evidence_group": "GtoPdb_secondary_mapping_signed",
+      "exact": 0,
+      "compatible": 1,
+      "broad_class": 0,
+      "new_resolution": 0,
+      "exact_or_compatible_union": 1
+    },
+    {
+      "evidence_group": "MRCLinksDB_unsigned_association",
+      "exact": 1,
+      "compatible": 13,
+      "broad_class": 0,
+      "new_resolution": 9,
+      "exact_or_compatible_union": 13
+    },
+    {
+      "evidence_group": "STITCH_cached_signed_orientation_uncertain",
+      "exact": 1,
+      "compatible": 13,
+      "broad_class": 0,
+      "new_resolution": 11,
+      "exact_or_compatible_union": 13
+    }
+  ],
+  "formula_incompatible_candidate_rows_excluded": 3,
+  "cellphonedb": "Not assessed: no CellPhoneDB records were available in the frozen source collections.",
+  "detailed_audits": {
+    "frozen_crosswalk": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/lipid_regulatory_mapping_audit",
+    "specificity_candidates": "/Users/dugourd/Library/CloudStorage/Dropbox/FCGL_FirstSubmission/gonads_snRNAseq_and_lipidomics_analysis_refactored/results/causal_modelling/lipid_regulatory_resolution_audit"
+  },
+  "interpretation": [
+    "Exact denotes the frozen mapper's reported-resolution classification, with original identity and acid/base labels retained. FA16 is a nested generic/specific identity ambiguity and was not admitted to the frozen155 inputs.",
+    "Compatible combines frozen compatible matches and formula-compatible supplementary ontology descendants. These are candidate molecules, not confirmed measured identities or automatic mappings.",
+    "GtoPdb primary and secondary chemical mapping tiers remain distinct; BRENDA/STITCH are cached evidence; MRCLinksDB is unsigned association data.",
+    "A feature may have both exact and compatible records and may match multiple resources. Union counts deduplicate features and must replace sums across categories/resources.",
+    "Pkn-edge availability columns preserve the detailed specificity audit's compartment-aware checks; candidate identity is still unconfirmed.",
+    "No accepted155 feature has an exact direct current-curated-PKN regulatory match. Candidate-level coverage across all1254 measurements must not be presented as coverage of the accepted input panel.",
+    "Coverage remains incomplete: the supplementary search only examines measured features already carrying exact reported-resolution ChEBI terms; neither audit establishes exhaustive biological coverage."
+  ]
+}

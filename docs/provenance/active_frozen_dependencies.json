@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "scope": "Minimal archived payloads consumed by active MOON entry points, selected reference checks and expanded-species input preparation",
+  "files": [
+    {
+      "path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_inputs.rds",
+      "bytes": 704853,
+      "sha256": "e9ff6c6602863d4c246722e1b8f06970e724ce6bc71388aa6005416e5cc5a4ac",
+      "role": "All active MOON directions: full-precision TF/lipid/RNA/regulon input bundle",
+      "required_by": "main entry points and selected replay"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_node_mapping.csv",
+      "bytes": 239073,
+      "sha256": "88f8b9d3d4d2df506441fab6832ad44802670e3ce8c35aabeac3316579af305d",
+      "role": "Selected exporter and lipid/PKN coverage audits: exact frozen mapping",
+      "required_by": "main entry points and selected replay"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_hepatocyte_tf_activities_mapped.csv",
+      "bytes": 57867,
+      "sha256": "766e26dadfe3316c8792103362da6518d6aa90492c5e8f215418011c33f62155",
+      "role": "Lipid-to-TF coverage subprocess: TF observation ledger",
+      "required_by": "main lipid-to-TF coverage subprocess"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_lipid_weights_all.csv",
+      "bytes": 141235,
+      "sha256": "33e6db7b590bf553f72052563cc36a0faf84c1137b7eaca26c368f56049e1d86",
+      "role": "Expanded-species preparation: all measured feature weights",
+      "required_by": "active expanded-species input-preparation extension"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_pilot/inputs/factor1_model_audit.json",
+      "bytes": 1086,
+      "sha256": "13ece8b7ee209a3fecdff6fcc1d32fbf2e9b65f23e40cebcfdb5ab857134ea04",
+      "role": "Expanded-species preparation: frozen orientation and factor audit",
+      "required_by": "active expanded-species input-preparation extension"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth4_compressed/run_state.rds",
+      "bytes": 331211,
+      "sha256": "a29438e9663f17bb0dfc54aef61a4807ca4e29c021dc3d2fe7a9108a03ebca44",
+      "role": "Selected main reference: saved scores and final graph",
+      "required_by": "selected main reference replay"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/runs/radius6_depth4_compressed/pkn_final_scoring.rds",
+      "bytes": 197116,
+      "sha256": "59fb861a0bb788a7e019775b38f7befe4dbaebcf84a5570f07f73ddc29c7b026",
+      "role": "Selected main entry: explicit dependency check and provenance",
+      "required_by": "selected main entry dependency check"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_parameter_search/topology_radius_6/compressed/compression.rds",
+      "bytes": 1023545,
+      "sha256": "1f05c4d1a36203b50930079417dd5fa0c86dbda5f723fd6c3f5d0c2b53594049",
+      "role": "Selected main reference: exact compression mapping",
+      "required_by": "selected main reference replay"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/threshold_search/C03/network_SIF.csv",
+      "bytes": 20275,
+      "sha256": "bd68a1ebb85e1aecb5f38760e49e01ce95f162ba49bb21729b2abbaf27928ff6",
+      "role": "Selected main reference: exact signed solution edges",
+      "required_by": "selected main reference replay"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/cosmos_factor1_compressed_review/score_retention/radius6_depth4_compressed_scores_all.csv",
+      "bytes": 297036,
+      "sha256": "200c44be3c19eade7107271ffce4f58756ce647e5ed549ee720a51fd407ae12a",
+      "role": "Selected main reference: complete pre-sign-filter scores",
+      "required_by": "selected main reference replay"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory/runs/direct_strong_tfs_pruning4_layers4/run_state.rds",
+      "bytes": 1059798,
+      "sha256": "3b67861cec0ae6212c785970c8139095c39d654bd48bbf36967625fc070fa7b1",
+      "role": "Relaxed reference: exact scores, graph and compression; MD5 pinned in active config",
+      "required_by": "active relaxed validation and reference replay"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory/score_layer_constrained/solutions/direct_strong_tfs_pruning4_layers4__p0.5__s0.5/network_SIF.csv",
+      "bytes": 226,
+      "sha256": "972d5f0e9733d273d95e4d90424dd6c69eb302f9d3ca25731d642893d1f266d1",
+      "role": "Relaxed reference: exact signed edges; MD5 pinned in active config",
+      "required_by": "active relaxed validation and reference replay"
+    },
+    {
+      "path": "miscellaneous/older_results/causal_modelling/factor1_lipid_to_tf_relaxed_regulatory/score_layer_constrained/solutions/direct_strong_tfs_pruning4_layers4__p0.5__s0.5/network_ATT.csv",
+      "bytes": 1040,
+      "sha256": "14548572b62ae84e31af335d4716d25d361ae022670ccfc85ae1f8c594fcf37d",
+      "role": "Relaxed reference: node scores and layers read by relaxed_compare_reference",
+      "required_by": "active relaxed reference replay"
+    }
+  ],
+  "total_files": 13,
+  "total_bytes": 4074361,
+  "maximum_file_bytes": 1059798,
+  "all_files_below_100_MiB": true,
+  "main_entrypoint_and_reference_files": 11,
+  "additional_active_extension_files": 2,
+  "canonical_active_inputs_fully_replace_archived_dependencies": false,
+  "reason": "Current selected outputs do not contain the complete original full-precision TF/lipid/RNA/regulon bundle, all-feature weight ledger or frozen reference scoring/compression states. They are independent of the expanded-marker zonation inputs. Archived preparation scripts retain historical path assumptions; there is no supported single-command reconstruction of every reference from public canonical inputs.",
+  "hash_contract": "Active scripts/moon/config/*.json retain the pinned input/reference MD5 values; this inventory adds per-file SHA256 without changing frozen data.",
+  "excluded": "Bulk discovery/search states, raw input bundles not consumed by active code, optional external KO culture counts, and all other archived payloads remain outside this selective inclusion list."
+}

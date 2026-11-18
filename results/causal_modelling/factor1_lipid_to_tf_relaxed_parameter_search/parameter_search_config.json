@@ -1,0 +1,14 @@
+{
+  "analysis": "factor1_lipid_to_tf_relaxed_parameter_search",
+  "base_config": "scripts/moon/config/factor1_lipid_to_tf_relaxed.json",
+  "output": "results/causal_modelling/factor1_lipid_to_tf_relaxed_parameter_search",
+  "pruning_steps": [4, 6, 8],
+  "n_layers": [2, 4, 6],
+  "tf_panels": ["all_tfs", "strong_tfs"],
+  "primary_thresholds": [0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
+  "secondary_thresholds": [0.0, 0.5, 1.0, 1.5, 2.0],
+  "maximum_solution_edges_exclusive": 500,
+  "minimum_independent_edge_fingerprint_groups": 1,
+  "minimum_downstream_tfs": 2,
+  "selection_policy": "Materialize every compact strict score-layer solution. Collapse duplicate signed-edge topologies in the stability table. Do not label an automatic optimum."
+}

@@ -1,0 +1,127 @@
+{
+  "reviewer": "independent_primary_literature_agent",
+  "review_date": "2026-10-13",
+  "scope": "read-only text/semantic/provenance QA; root responsible for visual page QA",
+  "passed": true,
+  "checks": [
+    {
+      "name": "all_narrative_blocks_preserved_in_pdf",
+      "passed": true,
+      "detail": {
+        "tested_blocks": 52,
+        "missing": []
+      }
+    },
+    {
+      "name": "all_markdown_table_cells_preserved_in_pdf",
+      "passed": true,
+      "detail": {
+        "cells_tested": 103,
+        "missing": []
+      }
+    },
+    {
+      "name": "all_unique_citation_urls_survive_as_pdf_links",
+      "passed": true,
+      "detail": {
+        "md_unique": 18,
+        "pdf_unique": 18,
+        "missing": []
+      }
+    },
+    {
+      "name": "pdf_has_nine_pages",
+      "passed": true,
+      "detail": {
+        "page_character_counts": [
+          3251,
+          2460,
+          2173,
+          2807,
+          1547,
+          2878,
+          3092,
+          2342,
+          2281
+        ]
+      }
+    },
+    {
+      "name": "ten_alternating_sets",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "ledger_targets_match_ranking",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all_route_records_denote_not_fully_verified",
+      "passed": true,
+      "detail": {
+        "route_count": 222
+      }
+    },
+    {
+      "name": "plcb1_upstream_prefix_six_layer_only",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no_surviving_fitted_prefix_for_pla2_or_plpp1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "gnai1_pld2_inhibitory_sign_preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "corrected_prefixes_explicitly_unscored",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "rxra_and_pparg_not_supplied_upstream",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all_frozen_path_edges_match_selected_graphs",
+      "passed": true,
+      "detail": {
+        "mismatches": []
+      }
+    },
+    {
+      "name": "local_ko_directions_follow_target_to_lipid_signs",
+      "passed": true,
+      "detail": {
+        "mismatches": []
+      }
+    },
+    {
+      "name": "all_endpoint_chemistry_and_transacylation_qualifiers_preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "source_context_qualifiers_present",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "issues": [],
+  "primary_source_rechecks": {
+    "10900149": "Primary abstract supports COUP-TF antagonism of RXR-associated ALDH2 reporter, not generic positiveactivation",
+    "20371740": "Primary publication explicitly humanendometrialstromalcells HOXA10\u2192ETA context"
+  },
+  "final_sha256": {
+    "docs/cosmos_factor1_ko_validation_targets.md": "d28d47d4f9297990050ea2e31c8db357989c9f5974273ea399496e05dc4bc881",
+    "output/pdf/cosmos_factor1_ko_validation_targets.pdf": "028b4bca1a3817a5d9e4e9915e97d183fa20fd6b716bb1d0dbf2098fba2cf810",
+    "results/causal_modelling/factor1_ko_validation_targets/route_annotation_revision_20261013/full_tf_route_audit.json": "27a60f6aa6dc7b1f63c3eda1972ebdca4ba02209f2b7be560b8d9071f5791f01",
+    "results/causal_modelling/factor1_ko_validation_targets/route_annotation_revision_20261013/full_tf_to_lipid_routes.csv": "513fd92f7e765640532b730c4f6aefa27a685b1694bbf4f3b22228fc5e3b51fa"
+  }
+}
