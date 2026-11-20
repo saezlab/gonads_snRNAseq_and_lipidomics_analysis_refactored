@@ -46,7 +46,7 @@ cat("  PC2:", round(var_explained[2], 2), "%\n")
 cat("  PC3:", round(var_explained[3], 2), "%\n")
 
 # 2. DE results
-load("results/lipidomic/ttop_full_list.RData")
+load("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData")
 ttop_gonadal <- ttop_full_list[["Testes vs Ovaries"]][["Testes vs Ovaries"]]
 cat("\nLipids in DE analysis:", nrow(ttop_gonadal), "\n")
 n_sig <- sum(ttop_gonadal$adj.P.Val <= 0.05)
@@ -54,7 +54,7 @@ cat("Significant (FDR <= 0.05):", n_sig, "\n")
 cat("Significant fraction:", round(n_sig / nrow(ttop_gonadal) * 100, 1), "%\n")
 
 # 3. Enrichment
-enrich <- read.csv("results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv")
+enrich <- read.csv("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv")
 cat("\nLipid classes tested:", nrow(enrich), "\n")
 sig_classes <- enrich[enrich$p_value < 0.05, ]
 cat("Significant classes:", nrow(sig_classes), "\n")

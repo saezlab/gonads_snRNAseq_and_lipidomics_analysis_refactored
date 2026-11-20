@@ -33,6 +33,7 @@ zmu_runtime05 <- function(input_dir, output) {
   input_dir <- normalizePath(input_dir, mustWork = TRUE)
   text <- readLines(analysis_path("engine_fcg05",mustWork=TRUE), warn = FALSE)
   text <- gsub("results/zonation", output, text, fixed = TRUE)
+  text <- gsub("results/lipidomic/", "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/", text, fixed=TRUE)
   for (f in c("scaled_RNA_zonation.csv", "meta_data_df_zonation.csv")) {
     text <- gsub(paste0("data/RNA/", f), file.path(input_dir, f), text, fixed = TRUE)
   }
@@ -151,9 +152,10 @@ zmu_run07 <- function(output_root, checkpoint=NULL) {
   branch <- c(text[start8:(start10-1L)],text[start11:end11])
   branch <- gsub('results/zonation/networks',
     normalizePath(file.path(output_root,"fcg05","networks")),branch,fixed=TRUE)
+  branch <- gsub("results/lipidomic/", "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/", branch, fixed=TRUE)
   # Only the zonation-dependent validation and structural branch is executed.
   setup <- c(
-    't_table <- read.csv(analysis_resolve_recorded_path("results/validation/knockdown_t_table.csv"),check.names=FALSE)',
+    't_table <- read.csv(analysis_resolve_recorded_path("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv"),check.names=FALSE)',
     'rownames(t_table) <- t_table$ID',
     'comparisons <- setNames(as.list(rep(NA,ncol(t_table)-1L)),names(t_table)[-1L])',
     'available_global <- character(0)',
@@ -172,7 +174,7 @@ zmu_run07 <- function(output_root, checkpoint=NULL) {
     invokeRestart("muffleWarning")
   })
   # Primary manuscript context is fixed before considering validation scores.
-  kd <- utils::read.csv(analysis_resolve_recorded_path("results/validation/knockdown_t_table.csv"),check.names=FALSE)
+  kd <- utils::read.csv(analysis_resolve_recorded_path("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv"),check.names=FALSE)
   fixed <- zmu_full_gene_cor(checkpoint$rna,checkpoint$metadata,checkpoint$lipids,"Mtmr11","TPP")
   fixed <- merge(fixed,kd[,c("ID","mtmr11")],by.x="lipid",by.y="ID")
   names(fixed)[names(fixed)=="mtmr11"] <- "KD_t"
@@ -328,7 +330,7 @@ zmu_compare <- function(output_root, checkpoint=NULL) {
       pericentral=sum(z$adj.P.Val<.05 & z$logFC<0))
   }))
   write.csv(figure4,file.path(output,"Fig4B_FDR_counts_old_vs_new.csv"),row.names=FALSE)
-  wf02<-new.env();load("results/pseudobulk/ttop_full_list.RData",envir=wf02)
+  wf02<-new.env();load("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData",envir=wf02)
   whole<-wf02$ttop_full_list[["Testes vs Ovaries"]][["Hepatocytes"]]
   claims<-list();claim_genes<-list()
   for(v in c("historical","revised"))for(definition in c("WF05_zonation_model_sex_FDR","WF02_fixed_whole_hepatocyte_sex_FDR")){
@@ -408,7 +410,7 @@ zmu_compare <- function(output_root, checkpoint=NULL) {
 zmu_class_sources <- function(output_root,checkpoint,versions=c("historical","revised")) {
   stems<-c(TPP="cormat_testes_portal",TPC="cormat_testes_central",OPP="cormat_Ovaries_portal",OPC="cormat_ova_central")
   species_all<-list();class_all<-list()
-  le<-new.env();load("results/lipidomic/ttop_full_list.RData",envir=le)
+  le<-new.env();load("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData",envir=le)
   tt<-le$ttop_full_list[["Testes vs Ovaries"]];if(is.list(tt)&&!is.data.frame(tt))tt<-tt[[1]]
   for(v in versions){
     netdir<-if(v=="historical")file.path(analysis_path("historical_fcg05"),"networks") else file.path(output_root,"fcg05","networks")
@@ -447,7 +449,7 @@ zmu_class_sources <- function(output_root,checkpoint,versions=c("historical","re
 
 zmu_validation_compare <- function(output_root) {
   output<-file.path(output_root,"comparisons")
-  a<-read.csv(analysis_resolve_recorded_path("results/validation/zonation_network_validation_scores.csv"),check.names=FALSE)
+  a<-read.csv(analysis_resolve_recorded_path("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/zonation_network_validation_scores.csv"),check.names=FALSE)
   b<-read.csv(file.path(output_root,"fcg07","zonation_network_validation_scores.csv"),check.names=FALSE)
   a$version<-"historical";b$version<-"revised"
   both<-rbind(a,b);both$on_target<-tolower(both$source)==tolower(both$condition)
@@ -458,7 +460,7 @@ zmu_validation_compare <- function(output_root) {
   }
   write.csv(both,file.path(output,"fcg07_all_ULM_scores_old_vs_new.csv"),row.names=FALSE)
   write.csv(both[both$on_target,],file.path(output,"fcg07_on_target_ULM_scores_old_vs_new.csv"),row.names=FALSE)
-  kd<-read.csv(analysis_resolve_recorded_path("results/validation/knockdown_t_table.csv"),check.names=FALSE)
+  kd<-read.csv(analysis_resolve_recorded_path("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv"),check.names=FALSE)
   old<-read.csv(file.path(analysis_path("historical_fcg05"),"networks/cormat_testes_portal_full_SIF.csv"),check.names=FALSE)
   old<-old[tolower(old$node1)=="mtmr11" & grepl("(",old$node2,fixed=TRUE),]
   names(old)<-c("gene","lipid","r_old")
@@ -479,7 +481,7 @@ zmu_validation_compare <- function(output_root) {
   stopifnot(length(oldscore)==1L,abs(scores$ULM_score[1]-oldscore)<1e-8)
   write.csv(scores,file.path(output,"Fig5F_prespecified_male_PP_old_vs_new.csv"),row.names=FALSE)
   write.csv(z,file.path(output,"Fig5F_matched_lipid_coefficients_old_vs_new.csv"),row.names=FALSE)
-  oldstruct<-read.csv(analysis_resolve_recorded_path("results/validation/structural_consistency/consistency_structural_regression_summary.csv"),check.names=FALSE)
+  oldstruct<-read.csv(analysis_resolve_recorded_path("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/structural_consistency/consistency_structural_regression_summary.csv"),check.names=FALSE)
   oldstruct<-oldstruct[tolower(oldstruct$gene) %in% c("mtmr11","sult3a1"),];oldstruct$version<-"historical"
   newstruct<-read.csv(file.path(output_root,"fcg07","structural_consistency","consistency_structural_regression_summary.csv"),check.names=FALSE)
   newstruct$version<-"revised"
@@ -600,7 +602,7 @@ zmu_patch_manifest <- function(output_root) {
   write.csv(m,file.path(output_root,"fcg_runtime_adapter_manifest.csv"),row.names=FALSE)
   files<-c("scripts/workflows/05_zonation_analysis.R","scripts/workflows/07_validation_experiments.R",
     "scripts/core/zonation_update_fcg.R","scripts/reports/run_zonation_update_fcg.R",
-    "results/validation/knockdown_t_table.csv","results/validation/knockdown_ttop_list.RData",
+    "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv","results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData",
     file.path(output_root,"runtime","05_zonation_analysis_versioned.R"),
     file.path(output_root,"runtime","07_zonation_validation_versioned.R"))
   hash<-data.frame(path=normalizePath(files),sha256=vapply(files,digest::digest,character(1),file=TRUE,algo="sha256"))
@@ -656,7 +658,7 @@ zmu_fixed_threshold_membership <- function(output_root,checkpoint) {
   }
   s$n_contexts<-rowSums(s[,names(stems)]);pp<-s$TPP|s$OPP;pc<-s$TPC|s$OPC
   s$zonation<-ifelse(pp&pc,"both",ifelse(pp,"periportal",ifelse(pc,"pericentral","no_association")))
-  le<-new.env();load("results/lipidomic/ttop_full_list.RData",envir=le)
+  le<-new.env();load("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData",envir=le)
   tt<-le$ttop_full_list[["Testes vs Ovaries"]];if(is.list(tt)&&!is.data.frame(tt))tt<-tt[[1]]
   s$gonad_bias<-ifelse(tt$logFC[match(s$lipid,tt$ID)]>0,"Testes","Ovaries")
   s$version<-"revised_fixed_historical_threshold"
@@ -688,7 +690,7 @@ zmu_context_class_panel <- function(output_root) {
   }))
   labels<-c(OPP="Female\nperiportal",OPC="Female\npericentral",TPP="Male\nperiportal",TPC="Male\npericentral")
   z$context<-factor(z$context,levels=contexts)
-  enrichment<-new.env();load("results/lipidomic/enrichment/lipid_class_enrichment_scores.RData",envir=enrichment)
+  enrichment<-new.env();load("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData",envir=enrichment)
   displayed<-unique(enrichment$lipid_class_results$source[
     grepl("^Testes vs Ovaries",enrichment$lipid_class_results$condition)])
   z$displayed_class<-z$lipid_class %in% displayed
@@ -768,8 +770,8 @@ zmu_metric_ledger <- function(output_root) {
   write.csv(ledger,file.path(output_root,"fcg_metric_ledger.csv"),row.names=FALSE)
   ex<-read.csv(file.path(dir,"fcg_historical_four_examples_all_lipid_correlations.csv"),check.names=FALSE)
   write.csv(ex[ex$top6_old|ex$top6_new,],file.path(dir,"Fig5D_top_partner_edge_changes.csv"),row.names=FALSE)
-  e<-new.env();load(analysis_resolve_recorded_path("results/validation/knockdown_ttop_list.RData"),envir=e)
-  kd<-read.csv(analysis_resolve_recorded_path("results/validation/knockdown_t_table.csv"),check.names=FALSE)
+  e<-new.env();load(analysis_resolve_recorded_path("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData"),envir=e)
+  kd<-read.csv(analysis_resolve_recorded_path("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv"),check.names=FALSE)
   audit<-do.call(rbind,lapply(names(e$ttop_list),function(g){
     z<-e$ttop_list[[g]];z<-z[match(kd$ID,z$ID),]
     data.frame(knockdown=g,n_lipids=nrow(kd),max_abs_delta_saved_t=max(abs(kd[[g]]-z$t)))

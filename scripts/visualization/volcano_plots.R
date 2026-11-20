@@ -235,7 +235,7 @@ volcano_nice <- function(df, hAss = 0.05, FCIndex, pValIndex, IDIndex, vAss = NU
 #'
 #' # Save plots
 #' create_volcano_plots(ttop_list, save_plots = TRUE,
-#'                      output_dir = "results/pseudobulk/volcanos/")
+#'                      output_dir = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos/")
 #'
 #' @export
 create_volcano_plots <- function(ttop_list,

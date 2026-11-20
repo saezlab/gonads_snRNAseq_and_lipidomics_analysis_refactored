@@ -103,12 +103,12 @@ comparisons_gdx <- list(
 
 | File | Change |
 |------|--------|
-| `results/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData` | Regenerated: 2 contrasts instead of 6 |
-| `results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv` | Regenerated: 2 columns instead of 6 |
-| `results/pseudobulk/gdx_validation_comparison.pdf` | Regenerated: may show different correlation |
-| `results/lipidomic/gdxhr_ttop_list.RData` | Regenerated: 2 contrasts instead of 6 |
-| `results/lipidomic/gdxhr_t_table.csv` | Regenerated: 2 columns instead of 6 |
-| `results/lipidomic/fcg_gdx_correlation.pdf` | Regenerated: may show different correlation |
+| `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData` | Regenerated: 2 contrasts instead of 6 |
+| `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv` | Regenerated: 2 columns instead of 6 |
+| `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdx_validation_comparison.pdf` | Regenerated: may show different correlation |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_ttop_list.RData` | Regenerated: 2 contrasts instead of 6 |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_t_table.csv` | Regenerated: 2 columns instead of 6 |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation.pdf` | Regenerated: may show different correlation |
 
 ---
 
@@ -144,7 +144,7 @@ comparisons_gdx <- list(
   - **B8b.** Load existing pre-trained model but regenerate weights/networks from new data
     - Risk: Factor structure may not match if expression differences are large enough
 - Verify Factor 1 still shows strong gonadal association (R² ~ 0.8)
-- Regenerate all network files in `results/mofa/networks/`
+- Regenerate all network files in `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/`
 
 #### B9. Re-run workflows 05-08
 

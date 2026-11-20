@@ -1,5 +1,0 @@
-"context","sex","zone","gene_old","n_edges_old","status_old","evaluated_old","gene_new","n_edges_new","status_new","evaluated_new"
-"female_PC","female","PC","Cyp3a41a",6,"Exploratory selected example",TRUE,"Cyp3a41a",6,"Exploratory selected example",TRUE
-"female_PP","female","PP","Fmo3",6,"Exploratory selected example",TRUE,"Fmo3",6,"Exploratory selected example",TRUE
-"male_PC","male","PC","Osbpl3",6,"Exploratory selected example",TRUE,"Osbpl3",6,"Exploratory selected example",TRUE
-"male_PP","male","PP","Col27a1",6,"Exploratory selected example",TRUE,"Col27a1",6,"Exploratory selected example",TRUE

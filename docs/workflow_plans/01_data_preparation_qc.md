@@ -47,7 +47,7 @@ source("scripts/core/pseudobulk_csv.R")
 
 | # | Section | Lines (approx) | Description |
 |---|---------|----------------|-------------|
-| 1 | Configuration | 51-80 | Load config/helpers and create `results/qc` and `data/RNA`. |
+| 1 | Configuration | 51-80 | Load config/helpers and create `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc` and `data/RNA`. |
 | 2 | Load Seurat Object | 83-148 | Read `data/RNA/fcg_pseudobulks.rds` and inspect assay layers. |
 | 3 | Extract Metadata | 151-238 | Extract pseudobulk metadata and write `meta_data_df.csv`. |
 | 4 | QC Metrics | 241-331 | Count pseudobulks per mouse/cell type, design balance, and write QC tables/plots. |
@@ -56,7 +56,7 @@ source("scripts/core/pseudobulk_csv.R")
 | 7 | Split and Save Data Files | 416-477 | Split by sample columns into three CSV files, keeping all genes in each file. |
 | 8 | Initial Exploratory Analysis | 480-626 | Reload split files and metadata, then create PCA diagnostics. |
 | 9 | Data Validation | 630-696 | Check missing/infinite values, variance, range, duplicates, and sample completeness. |
-| 10 | QC Report | 699-792 | Write `results/qc/data_quality_report.txt`. |
+| 10 | QC Report | 699-792 | Write `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/data_quality_report.txt`. |
 | 11 | Current zonation CSV conversion | 797-875 | Read `current_fcg_zonation_transport` and write registered FCG compatibility CSV/metadata if the manifest is present. |
 | 12 | GDX CSV Conversion | 876-988 | Convert `data/RNA/gdx_pseudobulks.rds` to split GDX CSV/metadata if present. |
 | - | Complete | 990-1021 | Print output summary. |
@@ -80,13 +80,13 @@ source("scripts/core/pseudobulk_csv.R")
 - `data/RNA/scaled_RNA_gdxhr_2.csv`
 - `data/RNA/scaled_RNA_gdxhr_3.csv`
 - `data/RNA/meta_data_df_gdxhr.csv`
-- `results/qc/data_quality_report.txt`
-- `results/qc/pseudobulk_per_biosample.pdf`
-- `results/qc/pseudobulk_per_celltype.pdf`
-- `results/qc/sample_celltype_design.csv`
-- `results/qc/samples_per_group_celltype.csv`
-- `results/qc/PCA_all_samples_by_celltype.pdf`
-- `results/qc/PCA_[CellType].pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/data_quality_report.txt`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/pseudobulk_per_biosample.pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/pseudobulk_per_celltype.pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/sample_celltype_design.csv`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/samples_per_group_celltype.csv`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/PCA_all_samples_by_celltype.pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/PCA_[CellType].pdf`
 
 ## Key Variables
 

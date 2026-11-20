@@ -93,7 +93,7 @@ compare_tables <- function(reference, regenerated, files) {
 }
 wp1_out <- replay_path("wp1-output")
 if (!is.null(wp1_out)) {
-  old <- "results/validation/cyp2c38_in_vivo"
+  old <- "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo"
   compare_tables(old, wp1_out, c("differential_primary_all.csv", "t_statistic_matrix.csv",
     "feature_annotation_and_QC_ledger.csv", "fixed_reference_and_matching_ledger.csv"))
   columns <- c("reference_universe", "contrast", "reference_set", "n_matched_lipids",

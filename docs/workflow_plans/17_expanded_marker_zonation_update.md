@@ -3,11 +3,10 @@
 ## Maintained entry and release
 
 Entry: `scripts/workflows/17_expanded_marker_zonation_update.R`.
-`analysis_path("current_root")` selects the immutable approved release
-`results/zonation_marker_update_20261116/`. A fresh scientific run must supply
+`analysis_path("current_root")` selects the published `results/current/` layout. The previous complete run resides in the ignored archive. A fresh scientific run must supply
 `--output=results/runs/NAME`. Before any staging or writes, full scientific and
 full manuscript-audit modes call `analysis_assert_not_approved_output()`, rejecting
-the approved root and every descendant even when ignored caches are absent;
+the published root, legacy archive and their descendants even when ignored caches are absent;
 home-directory and symlink aliases are resolved; unresolved dangling symlinks
 are refused. Existing `cf453_models/models.rds` or
 `fcg05/zonation_ttop_list.RData` additionally trigger the completed-run guard.
@@ -34,10 +33,10 @@ local R-library preference, not part of the distributed environment.
 | `current_fcg_zonation_transport`, `current_gdx_zonation_transport`, `current_wdsd_zonation_transport` | Supplied expanded-marker counts/data/scale CSV transports | Shipped manifests and all payloads under `data/RNA/pseudobulk_csv/`; original RDS identities retained only as provenance |
 | `wdsd_hepatocytes_transport` and `data/metabolomics/wdsd/lipidomics_cf453.csv` | Mandatory additional Workflow14 intake, even in models-only mode | Shipped; not replaced by `--source-root` or the staged WDSD zones |
 | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | Original FCG whole-liver lipids used by the current FCG gene-lipid calculations | Shipped; loaded directly, with the established log2 transform |
-| `results/lipidomic/ttop_full_list.RData` | Workflow03 gonadal lipid effects used by class/sex displays | Required full-run upstream output; shipped current artifact |
-| `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | Workflow03 lipid-class enrichment display source | Required full-run upstream output; shipped current artifact |
-| `results/lipidomic/structural_model/lipids_with_structure.csv` | Workflow06 structural reference used by the zonal07 structural-consistency plot ranges | Required when that structural branch has matched data; supplied current artifact; regenerate06 if absent |
-| `results/validation/knockdown_t_table.csv`, `knockdown_ttop_list.RData` | Workflow07 independent KD fit artifacts, reused without refitting raw experiments | Required: CSV supplies KD t statistics; RData is also required by validation/provenance checks |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData` | Workflow03 gonadal lipid effects used by class/sex displays | Required full-run upstream output; shipped current artifact |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | Workflow03 lipid-class enrichment display source | Required full-run upstream output; shipped current artifact |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv` | Workflow06 structural reference used by the zonal07 structural-consistency plot ranges | Required when that structural branch has matched data; supplied current artifact; regenerate06 if absent |
+| `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv`, `knockdown_ttop_list.RData` | Workflow07 independent KD fit artifacts, reused without refitting raw experiments | Required: CSV supplies KD t statistics; RData is also required by validation/provenance checks |
 | `support/TF_regulons.RData`, `support/Gonadal_Hormone_Genes.csv`, `support/m5.all.v2023.2.Mm.symbols.gmt` | Supplied TF/pathway resources used by FCG05 | Shipped; pathway ULM is recalculated, not read from the old05 cache |
 | `engine_fcg05`, `engine_validation07` | Frozen internal implementation engines, with versioned adapters | Shipped code; do not execute as unreviewed public legacy entries |
 
@@ -92,7 +91,7 @@ files separately from the original source-RDS identity. No normalization changes
 
 ## Outputs and parent graph
 
-Default components are `<current_root>/inputs`, `fcg05`, `fcg07`, `gdx_zonation`,
+Fresh run components under `--output` are `inputs`, `fcg05`, `fcg07`, `gdx_zonation`,
 `cf453_models`, `cf453_direct_diet`, `cf453_rewiring`, `cf453_layouts`, `runtime`,
 `logs` and QA/manifests. `cf453_models/models.rds` feeds15 and16;
 `cf453_direct_diet/diet_analysis.rds` additionally feeds16;
@@ -102,8 +101,7 @@ No stage infers a sibling fresh parent unless the orchestrator passes it.
 Curated panels, source tables, methods/legends and public manifests are supplied.
 Generated RDS/RData model, bootstrap and runtime caches are local/ignored and
 must be regenerated into a fresh run or restored before saved-result modes.
-The public report PDF and numeric replacement ledger do not make its private
-manuscript-audit inputs public. The HTML/full paragraph extraction remains local.
+The original report and numerical replacement ledger are kept in the local archive. `--report-only` requires `--output` pointing to a complete writable saved run outside the published tree and legacy archive.
 Current source tables exist independently of the optional formal-copy step.
 
 Figure4A/S4B–C composition/nucleus QC and exact executed retained-marker
@@ -124,7 +122,7 @@ inputs, analyses, figure bundles and the manuscript itself.
 
 ### Scope and inputs
 
-Output root: `results/zonation_marker_update_20261116/`.
+Output root: `results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/`.
 Updated source files reside in the user-specified original-datasets
 snRNAseq_seurat_objects folder: fcg/gdx/wdsd_zonation_pseudobulks_score.rds.
 Copy bytes to versioned inputs/{fcg,gdx,wdsd}/, record SHA256 and source paths.

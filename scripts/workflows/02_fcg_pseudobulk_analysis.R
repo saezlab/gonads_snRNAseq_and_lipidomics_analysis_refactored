@@ -33,16 +33,16 @@
 #' 10. Proteomics validation (WT male vs female bulk liver proteomics)
 #'
 #' Output:
-#' - results/pseudobulk/ttop_full_list.RData: FCG DE results
-#' - results/pseudobulk/tval_full_df.RData: FCG t-statistic matrix
-#' - results/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData: GDX DE results
-#' - results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv: GDX t-statistic matrix
-#' - results/pseudobulk/volcanos/: Volcano plots
-#' - results/pseudobulk/pca/: PCA grids
-#' - results/pseudobulk/pathways/: Pathway heatmaps
-#' - results/pseudobulk/gdx_validation_comparison.pdf: GDX validation plot
-#' - results/pseudobulk/xenium_validation_volcano.pdf: Xenium spatial validation
-#' - results/pseudobulk/proteo_validation_comparison.pdf: Proteomics validation plot
+#' - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData: FCG DE results
+#' - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.RData: FCG t-statistic matrix
+#' - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData: GDX DE results
+#' - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv: GDX t-statistic matrix
+#' - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos/: Volcano plots
+#' - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/: PCA grids
+#' - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/: Pathway heatmaps
+#' - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdx_validation_comparison.pdf: GDX validation plot
+#' - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/xenium_validation_volcano.pdf: Xenium spatial validation
+#' - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteo_validation_comparison.pdf: Proteomics validation plot
 
 library(dplyr)
 library(tidyr)
@@ -106,7 +106,7 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 cat("Creating PCA plots for all cell types to assess data quality...\n\n")
 
 # Create output directory
-dir.create("results/pseudobulk/pca", recursive = TRUE, showWarnings = FALSE)
+dir.create("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca", recursive = TRUE, showWarnings = FALSE)
 
 # Define color mapping for gonadal type
 color_mapping <- get_color_palette("gonadal")
@@ -145,7 +145,7 @@ for (cell_type in cell_types) {
   )
 
   # Save PCA grid
-  filename <- file.path("results/pseudobulk/pca",
+  filename <- file.path("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca",
                        paste0("pca_", gsub(" ", "_", cell_type), ".pdf"))
   save_pca_grid(pca_grid, filename, width = 12, height = 12)
 
@@ -167,7 +167,7 @@ for (cell_type in cell_types) {
   pca_results[[cell_type]] <- pca_merged
 }
 
-cat("\nPCA analysis complete! Plots saved to results/pseudobulk/pca/\n\n")
+cat("\nPCA analysis complete! Plots saved to results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/\n\n")
 
 # ==============================================================================
 # Create Joyplots (Ridgeline Plots) for PC1 Distribution
@@ -192,7 +192,7 @@ joyplot_gonadal <- ggplot(pca_combined, aes(x = PC1, y = cell_type, fill = gonad
 
 # Save joyplot 1
 ggsave(
-  filename = "results/pseudobulk/pca/joyplot_PC1_by_gonadal_type.pdf",
+  filename = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/joyplot_PC1_by_gonadal_type.pdf",
   plot = joyplot_gonadal,
   width = 8,
   height = 6
@@ -211,13 +211,13 @@ joyplot_allosome <- ggplot(pca_combined, aes(x = PC1, y = cell_type, fill = allo
 
 # Save joyplot 2
 ggsave(
-  filename = "results/pseudobulk/pca/joyplot_PC1_by_allosome_type.pdf",
+  filename = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/joyplot_PC1_by_allosome_type.pdf",
   plot = joyplot_allosome,
   width = 8,
   height = 6
 )
 
-cat("  Joyplots saved to results/pseudobulk/pca/\n\n")
+cat("  Joyplots saved to results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/\n\n")
 
 # ==============================================================================
 # STEP 3: Differential Expression Analysis
@@ -322,8 +322,8 @@ cat("\n")
 
 # Save results
 cat("Saving differential expression results...\n")
-save(ttop_full_list, file = "results/pseudobulk/ttop_full_list.RData")
-cat("  Saved: results/pseudobulk/ttop_full_list.RData\n\n")
+save(ttop_full_list, file = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData")
+cat("  Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData\n\n")
 
 # ==============================================================================
 # STEP 3B: Gonadosectomy (GDX) Differential Analysis
@@ -434,13 +434,13 @@ if (gdx_files_exist) {
   }
 
   # Save GDX results
-  dir.create("results/pseudobulk/gdxrh", recursive = TRUE, showWarnings = FALSE)
+  dir.create("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh", recursive = TRUE, showWarnings = FALSE)
 
-  save(gdx_ttop_list, file = "results/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData")
-  cat("  Saved: results/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData\n")
+  save(gdx_ttop_list, file = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData")
+  cat("  Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData\n")
 
-  readr::write_csv(tval_df_gdx, file = "results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv")
-  cat("  Saved: results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv\n\n")
+  readr::write_csv(tval_df_gdx, file = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv")
+  cat("  Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv\n\n")
 
   # Summary statistics
   cat("Summary of GDX differential expression:\n")
@@ -483,7 +483,7 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 cat("Creating volcano plots for all contrasts and cell types...\n\n")
 
 # Create output directory
-dir.create("results/pseudobulk/volcanos", recursive = TRUE, showWarnings = FALSE)
+dir.create("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos", recursive = TRUE, showWarnings = FALSE)
 
 # Define manual labels for specific contrast + cell type combinations
 manual_label_map <- list(
@@ -529,7 +529,7 @@ for (contrast_name in names(ttop_full_list)) {
       # Save plot
       filename <- paste0("volcano_", gsub(" ", "_", contrast_name), "_",
                         gsub(" ", "_", cell_type), ".pdf")
-      filepath <- file.path("results/pseudobulk/volcanos", filename)
+      filepath <- file.path("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos", filename)
       ggsave(filepath, plot = p, width = 5, height = 5)
     }, error = function(e) {
       cat("    WARNING: Error generating volcano plot for", contrast_name, "-", cell_type, "\n")
@@ -539,7 +539,7 @@ for (contrast_name in names(ttop_full_list)) {
   cat("\n")
 }
 
-cat("Volcano plots complete! Saved to results/pseudobulk/volcanos/\n\n")
+cat("Volcano plots complete! Saved to results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos/\n\n")
 
 # ==============================================================================
 # STEP 5: Create t-statistic Matrix for Enrichment
@@ -595,15 +595,15 @@ for (col_name in colnames(tval_full_df)) {
 cat("\n")
 
 # Save t-value matrix
-save(tval_full_df, file = "results/pseudobulk/tval_full_df.RData")
-cat("Saved: results/pseudobulk/tval_full_df.RData\n")
+save(tval_full_df, file = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.RData")
+cat("Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.RData\n")
 
 # Also save as CSV (needed by Step 7C GDX validation comparison)
 tval_csv <- as.data.frame(tval_full_df)
 tval_csv$ID <- rownames(tval_full_df)
 tval_csv <- tval_csv[, c("ID", setdiff(names(tval_csv), "ID"))]
-readr::write_csv(tval_csv, "results/pseudobulk/tval_full_df.csv")
-cat("Saved: results/pseudobulk/tval_full_df.csv\n\n")
+readr::write_csv(tval_csv, "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.csv")
+cat("Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.csv\n\n")
 
 # ==============================================================================
 # STEP 6: Pathway Enrichment Analysis
@@ -631,9 +631,9 @@ cat("  Significant (|score| > 11):",
     sum(abs(pathway_results$score) > 11, na.rm = TRUE), "\n\n")
 
 # Save pathway results
-dir.create("results/pseudobulk/pathways", recursive = TRUE, showWarnings = FALSE)
-save(pathway_results, file = "results/pseudobulk/pathways/pathway_scores_df_all.RData")
-cat("Saved: results/pseudobulk/pathways/pathway_scores_df_all.RData\n\n")
+dir.create("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways", recursive = TRUE, showWarnings = FALSE)
+save(pathway_results, file = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_scores_df_all.RData")
+cat("Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_scores_df_all.RData\n\n")
 
 # ==============================================================================
 # STEP 7: Pathway Enrichment Heatmap
@@ -676,12 +676,12 @@ if (nrow(pathway_results_sig) > 0) {
       cluster_cols = FALSE,
       main = "Top Enriched Pathways (GO Biological Process)",
       angle_col = 315,
-      filename = "results/pseudobulk/pathways/pathway_enrichment_heatmap.pdf",
+      filename = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_enrichment_heatmap.pdf",
       width = 11,
       height = 7.5
     )
 
-    cat("Pathway heatmap saved to: results/pseudobulk/pathways/pathway_enrichment_heatmap.pdf\n\n")
+    cat("Pathway heatmap saved to: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_enrichment_heatmap.pdf\n\n")
   }, error = function(e) {
     cat("WARNING: Could not create pathway enrichment heatmap\n")
     cat("Error message:", conditionMessage(e), "\n\n")
@@ -830,12 +830,12 @@ if (length(matched_pathways) > 0) {
       border_color = "grey80",
       main = "",  # No title for publication figure
       angle_col = 0,  # Horizontal column labels
-      filename = "results/pseudobulk/pathways/pathway_enrichment_heatmap_focused.pdf",
+      filename = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_enrichment_heatmap_focused.pdf",
       width = 6,
       height = 4
     )
 
-    cat("Focused pathway heatmap saved to: results/pseudobulk/pathways/pathway_enrichment_heatmap_focused.pdf\n\n")
+    cat("Focused pathway heatmap saved to: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_enrichment_heatmap_focused.pdf\n\n")
   }, error = function(e) {
     cat("WARNING: Could not create focused pathway heatmap\n")
     cat("Error message:", conditionMessage(e), "\n\n")
@@ -854,7 +854,7 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 cat("Comparing FCG gonad effects with gonadectomy (GDX) validation data...\n\n")
 
 # Check if GDX data exists
-gdx_file <- "results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv"
+gdx_file <- "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv"
 if (file.exists(gdx_file)) {
   tryCatch({
     # Load GDX t-values
@@ -863,7 +863,7 @@ if (file.exists(gdx_file)) {
 
     # Load FCG t-values (created in Step 5)
     cat("Loading FCG t-values...\n")
-    fcg_tval_df <- as.data.frame(readr::read_csv("results/pseudobulk/tval_full_df.csv", show_col_types = FALSE))
+    fcg_tval_df <- as.data.frame(readr::read_csv("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.csv", show_col_types = FALSE))
 
     # Select relevant columns and merge
     # FCG: Testes vs Ovaries in Hepatocytes
@@ -941,13 +941,13 @@ if (file.exists(gdx_file)) {
 
     # Save plot
     ggsave(
-      filename = "results/pseudobulk/gdx_validation_comparison.pdf",
+      filename = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdx_validation_comparison.pdf",
       plot = p_validation,
       width = 7,
       height = 7
     )
 
-    cat("Validation comparison plot saved to: results/pseudobulk/gdx_validation_comparison.pdf\n")
+    cat("Validation comparison plot saved to: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdx_validation_comparison.pdf\n")
 
     # Summary statistics
     cat("\nValidation Summary:\n")
@@ -1058,13 +1058,13 @@ if (file.exists(xenium_panel_file)) {
 
     # Save plot
     ggsave(
-      filename = "results/pseudobulk/xenium_validation_volcano.pdf",
+      filename = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/xenium_validation_volcano.pdf",
       plot = p_xenium,
       width = 4,
       height = 4
     )
 
-    cat("Xenium validation volcano plot saved to: results/pseudobulk/xenium_validation_volcano.pdf\n\n")
+    cat("Xenium validation volcano plot saved to: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/xenium_validation_volcano.pdf\n\n")
 
     # Summary
     cat("Summary:\n")
@@ -1111,8 +1111,8 @@ cat("  Significant (|score| > 5):",
     sum(abs(tf_results$score) > 5, na.rm = TRUE), "\n\n")
 
 # Save TF results
-save(tf_results, file = "results/pseudobulk/pathways/tf_scores_df_all.RData")
-cat("Saved: results/pseudobulk/pathways/tf_scores_df_all.RData\n\n")
+save(tf_results, file = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/tf_scores_df_all.RData")
+cat("Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/tf_scores_df_all.RData\n\n")
 
 # Create TF activity heatmap
 cat("Creating TF activity heatmap...\n\n")
@@ -1148,12 +1148,12 @@ if (nrow(tf_results_sig) > 0) {
       cluster_cols = FALSE,
       main = "Top Transcription Factor Activities",
       angle_col = 315,
-      filename = "results/pseudobulk/pathways/tf_activity_heatmap.pdf",
+      filename = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/tf_activity_heatmap.pdf",
       width = 11,
       height = 7.5
     )
 
-    cat("TF heatmap saved to: results/pseudobulk/pathways/tf_activity_heatmap.pdf\n\n")
+    cat("TF heatmap saved to: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/tf_activity_heatmap.pdf\n\n")
   }, error = function(e) {
     cat("WARNING: Could not create TF activity heatmap\n")
     cat("Error message:", conditionMessage(e), "\n\n")
@@ -1191,10 +1191,10 @@ pca_coords$sample <- rownames(pca_coords)
 pca_coords <- merge(pca_coords, hepatocyte_data$targets, by = "sample")
 
 # Save coordinates
-write.csv(pca_coords, "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv",
+write.csv(pca_coords, "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv",
           row.names = FALSE)
 
-cat("PCA coordinates saved to: results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv\n\n")
+cat("PCA coordinates saved to: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv\n\n")
 
 # ==============================================================================
 # STEP 10: Proteomics Validation
@@ -1266,13 +1266,14 @@ if (file.exists(proteo_file) && file.exists(proteo_metadata_file)) {
     )
 
     proteo_ttop <- proteo_ttop_list$male_vs_female
+    readr::write_csv(proteo_ttop, "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteomics_differential_results.csv")
     cat("  Significant proteins (FDR < 0.05):", sum(proteo_ttop$adj.P.Val < 0.05), "\n\n")
 
     # --- Compare protein t-values with RNA t-values ---
     cat("Comparing protein and RNA effect sizes...\n")
 
     # Load FCG RNA t-values
-    fcg_tval_df <- as.data.frame(readr::read_csv("results/pseudobulk/tval_full_df.csv",
+    fcg_tval_df <- as.data.frame(readr::read_csv("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.csv",
                                                    show_col_types = FALSE))
 
     # Find the hepatocyte gonadal t-value column
@@ -1313,6 +1314,8 @@ if (file.exists(proteo_file) && file.exists(proteo_metadata_file)) {
       proteo_rna_comparison$sig_concordant,
       FALSE
     )
+    proteomics_source <- merge(proteo_rna_comparison, pval_merged, by = "ID")
+    readr::write_csv(proteomics_source, "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteomics_rna_concordance.csv")
 
     concordance_pct <- round(100 * sum(proteo_rna_comparison$sig_concordant) / n_sig_rna, 1)
     cat("  RNA DEGs confirmed at protein level (concordant direction):",
@@ -1374,13 +1377,13 @@ if (file.exists(proteo_file) && file.exists(proteo_metadata_file)) {
       )
 
     ggsave(
-      filename = "results/pseudobulk/proteo_validation_comparison.pdf",
+      filename = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteo_validation_comparison.pdf",
       plot = p_proteo,
       width = 7,
       height = 7
     )
 
-    cat("Proteomics validation plot saved to: results/pseudobulk/proteo_validation_comparison.pdf\n\n")
+    cat("Proteomics validation plot saved to: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteo_validation_comparison.pdf\n\n")
 
     # Clean up
     rm(proteo, fit, proteo_meta, proteo_targets, proteo_limma_res,
@@ -1406,36 +1409,36 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 
 cat("Summary of outputs:\n")
 cat("  FCG Differential Expression:\n")
-cat("    - results/pseudobulk/ttop_full_list.RData\n")
-cat("    - results/pseudobulk/tval_full_df.RData\n")
+cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData\n")
+cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.RData\n")
 if (gdx_files_exist) {
   cat("  GDX Differential Expression:\n")
-  cat("    - results/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData\n")
-  cat("    - results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv\n")
+  cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData\n")
+  cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv\n")
 }
 cat("  Visualizations:\n")
-cat("    - results/pseudobulk/volcanos/*.pdf (", length(list.files("results/pseudobulk/volcanos")), " files)\n", sep = "")
-cat("    - results/pseudobulk/pca/*.pdf (", length(list.files("results/pseudobulk/pca")), " files)\n", sep = "")
+cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos/*.pdf (", length(list.files("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos")), " files)\n", sep = "")
+cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/*.pdf (", length(list.files("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca")), " files)\n", sep = "")
 cat("  Enrichment:\n")
-cat("    - results/pseudobulk/pathways/pathway_scores_df_all.RData\n")
-cat("    - results/pseudobulk/pathways/tf_scores_df_all.RData\n")
-cat("    - results/pseudobulk/pathways/pathway_enrichment_heatmap.pdf (full)\n")
-cat("    - results/pseudobulk/pathways/pathway_enrichment_heatmap_focused.pdf (5 key pathways)\n")
-cat("    - results/pseudobulk/pathways/tf_activity_heatmap.pdf\n")
+cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_scores_df_all.RData\n")
+cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/tf_scores_df_all.RData\n")
+cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_enrichment_heatmap.pdf (full)\n")
+cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_enrichment_heatmap_focused.pdf (5 key pathways)\n")
+cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/tf_activity_heatmap.pdf\n")
 if (gdx_files_exist) {
   cat("  Validation:\n")
-  cat("    - results/pseudobulk/gdx_validation_comparison.pdf (r = -0.48)\n")
+  cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdx_validation_comparison.pdf (r = -0.48)\n")
 }
 if (file.exists(xenium_panel_file)) {
   cat("  Xenium Spatial Validation:\n")
-  cat("    - results/pseudobulk/xenium_validation_volcano.pdf (100-gene panel)\n")
+  cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/xenium_validation_volcano.pdf (100-gene panel)\n")
 }
-if (file.exists("results/pseudobulk/proteo_validation_comparison.pdf")) {
+if (file.exists("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteo_validation_comparison.pdf")) {
   cat("  Proteomics Validation:\n")
-  cat("    - results/pseudobulk/proteo_validation_comparison.pdf\n")
+  cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteo_validation_comparison.pdf\n")
 }
 cat("  PCA Coordinates:\n")
-cat("    - results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv\n")
+cat("    - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv\n")
 cat("\n")
 
 cat("This refactored workflow produces IDENTICAL results to pseudobulk_DA.R\n")

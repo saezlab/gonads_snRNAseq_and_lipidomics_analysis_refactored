@@ -29,7 +29,7 @@ stopifnot(abs(u["score"] - fit_ols["t value"]) < 1e-10,
           is.na(wp1_ulm_stats(prediction, replace(effect, 1L, NA_real_))["score"]))
 
 # Replay all historical nominal ULM scores/p-values directly from persisted input.
-out <- "results/validation/cyp2c38_in_vivo"
+out <- "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo"
 old <- utils::read.csv(file.path(out, "signed_ULM_descriptive_scores.csv"))
 ledger <- utils::read.csv(file.path(out, "fixed_reference_and_matching_ledger.csv"))
 ledger <- ledger[ledger$match_status == "unique_exact", ]

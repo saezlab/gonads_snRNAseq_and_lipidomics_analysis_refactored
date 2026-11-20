@@ -225,7 +225,7 @@ tables, input/model/code SHA256 and session provenance, without all-edge analysi
 or the historical 30-panel set. Saved-result modes reject a new input override.
 
 The marker-score input is staged under
-`results/zonation_marker_update_20261116/inputs/wdsd/`; the new cache is
+`results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/inputs/wdsd/`; the new cache is
 `cf453_models/` under that version root. The unchanged eligibility rule retains
 18,604 genes; mouse correlation is 0.7859836. The existing three-test family
 identifies 570 SD sex-by-zone, 621 WD sex-by-zone and 185 three-way genes.

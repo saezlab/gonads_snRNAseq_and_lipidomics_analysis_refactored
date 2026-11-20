@@ -220,7 +220,7 @@ qa_cf453_diet_impact <- function(analysis_file,
   source_paths <- unlist(a$source_paths, use.names = TRUE)
   parent_path <- source_paths[basename(source_paths) == "models.rds"]
   stopifnot(length(parent_path) == 1L, file.exists(parent_path),
-            !any(grepl("CF459|scaled_RNA|results/zonation/|results/mofa/", source_paths)))
+            !any(grepl("CF459|scaled_RNA|results/zonation/|results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/", source_paths)))
   parent <- readRDS(parent_path)
   same(y, parent$modeled_rna, "All modeled RNA values unchanged from validated same-cohort parent")
   same(x, parent$design, "Eight-cell design unchanged from validated same-cohort parent")

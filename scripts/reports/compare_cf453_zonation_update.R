@@ -1,6 +1,7 @@
 source("scripts/config/analysis_release.R")
 # Observed old/new CF453 audit tables; no model or resampling is executed here.
-cf453_compare_zonation_update <- function(root=analysis_current()) {
+cf453_compare_zonation_update <- function(root) {
+  analysis_assert_not_approved_output(root)
   output<-file.path(root,"comparisons");dir.create(output,recursive=TRUE,showWarnings=FALSE)
   paths<-c(old_models=file.path(analysis_path("historical_cf453_models"),"models.rds"),
     new_models=file.path(root,"cf453_models/models.rds"),
@@ -79,4 +80,8 @@ cf453_compare_zonation_update <- function(root=analysis_current()) {
   cat("CF453 old/new comparisons written:",length(list.files(output,pattern="^cf453_.*[.]csv$")),"CSV files; chain checks pass\n")
   invisible(output)
 }
-if(sys.nframe()==0L){args<-commandArgs(TRUE);cf453_compare_zonation_update(if(length(args))args[1L] else analysis_current())}
+if(sys.nframe()==0L){
+  args<-commandArgs(TRUE)
+  if(length(args)!=1L)stop("Supply a complete saved Workflow 17 run directory")
+  cf453_compare_zonation_update(args[1L])
+}

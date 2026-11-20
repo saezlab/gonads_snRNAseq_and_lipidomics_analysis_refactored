@@ -217,7 +217,7 @@ Gene and lipid counts and both 6A layout counts are data-driven; historical
 Current defaults now select the approved expanded-marker parents/output;
 explicit historical parents remain supported.
 
-The new full result is `results/zonation_marker_update_20261116/cf453_rewiring/`.
+The new full result is `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/`.
 All eight bins still support five anchors: 40 selections, 35 distinct genes,
 fixed female PP9/PC7 and male PP9/PC10 programmes. Four SD-selected and six
 WD-selected arrows have direct three-way q<=0.05. There are 79,030 selected-family

@@ -14,6 +14,7 @@ zu_source_input <- function(cohort,source_root=analysis_path("pseudobulk_csv_roo
 }
 
 zu_stage_inputs <- function(output=analysis_current(),source_root=analysis_path("pseudobulk_csv_root")) {
+  analysis_assert_not_approved_output(output)
   source("scripts/core/pseudobulk_csv.R",local=TRUE)
   if(file.exists(file.path(output,"fcg05/fcg05_checkpoint.rds")))
     stop("Preserve completed release inputs: staging requires a fresh output directory")
@@ -54,4 +55,8 @@ zu_stage_inputs <- function(output=analysis_current(),source_root=analysis_path(
   utils::write.csv(do.call(rbind,qc),file.path(output,"inputs/cohort_qc.csv"),row.names=FALSE)
   print(do.call(rbind,qc));invisible(list(qc=qc,sources=unlist(sources),imports=imports))
 }
-if(sys.nframe()==0L)zu_stage_inputs()
+if(sys.nframe()==0L){
+  args<-commandArgs(TRUE)
+  if(length(args)!=1L||!grepl("^--output=.+",args))stop("Use --output= for a fresh run directory")
+  zu_stage_inputs(sub("^--output=","",args))
+}

@@ -6,7 +6,7 @@
 - Implementation: `scripts/core/zonation_update_fcg.R`, which reads the immutable
   `engine_fcg05` body at `scripts/core/engines/05_zonation_analysis_legacy.R`.
 - Default input directory: the parent of registry `current_fcg_zonation_csv`.
-  Default output root: registry `current_root` (`results/zonation_marker_update_20261116`).
+  Default output root: registry `current_root` (`results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116`).
 - `source()` defines functions; `Rscript` calls `fcg_zonation_run()`. Supported
   arguments are only `--input=DIR`, `--output=ROOT`, and `--validate-only`.
 - A fit writes `<ROOT>/fcg05/` plus `<ROOT>/runtime/`. A completed
@@ -38,8 +38,8 @@ and cache behavior are implementation history rather than maintained defaults.
 | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | Curated whole-liver lipid data, read through `core/data_loading.R::load_lipidomic_data()`. |
 | `support/m5.all.v2023.2.Mm.symbols.gmt` | Curated GO-BP sets for fresh pathway ULM. |
 | `support/TF_regulons.RData`, `support/Gonadal_Hormone_Genes.csv` | Curated regulons/custom ESR1/AR target replacement. |
-| `results/lipidomic/ttop_full_list.RData` | Workflow03 lipid DE, used by the association presentation. |
-| `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | Workflow03 lipid-class enrichment, used for class ordering/presentation. |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData` | Workflow03 lipid DE, used by the association presentation. |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | Workflow03 lipid-class enrichment, used for class ordering/presentation. |
 
 These scientific prerequisites are distributed in the public tree with the R
 packages; no source Seurat object, Workflow02 DE, Workflow04/MOFA output, historical
@@ -130,7 +130,7 @@ coefficients. The approved root and historical engine/reference bytes are frozen
 The isolated adapter `scripts/core/zonation_update_fcg.R`, invoked through
 `scripts/reports/run_zonation_update_fcg.R`, reruns this workflow against the
 staged expanded-marker FCG zonation export under
-`results/zonation_marker_update_20261116/inputs/fcg/`. This paragraph records the isolated production run before the later default
+`results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/inputs/fcg/`. This paragraph records the isolated production run before the later default
 promotion. Historical inputs/results remain archived; current defaults are the
 maintained wrapper and registry paths documented above. Its versioned
 runtime copy and outputs are in `runtime/` and `fcg05/` under the update root.

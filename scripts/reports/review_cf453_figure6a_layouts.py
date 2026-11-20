@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "maintenance"))
-from repository_paths import analysis_path, resolve_manifest_path
+from repository_paths import analysis_current, resolve_manifest_path
 import xml.etree.ElementTree as ET
 import zipfile
 
@@ -100,7 +100,7 @@ def package(root, rows):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--output", default=str(analysis_path("current_root") / "cf453_layouts"))
+    p.add_argument("--output", default=str(analysis_current("cf453_layouts")))
     p.add_argument("--package", action="store_true")
     a = p.parse_args(); rows = review(a.output)
     if a.package:

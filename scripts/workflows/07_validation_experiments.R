@@ -12,8 +12,9 @@ zonation_validation_run <- function(args=commandArgs(TRUE)) {
     return(validation_global_run(output,validate_only="--validate-only"%in%args))
   }
   if(!"--validate-only"%in%args)analysis_assert_not_approved_output(output)
-  required<-c(file.path(output,"fcg05/fcg05_checkpoint.rds"),
-    "results/validation/knockdown_t_table.csv","results/validation/knockdown_ttop_list.RData")
+  checkpoint<-if(length(x))file.path(output,"fcg05/fcg05_checkpoint.rds") else analysis_current("fcg05/fcg05_checkpoint.rds")
+  required<-c(checkpoint,
+    "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv","results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData")
   zmu_require();stopifnot(all(file.exists(required)))
   if("--validate-only"%in%args){cat("Current zonation reference and unchanged KD fits validated; no files changed.\n");return(invisible(TRUE))}
   if(file.exists(file.path(output,"fcg07/fcg07_checkpoint.rds")))

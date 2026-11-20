@@ -104,7 +104,7 @@ species-rule prior.
 ## Coverage denominators and limits
 
 The build's mapping universe is 1,254 features from
-`results/lipidomic/gonade_type_ttop.csv`, not all 1,386 assay features. The
+`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gonade_type_ttop.csv`, not all 1,386 assay features. The
 curated graph contains exact-resolution chemical matches for only seven of
 these features; the rule extension connects 149 measured features separately.
 The build's “64 Factor 1 lipids” denotes the earlier correlation-network

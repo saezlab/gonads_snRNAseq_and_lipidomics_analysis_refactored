@@ -99,7 +99,7 @@ results$wf01 <- run_workflow(
 
 if (results$wf01) {
   cat("\nChecking outputs:\n")
-  check_file("results/qc/data_summary.txt", "Data summary report")
+  check_file("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/data_summary.txt", "Data summary report")
   check_file("data/RNA/scaled_RNA_1.csv", "RNA data part 1")
   check_file("data/RNA/scaled_RNA_2.csv", "RNA data part 2")
   check_file("data/RNA/scaled_RNA_3.csv", "RNA data part 3")
@@ -120,27 +120,27 @@ if (results$wf02) {
   cat("\nChecking outputs:\n")
 
   # Main results files
-  has_ttop <- check_file("results/pseudobulk/ttop_full_list.RData",
+  has_ttop <- check_file("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData",
                          "Differential expression results (ttop_full_list)")
-  has_tval <- check_file("results/pseudobulk/tval_full_df.RData",
+  has_tval <- check_file("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.RData",
                          "t-statistic matrix (tval_full_df)")
 
   # PCA plots
-  check_file("results/pseudobulk/pca/pca_Hepatocytes.pdf",
+  check_file("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/pca_Hepatocytes.pdf",
             "PCA plot - Hepatocytes")
-  check_file("results/pseudobulk/pca/pca_Endothelial_cells.pdf",
+  check_file("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/pca_Endothelial_cells.pdf",
             "PCA plot - Endothelial cells")
 
   # Volcano plots
-  check_file("results/pseudobulk/volcanos/volcano_gonadal_type_Hepatocytes.pdf",
+  check_file("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos/volcano_gonadal_type_Hepatocytes.pdf",
             "Volcano plot - Hepatocytes gonadal_type")
-  check_file("results/pseudobulk/volcanos/volcano_allosome_type_Hepatocytes.pdf",
+  check_file("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos/volcano_allosome_type_Hepatocytes.pdf",
             "Volcano plot - Hepatocytes allosome_type")
 
   # Validate key results
   if (has_ttop) {
     cat("\nValidating differential expression results...\n")
-    load("results/pseudobulk/ttop_full_list.RData")
+    load("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData")
 
     # Check structure
     expected_contrasts <- c("gonadal_type", "allosome_type",
@@ -192,17 +192,17 @@ results$wf03 <- run_workflow(
 if (results$wf03) {
   cat("\nChecking outputs:\n")
 
-  has_lipid_results <- check_file("results/lipidomic/ttop_full_list.RData",
+  has_lipid_results <- check_file("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData",
                                    "Lipidomic differential analysis results")
-  check_file("results/lipidomic/gonade_type_ttop.csv",
+  check_file("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gonade_type_ttop.csv",
             "Gonad-dependent lipids table")
-  check_file("results/lipidomic/pca_plot.pdf",
+  check_file("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/pca_plot.pdf",
             "Lipidomic PCA plot")
 
   # Validate key results
   if (has_lipid_results) {
     cat("\nValidating lipidomic results...\n")
-    load("results/lipidomic/ttop_full_list.RData")
+    load("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData")
 
     # Check gonadal_type results
     if ("gonadal_type" %in% names(ttop_full_list)) {
@@ -253,7 +253,7 @@ results$wf04 <- run_workflow(
 
 if (results$wf04) {
   cat("\nChecking outputs:\n")
-  check_file("results/mofa/main_model_RNA_lipid_weight.RData",
+  check_file("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData",
             "MOFA model weights")
   check_file("results/multi-omic/hepatocyte_TF_spec_gene_lipid_network_mofa_full50percent.Rdata",
             "Gene-lipid correlation network")
@@ -271,7 +271,7 @@ results$wf05 <- run_workflow(
 
 if (results$wf05) {
   cat("\nChecking outputs:\n")
-  check_file("results/pseudobulk/zonation/ttop_pericentral_vs_periportal.RData",
+  check_file("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/zonation/ttop_pericentral_vs_periportal.RData",
             "Zonation differential expression results")
 }
 

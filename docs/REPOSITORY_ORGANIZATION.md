@@ -14,11 +14,31 @@ The cleanup on 16 November 2026 promotes the approved expanded-marker analysis w
 | `tests/` | Maintained tests and independent numerical QA; generated test logs are not source |
 | `data/RNA/pseudobulk_csv/` | Public pseudobulk CSV parts under 50 MB, with verified source values and original-object provenance |
 | `data/RNA/zonation/current/` | Local expanded-marker source objects (excluded from Git), alongside retained scoring scripts and small compatibility CSVs |
-| `results/zonation_marker_update_20261116/` | Immutable current zonation, diet panels, source tables and completed revision audit |
-| Other main `results/` roots | Unchanged cell-type, lipid, MOFA, validation and optional active causal outputs |
+| `results/current/` | Published results by Results section |
+| `results/causal_modelling/` | Active optional causal outputs and priors |
+| `results/legacy/` | Git-ignored complete prior result roots and access to the historical archives |
 | `miscellaneous/` | Historical results, comparison branches, source, refactoring, scratch outputs and local state |
 
-The dated current output root is intentional: renaming its embedded paths would obscure the original production provenance. Current consumers resolve it through [analysis_release.json](../scripts/config/analysis_release.json), rather than inferring a default from folder age or old filenames.
+## Manuscript layout promotion
+
+On 20 November 2026, the verified current results were published under
+[the six Results sections](../results/README.md). The 16 November release remains
+the scientific baseline. The [promotion ledger](provenance/result_layout_20261120.csv)
+records each published path, original path, size and SHA-256. It also identifies
+the verified replay additions and the two Figure 5C tables exported with only
+the current rows. Preserved scientific files were copied byte for byte.
+
+The previous flat results, including the complete 16 November bundle, were
+moved into the ignored `results/legacy/pre_reorganization_baseline/` archive.
+The local relocation inventory verifies 807 archived files and links. Output
+versions, reports and comparisons omitted from the new tree remain available
+there. Former tracked paths can also be recovered from Git commit
+`8883c449f1a34675c2059e4d950264b19dffc994`. Private reviewer materials and meeting exports remain local.
+
+Current workflow paths are documented in the [registry](../scripts/config/analysis_release.json).
+Recorded paths resolve to a byte-identical published artifact when present
+and to the legacy copy when a file was kept locally. Archived records and
+their embedded paths retain their original bytes.
 
 ## Archive map
 

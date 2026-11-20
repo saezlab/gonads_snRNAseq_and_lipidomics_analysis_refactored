@@ -13,6 +13,7 @@ Run from the repository root. None of these tools stages, commits or pushes.
 | `build_pseudobulk_input_index.py` | Rebuild the public CSV/JSON input hash index; never includes RDS objects |
 | `repository_paths.py` | Shared Python resolver for original paths in immutable provenance |
 | `organize_repository.py` | Explicit dated migration implementation; do not rerun `--apply` on an already migrated checkout |
+| `replay_manuscript_results.py --scratch results/runs/NAME` | Recompute manuscript workflows into a parallel subsection layout using saved MOFA models and record execution paths and checksums |
 
 The release selection and prefix relocations are in `scripts/config/analysis_release.json`. The R counterpart is `scripts/config/analysis_release.R`. Exact moves, approved input copies and result inventories are under `docs/provenance/`.
 

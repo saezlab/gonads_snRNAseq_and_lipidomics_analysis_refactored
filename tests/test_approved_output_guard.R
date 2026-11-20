@@ -5,7 +5,7 @@ test_approved_output_guard <- function(){
   root<-tempfile("approved_guard_repo_");dir.create(file.path(root,"scripts/config"),recursive=TRUE)
   root<-normalizePath(root,mustWork=TRUE)
   on.exit(unlink(root,recursive=TRUE),add=TRUE)
-  jsonlite::write_json(list(schema_version=1L,paths=list(current_root="results/approved")),
+  jsonlite::write_json(list(schema_version=1L,paths=list(current_root="results/approved",legacy_results_root="results/legacy")),
     file.path(root,"scripts/config/analysis_release.json"),auto_unbox=TRUE)
   approved<-file.path(root,"results/approved")
   dir.create(file.path(approved,"fcg05"),recursive=TRUE)
@@ -17,6 +17,7 @@ test_approved_output_guard <- function(){
   }
   for(path in c(approved,file.path(approved,"missing_child"),"results/approved", "results/approved/new/../fcg05"))
     expect_guard(analysis_assert_not_approved_output(path,root))
+  expect_guard(analysis_assert_not_approved_output("results/legacy/old_run",root))
   alias<-file.path(root,"approved_alias")
   if(file.symlink(approved,alias)){
     expect_guard(analysis_assert_not_approved_output(file.path(alias,"new_child"),root))
@@ -72,7 +73,7 @@ test_approved_output_guard <- function(){
   stopifnot(isTRUE(driver$zonation_update_fcg_run("--postprocess-only")))
 
   seven<-new.env(parent=globalenv());sys.source("scripts/workflows/07_validation_experiments.R",envir=seven)
-  seven$analysis_current<-function(...)approved
+  seven$analysis_current<-function(component="",...)if(nzchar(component))file.path(approved,component) else approved
   seven$analysis_assert_not_approved_output<-function(output)analysis_assert_not_approved_output(output,root)
   seven$zmu_require<-function()TRUE
   fits07<-0L;seven$zmu_run07<-function(...){fits07<<-fits07+1L;invisible(TRUE)}
@@ -109,8 +110,11 @@ test_approved_output_guard <- function(){
   expect_guard(seventeen$zu17_run())
   expect_guard(seventeen$zu17_run("--with-manuscript-audit"))
   stopifnot(stage_calls==0L,isTRUE(seventeen$zu17_run("--validate-only")))
-  # Explicit report refresh is allowed; all subprocesses/directory writes are stubbed.
-  seventeen$zu17_run("--report-only")
+  # Full-run report refresh needs a saved work directory outside published/legacy paths.
+  error<-tryCatch(seventeen$zu17_run("--report-only"),error=identity)
+  stopifnot(inherits(error,"error"),grepl("saved Workflow 17 run",conditionMessage(error),fixed=TRUE))
+  expect_guard(seventeen$zu17_run(c("--report-only",paste0("--output=",approved))))
+  seventeen$zu17_run(c("--report-only",paste0("--output=",root,"/results/saved17")))
   stopifnot(length(commands)>0L)
 
   fourteen<-new.env(parent=globalenv());sys.source("scripts/workflows/14_cf453_standalone_figure6.R",envir=fourteen)

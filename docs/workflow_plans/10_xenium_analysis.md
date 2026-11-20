@@ -62,7 +62,7 @@ Intermediate inputs produced by earlier scripts:
 The raw Xenium files are external and not committed. Generated nucleus/cell-level
 AnnData, component JSON, CellCharter CSV and diagnostic figure files are local
 workflow products, not prerequisites shipped by the current pseudobulk release.
-Retained exports under `results/xenium/` do not automatically populate these
+Retained exports under `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/xenium/` do not automatically populate these
 folder-local inputs. This branch does not regenerate the deferred Figure 4A or
 S4B-C sci-RNA-seq nucleus-composition QC from pseudobulk data.
 

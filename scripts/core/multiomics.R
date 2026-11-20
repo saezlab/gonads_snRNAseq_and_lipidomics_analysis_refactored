@@ -174,7 +174,7 @@ prepare_mofa_input <- function(rna_data,
 #' Loads multiple pre-trained MOFA models for comparison.
 #'
 #' @param model_dir Character. Directory containing model files.
-#'                  Default: "results/mofa/RNA"
+#'                  Default: "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA"
 #' @param factor_range Numeric vector. Factor numbers to load. Default: 5:15
 #' @param verbose Logical. Print progress messages. Default: TRUE
 #'
@@ -183,7 +183,7 @@ prepare_mofa_input <- function(rna_data,
 #' @examples
 #' models <- load_mofa_models()
 #' selected_model <- models$model12
-load_mofa_models <- function(model_dir = "results/mofa/RNA",
+load_mofa_models <- function(model_dir = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA",
                              factor_range = 5:15,
                              verbose = TRUE) {
 
@@ -473,7 +473,7 @@ run_tf_enrichment_on_weights <- function(weights,
 #' @param weights List. MOFA weights (from extract_mofa_weights())
 #' @param tf_scores Matrix. TF scores (from run_tf_enrichment_on_weights())
 #' @param tf_view_name Character. Name for TF view. Default: "Hepatocytes_TFs"
-#' @param output_file Character. Output file path. Default: "results/mofa/main_model_RNA_lipid_weight.RData"
+#' @param output_file Character. Output file path. Default: "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData"
 #' @param verbose Logical. Print progress messages. Default: TRUE
 #'
 #' @examples
@@ -481,7 +481,7 @@ run_tf_enrichment_on_weights <- function(weights,
 save_mofa_weights_with_tfs <- function(weights,
                                        tf_scores,
                                        tf_view_name = "Hepatocytes_TFs",
-                                       output_file = "results/mofa/main_model_RNA_lipid_weight.RData",
+                                       output_file = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData",
                                        verbose = TRUE) {
 
   # Add TF view to weights

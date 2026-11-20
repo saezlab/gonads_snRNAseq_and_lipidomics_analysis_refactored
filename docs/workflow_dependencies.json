@@ -148,12 +148,12 @@
         {
           "name": "Preparation QC",
           "paths": [
-            "results/qc/data_quality_report.txt",
-            "results/qc/pseudobulk_per_biosample.pdf",
-            "results/qc/pseudobulk_per_celltype.pdf",
-            "results/qc/sample_celltype_design.csv",
-            "results/qc/samples_per_group_celltype.csv",
-            "results/qc/PCA_*.pdf"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/data_quality_report.txt",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/pseudobulk_per_biosample.pdf",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/pseudobulk_per_celltype.pdf",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/sample_celltype_design.csv",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/samples_per_group_celltype.csv",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/PCA_*.pdf"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -184,7 +184,7 @@
       ],
       "calls": [],
       "validation": "No CLI/source guard/validate-only. Whole body executes; optional sections cannot bypass earlier mandatory main RDS. DATASETS source validation is a separate helper, not entry dry-run.",
-      "overwrite": "Writes fixed data/RNA and results/qc paths and can overwrite curated inputs; use isolated checkout/copy.",
+      "overwrite": "Writes fixed data/RNA and results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc paths and can overwrite curated inputs; use isolated checkout/copy.",
       "commands": [
         {
           "command": "Rscript scripts/workflows/01_data_preparation_qc.R",
@@ -293,10 +293,10 @@
         {
           "name": "Main RNA DE/statistics",
           "paths": [
-            "results/pseudobulk/ttop_full_list.RData",
-            "results/pseudobulk/tval_full_df.RData",
-            "results/pseudobulk/tval_full_df.csv",
-            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.RData",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.csv",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -304,9 +304,9 @@
         {
           "name": "RNA enrichment",
           "paths": [
-            "results/pseudobulk/pathways/pathway_scores_df_all.RData",
-            "results/pseudobulk/pathways/tf_scores_df_all.RData",
-            "results/pseudobulk/pathways/*.pdf"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_scores_df_all.RData",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/tf_scores_df_all.RData",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/*.pdf"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -314,8 +314,8 @@
         {
           "name": "RNA figures",
           "paths": [
-            "results/pseudobulk/pca/*.pdf",
-            "results/pseudobulk/volcanos/*.pdf"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/*.pdf",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos/*.pdf"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -323,18 +323,20 @@
         {
           "name": "Legacy GDX results",
           "paths": [
-            "results/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData",
-            "results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv",
-            "results/pseudobulk/gdx_validation_comparison.pdf"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdx_validation_comparison.pdf"
           ],
           "registry_keys": [],
           "mode": "optional GDX"
         },
         {
-          "name": "Optional validation displays",
+          "name": "Optional validation displays and proteomics source tables",
           "paths": [
-            "results/pseudobulk/xenium_validation_volcano.pdf",
-            "results/pseudobulk/proteo_validation_comparison.pdf"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/xenium_validation_volcano.pdf",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteo_validation_comparison.pdf",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteomics_differential_results.csv",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteomics_rna_concordance.csv"
           ],
           "registry_keys": [],
           "mode": "optional panel/proteomics"
@@ -342,7 +344,7 @@
       ],
       "calls": [],
       "validation": "No CLI/source guard/validate-only; source or Rscript executes all sections. vsn is loaded even if proteomics input is absent.",
-      "overwrite": "Overwrites fixed results/pseudobulk paths; use isolated checkout/copy.",
+      "overwrite": "Overwrites fixed results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk paths; use isolated checkout/copy.",
       "commands": [
         {
           "command": "Rscript scripts/workflows/02_fcg_pseudobulk_analysis.R",
@@ -430,7 +432,7 @@
         {
           "name": "Main lipid DE",
           "paths": [
-            "results/lipidomic/ttop_full_list.RData"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -438,9 +440,9 @@
         {
           "name": "Class enrichment",
           "paths": [
-            "results/lipidomic/enrichment/lipid_class_enrichment_scores.RData",
-            "results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv",
-            "results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_plot.pdf"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -448,11 +450,11 @@
         {
           "name": "Lipid figures/network",
           "paths": [
-            "results/lipidomic/pca/*.pdf",
-            "results/lipidomic/volcanos/*.pdf",
-            "results/lipidomic/network/significant_lipids_network_SIF.csv",
-            "results/lipidomic/network/significant_lipids_network_ATT.csv",
-            "results/lipidomic/bubbles_DBC/*.pdf"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/pca/*.pdf",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/volcanos/*.pdf",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/significant_lipids_network_SIF.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/significant_lipids_network_ATT.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/bubbles_DBC/*.pdf"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -460,9 +462,12 @@
         {
           "name": "GDX lipid results",
           "paths": [
-            "results/lipidomic/gdxhr_t_table.csv",
-            "results/lipidomic/gdxhr_ttop_list.RData",
-            "results/lipidomic/fcg_gdx_correlation.pdf"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_t_table.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_ttop_list.RData",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation.pdf",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation_by_sex.pdf",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation_source.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation_statistics.csv"
           ],
           "registry_keys": [],
           "mode": "optional GDX"
@@ -470,7 +475,7 @@
       ],
       "calls": [],
       "validation": "No CLI/source guard/validate-only; source/Rscript executes body.",
-      "overwrite": "Fixed results/lipidomic outputs can be overwritten; isolated checkout/copy required to preserve curated outputs.",
+      "overwrite": "Fixed results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic outputs can be overwritten; isolated checkout/copy required to preserve curated outputs.",
       "commands": [
         {
           "command": "Rscript scripts/workflows/03_fcg_lipidomic_analysis.R",
@@ -537,7 +542,7 @@
         {
           "name": "Pretrained model set",
           "paths": [
-            "results/mofa/RNA/mofa_res_*factor.hdf5"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA/mofa_res_*factor.hdf5"
           ],
           "registry_keys": [],
           "producer": "frozen",
@@ -548,7 +553,7 @@
         {
           "name": "Fallback weights",
           "paths": [
-            "results/mofa/main_model_RNA_lipid_weight.RData"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData"
           ],
           "registry_keys": [],
           "producer": "frozen",
@@ -572,7 +577,7 @@
         {
           "name": "Prepared integration input",
           "paths": [
-            "results/mofa/MOFA_data.RData"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/MOFA_data.RData"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -581,7 +586,7 @@
           "name": "Training input/models",
           "paths": [
             "data/mofa/MOFA_RNA_data.csv",
-            "results/mofa/RNA/mofa_res_*factor.hdf5"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA/mofa_res_*factor.hdf5"
           ],
           "registry_keys": [],
           "mode": "automatic missing-cache training"
@@ -589,9 +594,9 @@
         {
           "name": "Weight/factor products",
           "paths": [
-            "results/mofa/main_model_RNA_lipid_weight.RData",
-            "results/mofa/factor_analysis/factor_enrichment_gonadal.RData",
-            "results/mofa/factor_analysis/*.pdf"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/factor_enrichment_gonadal.RData",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/*.pdf"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -599,32 +604,37 @@
         {
           "name": "Global network products",
           "paths": [
-            "results/mofa/networks/gene_lipid_correlations_factor1.RData",
-            "results/mofa/networks/gene_lipid_correlations_factor1.csv",
-            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
-            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv",
-            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv",
-            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv",
-            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.RData",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv"
           ],
           "registry_keys": [],
           "mode": "default"
         }
       ],
       "calls": [],
-      "validation": "No CLI/source guard/validate-only. Always prepares and writes MOFA_data before cache branch. MOFA2 loads unconditionally in core/multiomics.R.",
+      "validation": "Reuse-only mode verifies the eleven exact saved models before any writes. No standalone validate-only mode. MOFA2 is required.",
       "overwrite": "Overwrites prepared input, weights, factor/network outputs; skips existing individual HDF5 training files. Use isolated checkout/copy.",
       "commands": [
         {
           "command": "Rscript scripts/workflows/04_mofa_integration.R",
           "effect": "Full integration analysis; normally reuse retained11models, otherwise automatically train missing factors."
+        },
+        {
+          "command": "Rscript scripts/workflows/04_mofa_integration.R --reuse-models-only --model-dir=results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA",
+          "effect": "Requires exactly the named models for factor counts 5–15 before writing and skips training. Use the parallel replay for a separate output tree."
         }
       ],
       "notes": [
         "Global07 uses permissive gene-lipid full network;12 pooled uses separately frozen sparse TF-gene-lipid branch/precursor.",
         "Current05/06 do not depend on04.",
         "Active MOON uses frozen precision inputs historically derived from04, not an automatic04 rerun.",
-        "Generic MOFA_SETTINGS does not control this entry hardcoded factor loop/trainer options."
+        "Generic MOFA_SETTINGS does not control this entry hardcoded factor loop/trainer options.",
+        "Read-only --model-dir is available in --reuse-models-only mode. A missing model stops the run before result writes."
       ],
       "evidence": [
         "scripts/workflows/04_mofa_integration.R",
@@ -687,8 +697,8 @@
         {
           "name": "Lipid DE and class enrichment",
           "paths": [
-            "results/lipidomic/ttop_full_list.RData",
-            "results/lipidomic/enrichment/lipid_class_enrichment_scores.RData"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData"
           ],
           "registry_keys": [],
           "producer": "03",
@@ -714,12 +724,12 @@
         {
           "name": "Current model/network results",
           "paths": [
-            "results/zonation_marker_update_20261116/fcg05/fcg05_checkpoint.rds",
-            "results/zonation_marker_update_20261116/fcg05/zonation_ttop_list.RData",
-            "results/zonation_marker_update_20261116/fcg05/t_table_zonation.csv",
-            "results/zonation_marker_update_20261116/fcg05/ttop_full_long.csv",
-            "results/zonation_marker_update_20261116/fcg05/optimal_threshold_metrics.csv",
-            "results/zonation_marker_update_20261116/fcg05/networks/*.csv"
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/fcg05_checkpoint.rds",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/zonation_ttop_list.RData",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/t_table_zonation.csv",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/ttop_full_long.csv",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/optimal_threshold_metrics.csv",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/*.csv"
           ],
           "registry_keys": [
             "current_root"
@@ -729,9 +739,9 @@
         {
           "name": "Fresh pathway/runtime records",
           "paths": [
-            "results/zonation_marker_update_20261116/fcg05/pathway_enrichment.RData",
-            "results/zonation_marker_update_20261116/fcg05/pathway_enrichment_fresh.csv",
-            "results/zonation_marker_update_20261116/runtime/05_zonation_analysis_versioned.R"
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/pathway_enrichment.RData",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/pathway_enrichment_fresh.csv",
+            "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/runtime/05_zonation_analysis_versioned.R"
           ],
           "registry_keys": [
             "current_root"
@@ -779,7 +789,7 @@
         {
           "name": "Main lipid DE archive",
           "paths": [
-            "results/lipidomic/ttop_full_list.RData"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData"
           ],
           "registry_keys": [],
           "producer": "03",
@@ -792,9 +802,9 @@
         {
           "name": "Structural features and regressions",
           "paths": [
-            "results/lipidomic/structural_model/lipids_with_structure.csv",
-            "results/lipidomic/structural_model/lipid_only_class_coefficients.csv",
-            "results/lipidomic/structural_model/lipid_only_class_summaries.csv"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_class_coefficients.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_class_summaries.csv"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -802,9 +812,9 @@
         {
           "name": "Conditional significant terms",
           "paths": [
-            "results/lipidomic/structural_model/lipid_only_chain_length_effects.csv",
-            "results/lipidomic/structural_model/lipid_only_db_position_effects.csv",
-            "results/lipidomic/structural_model/lipid_only_interaction_effects.csv"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_chain_length_effects.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_db_position_effects.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_interaction_effects.csv"
           ],
           "registry_keys": [],
           "mode": "only when qualifying terms exist"
@@ -812,8 +822,8 @@
         {
           "name": "Structural figures",
           "paths": [
-            "results/lipidomic/structural_model/lipid_only_summary_heatmap.pdf",
-            "results/lipidomic/structural_model/lipid_only_plots/*_structural_effects.pdf"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_summary_heatmap.pdf",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_plots/*_structural_effects.pdf"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -851,11 +861,11 @@
         {
           "name": "Same-root current FCG reference",
           "paths": [
-            "results/zonation_marker_update_20261116/fcg05/fcg05_checkpoint.rds",
-            "results/zonation_marker_update_20261116/fcg05/networks/cormat_testes_portal_full_SIF.csv",
-            "results/zonation_marker_update_20261116/fcg05/networks/cormat_testes_central_full_SIF.csv",
-            "results/zonation_marker_update_20261116/fcg05/networks/cormat_Ovaries_portal_full_SIF.csv",
-            "results/zonation_marker_update_20261116/fcg05/networks/cormat_ova_central_full_SIF.csv"
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/fcg05_checkpoint.rds",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_testes_portal_full_SIF.csv",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_testes_central_full_SIF.csv",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_Ovaries_portal_full_SIF.csv",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_ova_central_full_SIF.csv"
           ],
           "registry_keys": [
             "current_root"
@@ -868,8 +878,8 @@
         {
           "name": "Unchanged canonical KD fit/table",
           "paths": [
-            "results/validation/knockdown_t_table.csv",
-            "results/validation/knockdown_ttop_list.RData"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData"
           ],
           "registry_keys": [],
           "producer": "frozen",
@@ -880,7 +890,7 @@
         {
           "name": "Structural reference",
           "paths": [
-            "results/lipidomic/structural_model/lipids_with_structure.csv"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv"
           ],
           "registry_keys": [],
           "producer": "06",
@@ -902,7 +912,7 @@
         {
           "name": "Global full correlation network",
           "paths": [
-            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
           ],
           "registry_keys": [],
           "producer": "04",
@@ -928,13 +938,13 @@
         {
           "name": "Current zonal validation",
           "paths": [
-            "results/zonation_marker_update_20261116/fcg07/fcg07_checkpoint.rds",
-            "results/zonation_marker_update_20261116/fcg07/zonation_network_validation_scores.csv",
-            "results/zonation_marker_update_20261116/fcg07/Mtmr11_male_PP_prespecified_ULM.csv",
-            "results/zonation_marker_update_20261116/fcg07/Mtmr11_male_PP_prespecified_source.csv",
-            "results/zonation_marker_update_20261116/fcg07/Mtmr11_male_PP_ULM_background_source.csv",
-            "results/zonation_marker_update_20261116/fcg07/Fig5F_Mtmr11_male_PP_prespecified.pdf",
-            "results/zonation_marker_update_20261116/fcg07/structural_consistency/*"
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/fcg07_checkpoint.rds",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/zonation_network_validation_scores.csv",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_prespecified_ULM.csv",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_prespecified_source.csv",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_ULM_background_source.csv",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Fig5F_Mtmr11_male_PP_prespecified.pdf",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/structural_consistency/*"
           ],
           "registry_keys": [
             "current_root"
@@ -1014,10 +1024,10 @@
         {
           "name": "Variance tables",
           "paths": [
-            "results/lipidomic/variance_analysis/variance_analysis_results.csv",
-            "results/lipidomic/variance_analysis/significant_differential_variance_lipids.csv",
-            "results/lipidomic/variance_analysis/variance_analysis_by_class.csv",
-            "results/lipidomic/variance_analysis/variance_analysis_summary.csv"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/variance_analysis_results.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/significant_differential_variance_lipids.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/variance_analysis_by_class.csv",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/variance_analysis_summary.csv"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -1025,8 +1035,8 @@
         {
           "name": "Variance figures",
           "paths": [
-            "results/lipidomic/variance_analysis/cv_difference_volcano.pdf",
-            "results/lipidomic/variance_analysis/cv_difference_volcano_by_class.pdf"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/cv_difference_volcano.pdf",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/cv_difference_volcano_by_class.pdf"
           ],
           "registry_keys": [],
           "mode": "default"
@@ -1077,7 +1087,7 @@
         {
           "name": "Mouse signature seed and provisioned copy",
           "paths": [
-            "results/pseudobulk/hepa_gonad_signature.csv",
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/hepa_gonad_signature.csv",
             "/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/hepa_gonad_signature.csv"
           ],
           "registry_keys": [],
@@ -1124,26 +1134,29 @@
         {
           "name": "Retained study artifacts",
           "paths": [
-            "results/human/"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/human/"
           ],
           "registry_keys": [],
           "mode": "saved outputs; not the script default destination"
         }
       ],
       "calls": [],
-      "validation": "No CLI, --validate-only or harmless --help. Static audit only; importing calls RESULTS_DIR.mkdir before main.",
-      "overwrite": "External output directory is created at import; saves reuse fixed names and can overwrite. No fresh-directory guard.",
+      "validation": "CLI help after base package imports. The explicit DE-only mode bypasses pypath. Full scoring checks for a nonempty mouse-to-human map. No validate-only mode.",
+      "overwrite": "Explicit --output requires an empty destination. The historical default HPC path can overwrite its named files.",
       "commands": [
         {
           "command": "python3 scripts/workflows/09_human_analysis.py",
           "effect": "Runs full analysis after external paths/data/packages are provisioned; not a preflight."
+        },
+        {
+          "command": "python3 scripts/workflows/09_human_analysis.py --data-dir HUMAN_INPUTS --output results/runs/human_replay --de-only",
+          "effect": "Recompute all three human DE contrasts without mouse orthology or signature scoring."
         }
       ],
       "notes": [
         "Independent of17 expanded-marker and diet inputs.",
-        "DATA_DIR/RESULTS_DIR are literal /home/... HPC paths.",
-        "Male−female DE uses female reference; female age contrast is >=50 versus12–49.",
-        "Output/model state was not regenerated during this documentation audit."
+        "Use --data-dir and --output to override the historical external HPC paths.",
+        "Male−female DE uses female reference. Female age contrast is ≥50 versus12–49."
       ],
       "evidence": [
         "scripts/workflows/09_human_analysis.py",
@@ -1296,7 +1309,7 @@
         {
           "name": "Original FCG group/PCA roster",
           "paths": [
-            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
           ],
           "registry_keys": [],
           "producer": "02",
@@ -1307,7 +1320,7 @@
         {
           "name": "Frozen original full-network Cyp2c38 selection",
           "paths": [
-            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
           ],
           "registry_keys": [],
           "producer": "04",
@@ -1331,8 +1344,8 @@
         {
           "name": "Complete WP1 package",
           "paths": [
-            "results/validation/cyp2c38_in_vivo/",
-            "results/validation/cyp2c38_in_vivo/ulm_followup/"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/ulm_followup/"
           ],
           "registry_keys": [],
           "mode": "full"
@@ -1417,11 +1430,11 @@
         {
           "name": "Frozen whole-hepatocyte Figure3 networks and precursor",
           "paths": [
-            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
-            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv",
-            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv",
-            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv",
-            "results/mofa/networks/gene_lipid_correlations_factor1.csv"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv"
           ],
           "registry_keys": [],
           "producer": "04",
@@ -1466,7 +1479,7 @@
         {
           "name": "Original FCG group/PCA roster",
           "paths": [
-            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
           ],
           "registry_keys": [],
           "producer": "02",
@@ -1700,7 +1713,7 @@
         {
           "name": "Original FCG group/PCA roster",
           "paths": [
-            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
           ],
           "registry_keys": [],
           "producer": "02",
@@ -1870,8 +1883,8 @@
         {
           "name": "Saved model/full analysis",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_models/models.rds",
-            "results/zonation_marker_update_20261116/cf453_models/analysis.rds"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/models.rds",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/analysis.rds"
           ],
           "registry_keys": [
             "current_root"
@@ -1886,9 +1899,9 @@
         {
           "name": "Model stage",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_models/models.rds",
-            "results/zonation_marker_update_20261116/cf453_models/tables/",
-            "results/zonation_marker_update_20261116/cf453_models/provenance_sha256.csv"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/models.rds",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/tables/",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/provenance_sha256.csv"
           ],
           "registry_keys": [
             "current_root"
@@ -1945,8 +1958,8 @@
         {
           "name": "Selected Workflow14 model cache and adjacent provenance",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_models/models.rds",
-            "results/zonation_marker_update_20261116/cf453_models/provenance_sha256.csv"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/models.rds",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/provenance_sha256.csv"
           ],
           "registry_keys": [
             "current_root"
@@ -1959,7 +1972,7 @@
         {
           "name": "Saved direct analysis",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_direct_diet/diet_analysis.rds"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/diet_analysis.rds"
           ],
           "registry_keys": [
             "current_root"
@@ -1974,9 +1987,9 @@
         {
           "name": "Direct model evidence",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_direct_diet/diet_analysis.rds",
-            "results/zonation_marker_update_20261116/cf453_direct_diet/tables/",
-            "results/zonation_marker_update_20261116/cf453_direct_diet/provenance_sha256.csv"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/diet_analysis.rds",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/tables/",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/provenance_sha256.csv"
           ],
           "registry_keys": [
             "current_root"
@@ -2027,8 +2040,8 @@
         {
           "name": "Selected Workflow14 model cache and adjacent provenance",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_models/models.rds",
-            "results/zonation_marker_update_20261116/cf453_models/provenance_sha256.csv"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/models.rds",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/provenance_sha256.csv"
           ],
           "registry_keys": [
             "current_root"
@@ -2041,7 +2054,7 @@
         {
           "name": "Selected Workflow15 direct-diet evidence cache",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_direct_diet/diet_analysis.rds"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/diet_analysis.rds"
           ],
           "registry_keys": [
             "current_root"
@@ -2054,7 +2067,7 @@
         {
           "name": "Saved selected-programme analysis",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_rewiring/rewiring_analysis.rds"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/rewiring_analysis.rds"
           ],
           "registry_keys": [
             "current_root"
@@ -2069,9 +2082,9 @@
         {
           "name": "Selected-programme statistics",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_rewiring/rewiring_analysis.rds",
-            "results/zonation_marker_update_20261116/cf453_rewiring/tables/",
-            "results/zonation_marker_update_20261116/cf453_rewiring/provenance_sha256.csv"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/rewiring_analysis.rds",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/tables/",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/provenance_sha256.csv"
           ],
           "registry_keys": [
             "current_root"
@@ -2081,9 +2094,9 @@
         {
           "name": "Three main panel groups",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_rewiring/panels/",
-            "results/zonation_marker_update_20261116/cf453_rewiring/source_data/",
-            "results/zonation_marker_update_20261116/cf453_rewiring/panel_manifest.csv"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/panels/",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/source_data/",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/panel_manifest.csv"
           ],
           "registry_keys": [
             "current_root"
@@ -2181,8 +2194,8 @@
         {
           "name": "Lipid DA and enrichment outputs",
           "paths": [
-            "results/lipidomic/ttop_full_list.RData",
-            "results/lipidomic/enrichment/lipid_class_enrichment_scores.RData"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData",
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData"
           ],
           "registry_keys": [],
           "producer": "03",
@@ -2193,7 +2206,7 @@
         {
           "name": "Lipid structural reference",
           "paths": [
-            "results/lipidomic/structural_model/lipids_with_structure.csv"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv"
           ],
           "registry_keys": [],
           "producer": "06",
@@ -2204,8 +2217,8 @@
         {
           "name": "Independent KD fitted effects",
           "paths": [
-            "results/validation/knockdown_t_table.csv",
-            "results/validation/knockdown_ttop_list.RData"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData"
           ],
           "registry_keys": [],
           "producer": "07",
@@ -2267,7 +2280,7 @@
         {
           "name": "Whole-hepatocyte DE comparison audit",
           "paths": [
-            "results/pseudobulk/ttop_full_list.RData"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData"
           ],
           "registry_keys": [],
           "producer": "02",
@@ -2281,7 +2294,7 @@
             "manuscript/Cleland and Dugourd et al.docx",
             "<source-root>/james_scripts_20261104/preprocessing_{02_fcg,03_gdx,04_wdsd}.R",
             "<source-root>/Zonation_Genes.csv",
-            "results/zonation_marker_update_20261116/inputs/preprocessing_reference/*"
+            "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/inputs/preprocessing_reference/*"
           ],
           "registry_keys": [],
           "producer": "external",
@@ -2294,15 +2307,15 @@
         {
           "name": "Current staged inputs and scientific result stages",
           "paths": [
-            "results/zonation_marker_update_20261116/inputs/",
-            "results/zonation_marker_update_20261116/fcg05/",
-            "results/zonation_marker_update_20261116/fcg07/",
-            "results/zonation_marker_update_20261116/gdx_zonation/",
-            "results/zonation_marker_update_20261116/cf453_models/",
-            "results/zonation_marker_update_20261116/cf453_direct_diet/",
-            "results/zonation_marker_update_20261116/cf453_rewiring/",
-            "results/zonation_marker_update_20261116/cf453_layouts/",
-            "results/zonation_marker_update_20261116/fcg_panel_manifest.csv"
+            "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/inputs/",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/",
+            "results/current/04_pericentral_and_periportal_hepatocyte_bias/gdx_zonation/",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_layouts/",
+            "results/runs/NAME/fcg_panel_manifest.csv"
           ],
           "registry_keys": [
             "current_root"
@@ -2312,7 +2325,7 @@
         {
           "name": "Formal scientific table copies",
           "paths": [
-            "results/zonation_marker_update_20261116/tables/"
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/supplementary_tables/"
           ],
           "registry_keys": [
             "current_root"
@@ -2322,8 +2335,8 @@
         {
           "name": "Old/new comparisons and private revision report",
           "paths": [
-            "results/zonation_marker_update_20261116/comparisons/",
-            "results/zonation_marker_update_20261116/report/"
+            "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/comparisons/",
+            "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/report/"
           ],
           "registry_keys": [
             "current_root"
@@ -2340,7 +2353,7 @@
         "6A_layouts"
       ],
       "validation": "Entry --validate-only verifies3zone transports, balanced zones, engine paths and KD CSV/RData; no models or writes. It does NOT check all03/06/resources/whole-hepatocyte14 prerequisites. With --with-manuscript-audit it also checks Python and selected historical cache files, not all private/report dependencies.",
-      "overwrite": "Before any writes, full science/audit modes reject approved current_root and all descendants including cache-absent/symlink aliases via analysis_assert_not_approved_output; ordinary completed-cache guards remain. Validation skips guard and writes nothing. Explicit report-only skips guard and rewrites saved audit/report outputs.",
+      "overwrite": "Before any writes, full science/audit and report-only modes reject published current_root, legacy_results_root and all descendants including cache-absent/symlink aliases via analysis_assert_not_approved_output; ordinary completed-cache guards remain. Validation skips guard and writes nothing. Explicit report-only skips guard and rewrites saved audit/report outputs.",
       "commands": [
         {
           "command": "Rscript scripts/workflows/17_expanded_marker_zonation_update.R --validate-only",
@@ -2480,7 +2493,7 @@
         {
           "name": "Original FCG group/PCA roster",
           "paths": [
-            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
           ],
           "registry_keys": [],
           "producer": "02",
@@ -2569,11 +2582,11 @@
         {
           "name": "Frozen whole-hepatocyte Figure3 networks and precursor",
           "paths": [
-            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
-            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv",
-            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv",
-            "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv",
-            "results/mofa/networks/gene_lipid_correlations_factor1.csv"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv"
           ],
           "registry_keys": [],
           "producer": "04",
@@ -2618,7 +2631,7 @@
         {
           "name": "Original FCG group/PCA roster",
           "paths": [
-            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
           ],
           "registry_keys": [],
           "producer": "02",
@@ -2703,7 +2716,7 @@
         {
           "name": "Original FCG group/PCA roster",
           "paths": [
-            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
           ],
           "registry_keys": [],
           "producer": "02",
@@ -2714,7 +2727,7 @@
         {
           "name": "Frozen original full-network Cyp2c38 selection",
           "paths": [
-            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
           ],
           "registry_keys": [],
           "producer": "04",
@@ -2738,7 +2751,7 @@
         {
           "name": "Base KO results",
           "paths": [
-            "results/validation/cyp2c38_in_vivo/"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/"
           ],
           "registry_keys": [],
           "mode": "full"
@@ -2807,7 +2820,7 @@
         {
           "name": "Original FCG group/PCA roster",
           "paths": [
-            "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
+            "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"
           ],
           "registry_keys": [],
           "producer": "02",
@@ -2818,7 +2831,7 @@
         {
           "name": "Frozen original full-network Cyp2c38 selection",
           "paths": [
-            "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"
           ],
           "registry_keys": [],
           "producer": "04",
@@ -2840,10 +2853,10 @@
         {
           "name": "Fixed base parent outputs",
           "paths": [
-            "results/validation/cyp2c38_in_vivo/log2_analysis_matrix.csv",
-            "results/validation/cyp2c38_in_vivo/sample_manifest.csv",
-            "results/validation/cyp2c38_in_vivo/feature_annotation_and_QC_ledger.csv",
-            "results/validation/cyp2c38_in_vivo/limma_fits.rds"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/log2_analysis_matrix.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/sample_manifest.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/feature_annotation_and_QC_ledger.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/limma_fits.rds"
           ],
           "registry_keys": [],
           "producer": "07b",
@@ -2854,8 +2867,8 @@
         {
           "name": "Previous resampling banks",
           "paths": [
-            "results/validation/cyp2c38_in_vivo/combined_bootstrap_draws.csv",
-            "results/validation/cyp2c38_in_vivo/permutation_draws.csv"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/combined_bootstrap_draws.csv",
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/permutation_draws.csv"
           ],
           "registry_keys": [],
           "producer": "07b",
@@ -2868,7 +2881,7 @@
         {
           "name": "ULM followup",
           "paths": [
-            "results/validation/cyp2c38_in_vivo/ulm_followup/"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/ulm_followup/"
           ],
           "registry_keys": [],
           "mode": "full"
@@ -2904,7 +2917,7 @@
         {
           "name": "Saved16 analysis",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_rewiring/rewiring_analysis.rds"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/rewiring_analysis.rds"
           ],
           "registry_keys": [
             "current_root"
@@ -2917,11 +2930,11 @@
         {
           "name": "Retained-original artifacts recorded when present",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_rewiring/panels/Fig6A_anchor_gene_shifts.pdf",
-            "results/zonation_marker_update_20261116/cf453_rewiring/panels/Fig6B_lipid_class_shift.pdf",
-            "results/zonation_marker_update_20261116/cf453_rewiring/panels/Fig6C_network_gain_loss.pdf",
-            "results/zonation_marker_update_20261116/cf453_rewiring/source_data/*.csv",
-            "results/zonation_marker_update_20261116/cf453_rewiring/CF453_Figure6_zonation_diet_panels.zip"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/panels/Fig6A_anchor_gene_shifts.pdf",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/panels/Fig6B_lipid_class_shift.pdf",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/panels/Fig6C_network_gain_loss.pdf",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/source_data/*.csv",
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/CF453_Figure6_zonation_diet_panels.zip"
           ],
           "registry_keys": [],
           "producer": "16",
@@ -2934,7 +2947,7 @@
         {
           "name": "Two layout groups, ledger and provenance",
           "paths": [
-            "results/zonation_marker_update_20261116/cf453_layouts/"
+            "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_layouts/"
           ],
           "registry_keys": [
             "current_root"
@@ -3496,7 +3509,7 @@
         {
           "name": "Study feature inputs",
           "paths": [
-            "results/lipidomic/gonade_type_ttop.csv"
+            "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gonade_type_ttop.csv"
           ],
           "registry_keys": [],
           "producer": "03",
@@ -3507,7 +3520,7 @@
         {
           "name": "MOFA selected-feature context",
           "paths": [
-            "results/mofa/networks/gene_lipid_correlations_factor1.csv"
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv"
           ],
           "registry_keys": [],
           "producer": "04",

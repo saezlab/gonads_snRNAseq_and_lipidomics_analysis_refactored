@@ -5,7 +5,8 @@ registry<-analysis_release()
 stopifnot(identical(registry$release_id,"expanded_markers_20261116"))
 public_keys<-c("current_root","engine_fcg05","engine_validation07",grep("_transport$",names(registry$paths),value=TRUE))
 for(key in public_keys)stopifnot(file.exists(analysis_path(key)))
-stopifnot(identical(analysis_resolve_recorded_path("results/zonation_marker_update_20261116"),analysis_current()),
+stopifnot(identical(analysis_resolve_recorded_path("results/zonation_marker_update_20261116"),analysis_path("archived_zonation_bundle")),
+  identical(analysis_resolve_recorded_path("results/zonation_marker_update_20261116/cf453_models"),analysis_current("cf453_models")),
   identical(analysis_resolve_recorded_path("/prior/checkout/results/zonation/networks"),file.path(analysis_path("historical_fcg05"),"networks")))
 stopifnot(digest::digest(analysis_path("engine_fcg05"),file=TRUE,algo="sha256")=="c560572332047ce3ce0cb065662d32a112241bcc2d46600824b424232ae25410",
   digest::digest(analysis_path("engine_validation07"),file=TRUE,algo="sha256")=="730420ace073e6bd94ce2e15ca7b90d063b082cb9ebf73c58fa0d68f1e26b66b")

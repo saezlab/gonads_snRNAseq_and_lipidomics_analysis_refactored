@@ -62,7 +62,7 @@ source("scripts/core/data_loading.R")
 source("scripts/core/structural_analysis.R")
 
 # Define output directory
-structural_dir <- "results/lipidomic/structural_model"
+structural_dir <- "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model"
 if (!dir.exists(structural_dir)) {
   dir.create(structural_dir, recursive = TRUE)
 }
@@ -81,7 +81,7 @@ cat("This ensures we have ALL lipids, not just those with |logFC| > 1.\n\n")
 
 # Load limma results for lipidomics
 cat("Loading limma results...\n")
-load("results/lipidomic/ttop_full_list.RData")
+load("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData")
 
 # Extract gonadal type comparison (Testes vs Ovaries)
 ttop_gonadal <- ttop_full_list[["Testes vs Ovaries"]][["Testes vs Ovaries"]]
@@ -120,7 +120,7 @@ write.csv(
   row.names = FALSE
 )
 
-cat("\nSaved: results/lipidomic/structural_model/lipids_with_structure.csv\n")
+cat("\nSaved: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv\n")
 
 # Clean up
 rm(ttop_full_list, ttop_gonadal)
@@ -439,7 +439,7 @@ for (cls in class_counts$lipid_class) {
   cat("  ", cls_clean, ": n=", nrow(class_data_all), "\n", sep = "")
 }
 
-cat("\n  Saved individual class plots to: results/lipidomic/structural_model/lipid_only_plots/\n")
+cat("\n  Saved individual class plots to: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_plots/\n")
 
 #-------------------------------------------------------------------------------
 # 5c. SUMMARY FIGURE FOR LIPID-ONLY ANALYSIS
@@ -516,14 +516,14 @@ cat("LIPID STRUCTURAL ANALYSIS WORKFLOW COMPLETE\n")
 cat(strrep("=", 80), "\n\n")
 
 cat("Output files:\n")
-cat("  - results/lipidomic/structural_model/lipids_with_structure.csv\n")
-cat("  - results/lipidomic/structural_model/lipid_only_class_coefficients.csv\n")
-cat("  - results/lipidomic/structural_model/lipid_only_class_summaries.csv\n")
-cat("  - results/lipidomic/structural_model/lipid_only_chain_length_effects.csv\n")
-cat("  - results/lipidomic/structural_model/lipid_only_db_position_effects.csv\n")
-cat("  - results/lipidomic/structural_model/lipid_only_interaction_effects.csv\n")
-cat("  - results/lipidomic/structural_model/lipid_only_summary_heatmap.pdf\n")
-cat("  - results/lipidomic/structural_model/lipid_only_plots/[CLASS]_structural_effects.pdf\n")
+cat("  - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv\n")
+cat("  - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_class_coefficients.csv\n")
+cat("  - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_class_summaries.csv\n")
+cat("  - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_chain_length_effects.csv\n")
+cat("  - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_db_position_effects.csv\n")
+cat("  - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_interaction_effects.csv\n")
+cat("  - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_summary_heatmap.pdf\n")
+cat("  - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_plots/[CLASS]_structural_effects.pdf\n")
 
 cat("\n")
 cat(strrep("=", 80), "\n\n")

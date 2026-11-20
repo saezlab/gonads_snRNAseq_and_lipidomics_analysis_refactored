@@ -55,7 +55,7 @@ on earlier WP2 outputs or the zonation phase.
 | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | Original cleaned 1,254-feature matrix |
 | `data/RNA/scaled_RNA_{1,2,3}.csv`, `meta_data_df.csv` | Original whole-hepatocyte FCG profiles |
 | `historical_fcg_zonation_csv`, `historical_fcg_zonation_metadata` | Original FCG zonation matrices under `miscellaneous/older_inputs/two_marker_zonation/RNA/` |
-| `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv`, overview workbook | Validated original FCG identities |
+| `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv`, overview workbook | Validated original FCG identities |
 | Workflow 04 sparse species Figure 3 SIF and precursor | Frozen displayed/precursor pairs |
 | `historical_fcg05` + `networks/cormat_*_{SIF,full_SIF,full_ATT}.csv` | Four frozen Figure5 branches under `miscellaneous/older_results/zonation_two_marker/` |
 | `docs/reference_figures/FCGL_Fig3.ai` | Optional selection provenance; not required for numerical replay |
@@ -145,7 +145,7 @@ links and PDF text/tables/vector figures/layout are checked before delivery.
 ## Upstream artifacts and public-clone availability
 
 The pooled phase requires Workflow04's
-`results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`,
+`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`,
 `hepatocyte_TF_gene_lipid_network_full_SIF.csv`, corresponding full ATT,
 `hepatocyte_TF_gene_lipid_network_compressed_SIF.csv` and
 `gene_lipid_correlations_factor1.csv`, plus original split whole-cell RNA,

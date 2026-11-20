@@ -8,7 +8,7 @@
 
 The complete body executes under `source()` and `Rscript`. There is no CLI parser,
 source guard, validate-only or output override; existing named files in
-`results/lipidomic/variance_analysis/` can be overwritten. Use an isolated checkout
+`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/` can be overwritten. Use an isolated checkout
 or copy for a fresh reproduction. `load_lipidomic_data()` and `load_metadata()`
 use their literal/default paths; `DATASETS` is not selected.
 
@@ -35,7 +35,7 @@ source("scripts/core/data_loading.R")
 
 | # | Section | Lines (approx) | Description |
 |---|---------|----------------|-------------|
-| 1 | Configuration | 41-58 | Load config, themes, data loaders, and create `results/lipidomic/variance_analysis/`. |
+| 1 | Configuration | 41-58 | Load config, themes, data loaders, and create `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/`. |
 | 2 | Load Data | 61-94 | Load log2 lipidomics and sample metadata, subset metadata to lipidomic samples. |
 | 3 | Separate Samples | 98-119 | Split columns into ovaries and testes sample sets. |
 | 4 | CV Calculation | 123-178 | Compute per-lipid mean, SD, variance, CV, CV difference, and CV ratio. |
@@ -54,12 +54,12 @@ source("scripts/core/data_loading.R")
 
 ## Output Files
 
-- `results/lipidomic/variance_analysis/variance_analysis_results.csv` - Per-lipid CVs, Levene statistics, adjusted p-values, and direction labels.
-- `results/lipidomic/variance_analysis/significant_differential_variance_lipids.csv` - FDR-significant subset from the per-lipid table.
-- `results/lipidomic/variance_analysis/variance_analysis_by_class.csv` - Class-level variance analysis.
-- `results/lipidomic/variance_analysis/variance_analysis_summary.csv` - Text-like metric/value summary table.
-- `results/lipidomic/variance_analysis/cv_difference_volcano.pdf`
-- `results/lipidomic/variance_analysis/cv_difference_volcano_by_class.pdf`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/variance_analysis_results.csv` - Per-lipid CVs, Levene statistics, adjusted p-values, and direction labels.
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/significant_differential_variance_lipids.csv` - FDR-significant subset from the per-lipid table.
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/variance_analysis_by_class.csv` - Class-level variance analysis.
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/variance_analysis_summary.csv` - Text-like metric/value summary table.
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/cv_difference_volcano.pdf`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/cv_difference_volcano_by_class.pdf`
 
 ## Key Variables
 

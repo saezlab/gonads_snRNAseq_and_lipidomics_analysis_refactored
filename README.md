@@ -4,7 +4,7 @@ Analysis code and results for the Four Core Genotypes mouse liver study, with in
 
 ## Current analysis
 
-**The expanded-marker zonation analysis approved on 16 November 2026 is the default.** Its immutable production run is [results/zonation_marker_update_20261116](results/zonation_marker_update_20261116/README.md). Current FCG, gonadectomy and standard/Western-diet pseudobulk inputs are distributed under `data/RNA/pseudobulk_csv/` as numbered CSV parts, each strictly under 50 MB. Seurat/RNA RDS objects stay local and are excluded from Git. See [the CSV input guide](docs/PSEUDOBULK_CSV_INPUTS.md) and [the public input manifest](docs/provenance/current_input_manifest.csv).
+**The expanded-marker zonation analysis approved on 16 November 2026 is the default.** Its verified outputs are in the [manuscript-organized Results tree](results/README.md). Current FCG, gonadectomy and standard/Western-diet pseudobulk inputs are distributed under `data/RNA/pseudobulk_csv/` as numbered CSV parts, each strictly under 50 MB. Seurat/RNA RDS objects stay local and are excluded from Git. See [the CSV input guide](docs/PSEUDOBULK_CSV_INPUTS.md) and [the public input manifest](docs/provenance/current_input_manifest.csv).
 
 Start with:
 
@@ -14,6 +14,7 @@ Start with:
 - [Result lookup guide](docs/AGENT_GUIDE.md): concise query map.
 - [Provenance and archive map](docs/REPOSITORY_ORGANIZATION.md): original paths, archive locations, hashes and restoration.
 - [GitHub commit guide](docs/GITHUB_COMMIT_GUIDE.md): what is included, what is external and the pre-commit check.
+- [Parallel manuscript results replay](docs/MANUSCRIPT_RESULTS_REPLAY.md): subsection layout, handoffs and comparison procedure.
 
 The executable release registry is [scripts/config/analysis_release.json](scripts/config/analysis_release.json). Current scientific outputs and historical reference inputs are different entries; they must not be substituted for one another.
 
@@ -31,31 +32,31 @@ Rscript scripts/workflows/17_expanded_marker_zonation_update.R --output=results/
 
 Workflow 17 is the main zonation entry. It runs the FCG zonation models and gene–lipid networks, zonation-dependent knockdown validation, paired gonadectomy supporting analysis, diet-study models, selected-programme Figure 6, and both Figure 6A layouts. Workflow 14 and 15 model stages are upstream components of the current three-panel Workflow 16 presentation. Earlier full Figure 6 presentations are archived.
 
-Scientific reruns do not require the private manuscript. Manuscript auditing/report regeneration is an explicit optional mode; the completed report and its replacement ledger are already provided with the approved release. Workflow17 consumes saved Workflow03 lipid DE/class scores, Workflow06 structural annotations and the independent KD fit artifacts; it does not regenerate them. These derived prerequisites are shipped. Its validation mode checks only the inputs listed in the command comment, rather than every downstream resource. Read the [Workflow17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md) and [complete reference](docs/WORKFLOW_REFERENCE.md#workflow-17) before a full run. Manual14→15→16 runs must pass fresh parent paths explicitly; the orchestrator does this automatically.
+Scientific reruns do not require the private manuscript. Manuscript auditing and its replacement ledger are local. The previous complete run is available in the ignored archive. Workflow17 consumes saved Workflow03 lipid DE/class scores, Workflow06 structural annotations and the independent KD fit artifacts; it does not regenerate them. These derived prerequisites are shipped. Its validation mode checks only the inputs listed in the command comment, rather than every downstream resource. Read the [Workflow17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md) and [complete reference](docs/WORKFLOW_REFERENCE.md#workflow-17) before a full run. Manual14→15→16 runs must pass fresh parent paths explicitly; the orchestrator does this automatically.
 
 ## Main study pipeline
 
 | Branch | Entry | Main results |
 | --- | --- | --- |
-| Input preparation and QC | `01_data_preparation_qc.R` | `data/`, `results/qc/` |
-| Cell-type RNA differential analysis and validations | `02_fcg_pseudobulk_analysis.R` | `results/pseudobulk/` |
-| Lipid differential analysis | `03_fcg_lipidomic_analysis.R` | `results/lipidomic/` |
-| MOFA integration and global networks | `04_mofa_integration.R` | `results/mofa/` |
-| **Current zonation / standalone diet figures** | **`17_expanded_marker_zonation_update.R`** | **`results/zonation_marker_update_20261116/`** |
-| Lipid structural analysis | `06_structural_analysis.R` | `results/lipidomic/structural_model/` |
-| Experimental validation | `07_validation_experiments.R --global-only`, current zonal branch through 17 | `results/validation/`, current release `fcg07/` |
-| Lipid variance | `08_variance_analysis.R` | `results/lipidomic/variance_analysis/` |
-| In-vivo Cyp2c38 validation | `11_cyp2c38_in_vivo_validation.R` | `results/validation/cyp2c38_in_vivo/` |
+| Input preparation and QC | `01_data_preparation_qc.R` | `data/`, `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/` |
+| Cell-type RNA differential analysis and validations | `02_fcg_pseudobulk_analysis.R` | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/` |
+| Lipid differential analysis | `03_fcg_lipidomic_analysis.R` | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/` |
+| MOFA integration and global networks | `04_mofa_integration.R` | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/` |
+| **Current zonation / standalone diet figures** | **`17_expanded_marker_zonation_update.R`** | **Sections 04–06 under `results/current/`** |
+| Lipid structural analysis | `06_structural_analysis.R` | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/` |
+| Experimental validation | `07_validation_experiments.R --global-only`, current zonal branch through 17 | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/`, current release `fcg07/` |
+| Lipid variance | `08_variance_analysis.R` | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/` |
+| In-vivo Cyp2c38 validation | `11_cyp2c38_in_vivo_validation.R` | `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/` |
 
-Entries are under `scripts/workflows/`. The [workflow plans](docs/workflow_plans/) describe inputs, contrasts, units, outputs and limitations. Raw sci-RNA-seq preprocessing (00), human comparison (09) and collaborator Xenium scripts (10) need external raw data and are optional. Workflow04 uses the retained model set when all eleven factor-count model files are present; otherwise its current code starts training automatically. It requires MOFA2 even for cached analysis. Workflows01–04,06 and08 have fixed output paths and no safe validation CLI; sourcing or passing `--help` can execute analyses. Human09 and Xenium10 also have external/runtime requirements;10 has known execution blockers documented in its plan. The committed whole-cell CSVs support starting downstream analyses at 02; regenerating them with 01 also requires the original whole-cell FCG/GDX Seurat objects specified in its plan.
+Entries are under `scripts/workflows/`. The [workflow plans](docs/workflow_plans/) describe inputs, contrasts, units, outputs and limitations. Raw sci-RNA-seq preprocessing (00), human comparison (09) and collaborator Xenium scripts (10) need external inputs. Workflow04 requires MOFA2 and supports `--reuse-models-only` to require the retained model set before any writes. Its default mode can train when caches are missing. Workflows01–04,06 and08 have fixed output paths. Use the parallel replay to run them without modifying the release. Workflow10 has known execution blockers documented in its plan. The committed whole-cell CSVs allow downstream analyses to start at 02. Workflow01 re-export requires the local whole-cell FCG/GDX pseudobulks.
 
 ## Figures and interpretation
 
-The current release supplies revised Figure 4B; Figure 5A–D/F; S5A; source Tables S10/S13/S14/S15; and standalone Figure 6A–C with both 6A alternatives. Panels are provided separately for manual assembly. Independent spatial assays and knockdown measurements are preserved.
+The current release supplies Figure 4C, Figure 5A–D/F, S5A, source Tables S10/S13/S14/S15, and the standalone Figure 6B–D analyses with both anchor-layout alternatives. Panels are provided separately for manual assembly. Independent spatial assays and knockdown measurements are preserved.
 
 Figure 4A and S4B–C, their linked nucleus-level counts/composition statistics, and final confirmation of executed retained-marker lists for Methods remain James's tasks. Pseudobulks cannot reconstruct these quantities.
 
-The diet cohort is analysed independently of the younger original cohort. Gene–lipid associations and illustrative gain/loss networks remain exploratory: no tested correlation passes the declared BH family, and all 120 class bootstrap intervals include zero. See the current report for the exact numerical replacement ledger and selection-threshold sensitivity.
+The diet cohort is analysed independently of the younger original cohort. Gene–lipid associations and illustrative gain/loss networks remain exploratory: no tested correlation passes the declared BH family, and all 120 class bootstrap intervals include zero. The current panel source tables document the thresholds and the estimates.
 
 ## Optional analyses and historical references
 

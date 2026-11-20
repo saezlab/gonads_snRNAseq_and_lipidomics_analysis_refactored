@@ -16,7 +16,7 @@ wp1_run <- function(args = commandArgs(trailingOnly = TRUE)) {
   seed <- as.integer(option("seed", "20261006"))
   workers <- as.integer(option("workers", "3"))
   stopifnot(B >= 19, K >= 19, workers >= 1, !is.na(seed))
-  out <- option("output", "results/validation/cyp2c38_in_vivo")
+  out <- option("output", "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo")
   required <- c("limma", "statmod", "digest", "jsonlite", "decoupleR")
   for (p in required) if (!requireNamespace(p, quietly = TRUE)) stop("Missing package: ", p)
   write_csv <- function(x, name) utils::write.csv(x, file.path(out, name), row.names = FALSE, na = "")
@@ -269,7 +269,7 @@ wp1_run <- function(args = commandArgs(trailingOnly = TRUE)) {
   write_csv(classes, "lipid_class_descriptive_summary.csv")
   saveRDS(list(primary = primary, unweighted = unweighted, qc30 = qc30, supplied_scale = supplied_scale, separate_sex = separate), file.path(out, "limma_fits.rds"))
   capture.output(utils::sessionInfo(), file = file.path(out, "sessionInfo.txt"))
-  inputs <- c(input, paste0("data/RNA/scaled_RNA_", 1:3, ".csv"), "data/RNA/meta_data_df.csv", "data/metabolomics/Lipid_data_file_JPC_cleaned.csv", "data/Suppl_Table_1_OverviewData.xlsx", "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv", "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv", "scripts/workflows/11_cyp2c38_in_vivo_validation.R", "scripts/core/wp1_workflow.R", "scripts/core/cyp2c38_reference.R", "scripts/core/cyp2c38_models.R", "scripts/core/cyp2c38_plots.R", "scripts/core/cyp2c38_report.R", "tests/test_cyp2c38_in_vivo.R")
+  inputs <- c(input, paste0("data/RNA/scaled_RNA_", 1:3, ".csv"), "data/RNA/meta_data_df.csv", "data/metabolomics/Lipid_data_file_JPC_cleaned.csv", "data/Suppl_Table_1_OverviewData.xlsx", "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv", "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv", "scripts/workflows/11_cyp2c38_in_vivo_validation.R", "scripts/core/wp1_workflow.R", "scripts/core/cyp2c38_reference.R", "scripts/core/cyp2c38_models.R", "scripts/core/cyp2c38_plots.R", "scripts/core/cyp2c38_report.R", "tests/test_cyp2c38_in_vivo.R")
   write_csv(data.frame(path = inputs, sha256 = vapply(inputs, digest::digest, character(1), algo = "sha256", file = TRUE)), "input_and_code_SHA256.csv")
   provenance <- list(completed_at = format(Sys.time(), tz = "UTC", usetz = TRUE), seed = seed, permutations = B, bootstraps = K, workers = workers,
                      primary_features = nrow(y), QC30_features = sum(ledger$keep_qc30), shared_reference_features = nrow(map),
@@ -294,7 +294,7 @@ wp1_run <- function(args = commandArgs(trailingOnly = TRUE)) {
 
 
 wp1_ulm_run <- function(args = commandArgs(trailingOnly = TRUE),
-                        previous = "results/validation/cyp2c38_in_vivo",
+                        previous = "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo",
                         intake = NULL) {
   for (file in c("cyp2c38_reference.R", "cyp2c38_sex_networks.R",
                  "cyp2c38_models.R", "cyp2c38_ulm_bootstrap.R")) {
@@ -314,7 +314,7 @@ wp1_ulm_run <- function(args = commandArgs(trailingOnly = TRUE),
   ninner <- as.integer(get_option("calibration-inner", "199"))
   ninjection <- as.integer(get_option("injection-datasets", "399"))
   stopifnot(B >= 19, P >= 19, workers >= 1, !is.na(seed), ncal >= 2, ninner >= 19, ninjection >= 3)
-  out <- get_option("output", "results/validation/cyp2c38_in_vivo/ulm_followup")
+  out <- get_option("output", "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/ulm_followup")
   if (is.null(intake)) {
     m <- utils::read.csv(file.path(previous, "log2_analysis_matrix.csv"), check.names = FALSE)
     y <- as.matrix(m[, -1, drop = FALSE]); rownames(y) <- m$feature_id
@@ -489,8 +489,8 @@ wp1_ulm_run <- function(args = commandArgs(trailingOnly = TRUE),
                      scope = "No signed correlation score, confidence intervals or FDR in follow-up concordance reporting; previous outputs retained")
   jsonlite::write_json(provenance, file.path(out, "provenance.json"), auto_unbox = TRUE, pretty = TRUE)
   inputs <- c(file.path(previous, c("log2_analysis_matrix.csv", "sample_manifest.csv", "feature_annotation_and_QC_ledger.csv", "limma_fits.rds", "combined_bootstrap_draws.csv", "permutation_draws.csv")),
-              "data/metabolomics/Lipid_data_file_JPC_cleaned.csv", paste0("data/RNA/scaled_RNA_", 1:3, ".csv"), "data/RNA/meta_data_df.csv", "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv",
-              "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv", "scripts/workflows/11_cyp2c38_in_vivo_validation.R", "scripts/core/wp1_workflow.R",
+              "data/metabolomics/Lipid_data_file_JPC_cleaned.csv", paste0("data/RNA/scaled_RNA_", 1:3, ".csv"), "data/RNA/meta_data_df.csv", "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv",
+              "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv", "scripts/workflows/11_cyp2c38_in_vivo_validation.R", "scripts/core/wp1_workflow.R",
               file.path("scripts/core", c("cyp2c38_reference.R", "cyp2c38_models.R", "cyp2c38_sex_networks.R", "cyp2c38_ulm_bootstrap.R", "cyp2c38_ulm_calibration.R", "cyp2c38_ulm_presentation.R")))
   write_csv(data.frame(path = inputs, sha256 = vapply(inputs, digest::digest, character(1), algo = "sha256", file = TRUE)), "input_and_code_SHA256.csv")
   capture.output(utils::sessionInfo(), file = file.path(out, "sessionInfo.txt"))
@@ -511,7 +511,7 @@ wp1_package_run <- function(args = commandArgs(trailingOnly = TRUE)) {
     if (length(hit) > 1L) stop("Duplicate option: ", key)
     if (length(hit)) substring(hit, nchar(key) + 4L) else default
   }
-  out <- option("output", "results/validation/cyp2c38_in_vivo")
+  out <- option("output", "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo")
   base_args <- c(paste0("--output=", out),
     paste0("--permutations=", option("base-permutations", option("permutations", "1999"))),
     paste0("--bootstraps=", option("base-bootstraps", option("bootstraps", "999"))),

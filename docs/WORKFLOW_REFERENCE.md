@@ -91,7 +91,7 @@ Convert original whole-cell-type pseudobulks to main split CSVs; optional curren
 
 **Validation:** No CLI/source guard/validate-only. Whole body executes; optional sections cannot bypass earlier mandatory main RDS. DATASETS source validation is a separate helper, not entry dry-run.
 
-**Writes / overwrite behavior:** Writes fixed data/RNA and results/qc paths and can overwrite curated inputs; use isolated checkout/copy.
+**Writes / overwrite behavior:** Writes fixed data/RNA and results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc paths and can overwrite curated inputs; use isolated checkout/copy.
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
@@ -103,7 +103,7 @@ Convert original whole-cell-type pseudobulks to main split CSVs; optional curren
 | Output | Location | Mode |
 | --- | --- | --- |
 | Main RNA inputs | `data/RNA/scaled_RNA_1.csv`<br>`data/RNA/scaled_RNA_2.csv`<br>`data/RNA/scaled_RNA_3.csv`<br>`data/RNA/meta_data_df.csv` | default |
-| Preparation QC | `results/qc/data_quality_report.txt`<br>`results/qc/pseudobulk_per_biosample.pdf`<br>`results/qc/pseudobulk_per_celltype.pdf`<br>`results/qc/sample_celltype_design.csv`<br>`results/qc/samples_per_group_celltype.csv`<br>`results/qc/PCA_*.pdf` | default |
+| Preparation QC | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/data_quality_report.txt`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/pseudobulk_per_biosample.pdf`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/pseudobulk_per_celltype.pdf`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/sample_celltype_design.csv`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/samples_per_group_celltype.csv`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/PCA_*.pdf` | default |
 | Current FCG compatibility CSVs | `data/RNA/zonation/current/fcg/scaled_RNA_zonation.csv`<br>`data/RNA/zonation/current/fcg/meta_data_df_zonation.csv`<br>`registry:current_fcg_zonation_csv → data/RNA/zonation/current/fcg/scaled_RNA_zonation.csv`<br>`registry:current_fcg_zonation_metadata → data/RNA/zonation/current/fcg/meta_data_df_zonation.csv` | optional section11 |
 | Legacy GDX RNA validation CSVs | `data/RNA/scaled_RNA_gdxhr_1.csv`<br>`data/RNA/scaled_RNA_gdxhr_2.csv`<br>`data/RNA/scaled_RNA_gdxhr_3.csv`<br>`data/RNA/meta_data_df_gdxhr.csv` | optional section12 |
 
@@ -135,7 +135,7 @@ Fit main cell-type RNA contrasts, pathway/TF activities and optional validation 
 
 **Validation:** No CLI/source guard/validate-only; source or Rscript executes all sections. vsn is loaded even if proteomics input is absent.
 
-**Writes / overwrite behavior:** Overwrites fixed results/pseudobulk paths; use isolated checkout/copy.
+**Writes / overwrite behavior:** Overwrites fixed results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk paths; use isolated checkout/copy.
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
@@ -148,11 +148,11 @@ Fit main cell-type RNA contrasts, pathway/TF activities and optional validation 
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Main RNA DE/statistics | `results/pseudobulk/ttop_full_list.RData`<br>`results/pseudobulk/tval_full_df.RData`<br>`results/pseudobulk/tval_full_df.csv`<br>`results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | default |
-| RNA enrichment | `results/pseudobulk/pathways/pathway_scores_df_all.RData`<br>`results/pseudobulk/pathways/tf_scores_df_all.RData`<br>`results/pseudobulk/pathways/*.pdf` | default |
-| RNA figures | `results/pseudobulk/pca/*.pdf`<br>`results/pseudobulk/volcanos/*.pdf` | default |
-| Legacy GDX results | `results/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData`<br>`results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv`<br>`results/pseudobulk/gdx_validation_comparison.pdf` | optional GDX |
-| Optional validation displays | `results/pseudobulk/xenium_validation_volcano.pdf`<br>`results/pseudobulk/proteo_validation_comparison.pdf` | optional panel/proteomics |
+| Main RNA DE/statistics | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.RData`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.csv`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | default |
+| RNA enrichment | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_scores_df_all.RData`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/tf_scores_df_all.RData`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/*.pdf` | default |
+| RNA figures | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/*.pdf`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos/*.pdf` | default |
+| Legacy GDX results | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdx_validation_comparison.pdf` | optional GDX |
+| Optional validation displays and proteomics source tables | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/xenium_validation_volcano.pdf`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteo_validation_comparison.pdf`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteomics_differential_results.csv`<br>`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteomics_rna_concordance.csv` | optional panel/proteomics |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -181,7 +181,7 @@ Fit lipid mean-abundance contrasts, class enrichment, optional GDX lipid compari
 
 **Validation:** No CLI/source guard/validate-only; source/Rscript executes body.
 
-**Writes / overwrite behavior:** Fixed results/lipidomic outputs can be overwritten; isolated checkout/copy required to preserve curated outputs.
+**Writes / overwrite behavior:** Fixed results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic outputs can be overwritten; isolated checkout/copy required to preserve curated outputs.
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
@@ -193,10 +193,10 @@ Fit lipid mean-abundance contrasts, class enrichment, optional GDX lipid compari
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Main lipid DE | `results/lipidomic/ttop_full_list.RData` | default |
-| Class enrichment | `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData`<br>`results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv`<br>`results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf` | default |
-| Lipid figures/network | `results/lipidomic/pca/*.pdf`<br>`results/lipidomic/volcanos/*.pdf`<br>`results/lipidomic/network/significant_lipids_network_SIF.csv`<br>`results/lipidomic/network/significant_lipids_network_ATT.csv`<br>`results/lipidomic/bubbles_DBC/*.pdf` | default |
-| GDX lipid results | `results/lipidomic/gdxhr_t_table.csv`<br>`results/lipidomic/gdxhr_ttop_list.RData`<br>`results/lipidomic/fcg_gdx_correlation.pdf` | optional GDX |
+| Main lipid DE | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData` | default |
+| Class enrichment | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_plot.pdf` | default |
+| Lipid figures/network | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/pca/*.pdf`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/volcanos/*.pdf`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/significant_lipids_network_SIF.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/significant_lipids_network_ATT.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/bubbles_DBC/*.pdf` | default |
+| GDX lipid results | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_t_table.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_ttop_list.RData`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation.pdf`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation_by_sex.pdf`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation_source.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation_statistics.csv` | optional GDX |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -223,7 +223,7 @@ Integrate main cell-type RNA/lipids, reuse/train factor models, extract weights/
 
 **Entry:** `scripts/workflows/04_mofa_integration.R`
 
-**Validation:** No CLI/source guard/validate-only. Always prepares and writes MOFA_data before cache branch. MOFA2 loads unconditionally in core/multiomics.R.
+**Validation:** Reuse-only mode verifies the eleven exact saved models before any writes. No standalone validate-only mode. MOFA2 is required.
 
 **Writes / overwrite behavior:** Overwrites prepared input, weights, factor/network outputs; skips existing individual HDF5 training files. Use isolated checkout/copy.
 
@@ -232,16 +232,16 @@ Integrate main cell-type RNA/lipids, reuse/train factor models, extract weights/
 | Main RNA inputs<br>Supplied main cell-type pseudobulk CSVs; no need to rerun01. | `data/RNA/scaled_RNA_1.csv`<br>`data/RNA/scaled_RNA_2.csv`<br>`data/RNA/scaled_RNA_3.csv` | 01<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 | Lipid input<br>Whole-liver lipid vector, sample-intersected with RNA for six-view MOFA input. | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | curated<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 | Overview and regulatory resources<br>Factor group association and lipid-metabolism/TF annotations. | `data/Suppl_Table_1_OverviewData.xlsx`<br>`support/m5.all.v2023.2.Mm.symbols.gmt`<br>`support/TF_regulons.RData`<br>`support/Gonadal_Hormone_Genes.csv` | curated<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
-| Pretrained model set<br>At least11 regex matches skip training; selects12factor model. | `results/mofa/RNA/mofa_res_*factor.hdf5` | frozen<br>default retained-cache mode | Shipped in Git<br>All11 factor5-15 models exist and are unignored in supplied public tree; MOFA2 R package required. |
-| Fallback weights<br>Later fallback if model unavailable; does not bypass earlier training gate or unconditional MOFA2 helper import. | `results/mofa/main_model_RNA_lipid_weight.RData` | frozen<br>model unavailable | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
+| Pretrained model set<br>At least11 regex matches skip training; selects12factor model. | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA/mofa_res_*factor.hdf5` | frozen<br>default retained-cache mode | Shipped in Git<br>All11 factor5-15 models exist and are unignored in supplied public tree; MOFA2 R package required. |
+| Fallback weights<br>Later fallback if model unavailable; does not bypass earlier training gate or unconditional MOFA2 helper import. | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData` | frozen<br>model unavailable | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 | Python trainer<br>Python mofapy2 training command with GPU then CPU retry. | `scripts/mofa/mofa2.py` | curated<br>automatic if fewer than11 matching HDF5 files | Shipped in Git<br>Python/mofapy2 needed only in training contingency. |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Prepared integration input | `results/mofa/MOFA_data.RData` | default |
-| Training input/models | `data/mofa/MOFA_RNA_data.csv`<br>`results/mofa/RNA/mofa_res_*factor.hdf5` | automatic missing-cache training |
-| Weight/factor products | `results/mofa/main_model_RNA_lipid_weight.RData`<br>`results/mofa/factor_analysis/factor_enrichment_gonadal.RData`<br>`results/mofa/factor_analysis/*.pdf` | default |
-| Global network products | `results/mofa/networks/gene_lipid_correlations_factor1.RData`<br>`results/mofa/networks/gene_lipid_correlations_factor1.csv`<br>`results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`<br>`results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv`<br>`results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv`<br>`results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv`<br>`results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv` | default |
+| Prepared integration input | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/MOFA_data.RData` | default |
+| Training input/models | `data/mofa/MOFA_RNA_data.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA/mofa_res_*factor.hdf5` | automatic missing-cache training |
+| Weight/factor products | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/factor_enrichment_gonadal.RData`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/*.pdf` | default |
+| Global network products | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.RData`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv` | default |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -251,12 +251,19 @@ Full integration analysis; normally reuse retained11models, otherwise automatica
 Rscript scripts/workflows/04_mofa_integration.R
 ```
 
+Requires exactly the named models for factor counts 5–15 before writing and skips training. Use the parallel replay for a separate output tree.
+
+```sh
+Rscript scripts/workflows/04_mofa_integration.R --reuse-models-only --model-dir=results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA
+```
+
 **Important distinctions:**
 
 - Global07 uses permissive gene-lipid full network;12 pooled uses separately frozen sparse TF-gene-lipid branch/precursor.
 - Current05/06 do not depend on04.
 - Active MOON uses frozen precision inputs historically derived from04, not an automatic04 rerun.
 - Generic MOFA_SETTINGS does not control this entry hardcoded factor loop/trainer options.
+- Read-only --model-dir is available in --reuse-models-only mode. A missing model stops the run before result writes.
 
 **Code checked:** [scripts/workflows/04_mofa_integration.R](../scripts/workflows/04_mofa_integration.R), [scripts/core/multiomics.R](../scripts/core/multiomics.R).
 
@@ -278,13 +285,13 @@ Run seven blocked zonation/gonad contrasts, fresh pathways, TFs, threshold selec
 | Current FCG compatibility CSV pair<br>Supplied paired-zone matrix/metadata;01section11 or17staging can regenerate from current transport. | `data/RNA/zonation/current/fcg/scaled_RNA_zonation.csv`<br>`data/RNA/zonation/current/fcg/meta_data_df_zonation.csv`<br>`registry:current_fcg_zonation_csv → data/RNA/zonation/current/fcg/scaled_RNA_zonation.csv`<br>`registry:current_fcg_zonation_metadata → data/RNA/zonation/current/fcg/meta_data_df_zonation.csv` | curated<br>default --input | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 | Current FCG transport<br>Upstream source copied/extracted by17; not opened by bare05 wrapper. | `data/RNA/pseudobulk_csv/current_fcg_zonation/manifest.json`<br>`registry:current_fcg_zonation_transport → data/RNA/pseudobulk_csv/current_fcg_zonation/manifest.json` | curated<br>coordinated17 staging | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 | Lipid and support data<br>Whole-liver associations; GO/TF annotation. | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv`<br>`support/m5.all.v2023.2.Mm.symbols.gmt`<br>`support/TF_regulons.RData`<br>`support/Gonadal_Hormone_Genes.csv` | curated<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
-| Lipid DE and class enrichment<br>Class direction/order and lipid association presentation. | `results/lipidomic/ttop_full_list.RData`<br>`results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | 03<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
+| Lipid DE and class enrichment<br>Class direction/order and lipid association presentation. | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | 03<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 | Frozen implementation engine<br>Read as text and adapted, not directly sourced. | `scripts/core/engines/05_zonation_analysis_legacy.R`<br>`registry:engine_fcg05 → scripts/core/engines/05_zonation_analysis_legacy.R` | frozen<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Current model/network results | `results/zonation_marker_update_20261116/fcg05/fcg05_checkpoint.rds`<br>`results/zonation_marker_update_20261116/fcg05/zonation_ttop_list.RData`<br>`results/zonation_marker_update_20261116/fcg05/t_table_zonation.csv`<br>`results/zonation_marker_update_20261116/fcg05/ttop_full_long.csv`<br>`results/zonation_marker_update_20261116/fcg05/optimal_threshold_metrics.csv`<br>`results/zonation_marker_update_20261116/fcg05/networks/*.csv`<br>`registry:current_root → results/zonation_marker_update_20261116` | default: generated below selected fresh --output; current_root paths identify the saved approved release only |
-| Fresh pathway/runtime records | `results/zonation_marker_update_20261116/fcg05/pathway_enrichment.RData`<br>`results/zonation_marker_update_20261116/fcg05/pathway_enrichment_fresh.csv`<br>`results/zonation_marker_update_20261116/runtime/05_zonation_analysis_versioned.R`<br>`registry:current_root → results/zonation_marker_update_20261116` | default: generated below selected fresh --output; current_root paths identify the saved approved release only |
+| Current model/network results | `results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/fcg05_checkpoint.rds`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/zonation_ttop_list.RData`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/t_table_zonation.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/ttop_full_long.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/optimal_threshold_metrics.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/*.csv`<br>`registry:current_root → results/current` | default: generated below selected fresh --output; current_root paths identify the saved approved release only |
+| Fresh pathway/runtime records | `results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/pathway_enrichment.RData`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/pathway_enrichment_fresh.csv`<br>`results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/runtime/05_zonation_analysis_versioned.R`<br>`registry:current_root → results/current` | default: generated below selected fresh --output; current_root paths identify the saved approved release only |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -326,13 +333,13 @@ Parse main lipid DE structures and fit class-specific logFC ~ chain_length + db_
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
-| Main lipid DE archive<br>Nested Testes vs Ovaries result table; active workflow has no RNA/MOFA input. | `results/lipidomic/ttop_full_list.RData` | 03<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
+| Main lipid DE archive<br>Nested Testes vs Ovaries result table; active workflow has no RNA/MOFA input. | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData` | 03<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Structural features and regressions | `results/lipidomic/structural_model/lipids_with_structure.csv`<br>`results/lipidomic/structural_model/lipid_only_class_coefficients.csv`<br>`results/lipidomic/structural_model/lipid_only_class_summaries.csv` | default |
-| Conditional significant terms | `results/lipidomic/structural_model/lipid_only_chain_length_effects.csv`<br>`results/lipidomic/structural_model/lipid_only_db_position_effects.csv`<br>`results/lipidomic/structural_model/lipid_only_interaction_effects.csv` | only when qualifying terms exist |
-| Structural figures | `results/lipidomic/structural_model/lipid_only_summary_heatmap.pdf`<br>`results/lipidomic/structural_model/lipid_only_plots/*_structural_effects.pdf` | default |
+| Structural features and regressions | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_class_coefficients.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_class_summaries.csv` | default |
+| Conditional significant terms | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_chain_length_effects.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_db_position_effects.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_interaction_effects.csv` | only when qualifying terms exist |
+| Structural figures | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_summary_heatmap.pdf`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipid_only_plots/*_structural_effects.pdf` | default |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -365,16 +372,16 @@ Validate original gene-lipid predictions with unchanged KD data, with separate g
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
-| Same-root current FCG reference<br>Paired current FCG reference and candidate networks. | `results/zonation_marker_update_20261116/fcg05/fcg05_checkpoint.rds`<br>`results/zonation_marker_update_20261116/fcg05/networks/cormat_testes_portal_full_SIF.csv`<br>`results/zonation_marker_update_20261116/fcg05/networks/cormat_testes_central_full_SIF.csv`<br>`results/zonation_marker_update_20261116/fcg05/networks/cormat_Ovaries_portal_full_SIF.csv`<br>`results/zonation_marker_update_20261116/fcg05/networks/cormat_ova_central_full_SIF.csv`<br>`registry:current_root → results/zonation_marker_update_20261116` | 05<br>default zonal | Mixed: some files are local-only<br>Checkpoint is an ignored generated model cache; clone must first fit05/17 in the same fresh output root or restore it explicitly. |
-| Unchanged canonical KD fit/table<br>Table is scored; fit RData is additionally checked by the public wrapper. | `results/validation/knockdown_t_table.csv`<br>`results/validation/knockdown_ttop_list.RData` | frozen<br>default zonal | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
-| Structural reference<br>Axis reference for structural consistency; required by both modes. | `results/lipidomic/structural_model/lipids_with_structure.csv` | 06<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
+| Same-root current FCG reference<br>Paired current FCG reference and candidate networks. | `results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/fcg05_checkpoint.rds`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_testes_portal_full_SIF.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_testes_central_full_SIF.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_Ovaries_portal_full_SIF.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_ova_central_full_SIF.csv`<br>`registry:current_root → results/current` | 05<br>default zonal | Mixed: some files are local-only<br>Checkpoint is an ignored generated model cache; clone must first fit05/17 in the same fresh output root or restore it explicitly. |
+| Unchanged canonical KD fit/table<br>Table is scored; fit RData is additionally checked by the public wrapper. | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData` | frozen<br>default zonal | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
+| Structural reference<br>Axis reference for structural consistency; required by both modes. | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv` | 06<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 | Original siRNA lipid measurements<br>Refit original KD effects. | `data/metabolomics/lipidomics_20250423transfections.csv` | curated<br>--global-only | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
-| Global full correlation network<br>Permissive original global reference. | `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 04<br>--global-only | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
+| Global full correlation network<br>Permissive original global reference. | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 04<br>--global-only | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 | Frozen validation engine<br>Extract sections8/9/11 for zonal,1-7/10-11 forglobal. | `scripts/core/engines/07_validation_experiments_legacy.R`<br>`registry:engine_validation07 → scripts/core/engines/07_validation_experiments_legacy.R` | frozen<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Current zonal validation | `results/zonation_marker_update_20261116/fcg07/fcg07_checkpoint.rds`<br>`results/zonation_marker_update_20261116/fcg07/zonation_network_validation_scores.csv`<br>`results/zonation_marker_update_20261116/fcg07/Mtmr11_male_PP_prespecified_ULM.csv`<br>`results/zonation_marker_update_20261116/fcg07/Mtmr11_male_PP_prespecified_source.csv`<br>`results/zonation_marker_update_20261116/fcg07/Mtmr11_male_PP_ULM_background_source.csv`<br>`results/zonation_marker_update_20261116/fcg07/Fig5F_Mtmr11_male_PP_prespecified.pdf`<br>`results/zonation_marker_update_20261116/fcg07/structural_consistency/*`<br>`registry:current_root → results/zonation_marker_update_20261116` | default zonal: generated below selected fresh --output; current_root paths identify the saved approved release only |
+| Current zonal validation | `results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/fcg07_checkpoint.rds`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/zonation_network_validation_scores.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_prespecified_ULM.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_prespecified_source.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_ULM_background_source.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Fig5F_Mtmr11_male_PP_prespecified.pdf`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/structural_consistency/*`<br>`registry:current_root → results/current` | default zonal: generated below selected fresh --output; current_root paths identify the saved approved release only |
 | Independent global refit and validation | `results/runs/global_validation_reproduction/knockdown_t_table.csv`<br>`results/runs/global_validation_reproduction/knockdown_ttop_list.RData`<br>`results/runs/global_validation_reproduction/global_network_validation_scores.csv`<br>`results/runs/global_validation_reproduction/validation_summary.csv`<br>`results/runs/global_validation_reproduction/structural_consistency/*` | --global-only explicit fresh output |
 
 **Command examples** (not executed by this documentation audit):
@@ -430,8 +437,8 @@ Compare log2-lipid CV/Brown-Forsythe variability between gonad groups and class 
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Variance tables | `results/lipidomic/variance_analysis/variance_analysis_results.csv`<br>`results/lipidomic/variance_analysis/significant_differential_variance_lipids.csv`<br>`results/lipidomic/variance_analysis/variance_analysis_by_class.csv`<br>`results/lipidomic/variance_analysis/variance_analysis_summary.csv` | default |
-| Variance figures | `results/lipidomic/variance_analysis/cv_difference_volcano.pdf`<br>`results/lipidomic/variance_analysis/cv_difference_volcano_by_class.pdf` | default |
+| Variance tables | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/variance_analysis_results.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/significant_differential_variance_lipids.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/variance_analysis_by_class.csv`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/variance_analysis_summary.csv` | default |
+| Variance figures | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/cv_difference_volcano.pdf`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/cv_difference_volcano_by_class.pdf` | default |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -458,21 +465,21 @@ Compare a whole-hepatocyte mouse gonad signature with human bulk-liver sex/age e
 
 **Entry:** `scripts/workflows/09_human_analysis.py`
 
-**Validation:** No CLI, --validate-only or harmless --help. Static audit only; importing calls RESULTS_DIR.mkdir before main.
+**Validation:** CLI help after base package imports. The explicit DE-only mode bypasses pypath. Full scoring checks for a nonempty mouse-to-human map. No validate-only mode.
 
-**Writes / overwrite behavior:** External output directory is created at import; saves reuse fixed names and can overwrite. No fresh-directory guard.
+**Writes / overwrite behavior:** Explicit --output requires an empty destination. The historical default HPC path can overwrite its named files.
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
 | Human read/TPM/SOFT files<br>Counts, normalized comparison layer and sample sex/age/title metadata | `/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/bulk/zhou/GSE179250_gene_reads.txt`<br>`/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/bulk/zhou/GSE179250_gene_tpm_normalized.txt`<br>`/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/bulk/zhou/GSE179250_family.soft.gz` | external<br>full run | External / runtime-supplied<br>External absolute HPC DATA_DIR; not shipped. |
-| Mouse signature seed and provisioned copy<br>ID,t_Hepatocytes signature | `results/pseudobulk/hepa_gonad_signature.csv`<br>`/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/hepa_gonad_signature.csv` | frozen<br>full run | Shipped in Git; also runtime/external paths<br>Repository seed ships, but script reads a manually provisioned external copy. Its biological definition is the02gonadcontrast, but02doesnotwrite/copythisnamedseed. |
+| Mouse signature seed and provisioned copy<br>ID,t_Hepatocytes signature | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/hepa_gonad_signature.csv`<br>`/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/hepa_gonad_signature.csv` | frozen<br>full run | Shipped in Git; also runtime/external paths<br>Repository seed ships, but script reads a manually provisioned external copy. Its biological definition is the02gonadcontrast, but02doesnotwrite/copythisnamedseed. |
 | Full mouse DE table<br>ID,t_Hepatocytes,adj.P.Val,logFC table | `/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/male_vs_female_DA_res.csv` | external<br>ranked concordance stage | External / runtime-supplied<br>Separate required external copy; not produced by09. |
 | Orthology resources<br>Live package-resource/cache orthology lookup | `resource:Live package-resource/cache orthology lookup` | external<br>full run | External package/resource<br>Compatible pypath resource/cache or network access; frozen support/ortholog_resource.RData is not read. |
 
 | Output | Location | Mode |
 | --- | --- | --- |
 | Analysis output | `/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/results/bulk_manuscript/adata_processed.h5ad`<br>`/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/results/bulk_manuscript/*.csv`<br>`/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/results/bulk_manuscript/*.pdf` | external configured output |
-| Retained study artifacts | `results/human/` | saved outputs; not the script default destination |
+| Retained study artifacts | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/human/` | saved outputs; not the script default destination |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -482,12 +489,17 @@ Runs full analysis after external paths/data/packages are provisioned; not a pre
 python3 scripts/workflows/09_human_analysis.py
 ```
 
+Recompute all three human DE contrasts without mouse orthology or signature scoring.
+
+```sh
+python3 scripts/workflows/09_human_analysis.py --data-dir HUMAN_INPUTS --output results/runs/human_replay --de-only
+```
+
 **Important distinctions:**
 
 - Independent of17 expanded-marker and diet inputs.
-- DATA_DIR/RESULTS_DIR are literal /home/... HPC paths.
-- Male−female DE uses female reference; female age contrast is >=50 versus12–49.
-- Output/model state was not regenerated during this documentation audit.
+- Use --data-dir and --output to override the historical external HPC paths.
+- Male−female DE uses female reference. Female age contrast is ≥50 versus12–49.
 
 **Code checked:** [scripts/workflows/09_human_analysis.py](../scripts/workflows/09_human_analysis.py), [docs/workflow_plans/09_human_analysis.md](../docs/workflow_plans/09_human_analysis.md).
 
@@ -574,13 +586,13 @@ Independent KO differential models, fixed-reference concordance, native ULM/null
 | Cyp2c38 in-vivo KO lipid input<br>required | `data/metabolomics/cyp2c38ko/lipidomics_cyp2c38ko.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original whole-hepatocyte RNA and metadata<br>required | `data/RNA/scaled_RNA_[123].csv`<br>`data/RNA/meta_data_df.csv` | 01<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original lipid measurements<br>required | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Original FCG group/PCA roster<br>required | `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Frozen original full-network Cyp2c38 selection<br>required | `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 04<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Original FCG group/PCA roster<br>required | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Frozen original full-network Cyp2c38 selection<br>required | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 04<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Overview workbook recorded in production hashes<br>production provenance dependency | `data/Suppl_Table_1_OverviewData.xlsx` | curated<br>full | Shipped in Git<br>Shipped current artifact or source input |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Complete WP1 package | `results/validation/cyp2c38_in_vivo/`<br>`results/validation/cyp2c38_in_vivo/ulm_followup/` | full |
+| Complete WP1 package | `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/ulm_followup/` | full |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -624,11 +636,11 @@ Original Figure3/5 conservation versus CF453 SD and descriptive WD-SD changes
 | CF453 whole-hepatocyte pseudobulk transport<br>required | `data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json`<br>`data/RNA/pseudobulk_csv/wdsd_hepatocytes/*.csv`<br>`registry:wdsd_hepatocytes_transport → data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | CF453 lipid measurements<br>required | `data/metabolomics/wdsd/lipidomics_cf453.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Frozen original CF453 zone transport<br>required | `data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json`<br>`data/RNA/pseudobulk_csv/historical_wdsd_zonation/*.csv`<br>`registry:historical_wdsd_zonation_transport → data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json` | frozen<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Frozen whole-hepatocyte Figure3 networks and precursor<br>required | `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`<br>`results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv`<br>`results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv`<br>`results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv`<br>`results/mofa/networks/gene_lipid_correlations_factor1.csv` | 04<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Frozen whole-hepatocyte Figure3 networks and precursor<br>required | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv` | 04<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original raw lipid annotations<br>required | `data/metabolomics/fcg/lipidomics_fcg.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original whole-hepatocyte RNA and metadata<br>required | `data/RNA/scaled_RNA_[123].csv`<br>`data/RNA/meta_data_df.csv` | 01<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original lipid measurements<br>required | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Original FCG group/PCA roster<br>required | `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Original FCG group/PCA roster<br>required | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Frozen original FCG zone matrices<br>required | `miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv`<br>`miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv`<br>`registry:historical_fcg_zonation_csv → miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv`<br>`registry:historical_fcg_zonation_metadata → miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv` | frozen<br>all | Local-only; restore or regenerate<br>Retained local archive; payloads excluded from ordinary Git; restore through migration/recovery ledger |
 | Four frozen Figure5 context references<br>required | `miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_ATT.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_ATT.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_ATT.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_ATT.csv`<br>`registry:historical_fcg05 → miscellaneous/older_results/zonation_two_marker` | frozen<br>all | Local-only; restore or regenerate<br>Retained local archive; numerical payloads mostly ignored; restore original selected SIF/full-SIF/full-ATT, not current expanded-marker networks |
 
@@ -688,7 +700,7 @@ Compare CF459 WD with CF453 WD and original male FCG on fixed three-cohort pairs
 | Frozen original FCG zone matrices<br>required | `miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv`<br>`miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv`<br>`registry:historical_fcg_zonation_csv → miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv`<br>`registry:historical_fcg_zonation_metadata → miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv` | frozen<br>all | Local-only; restore or regenerate<br>Retained local archive; payloads excluded from ordinary Git; restore through migration/recovery ledger |
 | Four frozen Figure5 context references<br>required | `miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_ATT.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_ATT.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_ATT.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_ATT.csv`<br>`registry:historical_fcg05 → miscellaneous/older_results/zonation_two_marker` | frozen<br>all | Local-only; restore or regenerate<br>Retained local archive; numerical payloads mostly ignored; restore original selected SIF/full-SIF/full-ATT, not current expanded-marker networks |
 | Original lipid measurements<br>required | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Original FCG group/PCA roster<br>required | `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Original FCG group/PCA roster<br>required | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Prior WP2 coefficient replay<br>optional replay only | `miscellaneous/comparisons/wdsd_network_comparison/network_edges.csv`<br>`registry:historical_wf12 → miscellaneous/comparisons/wdsd_network_comparison` | 12<br>all | Mixed: some files are local-only<br>If absent, comparison proceeds and records replay unavailable |
 | Saved base draw banks and contexts<br>required | `miscellaneous/comparisons/wd_crosscohort_robustness/contexts.rds`<br>`miscellaneous/comparisons/wd_crosscohort_robustness/analysis.rds`<br>`registry:historical_wf13 → miscellaneous/comparisons/wd_crosscohort_robustness` | 13<br>--fcg-comparison-only | Mixed: some files are local-only<br>Ignored generated caches; restore or regenerate full13 |
 | Saved report bundle<br>required | `miscellaneous/comparisons/wd_crosscohort_robustness/report_bundle.rds`<br>`miscellaneous/comparisons/wd_crosscohort_robustness/fcg_comparison/analysis.rds`<br>`registry:historical_wf13 → miscellaneous/comparisons/wd_crosscohort_robustness` | 13<br>--report-only | Mixed: some files are local-only<br>Bundle required; extension cache used when present, otherwise bundle extension |
@@ -752,11 +764,11 @@ Supply current RNA/lipid models; optionally run full legacy30-panel association 
 | CF453 whole-hepatocyte pseudobulk transport<br>required | `data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json`<br>`data/RNA/pseudobulk_csv/wdsd_hepatocytes/*.csv`<br>`registry:wdsd_hepatocytes_transport → data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | CF453 lipid measurements<br>required | `data/metabolomics/wdsd/lipidomics_cf453.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Current CF453 zone transport<br>required | `data/RNA/pseudobulk_csv/current_wdsd_zonation/manifest.json`<br>`data/RNA/pseudobulk_csv/current_wdsd_zonation/*.csv`<br>`registry:current_wdsd_zonation_transport → data/RNA/pseudobulk_csv/current_wdsd_zonation/manifest.json` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Saved model/full analysis<br>required | `results/zonation_marker_update_20261116/cf453_models/models.rds`<br>`results/zonation_marker_update_20261116/cf453_models/analysis.rds`<br>`registry:current_root → results/zonation_marker_update_20261116` | 14<br>--finish/--plot-only | Mixed: some files are local-only; incomplete: declared paths absent<br>Ignored caches; finish needs models and no analysis, plot-only needs analysis; approved current model-only stage has no analysis.rds |
+| Saved model/full analysis<br>required | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/models.rds`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/analysis.rds`<br>`registry:current_root → results/current` | 14<br>--finish/--plot-only | Mixed: some files are local-only; incomplete: declared paths absent<br>Ignored caches; finish needs models and no analysis, plot-only needs analysis; approved current model-only stage has no analysis.rds |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Model stage | `results/zonation_marker_update_20261116/cf453_models/models.rds`<br>`results/zonation_marker_update_20261116/cf453_models/tables/`<br>`results/zonation_marker_update_20261116/cf453_models/provenance_sha256.csv`<br>`registry:current_root → results/zonation_marker_update_20261116` | all fresh modes; --models-only stops here |
+| Model stage | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/models.rds`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/tables/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/provenance_sha256.csv`<br>`registry:current_root → results/current` | all fresh modes; --models-only stops here |
 | Legacy full association/panel set | `<output>/analysis.rds`<br>`<output>/panels/`<br>`<output>/source_data/`<br>`<output>/panel_manifest.csv` | default/full, --finish or saved --plot-only exports |
 
 **Command examples** (not executed by this documentation audit):
@@ -797,12 +809,12 @@ Extend14 cache with direct diet interactions; optional four-panel presentation
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
-| Selected Workflow14 model cache and adjacent provenance<br>required | `results/zonation_marker_update_20261116/cf453_models/models.rds`<br>`results/zonation_marker_update_20261116/cf453_models/provenance_sha256.csv`<br>`registry:current_root → results/zonation_marker_update_20261116` | 14<br>fresh fit | Mixed: some files are local-only<br>Generated model RDS ignored in Git; regenerate14 models-only into fresh directory or restore exact cache; explicit --parent does not infer any other parent |
-| Saved direct analysis<br>required | `results/zonation_marker_update_20261116/cf453_direct_diet/diet_analysis.rds`<br>`registry:current_root → results/zonation_marker_update_20261116` | 15<br>--plot-only | Mixed: some files are local-only<br>Ignored generated cache; must restore/regenerate |
+| Selected Workflow14 model cache and adjacent provenance<br>required | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/models.rds`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/provenance_sha256.csv`<br>`registry:current_root → results/current` | 14<br>fresh fit | Mixed: some files are local-only<br>Generated model RDS ignored in Git; regenerate14 models-only into fresh directory or restore exact cache; explicit --parent does not infer any other parent |
+| Saved direct analysis<br>required | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/diet_analysis.rds`<br>`registry:current_root → results/current` | 15<br>--plot-only | Mixed: some files are local-only<br>Ignored generated cache; must restore/regenerate |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Direct model evidence | `results/zonation_marker_update_20261116/cf453_direct_diet/diet_analysis.rds`<br>`results/zonation_marker_update_20261116/cf453_direct_diet/tables/`<br>`results/zonation_marker_update_20261116/cf453_direct_diet/provenance_sha256.csv`<br>`registry:current_root → results/zonation_marker_update_20261116` | full or --models-only |
+| Direct model evidence | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/diet_analysis.rds`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/tables/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/provenance_sha256.csv`<br>`registry:current_root → results/current` | full or --models-only |
 | Four-panel alternative | `<output>/panels/`<br>`<output>/source_data/`<br>`<output>/panel_manifest.csv` | full or saved --plot-only |
 
 **Command examples** (not executed by this documentation audit):
@@ -837,14 +849,14 @@ Select zonation anchors and compute fixed-programme class/network displays
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
-| Selected Workflow14 model cache and adjacent provenance<br>required | `results/zonation_marker_update_20261116/cf453_models/models.rds`<br>`results/zonation_marker_update_20261116/cf453_models/provenance_sha256.csv`<br>`registry:current_root → results/zonation_marker_update_20261116` | 14<br>fresh fit | Mixed: some files are local-only<br>Generated model RDS ignored in Git; regenerate14 models-only into fresh directory or restore exact cache; explicit --parent does not infer any other parent |
-| Selected Workflow15 direct-diet evidence cache<br>required | `results/zonation_marker_update_20261116/cf453_direct_diet/diet_analysis.rds`<br>`registry:current_root → results/zonation_marker_update_20261116` | 15<br>fresh analysis | Mixed: some files are local-only<br>Generated RDS ignored in Git; regenerate15 models-only using the same14 parent or restore |
-| Saved selected-programme analysis<br>required | `results/zonation_marker_update_20261116/cf453_rewiring/rewiring_analysis.rds`<br>`registry:current_root → results/zonation_marker_update_20261116` | 16<br>--plot-only | Mixed: some files are local-only<br>Ignored cache; restore/regenerate16 |
+| Selected Workflow14 model cache and adjacent provenance<br>required | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/models.rds`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/provenance_sha256.csv`<br>`registry:current_root → results/current` | 14<br>fresh fit | Mixed: some files are local-only<br>Generated model RDS ignored in Git; regenerate14 models-only into fresh directory or restore exact cache; explicit --parent does not infer any other parent |
+| Selected Workflow15 direct-diet evidence cache<br>required | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/diet_analysis.rds`<br>`registry:current_root → results/current` | 15<br>fresh analysis | Mixed: some files are local-only<br>Generated RDS ignored in Git; regenerate15 models-only using the same14 parent or restore |
+| Saved selected-programme analysis<br>required | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/rewiring_analysis.rds`<br>`registry:current_root → results/current` | 16<br>--plot-only | Mixed: some files are local-only<br>Ignored cache; restore/regenerate16 |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Selected-programme statistics | `results/zonation_marker_update_20261116/cf453_rewiring/rewiring_analysis.rds`<br>`results/zonation_marker_update_20261116/cf453_rewiring/tables/`<br>`results/zonation_marker_update_20261116/cf453_rewiring/provenance_sha256.csv`<br>`registry:current_root → results/zonation_marker_update_20261116` | full or --models-only |
-| Three main panel groups | `results/zonation_marker_update_20261116/cf453_rewiring/panels/`<br>`results/zonation_marker_update_20261116/cf453_rewiring/source_data/`<br>`results/zonation_marker_update_20261116/cf453_rewiring/panel_manifest.csv`<br>`registry:current_root → results/zonation_marker_update_20261116` | full or --plot-only |
+| Selected-programme statistics | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/rewiring_analysis.rds`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/tables/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/provenance_sha256.csv`<br>`registry:current_root → results/current` | full or --models-only |
+| Three main panel groups | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/panels/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/source_data/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/panel_manifest.csv`<br>`registry:current_root → results/current` | full or --plot-only |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -875,7 +887,7 @@ Reproduce current FCG zonal/KD, paired GDX and CF45314/15/16/layout stages; opti
 
 **Validation:** Entry --validate-only verifies3zone transports, balanced zones, engine paths and KD CSV/RData; no models or writes. It does NOT check all03/06/resources/whole-hepatocyte14 prerequisites. With --with-manuscript-audit it also checks Python and selected historical cache files, not all private/report dependencies.
 
-**Writes / overwrite behavior:** Before any writes, full science/audit modes reject approved current_root and all descendants including cache-absent/symlink aliases via analysis_assert_not_approved_output; ordinary completed-cache guards remain. Validation skips guard and writes nothing. Explicit report-only skips guard and rewrites saved audit/report outputs.
+**Writes / overwrite behavior:** Before any writes, full science/audit and report-only modes reject published current_root, legacy_results_root and all descendants including cache-absent/symlink aliases via analysis_assert_not_approved_output; ordinary completed-cache guards remain. Validation skips guard and writes nothing. Explicit report-only skips guard and rewrites saved audit/report outputs.
 
 **Invokes other entries/phases:** `05`, `07`, `14`, `15`, `16`, `6A_layouts`. These are control-flow calls, not additional cohorts.
 
@@ -885,20 +897,20 @@ Reproduce current FCG zonal/KD, paired GDX and CF45314/15/16/layout stages; opti
 | CF453 whole-hepatocyte pseudobulk transport<br>required | `data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json`<br>`data/RNA/pseudobulk_csv/wdsd_hepatocytes/*.csv`<br>`registry:wdsd_hepatocytes_transport → data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | CF453 lipid measurements<br>required | `data/metabolomics/wdsd/lipidomics_cf453.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | FCG lipid measurements<br>required | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Lipid DA and enrichment outputs<br>required | `results/lipidomic/ttop_full_list.RData`<br>`results/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | 03<br>full | Shipped in Git<br>Shipped result artifacts; actual FCG engine requires them, but17 validate-only does not preflight them |
-| Lipid structural reference<br>required | `results/lipidomic/structural_model/lipids_with_structure.csv` | 06<br>full zonal07 structural branch | Shipped in Git<br>Shipped; needed when matched structural data exist;17 validate-only does not check it |
-| Independent KD fitted effects<br>reused KD fit, not raw-experiment refitting | `results/validation/knockdown_t_table.csv`<br>`results/validation/knockdown_ttop_list.RData` | 07<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Lipid DA and enrichment outputs<br>required | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData`<br>`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData` | 03<br>full | Shipped in Git<br>Shipped result artifacts; actual FCG engine requires them, but17 validate-only does not preflight them |
+| Lipid structural reference<br>required | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv` | 06<br>full zonal07 structural branch | Shipped in Git<br>Shipped; needed when matched structural data exist;17 validate-only does not check it |
+| Independent KD fitted effects<br>reused KD fit, not raw-experiment refitting | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData` | 07<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | TF/pathway resources<br>required | `support/TF_regulons.RData`<br>`support/Gonadal_Hormone_Genes.csv`<br>`support/m5.all.v2023.2.Mm.symbols.gmt` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Frozen implementation engines<br>implementation dependency | `scripts/core/engines/05_zonation_analysis_legacy.R`<br>`scripts/core/engines/07_validation_experiments_legacy.R`<br>`registry:engine_fcg05 → scripts/core/engines/05_zonation_analysis_legacy.R`<br>`registry:engine_validation07 → scripts/core/engines/07_validation_experiments_legacy.R` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Retrospective FCG/CF453/GDX references<br>required | `miscellaneous/older_results/zonation_two_marker/*`<br>`miscellaneous/older_inputs/two_marker_zonation/RNA/*`<br>`miscellaneous/older_results/cf453_standalone_figure6/models.rds`<br>`miscellaneous/older_results/cf453_diet_impact_figure6/diet_analysis.rds`<br>`miscellaneous/older_results/cf453_diet_rewiring_figure6/rewiring_analysis.rds`<br>`registry:historical_fcg05 → miscellaneous/older_results/zonation_two_marker`<br>`registry:historical_fcg_zonation_csv → miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv`<br>`registry:historical_fcg_zonation_metadata → miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv`<br>`registry:historical_gdx_zonation_rds → miscellaneous/older_inputs/two_marker_zonation/RNA/gdx_zonation_pseudobulks.rds`<br>`registry:historical_cf453_models → miscellaneous/older_results/cf453_standalone_figure6`<br>`registry:historical_cf453_direct → miscellaneous/older_results/cf453_diet_impact_figure6`<br>`registry:historical_cf453_rewiring → miscellaneous/older_results/cf453_diet_rewiring_figure6` | frozen<br>--with-manuscript-audit or --report-only | Mixed: some files are local-only<br>Mostly ignored local archive; restore exact original baselines. Old GDX RDS required for old/new supporting fit; current science does not need it. |
-| Whole-hepatocyte DE comparison audit<br>denominator-definition comparison only | `results/pseudobulk/ttop_full_list.RData` | 02<br>--with-manuscript-audit | Shipped in Git<br>Shipped current artifact or source input |
-| Private manuscript and supplied preprocessing evidence<br>required | `manuscript/Cleland and Dugourd et al.docx`<br>`<source-root>/james_scripts_20261104/preprocessing_{02_fcg,03_gdx,04_wdsd}.R`<br>`<source-root>/Zonation_Genes.csv`<br>`results/zonation_marker_update_20261116/inputs/preprocessing_reference/*` | external<br>audit/report modes | Mixed: some files are local-only; also runtime/external paths<br>Private DOCX ignored; exact saved reference snapshots may satisfy completed report replay. Fresh audit source-root must also contain preprocessing evidence; default public CSV root alone does not. |
+| Whole-hepatocyte DE comparison audit<br>denominator-definition comparison only | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData` | 02<br>--with-manuscript-audit | Shipped in Git<br>Shipped current artifact or source input |
+| Private manuscript and supplied preprocessing evidence<br>required | `manuscript/Cleland and Dugourd et al.docx`<br>`<source-root>/james_scripts_20261104/preprocessing_{02_fcg,03_gdx,04_wdsd}.R`<br>`<source-root>/Zonation_Genes.csv`<br>`results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/inputs/preprocessing_reference/*` | external<br>audit/report modes | Local-only; restore or regenerate; also runtime/external paths<br>Private DOCX ignored; exact saved reference snapshots may satisfy completed report replay. Fresh audit source-root must also contain preprocessing evidence; default public CSV root alone does not. |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Current staged inputs and scientific result stages | `results/zonation_marker_update_20261116/inputs/`<br>`results/zonation_marker_update_20261116/fcg05/`<br>`results/zonation_marker_update_20261116/fcg07/`<br>`results/zonation_marker_update_20261116/gdx_zonation/`<br>`results/zonation_marker_update_20261116/cf453_models/`<br>`results/zonation_marker_update_20261116/cf453_direct_diet/`<br>`results/zonation_marker_update_20261116/cf453_rewiring/`<br>`results/zonation_marker_update_20261116/cf453_layouts/`<br>`results/zonation_marker_update_20261116/fcg_panel_manifest.csv`<br>`registry:current_root → results/zonation_marker_update_20261116` | default science/full |
-| Formal scientific table copies | `results/zonation_marker_update_20261116/tables/`<br>`registry:current_root → results/zonation_marker_update_20261116` | science when system Python available; audit/report |
-| Old/new comparisons and private revision report | `results/zonation_marker_update_20261116/comparisons/`<br>`results/zonation_marker_update_20261116/report/`<br>`registry:current_root → results/zonation_marker_update_20261116` | --with-manuscript-audit or --report-only |
+| Current staged inputs and scientific result stages | `results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/inputs/`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/`<br>`results/current/04_pericentral_and_periportal_hepatocyte_bias/gdx_zonation/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_layouts/`<br>`results/runs/NAME/fcg_panel_manifest.csv`<br>`registry:current_root → results/current` | default science/full |
+| Formal scientific table copies | `results/current/05_sex_polarised_zonation_gene_lipid_interactions/supplementary_tables/`<br>`registry:current_root → results/current` | science when system Python available; audit/report |
+| Old/new comparisons and private revision report | `results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/comparisons/`<br>`results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/report/`<br>`registry:current_root → results/current` | --with-manuscript-audit or --report-only |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -954,7 +966,7 @@ Compatibility phase of complete workflow
 | Frozen original FCG zone matrices<br>required | `miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv`<br>`miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv`<br>`registry:historical_fcg_zonation_csv → miscellaneous/older_inputs/two_marker_zonation/RNA/scaled_RNA_zonation.csv`<br>`registry:historical_fcg_zonation_metadata → miscellaneous/older_inputs/two_marker_zonation/RNA/meta_data_df_zonation.csv` | frozen<br>all | Local-only; restore or regenerate<br>Retained local archive; payloads excluded from ordinary Git; restore through migration/recovery ledger |
 | Four frozen Figure5 context references<br>required | `miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_portal_full_ATT.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_testes_central_full_ATT.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_Ovaries_portal_full_ATT.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_SIF.csv`<br>`miscellaneous/older_results/zonation_two_marker/networks/cormat_ova_central_full_ATT.csv`<br>`registry:historical_fcg05 → miscellaneous/older_results/zonation_two_marker` | frozen<br>all | Local-only; restore or regenerate<br>Retained local archive; numerical payloads mostly ignored; restore original selected SIF/full-SIF/full-ATT, not current expanded-marker networks |
 | Original lipid measurements<br>required | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Original FCG group/PCA roster<br>required | `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Original FCG group/PCA roster<br>required | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
 
 | Output | Location | Mode |
 | --- | --- | --- |
@@ -992,11 +1004,11 @@ Compatibility phase of complete workflow
 | CF453 whole-hepatocyte pseudobulk transport<br>required | `data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json`<br>`data/RNA/pseudobulk_csv/wdsd_hepatocytes/*.csv`<br>`registry:wdsd_hepatocytes_transport → data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | CF453 lipid measurements<br>required | `data/metabolomics/wdsd/lipidomics_cf453.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Frozen original CF453 zone transport<br>required | `data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json`<br>`data/RNA/pseudobulk_csv/historical_wdsd_zonation/*.csv`<br>`registry:historical_wdsd_zonation_transport → data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json` | frozen<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Frozen whole-hepatocyte Figure3 networks and precursor<br>required | `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`<br>`results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv`<br>`results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv`<br>`results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv`<br>`results/mofa/networks/gene_lipid_correlations_factor1.csv` | 04<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Frozen whole-hepatocyte Figure3 networks and precursor<br>required | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv` | 04<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original raw lipid annotations<br>required | `data/metabolomics/fcg/lipidomics_fcg.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original whole-hepatocyte RNA and metadata<br>required | `data/RNA/scaled_RNA_[123].csv`<br>`data/RNA/meta_data_df.csv` | 01<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original lipid measurements<br>required | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Original FCG group/PCA roster<br>required | `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Original FCG group/PCA roster<br>required | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
 
 | Output | Location | Mode |
 | --- | --- | --- |
@@ -1035,13 +1047,13 @@ Compatibility phase of complete workflow
 | Cyp2c38 in-vivo KO lipid input<br>required | `data/metabolomics/cyp2c38ko/lipidomics_cyp2c38ko.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original whole-hepatocyte RNA and metadata<br>required | `data/RNA/scaled_RNA_[123].csv`<br>`data/RNA/meta_data_df.csv` | 01<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original lipid measurements<br>required | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Original FCG group/PCA roster<br>required | `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Frozen original full-network Cyp2c38 selection<br>required | `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 04<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Original FCG group/PCA roster<br>required | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Frozen original full-network Cyp2c38 selection<br>required | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 04<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Overview workbook recorded in production hashes<br>production provenance dependency | `data/Suppl_Table_1_OverviewData.xlsx` | curated<br>full | Shipped in Git<br>Shipped current artifact or source input |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Base KO results | `results/validation/cyp2c38_in_vivo/` | full |
+| Base KO results | `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/` | full |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -1075,15 +1087,15 @@ Compatibility phase of complete workflow
 | Cyp2c38 in-vivo KO lipid input<br>required | `data/metabolomics/cyp2c38ko/lipidomics_cyp2c38ko.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original whole-hepatocyte RNA and metadata<br>required | `data/RNA/scaled_RNA_[123].csv`<br>`data/RNA/meta_data_df.csv` | 01<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Original lipid measurements<br>required | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | curated<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Original FCG group/PCA roster<br>required | `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
-| Frozen original full-network Cyp2c38 selection<br>required | `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 04<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Original FCG group/PCA roster<br>required | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv` | 02<br>all | Shipped in Git<br>Shipped current artifact or source input |
+| Frozen original full-network Cyp2c38 selection<br>required | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 04<br>all | Shipped in Git<br>Shipped current artifact or source input |
 | Overview workbook recorded in production hashes<br>production provenance dependency | `data/Suppl_Table_1_OverviewData.xlsx` | curated<br>full | Shipped in Git<br>Shipped current artifact or source input |
-| Fixed base parent outputs<br>required | `results/validation/cyp2c38_in_vivo/log2_analysis_matrix.csv`<br>`results/validation/cyp2c38_in_vivo/sample_manifest.csv`<br>`results/validation/cyp2c38_in_vivo/feature_annotation_and_QC_ledger.csv`<br>`results/validation/cyp2c38_in_vivo/limma_fits.rds` | 07b<br>all | Mixed: some files are local-only<br>Required even validate-only; fit RDS ignored, must restore/regenerate |
-| Previous resampling banks<br>required | `results/validation/cyp2c38_in_vivo/combined_bootstrap_draws.csv`<br>`results/validation/cyp2c38_in_vivo/permutation_draws.csv` | 07b<br>full | Shipped in Git<br>Required full followup; base generated outputs |
+| Fixed base parent outputs<br>required | `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/log2_analysis_matrix.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/sample_manifest.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/feature_annotation_and_QC_ledger.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/limma_fits.rds` | 07b<br>all | Mixed: some files are local-only<br>Required even validate-only; fit RDS ignored, must restore/regenerate |
+| Previous resampling banks<br>required | `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/combined_bootstrap_draws.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/permutation_draws.csv` | 07b<br>full | Shipped in Git<br>Required full followup; base generated outputs |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| ULM followup | `results/validation/cyp2c38_in_vivo/ulm_followup/` | full |
+| ULM followup | `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/ulm_followup/` | full |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -1115,12 +1127,12 @@ Replot saved anchor effects as four-state heatmap and paired dots without resele
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
-| Saved16 analysis<br>required | `results/zonation_marker_update_20261116/cf453_rewiring/rewiring_analysis.rds`<br>`registry:current_root → results/zonation_marker_update_20261116` | 16<br>all | Mixed: some files are local-only<br>Ignored generated cache; restore or run16 first |
-| Retained-original artifacts recorded when present<br>optional retained-artifact checks | `results/zonation_marker_update_20261116/cf453_rewiring/panels/Fig6A_anchor_gene_shifts.pdf`<br>`results/zonation_marker_update_20261116/cf453_rewiring/panels/Fig6B_lipid_class_shift.pdf`<br>`results/zonation_marker_update_20261116/cf453_rewiring/panels/Fig6C_network_gain_loss.pdf`<br>`results/zonation_marker_update_20261116/cf453_rewiring/source_data/*.csv`<br>`results/zonation_marker_update_20261116/cf453_rewiring/CF453_Figure6_zonation_diet_panels.zip` | 16<br>all | Mixed: some files are local-only<br>Only existing files enter a new ledger; reusing oldoutput ledger can require its recorded original files |
+| Saved16 analysis<br>required | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/rewiring_analysis.rds`<br>`registry:current_root → results/current` | 16<br>all | Mixed: some files are local-only<br>Ignored generated cache; restore or run16 first |
+| Retained-original artifacts recorded when present<br>optional retained-artifact checks | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/panels/Fig6A_anchor_gene_shifts.pdf`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/panels/Fig6B_lipid_class_shift.pdf`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/panels/Fig6C_network_gain_loss.pdf`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/source_data/*.csv`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/CF453_Figure6_zonation_diet_panels.zip` | 16<br>all | Shipped in Git; incomplete: declared paths absent<br>Only existing files enter a new ledger; reusing oldoutput ledger can require its recorded original files |
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Two layout groups, ledger and provenance | `results/zonation_marker_update_20261116/cf453_layouts/`<br>`registry:current_root → results/zonation_marker_update_20261116` | plot-only by design |
+| Two layout groups, ledger and provenance | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_layouts/`<br>`registry:current_root → results/current` | plot-only by design |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -1407,8 +1419,8 @@ Build/audit signed prior resources separately from omic scoring.
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
 | Frozen source snapshots<br>Mouse-GEM,Rhea,regulation,SwissLipids,LINEX identity/reaction resources | `support/cosmos_mouse/raw/`<br>`results/causal_modelling/cosmos_pkn_audit/raw/` | frozen<br>base build | Mixed: some files are local-only<br>Retained base snapshots ship; do not infer that every optional upstream download ships. |
-| Study feature inputs<br>Measured lipid DA/catalogue | `results/lipidomic/gonade_type_ttop.csv` | 03<br>base mapping | Shipped in Git<br>Shipped saved output. |
-| MOFA selected-feature context<br>Factor1 feature selection context | `results/mofa/networks/gene_lipid_correlations_factor1.csv` | 04<br>base mapping | Shipped in Git<br>Shipped saved output; builder does not invoke04. |
+| Study feature inputs<br>Measured lipid DA/catalogue | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gonade_type_ttop.csv` | 03<br>base mapping | Shipped in Git<br>Shipped saved output. |
+| MOFA selected-feature context<br>Factor1 feature selection context | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv` | 04<br>base mapping | Shipped in Git<br>Shipped saved output; builder does not invoke04. |
 | Large directional STITCH downloads<br>Raw acting-partner/action/link evidence | `support/cosmos_mouse/raw/stitch_actions_10090_v5.0.tsv.gz`<br>`support/cosmos_mouse/raw/stitch_links_detailed_10090_v5.0.tsv.gz` | external<br>overlay rebuild only | Local-only; restore or regenerate<br>Local-only/ignored; source URLs+hashes retained. Existing overlay consumers do not need rawdownloads. |
 
 | Output | Location | Mode |

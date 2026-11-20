@@ -421,7 +421,7 @@ build_stat_matrix_from_results <- function(results_list, stat_column = "t") {
 #' @param verbose Logical. Print progress messages. Default: TRUE
 #'
 #' @examples
-#' save_enrichment_results(pathway_scores, "results/pseudobulk/pathways/pathway_scores_all")
+#' save_enrichment_results(pathway_scores, "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_scores_all")
 save_enrichment_results <- function(enrichment_scores,
                                    output_file,
                                    save_csv = TRUE,

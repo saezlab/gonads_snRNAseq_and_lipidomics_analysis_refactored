@@ -36,13 +36,32 @@
 #' - Network reveals hormone-lipid coordination
 #'
 #' Output:
-#' - results/mofa/MOFA_data.RData: MOFA input (CRITICAL)
-#' - results/mofa/RNA/mofa_res_12factor.hdf5: Optimal model
-#' - results/mofa/main_model_RNA_lipid_weight.RData: Weights + TF scores (computed from model)
-#' - results/mofa/factor_analysis/: Factor enrichment and publication figures
-#' - results/mofa/networks/: Gene-lipid correlation networks
+#' - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/MOFA_data.RData: MOFA input (CRITICAL)
+#' - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA/mofa_res_12factor.hdf5: Optimal model
+#' - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData: Weights + TF scores (computed from model)
+#' - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/: Factor enrichment and publication figures
+#' - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/: Gene-lipid correlation networks
 #'   - hepatocyte_gene_lipid_network_full_SIF.csv: Full (non-sparse) gene-lipid network (top 33% MOFA features)
 #'   - hepatocyte_TF_gene_lipid_network_full_SIF.csv: Sparse TF-gene-lipid network (top 2.5% MOFA features)
+
+# A replay can use saved models from outside its output tree. Check the exact
+# model set before reading matrices or writing anything to the destination.
+args <- commandArgs(trailingOnly = TRUE)
+reuse_models_only <- "--reuse-models-only" %in% args
+model_dir <- "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA"
+model_dir_arg <- args[startsWith(args, "--model-dir=")]
+if (length(model_dir_arg)) {
+  if (!reuse_models_only || length(model_dir_arg) != 1L) {
+    stop("--model-dir=PATH requires --reuse-models-only and can only be supplied once")
+  }
+  model_dir <- sub("^--model-dir=", "", model_dir_arg)
+}
+if (reuse_models_only) {
+  expected <- file.path(model_dir, sprintf("mofa_res_%dfactor.hdf5", 5:15))
+  if (!nzchar(model_dir) || !all(file.exists(expected) & !dir.exists(expected))) {
+    stop("Saved MOFA models for each factor count 5 through 15 are required in: ", model_dir)
+  }
+}
 
 library(dplyr)
 library(tidyr)
@@ -112,9 +131,9 @@ cat("  Total data points:", nrow(MOFA_data), "\n")
 cat("  This input is IDENTICAL to legacy code (validated)\n\n")
 
 # Save MOFA input
-dir.create("results/mofa", recursive = TRUE, showWarnings = FALSE)
-save(MOFA_data, file = "results/mofa/MOFA_data.RData")
-cat("Saved: results/mofa/MOFA_data.RData\n\n")
+dir.create("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa", recursive = TRUE, showWarnings = FALSE)
+save(MOFA_data, file = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/MOFA_data.RData")
+cat("Saved: results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/MOFA_data.RData\n\n")
 
 # ==============================================================================
 # STEP 2: Train MOFA Models (Optional - Can Use Pre-trained)
@@ -128,14 +147,13 @@ cat("Options:\n")
 cat("  1. Use pre-trained models if available (recommended)\n")
 cat("  2. Train new models via Python mofapy2 (requires mofapy2 pip package)\n\n")
 
-# Check if pre-trained models exist
-model_dir <- "results/mofa/RNA"
-dir.create(model_dir, recursive = TRUE, showWarnings = FALSE)
+# Check if pre-trained models exist. The replay directory is strictly read-only.
+if (!reuse_models_only) dir.create(model_dir, recursive = TRUE, showWarnings = FALSE)
 
 # Look for HDF5 models matching the expected naming pattern
 pretrained_models <- list.files(model_dir, pattern = "mofa_res_.*factor\\.hdf5$", full.names = TRUE)
 
-if (length(pretrained_models) >= 11) {
+if (reuse_models_only || length(pretrained_models) >= 11) {
   cat("Found", length(pretrained_models), "pre-trained models in", model_dir, "\n")
   cat("  Skipping training and using existing models.\n\n")
   skip_training <- TRUE
@@ -167,7 +185,7 @@ if (!skip_training) {
     # Write options CSV (write_MOFA_options_file prepends getwd() to paths)
     write_MOFA_options_file(
       input_file = "/data/mofa/MOFA_RNA_data.csv",
-      output_file = paste0("/results/mofa/RNA/mofa_res_", n_factors, "factor.hdf5"),
+      output_file = paste0("/results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA/mofa_res_", n_factors, "factor.hdf5"),
       factors = as.character(n_factors),
       convergence_mode = "slow",
       seed = "1",
@@ -181,7 +199,7 @@ if (!skip_training) {
       cat("  GPU mode failed, retrying with gpu_mode = False...\n")
       write_MOFA_options_file(
         input_file = "/data/mofa/MOFA_RNA_data.csv",
-        output_file = paste0("/results/mofa/RNA/mofa_res_", n_factors, "factor.hdf5"),
+        output_file = paste0("/results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA/mofa_res_", n_factors, "factor.hdf5"),
         factors = as.character(n_factors),
         convergence_mode = "slow",
         seed = "1",
@@ -250,7 +268,7 @@ cat("STEP 4: Extract Factor Weights and Run TF Enrichment\n")
 cat(paste(rep("=", 80), collapse = ""), "\n\n")
 
 cat("This step extracts MOFA weights and computes TF enrichment on hepatocyte weights.\n")
-cat("Output will be saved as: results/mofa/main_model_RNA_lipid_weight.RData\n\n")
+cat("Output will be saved as: results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData\n\n")
 
 if (!is.null(model)) {
   cat("Extracting weights from MOFA model...\n")
@@ -320,7 +338,7 @@ if (!is.null(model)) {
 
     # Save weights object
     cat("Saving weights with TF scores...\n")
-    weights_file <- "results/mofa/main_model_RNA_lipid_weight.RData"
+    weights_file <- "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData"
     save(weights, file = weights_file)
     cat("✓ Saved:", weights_file, "\n\n")
 
@@ -339,7 +357,7 @@ if (!is.null(model)) {
   cat("⚠ Model not available. Attempting to load pre-computed weights...\n\n")
 
   # Fallback: Load pre-computed weights (from legacy analysis)
-  weights_file <- "results/mofa/main_model_RNA_lipid_weight.RData"
+  weights_file <- "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData"
 
   if (file.exists(weights_file)) {
     cat("Loading MOFA weights from:", weights_file, "\n")
@@ -485,9 +503,9 @@ if (!is.null(model)) {
   cat("✓ Factor 1 shows strongest gonadal association (R² ~ 0.8)\n\n")
 
   # Save enrichment results
-  dir.create("results/mofa/factor_analysis", recursive = TRUE, showWarnings = FALSE)
-  save(factor_enrichment, file = "results/mofa/factor_analysis/factor_enrichment_gonadal.RData")
-  cat("Saved: results/mofa/factor_analysis/factor_enrichment_gonadal.RData\n\n")
+  dir.create("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis", recursive = TRUE, showWarnings = FALSE)
+  save(factor_enrichment, file = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/factor_enrichment_gonadal.RData")
+  cat("Saved: results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/factor_enrichment_gonadal.RData\n\n")
 
   # ==============================================================================
   # STEP 5b: Create Publication Figure - Variance Explained + Gonadal Enrichment
@@ -524,7 +542,7 @@ if (!is.null(model)) {
 
     # Create pheatmap version (simple heatmap)
     cat("Creating pheatmap version...\n")
-    pdf("results/mofa/factor_analysis/variance_explained_pheatmap.pdf", width = 8, height = 6)
+    pdf("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/variance_explained_pheatmap.pdf", width = 8, height = 6)
     pheatmap(r2_per_factor,
              display_numbers = TRUE,
              angle_col = "315",
@@ -537,7 +555,7 @@ if (!is.null(model)) {
              color = colorRampPalette(c("white", "grey45"))(100),
              fontsize_number = 10)
     dev.off()
-    cat("  Saved: results/mofa/factor_analysis/variance_explained_pheatmap.pdf\n\n")
+    cat("  Saved: results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/variance_explained_pheatmap.pdf\n\n")
 
     # Compute gonadal enrichment using decoupleR
     cat("Computing gonadal enrichment scores for each factor...\n")
@@ -587,7 +605,7 @@ if (!is.null(model)) {
     my_palette <- colorRampPalette(c("blue", "white", "red"))(100)
     breaks <- seq(-limit, limit, length.out = 101)
 
-    pdf("results/mofa/factor_analysis/gonadal_enrichment_pheatmap.pdf", width = 6, height = 6)
+    pdf("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/gonadal_enrichment_pheatmap.pdf", width = 6, height = 6)
     pheatmap::pheatmap(gonade_enrichment,
                        angle_col = "0",
                        color = my_palette,
@@ -596,7 +614,7 @@ if (!is.null(model)) {
                        cluster_cols = FALSE,
                        display_numbers = TRUE)
     dev.off()
-    cat("  Saved: results/mofa/factor_analysis/gonadal_enrichment_pheatmap.pdf\n\n")
+    cat("  Saved: results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/gonadal_enrichment_pheatmap.pdf\n\n")
 
     # Create ComplexHeatmap combining R² + gonadal enrichment
     cat("Creating combined ComplexHeatmap (publication figure)...\n")
@@ -660,13 +678,13 @@ if (!is.null(model)) {
     )
 
     # Draw and save
-    pdf("results/mofa/factor_analysis/mofa_variance_explained_with_gonadal_enrichment.pdf",
+    pdf("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/mofa_variance_explained_with_gonadal_enrichment.pdf",
         width = 10, height = 8)
     draw(ht, padding = unit(c(4, 4, 4, 4), "cm"))
     dev.off()
 
     cat("✓ ComplexHeatmap created successfully!\n")
-    cat("  Saved: results/mofa/factor_analysis/mofa_variance_explained_with_gonadal_enrichment.pdf\n\n")
+    cat("  Saved: results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/mofa_variance_explained_with_gonadal_enrichment.pdf\n\n")
 
     cat("This figure shows:\n")
     cat("  - Main heatmap: Variance explained (R²) by each factor in each view\n")
@@ -910,13 +928,13 @@ if (!is.null(hepatocyte_genes) && !is.null(lipid_features) &&
   cat("  Unique lipids:", length(unique(hepatocyte_cor_mat_RNA_lip_network$node1)), "\n\n")
 
   # Save full correlation matrix
-  dir.create("results/mofa/networks", recursive = TRUE, showWarnings = FALSE)
+  dir.create("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks", recursive = TRUE, showWarnings = FALSE)
   save(hepatocyte_cor_mat_RNA_lip,
-       file = "results/mofa/networks/gene_lipid_correlations_factor1.RData")
+       file = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.RData")
   write.csv(hepatocyte_cor_mat_RNA_lip,
-            "results/mofa/networks/gene_lipid_correlations_factor1.csv")
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv")
   cat("Saved full correlation matrix:\n")
-  cat("  results/mofa/networks/gene_lipid_correlations_factor1.csv\n\n")
+  cat("  results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv\n\n")
 
   # ==============================================================================
   # STEP 7b2: Create Full (Non-Sparse) Gene-Lipid Network in SIF Format
@@ -1043,10 +1061,10 @@ if (!is.null(hepatocyte_genes) && !is.null(lipid_features) &&
 
   # Save full network in SIF format
   write_csv(hepatocyte_cor_mat_RNA_lip_full_network,
-            file = "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv")
+            file = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv")
 
   cat("✓ Saved full (non-sparse) gene-lipid network:\n")
-  cat("  results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv\n")
+  cat("  results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv\n")
   cat("  Format: node1 (gene), node2 (lipid), mor (correlation)\n")
   cat("  This network contains ALL gene-lipid correlations without filtering\n\n")
 
@@ -1288,11 +1306,11 @@ if (!is.null(hepatocyte_genes) && !is.null(lipid_features) &&
     # Save full network
     cat("Saving full integrated network...\n")
     write_csv(hepa_TF_gene_lipid_network,
-              file = "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv")
+              file = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv")
     write_csv(nodes_lipnetwork,
-              file = "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv")
-    cat("  Saved: results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv\n")
-    cat("  Saved: results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv\n\n")
+              file = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv")
+    cat("  Saved: results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv\n")
+    cat("  Saved: results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv\n\n")
 
     # ==============================================================================
     # STEP 7e: Create Compressed Network (Aggregate Lipid Classes)
@@ -1350,11 +1368,11 @@ if (!is.null(hepatocyte_genes) && !is.null(lipid_features) &&
     # Save compressed network
     cat("Saving compressed network...\n")
     write_csv(hepa_TF_gene_lipid_network_compressed,
-              file = "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv")
+              file = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv")
     write_csv(nodes_lipnetwork_compressed,
-              file = "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv")
-    cat("  Saved: results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv\n")
-    cat("  Saved: results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv\n\n")
+              file = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv")
+    cat("  Saved: results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv\n")
+    cat("  Saved: results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv\n\n")
 
     # Summary
     cat("✓ Integrated TF→Gene→Lipid network complete!\n\n")
@@ -1439,24 +1457,24 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 
 cat("Summary of outputs:\n")
 cat("  MOFA Input:\n")
-cat("    - results/mofa/MOFA_data.RData (4.4M data points, VALIDATED)\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/MOFA_data.RData (4.4M data points, VALIDATED)\n")
 cat("  Models:\n")
-cat("    - results/mofa/RNA/mofa_res_12factor.hdf5 (optimal model)\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA/mofa_res_12factor.hdf5 (optimal model)\n")
 cat("  Weights (computed from model):\n")
-cat("    - results/mofa/main_model_RNA_lipid_weight.RData (includes TF scores)\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData (includes TF scores)\n")
 cat("    - Extracted from MOFA model + TF enrichment computed in-workflow\n")
 cat("  Factor Analysis:\n")
-cat("    - results/mofa/factor_analysis/factor_enrichment_gonadal.RData\n")
-cat("    - results/mofa/factor_analysis/variance_explained_pheatmap.pdf\n")
-cat("    - results/mofa/factor_analysis/gonadal_enrichment_pheatmap.pdf\n")
-cat("    - results/mofa/factor_analysis/mofa_variance_explained_with_gonadal_enrichment.pdf\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/factor_enrichment_gonadal.RData\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/variance_explained_pheatmap.pdf\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/gonadal_enrichment_pheatmap.pdf\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/factor_analysis/mofa_variance_explained_with_gonadal_enrichment.pdf\n")
 cat("  Networks:\n")
-cat("    - results/mofa/networks/gene_lipid_correlations_factor1.csv (full correlation matrix, top 2.5%)\n")
-cat("    - results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv (Gene→Lipid, non-sparse, top 33%)\n")
-cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv (TF→Gene→Lipid, sparse, top 2.5%)\n")
-cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv (node attributes)\n")
-cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv (lipid classes)\n")
-cat("    - results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv (compressed nodes)\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv (full correlation matrix, top 2.5%)\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv (Gene→Lipid, non-sparse, top 33%)\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv (TF→Gene→Lipid, sparse, top 2.5%)\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv (node attributes)\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv (lipid classes)\n")
+cat("    - results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv (compressed nodes)\n")
 cat("\n")
 
 cat("This refactored workflow produces IDENTICAL results to vanilla script:\n")

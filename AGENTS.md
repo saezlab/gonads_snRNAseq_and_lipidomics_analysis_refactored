@@ -18,7 +18,7 @@ This repository analyses gonadal versus chromosome effects in Four Core Genotype
 - Main zonation entry: `scripts/workflows/17_expanded_marker_zonation_update.R`.
 - Public pseudobulk inputs: `data/RNA/pseudobulk_csv/`, using the seven manifest paths in the release registry. Each RNA CSV part must be strictly smaller than 50,000,000 bytes.
 - Original RNA/Seurat RDS objects remain local and must not be allowed into the commit; readers prefer verified CSV manifests. Preserve source-object SHA256 separately from CSV payload hashes.
-- Approved result root: `results/zonation_marker_update_20261116/`.
+- Current result root: `results/current/`. Consult `analysis_current(component)` for release components and the relocation ledger for frozen original paths.
 - Current diet presentation: Workflow16; Workflow14/15 model stages are its upstream dependencies. Both Figure6A layouts are retained.
 - Old 05/07 bodies are implementation engines under `scripts/core/engines/`; use the maintained public entries/adapters, not an unreviewed legacy source call.
 - Historical two-marker inputs/results and 12/13 comparisons resolve through explicit historical registry keys. Never point those keys at current data.

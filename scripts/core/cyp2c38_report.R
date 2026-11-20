@@ -101,7 +101,7 @@ wp1_write_report <- function(out) {
            ", two-sided animal p = ", fmt(x$permutation_p_two_sided, 4L))
   }, character(1L))
   historical_file <- file.path(out, "..", "global_network_validation_scores.csv")
-  if (!file.exists(historical_file)) historical_file <- analysis_resolve_recorded_path("results/validation/global_network_validation_scores.csv")
+  if (!file.exists(historical_file)) historical_file <- analysis_resolve_recorded_path("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/global_network_validation_scores.csv")
   if (!file.exists(historical_file)) stop("Missing existing Workflow 07 siRNA validation context.")
   historical <- utils::read.csv(historical_file, check.names = FALSE, stringsAsFactors = FALSE)
   historical <- historical[historical$source == "Cyp2c38" & historical$condition == "cyp2c38", , drop = FALSE]
@@ -134,7 +134,7 @@ wp1_write_report <- function(out) {
   rerun <- paste0("Rscript scripts/workflows/07b_cyp2c38_in_vivo_validation.R \\\n",
                   "  --permutations=", provenance$permutations, " --bootstraps=", provenance$bootstraps,
                   " --seed=", provenance$seed, " --workers=", provenance$workers, " \\\n",
-                  "  --output=results/validation/cyp2c38_in_vivo_replay")
+                  "  --output=results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/cyp2c38_in_vivo_replay")
   lines <- c(
     "# Cyp2c38 in vivo heterozygous knockout: lipidomics and predictive validation",
     "", paste0("Completed run: ", provenance$completed_at, ". All numerical statements below are read from the saved result tables."),

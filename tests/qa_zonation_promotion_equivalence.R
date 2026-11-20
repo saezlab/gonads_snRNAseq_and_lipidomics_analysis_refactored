@@ -1,7 +1,7 @@
 # Compare a fresh current-only FCG/GDX run with the approved release. Differences
 # in file locations, retrospective columns and display row order are excluded.
 source("scripts/config/analysis_release.R")
-qa_zonation_promotion_equivalence <- function(fresh,approved=analysis_current(),output=NULL){
+qa_zonation_promotion_equivalence <- function(fresh,approved=analysis_path("archived_zonation_bundle"),output=NULL){
   rows<-list()
   normalize<-function(x){
     keys<-intersect(c("version","gene","context","lipid","lipid_class","gonad_bias","zonation"),names(x))

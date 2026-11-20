@@ -3,8 +3,7 @@
 The seven public pseudobulk transports under `data/RNA/pseudobulk_csv/` contain
 split CSV matrices and typed metadata/identity manifests. They include the
 current expanded-marker FCG/GDX/diet inputs and the separate frozen inputs
-needed by the documented comparison branches. The approved dated release remains in
-`results/zonation_marker_update_20261116/`. Historical files moved to
+needed by the documented comparison branches. The published results are organized under `results/current/`. The complete previous result trees remain in `results/legacy/`. Historical files moved to
 `miscellaneous/` are retained locally with migration/provenance records;
 moving an artifact does not authorize changing its scientific content.
 
@@ -33,7 +32,7 @@ a Git commit, push, release upload, history rewrite, or deletion of local data.
 The ignore rules keep local libraries, tool settings, histories, caches, render
 images, replay/model/bootstrap states, runtime logs, delivery ZIPs, duplicate
 input copies and selected bulk comparison exports out of an ordinary commit.
-Fresh reproduction directories under `results/runs/` are generated and ignored until intentionally promoted and curated as a new release. The approved release remains complete on disk. `.gitignore` changes do not
+Fresh reproduction directories under `results/runs/` are generated and ignored until intentionally promoted and curated as a new release. The approved source bytes remain available in the local archive. `.gitignore` changes do not
 remove files already tracked by Git; any tracked-file relocation must be
 reviewed explicitly.
 

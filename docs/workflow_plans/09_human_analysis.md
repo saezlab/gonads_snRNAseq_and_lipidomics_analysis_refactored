@@ -15,19 +15,19 @@ inputs and the standalone diet cohort are not upstream inputs.
 
 ## Execution and side effects
 
-There is no argument parser, `--validate-only` or harmless `--help` mode.
-`python3 scripts/workflows/09_human_analysis.py` runs `main()` in full after
-imports. `DATA_DIR` and `RESULTS_DIR` are literal external HPC paths at lines
-60-61 and must be provisioned or deliberately edited before use. Importing
-the module also calls `RESULTS_DIR.mkdir(...)` at line 63; importing it is not
-a no-write preflight. Existing filenames in that output directory can be
-overwritten. No fresh-output guard or frozen-result comparison is implemented.
+The collaborator's HPC paths are the defaults. Set `--data-dir` for a local
+input tree and `--output` for a fresh destination. `--de-only` runs the three
+human differential expression analyses and their applicable plots while
+skipping mouse orthology, signature scoring and cross-species ranking. It
+still requires the human count, TPM and SOFT inputs. `--help` shows the CLI
+after importing the base plotting and statistics libraries. There is no
+`--validate-only` mode.
 
 The `pypath` homology lookup in `main()` obtains mouse-to-human mappings from
 the installed package's resources/cache; the script does not use the
 repository's frozen `support/ortholog_resource.RData`. A suitable cache or
-network access and a compatible Python environment are additional
-prerequisites. The package list below is not a tested version lock.
+network access and a compatible Python environment are full-run prerequisites.
+An empty mapping stops the full run. The package list below is not a version lock.
 
 Python packages imported by the script:
 
@@ -72,7 +72,7 @@ External files expected under `DATA_DIR`:
 
 Repository source for the signature:
 
-- `results/pseudobulk/hepa_gonad_signature.csv` - Retained two-column table
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/hepa_gonad_signature.csv` - Retained two-column table
   (`ID`, `t_Hepatocytes`) containing the mouse hepatocyte Testes vs Ovaries
   t-value vector. The script reads an external copy, so merely running
   Workflow 02 does not provision `DATA_DIR/hepa_gonad_signature.csv`.
@@ -81,9 +81,9 @@ The human liver data come from GEO accession [`GSE179250`](https://www.ncbi.nlm.
 
 ## Output Files
 
-Outputs are written to the external `RESULTS_DIR` configured in the script, not to this repository by default.
-Retained tables/figures under `results/human/` are saved study artifacts;
-the script does not automatically write or synchronize that repository tree.
+Outputs are written to the external `RESULTS_DIR` by default or to the supplied
+`--output`. Retained tables and figures under `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/human/` are saved study
+artifacts. The explicit output option allows a parallel replay and comparison.
 
 - `adata_processed.h5ad`
 - `pca_by_sex.pdf`
@@ -127,7 +127,7 @@ audit on 18 November 2026.
 ## Notes for Context Restoration
 
 1. This workflow should be treated as optional validation/comparison, not a dependency of workflows 00-08.
-2. The script currently uses absolute collaborator/HPC paths for `DATA_DIR` and `RESULTS_DIR`.
-3. `results/pseudobulk/hepa_gonad_signature.csv` is checked in as the stable seed for the mouse hepatocyte signature; the script reads a copy from external `DATA_DIR`.
+2. The script defaults to collaborator HPC paths. Supply both path overrides for a local replay.
+3. `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/hepa_gonad_signature.csv` is checked in as the stable seed for the mouse hepatocyte signature; the script reads a copy from external `DATA_DIR`.
 4. The human DE contrast is `male` versus `female` with `female` as the reference in `calc_deg()`.
 5. The ages 12-49 subset is used for one ULM enrichment plot and one human male-vs-female DE rerun.

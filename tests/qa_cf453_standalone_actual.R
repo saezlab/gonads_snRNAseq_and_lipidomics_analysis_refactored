@@ -219,7 +219,7 @@ qa_cf453_standalone_actual <- function(analysis_file,
   # Direct count-layer and lipid-source checks; no workflow/reference loader.
   paths <- unlist(a$input_paths, use.names = TRUE)
   stopifnot(length(paths) >= 2L, all(file.exists(paths)),
-            !any(grepl("CF459|scaled_RNA|results/zonation|results/mofa|Lipid_data_file_JPC", paths)))
+            !any(grepl("CF459|scaled_RNA|results/zonation|results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa|Lipid_data_file_JPC", paths)))
   zonation_path <- paths[grepl("zonation", names(paths))]
   lipid_path <- paths[grepl("lipid", names(paths))]
   stopifnot(length(zonation_path) == 1L, length(lipid_path) == 1L,

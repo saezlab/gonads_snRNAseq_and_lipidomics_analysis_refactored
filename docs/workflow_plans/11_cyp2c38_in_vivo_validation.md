@@ -45,8 +45,8 @@ limma, statmod, digest, jsonlite, decoupleR and the existing plot dependencies.
 | `data/metabolomics/cyp2c38ko/lipidomics_cyp2c38ko.csv` | Integrated KO export, including nine analytical QC injections |
 | `data/RNA/scaled_RNA_{1,2,3}.csv`, `data/RNA/meta_data_df.csv` | Original whole-hepatocyte FCG profiles/metadata |
 | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | Original 1,254-feature lipid matrix |
-| `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv`, `data/Suppl_Table_1_OverviewData.xlsx` | Independently checked original FCG groups |
-| `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | Historical 828-edge Cyp2c38 universe |
+| `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv`, `data/Suppl_Table_1_OverviewData.xlsx` | Independently checked original FCG groups |
+| `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | Historical 828-edge Cyp2c38 universe |
 
 Required KO intake: 1,237 primary endogenous features, 1,215 QC-CV<=30%
 features, 32 mice in F_WT/F_KO/M_WT/M_KO counts 8/8/7/9, and 552 strict
@@ -87,7 +87,7 @@ absence of Cyp2c38 regulation or negate independent experimental evidence.
 
 ```bash
 Rscript scripts/workflows/11_cyp2c38_in_vivo_validation.R --validate-only
-Rscript scripts/workflows/11_cyp2c38_in_vivo_validation.R --output=results/validation/cyp2c38_in_vivo_reproduction
+Rscript scripts/workflows/11_cyp2c38_in_vivo_validation.R --output=results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/cyp2c38_in_vivo_reproduction
 ```
 
 | Setting | Base phase | ULM/calibration phase |
@@ -113,7 +113,7 @@ explicit production settings include `--bootstraps=4999 --base-bootstraps=999`.
 no saved WP1 results and creates no outputs. It reconstructs coefficients and fits
 the observed weighted KO model for validation; it does not run the resampling,
 calibration, injection or plotting stages. Full runs reject nonempty output
-directories. Default root is `results/validation/cyp2c38_in_vivo/`, with
+directories. Default root is `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/`, with
 ULM results in `ulm_followup/`.
 
 ## Outputs and helper ownership
@@ -139,7 +139,7 @@ for the in-vivo KO data.
 
 The `07b` wrapper calls only `wp1_run()` and produces the base outputs. The `07c`
 wrapper calls only `wp1_ulm_run()` with `previous` fixed to
-`results/validation/cyp2c38_in_vivo/`; `--output` changes its destination, not its
+`results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/`; `--output` changes its destination, not its
 base parent. Its standalone validation needs base `log2_analysis_matrix.csv`,
 `sample_manifest.csv`, `feature_annotation_and_QC_ledger.csv` and
 `limma_fits.rds`; a full follow-up additionally reads

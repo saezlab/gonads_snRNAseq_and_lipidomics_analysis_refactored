@@ -83,8 +83,8 @@ WF05-08 outputs currently on disk are stale (generated before lipidomic fix and 
 **Script:** `scripts/workflows/05_zonation_analysis.R`
 
 **Key inputs (from WF01-04):**
-- `results/pseudobulk/ttop_full_list.RData` (WF02)
-- `results/pseudobulk/tval_full_df.csv` (WF02)
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData` (WF02)
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.csv` (WF02)
 - Lipidomic data via `load_lipidomic_data()` (fixed)
 - Zonation CSVs from `data/RNA/scaled_RNA_zonation.csv`
 
@@ -101,7 +101,7 @@ WF05-08 outputs currently on disk are stale (generated before lipidomic fix and 
 **Script:** `scripts/workflows/06_structural_analysis.R`
 
 **Key inputs (from WF04):**
-- `results/mofa/main_model_RNA_lipid_weight.RData`
+- `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData`
 - Lipidomic data and structural files from `data/metabolomics/`
 - RNA data from `data/RNA/scaled_RNA_{1,2,3}.csv`
 
@@ -109,7 +109,7 @@ WF05-08 outputs currently on disk are stale (generated before lipidomic fix and 
 1. Total significant associations (was 22,757 rows)
 2. Chain length genes count (was 1,162)
 3. Whether key genes (Cyp2b9, Cyp2d9, Cyp2c38, etc.) still appear
-4. Check all `results/multi-omic/structural_model/*.csv` updated
+4. Check all `results/legacy/pre_reorganization_baseline/multi-omic/structural_model/*.csv` updated
 
 **Acceptance:** Key genes should persist. Total counts may shift but same order of magnitude.
 
@@ -118,8 +118,8 @@ WF05-08 outputs currently on disk are stale (generated before lipidomic fix and 
 **Script:** `scripts/workflows/07_validation_experiments.R`
 
 **Key inputs:**
-- `results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv` (WF04)
-- `results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv` (WF04)
+- `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv` (WF04)
+- `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_ATT.csv` (WF04)
 - Zonation network files from `results/zonation/` (from WF05 re-run)
 - siRNA knockdown data from `data/metabolomics/sirna_*.csv`
 
@@ -135,7 +135,7 @@ WF05-08 outputs currently on disk are stale (generated before lipidomic fix and 
 **Script:** `scripts/workflows/08_variance_analysis.R`
 
 **Key inputs:**
-- `results/lipidomic/ttop_full_list.RData` (WF03)
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData` (WF03)
 - Lipidomic data via `load_lipidomic_data()`
 
 **Comparison after run:**

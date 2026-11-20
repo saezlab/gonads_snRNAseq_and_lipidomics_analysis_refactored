@@ -303,7 +303,7 @@ qa_cf453_diet_rewiring <- function(analysis_file,
   expected <- prior$sha256[match(paths, prior$path)]
   actual <- vapply(paths, digest::digest, character(1L), file = TRUE, algo = "sha256")
   stopifnot(!anyNA(expected), identical(unname(expected), unname(actual)),
-            all(paths %in% a$source_paths), !any(grepl("CF459|scaled_RNA|results/zonation/|results/mofa/", a$source_paths)))
+            all(paths %in% a$source_paths), !any(grepl("CF459|scaled_RNA|results/zonation/|results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/", a$source_paths)))
   record("All original CF453 input hashes unchanged; no external cohort/network reference dependencies")
   record("Every stored edge-specific bootstrap correlation independently reconstructed",
          detail = paste(boot_replay_count, "candidate edge/draw/diet values; complete class-draw arrays also replayed"))

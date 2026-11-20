@@ -183,10 +183,10 @@ VISUALIZATION_SETTINGS <- list(
 
 OUTPUT_DIRS <- list(
   results = "results",
-  qc = "results/qc",
-  pseudobulk = "results/pseudobulk",
-  lipidomic = "results/lipidomic",
-  mofa = "results/mofa",
+  qc = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc",
+  pseudobulk = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk",
+  lipidomic = "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic",
+  mofa = "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa",
   zonation = "results/zonation",
   structural = "results/multi-omic/structural_model",
   multiomics = "results/multi-omic",

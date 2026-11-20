@@ -30,8 +30,10 @@ def main():
     p.add_argument("--output", type=Path, default=ROOT / "miscellaneous/local/repository_cleanup")
     args = p.parse_args()
     checks, missing, mismatches = [], [], []
+    files_hashed = 0
 
     def verify(label, records, field, digest="sha256", required=False, resolve=False):
+        nonlocal files_hashed
         available = 0
         for row in records:
             path = resolve_recorded_path(row[field]) if resolve else ROOT / row[field]
@@ -39,6 +41,7 @@ def main():
                 missing.append(dict(group=label, recorded_path=row[field], resolved_path=str(path)))
             else:
                 available += 1
+                files_hashed += 1
                 if sha(path) != row[digest]:
                     mismatches.append(dict(group=label, path=str(path), expected=row[digest]))
         absent = len(records) - available
@@ -49,10 +52,14 @@ def main():
     verify("Causal moved bytes", read(ROOT / "docs/provenance/causal_cleanup_20261116.csv"), "new_path")
     approved = read(ROOT / "docs/provenance/current_release_artifacts.csv")
     local_metadata = [r for r in approved if r.get("role") == "local_metadata"]
-    verify("Approved scientific/run-record bytes", [r for r in approved if r.get("role") != "local_metadata"], "path")
+    verify("Approved scientific/run-record bytes", [r for r in approved if r.get("role") != "local_metadata"], "path", resolve=True)
+    promoted = read(ROOT / "docs/provenance/result_layout_20261120.csv")
+    verify("Published manuscript-layout bytes", promoted, "path", required=True)
+    local_archive = [r for r in promoted if r["legacy_path"]]
+    verify("Archived pre-promotion bytes", local_archive, "legacy_path", digest="prior_sha256")
     current_inputs = read(ROOT / "docs/provenance/current_input_manifest.csv")
     verify("Canonical expanded-marker inputs", current_inputs, "path", required=True)
-    historical = analysis_path("current_root") / "QA/historical_sha256.csv"
+    historical = analysis_path("archived_zonation_bundle") / "QA/historical_sha256.csv"
     if historical.exists():
         verify("Original 104 historical references via relocation resolver", read(historical), "path", resolve=True)
     registry = json.loads((ROOT / "scripts/config/analysis_release.json").read_text())
@@ -79,7 +86,7 @@ def main():
     (output / "organization_verification.json").write_text(json.dumps(summary, indent=2) + "\n")
     with (output / "organization_checks.csv").open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(checks[0])); w.writeheader(); w.writerows(checks)
-    print(json.dumps({"passed": summary["passed"], "groups": len(checks), "files_hashed": sum(c["available"] for c in checks[:5]), "byte_mismatches": len(mismatches), "missing_payloads": len(missing)}, indent=2))
+    print(json.dumps({"passed": summary["passed"], "groups": len(checks), "files_hashed": files_hashed, "byte_mismatches": len(mismatches), "missing_payloads": len(missing)}, indent=2))
     return int(not summary["passed"])
 
 

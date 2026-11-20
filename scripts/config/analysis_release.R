@@ -23,7 +23,12 @@ analysis_path <- function(key,root=".",mustWork=FALSE) {
 
 analysis_current <- function(component="",root=".",mustWork=FALSE) {
   p<-analysis_path("current_root",root)
-  if(nzchar(component))p<-file.path(p,component)
+  if(nzchar(component)){
+    layout<-analysis_release(root)$current_components
+    branch<-sub("/.*$","",component)
+    if(!is.null(layout[[branch]]))component<-paste0(layout[[branch]],substring(component,nchar(branch)+1L))
+    p<-file.path(p,component)
+  }
   if(mustWork&&!file.exists(p))stop("Missing current-release artifact: ",p)
   p
 }
@@ -54,9 +59,13 @@ analysis_assert_not_approved_output <- function(output,root=".") {
     }
     resolved
   }
-  target<-canonical(output);approved<-canonical(analysis_current(root=root))
-  if(identical(target,approved)||startsWith(target,paste0(approved,"/")))
-    stop("Preserve the approved release: scientific output must use a fresh directory outside ",approved)
+  target<-canonical(output)
+  release<-analysis_release(root)
+  protected<-c(release$paths$current_root,release$paths$legacy_results_root)
+  for(path in vapply(protected,canonical,character(1L),USE.NAMES=FALSE)){
+    if(identical(target,path)||startsWith(target,paste0(path,"/")))
+      stop("Preserve the approved release and legacy archive: scientific output must use a fresh directory outside ",path)
+  }
   invisible(target)
 }
 
@@ -77,7 +86,12 @@ analysis_resolve_recorded_path <- function(path,root=".",mustWork=FALSE) {
         from<-sub("/$","",move$from)
         if(identical(rel,from)||startsWith(rel,paste0(from,"/"))){
           suffix<-substring(rel,nchar(from)+1L)
-          rel<-paste0(sub("/$","",move$to),suffix);break
+          rel<-paste0(sub("/$","",move$to),suffix)
+          if(!is.null(move$fallback)&&!file.exists(file.path(repo,rel))){
+            archived<-paste0(sub("/$","",move$fallback),suffix)
+            if(file.exists(file.path(repo,archived)))rel<-archived
+          }
+          break
         }
       }
     }

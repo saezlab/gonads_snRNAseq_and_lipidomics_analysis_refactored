@@ -161,7 +161,7 @@ if (RUN_FULL_WORKFLOWS) {
 
 # Check expected output files
 cat("\nChecking expected output files...\n")
-test_file_exists("results/qc/data_summary.txt", "Data summary report")
+test_file_exists("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/data_summary.txt", "Data summary report")
 
 # ==============================================================================
 # Test 2: Pseudobulk RNA-seq Analysis
@@ -186,14 +186,14 @@ if (RUN_FULL_WORKFLOWS) {
     cat("\nValidating differential expression results...\n")
 
     # Check output files exist
-    test_file_exists("results/pseudobulk/ttop_full_list.RData",
+    test_file_exists("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData",
                     "DE results (ttop_full_list)")
-    test_file_exists("results/pseudobulk/tval_full_df.RData",
+    test_file_exists("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.RData",
                     "t-statistic matrix")
 
     # Load and validate DE results
     test_that("DE results have correct structure", {
-      load("results/pseudobulk/ttop_full_list.RData")
+      load("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData")
 
       # Expected contrasts
       expected_contrasts <- c("gonadal_type", "allosome_type",
@@ -226,11 +226,11 @@ if (RUN_FULL_WORKFLOWS) {
     })
 
     # Check PCA plots generated
-    test_file_exists("results/pseudobulk/pca/pca_Hepatocytes.pdf",
+    test_file_exists("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/pca_Hepatocytes.pdf",
                     "Hepatocyte PCA plot")
 
     # Check volcano plots generated
-    test_file_exists("results/pseudobulk/volcanos/volcano_gonadal_type_Hepatocytes.pdf",
+    test_file_exists("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos/volcano_gonadal_type_Hepatocytes.pdf",
                     "Hepatocyte gonadal volcano plot")
   }
 } else {
@@ -301,14 +301,14 @@ if (RUN_FULL_WORKFLOWS) {
     cat("\nValidating lipidomic results...\n")
 
     # Check output files
-    test_file_exists("results/lipidomic/ttop_full_list.RData",
+    test_file_exists("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData",
                     "Lipidomic DE results")
-    test_file_exists("results/lipidomic/gonade_type_ttop.csv",
+    test_file_exists("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gonade_type_ttop.csv",
                     "Gonad-dependent lipids")
 
     # Validate results
     test_that("Lipidomic results are correct", {
-      load("results/lipidomic/ttop_full_list.RData")
+      load("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData")
 
       # Check gonadal_type results
       gonad_results <- ttop_full_list$gonadal_type
@@ -352,7 +352,7 @@ if (RUN_FULL_WORKFLOWS) {
 
   if (workflow_04_success) {
     # Check MOFA outputs
-    test_file_exists("results/mofa/main_model_RNA_lipid_weight.RData",
+    test_file_exists("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData",
                     "MOFA model weights")
     test_file_exists("results/multi-omic/hepatocyte_TF_spec_gene_lipid_network_mofa_full50percent.Rdata",
                     "Gene-lipid correlation network")

@@ -73,6 +73,11 @@ data/westernDiet/
 results/wf*_run.log
 results/wf*_rerun.log
 
+# Local parallel replay and legacy lookup. Publish a reviewed result set
+# through a separate release change after comparing the parallel replay.
+/results/manuscript/
+/results/legacy/
+
 # Local/generated result variants
 results/comment_responses/
 results/validation/*_jpc.csv
@@ -171,39 +176,24 @@ scripts/james/
 /results/cf453_standalone_figure6/tables/edges.csv
 /results/cf453_standalone_figure6/tables/diet_edge_changes.csv
 
-# The current release itself remains intact locally. Git includes its panels,
-# compact source tables, methods, numerical QA summaries and provenance, while
-# excluding duplicate inputs and reproducible runtime/bulk artifacts.
-/results/zonation_marker_update_20261116/**/*.RData
-/results/zonation_marker_update_20261116/**/*.Rdata
-/results/zonation_marker_update_20261116/**/*.rda
-/results/zonation_marker_update_20261116/**/*.zip
-/results/zonation_marker_update_20261116/**/*.log
-/results/zonation_marker_update_20261116/logs/
-/results/zonation_marker_update_20261116/**/QA/cli_replay/
-/results/zonation_marker_update_20261116/**/QA/standardized_sensitivity/
-/results/zonation_marker_update_20261116/QA/fcg_visual/
-/results/zonation_marker_update_20261116/report/qa/layout_*/
-/results/zonation_marker_update_20261116/report/qa/manuscript_source_media/
-# Full private manuscript extraction and HTML are author-facing local artifacts.
-# Keep the public PDF, numeric replacements and portable panel index visible.
-/results/zonation_marker_update_20261116/report/manuscript_paragraph_locations.csv
-/results/zonation_marker_update_20261116/report/manuscript_zonation_context_scan.csv
-/results/zonation_marker_update_20261116/report/manuscript_numeric_inventory.csv
-/results/zonation_marker_update_20261116/report/zonation_update_report.html
-/results/zonation_marker_update_20261116/cf453_layouts/QA/rendered/
-/results/zonation_marker_update_20261116/inputs/**/scaled_RNA*.csv
-/results/zonation_marker_update_20261116/inputs/**/meta_data_df*.csv
-/results/zonation_marker_update_20261116/inputs/preprocessing_reference/*.docx
-/results/zonation_marker_update_20261116/cf453_models/tables/
-/results/zonation_marker_update_20261116/cf453_direct_diet/tables/
-/results/zonation_marker_update_20261116/cf453_rewiring/tables/edges.csv
-/results/zonation_marker_update_20261116/cf453_rewiring/tables/eligibility.csv
-/results/zonation_marker_update_20261116/gdx_zonation/old_results.csv
-/results/zonation_marker_update_20261116/gdx_zonation/new_results.csv
-/results/zonation_marker_update_20261116/comparisons/gdx_old_new.csv
-/results/zonation_marker_update_20261116/comparisons/fcg_gene_statistics_old_vs_new.csv
-/results/zonation_marker_update_20261116/comparisons/fcg_reselected_network_edges_old_vs_new.csv
-/results/zonation_marker_update_20261116/comparisons/fcg_fixed_historical_pairs_old_vs_new.csv
-/results/zonation_marker_update_20261116/comparisons/cf453_primary_gene_changes.csv
-/results/zonation_marker_update_20261116/comparisons/cf453_direct_diet_gene_changes.csv
+# Retired paths remain ignored if recreated by a historical script. Verified
+# snapshots are stored in results/legacy and current files in results/current.
+/results/zonation_marker_update_20261116/
+/results/pseudobulk/
+/results/lipidomic/
+/results/mofa/
+/results/validation/
+/results/in_vitro_validation/
+/results/qc/
+/results/xenium/
+/results/human/
+/results/multi-omic/
+
+# Local current-release cache and large intermediate exports.
+/results/current/**/fcg05/*.RData
+/results/current/**/*.log
+/results/current/**/*.zip
+/results/current/**/QA/rendered/
+/results/current/**/cf453_rewiring/tables/edges.csv
+/results/current/**/cf453_rewiring/tables/eligibility.csv
+/results/current/**/gdx_zonation/old_*

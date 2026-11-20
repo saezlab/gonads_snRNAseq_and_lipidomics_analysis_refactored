@@ -5,7 +5,7 @@
 This wrapper calls only `wp1_ulm_run()` in `scripts/core/wp1_workflow.R`.
 Use [Workflow11](11_cyp2c38_in_vivo_validation.md) for a fresh complete package.
 The wrapper's `previous` parent is fixed by the helper default to
-`results/validation/cyp2c38_in_vivo/`; `--output` changes only the follow-up
+`results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/`; `--output` changes only the follow-up
 destination. There is no CLI `--previous`/`--parent`, report-only or resume mode.
 
 Even `--validate-only` reads base `log2_analysis_matrix.csv`,
@@ -24,7 +24,7 @@ Options are `--bootstraps`, `--permutations`, `--seed`, `--workers`, `--output`,
 **Entry point:** `scripts/workflows/07c_cyp2c38_ulm_resampling.R`.
 **Scope:** October 2026 WP1 follow-up: focus reporting on ULM scores, nominal ULM p-values and explicit bootstrap p-values; regenerate separate ovarian/testicular Cyp2c38–lipid networks; check calibration versus low power. Execution and reporting dated 2026-10-07.
 
-Read Workflow 07b's plan and the cross-workflow overview before editing. This extension reads the completed 07b KO matrix/metadata and reconstructs the original paired FCG reference. It writes a separate `results/validation/cyp2c38_in_vivo/ulm_followup/` directory, preserving the original analysis.
+Read Workflow 07b's plan and the cross-workflow overview before editing. This extension reads the completed 07b KO matrix/metadata and reconstructs the original paired FCG reference. It writes a separate `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/ulm_followup/` directory, preserving the original analysis.
 
 ## Specification
 

@@ -3,7 +3,8 @@ source("scripts/config/analysis_release.R")
 # No pipeline, limma fitting, plot generation or bootstrap is rerun here.
 # Run: Rscript tests/qa_zonation_marker_update.R [VERSIONED_ROOT]
 
-qa_zonation_marker_update <- function(root = "results/zonation_marker_update_20261116") {
+qa_zonation_marker_update <- function(root) {
+  analysis_assert_not_approved_output(root)
   if (dir.exists(".local/R-library")) .libPaths(c(".local/R-library", .libPaths()))
   checks <- list(); metrics <- list()
   same <- function(a, b, label, tolerance = 1e-8) {
@@ -133,7 +134,7 @@ qa_zonation_marker_update <- function(root = "results/zonation_marker_update_202
     }
   }
   val <- read_csv(file.path(root,"fcg07/Mtmr11_male_PP_prespecified_source.csv"))
-  kd <- read_csv("results/validation/knockdown_t_table.csv")
+  kd <- read_csv("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv")
   kd_id <- kd[[1L]]; kd_t <- kd[[which(tolower(names(kd))=="mtmr11")]]
   same(val$KD_t,kd_t[match(val$lipid,kd_id)],"Every plotted Mtmr11 experimental KD t remains unchanged")
   summary <- read_csv(file.path(root,"comparisons/Fig5F_prespecified_male_PP_old_vs_new.csv"))
@@ -152,7 +153,7 @@ qa_zonation_marker_update <- function(root = "results/zonation_marker_update_202
     same(saved$n_KD_background,length(kd_t),paste(version,"complete KD background count"))
     same(saved$lipid_vector_Pearson,stats::cor(pred[ok],kd_t[ok]),paste(version,"matched-only plotted Pearson r"))
   }
-  old_kd_hash<-digest::digest("results/validation/knockdown_t_table.csv",file=TRUE,algo="sha256")
+  old_kd_hash<-digest::digest("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv",file=TRUE,algo="sha256")
   same(nrow(val),345,"Figure5F has345 matched points, distinct from22 reference mice and661 ULM background features")
   out<-file.path(root,"report/qa");dir.create(out,recursive=TRUE,showWarnings=FALSE)
   utils::write.csv(do.call(rbind,checks),file.path(out,"independent_fit_checks.csv"),row.names=FALSE)
@@ -160,4 +161,8 @@ qa_zonation_marker_update <- function(root = "results/zonation_marker_update_202
   saveRDS(list(checks=checks,KD_source_sha256=old_kd_hash,session=utils::sessionInfo()),file.path(out,"independent_fit_qa.rds"))
   cat("Versioned marker-update independent QA passed:",length(checks),"groups; no resampling or model fitting rerun.\n")
 }
-if(sys.nframe()==0L){args<-commandArgs(TRUE);qa_zonation_marker_update(if(length(args))args[1] else "results/zonation_marker_update_20261116")}
+if(sys.nframe()==0L){
+  args<-commandArgs(TRUE)
+  if(length(args)!=1L)stop("Supply a complete saved Workflow 17 run directory")
+  qa_zonation_marker_update(args[1])
+}

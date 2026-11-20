@@ -34,16 +34,16 @@
 #' - Female-biased: Sphingolipids (SM, Cer, HexCer)
 #'
 #' Output:
-#' - results/lipidomic/ttop_full_list.RData: All FCG DE results
-#' - results/lipidomic/gdxhr_ttop_list.RData: All GDX validation DE results
-#' - results/lipidomic/gdxhr_t_table.csv: GDX t-statistics table
-#' - results/lipidomic/volcanos/: Volcano plots
-#' - results/lipidomic/fcg_gdx_correlation.pdf: FCG vs GDX correlation plot
-#' - results/lipidomic/pca/: PCA grids
-#' - results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf: Paper figure
-#' - results/lipidomic/enrichment/lipid_class_enrichment_scores.RData: Enrichment data
-#' - results/lipidomic/network/: LINEX2 network files
-#' - results/lipidomic/bubbles_DBC/: Bubble plots (C vs DB) for each lipid class
+#' - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData: All FCG DE results
+#' - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_ttop_list.RData: All GDX validation DE results
+#' - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_t_table.csv: GDX t-statistics table
+#' - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/volcanos/: Volcano plots
+#' - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation.pdf: FCG vs GDX correlation plot
+#' - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/pca/: PCA grids
+#' - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_plot.pdf: Paper figure
+#' - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData: Enrichment data
+#' - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/: LINEX2 network files
+#' - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/bubbles_DBC/: Bubble plots (C vs DB) for each lipid class
 
 library(dplyr)
 library(tidyr)
@@ -122,7 +122,7 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 cat("Creating PCA plot to assess data structure...\n\n")
 
 # Create output directory
-dir.create("results/lipidomic/pca", recursive = TRUE, showWarnings = FALSE)
+dir.create("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/pca", recursive = TRUE, showWarnings = FALSE)
 
 # Prepare targets for PCA
 targets_pca <- data.frame(
@@ -144,10 +144,16 @@ pca_grid <- nicePCA(
 )
 
 # Save PCA grid
-save_pca_grid(pca_grid, "results/lipidomic/pca/pca_lipidomic_gonadal_type.pdf",
+save_pca_grid(pca_grid, "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/pca/pca_lipidomic_gonadal_type.pdf",
+              width = 12, height = 12)
+targets_chromosome <- data.frame(sample = metadata_lipid$sample,
+                                 condition = metadata_lipid$allosome_type)
+chromosome_pca <- nicePCA(df = lipidomic, targets = targets_chromosome,
+                         no_label = TRUE, color_mapping = get_color_palette("allosome"))
+save_pca_grid(chromosome_pca, "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/pca/pca_lipidomic_chromosomal_sex.pdf",
               width = 12, height = 12)
 
-cat("PCA analysis complete! Plot saved to results/lipidomic/pca/\n")
+cat("PCA analysis complete! Plot saved to results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/pca/\n")
 cat("  Key observation: PC1 (~40% variance) separates by gonadal type\n\n")
 
 # ==============================================================================
@@ -231,8 +237,8 @@ cat("Differential analysis complete!\n\n")
 
 # Save results
 cat("Saving differential analysis results...\n")
-save(ttop_full_list, file = "results/lipidomic/ttop_full_list.RData")
-cat("  Saved: results/lipidomic/ttop_full_list.RData\n\n")
+save(ttop_full_list, file = "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData")
+cat("  Saved: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData\n\n")
 
 # ==============================================================================
 # STEP 3.5: Gonadectomy Validation Experiment Differential Analysis
@@ -338,12 +344,12 @@ if (file.exists(gdx_data_file)) {
   }
 
   # Save GDX t-table for use in correlation analysis
-  write_csv(t_table_gdx, file = "results/lipidomic/gdxhr_t_table.csv")
-  cat("  Saved: results/lipidomic/gdxhr_t_table.csv\n")
+  write_csv(t_table_gdx, file = "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_t_table.csv")
+  cat("  Saved: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_t_table.csv\n")
 
   # Save full GDX results
-  save(ttop_list_gdx, file = "results/lipidomic/gdxhr_ttop_list.RData")
-  cat("  Saved: results/lipidomic/gdxhr_ttop_list.RData\n\n")
+  save(ttop_list_gdx, file = "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_ttop_list.RData")
+  cat("  Saved: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_ttop_list.RData\n\n")
 
   cat("Gonadectomy validation analysis complete!\n")
   cat("  This data will be used to validate FCG results in Step 4.5\n\n")
@@ -364,7 +370,7 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 cat("Creating volcano plots for all contrasts...\n\n")
 
 # Create output directory
-dir.create("results/lipidomic/volcanos", recursive = TRUE, showWarnings = FALSE)
+dir.create("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/volcanos", recursive = TRUE, showWarnings = FALSE)
 
 # Create volcano plots
 for (contrast_name in names(ttop_full_list)) {
@@ -393,12 +399,12 @@ for (contrast_name in names(ttop_full_list)) {
 
     # Save plot
     filename <- paste0("volcano_", gsub(" ", "_", comparison_name), ".pdf")
-    filepath <- file.path("results/lipidomic/volcanos", filename)
+    filepath <- file.path("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/volcanos", filename)
     ggsave(filepath, plot = p, width = 9, height = 9)
   }
 }
 
-cat("\nVolcano plots complete! Saved to results/lipidomic/volcanos/\n\n")
+cat("\nVolcano plots complete! Saved to results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/volcanos/\n\n")
 
 # ==============================================================================
 # STEP 4.5: Correlation with Gonadectomy Experiment
@@ -410,7 +416,7 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 cat("Comparing FCG model results with gonadectomy validation experiment...\n\n")
 
 # Check if gonadectomy results exist
-gdx_tval_file <- "results/lipidomic/gdxhr_t_table.csv"
+gdx_tval_file <- "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_t_table.csv"
 
 if (file.exists(gdx_tval_file)) {
   cat("  Loading gonadectomy t-values...\n")
@@ -427,10 +433,10 @@ if (file.exists(gdx_tval_file)) {
     # Merge FCG and GDX t-values
     t_val_comparison <- merge(
       ttop_gonadal[, c("ID", "t")],
-      gdx_t_table[, c("ID", "testes_gonadosectomy")],
+      gdx_t_table[, c("ID", "testes_gonadosectomy", "ova_gonadosectomy")],
       by = "ID"
     )
-    names(t_val_comparison) <- c("ID", "fcgl", "testes_gonadosectomy")
+    names(t_val_comparison)[2] <- "fcgl"
 
     cat("  Lipids in common:", nrow(t_val_comparison), "\n")
 
@@ -484,15 +490,43 @@ if (file.exists(gdx_tval_file)) {
       )
 
     # Save plot
-    dir.create("results/lipidomic", recursive = TRUE, showWarnings = FALSE)
-    ggsave("results/lipidomic/fcg_gdx_correlation.pdf",
+    dir.create("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic", recursive = TRUE, showWarnings = FALSE)
+    ggsave("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation.pdf",
            plot = p_correlation,
            width = 9,
            height = 9)
 
-    cat("Correlation plot saved: results/lipidomic/fcg_gdx_correlation.pdf\n")
-    cat("  Interpretation: Positive correlation confirms gonadal hormone effects\n")
-    cat("                  are consistent between FCG model and gonadectomy\n\n")
+    gdx_by_sex <- t_val_comparison %>%
+      dplyr::select(ID, fcgl, color, testes_gonadosectomy, ova_gonadosectomy) %>%
+      tidyr::pivot_longer(c(testes_gonadosectomy, ova_gonadosectomy),
+                         names_to = "contrast", values_to = "gdx_t") %>%
+      dplyr::filter(is.finite(fcgl), is.finite(gdx_t))
+    gdx_statistics <- do.call(rbind, lapply(split(gdx_by_sex, gdx_by_sex$contrast), function(x) {
+      test <- stats::cor.test(x$fcgl, x$gdx_t)
+      data.frame(contrast = x$contrast[1], n_lipids = nrow(x),
+                 r = unname(test$estimate), p_value = test$p.value)
+    }))
+    readr::write_csv(gdx_by_sex, "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation_source.csv")
+    readr::write_csv(gdx_statistics, "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation_statistics.csv")
+    sex_labels <- c(ova_gonadosectomy = "Female GDX", testes_gonadosectomy = "Male GDX")
+    labels <- setNames(
+      paste0(sex_labels[gdx_statistics$contrast], "\nPearson r = ", sprintf("%.3f", gdx_statistics$r)),
+      gdx_statistics$contrast
+    )
+    plot_data <- dplyr::mutate(gdx_by_sex, contrast = factor(
+      contrast, levels = c("testes_gonadosectomy", "ova_gonadosectomy")
+    ))
+    plot_by_sex <- ggplot(plot_data, aes(fcgl, gdx_t)) +
+      geom_point(aes(color = color), alpha = 0.5) +
+      scale_color_manual(values = c(ovary = "#e54141", testes = "#4173d8"), guide = "none") +
+      geom_smooth(method = "lm", se = TRUE, color = "black") +
+      facet_wrap(~contrast, labeller = as_labeller(labels)) +
+      labs(x = "FCG: Testes minus Ovaries t statistic", y = "GDX: operated minus intact t statistic") +
+      theme_classic()
+    ggsave("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation_by_sex.pdf", plot = plot_by_sex, width = 9, height = 4.5)
+
+    cat("Correlation plot saved: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation.pdf\n")
+    cat("  Negative correlations indicate opposite directions for the FCG and gonadectomy contrasts.\n\n")
 
   } else {
     cat("  Warning: Could not find gonadal comparison in results\n\n")
@@ -548,10 +582,10 @@ cat("\nLipid class enrichment complete!\n")
 cat("  Total class-contrast pairs tested:", nrow(lipid_class_results), "\n\n")
 
 # Save enrichment results
-dir.create("results/lipidomic/enrichment", recursive = TRUE, showWarnings = FALSE)
+dir.create("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment", recursive = TRUE, showWarnings = FALSE)
 save(lipid_class_results,
-     file = "results/lipidomic/enrichment/lipid_class_enrichment_scores.RData")
-cat("Saved: results/lipidomic/enrichment/lipid_class_enrichment_scores.RData\n\n")
+     file = "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData")
+cat("Saved: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData\n\n")
 
 # Export full enrichment results to CSV (including p-values)
 # Extract gonadal comparison for the main enrichment table
@@ -564,9 +598,9 @@ if (!is.na(gonadal_pattern)) {
     dplyr::arrange(desc(enrichment_score))
 
   write.csv(lipid_class_enrichment_gonadal,
-            file = "results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv",
+            file = "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv",
             row.names = FALSE)
-  cat("Saved: results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv\n")
+  cat("Saved: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv\n")
   cat("  (Contains enrichment scores with p-values for gonadal comparison)\n\n")
 }
 
@@ -657,13 +691,13 @@ if (!is.null(gonadal_comparison)) {
     )
 
   # Save plot
-  ggsave("results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf",
+  ggsave("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_plot.pdf",
          plot = p_enrichment,
          width = 4,
          height = 8)
 
   cat("Lipid class enrichment plot saved!\n")
-  cat("  Saved: results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf\n\n")
+  cat("  Saved: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_plot.pdf\n\n")
 
   # Print summary
   cat("Top enriched lipid classes:\n")
@@ -737,7 +771,7 @@ if (file.exists("support/linex2_adjacency_matrix_OT.csv")) {
     cat("  Network edges found:", nrow(network_edges), "\n\n")
 
     # Save network files
-    dir.create("results/lipidomic/network", recursive = TRUE, showWarnings = FALSE)
+    dir.create("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network", recursive = TRUE, showWarnings = FALSE)
 
     # SIF format (source, interaction, target)
     if (nrow(network_edges) > 0) {
@@ -745,8 +779,8 @@ if (file.exists("support/linex2_adjacency_matrix_OT.csv")) {
         dplyr::mutate(interaction = "lipid_conversion") %>%
         dplyr::select(source, interaction, target)
 
-      write_csv(network_sif, "results/lipidomic/network/significant_lipids_network_SIF.csv")
-      cat("  Saved: results/lipidomic/network/significant_lipids_network_SIF.csv\n")
+      write_csv(network_sif, "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/significant_lipids_network_SIF.csv")
+      cat("  Saved: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/significant_lipids_network_SIF.csv\n")
 
       # Node attributes (logFC, p-value)
       node_attributes <- ttop_gonadal %>%
@@ -757,8 +791,8 @@ if (file.exists("support/linex2_adjacency_matrix_OT.csv")) {
           significance = -log10(adj.P.Val)
         )
 
-      write_csv(node_attributes, "results/lipidomic/network/significant_lipids_network_ATT.csv")
-      cat("  Saved: results/lipidomic/network/significant_lipids_network_ATT.csv\n")
+      write_csv(node_attributes, "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/significant_lipids_network_ATT.csv")
+      cat("  Saved: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/significant_lipids_network_ATT.csv\n")
 
       cat("\n  Network files can be imported into Cytoscape for visualization\n\n")
     } else {
@@ -789,7 +823,7 @@ if (dir.exists(bubble_data_dir)) {
   cat("  Found", length(all_lipid_class_files), "lipid classes with structural data\n\n")
 
   # Create output directory
-  dir.create("results/lipidomic/bubbles_DBC", recursive = TRUE, showWarnings = FALSE)
+  dir.create("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/bubbles_DBC", recursive = TRUE, showWarnings = FALSE)
 
   # Generate bubble plot for each lipid class
   for (lipid_class_file in all_lipid_class_files) {
@@ -836,7 +870,7 @@ if (dir.exists(bubble_data_dir)) {
       )
 
     # Save plot
-    output_file <- file.path("results/lipidomic/bubbles_DBC", paste0(lipid_class, ".pdf"))
+    output_file <- file.path("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/bubbles_DBC", paste0(lipid_class, ".pdf"))
     ggsave(
       filename = output_file,
       plot = bubbleplot,
@@ -845,7 +879,7 @@ if (dir.exists(bubble_data_dir)) {
     )
   }
 
-  cat("\nBubble plots saved to: results/lipidomic/bubbles_DBC/\n")
+  cat("\nBubble plots saved to: results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/bubbles_DBC/\n")
   cat("  Total plots generated:", length(all_lipid_class_files), "\n\n")
 
 } else {
@@ -921,21 +955,21 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 
 cat("Summary of outputs:\n")
 cat("  Differential Analysis:\n")
-cat("    - results/lipidomic/ttop_full_list.RData (FCG model)\n")
-cat("    - results/lipidomic/gdxhr_ttop_list.RData (GDX validation)\n")
-cat("    - results/lipidomic/gdxhr_t_table.csv (GDX t-statistics)\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData (FCG model)\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_ttop_list.RData (GDX validation)\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_t_table.csv (GDX t-statistics)\n")
 cat("  Visualizations:\n")
-cat("    - results/lipidomic/volcanos/*.pdf\n")
-cat("    - results/lipidomic/fcg_gdx_correlation.pdf (validation plot)\n")
-cat("    - results/lipidomic/pca/*.pdf\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/volcanos/*.pdf\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation.pdf (validation plot)\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/pca/*.pdf\n")
 cat("  Enrichment:\n")
-cat("    - results/lipidomic/enrichment/lipid_class_enrichment_scores.RData\n")
-cat("    - results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf (paper figure)\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_plot.pdf (paper figure)\n")
 cat("  Network:\n")
-cat("    - results/lipidomic/network/*_SIF.csv (Cytoscape import)\n")
-cat("    - results/lipidomic/network/*_ATT.csv (node attributes)\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/*_SIF.csv (Cytoscape import)\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/*_ATT.csv (node attributes)\n")
 cat("  Bubble Plots:\n")
-cat("    - results/lipidomic/bubbles_DBC/*.pdf (C vs DB plots by lipid class)\n")
+cat("    - results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/bubbles_DBC/*.pdf (C vs DB plots by lipid class)\n")
 cat("\n")
 
 cat("This refactored workflow produces IDENTICAL results to lipidomic_DA.R\n")

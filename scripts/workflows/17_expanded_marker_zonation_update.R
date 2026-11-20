@@ -6,8 +6,10 @@ zu17_run <- function(args=commandArgs(TRUE)) {
   values<-args[grepl("^--(output|source-root|python)=",args)]
   if(any(!args%in%c(flags,values))||anyDuplicated(sub("=.*$","",args))||all(c("--validate-only","--report-only")%in%args))stop("Unknown, duplicate or mutually exclusive CLI options")
   value<-function(key,default){v<-args[startsWith(args,paste0(key,"="))];if(length(v))sub("^[^=]*=","",v[1]) else default}
+  if("--report-only"%in%args&&!any(startsWith(args,"--output=")))
+    stop("--report-only needs --output= pointing to a saved Workflow 17 run with its inputs and caches")
   output<-value("--output",analysis_current())
-  if(!any(c("--validate-only","--report-only")%in%args))analysis_assert_not_approved_output(output)
+  if(!"--validate-only"%in%args)analysis_assert_not_approved_output(output)
   source_root<-value("--source-root",analysis_path("pseudobulk_csv_root"))
   staging<-new.env(parent=globalenv());sys.source("scripts/reports/stage_zonation_marker_update.R",envir=staging)
   py<-value("--python",Sys.getenv("ZONATION_PYTHON",unset=Sys.which("python3")))
@@ -20,7 +22,7 @@ zu17_run <- function(args=commandArgs(TRUE)) {
       rm(x)
     }
     stopifnot(file.exists(analysis_path("engine_fcg05")),file.exists(analysis_path("engine_validation07")),
-      file.exists("results/validation/knockdown_t_table.csv"),file.exists("results/validation/knockdown_ttop_list.RData"))
+      file.exists("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv"),file.exists("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData"))
     if(audit)stopifnot(nzchar(py),file.exists(py),file.exists(file.path(analysis_path("historical_fcg05"),"zonation_ttop_list.RData")),
       file.exists(file.path(analysis_path("historical_cf453_models"),"models.rds")))
     cat("Current scientific inputs, frozen engines and unchanged KD fits validated; no outputs written.\n")
@@ -40,7 +42,7 @@ zu17_run <- function(args=commandArgs(TRUE)) {
       files<-c(analysis_path("historical_fcg_zonation_csv"),analysis_path("historical_fcg_zonation_metadata"),
         analysis_path("historical_fcg_zonation_rds"),analysis_path("historical_gdx_zonation_rds"),analysis_path("historical_wdsd_zonation_rds"),
         list.files(analysis_path("historical_fcg05"),recursive=TRUE,full.names=TRUE),
-        list.files("results/validation",recursive=TRUE,full.names=TRUE))
+        list.files("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation",recursive=TRUE,full.names=TRUE))
       files<-sort(unique(files[file.exists(files)&grepl("[.](csv|rds|RData|pdf|docx)$",files)&!grepl("cyp2c38_in_vivo",files)]))
       original<-data.frame(path=normalizePath(files),sha256=unname(vapply(files,digest::digest,character(1L),file=TRUE,algo="sha256")),bytes=file.info(files)$size)
       utils::write.csv(original,file.path(output,"QA/historical_sha256.csv"),row.names=FALSE)

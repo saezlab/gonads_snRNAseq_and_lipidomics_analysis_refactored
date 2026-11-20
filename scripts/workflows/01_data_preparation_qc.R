@@ -26,7 +26,7 @@
 #   - data/RNA/scaled_RNA_2.csv (second third of genes)
 #   - data/RNA/scaled_RNA_3.csv (third third of genes)
 #   - data/RNA/meta_data_df.csv (cell-level metadata)
-#   - results/qc/data_quality_report.txt
+#   - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/data_quality_report.txt
 #
 # Dataset scale:
 #   - 466,986 high-quality nuclei
@@ -70,7 +70,7 @@ source("scripts/seurat_compatibility.R")
 source("scripts/visualization/dimred_plots.R")
 
 # Define output directories
-qc_dir <- "results/qc"
+qc_dir <- "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc"
 if (!dir.exists(qc_dir)) {
   dir.create(qc_dir, recursive = TRUE)
 }
@@ -273,7 +273,7 @@ if ("sample_name" %in% colnames(metadata)) {
     theme(axis.text.y = element_text(size = 6))
 
   ggsave(file.path(qc_dir, "pseudobulk_per_biosample.pdf"), p_samples, width = 8, height = 10)
-  cat("  Saved: results/qc/pseudobulk_per_biosample.pdf\n")
+  cat("  Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/pseudobulk_per_biosample.pdf\n")
 }
 
 # 2. Pseudobulk samples per cell type
@@ -295,7 +295,7 @@ if ("cell_type" %in% colnames(metadata)) {
     theme_bw()
 
   ggsave(file.path(qc_dir, "pseudobulk_per_celltype.pdf"), p_types, width = 8, height = 6)
-  cat("\n  Saved: results/qc/pseudobulk_per_celltype.pdf\n")
+  cat("\n  Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/pseudobulk_per_celltype.pdf\n")
 }
 
 # 3. Sample × cell type design matrix
@@ -313,7 +313,7 @@ if ("sample_name" %in% colnames(metadata) && "cell_type" %in% colnames(metadata)
             file.path(qc_dir, "sample_celltype_design.csv"),
             row.names = FALSE)
 
-  cat("\n  Saved: results/qc/sample_celltype_design.csv\n")
+  cat("\n  Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/sample_celltype_design.csv\n")
 }
 
 # 4. Experimental design balance
@@ -537,7 +537,7 @@ grid::grid.draw(nicePCA(scaled_RNA_pca, meta_data_df_pca[, c(2, 4)],
                         no_label = TRUE, color_mapping = color_mapping))
 dev.off()
 
-cat("  Saved: results/qc/PCA_all_samples_by_celltype.pdf\n")
+cat("  Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/PCA_all_samples_by_celltype.pdf\n")
 cat("  This plot shows that cell type is the primary driver of variation,\n")
 cat("  with samples clustering by cell type rather than by biological sample.\n\n")
 
@@ -621,7 +621,7 @@ for (cell_type in cell_types) {
     grid::grid.draw(pca_plot)
     dev.off()
 
-    cat("    Saved: results/qc/PCA_", gsub(" ", "_", cell_type), ".pdf\n", sep = "")
+    cat("    Saved: results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/PCA_", gsub(" ", "_", cell_type), ".pdf\n", sep = "")
   }
 }
 
@@ -773,12 +773,12 @@ cat("data/RNA/scaled_RNA_1.csv\n")
 cat("data/RNA/scaled_RNA_2.csv\n")
 cat("data/RNA/scaled_RNA_3.csv\n")
 cat("data/RNA/meta_data_df.csv\n")
-cat("results/qc/pseudobulk_per_biosample.pdf\n")
-cat("results/qc/pseudobulk_per_celltype.pdf\n")
-cat("results/qc/sample_celltype_design.csv\n")
-cat("results/qc/experimental_design.csv\n")
-cat("results/qc/PCA_all_samples_by_celltype.pdf\n")
-cat("results/qc/PCA_[celltype].pdf (for each cell type)\n")
+cat("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/pseudobulk_per_biosample.pdf\n")
+cat("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/pseudobulk_per_celltype.pdf\n")
+cat("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/sample_celltype_design.csv\n")
+cat("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/experimental_design.csv\n")
+cat("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/PCA_all_samples_by_celltype.pdf\n")
+cat("results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/PCA_[celltype].pdf (for each cell type)\n")
 
 cat("\n")
 cat(strrep("=", 80), "\n")
@@ -1011,7 +1011,7 @@ cat("  - ",analysis_path("current_fcg_zonation_csv"),"\n",sep="")
 cat("  - ",analysis_path("current_fcg_zonation_metadata"),"\n",sep="")
 cat("  - data/RNA/scaled_RNA_gdxhr_{1,2,3}.csv\n")
 cat("  - data/RNA/meta_data_df_gdxhr.csv\n")
-cat("  - results/qc/ (QC plots and reports)\n\n")
+cat("  - results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc/ (QC plots and reports)\n\n")
 
 cat("Next steps:\n")
 cat("  Run workflow 02: Pseudobulk differential analysis\n")

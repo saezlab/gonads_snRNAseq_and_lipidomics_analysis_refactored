@@ -17,6 +17,8 @@ validation_global_runtime <- function(output) {
   branch <- append(branch,c('mean_cl_normal <- zmu_mean_cl_normal',
     'available_zonation <- character(0) # Prevent inherited interactive zonation state.'),after=at)
   branch <- gsub("results/validation",output,branch,fixed=TRUE)
+  branch <- gsub("results/mofa/", "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/", branch, fixed=TRUE)
+  branch <- gsub("results/lipidomic/", "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/", branch, fixed=TRUE)
   stopifnot(!any(grepl('^# [89]\\.',branch)),!any(grepl('"results/zonation/',branch,fixed=TRUE)))
   attr(branch,"engine_lines") <- selected
   branch
@@ -26,8 +28,8 @@ validation_global_run <- function(output,validate_only=FALSE) {
   zmu_require()
   required <- c(analysis_path("engine_validation07",mustWork=TRUE),
     "data/metabolomics/lipidomics_20250423transfections.csv",
-    "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
-    "results/lipidomic/structural_model/lipids_with_structure.csv")
+    "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv",
+    "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv")
   if(!all(file.exists(required)))stop("Missing independent validation input: ",paste(required[!file.exists(required)],collapse=", "))
   output <- file.path(normalizePath(dirname(output),mustWork=FALSE),basename(output))
   runtime <- validation_global_runtime(output)

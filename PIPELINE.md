@@ -1,8 +1,10 @@
 # Pipeline, data dependencies and provenance
 
-The current zonation and standalone diet release is **expanded_markers_20261116**, selected by [analysis_release.json](scripts/config/analysis_release.json). Its approved output root is `results/zonation_marker_update_20261116/`. Numbering identifies workflows; it is not execution order.
+The current zonation and standalone diet release is **expanded_markers_20261116**, selected by [analysis_release.json](scripts/config/analysis_release.json). The published outputs are under `results/current/`. The registry routes saved components into the six Results sections. Numbering identifies workflows; it is not execution order.
 
 Use the [complete workflow reference](docs/WORKFLOW_REFERENCE.md) for each entry's actual file inputs, producers, execution modes, outputs, validation scope and overwrite behavior. It is generated from the [editable JSON contract](docs/workflow_dependencies.json); the same relationships are available as a [filterable dependency CSV](docs/workflow_dependencies.csv) and [workflow catalog](docs/analysis_catalog.csv). The detailed [workflow plans](docs/workflow_plans/) describe methods and limitations.
+
+The [manuscript replay](docs/MANUSCRIPT_RESULTS_REPLAY.md) uses a separate result tree arranged by Results subsection. The replay supplies new producer artifacts to their downstream consumers and retains explicit references to frozen inputs.
 
 ## Scientific data flow
 
@@ -71,9 +73,9 @@ Dotted arrows are calls; they do not imply that the diet cohort uses original FC
 | Current FCG, GDX and diet zone manifests and all layers | Supplied expanded-marker pseudobulks; registry `current_*_zonation_transport` | Shipped split CSV transports |
 | Diet whole-hepatocyte manifest | Registry `wdsd_hepatocytes_transport`; mandatory14 intake even in models-only mode | Shipped; additional to the diet zone data |
 | FCG and diet lipid measurements; TF/pathway resources | Curated input files under `data/` and `support/` | Shipped; exact files in the reference |
-| `results/lipidomic/ttop_full_list.RData` and `enrichment/lipid_class_enrichment_scores.RData` | Workflow03 | Shipped derived prerequisites |
-| `results/lipidomic/structural_model/lipids_with_structure.csv` | Workflow06; consumed by zonal07 structural plots | Shipped derived prerequisite |
-| `results/validation/knockdown_t_table.csv` and `knockdown_ttop_list.RData` | Independent KD fit in Workflow07 global branch | Shipped derived prerequisites; KD measurements are unchanged |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData` and `enrichment/lipid_class_enrichment_scores.RData` | Workflow03 | Shipped derived prerequisites |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv` | Workflow06; consumed by zonal07 structural plots | Shipped derived prerequisite |
+| `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv` and `knockdown_ttop_list.RData` | Independent KD fit in Workflow07 global branch | Shipped derived prerequisites; KD measurements are unchanged |
 
 Workflow17 does **not** run03,06 or the independent KD fit producer. Neither04's MOFA fit nor historical FCG zonation results are required for its default scientific branch. Current inputs use [CSV transports](docs/PSEUDOBULK_CSV_INPUTS.md); registry `current_input_root` and the `*_rds` keys identify local originals/compatibility exports, not the public transport root.
 
@@ -91,7 +93,7 @@ Rscript scripts/workflows/17_expanded_marker_zonation_update.R --validate-only
 Rscript scripts/workflows/17_expanded_marker_zonation_update.R --output=results/runs/expanded_markers_reproduction
 ```
 
-Validation17 does not check every full-run03/06/resource prerequisite. Its optional `--with-manuscript-audit` validation adds selected historical cache/Python checks, not a complete manuscript-audit restoration test. Full manuscript auditing requires additional local historical caches, preprocessing references and a private DOCX. `--report-only` intentionally refreshes reports/source copies from saved results and writes files; it cannot rebuild missing model caches. See [the17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md) for the shared `--source-root` requirements of full private auditing.
+Validation17 does not check every full-run03/06/resource prerequisite. Its optional `--with-manuscript-audit` validation adds selected historical cache/Python checks, not a complete manuscript-audit restoration test. Full manuscript auditing requires additional local historical caches, preprocessing references and a private DOCX. `--report-only --output=PATH` refreshes reports and source copies from a complete saved Workflow 17 run. Use a writable saved run directory outside the published tree and legacy archive. See [the17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md) for the shared `--source-root` requirements of full private auditing.
 
 ### Manual diet-only execution
 
@@ -110,7 +112,7 @@ Adjacent parent provenance is required. Defaults15/16 point to the approved rele
 
 - Current full public05/07 zonal,14,17 and6A-layout entries reject the approved release root and descendants independently of cache presence. Fresh destinations remain required. Existing generic freshness guards also apply. Explicit saved-result refresh modes have their own documented write semantics.
 - Workflows01–04,06 and08 execute on source and have fixed output paths, without a safe validation CLI or general fresh-output option. Use an isolated checkout/copy for a reproduction. Passing `--help` does not make these scripts read-only. `analysis_config.R`/`DATASETS` do not globally redirect their literal paths.
-- Workflow04 loads retained MOFA models if all eleven factor-count model files are present; otherwise it automatically enters training. MOFA2 remains required for cached analysis.
+- Workflow04's `--reuse-models-only` mode requires all eleven specific factor-count model files before writing and supports a read-only `--model-dir=PATH`. The unflagged mode can train if its cache is incomplete. MOFA2 is required for both modes.
 - Workflow07 `--global-only --output=<fresh>` regenerates independent KD/global/structural validation separately from the current zonal branch. It reads04 network and06 structural artifacts. Its validation mode is a prerequisite check; Workflow11's `--validate-only`, by contrast, fits the observed weighted limma model in memory.
 - Internal staging/engine helpers are called by maintained public entries; direct helper execution is not a substitute for the public rerun contract. Frozen05/07 bodies remain under `scripts/core/engines/`.
 

@@ -1,5 +1,0 @@
-"metric_key","old_value","new_value","status","source_file","note"
-"figure4B_additional_correlation_audit","-0.0417650156080848 3.08862e-09 20123","r= -0.02908861 ;p= 3.67531e-05 ;n= 20123","INDEPENDENTLY_REPLAYED","results/zonation_marker_update_20261116/fcg05/t_table_zonation.csv","Additional audit statistic; no r/p was printed in the embedded old Figure4B."
-"female_male_zonation_r","0.802526","0.780464","INDEPENDENTLY_REPLAYED","results/zonation_marker_update_20261116/fcg05/t_table_zonation.csv",""
-"female_male_zonation_n_genes","20123","20123","INDEPENDENTLY_REPLAYED","results/zonation_marker_update_20261116/fcg05/t_table_zonation.csv",""
-"female_male_zonation_p","<1e-300","<1e-300","INDEPENDENTLY_REPLAYED","results/zonation_marker_update_20261116/fcg05/t_table_zonation.csv",""

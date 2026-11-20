@@ -498,7 +498,7 @@ def populate_saved_results(report: Path, rows: list[dict], edge_rows: list[dict]
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manuscript", type=Path, default=ROOT / "manuscript/Cleland and Dugourd et al.docx")
-    parser.add_argument("--output", type=Path, default=ROOT / "results/zonation_marker_update_20261116/report")
+    parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     before = sha256(args.manuscript)

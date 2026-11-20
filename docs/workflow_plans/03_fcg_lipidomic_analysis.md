@@ -8,7 +8,7 @@
 
 Both `source()` and `Rscript` execute the complete body. There is no CLI parser,
 validate-only, source guard or output-root option; named outputs under
-`results/lipidomic/` can be overwritten. Use an isolated checkout/copy for a fresh
+`results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/` can be overwritten. Use an isolated checkout/copy for a fresh
 reproduction. The script uses literal/default loader paths, not `DATASETS` routing.
 
 The main branch needs the supplied cleaned lipid CSV, overview workbook and main
@@ -64,18 +64,25 @@ source("scripts/visualization/heatmaps.R")
 
 ## Output Files
 
-- `results/lipidomic/ttop_full_list.RData`
-- `results/lipidomic/gdxhr_t_table.csv`
-- `results/lipidomic/gdxhr_ttop_list.RData`
-- `results/lipidomic/volcanos/*.pdf`
-- `results/lipidomic/pca/*.pdf`
-- `results/lipidomic/fcg_gdx_correlation.pdf`
-- `results/lipidomic/enrichment/lipid_class_enrichment_scores.RData`
-- `results/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv`
-- `results/lipidomic/enrichment/lipid_class_enrichment_plot.pdf`
-- `results/lipidomic/network/significant_lipids_network_SIF.csv`
-- `results/lipidomic/network/significant_lipids_network_ATT.csv`
-- `results/lipidomic/bubbles_DBC/*.pdf`
+The manuscript PCA exports include `pca/pca_lipidomic_gonadal_type.pdf` and
+`pca/pca_lipidomic_chromosomal_sex.pdf`. The gonadectomy branch also exports
+`fcg_gdx_correlation_by_sex.pdf`, `fcg_gdx_correlation_source.csv` and
+`fcg_gdx_correlation_statistics.csv` under `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/`. Both Pearson
+tests use an exact lipid-ID join and finite t statistics. The source records
+the matched species separately for each sex.
+
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_t_table.csv`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gdxhr_ttop_list.RData`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/volcanos/*.pdf`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/pca/*.pdf`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/fcg_gdx_correlation.pdf`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_scores.RData`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_gonadal.csv`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/enrichment/lipid_class_enrichment_plot.pdf`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/significant_lipids_network_SIF.csv`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/significant_lipids_network_ATT.csv`
+- `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/bubbles_DBC/*.pdf`
 
 ## Key Variables
 
@@ -102,5 +109,5 @@ source("scripts/visualization/heatmaps.R")
 ## Notes for Context Restoration
 
 1. WF03's `ttop_full_list.RData` is nested (`contrast -> comparison`) and is handled tolerantly in workflow 05.
-2. LINEX2 outputs are in `results/lipidomic/network/`; older root-level network CSVs may exist but are not written by the current script.
+2. LINEX2 outputs are in `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/network/`; older root-level network CSVs may exist but are not written by the current script.
 3. Bubble plots use `data/metabolomics/for_bubbles/`, while workflow 06 parses lipid names directly from limma results.

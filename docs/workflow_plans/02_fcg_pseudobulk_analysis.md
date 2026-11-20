@@ -8,7 +8,7 @@
 
 The entry runs the complete body under both `source()` and `Rscript`; there is no
 CLI parser, source guard, validate-only mode or output-directory override. Existing
-files under `results/pseudobulk/` can be overwritten. Reproduction without changing
+files under `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/` can be overwritten. Reproduction without changing
 curated results requires an isolated checkout/copy. The literal/default loader
 paths below, not `DATASETS` selection, control its inputs.
 
@@ -73,22 +73,29 @@ source("scripts/visualization/heatmaps.R")
 
 ## Output Files
 
-- `results/pseudobulk/ttop_full_list.RData`
-- `results/pseudobulk/tval_full_df.RData`
-- `results/pseudobulk/tval_full_df.csv`
-- `results/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData`
-- `results/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv`
-- `results/pseudobulk/volcanos/volcano_*.pdf`
-- `results/pseudobulk/pca/*.pdf`
-- `results/pseudobulk/pathways/pathway_scores_df_all.RData`
-- `results/pseudobulk/pathways/pathway_enrichment_heatmap.pdf`
-- `results/pseudobulk/pathways/pathway_enrichment_heatmap_focused.pdf`
-- `results/pseudobulk/pathways/tf_scores_df_all.RData`
-- `results/pseudobulk/pathways/tf_activity_heatmap.pdf`
-- `results/pseudobulk/gdx_validation_comparison.pdf`
-- `results/pseudobulk/xenium_validation_volcano.pdf`
-- `results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv`
-- `results/pseudobulk/proteo_validation_comparison.pdf`
+The optional whole-liver proteomics comparison exports the full moderated DE
+table at `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteomics_differential_results.csv` and the joined,
+unclipped statistics, adjusted p values and direction-concordance indicator at
+`results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteomics_rna_concordance.csv`. These capture the analysis
+behind the plot before its axes are capped. Counts conditioned on protein FDR,
+RNA FDR or both use different denominators.
+
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.RData`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/tval_full_df.csv`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_ttop_list.RData`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/gdhxr_groups_tval_df.csv`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/volcanos/volcano_*.pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pca/*.pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_scores_df_all.RData`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_enrichment_heatmap.pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/pathway_enrichment_heatmap_focused.pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/tf_scores_df_all.RData`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/pathways/tf_activity_heatmap.pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdx_validation_comparison.pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/xenium_validation_volcano.pdf`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv`
+- `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/proteo_validation_comparison.pdf`
 
 ## Key Variables
 
@@ -118,10 +125,10 @@ source("scripts/visualization/heatmaps.R")
 
 ## Notes for Context Restoration
 
-1. `results/pseudobulk/ttop_full_list.RData` is the primary RNA DE archive. The current script does not write `ttop_full_long.csv`.
+1. `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData` is the primary RNA DE archive. The current script does not write `ttop_full_long.csv`.
 2. Pathway enrichment intentionally uses `minsize = 5` to match the legacy/default decoupleR behavior.
 3. TF activity uses `minsize = 20`.
-4. GDX validation expects the workflow 01 GDX CSVs and writes into `results/pseudobulk/gdxrh/` (spelled `gdxrh` in the script).
+4. GDX validation expects the workflow 01 GDX CSVs and writes into `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/gdxrh/` (spelled `gdxrh` in the script).
 5. Proteomics validation is optional and skipped if either proteomics input file is missing.
 6. The original collaborator P3225 fractionated TMT proteomics R Markdown file
    is retained as provenance at

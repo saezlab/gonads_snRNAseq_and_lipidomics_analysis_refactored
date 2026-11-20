@@ -174,7 +174,7 @@ validated against the parent ledger rather than a historical 18,486-gene count;
 the 28-mouse/56-profile balanced design and all contrast/FDR rules remain fixed.
 
 The versioned `cf453_direct_diet/` stage under
-`results/zonation_marker_update_20261116/` uses the newly fitted CF453 model
+`results/current/` uses the newly fitted CF453 model
 cache and runs models-only: no older four-panel alternative is regenerated.
 Its 18,604 genes yield 163 diet-by-sex, 333 diet-by-zone and 140 three-way
 discoveries in the declared pooled family, and 593 omnibus discoveries.
@@ -183,4 +183,4 @@ All raw three-way estimates/p values replay the matching updated Workflow 14
 fit; this does not assert equality with the historical two-marker-input fit.
 Independent actual-data verification passes 170 groups. Cohort-reference
 guards distinguish the actual historical `results/zonation/` directory from
-the unrelated version-root name `results/zonation_marker_update_20261116/`.
+the unrelated version-root name `results/current/`.

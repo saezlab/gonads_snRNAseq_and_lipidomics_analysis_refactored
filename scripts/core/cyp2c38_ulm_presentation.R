@@ -408,7 +408,7 @@ wp1_ulm_followup_report <- function(out) {
   rerun <- paste0("Rscript scripts/workflows/07c_cyp2c38_ulm_resampling.R \\\n",
                   "  --bootstraps=", provenance$bootstraps, " --permutations=", provenance$permutations,
                   " --seed=", provenance$seed, " --workers=", provenance$workers,
-                  " \\\n  --output=results/validation/cyp2c38_in_vivo/ulm_followup_replay")
+                  " \\\n  --output=results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/ulm_followup_replay")
   lines <- c(
     "# Cyp2c38 in vivo lipidomics: ULM scores, bootstrap tests and regenerated gonadal networks",
     "", paste0("Completed run: ", provenance$completed_at, ". Every result table below comes from the saved outputs."),

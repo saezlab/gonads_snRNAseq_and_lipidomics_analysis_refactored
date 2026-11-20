@@ -17,7 +17,7 @@
 #       bulk/zhou/GSE179250_family.soft.gz
 #
 # Mouse signature input:
-#   results/pseudobulk/hepa_gonad_signature.csv is the repository copy of the
+#   results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/hepa_gonad_signature.csv is the repository copy of the
 #   mouse hepatocyte gonadal t-value signature. The script currently reads a
 #   copy from DATA_DIR / "hepa_gonad_signature.csv". The later mouse-human
 #   ranked-gene dot plots also expect DATA_DIR / "male_vs_female_DA_res.csv".
@@ -32,11 +32,11 @@
 #   7. Test young-vs-old signal among female human samples.
 #
 # Outputs:
-#   Results are written to RESULTS_DIR, which currently points to the
-#   collaborator's external analysis directory rather than this repository.
+#   Use --data-dir and --output to run outside the collaborator's HPC paths.
 
 from __future__ import annotations
 
+import argparse
 import gzip
 from pathlib import Path
 from typing import Dict, Iterable, Tuple
@@ -50,7 +50,6 @@ import scanpy as sc
 import seaborn as sns
 from pydeseq2.dds import DeseqDataSet
 from pydeseq2.ds import DeseqStats
-from pypath.utils import homology
 from scipy.stats import mannwhitneyu
 from adjustText import adjust_text
 
@@ -59,9 +58,6 @@ sns.set_style("whitegrid", {"grid.color":'#EEE9E9'})
 
 DATA_DIR = Path("/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/data/")
 RESULTS_DIR = Path("/home/hd/hd_hd/hd_lx260/sds-hd/sd22b002/projects/sexdifferences_humanliver/results/bulk_manuscript")
-SOFT_PATH = DATA_DIR / "bulk/zhou/GSE179250_family.soft.gz"
-RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-
 GENDER_PALETTE = {'female': '#FF0000', 'male': '#5771CF'}
 
 VOLCANO_PADJ_THR = 0.05
@@ -110,6 +106,8 @@ def load_metadata(soft_path: Path) -> pd.DataFrame:
 
 def prepare_adata(counts: pd.DataFrame, counts_tpm: pd.DataFrame, meta_df: pd.DataFrame) -> ad.AnnData:
     """Build AnnData, keep raw counts, and normalize."""
+    if not counts.index.equals(counts_tpm.index) or not counts.columns.equals(counts_tpm.columns):
+        raise ValueError("GEO count and TPM tables must have identical gene and sample order")
     adata = ad.AnnData(
         X=counts.T.values,
         obs=meta_df.copy(),
@@ -485,7 +483,6 @@ def volcano_nice(df,
     plt.text(xmax, -0.8, labels[0], color=col_high_neut_low[2], fontsize=10, ha="right", va="top")
 
 
-    plt.show()
     return fig
 
 
@@ -546,8 +543,8 @@ def plot_dotplot(data,path,size_range=(0, 3), size_title="-log10(adj. pval)", co
 
     plt.savefig(path, format="pdf", bbox_inches="tight")
 
-def main() -> None:
-    # Load bulk counts and signature data.
+def main(de_only: bool = False) -> None:
+    # Load bulk counts and TPM data.
     bulk_data = pd.read_csv(
         DATA_DIR / "bulk/zhou/GSE179250_gene_reads.txt",
         sep="\t",
@@ -560,12 +557,8 @@ def main() -> None:
         dtype={"CHR": str},
         low_memory=False,
     )
-    signature = pd.read_csv(DATA_DIR / "hepa_gonad_signature.csv")
-    homology_map = homology.get_dict(source="mouse", target="human", id_type="genesymbol")
-
-
     # Parse GEO metadata from the SOFT file and align to sample columns.
-    meta_df = load_metadata(SOFT_PATH)
+    meta_df = load_metadata(DATA_DIR / "bulk/zhou/GSE179250_family.soft.gz")
     counts = bulk_data.set_index("Description").iloc[:, 3:]
     counts_tpm = tpm_bulk_data.set_index("Description").iloc[:, 3:]
 
@@ -591,29 +584,36 @@ def main() -> None:
     fig_pca = sc.pl.pca(adata_pca, color="sex", palette=GENDER_PALETTE, return_fig=True, show=False)
     save_fig(fig_pca, "pca_by_sex.pdf")
 
-    # Translate signature genes to human symbols and drop duplicates.
-    signature = translate_signature(signature, homology_map, adata.var_names)
+    if not de_only:
+        from pypath.utils import homology
 
-    # Run decoupler ULM to score the signature.
-    estimate = run_ulm_scores(adata, signature)
+        signature = pd.read_csv(DATA_DIR / "hepa_gonad_signature.csv")
+        homology_map = homology.get_dict(source="mouse", target="human", id_type="genesymbol")
+        if not homology_map:
+            raise RuntimeError("pypath returned an empty mouse-to-human orthology mapping")
+        # Translate signature genes to human symbols and drop duplicates.
+        signature = translate_signature(signature, homology_map, adata.var_names)
 
-    adata.write(RESULTS_DIR / "adata_processed.h5ad")
-    estimate.to_csv(RESULTS_DIR / "ulm_sex_signature_estimates.csv", index=False)
+        # Run decoupler ULM to score the signature.
+        estimate = run_ulm_scores(adata, signature)
 
-    estimate["age_group_bins"] = pd.cut(
-        estimate["age"],
-        bins=np.arange(0, estimate["age"].max() + 15, 15),
-        labels=None,
-        include_lowest=True,
-        right=False,
-    )
+        adata.write(RESULTS_DIR / "adata_processed.h5ad")
+        estimate.to_csv(RESULTS_DIR / "ulm_sex_signature_estimates.csv", index=False)
 
-    fig, ax = plt.subplots(figsize=(3, 4))
-    young_cutoff, old_cutoff = 12, 49
-    estimate_young_range = estimate[(estimate["age"] >= young_cutoff) & (estimate["age"] <= old_cutoff)]
-    plot_gender_boxplot(ax, estimate_young_range, palette=GENDER_PALETTE)
-    ax.set_title(f"ages {young_cutoff}-{old_cutoff}, n = {estimate_young_range.shape[0]}", fontsize = 16)
-    save_fig(fig, "ulm_enrichment_12_49.pdf")
+        estimate["age_group_bins"] = pd.cut(
+            estimate["age"],
+            bins=np.arange(0, estimate["age"].max() + 15, 15),
+            labels=None,
+            include_lowest=True,
+            right=False,
+        )
+
+        fig, ax = plt.subplots(figsize=(3, 4))
+        young_cutoff, old_cutoff = 12, 49
+        estimate_young_range = estimate[(estimate["age"] >= young_cutoff) & (estimate["age"] <= old_cutoff)]
+        plot_gender_boxplot(ax, estimate_young_range, palette=GENDER_PALETTE)
+        ax.set_title(f"ages {young_cutoff}-{old_cutoff}, n = {estimate_young_range.shape[0]}", fontsize = 16)
+        save_fig(fig, "ulm_enrichment_12_49.pdf")
 
     # Differential expression: female vs male across all ages.
     results_df, mat = calc_deg(adata, "sex", "female", "male")
@@ -641,10 +641,6 @@ def main() -> None:
     save_fig(fig, "volcano_male_vs_female_highlight.pdf")
     
 
-    merged_mouse = signature.merge(mat.T, how="left", left_on="human_gene_orth", right_index=True)
-    merged_mouse = merged_mouse[~merged_mouse["Hepatocyte"].isna()]
-
-
     adata_sub = adata[(adata.obs["age"] >= 12) & (adata.obs["age"] <= 49)].copy()
     results_df_sub, mat_sub = calc_deg(adata_sub, "sex", "female", "male")
     mat_sub.to_csv(RESULTS_DIR / "12_49_malevsfemale_deg_zhou.csv")
@@ -670,32 +666,33 @@ def main() -> None:
     save_fig(fig, "volcano_male_vs_female_highlight_1249.pdf")
 
 
-    full_results = pd.read_csv(DATA_DIR / "male_vs_female_DA_res.csv")
-    full_results["human_gene_orth"] = [
-        list(homology_map[g])[0] if g in homology_map else g.upper() for g in full_results["ID"]
-    ]
-    present_both = set(full_results["human_gene_orth"]) & set(adata.var_names)
-    print(f"{len(full_results) - len(present_both)} genes cannot be translated with ortho & caps")
+    if not de_only:
+        full_results = pd.read_csv(DATA_DIR / "male_vs_female_DA_res.csv")
+        full_results["human_gene_orth"] = [
+            list(homology_map[g])[0] if g in homology_map else g.upper() for g in full_results["ID"]
+        ]
+        present_both = set(full_results["human_gene_orth"]) & set(adata.var_names)
+        print(f"{len(full_results) - len(present_both)} genes cannot be translated with ortho & caps")
 
-    all_results = full_results.merge(results_df_sub, left_on="human_gene_orth", right_index=True)
-    all_results["rank_mouse_fem"] = all_results["t_Hepatocytes"].rank()
-    all_results["rank_human_fem"] = all_results["stat"].rank()
-    all_results["rank_mouse_male"] = all_results["t_Hepatocytes"].rank(ascending=False)
-    all_results["rank_human_male"] = all_results["stat"].rank(ascending=False)
-    all_results["avg_male_rank"] = (all_results["rank_mouse_male"] + all_results["rank_human_male"]) / 2
-    all_results["avg_female_rank"] = (all_results["rank_mouse_fem"] + all_results["rank_human_fem"]) / 2
-    all_results["con_malemouse_rank"] = (all_results["rank_mouse_male"] + all_results["rank_human_fem"]) / 2
-    all_results["con_femalemouse_rank"] = (all_results["rank_mouse_fem"] + all_results["rank_human_male"]) / 2
-    all_results = all_results.set_index("ID")
+        all_results = full_results.merge(results_df_sub, left_on="human_gene_orth", right_index=True)
+        all_results["rank_mouse_fem"] = all_results["t_Hepatocytes"].rank()
+        all_results["rank_human_fem"] = all_results["stat"].rank()
+        all_results["rank_mouse_male"] = all_results["t_Hepatocytes"].rank(ascending=False)
+        all_results["rank_human_male"] = all_results["stat"].rank(ascending=False)
+        all_results["avg_male_rank"] = (all_results["rank_mouse_male"] + all_results["rank_human_male"]) / 2
+        all_results["avg_female_rank"] = (all_results["rank_mouse_fem"] + all_results["rank_human_fem"]) / 2
+        all_results["con_malemouse_rank"] = (all_results["rank_mouse_male"] + all_results["rank_human_fem"]) / 2
+        all_results["con_femalemouse_rank"] = (all_results["rank_mouse_fem"] + all_results["rank_human_male"]) / 2
+        all_results = all_results.set_index("ID")
 
 
-    sig = all_results[(all_results['adj.P.Val'] < 0.1) & (all_results['padj'] < 0.1)]
-    # female
-    data = sig[(sig['logFC'] < 0) & (sig['log2FoldChange'] < 0)].sort_values(by = 'avg_female_rank').iloc[:5]
-    plot_dotplot(data, title = 'top female', path = RESULTS_DIR / 'top_ranked_genes_female_dot.pdf')
-    # male
-    data = sig[(sig['logFC'] > 0) & (sig['log2FoldChange'] > 0)].sort_values(by = 'avg_male_rank').iloc[:5]
-    plot_dotplot(data, title = 'top male', path = RESULTS_DIR / 'top_ranked_genes_male_dot.pdf')
+        sig = all_results[(all_results['adj.P.Val'] < 0.1) & (all_results['padj'] < 0.1)]
+        # female
+        data = sig[(sig['logFC'] < 0) & (sig['log2FoldChange'] < 0)].sort_values(by = 'avg_female_rank').iloc[:5]
+        plot_dotplot(data, title = 'top female', path = RESULTS_DIR / 'top_ranked_genes_female_dot.pdf')
+        # male
+        data = sig[(sig['logFC'] > 0) & (sig['log2FoldChange'] > 0)].sort_values(by = 'avg_male_rank').iloc[:5]
+        plot_dotplot(data, title = 'top male', path = RESULTS_DIR / 'top_ranked_genes_male_dot.pdf')
 
     adata_sub_female = adata[(adata.obs["age"] >= 12) & (adata.obs["sex"] == "female")].copy()
     adata_sub_female.obs["agecat"] = "young"
@@ -706,17 +703,27 @@ def main() -> None:
     results_df_yo.to_csv(RESULTS_DIR / "olderthan11female_oldvsyoung_full_results_deg_zhou.csv")
     mat_yo.to_csv(RESULTS_DIR / "olderthan11female_oldvsyoung_deg_statmatrix_zhou.csv")
 
-    merged_yo = signature.merge(mat_yo.T, how="left", left_on="human_gene_orth", right_index=True)
-    merged_yo = merged_yo[~merged_yo["Hepatocyte"].isna()]
-
-    fig, ax = plt.subplots(figsize=(3, 4))
-    estimate_sub = estimate[(adata.obs["age"] >= 12) & (adata.obs["sex"] == "female")].copy()
-    estimate_sub["agecat"] = "young"
-    estimate_sub.loc[estimate_sub["age"] > 49, "agecat"] = "old"
-    plot_gender_boxplot(ax, estimate_sub, x_col="agecat", palette={"young": "#ED9FA3", "old": "#FF0000"})
-    ax.set_title(f"female, n = {estimate_sub.shape[0]}", fontsize = 16)
-    save_fig(fig, "ulm_enrichment_female__old_vs_young.pdf")
+    if not de_only:
+        fig, ax = plt.subplots(figsize=(3, 4))
+        estimate_sub = estimate[(estimate["age"] >= 12) & (estimate["sex"] == "female")].copy()
+        estimate_sub["agecat"] = "young"
+        estimate_sub.loc[estimate_sub["age"] > 49, "agecat"] = "old"
+        plot_gender_boxplot(ax, estimate_sub, x_col="agecat", palette={"young": "#ED9FA3", "old": "#FF0000"})
+        ax.set_title(f"female, n = {estimate_sub.shape[0]}", fontsize = 16)
+        save_fig(fig, "ulm_enrichment_female__old_vs_young.pdf")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Compare mouse and human liver sex signatures.")
+    parser.add_argument("--data-dir", type=Path, default=DATA_DIR)
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--de-only", action="store_true",
+                        help="Run GEO differential expression without mouse orthology or ULM scoring.")
+    args = parser.parse_args()
+    DATA_DIR = args.data_dir
+    if args.output is not None:
+        RESULTS_DIR = args.output
+        if RESULTS_DIR.is_dir() and any(RESULTS_DIR.iterdir()):
+            parser.error("--output requires an empty destination")
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    main(de_only=args.de_only)

@@ -1,0 +1,9 @@
+"cell","diet_sex","diet_zone","diet_sex_zone"
+"female_SD_PC",0.5,0.5,-1
+"male_SD_PC",-0.5,0.5,1
+"female_WD_PC",-0.5,-0.5,1
+"male_WD_PC",0.5,-0.5,-1
+"female_SD_PP",0.5,-0.5,1
+"male_SD_PP",-0.5,-0.5,-1
+"female_WD_PP",-0.5,0.5,-1
+"male_WD_PP",0.5,0.5,1

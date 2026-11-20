@@ -40,7 +40,7 @@ wp2_load_reference <- function(root = ".") {
   rna_file <- analysis_path("historical_fcg_zonation_csv",root)
   metadata_file <- analysis_path("historical_fcg_zonation_metadata",root)
   lipid_file <- file.path(root, "data/metabolomics/Lipid_data_file_JPC_cleaned.csv")
-  genotype_file <- file.path(root, "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv")
+  genotype_file <- file.path(root, "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv")
   network_dir <- file.path(analysis_path("historical_fcg05",root),"networks")
   network_paths <- unlist(lapply(definition$archive_stem, function(stem) {
     file.path(network_dir, paste0("cormat_", stem,

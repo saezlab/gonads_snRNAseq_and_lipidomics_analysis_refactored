@@ -46,7 +46,7 @@ qa_wd_fcg_comparison_actual <- function(comparison_file, contexts_file,
   # Reconstruct FCG from original CSVs, without the analysis/reference helpers.
   rt <- read_csv(analysis_path("historical_fcg_zonation_csv",root))
   meta <- read_csv(analysis_path("historical_fcg_zonation_metadata",root))
-  gt <- read_csv(file.path(root, "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"))
+  gt <- read_csv(file.path(root, "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv"))
   lt <- read_csv(file.path(root, "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"))
   stopifnot(names(rt)[1L] == "gene", nrow(meta) == 86L,
             nrow(gt) == 43L, ncol(lt) == 1255L,

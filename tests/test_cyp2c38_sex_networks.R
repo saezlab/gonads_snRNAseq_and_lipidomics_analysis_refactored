@@ -41,7 +41,7 @@ for (path in manifest$file) {
 malformed <- full
 malformed$coefficients$fixed_reference[1L] <- NA
 stopifnot(inherits(try(wp1_export_sex_networks(out, malformed), silent = TRUE), "try-error"))
-ledger <- utils::read.csv("results/validation/cyp2c38_in_vivo/feature_annotation_and_QC_ledger.csv",
+ledger <- utils::read.csv("results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/feature_annotation_and_QC_ledger.csv",
                          check.names = FALSE)
 endogenous <- ledger[ledger$keep_primary, , drop = FALSE]
 stopifnot(!anyDuplicated(endogenous$canonical_lipid))

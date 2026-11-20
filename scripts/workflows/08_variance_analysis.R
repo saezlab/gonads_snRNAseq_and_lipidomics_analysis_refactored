@@ -52,7 +52,7 @@ source("scripts/config/plotting_themes.R")
 source("scripts/core/data_loading.R")
 
 # Define output directory
-variance_dir <- "results/lipidomic/variance_analysis"
+variance_dir <- "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis"
 if (!dir.exists(variance_dir)) {
   dir.create(variance_dir, recursive = TRUE)
 }

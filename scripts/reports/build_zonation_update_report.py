@@ -217,6 +217,6 @@ def build(root, draft=False):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output',default='results/zonation_marker_update_20261116')
+    parser.add_argument('--output', required=True)
     parser.add_argument('--draft',action='store_true')
     args=parser.parse_args();build(args.output,args.draft)

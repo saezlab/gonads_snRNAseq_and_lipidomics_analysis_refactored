@@ -10,7 +10,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 
 parser=argparse.ArgumentParser(description="Render the completed 07c Markdown report and append its vector figure pages.")
-parser.add_argument('--input',type=Path,default=Path('results/validation/cyp2c38_in_vivo/ulm_followup/README.md'))
+parser.add_argument('--input',type=Path,default=Path('results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/ulm_followup/README.md'))
 parser.add_argument('--output',type=Path,default=None)
 parser.add_argument('--font-dir',type=Path,default=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/LibreOfficeDev.app/Contents/Resources/fonts/truetype')
 args=parser.parse_args()

@@ -271,7 +271,7 @@ filter_significant_features <- function(ttop,
 #' @param verbose Logical. Print progress messages. Default: TRUE
 #'
 #' @examples
-#' save_da_results(results, output_dir = "results/pseudobulk/", prefix = "fcg_main")
+#' save_da_results(results, output_dir = "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/", prefix = "fcg_main")
 save_da_results <- function(results,
                             output_dir = "results/",
                             prefix = "",

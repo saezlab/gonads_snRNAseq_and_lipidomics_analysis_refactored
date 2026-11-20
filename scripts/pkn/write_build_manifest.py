@@ -21,8 +21,8 @@ def main():
     raw += [ROOT / 'results/causal_modelling/cosmos_pkn_audit/raw' / name for name in
             ['om-fresh-grn.tsv.gz', 'om-fresh-ppi.tsv.gz', 'om-mouse-pkn.json.gz',
              'swisslipids-enzymes.tsv.gz']]
-    inputs = [ROOT / p for p in ['results/lipidomic/gonade_type_ttop.csv',
-              'results/mofa/networks/gene_lipid_correlations_factor1.csv']]
+    inputs = [ROOT / p for p in ['results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gonade_type_ttop.csv',
+              'results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv']]
     code = sorted((ROOT / 'scripts/pkn').glob('*.py')) + sorted((ROOT / 'scripts/pkn').glob('*.R'))
     outputs = sorted(p for p in OUT.iterdir() if p.is_file() and p.name != 'build_manifest.json')
     result = dict(created_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),

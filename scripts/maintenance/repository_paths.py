@@ -13,6 +13,13 @@ def analysis_path(key, root=ROOT):
     return Path(root) / release(root)["paths"][key]
 
 
+def analysis_current(component="", root=ROOT):
+    registry = release(root)
+    branch, sep, suffix = str(component).partition("/")
+    location = registry.get("current_components", {}).get(branch, branch)
+    return Path(root) / registry["paths"]["current_root"] / (location + sep + suffix)
+
+
 def resolve_recorded_path(recorded, root=ROOT):
     root = Path(root).resolve()
     path = Path(recorded)
@@ -30,7 +37,12 @@ def resolve_recorded_path(recorded, root=ROOT):
     for move in sorted(release(root).get("relocations", []), key=lambda x: -len(x["from"])):
         before = move["from"].rstrip("/")
         if relative == before or relative.startswith(before + "/"):
-            relative = move["to"].rstrip("/") + relative[len(before):]
+            suffix = relative[len(before):]
+            relative = move["to"].rstrip("/") + suffix
+            if "fallback" in move and not (root / relative).exists():
+                archived = move["fallback"].rstrip("/") + suffix
+                if (root / archived).exists():
+                    relative = archived
             break
     return root / relative
 

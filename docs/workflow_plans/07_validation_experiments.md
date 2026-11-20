@@ -33,11 +33,11 @@ are phase compatibility wrappers for11.
 | Input | Zonal mode | Global-only mode | Producer |
 | --- | --- | --- | --- |
 | `<ROOT>/fcg05/fcg05_checkpoint.rds` and four `fcg05/networks/cormat_*_full_SIF.csv` | Required current reference; the exact mixed names are below. | Not read. | Current05 in the same run root. |
-| `results/validation/knockdown_t_table.csv` | Reused directly for scoring and plots. | Not an input; a new table is fitted/written in the fresh output. | Retained original siRNA result. |
-| `results/validation/knockdown_ttop_list.RData` | Entry-level prerequisite; the score calculations read the CSV. | Not an input; newly fitted. | Retained original siRNA fit. |
+| `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv` | Reused directly for scoring and plots. | Not an input; a new table is fitted/written in the fresh output. | Retained original siRNA result. |
+| `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData` | Entry-level prerequisite; the score calculations read the CSV. | Not an input; newly fitted. | Retained original siRNA fit. |
 | `data/metabolomics/lipidomics_20250423transfections.csv` | Not read. | Required original KD measurements. | Curated experimental input. |
-| `results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | Not read. | Required permissive global gene-lipid reference. | Workflow04. |
-| `results/lipidomic/structural_model/lipids_with_structure.csv` | Required for structural reference axes. | Required for structural reference axes. | Workflow06 after03. |
+| `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | Not read. | Required permissive global gene-lipid reference. | Workflow04. |
+| `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv` | Required for structural reference axes. | Required for structural reference axes. | Workflow06 after03. |
 
 The curated KD/global/structural resources are public-tree artifacts with the
 necessary R packages; neither mode requires a source RNA/Seurat object. Zonal
@@ -46,7 +46,7 @@ model cache. A public clone must first fit05/17 into a fresh root (or explicitly
 restore that cache); plain07 is not a way to recreate it. Recompute04/06 first only when
 rebuilding their global network/structural inputs. A new global-only run writes
 its KD fit to its fresh output; it does not silently replace the curated canonical
-`results/validation/` inputs reused by current zonal validation.
+`results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/` inputs reused by current zonal validation.
 
 Exact current full-network basenames are
 `cormat_testes_portal_full_SIF.csv`, `cormat_testes_central_full_SIF.csv`,
@@ -108,7 +108,7 @@ and global structural regressions at1e-12 after matching tied lipid rows by ID.
 The frozen engine's original1113-line map was:1 configuration,2 KD import,3 PCA,
 4 limma KD fitting,5 heatmap,6 global ULM,7 global scatters,8 zonal ULM,9 zonal
 scatters,10 combined summary,11 structural consistency. Its original fixed
-`results/validation/` outputs and automatic combined execution are historical;
+`results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/` outputs and automatic combined execution are historical;
 the maintained mode table above defines current behavior.
 
 ## Versioned zonation-reference update, 16 November 2026
@@ -116,7 +116,7 @@ the maintained mode table above defines current behavior.
 `scripts/reports/run_zonation_update_fcg.R` and its isolated
 `scripts/core/zonation_update_fcg.R` adapter rerun only the zonation-dependent
 validation and structural-consistency sections against the revised FCG WF05
-networks. Outputs are under `results/zonation_marker_update_20261116/fcg07/`;
+networks. Outputs are under `results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/`;
 historical validation outputs are preserved. This records the production
 comparison; current defaults are the zonal wrapper mode described above. The global
 MOFA validation and knockdown fit are unchanged. The saved knockdown t-table

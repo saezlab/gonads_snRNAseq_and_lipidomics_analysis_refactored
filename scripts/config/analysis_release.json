@@ -3,7 +3,7 @@
   "release_id": "expanded_markers_20261116",
   "description": "Current manuscript zonation and standalone diet analysis; expanded-marker pseudobulks prepared by James on 2026-11-04, approved 2026-11-16.",
   "paths": {
-    "current_root": "results/zonation_marker_update_20261116",
+    "current_root": "results/current",
     "current_input_root": "data/RNA/zonation/current",
     "current_fcg_zonation_rds": "data/RNA/zonation/current/fcg_zonation_pseudobulks_score.rds",
     "current_gdx_zonation_rds": "data/RNA/zonation/current/gdx_zonation_pseudobulks_score.rds",
@@ -32,7 +32,9 @@
     "wdsd_hepatocytes_transport": "data/RNA/pseudobulk_csv/wdsd_hepatocytes/manifest.json",
     "historical_wdsd_zonation_transport": "data/RNA/pseudobulk_csv/historical_wdsd_zonation/manifest.json",
     "wd_cell_types_transport": "data/RNA/pseudobulk_csv/wd_cell_types/manifest.json",
-    "wd_zonation_transport": "data/RNA/pseudobulk_csv/wd_zonation/manifest.json"
+    "wd_zonation_transport": "data/RNA/pseudobulk_csv/wd_zonation/manifest.json",
+    "legacy_results_root": "results/legacy",
+    "archived_zonation_bundle": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116"
   },
   "relocations": [
     {
@@ -266,6 +268,113 @@
     {
       "from": "scripts/exploration/audit_cosmos_pkn.py",
       "to": "miscellaneous/quick_tests/code/audit_cosmos_pkn.py"
+    },
+    {
+      "from": "results/lipidomic",
+      "to": "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic",
+      "fallback": "results/legacy/pre_reorganization_baseline/lipidomic"
+    },
+    {
+      "from": "results/qc",
+      "to": "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/qc",
+      "fallback": "results/legacy/pre_reorganization_baseline/qc"
+    },
+    {
+      "from": "results/pseudobulk",
+      "to": "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk",
+      "fallback": "results/legacy/pre_reorganization_baseline/pseudobulk"
+    },
+    {
+      "from": "results/xenium",
+      "to": "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/xenium",
+      "fallback": "results/legacy/pre_reorganization_baseline/xenium"
+    },
+    {
+      "from": "results/human",
+      "to": "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/human",
+      "fallback": "results/legacy/pre_reorganization_baseline/human"
+    },
+    {
+      "from": "results/mofa",
+      "to": "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa",
+      "fallback": "results/legacy/pre_reorganization_baseline/mofa"
+    },
+    {
+      "from": "results/validation/cyp2c38_in_vivo",
+      "to": "results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo",
+      "fallback": "results/legacy/pre_reorganization_baseline/validation/cyp2c38_in_vivo"
+    },
+    {
+      "from": "results/validation",
+      "to": "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation",
+      "fallback": "results/legacy/pre_reorganization_baseline/validation"
+    },
+    {
+      "from": "results/in_vitro_validation",
+      "to": "results/current/03_gonadal_sex_biased_regulatory_circuitry/assay_source_data",
+      "fallback": "results/legacy/pre_reorganization_baseline/in_vitro_validation"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116/gdx_zonation",
+      "to": "results/current/04_pericentral_and_periportal_hepatocyte_bias/gdx_zonation",
+      "fallback": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/gdx_zonation"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116/fcg05",
+      "to": "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05",
+      "fallback": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/fcg05"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116/fcg07",
+      "to": "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07",
+      "fallback": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/fcg07"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116/tables",
+      "to": "results/current/05_sex_polarised_zonation_gene_lipid_interactions/supplementary_tables",
+      "fallback": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/tables"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116/cf453_models",
+      "to": "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models",
+      "fallback": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/cf453_models"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116/cf453_direct_diet",
+      "to": "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet",
+      "fallback": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/cf453_direct_diet"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116/cf453_rewiring",
+      "to": "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring",
+      "fallback": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/cf453_rewiring"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116/cf453_layouts",
+      "to": "results/current/06_western_diet_and_gene_lipid_circuitry/cf453_layouts",
+      "fallback": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/cf453_layouts"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116/fcg05/zonation_vs_sex_bias_scatter.pdf",
+      "to": "results/current/04_pericentral_and_periportal_hepatocyte_bias/fcg_zonation/zonation_vs_sex_bias_scatter.pdf",
+      "fallback": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/fcg05/zonation_vs_sex_bias_scatter.pdf"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116/tables/TableS10_zonation_differential_results.csv",
+      "to": "results/current/04_pericentral_and_periportal_hepatocyte_bias/supplementary_tables/TableS10_zonation_differential_results.csv",
+      "fallback": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/tables/TableS10_zonation_differential_results.csv"
+    },
+    {
+      "from": "results/multi-omic",
+      "to": "results/legacy/pre_reorganization_baseline/multi-omic"
+    },
+    {
+      "from": "results/zonation_marker_update_20261116",
+      "to": "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116"
+    },
+    {
+      "from": "results/validation/cyp2c38_in_vivo/README.md",
+      "to": "results/legacy/pre_reorganization_baseline/validation/cyp2c38_in_vivo/README.md"
     }
   ],
   "input_distribution": {
@@ -274,5 +383,15 @@
     "serialized_seurat_objects": "local_only",
     "approved_source_rds_hashes": "retained in transport provenance; not replaced by CSV hashes",
     "updated": "2026-11-18"
+  },
+  "current_components": {
+    "gdx_zonation": "04_pericentral_and_periportal_hepatocyte_bias/gdx_zonation",
+    "fcg05": "05_sex_polarised_zonation_gene_lipid_interactions/fcg05",
+    "fcg07": "05_sex_polarised_zonation_gene_lipid_interactions/fcg07",
+    "tables": "05_sex_polarised_zonation_gene_lipid_interactions/supplementary_tables",
+    "cf453_models": "06_western_diet_and_gene_lipid_circuitry/cf453_models",
+    "cf453_direct_diet": "06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet",
+    "cf453_rewiring": "06_western_diet_and_gene_lipid_circuitry/cf453_rewiring",
+    "cf453_layouts": "06_western_diet_and_gene_lipid_circuitry/cf453_layouts"
   }
 }

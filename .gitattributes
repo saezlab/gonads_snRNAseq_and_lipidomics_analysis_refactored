@@ -63,7 +63,7 @@ support/cosmos_mouse/raw/** -text !eol
 # source files still receive ordinary text diffs where Git detects text.
 data/RNA/zonation/current/** -text !eol
 data/RNA/pseudobulk_csv/** -text !eol
-results/zonation_marker_update_20261116/** -text !eol
+results/current/** -text !eol
 miscellaneous/** -text !eol
 
 # New frozen inputs, engine copies and provenance must retain their recorded
@@ -77,6 +77,5 @@ docs/provenance/** -text !eol
 docs/analysis_catalog.csv -text !eol
 scripts/core/engines/** -text !eol
 scripts/moon/archive/** -text !eol
-results/validation/cyp2c38_in_vivo/** -text !eol
 support/cosmos_mouse/comparison/** -text !eol
 support/cosmos_mouse/moon_currency_*.csv -text !eol

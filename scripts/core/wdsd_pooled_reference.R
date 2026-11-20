@@ -56,17 +56,17 @@ wp2_pooled_reference <- function(root = ".") {
   }
   root <- normalizePath(root, mustWork = TRUE)
   paths <- c(
-    full33_SIF = file.path(root, "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"),
-    figure3_species_SIF = file.path(root, "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv"),
-    figure3_species_ATT = file.path(root, "results/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv"),
-    figure3_compressed_SIF = file.path(root, "results/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv"),
-    sparse_matrix = file.path(root, "results/mofa/networks/gene_lipid_correlations_factor1.csv"),
+    full33_SIF = file.path(root, "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv"),
+    figure3_species_SIF = file.path(root, "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_SIF.csv"),
+    figure3_species_ATT = file.path(root, "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_full_ATT.csv"),
+    figure3_compressed_SIF = file.path(root, "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_TF_gene_lipid_network_compressed_SIF.csv"),
+    sparse_matrix = file.path(root, "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv"),
     RNA_1 = file.path(root, "data/RNA/scaled_RNA_1.csv"),
     RNA_2 = file.path(root, "data/RNA/scaled_RNA_2.csv"),
     RNA_3 = file.path(root, "data/RNA/scaled_RNA_3.csv"),
     original_lipids = file.path(root, "data/metabolomics/Lipid_data_file_JPC_cleaned.csv"),
     RNA_metadata = file.path(root, "data/RNA/meta_data_df.csv"),
-    genotype_metadata = file.path(root, "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv")
+    genotype_metadata = file.path(root, "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv")
   )
   if (any(!file.exists(paths))) {
     stop("Missing frozen pooled source files: ", paste(paths[!file.exists(paths)], collapse = ", "))

@@ -238,9 +238,9 @@ def main():
         urllib.request.urlretrieve(URL, path)
     if not path.exists():
         raise FileNotFoundError(f'{path}: use --download')
-    with (ROOT / 'results/lipidomic/gonade_type_ttop.csv').open() as handle:
+    with (ROOT / 'results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gonade_type_ttop.csv').open() as handle:
         measured_ids = [r['ID'] for r in csv.DictReader(handle)]
-    with (ROOT / 'results/mofa/networks/gene_lipid_correlations_factor1.csv').open() as handle:
+    with (ROOT / 'results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv').open() as handle:
         factor_ids = set(next(csv.reader(handle))[1:])
     assert len(measured_ids) == len(set(measured_ids))
     universe = list(dict.fromkeys(measured_ids + sorted(factor_ids)))
@@ -376,7 +376,7 @@ def main():
                 'source': {'url': URL, 'path': str(path.relative_to(ROOT)), 'sha256_download': checksum(path),
                            'encoding': 'latin-1', 'rows': total, 'levels': dict(levels)},
                 'dependencies': {name: importlib.metadata.version(name) for name in ['pygoslin', 'scipy', 'numpy']},
-                'inputs': {str(p.relative_to(ROOT)): checksum(p) for p in [ROOT / 'results/lipidomic/gonade_type_ttop.csv', ROOT / 'results/mofa/networks/gene_lipid_correlations_factor1.csv']},
+                'inputs': {str(p.relative_to(ROOT)): checksum(p) for p in [ROOT / 'results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gonade_type_ttop.csv', ROOT / 'results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/gene_lipid_correlations_factor1.csv']},
                 'all_features': coverage(summary_rows), 'factor1': coverage([r for r in summary_rows if r['in_factor1']]),
                 'candidate_rows': len(candidate_rows), 'catalog_rows': len(catalog),
                 'chebi_node_mapping': chebi_node_metadata,

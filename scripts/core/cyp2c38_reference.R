@@ -34,11 +34,11 @@ wp1_load_reference <- function(root = ".") {
     stop("root must identify one existing analysis repository directory.")
   }
   root <- normalizePath(root, mustWork = TRUE)
-  reference_file <- file.path(root, "results/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv")
+  reference_file <- file.path(root, "results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv")
   rna_files <- file.path(root, "data/RNA", paste0("scaled_RNA_", seq_len(3L), ".csv"))
   lipid_file <- file.path(root, "data/metabolomics/Lipid_data_file_JPC_cleaned.csv")
   metadata_file <- file.path(root, "data/RNA/meta_data_df.csv")
-  genotype_file <- file.path(root, "results/pseudobulk/PCA_sample_coord_RNA_HEPA.csv")
+  genotype_file <- file.path(root, "results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/PCA_sample_coord_RNA_HEPA.csv")
   required_files <- c(reference_file, rna_files, lipid_file, metadata_file, genotype_file)
   missing_files <- required_files[!file.exists(required_files)]
   if (length(missing_files)) {

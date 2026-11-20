@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "maintenance"))
-from repository_paths import analysis_path, resolve_manifest_path
+from repository_paths import analysis_current, resolve_manifest_path
 import xml.etree.ElementTree as ET
 
 import pdfplumber
@@ -68,5 +68,5 @@ def review(output):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", default=str(analysis_path("current_root") / "cf453_rewiring"))
+    parser.add_argument("--output", default=str(analysis_current("cf453_rewiring")))
     review(parser.parse_args().output)

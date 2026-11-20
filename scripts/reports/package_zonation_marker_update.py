@@ -107,5 +107,5 @@ def package(root):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--output',default='results/zonation_marker_update_20261116')
+    p.add_argument('--output', required=True)
     package(p.parse_args().output)

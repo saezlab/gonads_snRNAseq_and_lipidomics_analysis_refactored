@@ -189,7 +189,7 @@ parse_lipid_names_to_df <- function(lipid_names, verbose = TRUE) {
 #'   - logfc: Log fold change from limma
 #'
 #' @examples
-#' load("results/lipidomic/ttop_full_list.RData")
+#' load("results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/ttop_full_list.RData")
 #' ttop <- ttop_full_list[["Testes vs Ovaries"]][["Testes vs Ovaries"]]
 #' lipid_structure <- generate_lipid_structural_data(ttop)
 #'
@@ -587,7 +587,7 @@ extract_lipid_structural_associations <- function(class_results,
 #'
 #' @examples
 #' # Load MOFA weights
-#' load("results/mofa/main_model_RNA_lipid_weight.RData")
+#' load("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData")
 #'
 #' # Load data
 #' rna_data <- load_rna_data()

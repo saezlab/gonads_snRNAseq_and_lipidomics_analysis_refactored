@@ -17,7 +17,6 @@ from repository_paths import analysis_path, resolve_recorded_path
 
 
 REPOSITORY = Path(__file__).resolve().parents[2]
-DEFAULT_OUTPUT = REPOSITORY / "results/zonation_marker_update_20261116"
 DEFAULT_SOURCE_ROOT = analysis_path("current_input_root")
 TABLE_NOTE = (
     "Updated source table; preserve independent S11/S12. Submission formatting may differ."
@@ -157,7 +156,7 @@ def stage(output: Path, source_root: Path | None = None, tables_only: bool = Fal
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--source-root", type=Path, default=None,
                         help="Optional snRNAseq_seurat_objects folder containing james_scripts_20261104.")
     parser.add_argument("--tables-only", action="store_true",

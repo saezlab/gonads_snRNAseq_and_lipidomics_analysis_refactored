@@ -40,6 +40,7 @@ zu_gdx_fit <- function(path,version) {
 }
 
 zu_gdx_run <- function(root=analysis_current(),science_only=FALSE) {
+  analysis_assert_not_approved_output(root)
   output<-file.path(root,"gdx_zonation")
   if(file.exists(file.path(output,"gdx_paired_analysis.rds")))stop("Preserve completed GDX results: choose a fresh output root")
   dir.create(output,recursive=TRUE,showWarnings=FALSE)

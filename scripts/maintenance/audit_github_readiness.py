@@ -24,7 +24,6 @@ from repository_paths import resolve_recorded_path
 
 ROOT = Path(__file__).resolve().parents[2]
 MIB = 1024 ** 2
-CURRENT = "results/zonation_marker_update_20261116/"
 CSV_MAX_BYTES = 50_000_000  # User policy is strict decimal MB, not MiB.
 OBJECT_SUFFIXES = {".rds", ".rdata", ".rda", ".h5", ".hdf5", ".h5ad", ".h5seurat",
                    ".h5mu", ".loom", ".qs", ".qs2", ".pkl", ".pickle", ".mtx", ".zarr"}
@@ -98,7 +97,7 @@ def rna_input_policy(entries: list[dict], declared_models: set[str] | None = Non
         if reason:
             obvious_anywhere.append(dict(**row, reason=reason))
         if suffixes & {".h5", ".hdf5"} and not name.startswith("data/RNA/"):
-            classification = "MOFA fitted model" if name.startswith("results/mofa/RNA/") else "Other HDF5 container; review provenance"
+            classification = "MOFA fitted model" if name.startswith("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/RNA/") else "Other HDF5 container; review provenance"
             hdf5_review.append(dict(**row, classification=classification))
         if not name.startswith("data/"):
             continue

@@ -31,11 +31,11 @@ cat(paste(rep("=", 80), collapse = ""), "\n\n")
 cat("Loading data...\n")
 
 # Load MOFA weights
-if (!file.exists("results/mofa/main_model_RNA_lipid_weight.RData")) {
+if (!file.exists("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData")) {
   stop("MOFA weights not found. Run MOFA analysis first.")
 }
 
-load("results/mofa/main_model_RNA_lipid_weight.RData")
+load("results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData")
 
 # Convert list of matrices to data frame format expected by function
 # weights is a list with matrices for each view (Hepatocytes, lipidomic, etc.)
