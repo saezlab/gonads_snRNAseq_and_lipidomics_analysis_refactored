@@ -9,7 +9,7 @@ The standalone replay writes a separate manuscript-shaped tree at `results/manus
 | Gonadal sex-biased regulatory circuitry controlling lipid homeostasis | `03_gonadal_sex_biased_regulatory_circuitry/` | 04 MOFA, global 07 knockdown validation and 11 in-vivo KO |
 | Distinct gonadal sex biases in pericentral and periportal hepatocytes | `04_pericentral_and_periportal_hepatocyte_bias/` | 17 paired gonadectomy and the gonad-versus-zone panel/source lookup |
 | Gene-lipid regulatory interactions with gonadal sex-polarised zonation bias | `05_sex_polarised_zonation_gene_lipid_interactions/` | 17 current FCG zonation, zonal 07 validation and shared zonation table exports |
-| Sex-specific impact of chronic Western diet on gene-lipid regulatory circuitry | `06_western_diet_and_gene_lipid_circuitry/` | 17 invokes 14, 15, 16 and both Figure 6A layouts |
+| Sex-specific impact of chronic Western diet on gene-lipid regulatory circuitry | `06_western_diet_and_gene_lipid_circuitry/` | 17 invokes 14, 15, 16, both anchor layouts and the Figure 6B/6E manuscript renderer |
 
 ## Running the replay
 

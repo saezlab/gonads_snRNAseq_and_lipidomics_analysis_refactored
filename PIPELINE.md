@@ -37,7 +37,9 @@ flowchart TD
   D14 --> D15[15 direct diet interactions]
   D14 --> D16[16 selected programmes and associations]
   D15 --> D16
-  D16 --> LAYOUT[Two alternative 6A layouts]
+  D16 --> LAYOUT[Two alternative anchor layouts]
+  D15 --> MANUSCRIPT[Manuscript panels 6B and 6E]
+  D16 --> MANUSCRIPT
   W04 --> W11[11 independent Cyp2c38 validation]
   RNA --> W11
   W02 --> W11
@@ -57,11 +59,14 @@ flowchart LR
   W17 -. invokes .-> D14[14 models-only]
   W17 -. invokes .-> D15[15 models-only]
   W17 -. invokes .-> D16[16 full presentation]
-  W17 -. invokes .-> A[6A layouts and QA]
+  W17 -. invokes .-> A[Anchor layouts and QA]
+  W17 -. invokes .-> M[Manuscript panels 6B and 6E]
   D14 --> D15
   D14 --> D16
   D15 --> D16
   D16 --> A
+  D15 --> M
+  D16 --> M
 ```
 
 Dotted arrows are calls; they do not imply that the diet cohort uses original FCG estimates. The diet study is analysed independently. Age differences preclude a simple causal bridge to the original cohort. RNA zones are paired profiles within each mouse; lipid measurements are whole-liver. Diet association and threshold-defined edge gains/losses remain exploratory.
@@ -104,9 +109,12 @@ Rscript scripts/workflows/14_cf453_standalone_figure6.R --models-only --output=r
 Rscript scripts/workflows/15_cf453_diet_impact_figure6.R --models-only --parent=results/runs/diet_models/models.rds --output=results/runs/diet_direct
 Rscript scripts/workflows/16_cf453_diet_rewiring_figure6.R --parent=results/runs/diet_models/models.rds --direct=results/runs/diet_direct/diet_analysis.rds --output=results/runs/diet_rewiring
 Rscript scripts/reports/cf453_figure6a_layouts.R --parent=results/runs/diet_rewiring/rewiring_analysis.rds --output=results/runs/diet_layouts
+Rscript scripts/reports/cf453_manuscript_panels.R --lipids=results/runs/diet_direct/tables/lipid_results.csv --edges=results/runs/diet_rewiring/source_data/Fig6C_network_gain_loss.csv --output=results/runs/figure6_manuscript
 ```
 
 Adjacent parent provenance is required. Defaults15/16 point to the approved release, not whichever fresh sibling directory was most recently written. Ignored `.rds` caches are absent in a public checkout and must be regenerated or restored before cache-consuming modes. Workflow16 `--models-only` still performs its full numerical/resampling stage;14/15/16 have no `--validate-only` option.
+
+For plot-only replay, `Rscript scripts/reports/cf453_manuscript_panels.R --output=results/runs/figure6_manuscript` reads the two shipped CF453 source CSVs. Fresh runs pass both source paths as above. The resulting vector PDFs and PNGs use the reviewed A4 placement sizes.
 
 ## Execution and overwrite limits
 

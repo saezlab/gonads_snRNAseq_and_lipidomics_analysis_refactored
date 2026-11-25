@@ -40,6 +40,13 @@ Recorded paths resolve to a byte-identical published artifact when present
 and to the legacy copy when a file was kept locally. Archived records and
 their embedded paths retain their original bytes.
 
+On 25 November 2026 the reviewed Figure 6B and 6E were added under
+`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_manuscript_panels/`.
+The maintained renderer reproduced the review PNGs and rendered PDFs pixel for
+pixel and the source CSVs byte for byte. The [panel manifest and input hashes](../results/current/06_western_diet_and_gene_lipid_circuitry/cf453_manuscript_panels/README.md)
+record the handoff. Previously published CF453 paths retain their native
+workflow numbers and are the sources for the manuscript exports.
+
 ## Archive map
 
 | Original location | New location | Dependency/status |

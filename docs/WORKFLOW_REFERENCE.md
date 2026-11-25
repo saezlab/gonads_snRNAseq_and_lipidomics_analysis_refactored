@@ -35,6 +35,7 @@ Generated from [workflow_dependencies.json](workflow_dependencies.json). Use [PI
 | [07b](#workflow-07b) | compatibility wrapper; historical scientific definition | [07b_cyp2c38_in_vivo_validation.R](../scripts/workflows/07b_cyp2c38_in_vivo_validation.R) | [07b_cyp2c38_in_vivo_validation.md](workflow_plans/07b_cyp2c38_in_vivo_validation.md) |
 | [07c](#workflow-07c) | compatibility wrapper; historical scientific definition | [07c_cyp2c38_ulm_resampling.R](../scripts/workflows/07c_cyp2c38_ulm_resampling.R) | [07c_cyp2c38_ulm_resampling.md](workflow_plans/07c_cyp2c38_ulm_resampling.md) |
 | [6A_layouts](#workflow-6a_layouts) | current optional display entry | [cf453_figure6a_layouts.R](../scripts/reports/cf453_figure6a_layouts.R) | [16_cf453_diet_rewiring_figure6.md](workflow_plans/16_cf453_diet_rewiring_figure6.md) |
+| [6BE_manuscript](#workflow-6be_manuscript) | current manuscript plot-only entry | [cf453_manuscript_panels.R](../scripts/reports/cf453_manuscript_panels.R) | [16_cf453_diet_rewiring_figure6.md](workflow_plans/16_cf453_diet_rewiring_figure6.md) |
 | [MOON_EXPANDED](#workflow-moon_expanded) | Active optional sensitivity; retained preferred outputs differ from runner defaults. | [audit_measured_lipid_reaction_targets.py](../scripts/pkn/audit_measured_lipid_reaction_targets.py)<br>[build_expanded_lipid_rules.py](../scripts/pkn/build_expanded_lipid_rules.py)<br>[prepare_expanded_factor1_mapping.py](../scripts/moon/ancillary/prepare_expanded_factor1_mapping.py)<br>[build_currency_traversal_policy.py](../scripts/moon/ancillary/build_currency_traversal_policy.py)<br>[run_expanded_factor1_tf_to_lipid.R](../scripts/moon/ancillary/run_expanded_factor1_tf_to_lipid.R)<br>[reextract_expanded_factor1_thresholds.R](../scripts/moon/ancillary/reextract_expanded_factor1_thresholds.R)<br>[export_expanded_factor1_network.py](../scripts/moon/ancillary/export_expanded_factor1_network.py) | [moon_factor1_tf_to_lipid_expanded_species.md](workflow_plans/moon_factor1_tf_to_lipid_expanded_species.md) |
 | [MOON_KO](#workflow-moon_ko) | Optional no-fit evidence/proposal branch; raw-count regeneration needs local inputs. | [audit_factor1_ko_expression.R](../scripts/moon/ancillary/audit_factor1_ko_expression.R)<br>[propose_factor1_ko_validation.py](../scripts/moon/ancillary/propose_factor1_ko_validation.py) | [moon_factor1_ko_validation_prioritization.md](workflow_plans/moon_factor1_ko_validation_prioritization.md) |
 | [MOON_LIPID_TO_TF](#workflow-moon_lipid_to_tf) | Active optional branch; main entry produces coarsegrid, not every retained refinement/export. | [run_factor1_lipid_to_tf.R](../scripts/moon/run_factor1_lipid_to_tf.R)<br>[refine_lipid_tf_thresholds.R](../scripts/moon/ancillary/refine_lipid_tf_thresholds.R)<br>[audit_lipid_tf_scores.R](../scripts/moon/ancillary/audit_lipid_tf_scores.R) | [moon_factor1_lipid_to_tf.md](workflow_plans/moon_factor1_lipid_to_tf.md) |
@@ -889,7 +890,7 @@ Reproduce current FCG zonal/KD, paired GDX and CF45314/15/16/layout stages; opti
 
 **Writes / overwrite behavior:** Before any writes, full science/audit and report-only modes reject published current_root, legacy_results_root and all descendants including cache-absent/symlink aliases via analysis_assert_not_approved_output; ordinary completed-cache guards remain. Validation skips guard and writes nothing. Explicit report-only skips guard and rewrites saved audit/report outputs.
 
-**Invokes other entries/phases:** `05`, `07`, `14`, `15`, `16`, `6A_layouts`. These are control-flow calls, not additional cohorts.
+**Invokes other entries/phases:** `05`, `07`, `14`, `15`, `16`, `6A_layouts`, `6BE_manuscript`. These are control-flow calls, not additional cohorts.
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
@@ -908,7 +909,7 @@ Reproduce current FCG zonal/KD, paired GDX and CF45314/15/16/layout stages; opti
 
 | Output | Location | Mode |
 | --- | --- | --- |
-| Current staged inputs and scientific result stages | `results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/inputs/`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/`<br>`results/current/04_pericentral_and_periportal_hepatocyte_bias/gdx_zonation/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_layouts/`<br>`results/runs/NAME/fcg_panel_manifest.csv`<br>`registry:current_root → results/current` | default science/full |
+| Current staged inputs and scientific result stages | `results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/inputs/`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/`<br>`results/current/04_pericentral_and_periportal_hepatocyte_bias/gdx_zonation/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_models/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_layouts/`<br>`results/current/06_western_diet_and_gene_lipid_circuitry/cf453_manuscript_panels/`<br>`results/runs/NAME/fcg_panel_manifest.csv`<br>`registry:current_root → results/current` | default science/full |
 | Formal scientific table copies | `results/current/05_sex_polarised_zonation_gene_lipid_interactions/supplementary_tables/`<br>`registry:current_root → results/current` | science when system Python available; audit/report |
 | Old/new comparisons and private revision report | `results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/comparisons/`<br>`results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/report/`<br>`registry:current_root → results/current` | --with-manuscript-audit or --report-only |
 
@@ -937,6 +938,7 @@ Rscript scripts/workflows/17_expanded_marker_zonation_update.R --report-only
 - Normal source-root is public pseudobulk_csv_root; staging copies zones only.14 whole-hepatocyte/lipid intake still comes from repository registry/defaults.
 - Normal scientific run does not require private manuscript, original datasets or Codex runtime.
 - Optional Python tables-only copies13tableCSVs; statistical source CSVs do not depend on that copy.
+- Fresh runs pass the saved15 lipid-results table and saved16 selected-pair source table to the manuscript Figure 6B and 6E renderer.
 - Audit source-root is reused for preprocessing reference lookup: fresh audit needs a combined source folder or exact pre-staged references.
 - Report-only implies audit and still requires saved model/checkpoint/comparison caches; it does not rebuild missing model stages.
 - James retains nucleus-composition panels and exact executed marker-list confirmation.
@@ -1149,6 +1151,44 @@ Rscript scripts/reports/cf453_figure6a_layouts.R --parent=results/runs/cf16/rewi
 - Plan/source hashes are recorded anew, not compared as retained-original data identities.
 
 **Code checked:** [scripts/reports/cf453_figure6a_layouts.R](../scripts/reports/cf453_figure6a_layouts.R), [scripts/core/cf453_figure6a_layouts.R](../scripts/core/cf453_figure6a_layouts.R).
+
+
+## Workflow 6BE_manuscript
+
+**Manuscript Figure 6B and 6E — current manuscript plot-only entry**
+
+Render A4-size manuscript panels for diet response specificity and selected gene-lipid correlations.
+
+**Entry:** `scripts/reports/cf453_manuscript_panels.R`
+
+**Validation:** Checks unique lipid joins, the signed diet-by-sex contrast, within-sex effect matching and available representatives. Source loading defines the runner. Figures reuse saved estimates and selection.
+
+**Writes / overwrite behavior:** Requires fresh --output outside the approved and legacy trees. Exports are assembled in a sibling staging directory before renaming into place.
+
+| Required input / role | File or registry key | Producer / mode | Availability and action |
+| --- | --- | --- | --- |
+| Saved whole-liver lipid contrasts<br>required | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_direct_diet/tables/lipid_results.csv` | 15<br>all | Shipped in Git<br>Shipped by default. Fresh runs pass the exact saved15 path with --lipids. |
+| Saved representative gene-lipid pairs<br>required | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_rewiring/source_data/Fig6C_network_gain_loss.csv` | 16<br>all | Shipped in Git<br>Shipped by default. Fresh runs pass the matching saved16 source table with --edges. |
+
+| Output | Location | Mode |
+| --- | --- | --- |
+| Two A4 vector and PNG panels with source tables and input hashes | `results/current/06_western_diet_and_gene_lipid_circuitry/cf453_manuscript_panels/` | plot-only by design |
+
+**Command examples** (not executed by this documentation audit):
+
+Render 6B and 6E from the two shipped tables.
+
+```sh
+Rscript scripts/reports/cf453_manuscript_panels.R --output=results/runs/figure6_manuscript
+```
+
+**Important distinctions:**
+
+- Workflow17 passes both --lipids and --edges from its own run.
+- Figure 6B carries over the fixed Figure 5A t thresholds. Figure 6E preserves every saved pair and its fixed x coordinate.
+- The A4 panels use the manuscript numbering. The Workflow16 source filenames keep their native numbering.
+
+**Code checked:** [scripts/reports/cf453_manuscript_panels.R](../scripts/reports/cf453_manuscript_panels.R), [scripts/core/cf453_manuscript_panels.R](../scripts/core/cf453_manuscript_panels.R), [tests/test_cf453_manuscript_panels.R](../tests/test_cf453_manuscript_panels.R).
 
 
 ## Workflow MOON_EXPANDED

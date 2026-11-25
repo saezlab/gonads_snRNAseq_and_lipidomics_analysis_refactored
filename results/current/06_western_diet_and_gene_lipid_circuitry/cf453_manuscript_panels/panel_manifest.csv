@@ -1,0 +1,5 @@
+"panel","file","format","width_mm","height_mm","source_table"
+"Fig6B","panels/Fig6B_diet_specificity_A4.pdf","PDF",64,69,"source_data/Fig6B_diet_specificity_source.csv"
+"Fig6B","panels/Fig6B_diet_specificity_A4.png","PNG",64,69,"source_data/Fig6B_diet_specificity_source.csv"
+"Fig6E","panels/Fig6E_four_examples_A4.pdf","PDF",180,190,"source_data/Fig6E_four_examples_source.csv"
+"Fig6E","panels/Fig6E_four_examples_A4.png","PNG",180,190,"source_data/Fig6E_four_examples_source.csv"

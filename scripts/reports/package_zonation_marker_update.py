@@ -65,6 +65,9 @@ def package(root):
         if p.is_file() and p.suffix.lower() in ('.csv','.json'):selected.add(p)
     for p in (root/'QA/fcg_visual').glob('*manifest*.csv'):selected.add(p)
     for p in (root/'runtime').glob('*.R'):selected.add(p)
+    manuscript=root/'cf453_manuscript_panels'
+    for pattern in ('panels/*.pdf','panels/*.png','source_data/*.csv','README.md','input_sha256.csv'):
+        selected.update(p for p in manuscript.glob(pattern) if p.is_file())
     for d in ('cf453_models','cf453_direct_diet','cf453_rewiring','cf453_layouts','fcg05','fcg07','gdx_zonation'):
         for name in ('README.md','README.txt','METHODS.md','PANEL_LEGENDS.md','sessionInfo.txt','provenance_sha256.csv','completion_manifest.json'):
             p=root/d/name
@@ -81,6 +84,7 @@ def package(root):
     candidates += list(Path('scripts/core').glob('cf453*.R'))
     candidates += list(Path('scripts/workflows').glob('1[456]_cf453*.R'))
     candidates += [Path('scripts/core/wdsd_intake.R'),Path('scripts/reports/cf453_figure6a_layouts.R'),
+                   Path('scripts/reports/cf453_manuscript_panels.R'),
                    Path('docs/workflow_plans/17_expanded_marker_zonation_update.md')]
     for p in candidates:
         if p.exists():

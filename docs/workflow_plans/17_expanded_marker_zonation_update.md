@@ -55,7 +55,8 @@ simultaneous validation/report-only are rejected.
 
 - **Default science:** stage three current zone inputs; run current FCG05 and
   zonal07 adapters plus paired current GDX; run14 `--models-only`,15
-  `--models-only`,16 full and the two6A layouts; run current scientific QA.
+  `--models-only`,16 full, the two anchor layouts and manuscript 6B/6E; run
+  current scientific QA.
   If Python is available, copy the formal source tables with `--tables-only`.
   It does not run the old/new comparisons, private manuscript inventory or
   report/bundle generation.
@@ -92,10 +93,15 @@ files separately from the original source-RDS identity. No normalization changes
 ## Outputs and parent graph
 
 Fresh run components under `--output` are `inputs`, `fcg05`, `fcg07`, `gdx_zonation`,
-`cf453_models`, `cf453_direct_diet`, `cf453_rewiring`, `cf453_layouts`, `runtime`,
+`cf453_models`, `cf453_direct_diet`, `cf453_rewiring`, `cf453_layouts`,
+`cf453_manuscript_panels`, `runtime`,
 `logs` and QA/manifests. `cf453_models/models.rds` feeds15 and16;
 `cf453_direct_diet/diet_analysis.rds` additionally feeds16;
-`cf453_rewiring/rewiring_analysis.rds` feeds the separate6A layout entry.
+`cf453_rewiring/rewiring_analysis.rds` feeds the anchor layout entry.
+The manuscript renderer reads the fresh Workflow15 lipid-results CSV and
+Workflow16 selected-network source CSV. It saves reviewed-size PDF and PNG
+panels with source CSVs, a panel manifest and input hashes. The same entry can
+render directly from the shipped source CSVs.
 No stage infers a sibling fresh parent unless the orchestrator passes it.
 
 Curated panels, source tables, methods/legends and public manifests are supplied.

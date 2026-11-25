@@ -55,6 +55,11 @@ zu17_run <- function(args=commandArgs(TRUE)) {
     run("Rscript",c("scripts/workflows/15_cf453_diet_impact_figure6.R","--models-only",paste0("--parent=",output,"/cf453_models/models.rds"),paste0("--output=",output,"/cf453_direct_diet")),"workflow17_cf453_15")
     run("Rscript",c("scripts/workflows/16_cf453_diet_rewiring_figure6.R",paste0("--parent=",output,"/cf453_models/models.rds"),paste0("--direct=",output,"/cf453_direct_diet/diet_analysis.rds"),paste0("--output=",output,"/cf453_rewiring")),"workflow17_cf453_16")
     run("Rscript",c("scripts/reports/cf453_figure6a_layouts.R",paste0("--parent=",output,"/cf453_rewiring/rewiring_analysis.rds"),paste0("--output=",output,"/cf453_layouts")),"workflow17_cf453_layouts")
+    run("Rscript", c("scripts/reports/cf453_manuscript_panels.R",
+      paste0("--lipids=", file.path(output, "cf453_direct_diet/tables/lipid_results.csv")),
+      paste0("--edges=", file.path(output, "cf453_rewiring/source_data/Fig6C_network_gain_loss.csv")),
+      paste0("--output=", file.path(output, "cf453_manuscript_panels"))),
+      "workflow17_cf453_manuscript_panels")
     if(audit)run("Rscript",c("scripts/reports/compare_cf453_zonation_update.R",output),"workflow17_cf453_comparisons")
   }
   run("Rscript",c("tests/qa_current_zonation_release.R",paste0("--root=",output)),"workflow17_scientific_QA")

@@ -30,7 +30,7 @@ Rscript scripts/workflows/17_expanded_marker_zonation_update.R --validate-only
 Rscript scripts/workflows/17_expanded_marker_zonation_update.R --output=results/runs/expanded_markers_reproduction
 ```
 
-Workflow 17 is the main zonation entry. It runs the FCG zonation models and gene–lipid networks, zonation-dependent knockdown validation, paired gonadectomy supporting analysis, diet-study models, selected-programme Figure 6, and both Figure 6A layouts. Workflow 14 and 15 model stages are upstream components of the current three-panel Workflow 16 presentation. Earlier full Figure 6 presentations are archived.
+Workflow 17 is the main zonation entry. It runs the FCG zonation models and gene–lipid networks, zonation-dependent knockdown validation, paired gonadectomy supporting analysis, the CF453 diet models and selected programmes, and both anchor layouts. It renders current manuscript Figure 6B and 6E from the saved Workflow 15 lipid contrasts and Workflow 16 representative pairs. Earlier full Figure 6 presentations are archived.
 
 Scientific reruns do not require the private manuscript. Manuscript auditing and its replacement ledger are local. The previous complete run is available in the ignored archive. Workflow17 consumes saved Workflow03 lipid DE/class scores, Workflow06 structural annotations and the independent KD fit artifacts; it does not regenerate them. These derived prerequisites are shipped. Its validation mode checks only the inputs listed in the command comment, rather than every downstream resource. Read the [Workflow17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md) and [complete reference](docs/WORKFLOW_REFERENCE.md#workflow-17) before a full run. Manual14→15→16 runs must pass fresh parent paths explicitly; the orchestrator does this automatically.
 
@@ -52,7 +52,7 @@ Entries are under `scripts/workflows/`. The [workflow plans](docs/workflow_plans
 
 ## Figures and interpretation
 
-The current release supplies Figure 4C, Figure 5A–D/F, S5A, source Tables S10/S13/S14/S15, and the standalone Figure 6B–D analyses with both anchor-layout alternatives. Panels are provided separately for manual assembly. Independent spatial assays and knockdown measurements are preserved.
+The current release supplies Figure 4C, Figure 5A–D/F, S5A, source Tables S10/S13/S14/S15, and standalone [Figure 6 panels](results/current_panels.md). The approved A4 exports of Figure 6B and 6E are indexed with their source tables and legends. The panels are provided separately for manual assembly. Independent spatial assays and knockdown measurements are preserved.
 
 Figure 4A and S4B–C, their linked nucleus-level counts/composition statistics, and final confirmation of executed retained-marker lists for Methods remain James's tasks. Pseudobulks cannot reconstruct these quantities.
 

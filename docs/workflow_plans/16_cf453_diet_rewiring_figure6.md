@@ -44,6 +44,36 @@ code/docs hashes. Historical strict export-QA can separately compare all recorde
 source/plan hashes and therefore report source-snapshot drift after documentation
 edits. Preserve approved manifests/results; do not refresh them to hide that drift.
 
+## Current manuscript 6B and 6E
+
+`scripts/reports/cf453_manuscript_panels.R` renders the approved A4 panels from
+the Workflow15 `tables/lipid_results.csv` and Workflow16
+`source_data/Fig6C_network_gain_loss.csv`. The defaults read the shipped
+tables. For a fresh run, pass both `--lipids=` and `--edges=`. Supply an explicit
+fresh `--output=` outside the published and legacy roots. Workflow17 supplies
+the two paths from its own 15/16 stages. Rendering uses ggplot2 ≥ 3.5, scales,
+ragg, digest and ggrepel for labels on alternate selections.
+
+Manuscript 6B uses female and male moderated WD-minus-SD t statistics with
+asinh(t/2) display axes. The fixed Figure 5A display rule requires absolute
+diet-by-sex t above 4.4 and absolute t below 1 in the opposing sex. The
+published categories contain 9 female decreases, 2 female increases and
+5 male increases among 1,129 eligible lipids. The low-t band is descriptive.
+The saved interaction BH q values remain available in the source table.
+
+Manuscript 6E uses the saved representative and up to six saved partners in
+each context. Each pair uses the same lipid ID for the within-sex abundance
+effect and both correlations. Each arrow connects open SD to filled WD at a
+fixed log2(WD/SD) on square panels with shared scales. The current genes are
+Fmo3, Cyp3a41a, Col27a1 and Osbpl3. The source edge selection and its inference
+limits are documented below. For other valid selections the renderer lays out
+the saved partners, with empty contexts shown explicitly.
+
+The published manuscript exports are under `analysis_current("cf453_manuscript_panels")`.
+The native anchor, class and network filenames below retain their Workflow16
+numbers. Run `Rscript tests/test_cf453_manuscript_panels.R` to verify selection
+counts, arrow geometry and source-table replay.
+
 Requested 2 November 2026 as three independent Figure 6 panel groups closer
 to Figure 5. Preserve workflows 14/15 and their outputs. This is a standalone
 analysis of 28 approximately 10-month-old wild-type mice: seven per sex and

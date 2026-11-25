@@ -22,8 +22,8 @@ For input dependencies, producers, execution modes and fresh-checkout requiremen
 | Mtmr11 zonal validation | `analysis_current()` · `fcg07/Fig5F_Mtmr11_male_PP_prespecified.pdf`, `Mtmr11_male_PP_prespecified_source.csv` | MalePP,22reference animals; native ULM661KD targets;345matched scatter points |
 | Updated formal source tables | [Sections 04–05](../results/README.md) | S10/S13/S14/S15 in the supplementary table directories |
 | Standalone diet models | `analysis_current()` · `cf453_models/`, `cf453_direct_diet/` | Workflow14/15 model caches; seven mice per sex/diet |
-| Current Figure6 | `analysis_current()` · `cf453_rewiring/panels/`, `source_data/` | Workflow16; class and edge associations exploratory |
-| Figure6B alternatives | `analysis_current()` · `cf453_layouts/panels/`, `source_data/` | Heatmap and paired dots from the same new gene set |
+| Manuscript Figure 6B and 6E | [A4 panels and legends](../results/current/06_western_diet_and_gene_lipid_circuitry/cf453_manuscript_panels/README.md) | Plot-only exports from Workflow15 lipid contrasts and Workflow16 selected gene–lipid pairs |
+| Figure 6C and 6D sources | `analysis_current()` · `cf453_rewiring/panels/`, `cf453_layouts/panels/` and their `source_data/` | Saved anchor trajectories and layout alternatives, and exploratory lipid-class associations. Filenames retain the workflow numbering. |
 | GDX supporting result | `analysis_current()` · `gdx_zonation/` | Paired sham/GDX model; not a replay of the mismatched hormone-replacement notebook |
 | KD experimental measurements | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv`, `knockdown_ttop_list.RData` | Preserved experimental data |
 | In-vivo Cyp2c38 validation | `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/` | Workflow11; independent whole-hepatocyte reference |

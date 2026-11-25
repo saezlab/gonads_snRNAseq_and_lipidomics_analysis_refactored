@@ -85,7 +85,8 @@ class Replay:
             "gdx_zonation": output / SECTIONS[3] / "gdx_zonation",
             "tables": output / SECTIONS[4] / "supplementary_tables",
         }
-        for branch in ("cf453_models", "cf453_direct_diet", "cf453_rewiring", "cf453_layouts"):
+        for branch in ("cf453_models", "cf453_direct_diet", "cf453_rewiring",
+                       "cf453_layouts", "cf453_manuscript_panels"):
             self.zonal_paths[branch] = output / SECTIONS[5] / branch
         self.models = resolve_recorded_path("results/mofa/RNA", REPO)
         self.env = os.environ.copy()
