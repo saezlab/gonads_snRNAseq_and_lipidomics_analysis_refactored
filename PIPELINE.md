@@ -145,6 +145,7 @@ documents the input and restoration requirements.
 - Workflows01–04,06 and08 execute on source and have fixed output paths, without a safe validation CLI or general fresh-output option. Use an isolated checkout/copy for a reproduction. Passing `--help` does not make these scripts read-only. `analysis_config.R`/`DATASETS` do not globally redirect their literal paths.
 - Workflow04's `--reuse-models-only` mode requires all eleven specific factor-count model files before writing and supports a read-only `--model-dir=PATH`. The unflagged mode can train if its cache is incomplete. MOFA2 is required for both modes.
 - Workflow07 `--global-only --output=<fresh>` regenerates independent KD/global/structural validation separately from the current zonal branch. It reads04 network and06 structural artifacts. Its validation mode is a prerequisite check; Workflow11's `--validate-only`, by contrast, fits the observed weighted limma model in memory.
+- Workflow07 `--fig3fg-only --output=<fresh>` regenerates the two Figure 3 panels from the saved knockdown t-table and global MOFA network. The scatter, regression and ULM use one row per matched lipid.
 - Internal staging/engine helpers are called by maintained public entries; direct helper execution is not a substitute for the public rerun contract. Frozen05/07 bodies remain under `scripts/core/engines/`.
 
 Validation is workflow-specific. The complete reference describes its exact scope and which commands mutate saved outputs. No validation flag alone certifies scientific reproducibility.

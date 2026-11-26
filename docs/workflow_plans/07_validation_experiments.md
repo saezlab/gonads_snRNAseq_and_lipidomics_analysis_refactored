@@ -1,6 +1,6 @@
 # Workflow 07: siRNA Validation Experiments
 
-## Authoritative execution contract (updated 25 November 2026)
+## Authoritative execution contract (updated 26 November 2026)
 
 The public entry is `scripts/workflows/07_validation_experiments.R`.
 `source()` defines functions and `Rscript` invokes
@@ -11,15 +11,17 @@ not a maintained direct execution entry.
 | Mode | What runs | Destination and protection |
 | --- | --- | --- |
 | Default/current zonal | `core/zonation_update_fcg.R::zmu_run07()` uses the expanded-marker FCG reference from Workflow 05 and the saved KD effects. It produces the adaptive zonal context results and the prespecified Mtmr11 male-PP panel. | Supply `--output=ROOT`. The entry writes `ROOT/fcg07/` and `ROOT/runtime/`. A completed `fcg07_checkpoint.rds` blocks the wrapper. |
-| `--global-only` | `core/validation_global.R`: frozen engine1-7 and10-11; refit original KD data, global MOFA validation and global structural consistency; no zonation network read. | Actual execution requires explicit `--output=FRESH_DIR`; any nonempty directory is refused. Files are written directly under this directory. |
+| `--global-only` | `core/validation_global.R` runs frozen engine sections 1–7 and 10–11 with the matched-lipid F–G plots. Refit original KD data and run global validation and structural consistency. | Requires explicit `--output=FRESH_DIR`. |
+| `--fig3fg-only` | Use the saved knockdown t-table and global MOFA network to score and render F–G. | Requires explicit `--output=FRESH_DIR`. |
 
 `--validate-only` alone checks the packages, FCG checkpoint, adjacent networks
 and saved KD files without writing. The fit later opens the structural reference.
 `--global-only --validate-only` verifies its raw KD/global/structural inputs and
-prepared runtime syntax without writing. The global fit requires an empty or
-fresh output directory. The zonal checkpoint guard protects completed zonal
-runs. Zonal execution protects the approved and legacy roots with
-`analysis_assert_not_approved_output()`.
+prepared runtime syntax without writing. `--fig3fg-only --validate-only` checks
+the saved inputs, unique matches and matched-only ULM scores in memory.
+Both independent write modes refuse nonempty destinations. The zonal checkpoint
+guard protects completed zonal runs. All write modes use
+`analysis_assert_not_approved_output()` to protect the approved and legacy roots.
 
 Run zonal Workflow 07 after Workflow 05 using the same `--output=ROOT`, or pass
 `--parent=PATH` to the FCG05 checkpoint in another run to choose a separate output
@@ -53,15 +55,43 @@ Exact current full-network basenames are
 All are in `networks/` next to the selected checkpoint. Old `results/zonation/`
 paths occur only inside the frozen engine and are redirected by the zonal adapter.
 
-## Implementation and outputs
+## Figure 3F–G from saved inputs
+
+```sh
+Rscript scripts/workflows/07_validation_experiments.R --fig3fg-only --output=results/runs/fig3fg_matched
+```
+
+`scripts/core/validation_fig3fg.R` joins each focal gene's retained MOFA network
+targets to the saved KD table by exact lipid ID. The historical parenthesis
+filter applies to reference targets. The current data yield 210 unique lipids per
+gene. The points, grey regression and pointwise 95% mean interval, and panel ULM
+all use this per-lipid match set. The fit and ULM use original moderated
+t-statistics. The point coordinates are capped at ±10 for display.
+
+Both independent modes export `cyp2d9_validation_scatter.pdf`,
+`cyp2c38_validation_scatter.pdf`, `Fig3F-G_matched.pdf`,
+`Fig3FG_matched_lipids.csv` and `Fig3FG_matched_ULM.csv`. The CSVs record both
+original and displayed t-statistics, the number of capped points, and the
+native ULM scores and nominal p-values. The ULM score describes the across-lipid fit.
+
+Figure-only dependencies are the two saved CSV inputs, decoupleR, ggplot2,
+ggrepel and patchwork. The global mode supplies its freshly generated KD table
+and loaded network to the same panel helper.
+
+The [current panel index](../../results/current_panels.md) links the published
+PDFs and plotted data. The publication includes hashes of the two saved inputs.
+
+## Implementation and other outputs
 
 Both adapters source the registry and shared FCG adapter, whose `zmu_require()`
 checks the full declared package set. Generated runtimes additionally source
 `analysis_config.R`, `datasets.R`, `support_functions.R`, and structural helpers.
 The global adapter removes workspace clearing, binds an empty zonation candidate
 set to avoid inherited interactive state, redirects only validation output paths,
-and supplies the t-based mean-CI plotting helper. No statistical model changes
-are introduced by those transport/execution adapters.
+and supplies the t-based mean-CI plotting helper. The global adapter skips the
+old edge-table plotting loop for the two Figure 3 genes. The legacy
+`global_network_validation_scores.csv` records the original 661-feature
+background for the independent global analysis.
 
 Zonal outputs under `<ROOT>/fcg07/` include:
 
@@ -82,8 +112,8 @@ Global-only outputs directly under its explicit fresh directory include:
 
 - `knockdown_PCA.pdf`, `knockdown_ttop_list.RData`, `knockdown_t_table.csv`,
   `knockdown_heatmap.pdf`, `global_network_validation_scores.csv`.
-- Global scatter PDFs for available genes among Cyp2d9/Cyp2b9/Cyp2c38;
-  `validation_summary.csv`, global `structural_consistency/` plots/regressions,
+- The matched Figure 3F–G exports above and the Cyp2b9 scatter.
+- `validation_summary.csv`, global `structural_consistency/` plots/regressions,
   `warnings.csv`, `runtime/07_global_validation_versioned.R` and its section ledger.
 
 Additional old/new comparison tables and unchanged-KD-fit audits belong to the
@@ -94,8 +124,9 @@ retrospective FCG report driver/Workflow17 audit mode, not to the plain07 wrappe
 Global candidates are Cyp2d9/Cyp2b9/Cyp2c38; zonal adaptive candidates are
 Sult3a1/Mtmr11 when available. Adaptive best-context scores remain distinct from
 prespecified Mtmr11 male-PP validation. Structural consistency is correlation times
-KD t-statistic times minus1, with SM/BMP/PG/TG focus classes. The ULM background
-and measured-scatter feature count must remain distinct; zones are paired RNA
+KD t-statistic times minus1, with SM/BMP/PG/TG focus classes. The original global
+score background and the Figure 3F–G matched-only score have distinct feature
+counts. Zones are paired RNA
 profiles and lipids are measured at whole-liver level. Preserve lowercase gene
 matching and the exact network filenames. The original parenthesis-based target
 filter is historical scoring behavior, not a general lipid-name identity rule.

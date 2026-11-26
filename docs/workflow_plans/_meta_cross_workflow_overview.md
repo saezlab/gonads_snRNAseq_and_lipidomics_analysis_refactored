@@ -19,6 +19,7 @@ Audited against execution code on **18 November 2026**. The current release is `
 | 02 RNA;03 lipid;04 integration | Supplied01 cell-type CSV/metadata plus branch-specific lipids/resources | Public downstream runs can use shipped CSVs.02 DE is not an input to04's fit or current05. |
 | 06 lipid structural | 03 lipid DE / curated lipid annotations | Produces `lipids_with_structure.csv`, needed by07 global and current zonal validation. |
 | 07 global validation | 04 global networks,06 structure, independent KD measurements | Independent KD fit artifacts are preserved and reused by current zonal07; these are not rerun by17. |
+| 07 Figure 3F–G replay | Saved 07 knockdown t-table and 04 global network | Produces matched-only scores and panels from the 210 unique lipids per gene. The full global validation also uses this plotting branch. |
 | 05 FCG zonation | Current FCG zone transport, 03 lipid DE/class scores, original FCG lipids, TF/pathway resources | Produces the FCG models, networks and panels. |
 | 07 zonal validation | Workflow 05 checkpoint and adjacent networks, saved KD table/fit and 06 structure | Uses the FCG result in the same root or the checkpoint passed with `--parent=`. |
 | 05 paired GDX | Current GDX zone transport | `--cohort=gdx` selects the paired supporting analysis. |

@@ -47,6 +47,12 @@ pixel and the source CSVs byte for byte. The [panel manifest and input hashes](.
 record the handoff. Previously published CF453 paths retain their native
 workflow numbers and are the sources for the manuscript exports.
 
+On 26 November 2026 the matched-lipid Figure 3F and 3G exports were added to the
+[panel index](../results/current_panels.md). Each panel uses 210 matched lipids.
+The regenerated PDFs rendered identically to the review panels, and their source
+tables matched byte for byte. The [input hashes](../results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/fig3fg_matched/input_sha256.csv)
+identify the knockdown table and hepatocyte gene–lipid network used for the export.
+
 ## Archive map
 
 | Original location | New location | Dependency/status |

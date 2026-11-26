@@ -1,20 +1,24 @@
-# Current expanded-marker zonation validation; global/KD results remain unchanged.
+# Current expanded-marker zonal validation and independent global KD panels.
 if(dir.exists(".local/R-library")) .libPaths(c(normalizePath(".local/R-library"),.libPaths()))
 source("scripts/config/analysis_release.R")
 source("scripts/core/zonation_update_fcg.R")
 zonation_validation_run <- function(args=commandArgs(TRUE)) {
-  if(any(!grepl("^(--(output|parent)=.+|--validate-only|--global-only)$",args)) ||
+  if(any(!grepl("^(--(output|parent)=.+|--validate-only|--global-only|--fig3fg-only)$",args)) ||
       anyDuplicated(sub("=.*$", "", args)))
-    stop("Use --output=, --parent= for zonal validation, --global-only or --validate-only")
+    stop("Use --output=, --parent= for zonal validation, --global-only, --fig3fg-only or --validate-only")
   x<-args[startsWith(args,"--output=")]
   parent <- args[startsWith(args, "--parent=")]
+  modes<-intersect(args,c("--global-only","--fig3fg-only"))
+  if(length(modes)>1L)stop("Choose one validation mode")
   output<-if(length(x))sub("^--output=","",x[1]) else analysis_current()
   validate_only<-"--validate-only"%in%args
-  if("--global-only"%in%args){
+  if(length(modes)){
     if(length(parent))stop("--parent is used only for zonal validation")
-    if(!length(x)&&!validate_only)stop("Use --global-only with a fresh --output=<directory>")
+    if(!length(x)&&!validate_only)stop("Use ",modes," with a fresh --output=<directory>")
+    if(!validate_only)analysis_assert_not_approved_output(output)
     source("scripts/core/validation_global.R")
-    return(validation_global_run(output,validate_only=validate_only))
+    if(modes=="--fig3fg-only")return(validation_fig3fg_run(output,validate_only))
+    return(validation_global_run(output,validate_only))
   }
   if(!validate_only)analysis_assert_not_approved_output(output)
   checkpoint <- if (length(parent)) sub("^--parent=", "", parent) else

@@ -19,7 +19,7 @@ Generated from [workflow_dependencies.json](workflow_dependencies.json). Use [PI
 | [04](#workflow-04) | public_science_with_retained_model_cache | [04_mofa_integration.R](../scripts/workflows/04_mofa_integration.R) | [04_mofa_integration.md](workflow_plans/04_mofa_integration.md) |
 | [05](#workflow-05) | current_component_public_CSV_inputs | [05_zonation_analysis.R](../scripts/workflows/05_zonation_analysis.R) | [05_zonation_analysis.md](workflow_plans/05_zonation_analysis.md) |
 | [06](#workflow-06) | public_science_fixed_output | [06_structural_analysis.R](../scripts/workflows/06_structural_analysis.R) | [06_structural_analysis.md](workflow_plans/06_structural_analysis.md) |
-| [07](#workflow-07) | source_safe_two_mode_component | [07_validation_experiments.R](../scripts/workflows/07_validation_experiments.R) | [07_validation_experiments.md](workflow_plans/07_validation_experiments.md) |
+| [07](#workflow-07) | source_safe_three_mode_component | [07_validation_experiments.R](../scripts/workflows/07_validation_experiments.R) | [07_validation_experiments.md](workflow_plans/07_validation_experiments.md) |
 | [08](#workflow-08) | independent_public_science_fixed_output | [08_variance_analysis.R](../scripts/workflows/08_variance_analysis.R) | [08_variance_analysis.md](workflow_plans/08_variance_analysis.md) |
 | [09](#workflow-09) | Optional external analysis; no public-checkout end-to-end validation. | [09_human_analysis.py](../scripts/workflows/09_human_analysis.py) | [09_human_analysis.md](workflow_plans/09_human_analysis.md) |
 | [10](#workflow-10) | Imported provenance; existing fresh-process blockers; intended order00→01→02/03 is not a validated standalone run. | [00_infer_doublets.py](../scripts/workflows/10_xenium_analysis/00_infer_doublets.py)<br>[01_merge_doublets.py](../scripts/workflows/10_xenium_analysis/01_merge_doublets.py)<br>[02_compositional_analysis.py](../scripts/workflows/10_xenium_analysis/02_compositional_analysis.py)<br>[03_DGE_analysis.py](../scripts/workflows/10_xenium_analysis/03_DGE_analysis.py) | [10_xenium_analysis.md](workflow_plans/10_xenium_analysis.md) |
@@ -367,29 +367,31 @@ Rscript scripts/workflows/06_structural_analysis.R
 
 ## Workflow 07
 
-**siRNA global/current-zonal validation — source_safe_two_mode_component**
+**siRNA global/current-zonal validation — source_safe_three_mode_component**
 
 Validate original gene-lipid predictions with unchanged KD data, with separate global-refit and current-zonal modes.
 
 **Entry:** `scripts/workflows/07_validation_experiments.R`
 
-**Validation:** Default --validate-only checks the selected 05 checkpoint, adjacent networks, KD table/fit and packages. --global-only --validate-only checks raw/global/structural inputs and runtime syntax. Source-safe.
+**Validation:** Default --validate-only checks the selected 05 checkpoint, adjacent networks, KD table/fit and packages. --global-only --validate-only checks raw/global/structural inputs and runtime syntax. --fig3fg-only --validate-only checks the saved table, reference matches and matched-only ULM in memory. Source-safe.
 
-**Writes / overwrite behavior:** The shared guard protects approved and legacy output roots. An existing fcg07 checkpoint protects a complete zonal run. Global-only execution requires an explicit empty or fresh output directory.
+**Writes / overwrite behavior:** The shared guard protects approved and legacy output roots. An existing fcg07 checkpoint protects a complete zonal run. The independent modes require explicit empty or fresh output directories.
 
 | Required input / role | File or registry key | Producer / mode | Availability and action |
 | --- | --- | --- | --- |
 | Selected current FCG reference<br>Paired current FCG reference and candidate networks. | `results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/fcg05_checkpoint.rds`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_testes_portal_full_SIF.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_testes_central_full_SIF.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_Ovaries_portal_full_SIF.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_ova_central_full_SIF.csv`<br>`registry:current_root → results/current` | 05<br>default zonal | Mixed: some files are local-only<br>Run Workflow 05 for FCG into the same output root or pass --parent= to the checkpoint from another run. Generated checkpoints are ignored in Git. |
 | Unchanged canonical KD fit/table<br>Table is scored; fit RData is additionally checked by the public wrapper. | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv`<br>`results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData` | frozen<br>default zonal | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
+| Saved siRNA t-statistics for Figure 3F–G<br>Original moderated t-statistics for the matched-lipid plots and ULM. | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv` | frozen<br>--fig3fg-only | Shipped in Git<br>Public tracked/nonignored file with the required software environment. |
 | Structural reference<br>Axis reference for structural consistency; required by both modes. | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv` | 06<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 | Original siRNA lipid measurements<br>Refit original KD effects. | `data/metabolomics/lipidomics_20250423transfections.csv` | curated<br>--global-only | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
-| Global full correlation network<br>Permissive original global reference. | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 04<br>--global-only | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
+| Global full correlation network<br>Permissive original global reference. | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/hepatocyte_gene_lipid_network_full_SIF.csv` | 04<br>--global-only and --fig3fg-only | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 | Frozen validation engine<br>Extract sections8/9/11 for zonal,1-7/10-11 forglobal. | `scripts/core/engines/07_validation_experiments_legacy.R`<br>`registry:engine_validation07 → scripts/core/engines/07_validation_experiments_legacy.R` | frozen<br>default | Shipped in Git<br>Public tracked/nonignored files with the required software environment. |
 
 | Output | Location | Mode |
 | --- | --- | --- |
 | Current zonal validation | `results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/fcg07_checkpoint.rds`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/zonation_network_validation_scores.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_prespecified_ULM.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_prespecified_source.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_ULM_background_source.csv`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Fig5F_Mtmr11_male_PP_prespecified.pdf`<br>`results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/structural_consistency/*`<br>`results/runs/NAME/fcg07/reference_provenance.csv`<br>`results/runs/NAME/fcg07/panel_manifest.csv`<br>`registry:current_root → results/current` | default zonal: generated below selected fresh --output; current_root paths identify the saved approved release only |
 | Independent global refit and validation | `results/runs/global_validation_reproduction/knockdown_t_table.csv`<br>`results/runs/global_validation_reproduction/knockdown_ttop_list.RData`<br>`results/runs/global_validation_reproduction/global_network_validation_scores.csv`<br>`results/runs/global_validation_reproduction/validation_summary.csv`<br>`results/runs/global_validation_reproduction/structural_consistency/*` | --global-only explicit fresh output |
+| Matched-lipid Figure 3F–G | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/fig3fg_matched/`<br>`results/runs/fig3fg_matched/cyp2d9_validation_scatter.pdf`<br>`results/runs/fig3fg_matched/cyp2c38_validation_scatter.pdf`<br>`results/runs/fig3fg_matched/Fig3F-G_matched.pdf`<br>`results/runs/fig3fg_matched/Fig3FG_matched_lipids.csv`<br>`results/runs/fig3fg_matched/Fig3FG_matched_ULM.csv` | --fig3fg-only and --global-only write fresh outputs. The published copy was rendered with --fig3fg-only. |
 
 **Command examples** (not executed by this documentation audit):
 
@@ -417,19 +419,26 @@ Read-only independent global setup check.
 Rscript scripts/workflows/07_validation_experiments.R --global-only --validate-only
 ```
 
-Refit KD/global/structural independent branch into fresh output; does not overwrite canonical KD inputs.
+Refit global validation and structural results and render matched F–G into a fresh directory.
 
 ```sh
 Rscript scripts/workflows/07_validation_experiments.R --global-only --output=results/runs/global_validation_reproduction
 ```
 
+Render Figure 3F–G and export the matched points and scores using the saved knockdown and global network tables.
+
+```sh
+Rscript scripts/workflows/07_validation_experiments.R --fig3fg-only --output=results/runs/fig3fg_matched
+```
+
 **Important distinctions:**
 
-- Default zonal mode uses the selected expanded-marker FCG reference. Global-only mode uses the global MOFA network.
+- Default zonal mode uses the selected expanded-marker FCG reference. Both independent modes use the global MOFA network.
+- F–G use one row per exact matched lipid for the plot and the native ULM. Display capping at ±10 applies to the plotted points.
 - Prespecified Mtmr11 malePP is separate from adaptive best context; ULM fullKDbackground differs from matchedscatter universe.
 - Workflow11 in-vivoKO is independent;07b/07c are compatibility phase entries for11.
 
-**Code checked:** [scripts/workflows/07_validation_experiments.R](../scripts/workflows/07_validation_experiments.R), [scripts/core/zonation_update_fcg.R](../scripts/core/zonation_update_fcg.R), [scripts/core/validation_global.R](../scripts/core/validation_global.R), [scripts/core/engines/07_validation_experiments_legacy.R](../scripts/core/engines/07_validation_experiments_legacy.R).
+**Code checked:** [scripts/workflows/07_validation_experiments.R](../scripts/workflows/07_validation_experiments.R), [scripts/core/zonation_update_fcg.R](../scripts/core/zonation_update_fcg.R), [scripts/core/validation_global.R](../scripts/core/validation_global.R), [scripts/core/validation_fig3fg.R](../scripts/core/validation_fig3fg.R), [scripts/core/engines/07_validation_experiments_legacy.R](../scripts/core/engines/07_validation_experiments_legacy.R).
 
 
 ## Workflow 08

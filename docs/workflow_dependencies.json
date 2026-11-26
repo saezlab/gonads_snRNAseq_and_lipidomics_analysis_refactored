@@ -890,7 +890,7 @@
       ],
       "plan": "docs/workflow_plans/07_validation_experiments.md",
       "purpose": "Validate original gene-lipid predictions with unchanged KD data, with separate global-refit and current-zonal modes.",
-      "status": "source_safe_two_mode_component",
+      "status": "source_safe_three_mode_component",
       "inputs": [
         {
           "name": "Selected current FCG reference",
@@ -922,6 +922,17 @@
           "availability_note": "Public tracked/nonignored files with the required software environment."
         },
         {
+          "name": "Saved siRNA t-statistics for Figure 3F–G",
+          "paths": [
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv"
+          ],
+          "registry_keys": [],
+          "producer": "frozen",
+          "mode": "--fig3fg-only",
+          "role": "Original moderated t-statistics for the matched-lipid plots and ULM.",
+          "availability_note": "Public tracked/nonignored file with the required software environment."
+        },
+        {
           "name": "Structural reference",
           "paths": [
             "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv"
@@ -950,7 +961,7 @@
           ],
           "registry_keys": [],
           "producer": "04",
-          "mode": "--global-only",
+          "mode": "--global-only and --fig3fg-only",
           "role": "Permissive original global reference.",
           "availability_note": "Public tracked/nonignored files with the required software environment."
         },
@@ -998,11 +1009,24 @@
           ],
           "registry_keys": [],
           "mode": "--global-only explicit fresh output"
+        },
+        {
+          "name": "Matched-lipid Figure 3F–G",
+          "paths": [
+            "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/fig3fg_matched/",
+            "results/runs/fig3fg_matched/cyp2d9_validation_scatter.pdf",
+            "results/runs/fig3fg_matched/cyp2c38_validation_scatter.pdf",
+            "results/runs/fig3fg_matched/Fig3F-G_matched.pdf",
+            "results/runs/fig3fg_matched/Fig3FG_matched_lipids.csv",
+            "results/runs/fig3fg_matched/Fig3FG_matched_ULM.csv"
+          ],
+          "registry_keys": [],
+          "mode": "--fig3fg-only and --global-only write fresh outputs. The published copy was rendered with --fig3fg-only."
         }
       ],
       "calls": [],
-      "validation": "Default --validate-only checks the selected 05 checkpoint, adjacent networks, KD table/fit and packages. --global-only --validate-only checks raw/global/structural inputs and runtime syntax. Source-safe.",
-      "overwrite": "The shared guard protects approved and legacy output roots. An existing fcg07 checkpoint protects a complete zonal run. Global-only execution requires an explicit empty or fresh output directory.",
+      "validation": "Default --validate-only checks the selected 05 checkpoint, adjacent networks, KD table/fit and packages. --global-only --validate-only checks raw/global/structural inputs and runtime syntax. --fig3fg-only --validate-only checks the saved table, reference matches and matched-only ULM in memory. Source-safe.",
+      "overwrite": "The shared guard protects approved and legacy output roots. An existing fcg07 checkpoint protects a complete zonal run. The independent modes require explicit empty or fresh output directories.",
       "commands": [
         {
           "command": "Rscript scripts/workflows/07_validation_experiments.R --validate-only",
@@ -1022,11 +1046,16 @@
         },
         {
           "command": "Rscript scripts/workflows/07_validation_experiments.R --global-only --output=results/runs/global_validation_reproduction",
-          "effect": "Refit KD/global/structural independent branch into fresh output; does not overwrite canonical KD inputs."
+          "effect": "Refit global validation and structural results and render matched F–G into a fresh directory."
+        },
+        {
+          "command": "Rscript scripts/workflows/07_validation_experiments.R --fig3fg-only --output=results/runs/fig3fg_matched",
+          "effect": "Render Figure 3F–G and export the matched points and scores using the saved knockdown and global network tables."
         }
       ],
       "notes": [
-        "Default zonal mode uses the selected expanded-marker FCG reference. Global-only mode uses the global MOFA network.",
+        "Default zonal mode uses the selected expanded-marker FCG reference. Both independent modes use the global MOFA network.",
+        "F–G use one row per exact matched lipid for the plot and the native ULM. Display capping at ±10 applies to the plotted points.",
         "Prespecified Mtmr11 malePP is separate from adaptive best context; ULM fullKDbackground differs from matchedscatter universe.",
         "Workflow11 in-vivoKO is independent;07b/07c are compatibility phase entries for11."
       ],
@@ -1034,6 +1063,7 @@
         "scripts/workflows/07_validation_experiments.R",
         "scripts/core/zonation_update_fcg.R",
         "scripts/core/validation_global.R",
+        "scripts/core/validation_fig3fg.R",
         "scripts/core/engines/07_validation_experiments_legacy.R"
       ]
     },
