@@ -1,4 +1,4 @@
-# Current expanded-marker scientific pipeline; optional retrospective manuscript audit.
+# Optional batch reproduction of the current zonation and diet workflows.
 if(dir.exists(".local/R-library")) .libPaths(c(normalizePath(".local/R-library"),.libPaths()))
 source("scripts/config/analysis_release.R")
 zu17_run <- function(args=commandArgs(TRUE)) {
@@ -10,7 +10,7 @@ zu17_run <- function(args=commandArgs(TRUE)) {
     stop("--report-only needs --output= pointing to a saved Workflow 17 run with its inputs and caches")
   output<-value("--output",analysis_current())
   if(!"--validate-only"%in%args)analysis_assert_not_approved_output(output)
-  source_root<-value("--source-root",analysis_path("pseudobulk_csv_root"))
+  source_root<-value("--source-root",NULL)
   staging<-new.env(parent=globalenv());sys.source("scripts/reports/stage_zonation_marker_update.R",envir=staging)
   py<-value("--python",Sys.getenv("ZONATION_PYTHON",unset=Sys.which("python3")))
   audit<-any(c("--with-manuscript-audit","--report-only")%in%args)
@@ -48,9 +48,17 @@ zu17_run <- function(args=commandArgs(TRUE)) {
       utils::write.csv(original,file.path(output,"QA/historical_sha256.csv"),row.names=FALSE)
     }
     staged<-staging$zu_stage_inputs(output,source_root)
-    mode<-if(audit)character() else "--science-only"
-    run("Rscript",c("scripts/reports/run_zonation_update_fcg.R",paste0("--output=",output),mode),"workflow17_fcg")
-    run("Rscript",c("scripts/reports/run_zonation_update_gdx.R",paste0("--output=",output),mode),"workflow17_gdx")
+    if (audit) {
+      run("Rscript", c("scripts/reports/run_zonation_update_fcg.R", paste0("--output=", output)), "workflow17_fcg")
+      run("Rscript", c("scripts/reports/run_zonation_update_gdx.R", paste0("--output=", output)), "workflow17_gdx")
+    } else {
+      run("Rscript", c("scripts/workflows/05_zonation_analysis.R",
+        paste0("--input=", file.path(output, "inputs/fcg")), paste0("--output=", output)), "workflow17_fcg")
+      run("Rscript", c("scripts/workflows/07_validation_experiments.R",
+        paste0("--output=", output)), "workflow17_fcg_validation")
+      run("Rscript", c("scripts/workflows/05_zonation_analysis.R", "--cohort=gdx",
+        paste0("--input=", staged$sources[["gdx"]]), paste0("--output=", output)), "workflow17_gdx")
+    }
     run("Rscript",c("scripts/workflows/14_cf453_standalone_figure6.R","--models-only",paste0("--input-zonation=",staged$sources[["wdsd"]]),paste0("--output=",output,"/cf453_models")),"workflow17_cf453_14")
     run("Rscript",c("scripts/workflows/15_cf453_diet_impact_figure6.R","--models-only",paste0("--parent=",output,"/cf453_models/models.rds"),paste0("--output=",output,"/cf453_direct_diet")),"workflow17_cf453_15")
     run("Rscript",c("scripts/workflows/16_cf453_diet_rewiring_figure6.R",paste0("--parent=",output,"/cf453_models/models.rds"),paste0("--direct=",output,"/cf453_direct_diet/diet_analysis.rds"),paste0("--output=",output,"/cf453_rewiring")),"workflow17_cf453_16")
@@ -66,7 +74,8 @@ zu17_run <- function(args=commandArgs(TRUE)) {
   if(nzchar(py)&&file.exists(py))run(py,c("scripts/reports/prepare_zonation_update_report_sources.py","--output",output,"--tables-only"),"workflow17_scientific_tables")
   if(audit){
     if(!nzchar(py)||!file.exists(py))stop("Optional manuscript audit requires Python3; set --python= or ZONATION_PYTHON")
-    run(py,c("scripts/reports/prepare_zonation_update_report_sources.py","--output",output,"--source-root",source_root),"workflow17_report_sources")
+    reference_root <- if (is.null(source_root)) analysis_path("pseudobulk_csv_root") else source_root
+    run(py,c("scripts/reports/prepare_zonation_update_report_sources.py","--output",output,"--source-root",reference_root),"workflow17_report_sources")
     run("Rscript",c("tests/qa_zonation_marker_update.R",output),"workflow17_independent_audit_QA")
     run(py,c("scripts/reports/zonation_update_manuscript_audit.py","--output",file.path(output,"report")),"workflow17_manuscript_inventory")
     run(py,c("scripts/reports/build_zonation_update_report.py","--output",output),"workflow17_report")

@@ -23,14 +23,14 @@ flowchart TD
   W04 --> GLOBAL[07 global KD validation]
   W06 --> GLOBAL
   KD[Independent culture KD measurements] --> GLOBAL
-  W03 --> FCG[Current FCG zonation models and networks]
+  W03 --> FCG[05 FCG zonation models and networks]
   ZFCG[Expanded-marker FCG zone CSV transport] --> FCG
   LIP --> FCG
-  FCG --> ZKD[Current zonal KD validation]
+  FCG --> ZKD[07 zonal KD validation]
   GLOBAL --> KDFIT[Saved KD table and fit]
   KDFIT --> ZKD
   W06 --> ZKD
-  ZGDX[Expanded-marker GDX zone CSV transport] --> GDX[Paired GDX supporting analysis]
+  ZGDX[Expanded-marker GDX zone CSV transport] --> GDX[05 paired GDX supporting analysis]
   ZDIET[Expanded-marker diet zone CSV transport] --> D14[14 standalone diet models]
   HEP[Diet whole-hepatocyte CSV transport] --> D14
   DLIP[Diet cohort whole-liver lipids] --> D14
@@ -49,13 +49,13 @@ flowchart TD
 
 Support regulons, gene sets, validation measurements and auxiliary annotations are itemized in the complete reference. Workflow08 is a separate raw-lipid/metadata variance analysis; it does not consume03 or RNA. Workflow09 requires an externally supplied mouse signature and human data. Workflow10 is an independent raw Xenium branch with known execution blockers, not an output of02's panel-restricted FCG volcano plot.
 
-## Current zonation and diet orchestration
+## Optional zonation and diet batch run
 
 ```mermaid
 flowchart LR
-  W17[17 orchestrator] -. stages .-> S[Three current zone transports]
-  W17 -. invokes .-> F[Current FCG05 and zonal07 adapters]
-  W17 -. invokes .-> G[Paired GDX analysis]
+  W17[17 optional coordinator] -. stages .-> S[Three current zone transports]
+  W17 -. invokes .-> F[05 FCG and zonal 07]
+  W17 -. invokes .-> G[05 paired GDX analysis]
   W17 -. invokes .-> D14[14 models-only]
   W17 -. invokes .-> D15[15 models-only]
   W17 -. invokes .-> D16[16 full presentation]
@@ -71,7 +71,7 @@ flowchart LR
 
 Dotted arrows are calls; they do not imply that the diet cohort uses original FCG estimates. The diet study is analysed independently. Age differences preclude a simple causal bridge to the original cohort. RNA zones are paired profiles within each mouse; lipid measurements are whole-liver. Diet association and threshold-defined edge gains/losses remain exploratory.
 
-### Files required before Workflow17
+### Scientific inputs for FCG, GDX and diet
 
 | Input group | Producer / handoff | Availability |
 | --- | --- | --- |
@@ -82,27 +82,35 @@ Dotted arrows are calls; they do not imply that the diet cohort uses original FC
 | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/lipids_with_structure.csv` | Workflow06; consumed by zonal07 structural plots | Shipped derived prerequisite |
 | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv` and `knockdown_ttop_list.RData` | Independent KD fit in Workflow07 global branch | Shipped derived prerequisites; KD measurements are unchanged |
 
-Workflow17 does **not** run03,06 or the independent KD fit producer. Neither04's MOFA fit nor historical FCG zonation results are required for its default scientific branch. Current inputs use [CSV transports](docs/PSEUDOBULK_CSV_INPUTS.md); registry `current_input_root` and the `*_rds` keys identify local originals/compatibility exports, not the public transport root.
+The zonal workflows reuse the shipped lipid DE, structural annotations and
+independent KD fit. The current cohort inputs are the [CSV transports](docs/PSEUDOBULK_CSV_INPUTS.md).
+Registry `current_input_root` and the `*_rds` keys identify local originals or
+compatibility exports.
 
 ## Reproducing from a public checkout
 
 Run maintained R entries from the repository root with the required packages installed. Reading shipped panels and tables needs no model refit. Reproducing full Workflow01 requires excluded original whole-cell-type FCG/GDX Seurat objects; public downstream analyses can start from the committed cell-type CSVs instead. Workflow00 is a legacy HPC preprocessing reference, with an explicit external import/name handoff to01; it did not generate the current expanded-marker transports as a reproducible numbered step.
 
-For the current zonation/diet branch:
+### FCG and paired gonadectomy execution
 
 ```sh
-# No fitting or writes: checks three zone transports, engine files and saved KD files.
-Rscript scripts/workflows/17_expanded_marker_zonation_update.R --validate-only
+# FCG models, networks and panels, followed by the zonal knockdown validation.
+Rscript scripts/workflows/05_zonation_analysis.R --output=results/runs/fcg_zonation
+Rscript scripts/workflows/07_validation_experiments.R --output=results/runs/fcg_zonation
 
-# Full scientific rerun into a new directory, including fresh diet-parent handoffs.
-Rscript scripts/workflows/17_expanded_marker_zonation_update.R --output=results/runs/expanded_markers_reproduction
+# Paired sham/gonadectomy supporting analysis.
+Rscript scripts/workflows/05_zonation_analysis.R --cohort=gdx --output=results/runs/gdx_zonation
 ```
 
-Validation17 does not check every full-run03/06/resource prerequisite. Its optional `--with-manuscript-audit` validation adds selected historical cache/Python checks, not a complete manuscript-audit restoration test. Full manuscript auditing requires additional local historical caches, preprocessing references and a private DOCX. `--report-only --output=PATH` refreshes reports and source copies from a complete saved Workflow 17 run. Use a writable saved run directory outside the published tree and legacy archive. See [the17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md) for the shared `--source-root` requirements of full private auditing.
+Both Workflow 05 modes read the current registry-selected transports. For
+zonal 07 in a different output directory, pass the prior FCG05 checkpoint with
+`--parent=PATH`. Its sibling `networks/` supplies the four reference networks.
+Each entry has a `--validate-only` check for its immediate prerequisites.
 
-### Manual diet-only execution
+### Standalone diet execution
 
-For a new diet run without FCG/GDX, use a fresh destination at every stage and pass the new parents explicitly:
+Workflow 14 reads the current expanded-marker diet transport by default. Use a
+fresh destination at every stage and pass the new parents explicitly.
 
 ```sh
 Rscript scripts/workflows/14_cf453_standalone_figure6.R --models-only --output=results/runs/diet_models
@@ -115,6 +123,21 @@ Rscript scripts/reports/cf453_manuscript_panels.R --lipids=results/runs/diet_dir
 Adjacent parent provenance is required. Defaults15/16 point to the approved release, not whichever fresh sibling directory was most recently written. Ignored `.rds` caches are absent in a public checkout and must be regenerated or restored before cache-consuming modes. Workflow16 `--models-only` still performs its full numerical/resampling stage;14/15/16 have no `--validate-only` option.
 
 For plot-only replay, `Rscript scripts/reports/cf453_manuscript_panels.R --output=results/runs/figure6_manuscript` reads the two shipped CF453 source CSVs. Fresh runs pass both source paths as above. The resulting vector PDFs and PNGs use the reviewed A4 placement sizes.
+
+### Batch reproduction and manuscript audit
+
+```sh
+Rscript scripts/workflows/17_expanded_marker_zonation_update.R --validate-only
+Rscript scripts/workflows/17_expanded_marker_zonation_update.R --output=results/runs/expanded_markers_reproduction
+```
+
+Workflow 17 stages the current inputs, runs the individual workflows and
+records a QA log. Its validation checks the three zone transports, two engine
+files and saved KD artifacts. `--with-manuscript-audit` additionally uses local
+historical caches, preprocessing references and the private DOCX. Use
+`--report-only --output=PATH` to refresh reports from a complete, writable saved
+batch. The [Workflow 17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md)
+documents the input and restoration requirements.
 
 ## Execution and overwrite limits
 

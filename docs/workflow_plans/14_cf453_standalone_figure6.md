@@ -2,7 +2,9 @@
 
 ## Current entry and dependencies (18 November 2026)
 
-The current pipeline uses this entry's `--models-only` stage. Default output is
+Run this entry with `--models-only` to start a current diet-only analysis. The
+entry reads the expanded-marker zone assignments directly from the release
+registry and supplies the model cache for Workflows 15 and 16. Default output is
 `analysis_current("cf453_models")` under the approved expanded-marker release;
 new fits require a fresh `--output` outside that approved root. Fresh full and
 `--models-only` modes call `analysis_assert_not_approved_output()` before any

@@ -6,7 +6,7 @@ The cleanup on 16 November 2026 promotes the approved expanded-marker analysis w
 
 | Location | Role |
 | --- | --- |
-| `scripts/workflows/` | Numbered entry points; 17 is the current zonation/diet chain |
+| `scripts/workflows/` | Numbered entry points. Workflows 05 and 14 read current zonal inputs. Workflow 17 offers a batch run. |
 | `scripts/core/`, `scripts/config/`, `scripts/visualization/` | Shared implementations, release registry and plotting code |
 | `scripts/core/engines/` | Frozen original 05/07 source bodies used by validated adapters |
 | `scripts/moon/`, `scripts/pkn/` | Active optional causal workflows and resources |

@@ -19,8 +19,9 @@ Audited against execution code on **18 November 2026**. The current release is `
 | 02 RNA;03 lipid;04 integration | Supplied01 cell-type CSV/metadata plus branch-specific lipids/resources | Public downstream runs can use shipped CSVs.02 DE is not an input to04's fit or current05. |
 | 06 lipid structural | 03 lipid DE / curated lipid annotations | Produces `lipids_with_structure.csv`, needed by07 global and current zonal validation. |
 | 07 global validation | 04 global networks,06 structure, independent KD measurements | Independent KD fit artifacts are preserved and reused by current zonal07; these are not rerun by17. |
-| 17 current FCG zonation | Current FCG zone transport,03 lipid DE/class scores, original FCG lipids, TF/pathway resources | Does not consume04 or historical05 fits. Its zonal07 stage also needs the saved KD table/fit and06 structure. |
-| 17 paired GDX | Current GDX zone transport | Separate supporting paired analysis; not the legacy hormone-replacement notebook. |
+| 05 FCG zonation | Current FCG zone transport, 03 lipid DE/class scores, original FCG lipids, TF/pathway resources | Produces the FCG models, networks and panels. |
+| 07 zonal validation | Workflow 05 checkpoint and adjacent networks, saved KD table/fit and 06 structure | Uses the FCG result in the same root or the checkpoint passed with `--parent=`. |
+| 05 paired GDX | Current GDX zone transport | `--cohort=gdx` selects the paired supporting analysis. |
 | 14 standalone diet | Current diet zone transport, diet whole-hepatocyte transport, diet whole-liver lipids | Whole-hepatocyte intake is mandatory even in models-only mode. No original-cohort statistical dependency. |
 | 15 direct diet tests | 14 `models.rds` and adjacent provenance | Manual runs must explicitly select a new parent. |
 | 16 current diet presentation | 14 model cache/provenance and15 `diet_analysis.rds` | Neither parent is inferred from the latest output directory. Layouts use16 `rewiring_analysis.rds`. |
@@ -31,7 +32,10 @@ Audited against execution code on **18 November 2026**. The current release is `
 | 09 human;10 Xenium | External human/signature resources; independent raw imaging |09's signature is not emitted by current02.10 has documented execution blockers and is not supplied by02's panel-restricted volcano. |
 | Optional PKN/MOON | Frozen factor inputs, priors, fitted/extracted states and branch-specific references | Follow the causal map; some archived pilots remain live frozen dependencies. |
 
-Workflow17 orchestrates current FCG/GDX,14 models-only,15 models-only,16, the anchor layouts and the manuscript 6B/6E exports. Calls are not evidence of cross-cohort biological dependence. The standalone diet cohort remains scientifically independent because of age differences. RNA zones are paired within mouse; whole-liver lipids are measured once per mouse.
+The current FCG/GDX and diet branches run individually. Optional Workflow 17
+coordinates the same entries and runs the anchor layouts and manuscript 6B/6E
+exports. The diet cohort is analysed independently because of age differences.
+RNA zones are paired within mouse and whole-liver lipids are measured once per mouse.
 
 ## Reproducibility limits and checks
 

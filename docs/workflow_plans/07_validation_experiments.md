@@ -1,38 +1,37 @@
 # Workflow 07: siRNA Validation Experiments
 
-## Authoritative execution contract (audited 18 November 2026)
+## Authoritative execution contract (updated 25 November 2026)
 
-Public entry: `scripts/workflows/07_validation_experiments.R` (23-line source-safe
-wrapper). `source()` defines functions; `Rscript` invokes
+The public entry is `scripts/workflows/07_validation_experiments.R`.
+`source()` defines functions and `Rscript` invokes
 `zonation_validation_run()`. The original full body is immutable at
 `scripts/core/engines/07_validation_experiments_legacy.R` (`engine_validation07`),
-not a maintained direct execution entry. There are two intentionally separate modes.
+not a maintained direct execution entry.
 
 | Mode | What runs | Destination and protection |
 | --- | --- | --- |
-| Default/current zonal | `core/zonation_update_fcg.R::zmu_run07()`: frozen engine8/9/11 with global genes empty; reuse unchanged KD effects, adaptive zonal contexts plus prespecified Mtmr11 male-PP. | `--output=ROOT` defaults to `current_root`; writes `ROOT/fcg07/` and `ROOT/runtime/`. A completed `fcg07_checkpoint.rds` blocks the wrapper. |
+| Default/current zonal | `core/zonation_update_fcg.R::zmu_run07()` uses the expanded-marker FCG reference from Workflow 05 and the saved KD effects. It produces the adaptive zonal context results and the prespecified Mtmr11 male-PP panel. | Supply `--output=ROOT`. The entry writes `ROOT/fcg07/` and `ROOT/runtime/`. A completed `fcg07_checkpoint.rds` blocks the wrapper. |
 | `--global-only` | `core/validation_global.R`: frozen engine1-7 and10-11; refit original KD data, global MOFA validation and global structural consistency; no zonation network read. | Actual execution requires explicit `--output=FRESH_DIR`; any nonempty directory is refused. Files are written directly under this directory. |
 
-Supported flags are `--output=...`, `--global-only`, and `--validate-only`.
-`--validate-only` alone checks package/checkpoint/KD-file prerequisites without
-writing; it does not verify the structural reference later opened by the fit.
+`--validate-only` alone checks the packages, FCG checkpoint, adjacent networks
+and saved KD files without writing. The fit later opens the structural reference.
 `--global-only --validate-only` verifies its raw KD/global/structural inputs and
-prepared runtime syntax without writing. The checkpoint guard on zonal runs does
-not promise to preserve a partial destination lacking its completion checkpoint.
-Full zonal execution also calls `analysis_assert_not_approved_output()` before
-checking/fitting, rejecting the approved root and descendants even when model
-caches are absent. Validation is allowed there; actual fits need an explicit
-fresh root outside it. Cache guards additionally protect completed fresh runs.
+prepared runtime syntax without writing. The global fit requires an empty or
+fresh output directory. The zonal checkpoint guard protects completed zonal
+runs. Zonal execution protects the approved and legacy roots with
+`analysis_assert_not_approved_output()`.
 
-Workflow17 coordinates current05 then zonal07. The independent in-vivo Cyp2c38
-Workflow11 is a different experiment and is not called by this entry; former07b/07c
-are phase compatibility wrappers for11.
+Run zonal Workflow 07 after Workflow 05 using the same `--output=ROOT`, or pass
+`--parent=PATH` to the FCG05 checkpoint in another run to choose a separate output
+root. Validation without `--output` or `--parent` checks the published reference.
+Workflow 17 offers a batch run. The independent in-vivo Cyp2c38 experiment is
+Workflow 11, including the former 07b and 07c compatibility phases.
 
 ## Actual inputs and ordering by mode
 
 | Input | Zonal mode | Global-only mode | Producer |
 | --- | --- | --- | --- |
-| `<ROOT>/fcg05/fcg05_checkpoint.rds` and four `fcg05/networks/cormat_*_full_SIF.csv` | Required current reference; the exact mixed names are below. | Not read. | Current05 in the same run root. |
+| `<ROOT>/fcg05/fcg05_checkpoint.rds` or explicit `--parent=`, and four adjacent `networks/cormat_*_full_SIF.csv` | Required current reference. | Not read. | Workflow 05 FCG. |
 | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv` | Reused directly for scoring and plots. | Not an input; a new table is fitted/written in the fresh output. | Retained original siRNA result. |
 | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData` | Entry-level prerequisite; the score calculations read the CSV. | Not an input; newly fitted. | Retained original siRNA fit. |
 | `data/metabolomics/lipidomics_20250423transfections.csv` | Not read. | Required original KD measurements. | Curated experimental input. |
@@ -41,9 +40,9 @@ are phase compatibility wrappers for11.
 
 The curated KD/global/structural resources are public-tree artifacts with the
 necessary R packages; neither mode requires a source RNA/Seurat object. Zonal
-validation also requires its generated same-root05 checkpoint, which is an ignored
-model cache. A public clone must first fit05/17 into a fresh root (or explicitly
-restore that cache); plain07 is not a way to recreate it. Recompute04/06 first only when
+validation requires the generated Workflow 05 checkpoint, which is ignored in Git.
+In a public clone, run Workflow 05 for FCG or restore the checkpoint before zonal
+validation. Recompute04/06 first only when
 rebuilding their global network/structural inputs. A new global-only run writes
 its KD fit to its fresh output; it does not silently replace the curated canonical
 `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/` inputs reused by current zonal validation.
@@ -51,7 +50,7 @@ its KD fit to its fresh output; it does not silently replace the curated canonic
 Exact current full-network basenames are
 `cormat_testes_portal_full_SIF.csv`, `cormat_testes_central_full_SIF.csv`,
 `cormat_Ovaries_portal_full_SIF.csv`, `cormat_ova_central_full_SIF.csv`.
-All are below the selected root's `fcg05/networks/`. Old `results/zonation/`
+All are in `networks/` next to the selected checkpoint. Old `results/zonation/`
 paths occur only inside the frozen engine and are redirected by the zonal adapter.
 
 ## Implementation and outputs
@@ -71,7 +70,10 @@ Zonal outputs under `<ROOT>/fcg07/` include:
 - `Mtmr11_male_PP_prespecified_ULM.csv`,
   `Mtmr11_male_PP_prespecified_source.csv`,
   `Mtmr11_male_PP_ULM_background_source.csv`,
-  `Fig5F_Mtmr11_male_PP_prespecified.pdf`.
+  `Fig5F_Mtmr11_male_PP_prespecified.pdf`, and its `panel_manifest.csv`. A
+  same-root run also adds Figure 5F to the Workflow 05 panel manifest.
+- `reference_provenance.csv` records the hashes of the selected checkpoint
+  and networks and the saved knockdown t table.
 - `structural_consistency/[gene]_structural_consistency.pdf` and
   `structural_consistency/consistency_structural_regression_summary.csv` for zonal
   candidates. Runtime: `runtime/07_zonation_validation_versioned.R` at root level.

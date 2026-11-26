@@ -5,9 +5,9 @@
 The full entry is a local preparation script: it immediately reads the ignored
 `data/RNA/fcg_pseudobulks.rds`, then rewrites the main RNA split CSVs, metadata and
 QC outputs. It is not a public-clone prerequisite: supplied main CSVs already feed
-02/03/04, and Workflow17 independently stages current expanded-marker transports.
+02/03/04. Workflow 05 reads the expanded-marker transports directly.
 The optional GDX conversion uses `data/RNA/gdx_pseudobulks.rds`; these are original
-whole-cell-type pseudobulks, not Workflow17's paired zonal GDX input.
+whole-cell-type pseudobulks, separate from Workflow 05's paired zonal GDX input.
 
 Section11 now reads the public plain-matrix CSV transport selected by
 `current_fcg_zonation_transport`; no Seurat object is needed for that subsection.
@@ -107,6 +107,8 @@ source("scripts/core/pseudobulk_csv.R")
 ## Notes for Context Restoration
 
 1. The split RNA CSVs are split by **sample columns**, not genes. Each file keeps the `gene` column and all rows, which allows `load_rna_data()` to merge by `gene`.
-2. Main downstream consumers are02/04 for main RNA,03 for the main RNA metadata sample roster,05 for current zonation compatibility CSVs, and02 for the GDX RNA CSVs.03 reads its own GDX lipid input and does not consume these GDX RNA CSVs.
+2. Main downstream consumers are02/04 for main RNA,03 for the main RNA metadata
+   sample roster and02 for the GDX RNA CSVs. Workflow 05 also accepts the
+   section11 zonation compatibility CSV pair as an explicit input.
 3. The Seurat objects are already pseudobulk objects; columns represent pseudobulk samples, not single cells.
 4. Metadata from the raw Seurat object initially lacks `group` and `allosome_type`; downstream loaders merge those from the overview workbook.

@@ -15,10 +15,11 @@ The previous long instruction file is preserved at `miscellaneous/documentation/
 
 This repository analyses gonadal versus chromosome effects in Four Core Genotypes mouse liver, with RNA/lipid integration and independent validation. The current zonation and standalone diet release is **expanded_markers_20261116**, selected in `scripts/config/analysis_release.json`.
 
-- Main zonation entry: `scripts/workflows/17_expanded_marker_zonation_update.R`.
+- Main zonation entry: `scripts/workflows/05_zonation_analysis.R` for FCG and `--cohort=gdx` for paired gonadectomy. Zonal Workflow 07 uses the FCG checkpoint and its adjacent networks. Workflow 17 is an optional batch and audit entry.
 - Public pseudobulk inputs: `data/RNA/pseudobulk_csv/`, using the seven manifest paths in the release registry. Each RNA CSV part must be strictly smaller than 50,000,000 bytes.
 - Original RNA/Seurat RDS objects remain local and must not be allowed into the commit; readers prefer verified CSV manifests. Preserve source-object SHA256 separately from CSV payload hashes.
 - Current result root: `results/current/`. Consult `analysis_current(component)` for release components and the relocation ledger for frozen original paths.
+- Standalone diet analysis: Workflow 14 reads the expanded-marker diet transport directly and feeds 15 and 16.
 - Current manuscript Figure 6B and 6E: `scripts/reports/cf453_manuscript_panels.R` uses saved Workflow15 lipid contrasts and Workflow16 gene–lipid pairs. Workflow17 renders both panels. The anchor layouts retain their native Workflow16 filenames.
 - Old 05/07 bodies are implementation engines under `scripts/core/engines/`; use the maintained public entries/adapters, not an unreviewed legacy source call.
 - Historical two-marker inputs/results and 12/13 comparisons resolve through explicit historical registry keys. Never point those keys at current data.

@@ -130,7 +130,7 @@
           "producer": "external",
           "mode": "section12 if local RDS exists",
           "role": "Optional section12 source for02 GDX RNA validation.",
-          "availability_note": "Ignored local object; distinct from17 paired-zone GDX source."
+          "availability_note": "Ignored local object. Workflow 05 uses the separate paired-zone GDX source."
         }
       ],
       "outputs": [
@@ -194,7 +194,7 @@
       "notes": [
         "Main CSVs feed02/04; main RNA metadata also filters03 cohort.",
         "Only02 consumes the GDX RNA CSVs;03 GDX lipid analysis reads its own experimental CSV.",
-        "Section11 transport can regenerate05 compatibility input, while17 stages current transports independently.",
+        "Section11 can regenerate the optional FCG compatibility pair. Workflow 05 defaults to the current transport.",
         "DATASETS does not redirect hardcoded whole-FCG/GDX RDS paths."
       ],
       "evidence": [
@@ -643,13 +643,12 @@
     },
     {
       "id": "05",
-      "name": "Current expanded-marker FCG zonation",
+      "name": "Current FCG and paired gonadectomy zonation",
       "entrypoints": [
-        "scripts/workflows/05_zonation_analysis.R",
-        "scripts/reports/run_zonation_update_fcg.R"
+        "scripts/workflows/05_zonation_analysis.R"
       ],
       "plan": "docs/workflow_plans/05_zonation_analysis.md",
-      "purpose": "Run seven blocked zonation/gonad contrasts, fresh pathways, TFs, threshold selection, networks and class associations.",
+      "purpose": "Run the FCG zonation models, networks and panels, or the paired gonadectomy model, from the current expanded-marker profiles.",
       "status": "current_component_public_CSV_inputs",
       "inputs": [
         {
@@ -663,21 +662,36 @@
             "current_fcg_zonation_metadata"
           ],
           "producer": "curated",
-          "mode": "default --input",
-          "role": "Supplied paired-zone matrix/metadata;01section11 or17staging can regenerate from current transport.",
+          "mode": "FCG with explicit --input=DIR",
+          "role": "Compatibility matrix and metadata. Workflow 01 section 11 can regenerate this pair.",
           "availability_note": "Public tracked/nonignored files with the required software environment."
         },
         {
           "name": "Current FCG transport",
           "paths": [
-            "data/RNA/pseudobulk_csv/current_fcg_zonation/manifest.json"
+            "data/RNA/pseudobulk_csv/current_fcg_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/current_fcg_zonation/*.csv"
           ],
           "registry_keys": [
             "current_fcg_zonation_transport"
           ],
           "producer": "curated",
-          "mode": "coordinated17 staging",
-          "role": "Upstream source copied/extracted by17; not opened by bare05 wrapper.",
+          "mode": "default FCG",
+          "role": "Workflow 05 verifies the manifest and materializes the engine's input pair from the supplied scale.data layer and profile metadata.",
+          "availability_note": "Public tracked/nonignored files with the required software environment."
+        },
+        {
+          "name": "Current GDX transport",
+          "paths": [
+            "data/RNA/pseudobulk_csv/current_gdx_zonation/manifest.json",
+            "data/RNA/pseudobulk_csv/current_gdx_zonation/*.csv"
+          ],
+          "registry_keys": [
+            "current_gdx_zonation_transport"
+          ],
+          "producer": "curated",
+          "mode": "--cohort=gdx",
+          "role": "Workflow 05 verifies the transport and uses the scaled RNA and counts for the paired sex-by-surgery-by-zone fit and gene eligibility.",
           "availability_note": "Public tracked/nonignored files with the required software environment."
         },
         {
@@ -690,7 +704,7 @@
           ],
           "registry_keys": [],
           "producer": "curated",
-          "mode": "default",
+          "mode": "FCG",
           "role": "Whole-liver associations; GO/TF annotation.",
           "availability_note": "Public tracked/nonignored files with the required software environment."
         },
@@ -702,7 +716,7 @@
           ],
           "registry_keys": [],
           "producer": "03",
-          "mode": "default",
+          "mode": "FCG",
           "role": "Class direction/order and lipid association presentation.",
           "availability_note": "Public tracked/nonignored files with the required software environment."
         },
@@ -715,7 +729,7 @@
             "engine_fcg05"
           ],
           "producer": "frozen",
-          "mode": "default",
+          "mode": "FCG",
           "role": "Read as text and adapted, not directly sourced.",
           "availability_note": "Public tracked/nonignored files with the required software environment."
         }
@@ -737,43 +751,63 @@
           "mode": "default: generated below selected fresh --output; current_root paths identify the saved approved release only"
         },
         {
-          "name": "Fresh pathway/runtime records",
+          "name": "FCG pathway, panel and runtime records",
           "paths": [
             "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/pathway_enrichment.RData",
             "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/pathway_enrichment_fresh.csv",
-            "results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116/runtime/05_zonation_analysis_versioned.R"
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/panels/",
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/panel_source_data/",
+            "results/runs/NAME/fcg_panel_manifest.csv",
+            "results/runs/NAME/runtime/05_zonation_analysis_versioned.R",
+            "results/runs/NAME/inputs/fcg/input_provenance.csv"
           ],
           "registry_keys": [
             "current_root"
           ],
-          "mode": "default: generated below selected fresh --output; current_root paths identify the saved approved release only"
+          "mode": "FCG, with input provenance generated for direct transport input"
+        },
+        {
+          "name": "Paired GDX contrasts, eligibility and result cache",
+          "paths": [
+            "results/current/04_pericentral_and_periportal_hepatocyte_bias/gdx_zonation/new_results.csv",
+            "results/current/04_pericentral_and_periportal_hepatocyte_bias/gdx_zonation/new_summary.csv",
+            "results/current/04_pericentral_and_periportal_hepatocyte_bias/gdx_zonation/new_eligibility.csv",
+            "results/current/04_pericentral_and_periportal_hepatocyte_bias/gdx_zonation/gdx_paired_analysis.rds"
+          ],
+          "registry_keys": [
+            "current_root"
+          ],
+          "mode": "--cohort=gdx: generated under the selected fresh --output"
         }
       ],
       "calls": [],
-      "validation": "--validate-only checks current RNA integrity, packages and runtime parse without writes; later GO/TF/03 resources are not all opened by validation.",
-      "overwrite": "Shared approved-root guard rejects current_root and every descendant before full fitting, independent of cache presence (also in documented FCG report driver). Validation and explicit postprocess refresh remain allowed. Outside approved root, completed fcg05 checkpoint blocks rerun; partial destinations may be rewritten. Use explicit fresh --output.",
+      "validation": "--validate-only checks the selected transport and pairing. FCG validates packages and runtime syntax using temporary compatibility files. GDX checks the paired profiles and limma.",
+      "overwrite": "Use a fresh --output outside the published and legacy roots. A completed FCG05 checkpoint or GDX result cache blocks repeating that cohort in the selected root. Files from partial runs can be rewritten.",
       "commands": [
         {
           "command": "Rscript scripts/workflows/05_zonation_analysis.R --validate-only",
-          "effect": "Read-only current input/runtime validation."
+          "effect": "Validate the current FCG inputs and runtime without saving results."
         },
         {
           "command": "Rscript scripts/workflows/05_zonation_analysis.R --output=results/runs/fcg_zonation_reproduction",
-          "effect": "Fit current05 engine/checkpoint into explicit fresh root; does not call07 or science-panel finalizer."
+          "effect": "Fit FCG, write the networks and panels and save the checkpoint for zonal Workflow 07."
+        },
+        {
+          "command": "Rscript scripts/workflows/05_zonation_analysis.R --cohort=gdx --output=results/runs/gdx_zonation_reproduction",
+          "effect": "Run the current paired gonadectomy zonation fit independently."
         }
       ],
       "notes": [
-        "Source-safe wrapper; calls zmu_run05, not old direct body.",
-        "No02/04/historical model/pathway cache needed for current fit.",
-        "Fresh ULM minsize15 replaces frozen cache section; condition order and absent-category scalar fixes are preserved.",
-        "17/report-driver --science-only adds07 and current panel finalization; retrospective report-driver modes require archive references.",
-        "12/13 consume historical_fcg05, not current05 outputs.",
-        "Guard-only hardening was tested with missing-cache Git-like fixtures and model/render stubs; engines/statistical functions were unchanged."
+        "The released FCG and GDX transports contain the supplied expanded-marker assignments.",
+        "FCG fits retain explicit condition order, fresh ULM minsize15 and absent-category scalar handling.",
+        "Workflow 07 uses the expanded-marker FCG result. Workflow 17 offers a batch run.",
+        "Retrospective comparisons and Workflows 12/13 use explicit archive references."
       ],
       "evidence": [
         "scripts/workflows/05_zonation_analysis.R",
+        "scripts/core/zonation_inputs.R",
         "scripts/core/zonation_update_fcg.R",
-        "scripts/reports/run_zonation_update_fcg.R"
+        "scripts/core/zonation_update_gdx.R"
       ]
     },
     {
@@ -859,7 +893,7 @@
       "status": "source_safe_two_mode_component",
       "inputs": [
         {
-          "name": "Same-root current FCG reference",
+          "name": "Selected current FCG reference",
           "paths": [
             "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/fcg05_checkpoint.rds",
             "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg05/networks/cormat_testes_portal_full_SIF.csv",
@@ -873,7 +907,7 @@
           "producer": "05",
           "mode": "default zonal",
           "role": "Paired current FCG reference and candidate networks.",
-          "availability_note": "Checkpoint is an ignored generated model cache; clone must first fit05/17 in the same fresh output root or restore it explicitly."
+          "availability_note": "Run Workflow 05 for FCG into the same output root or pass --parent= to the checkpoint from another run. Generated checkpoints are ignored in Git."
         },
         {
           "name": "Unchanged canonical KD fit/table",
@@ -944,7 +978,9 @@
             "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_prespecified_source.csv",
             "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Mtmr11_male_PP_ULM_background_source.csv",
             "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/Fig5F_Mtmr11_male_PP_prespecified.pdf",
-            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/structural_consistency/*"
+            "results/current/05_sex_polarised_zonation_gene_lipid_interactions/fcg07/structural_consistency/*",
+            "results/runs/NAME/fcg07/reference_provenance.csv",
+            "results/runs/NAME/fcg07/panel_manifest.csv"
           ],
           "registry_keys": [
             "current_root"
@@ -965,16 +1001,20 @@
         }
       ],
       "calls": [],
-      "validation": "Default --validate-only checks05checkpoint, KD table/fit and packages (not later structural reference). --global-only --validate-only checks raw/global/structural inputs and runtime parse. Source-safe.",
-      "overwrite": "Shared approved-root guard rejects full zonal fitting at current_root/descendants independently of caches; validate-only remains allowed. Outside it, completed fcg07 checkpoint blocks rerun; partial destinations may be rewritten. Global-only requires explicit empty/fresh output.",
+      "validation": "Default --validate-only checks the selected 05 checkpoint, adjacent networks, KD table/fit and packages. --global-only --validate-only checks raw/global/structural inputs and runtime syntax. Source-safe.",
+      "overwrite": "The shared guard protects approved and legacy output roots. An existing fcg07 checkpoint protects a complete zonal run. Global-only execution requires an explicit empty or fresh output directory.",
       "commands": [
         {
           "command": "Rscript scripts/workflows/07_validation_experiments.R --validate-only",
-          "effect": "Read-only selected-root zonal setup check; requires generated05checkpoint."
+          "effect": "Check the saved zonal prerequisites for the selected FCG checkpoint."
         },
         {
           "command": "Rscript scripts/workflows/07_validation_experiments.R --output=results/runs/fcg_zonation_reproduction",
-          "effect": "Run zonal validation after05 in the same fresh root."
+          "effect": "Run zonal validation after Workflow 05 in the same root and add Figure 5F to its panel manifest."
+        },
+        {
+          "command": "Rscript scripts/workflows/07_validation_experiments.R --parent=results/runs/fcg_zonation_reproduction/fcg05/fcg05_checkpoint.rds --output=results/runs/fcg_zonal_validation",
+          "effect": "Use the selected FCG checkpoint and its adjacent networks, with validation outputs in a separate directory."
         },
         {
           "command": "Rscript scripts/workflows/07_validation_experiments.R --global-only --validate-only",
@@ -986,7 +1026,7 @@
         }
       ],
       "notes": [
-        "Default mode does not read rawKD orglobalMOFA network; globalonly does not read zonation network.",
+        "Default zonal mode uses the selected expanded-marker FCG reference. Global-only mode uses the global MOFA network.",
         "Prespecified Mtmr11 malePP is separate from adaptive best context; ULM fullKDbackground differs from matchedscatter universe.",
         "Workflow11 in-vivoKO is independent;07b/07c are compatibility phase entries for11."
       ],
@@ -1838,7 +1878,7 @@
         "scripts/workflows/14_cf453_standalone_figure6.R"
       ],
       "plan": "docs/workflow_plans/14_cf453_standalone_figure6.md",
-      "purpose": "Supply current RNA/lipid models; optionally run full legacy30-panel association presentation",
+      "purpose": "Fit current diet models directly from the expanded-marker zone profiles and liver lipid measurements. The full mode also produces the legacy presentation.",
       "status": "current upstream model stage; full presentation alternative",
       "inputs": [
         {
@@ -2128,13 +2168,13 @@
     },
     {
       "id": "17",
-      "name": "Current expanded-marker zonation and standalone diet pipeline",
+      "name": "Optional zonation and standalone diet batch run",
       "entrypoints": [
         "scripts/workflows/17_expanded_marker_zonation_update.R"
       ],
       "plan": "docs/workflow_plans/17_expanded_marker_zonation_update.md",
-      "purpose": "Reproduce current FCG zonal/KD, paired GDX and CF45314/15/16/layout stages; optional retrospective manuscript audit",
-      "status": "current main zonation/diet entry",
+      "purpose": "Run the current 05, 07 and 14–16 branches together, render Figure 6 and run release QA. The retrospective manuscript audit is optional.",
+      "status": "optional batch run and retrospective audit",
       "inputs": [
         {
           "name": "Three current expanded-marker zone transports",
@@ -2355,7 +2395,7 @@
         "6BE_manuscript"
       ],
       "validation": "Entry --validate-only verifies3zone transports, balanced zones, engine paths and KD CSV/RData; no models or writes. It does NOT check all03/06/resources/whole-hepatocyte14 prerequisites. With --with-manuscript-audit it also checks Python and selected historical cache files, not all private/report dependencies.",
-      "overwrite": "Before any writes, full science/audit and report-only modes reject published current_root, legacy_results_root and all descendants including cache-absent/symlink aliases via analysis_assert_not_approved_output; ordinary completed-cache guards remain. Validation skips guard and writes nothing. Explicit report-only skips guard and rewrites saved audit/report outputs.",
+      "overwrite": "Science and audit modes require an output outside the published and legacy trees. The full batch requires a fresh output. Report-only rewrites reports in a complete saved run. Validation saves no outputs.",
       "commands": [
         {
           "command": "Rscript scripts/workflows/17_expanded_marker_zonation_update.R --validate-only",
@@ -2366,20 +2406,20 @@
           "effect": "Current science; does not run03/06 or refit rawKD"
         },
         {
-          "command": "Rscript scripts/workflows/17_expanded_marker_zonation_update.R --report-only",
+          "command": "Rscript scripts/workflows/17_expanded_marker_zonation_update.R --report-only --output=results/runs/saved_batch",
           "effect": "Saved-cache QA/table/inventory/report/bundle refresh; private prerequisites"
         }
       ],
       "notes": [
-        "Normal source-root is public pseudobulk_csv_root; staging copies zones only.14 whole-hepatocyte/lipid intake still comes from repository registry/defaults.",
+        "Default staging selects the same current cohort transports as Workflows 05 and 14. An explicit --source-root can override the three zone inputs for batch reproduction.",
+        "The scientific batch invokes the FCG and GDX modes of 05 and the zonal mode of 07. The audit invokes the report drivers to produce the historical comparisons.",
         "Normal scientific run does not require private manuscript, original datasets or Codex runtime.",
         "Optional Python tables-only copies13tableCSVs; statistical source CSVs do not depend on that copy.",
         "Fresh runs pass the saved15 lipid-results table and saved16 selected-pair source table to the manuscript Figure 6B and 6E renderer.",
         "Audit source-root is reused for preprocessing reference lookup: fresh audit needs a combined source folder or exact pre-staged references.",
         "Report-only implies audit and still requires saved model/checkpoint/comparison caches; it does not rebuild missing model stages.",
         "James retains nucleus-composition panels and exact executed marker-list confirmation.",
-        "Guard-only public-clone protection was added and tested with cache-absent stub fixtures; no estimates or approved artifacts changed.",
-        "Internal staging/GDX/core helpers retain cache guards and are not public approved-output-safe entries; maintained17 protects the chain before invoking them. Standalone maintained FCG driver also has the shared full guard."
+        "The direct Workflow 05 and 14 entries support individual reruns from the same expanded-marker inputs."
       ],
       "evidence": [
         "scripts/workflows/17_expanded_marker_zonation_update.R",

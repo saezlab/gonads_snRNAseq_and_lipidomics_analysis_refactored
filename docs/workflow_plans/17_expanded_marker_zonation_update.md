@@ -1,8 +1,11 @@
-# Workflow 17: Current expanded-marker zonation and diet pipeline
+# Workflow 17: Optional zonation and diet batch run
 
 ## Maintained entry and release
 
 Entry: `scripts/workflows/17_expanded_marker_zonation_update.R`.
+The standard Workflow 05 and Workflow 14 entries select the expanded-marker
+profiles themselves. This optional coordinator runs the branches together,
+performs release QA and supports retrospective manuscript audits.
 `analysis_path("current_root")` selects the published `results/current/` layout. The previous complete run resides in the ignored archive. A fresh scientific run must supply
 `--output=results/runs/NAME`. Before any staging or writes, full scientific and
 full manuscript-audit modes call `analysis_assert_not_approved_output()`, rejecting
@@ -13,12 +16,9 @@ are refused. Existing `cf453_models/models.rds` or
 Staging and internal FCG/GDX components retain their checkpoint/cache guards.
 There is no general resume mode for a partial release.
 
-`stage_zonation_marker_update.R`, the GDX driver and `zonation_update_*` helpers
-are internal components of this protected chain, not independent public rerun
-entries with the same approved-output guarantee. Their local cache guards are
-not a substitute for the main17 guard. The maintained standalone FCG driver
-`run_zonation_update_fcg.R` also has the shared full-run guard; use the public
-05/17 entries and documented modes for ordinary reruns.
+The ordinary scientific stages invoke the public Workflow 05 FCG and GDX modes,
+zonal Workflow 07, and Workflows 14–16. The historical audit uses the FCG and
+GDX report drivers for the archived inputs and old/new comparisons.
 
 Source loading defines `zu17_run()` without executing it. Run from the repository
 root. The public scientific default does not require the private manuscript,
@@ -53,8 +53,8 @@ Accepted flags are `--validate-only`, `--report-only`, `--with-manuscript-audit`
 values are `--output`, `--source-root`, `--python`. Unknown/duplicate options and
 simultaneous validation/report-only are rejected.
 
-- **Default science:** stage three current zone inputs; run current FCG05 and
-  zonal07 adapters plus paired current GDX; run14 `--models-only`,15
+- **Default science:** stage three current zone inputs; run 05 for FCG,
+  zonal 07 and `05 --cohort=gdx`; run14 `--models-only`,15
   `--models-only`,16 full, the two anchor layouts and manuscript 6B/6E; run
   current scientific QA.
   If Python is available, copy the formal source tables with `--tables-only`.
@@ -79,15 +79,18 @@ simultaneous validation/report-only are rejected.
 - **`--report-only`:** implies manuscript-audit mode and skips model/staging
   stages. It reads saved FCG/GDX/14/15/16 caches and comparison tables, runs
   scientific/retrospective numerical QA, stages source tables/references and
-  rewrites inventory/report/bundle. This explicit mode bypasses the approved-output write guard. It is not a read-only command and cannot
-  reconstruct missing comparisons/model caches. Main model fits are not rerun.
+  rewrites inventory/report/bundle in the supplied saved run outside the
+  approved and legacy trees. Restore a complete set of comparisons and model
+  caches for this mode.
 
-`--source-root` defaults to registry `pseudobulk_csv_root`. For each cohort,
-staging prefers `current_<cohort>_zonation/manifest.json`, then
+With no `--source-root`, staging reads the same `current_*_zonation_transport`
+registry paths as the individual workflows. For an explicit source root, it
+prefers `current_<cohort>_zonation/manifest.json`, then
 `<cohort>/manifest.json`, then an explicit local `<cohort>_zonation_pseudobulks_score.rds`.
 It copies and SHA-verifies all transport payloads into `<output>/inputs/<cohort>/`.
 FCG/GDX scale-layer CSVs reproduce the established sample-name conventions;
-Workflow14 receives the staged WDSD manifest. New provenance hashes actual CSV
+Workflow 05 receives the staged FCG engine CSV pair or the GDX transport, and
+Workflow 14 receives the staged WDSD transport. New provenance hashes actual CSV
 files separately from the original source-RDS identity. No normalization changes.
 
 ## Outputs and parent graph
@@ -95,7 +98,8 @@ files separately from the original source-RDS identity. No normalization changes
 Fresh run components under `--output` are `inputs`, `fcg05`, `fcg07`, `gdx_zonation`,
 `cf453_models`, `cf453_direct_diet`, `cf453_rewiring`, `cf453_layouts`,
 `cf453_manuscript_panels`, `runtime`,
-`logs` and QA/manifests. `cf453_models/models.rds` feeds15 and16;
+`logs` and QA/manifests. FCG05 and zonal07 have separate logs.
+`cf453_models/models.rds` feeds15 and16;
 `cf453_direct_diet/diet_analysis.rds` additionally feeds16;
 `cf453_rewiring/rewiring_analysis.rds` feeds the anchor layout entry.
 The manuscript renderer reads the fresh Workflow15 lipid-results CSV and

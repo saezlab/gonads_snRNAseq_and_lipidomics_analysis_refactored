@@ -15,7 +15,7 @@ For input dependencies, producers, execution modes and fresh-checkout requiremen
 | Main cell-type RNA DE | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/ttop_full_list.RData` | Workflow02; separate from zonation-model sex effects |
 | Main lipid DE | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/gonade_type_ttop.csv` | Workflow03; use actual tables rather than old prose counts |
 | MOFA weights / global networks | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/main_model_RNA_lipid_weight.RData`, `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/networks/` | Workflow04, selected trained model set |
-| Current FCG zonation DE | `analysis_current()` · `fcg05/ttop_full_long.csv`, `t_table_zonation.csv` | Workflow17/FCG adapter; all seven contrasts |
+| Current FCG zonation DE | `analysis_current()` · `fcg05/ttop_full_long.csv`, `t_table_zonation.csv` | Workflow 05, FCG mode; all seven contrasts |
 | Selected spatial programmes | `analysis_current()` · `fcg05/sex_specific_zonation_genes_summary.csv` | Reoptimized cutoff4.4; fixed5.4 sensitivity is separately audited |
 | Gene–lipid networks | `analysis_current()` · `fcg05/networks/` | Four gonad × zone contexts; SIF/ATT sources |
 | Lipid-class associations | `analysis_current()` · `fcg05/panel_source_data/` | Faithful historical butterfly and explicit gene-context view have different sex encodings |
@@ -24,7 +24,7 @@ For input dependencies, producers, execution modes and fresh-checkout requiremen
 | Standalone diet models | `analysis_current()` · `cf453_models/`, `cf453_direct_diet/` | Workflow14/15 model caches; seven mice per sex/diet |
 | Manuscript Figure 6B and 6E | [A4 panels and legends](../results/current/06_western_diet_and_gene_lipid_circuitry/cf453_manuscript_panels/README.md) | Plot-only exports from Workflow15 lipid contrasts and Workflow16 selected gene–lipid pairs |
 | Figure 6C and 6D sources | `analysis_current()` · `cf453_rewiring/panels/`, `cf453_layouts/panels/` and their `source_data/` | Saved anchor trajectories and layout alternatives, and exploratory lipid-class associations. Filenames retain the workflow numbering. |
-| GDX supporting result | `analysis_current()` · `gdx_zonation/` | Paired sham/GDX model; not a replay of the mismatched hormone-replacement notebook |
+| GDX supporting result | `analysis_current()` · `gdx_zonation/` | Workflow 05 `--cohort=gdx`; paired sham/GDX model |
 | KD experimental measurements | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv`, `knockdown_ttop_list.RData` | Preserved experimental data |
 | In-vivo Cyp2c38 validation | `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/` | Workflow11; independent whole-hepatocyte reference |
 | Lipid-only structural / variance models | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/`, `variance_analysis/` | Workflows06/08 |

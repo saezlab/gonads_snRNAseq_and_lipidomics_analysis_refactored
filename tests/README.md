@@ -24,6 +24,7 @@ Organization verification compares inputs and approved scientific artifacts with
 
 | Check | Scope and prerequisites |
 | --- | --- |
+| `Rscript scripts/workflows/05_zonation_analysis.R --validate-only` and `--cohort=gdx --validate-only` | Check the selected expanded-marker CSV input. FCG also checks the temporary engine inputs and runtime syntax. |
 | `Rscript scripts/workflows/17_expanded_marker_zonation_update.R --validate-only` | Reads/verifies the three current zone CSV transports, engine files and saved KD files; no fitting or writes. It does not check every full-run03/06/resource dependency. |
 | `Rscript tests/test_analysis_release.R` | Checks registry, frozen engines, relocation and raw-input identity for the saved current diet model cache; requires ignored `cf453_models/models.rds` and adjacent provenance. Optional `--with-historical` also needs restored historical caches. |
 | `Rscript tests/test_validation_global_entry.R` | With no extra argument, checks the07 global entry's prerequisites and generated runtime text; no fits. Its optional fresh-output argument compares an already-generated independent validation rerun; it does not create that rerun. |
@@ -34,7 +35,10 @@ Workflow11 `--validate-only` fits its observed weighted limma model in memory. W
 
 ## Scientific reproductions
 
-Use the fresh-output commands and dependency order in [PIPELINE.md](../PIPELINE.md). Current zonation/diet runs use17; manual diet runs pass new14 and15 cache paths explicitly to16. Use isolated checkouts/copies for older fixed-root workflows. Preserve the approved release and never repoint historical two-marker keys to current inputs.
+Use the fresh-output commands and dependency order in [PIPELINE.md](../PIPELINE.md).
+Run FCG 05 before zonal 07, or choose the paired GDX mode in 05. Diet-only
+runs pass the new 14 and 15 cache paths explicitly to 16. Workflow 17 offers
+batch reproduction. Use isolated checkouts for older fixed-root workflows.
 
 Historical source-snapshot QA can flag intentional code/plan changes even when preserved numerical files and normal parent-cache checks pass. Keep the original recorded hashes and interpret the stated mismatch; do not refresh frozen provenance to hide drift.
 

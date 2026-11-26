@@ -30,6 +30,17 @@ qa_pseudobulk_csv_consumers <- function(baseline_dir=NULL,output=NULL) {
     }
     rm(x);invisible(gc())
   }
+  five <- new.env(parent = globalenv())
+  sys.source("scripts/workflows/05_zonation_analysis.R", envir = five)
+  selected_transports <- character()
+  five$analysis_path <- function(key, ...) {
+    selected_transports <<- c(selected_transports, key)
+    analysis_path(key, ...)
+  }
+  check("Workflow 05 FCG CSV-only validation", isTRUE(five$fcg_zonation_run("--validate-only")))
+  check("Workflow 05 GDX CSV-only validation", isTRUE(five$fcg_zonation_run(c("--cohort=gdx", "--validate-only"))))
+  check("Workflow 05 directly selects both expanded-marker manifests",
+    identical(selected_transports, c("current_fcg_zonation_transport", "current_gdx_zonation_transport")))
   source("scripts/workflows/17_expanded_marker_zonation_update.R",local=TRUE)
   check("Workflow17 CSV-only validation",isTRUE(zu17_run("--validate-only")))
   a<-readRDS(analysis_current("cf453_models/models.rds"))

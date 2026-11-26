@@ -1,10 +1,13 @@
 # Stage verified pseudobulk CSV transports; explicit local RDS imports remain possible.
 source("scripts/support_functions.R")
 source("scripts/config/analysis_release.R")
+source("scripts/core/zonation_inputs.R")
 if(dir.exists(".local/R-library")) .libPaths(c(normalizePath(".local/R-library"),.libPaths()))
 
-zu_source_input <- function(cohort,source_root=analysis_path("pseudobulk_csv_root")) {
+zu_source_input <- function(cohort, source_root = NULL) {
   stopifnot(cohort%in%c("fcg","gdx","wdsd"))
+  if (is.null(source_root))
+    return(analysis_path(paste0("current_", cohort, "_zonation_transport"), mustWork = TRUE))
   # CSV always wins when both representations are present in an explicit source root.
   candidates<-c(file.path(source_root,paste0("current_",cohort,"_zonation"),"manifest.json"),
     file.path(source_root,cohort,"manifest.json"),file.path(source_root,paste0(cohort,"_zonation_pseudobulks_score.rds")))
@@ -13,7 +16,7 @@ zu_source_input <- function(cohort,source_root=analysis_path("pseudobulk_csv_roo
   normalizePath(found[1L],mustWork=TRUE)
 }
 
-zu_stage_inputs <- function(output=analysis_current(),source_root=analysis_path("pseudobulk_csv_root")) {
+zu_stage_inputs <- function(output=analysis_current(), source_root=NULL) {
   analysis_assert_not_approved_output(output)
   source("scripts/core/pseudobulk_csv.R",local=TRUE)
   if(file.exists(file.path(output,"fcg05/fcg05_checkpoint.rds")))
@@ -40,15 +43,7 @@ zu_stage_inputs <- function(output=analysis_current(),source_root=analysis_path(
     id<-if(cohort=="wdsd")m$cf453_id else m$sample_name
     stopifnot(all(is.finite(cts)),all(cts>=0),max(abs(cts-round(cts)))==0,all(is.finite(dat)),err<1e-12,
       all(table(id)==2L),all(table(m$zonation_type)==length(o$cells)/2))
-    if(cohort %in% c("fcg","gdx")) {
-      x<-as.matrix(o$layers$scale.data)
-      m$sample<-gsub("-","_",as.character(m$orig.ident));m$sample_name<-gsub("-","_",m$sample_name)
-      m<-m[,c("sample",setdiff(colnames(m),c("sample","orig.ident")))]
-      colnames(x)<-m$sample
-      tag<-if(cohort=="fcg")"" else "gdx_"
-      utils::write.csv(data.frame(gene=rownames(x),x,check.names=FALSE),file.path(destination,paste0("scaled_RNA_",tag,"zonation.csv")),row.names=FALSE)
-      utils::write.csv(m,file.path(destination,paste0("meta_data_df_",tag,"zonation.csv")),row.names=FALSE)
-    }
+    if(cohort %in% c("fcg","gdx")) zu_write_scaled_inputs(o,destination,cohort)
     qc[[cohort]]<-data.frame(cohort=cohort,genes=length(o$features),profiles=length(o$cells),mice=length(unique(id)),paired_zones=TRUE,normalization_max_error=err)
   }
   utils::write.csv(do.call(rbind,imports),file.path(output,"inputs/import_manifest.csv"),row.names=FALSE)

@@ -52,12 +52,19 @@ test_approved_output_guard <- function(){
   five$analysis_assert_not_approved_output<-function(output)analysis_assert_not_approved_output(output,root)
   five$zmu_require<-function()TRUE;five$zmu_validate<-function(...)TRUE
   five$zmu_runtime05<-function(...)"TRUE"
-  fits05<-0L;five$zmu_run05<-function(...){fits05<<-fits05+1L;invisible(TRUE)}
+  compat_input <- file.path(root, "compatibility")
+  dir.create(compat_input)
+  input_option <- paste0("--input=", compat_input)
+  fits05<-0L;five$zmu_run05<-function(input_dir, output_root, current_panels){
+    stopifnot(identical(input_dir, compat_input), isTRUE(current_panels))
+    fits05<<-fits05+1L;invisible(TRUE)
+  }
   expect_guard(five$fcg_zonation_run())
   expect_guard(five$fcg_zonation_run(paste0("--output=",approved)))
-  stopifnot(fits05==0L,isTRUE(five$fcg_zonation_run("--validate-only")))
+  expect_guard(five$fcg_zonation_run(c("--cohort=gdx", paste0("--output=", approved))))
+  stopifnot(fits05==0L,isTRUE(five$fcg_zonation_run(c(input_option, "--validate-only"))))
   fresh05<-file.path(root,"results/fresh05")
-  five$fcg_zonation_run(paste0("--output=",fresh05))
+  five$fcg_zonation_run(c(input_option, paste0("--output=",fresh05)))
   stopifnot(fits05==1L,!dir.exists(fresh05))
 
   driver<-new.env(parent=globalenv());sys.source("scripts/reports/run_zonation_update_fcg.R",envir=driver)
@@ -76,18 +83,29 @@ test_approved_output_guard <- function(){
   seven$analysis_current<-function(component="",...)if(nzchar(component))file.path(approved,component) else approved
   seven$analysis_assert_not_approved_output<-function(output)analysis_assert_not_approved_output(output,root)
   seven$zmu_require<-function()TRUE
-  fits07<-0L;seven$zmu_run07<-function(...){fits07<<-fits07+1L;invisible(TRUE)}
+  parents07 <- character()
+  seven$zmu_run07 <- function(output_root, checkpoint_path) {
+    parents07 <<- c(parents07, checkpoint_path)
+    invisible(TRUE)
+  }
   expect_guard(seven$zonation_validation_run())
   expect_guard(seven$zonation_validation_run(paste0("--output=",approved)))
-  stopifnot(fits07==0L)
+  stopifnot(!length(parents07))
   # Validation remains allowed when its declared prerequisites exist.
-  writeLines("fixture checkpoint, never read",file.path(approved,"fcg05/fcg05_checkpoint.rds"))
+  fake_reference <- function(path) {
+    networks <- zmu_zonal_network_paths(path)
+    dir.create(dirname(networks[1L]), recursive = TRUE)
+    stopifnot(all(file.create(c(path, networks))))
+  }
+  approved_parent <- file.path(approved, "fcg05/fcg05_checkpoint.rds")
+  fake_reference(approved_parent)
   stopifnot(isTRUE(seven$zonation_validation_run("--validate-only")))
   fresh07<-file.path(root,"results/fresh07")
-  dir.create(file.path(fresh07,"fcg05"),recursive=TRUE)
-  writeLines("fixture checkpoint, never read",file.path(fresh07,"fcg05/fcg05_checkpoint.rds"))
+  fresh_parent <- file.path(fresh07, "fcg05/fcg05_checkpoint.rds")
+  fake_reference(fresh_parent)
   seven$zonation_validation_run(paste0("--output=",fresh07))
-  stopifnot(fits07==1L,!dir.exists(file.path(fresh07,"fcg07")))
+  seven$zonation_validation_run(c(paste0("--output=", fresh07), paste0("--parent=", approved_parent)))
+  stopifnot(identical(parents07, c(fresh_parent, approved_parent)), !dir.exists(file.path(fresh07,"fcg07")))
 
   current<-function(component="",...)if(nzchar(component))file.path(approved,component) else approved
   seventeen<-new.env(parent=globalenv());sys.source("scripts/workflows/17_expanded_marker_zonation_update.R",envir=seventeen)

@@ -1,14 +1,26 @@
 source("scripts/config/analysis_release.R")
-# Supporting GDX branch for Workflow17. Never sources the unsafe legacy notebook.
+# Paired GDX zonation on the supplied pseudobulk profiles.
+zu_gdx_read_input <- function(path) {
+  source("scripts/core/pseudobulk_csv.R", local = TRUE)
+  o <- pb_components(path)
+  m <- o$meta.data
+  required <- c("group", "sample_name", "zonation_type")
+  stopifnot(all(required %in% names(m)), !anyNA(m[, required]),
+    setequal(unique(m$group), c("f-s-v", "f-g-v", "m-s-v", "m-g-v")),
+    setequal(unique(m$zonation_type), c("Periportal", "Pericentral")),
+    length(o$cells) == 44L, all(table(m$sample_name, m$zonation_type) == 1L),
+    identical(colnames(o$layers$scale.data), rownames(m)),
+    identical(dimnames(o$layers$scale.data), dimnames(o$layers$counts)))
+  o
+}
+
 zu_gdx_fit <- function(path,version) {
-  source("scripts/core/pseudobulk_csv.R",local=TRUE)
-  o<-pb_components(path);m<-o$meta.data
-  stopifnot(setequal(unique(m$group),c("f-s-v","f-g-v","m-s-v","m-g-v")),length(o$cells)==44L)
+  o <- zu_gdx_read_input(path)
+  m <- o$meta.data
   m$mouse_id<-m$sample_name;m$sex<-ifelse(substr(m$group,1,1)=="f","female","male")
   m$surgery<-ifelse(substr(m$group,3,3)=="g","gdx","sham")
   m$zone<-ifelse(m$zonation_type=="Periportal","PP","PC")
   m$cell<-paste(m$sex,m$surgery,m$zone,sep="_")
-  stopifnot(all(table(m$mouse_id)==2L),all(table(m$mouse_id,m$zone)==1L))
   x<-as.matrix(o$layers$scale.data)
   cts<-as.matrix(o$layers$counts)
   eligibility<-data.frame(gene=rownames(x),detected_profiles=rowSums(cts>0),variable=apply(x,1,stats::sd)>1e-8)
@@ -39,18 +51,19 @@ zu_gdx_fit <- function(path,version) {
       historical_status="new paired supporting analysis of both old/new inputs; not a replay of the legacy hormone-replacement notebook"))
 }
 
-zu_gdx_run <- function(root=analysis_current(),science_only=FALSE) {
+zu_gdx_run <- function(root=analysis_current(), science_only=FALSE, input=NULL) {
   analysis_assert_not_approved_output(root)
   output<-file.path(root,"gdx_zonation")
   if(file.exists(file.path(output,"gdx_paired_analysis.rds")))stop("Preserve completed GDX results: choose a fresh output root")
+  if (is.null(input)) {
+    staged <- file.path(root, c("inputs/gdx/manifest.json", "inputs/gdx/gdx_zonation_pseudobulks_score.rds"))
+    available <- staged[file.exists(staged)]
+    if (!length(available)) stop("The retrospective GDX driver needs a staged GDX transport")
+    input <- available[1L]
+  }
   dir.create(output,recursive=TRUE,showWarnings=FALSE)
-  candidates<-file.path(root,c("inputs/gdx/manifest.json","inputs/gdx/gdx_zonation_pseudobulks_score.rds"))
-  available<-candidates[file.exists(candidates)]
-  if(!length(available))stop("Stage the current GDX pseudobulk CSV transport first")
-  current_input<-available[1L]
   if(science_only){
-    new<-zu_gdx_fit(current_input,"expanded_marker_score")
-    saveRDS(list(new=new),file.path(output,"gdx_paired_analysis.rds"))
+    new<-zu_gdx_fit(input,"expanded_marker_score")
     for(nm in c("results","summary","eligibility","metadata"))
       utils::write.csv(new[[nm]],file.path(output,paste0("new_",nm,".csv")),row.names=FALSE)
     for(family in unique(new$results$family)){
@@ -59,10 +72,11 @@ zu_gdx_run <- function(root=analysis_current(),science_only=FALSE) {
     }
     writeLines(c("Current expanded-marker GDX supporting analysis:22 mice/44 paired profiles.",
       "Historical comparisons and the manuscript audit are optional; no old input is required for this fit."),file.path(output,"README.txt"))
+    saveRDS(list(new=new),file.path(output,"gdx_paired_analysis.rds"))
     return(invisible(list(new=new)))
   }
   old<-zu_gdx_fit(analysis_path("historical_gdx_zonation_rds"),"original_two_marker")
-  new<-zu_gdx_fit(current_input,"expanded_marker_score")
+  new<-zu_gdx_fit(input,"expanded_marker_score")
   saveRDS(list(old=old,new=new),file.path(output,"gdx_paired_analysis.rds"))
   for(nm in c("results","summary","eligibility","metadata")) {
     utils::write.csv(old[[nm]],file.path(output,paste0("old_",nm,".csv")),row.names=FALSE)

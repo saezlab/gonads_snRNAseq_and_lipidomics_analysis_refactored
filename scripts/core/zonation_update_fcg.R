@@ -1,6 +1,5 @@
 source("scripts/config/analysis_release.R")
-# Versioned rerun of FCG Workflow 05 and its zonation-dependent validation.
-# Historical workflows and their default paths are deliberately left unchanged.
+# Current FCG zonation models, panels and zonation-dependent validation.
 zmu_require <- function() {
   if (dir.exists(".local/R-library")) .libPaths(c(".local/R-library", .libPaths()))
   pkgs <- c("limma", "dplyr", "tidyr", "ggplot2", "ggrepel", "cowplot",
@@ -13,13 +12,15 @@ zmu_require <- function() {
 
 zmu_validate <- function(input_dir) {
   paths <- file.path(input_dir, c("scaled_RNA_zonation.csv", "meta_data_df_zonation.csv"))
-  stopifnot(all(file.exists(paths)))
+  if (!all(file.exists(paths)))
+    stop("Missing FCG zonation input: ", paste(paths[!file.exists(paths)], collapse = ", "))
   x <- utils::read.csv(paths[1], row.names = 1, check.names = FALSE)
   m <- utils::read.csv(paths[2], check.names = FALSE)
   required <- c("sample", "sample_name", "zonation_type", "gonadal_type")
   stopifnot(all(required %in% names(m)), !anyDuplicated(m$sample),
     !anyDuplicated(rownames(x)), setequal(m$sample, colnames(x)),
-    all(is.finite(as.matrix(x))), all(table(m$sample_name) == 2L),
+    all(is.finite(as.matrix(x))), !anyNA(m[, required]),
+    all(table(m$sample_name, m$zonation_type) == 1L),
     all(m$zonation_type %in% c("Pericentral", "Periportal")),
     all(m$gonadal_type %in% c("Ovaries", "Testes")))
   cat("FCG input dimensions:", nrow(x), "genes x", ncol(x), "profiles;",
@@ -29,7 +30,7 @@ zmu_validate <- function(input_dir) {
 }
 
 zmu_runtime05 <- function(input_dir, output) {
-  output <- file.path(normalizePath(dirname(output), mustWork = TRUE), basename(output))
+  output <- file.path(normalizePath(dirname(output), mustWork = FALSE), basename(output))
   input_dir <- normalizePath(input_dir, mustWork = TRUE)
   text <- readLines(analysis_path("engine_fcg05",mustWork=TRUE), warn = FALSE)
   text <- gsub("results/zonation", output, text, fixed = TRUE)
@@ -76,7 +77,7 @@ zmu_write_runtime <- function(text, path) {
   invisible(path)
 }
 
-zmu_run05 <- function(input_dir, output_root) {
+zmu_run05 <- function(input_dir, output_root, current_panels = FALSE) {
   zmu_require(); zmu_validate(input_dir)
   output <- file.path(output_root, "fcg05")
   if (file.exists(file.path(output, "fcg05_checkpoint.rds")))
@@ -106,8 +107,9 @@ zmu_run05 <- function(input_dir, output_root) {
     candidates = list(TPP = e$testes_periportal_genes$gene,
       TPC = e$testes_pericentral_genes$gene, OPP = e$ovaries_periportal_genes$gene,
       OPC = e$ovaries_pericentral_genes$gene))
-  saveRDS(result, file.path(output, "fcg05_checkpoint.rds"))
+  if (current_panels) zmu_science_finish(output_root, result, include_validation = FALSE)
   writeLines(capture.output(sessionInfo()), file.path(output, "sessionInfo.txt"))
+  saveRDS(result, file.path(output, "fcg05_checkpoint.rds"))
   invisible(result)
 }
 
@@ -134,9 +136,21 @@ zmu_mean_cl_normal <- function(x,conf.int=.95,mult=NULL,na.rm=TRUE) {
   data.frame(y=m,ymin=m-delta,ymax=m+delta)
 }
 
-zmu_run07 <- function(output_root, checkpoint=NULL) {
+zmu_zonal_network_paths <- function(checkpoint_path) {
+  file.path(dirname(checkpoint_path), "networks", paste0(
+    c("cormat_testes_portal", "cormat_testes_central", "cormat_Ovaries_portal", "cormat_ova_central"),
+    "_full_SIF.csv"))
+}
+
+zmu_run07 <- function(output_root, checkpoint = NULL,
+                      checkpoint_path = file.path(output_root, "fcg05/fcg05_checkpoint.rds")) {
   zmu_require()
-  if (is.null(checkpoint)) checkpoint <- readRDS(file.path(output_root,"fcg05","fcg05_checkpoint.rds"))
+  networks <- zmu_zonal_network_paths(checkpoint_path)
+  reference_files <- networks
+  if (is.null(checkpoint)) {
+    checkpoint <- readRDS(checkpoint_path)
+    reference_files <- c(checkpoint_path, reference_files)
+  }
   output <- file.path(output_root,"fcg07")
   dir.create(output,recursive=TRUE,showWarnings=FALSE)
   output <- normalizePath(output)
@@ -151,7 +165,7 @@ zmu_run07 <- function(output_root, checkpoint=NULL) {
   header <- gsub('results/validation',output,header,fixed=TRUE)
   branch <- c(text[start8:(start10-1L)],text[start11:end11])
   branch <- gsub('results/zonation/networks',
-    normalizePath(file.path(output_root,"fcg05","networks")),branch,fixed=TRUE)
+    normalizePath(dirname(networks[1L]), mustWork = TRUE),branch,fixed=TRUE)
   branch <- gsub("results/lipidomic/", "results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/", branch, fixed=TRUE)
   # Only the zonation-dependent validation and structural branch is executed.
   setup <- c(
@@ -174,7 +188,8 @@ zmu_run07 <- function(output_root, checkpoint=NULL) {
     invokeRestart("muffleWarning")
   })
   # Primary manuscript context is fixed before considering validation scores.
-  kd <- utils::read.csv(analysis_resolve_recorded_path("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv"),check.names=FALSE)
+  kd_path <- analysis_resolve_recorded_path("results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv")
+  kd <- utils::read.csv(kd_path, check.names = FALSE)
   fixed <- zmu_full_gene_cor(checkpoint$rna,checkpoint$metadata,checkpoint$lipids,"Mtmr11","TPP")
   fixed <- merge(fixed,kd[,c("ID","mtmr11")],by.x="lipid",by.y="ID")
   names(fixed)[names(fixed)=="mtmr11"] <- "KD_t"
@@ -216,6 +231,16 @@ zmu_run07 <- function(output_root, checkpoint=NULL) {
     width=7,height=6,device=grDevices::pdf,family="Helvetica",useDingbats=FALSE)
   result <- list(scores=e$sszb_validation_scores,on_target=e$validation_set_only_sszb,
     structural=e$all_regression_stats,prespecified=ulm,prespecified_source=fixed)
+  panel <- zmu_fig5f_panel(output_root)
+  utils::write.csv(analysis_provenance(c(reference_files, kd_path)),
+    file.path(output, "reference_provenance.csv"), row.names = FALSE)
+  utils::write.csv(panel, file.path(output, "panel_manifest.csv"), row.names = FALSE)
+  combined <- file.path(output_root, "fcg_panel_manifest.csv")
+  same_root_parent <- file.path(output_root, "fcg05/fcg05_checkpoint.rds")
+  if (file.exists(combined) && file.exists(same_root_parent) &&
+      identical(normalizePath(checkpoint_path), normalizePath(same_root_parent))) {
+    zmu_append_panel(combined, panel)
+  }
   saveRDS(result,file.path(output,"fcg07_checkpoint.rds"))
   invisible(result)
 }
@@ -519,7 +544,21 @@ zmu_network_plot <- function(z,gene,context,selected) {
   list(plot=p,source=z)
 }
 
-zmu_main_panels <- function(output_root,checkpoint=NULL,comparison=NULL,include_historical=TRUE) {
+zmu_fig5f_panel <- function(output_root) {
+  base <- file.path(output_root, "fcg07")
+  data.frame(panel_id = "Fig5F",
+    generated_file = normalizePath(file.path(base, "Fig5F_Mtmr11_male_PP_prespecified.pdf"), mustWork = TRUE),
+    source_table = normalizePath(file.path(base, "Mtmr11_male_PP_prespecified_source.csv"), mustWork = TRUE),
+    note = "Prespecified male-periportal reference; unchanged knockdown fit.")
+}
+
+zmu_append_panel <- function(path, entry) {
+  manifest <- utils::read.csv(path, check.names = FALSE)
+  utils::write.csv(rbind(manifest[manifest$panel_id != entry$panel_id, ], entry), path, row.names = FALSE)
+}
+
+zmu_main_panels <- function(output_root,checkpoint=NULL,comparison=NULL,include_historical=TRUE,
+                            include_validation=TRUE) {
   if(is.null(checkpoint))checkpoint<-readRDS(file.path(output_root,"fcg05","fcg05_checkpoint.rds"))
   if(is.null(comparison)) {
     if(include_historical)comparison<-zmu_compare(output_root,checkpoint) else {
@@ -566,28 +605,27 @@ zmu_main_panels <- function(output_root,checkpoint=NULL,comparison=NULL,include_
       family="Helvetica",useDingbats=FALSE)
     add(paste0("Fig5D_",g),pdf,csv,if(selected)"Historical gene retained; partners re-ranked using revised coefficients." else "Historical example audit; revised candidate rule not met.")
   }
-  add("Fig5F",file.path(output_root,"fcg07","Fig5F_Mtmr11_male_PP_prespecified.pdf"),
-    file.path(output_root,"fcg07","Mtmr11_male_PP_prespecified_source.csv"),"Prespecified male-periportal reference; unchanged knockdown fit.")
+  if (include_validation) rows[[length(rows) + 1L]] <- zmu_fig5f_panel(output_root)
   manifest<-do.call(rbind,rows)
   write.csv(manifest,file.path(output_root,"fcg_panel_manifest.csv"),row.names=FALSE)
   invisible(manifest)
 }
 
-zmu_science_finish <- function(output_root) {
-  checkpoint<-readRDS(file.path(output_root,"fcg05","fcg05_checkpoint.rds"))
-  zmu_main_panels(output_root,checkpoint,include_historical=FALSE)
-  zmu_context_class_panel(output_root)
-  zmu_repair_auxiliary_heatmaps(output_root)
-  zmu_patch_manifest(output_root)
+zmu_science_finish <- function(output_root, checkpoint = readRDS(file.path(output_root, "fcg05/fcg05_checkpoint.rds")),
+                               include_validation = TRUE) {
+  zmu_main_panels(output_root, checkpoint, include_historical = FALSE, include_validation = include_validation)
+  zmu_context_class_panel(output_root, checkpoint)
+  zmu_repair_auxiliary_heatmaps(output_root, checkpoint)
+  zmu_patch_manifest(output_root, include_validation)
   invisible(TRUE)
 }
 
-zmu_patch_manifest <- function(output_root) {
+zmu_patch_manifest <- function(output_root, include_validation = TRUE) {
   m<-data.frame(scope=c("WF05","WF05","WF05","WF05","WF05","WF07","WF07","WF07"),
     adaptation=c("Versioned output paths","Versioned input paths","Explicit condition order",
       "Fresh pathway ULM","Zero-frequency category scalar","Reuse knockdown fit","Zonation-only branch","Prespecified Mtmr11 context"),
     detail=c("All results/zonation paths redirected into fcg05, preserving original outputs.",
-      "Only FCG zonation CSVs are read from the staged expanded-marker export.",
+      "FCG zonation uses the supplied scaled pseudobulk profiles through the compatibility CSV pair.",
       "Pericentral_Ovaries, Periportal_Ovaries, Pericentral_Testes, Periportal_Testes; exact old-input model replay verified.",
       "Restore documented minsize15 ULM on current t statistics; do not load the historical pathway cache.",
       "Absent no_association has zero mass: sum(proportion[category]) avoids zero-length summarise without changing denominators or entropy formula.",
@@ -599,12 +637,18 @@ zmu_patch_manifest <- function(output_root) {
     detail=c("Comparison and membership ledgers identify features from the measured1254-target universe, retaining three names without parentheses. None crosses0.65 or overlapsKD, so faithful displayed/validation statistics are unchanged.",
       "Auxiliary selected-gene heatmaps show the exact173-gene t-statistic matrices as labelled rows on taller pages; no model or selection changes. The four-context class alternative displays the same20classes as the original class panel; all raw classes remain in its source table.",
       "Use base R mean plus/minus t-quantile times standard error for the legacy stat_summary layer, matching Hmisc smean.cl.normal documented formula and stats::t.test confidence limits. No model, ULM, network or primary Figure5F changes.")))
+  files <- c("scripts/workflows/05_zonation_analysis.R", "scripts/core/zonation_update_fcg.R",
+    "scripts/core/zonation_inputs.R", "scripts/reports/run_zonation_update_fcg.R",
+    file.path(output_root, "runtime/05_zonation_analysis_versioned.R"))
+  if (include_validation) {
+    files <- c(files, "scripts/workflows/07_validation_experiments.R",
+      "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv",
+      "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData",
+      file.path(output_root, "runtime/07_zonation_validation_versioned.R"))
+  } else {
+    m <- m[!startsWith(m$scope, "WF07"), ]
+  }
   write.csv(m,file.path(output_root,"fcg_runtime_adapter_manifest.csv"),row.names=FALSE)
-  files<-c("scripts/workflows/05_zonation_analysis.R","scripts/workflows/07_validation_experiments.R",
-    "scripts/core/zonation_update_fcg.R","scripts/reports/run_zonation_update_fcg.R",
-    "results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_t_table.csv","results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/knockdown_ttop_list.RData",
-    file.path(output_root,"runtime","05_zonation_analysis_versioned.R"),
-    file.path(output_root,"runtime","07_zonation_validation_versioned.R"))
   hash<-data.frame(path=normalizePath(files),sha256=vapply(files,digest::digest,character(1),file=TRUE,algo="sha256"))
   write.csv(hash,file.path(output_root,"fcg_source_fit_sha256.csv"),row.names=FALSE)
   invisible(m)
@@ -679,7 +723,7 @@ zmu_fixed_threshold_membership <- function(output_root,checkpoint) {
   invisible(s)
 }
 
-zmu_context_class_panel <- function(output_root) {
+zmu_context_class_panel <- function(output_root, checkpoint) {
   source<-file.path(output_root,"fcg05","panel_source_data")
   s<-read.csv(file.path(source,"Fig5C_lipid_species_membership_old_vs_new.csv"),check.names=FALSE)
   s<-s[s$version=="revised",]
@@ -696,7 +740,7 @@ zmu_context_class_panel <- function(output_root) {
   z$displayed_class<-z$lipid_class %in% displayed
   classes<-sort(unique(z$lipid_class));z$lipid_class<-factor(z$lipid_class,levels=rev(classes))
   totals<-setNames(z$total[match(classes,z$lipid_class)],classes)
-  threshold<-readRDS(file.path(output_root,"fcg05","fcg05_checkpoint.rds"))$threshold
+  threshold <- checkpoint$threshold
   p<-ggplot2::ggplot(z[z$displayed_class,],ggplot2::aes(context,lipid_class,fill=proportion))+
     ggplot2::geom_tile(colour="white",linewidth=.5)+
     ggplot2::geom_text(ggplot2::aes(label=sprintf("%.0f%%",100*proportion),
@@ -718,11 +762,9 @@ zmu_context_class_panel <- function(output_root) {
   write.csv(z,csv,row.names=FALSE)
   pdf<-file.path(output_root,"fcg05","panels","Fig5C_explicit_gene_context_class_associations.pdf")
   ggplot2::ggsave(pdf,p,width=7.5,height=7.5,device=grDevices::pdf,family="Helvetica",useDingbats=FALSE)
-  manifest<-read.csv(file.path(output_root,"fcg_panel_manifest.csv"),check.names=FALSE)
   row<-data.frame(panel_id="Fig5C_gene_context_alternative",generated_file=normalizePath(pdf),source_table=normalizePath(csv),
     note="Unambiguous gene-sex/zone class association fractions; explicit alternative to historical lipid-DA-direction butterfly.")
-  write.csv(rbind(manifest[manifest$panel_id!=row$panel_id,],row),
-    file.path(output_root,"fcg_panel_manifest.csv"),row.names=FALSE)
+  zmu_append_panel(file.path(output_root, "fcg_panel_manifest.csv"), row)
   invisible(z)
 }
 
@@ -781,8 +823,7 @@ zmu_metric_ledger <- function(output_root) {
   invisible(ledger)
 }
 
-zmu_repair_auxiliary_heatmaps <- function(output_root) {
-  z<-readRDS(file.path(output_root,"fcg05","fcg05_checkpoint.rds"))
+zmu_repair_auxiliary_heatmaps <- function(output_root, z) {
   ids<-do.call(rbind,lapply(c("TPC","TPP","OPC","OPP"),function(context)
     data.frame(gene=z$candidates[[context]],context=context)))
   d<-merge(ids,z$t_table,by="gene")
@@ -823,8 +864,8 @@ zmu_finish <- function(output_root,rerun07=FALSE) {
   zmu_validation_compare(output_root)
   zmu_main_panels(output_root,checkpoint,comparison)
   zmu_fixed_threshold_membership(output_root,checkpoint)
-  zmu_context_class_panel(output_root)
-  zmu_repair_auxiliary_heatmaps(output_root)
+  zmu_context_class_panel(output_root, checkpoint)
+  zmu_repair_auxiliary_heatmaps(output_root, checkpoint)
   zmu_metric_ledger(output_root)
   zmu_patch_manifest(output_root)
   invisible(TRUE)

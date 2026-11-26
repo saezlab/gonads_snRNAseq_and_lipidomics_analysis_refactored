@@ -23,16 +23,27 @@ The executable release registry is [scripts/config/analysis_release.json](script
 Run commands from the repository root in an R environment with the required packages installed.
 
 ```sh
-# Check the three zone CSV transports, engine files and saved KD artifacts; no models run.
-Rscript scripts/workflows/17_expanded_marker_zonation_update.R --validate-only
+# FCG zonation, gene–lipid networks and Figure 5 panels
+Rscript scripts/workflows/05_zonation_analysis.R --output=results/runs/fcg_zonation
+Rscript scripts/workflows/07_validation_experiments.R --output=results/runs/fcg_zonation
 
-# Recompute into a fresh directory; the approved release is preserved.
-Rscript scripts/workflows/17_expanded_marker_zonation_update.R --output=results/runs/expanded_markers_reproduction
+# Paired sham/gonadectomy zonation
+Rscript scripts/workflows/05_zonation_analysis.R --cohort=gdx --output=results/runs/gdx_zonation
 ```
 
-Workflow 17 is the main zonation entry. It runs the FCG zonation models and gene–lipid networks, zonation-dependent knockdown validation, paired gonadectomy supporting analysis, the CF453 diet models and selected programmes, and both anchor layouts. It renders current manuscript Figure 6B and 6E from the saved Workflow 15 lipid contrasts and Workflow 16 representative pairs. Earlier full Figure 6 presentations are archived.
+Workflow 05 reads the supplied expanded-marker profiles directly. Workflow 07 uses
+the checkpoint and networks from the FCG run, together with the saved knockdown
+effects. Use `--parent=PATH` to use an FCG checkpoint from a different output root.
 
-Scientific reruns do not require the private manuscript. Manuscript auditing and its replacement ledger are local. The previous complete run is available in the ignored archive. Workflow17 consumes saved Workflow03 lipid DE/class scores, Workflow06 structural annotations and the independent KD fit artifacts; it does not regenerate them. These derived prerequisites are shipped. Its validation mode checks only the inputs listed in the command comment, rather than every downstream resource. Read the [Workflow17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md) and [complete reference](docs/WORKFLOW_REFERENCE.md#workflow-17) before a full run. Manual14→15→16 runs must pass fresh parent paths explicitly; the orchestrator does this automatically.
+For standalone diet analysis, Workflow 14 reads the expanded-marker diet profiles
+and supplies the model cache to Workflows 15 and 16. The saved lipid contrasts and
+representative pairs feed the Figure 6B and 6E renderer. The full command sequence
+is in the [pipeline guide](PIPELINE.md#standalone-diet-execution).
+
+Workflow 17 is an optional batch entry that runs these branches together with
+release QA and Figure 6 rendering. Scientific reruns use the shipped derived
+prerequisites. The optional manuscript audit uses additional local references.
+See the [Workflow 17 plan](docs/workflow_plans/17_expanded_marker_zonation_update.md).
 
 ## Main study pipeline
 
@@ -42,11 +53,12 @@ Scientific reruns do not require the private manuscript. Manuscript auditing and
 | Cell-type RNA differential analysis and validations | `02_fcg_pseudobulk_analysis.R` | `results/current/02_gonadal_sex_and_hepatocyte_gene_expression/pseudobulk/` |
 | Lipid differential analysis | `03_fcg_lipidomic_analysis.R` | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/` |
 | MOFA integration and global networks | `04_mofa_integration.R` | `results/current/03_gonadal_sex_biased_regulatory_circuitry/mofa/` |
-| **Current zonation / standalone diet figures** | **`17_expanded_marker_zonation_update.R`** | **Sections 04–06 under `results/current/`** |
+| FCG and paired gonadectomy zonation | `05_zonation_analysis.R` (FCG default, `--cohort=gdx` for gonadectomy) | Sections 04–05 under `results/current/` |
 | Lipid structural analysis | `06_structural_analysis.R` | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/structural_model/` |
-| Experimental validation | `07_validation_experiments.R --global-only`, current zonal branch through 17 | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/`, current release `fcg07/` |
+| Experimental validation | `07_validation_experiments.R` (zonal default, `--global-only` for the independent fit) | `results/current/03_gonadal_sex_biased_regulatory_circuitry/in_vitro_validation/`, current release `fcg07/` |
 | Lipid variance | `08_variance_analysis.R` | `results/current/01_gonadal_sex_and_hepatic_lipid_homeostasis/lipidomic/variance_analysis/` |
 | In-vivo Cyp2c38 validation | `11_cyp2c38_in_vivo_validation.R` | `results/current/03_gonadal_sex_biased_regulatory_circuitry/cyp2c38_in_vivo/` |
+| Standalone diet figures | Workflow 14 `--models-only` → 15 `--models-only` → 16 | Section 06 under `results/current/` |
 
 Entries are under `scripts/workflows/`. The [workflow plans](docs/workflow_plans/) describe inputs, contrasts, units, outputs and limitations. Raw sci-RNA-seq preprocessing (00), human comparison (09) and collaborator Xenium scripts (10) need external inputs. Workflow04 requires MOFA2 and supports `--reuse-models-only` to require the retained model set before any writes. Its default mode can train when caches are missing. Workflows01–04,06 and08 have fixed output paths. Use the parallel replay to run them without modifying the release. Workflow10 has known execution blockers documented in its plan. The committed whole-cell CSVs allow downstream analyses to start at 02. Workflow01 re-export requires the local whole-cell FCG/GDX pseudobulks.
 

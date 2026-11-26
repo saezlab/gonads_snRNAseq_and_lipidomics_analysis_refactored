@@ -1,40 +1,33 @@
-# Workflow 05: Current FCG Zonation Analysis
+# Workflow 05: Current FCG and gonadectomy zonation
 
-## Authoritative execution contract (audited 18 November 2026)
+## Authoritative execution contract (25 November 2026)
 
-- Public entry: `scripts/workflows/05_zonation_analysis.R` (19-line source-safe wrapper).
-- Implementation: `scripts/core/zonation_update_fcg.R`, which reads the immutable
-  `engine_fcg05` body at `scripts/core/engines/05_zonation_analysis_legacy.R`.
-- Default input directory: the parent of registry `current_fcg_zonation_csv`.
-  Default output root: registry `current_root` (`results/legacy/pre_reorganization_baseline/zonation_marker_update_20261116`).
-- `source()` defines functions; `Rscript` calls `fcg_zonation_run()`. Supported
-  arguments are only `--input=DIR`, `--output=ROOT`, and `--validate-only`.
-- A fit writes `<ROOT>/fcg05/` plus `<ROOT>/runtime/`. A completed
-  `fcg05/fcg05_checkpoint.rds` blocks rerunning into that root. Use a fresh root;
-  the guard does not promise to preserve every file in a partial destination.
-  `analysis_assert_not_approved_output()` additionally refuses the approved
-  registry root and every descendant before scientific work, regardless of
-  whether ignored checkpoints exist. This also protects a Git-only clone.
-  Always supply a fresh `--output` outside the approved root.
+The source-safe public entry is `scripts/workflows/05_zonation_analysis.R`.
+The default cohort is FCG. Use `--cohort=gdx` for the paired gonadectomy model.
+Both modes read their current expanded-marker transport directly from the release
+registry. `--input=PATH` accepts a transport directory, its manifest, or an explicit
+local pseudobulk RDS. FCG also accepts an explicit directory containing
+`scaled_RNA_zonation.csv` and `meta_data_df_zonation.csv`, taking that pair if
+both representations are present. Supply a fresh `--output=ROOT`. The approved
+registry root and the legacy archive are protected from writes.
 
-Workflow17 is the main coordinated current zonation/diet entry. It stages CSV
-transports and invokes the report driver in `--science-only` mode, running05,
-zonal07 and current panel finalization. Running05 alone runs the model/network
-engine and saves its checkpoint; it does not run07 or the report driver's extra
-Figure5D/context-class panel finalization.
+The FCG mode adapts the immutable engine in `scripts/core/engines/` through
+`scripts/core/zonation_update_fcg.R`. It fits the model, builds the networks, and
+generates the current Figure 5D and class panels in the same run. The resulting
+checkpoint and networks feed zonal Workflow 07. Workflow 17 can run both entries
+together with the diet workflows.
 
-`--validate-only` verifies RNA matrix/metadata integrity, required R packages and
-prepared runtime syntax without writing. It does not open/check every later
-GO/regulon/Workflow03 resource; file presence there remains a full-run prerequisite.
-The frozen engine must not be sourced directly: its old paths, condition ordering
-and cache behavior are implementation history rather than maintained defaults.
+`--validate-only` checks the selected cohort’s RNA and metadata and its required
+packages. FCG materializes any engine inputs in a temporary directory, checks the
+engine syntax, and removes the temporary files. Full FCG runs also require the
+GO, TF and Workflow 03 resources below.
 
 ## Actual inputs and producers
 
 | Input | Producer/role |
 | --- | --- |
-| `data/RNA/zonation/current/fcg/scaled_RNA_zonation.csv` (`current_fcg_zonation_csv`) | Supplied current FCG compatibility matrix; Workflow01 section11 can regenerate it from `current_fcg_zonation_transport`. Workflow17 instead stages the same values into its fresh run's `inputs/fcg/`. |
-| `data/RNA/zonation/current/fcg/meta_data_df_zonation.csv` (`current_fcg_zonation_metadata`) | Matching paired mouse/zone/gonad metadata. |
+| `current_fcg_zonation_transport` | Default verified FCG manifest and payloads. The engine reads scaled expression and paired mouse/zone/gonad metadata materialized under the run’s `inputs/fcg/`. |
+| `current_fcg_zonation_csv`, `current_fcg_zonation_metadata` | Shipped compatibility pair for explicit `--input=DIR` use and historical report compatibility. |
 | `data/metabolomics/Lipid_data_file_JPC_cleaned.csv` | Curated whole-liver lipid data, read through `core/data_loading.R::load_lipidomic_data()`. |
 | `support/m5.all.v2023.2.Mm.symbols.gmt` | Curated GO-BP sets for fresh pathway ULM. |
 | `support/TF_regulons.RData`, `support/Gonadal_Hormone_Genes.csv` | Curated regulons/custom ESR1/AR target replacement. |
@@ -70,8 +63,8 @@ The historical pathway cache is an output of the fresh calculation, not an input
 | 13 | Four RNA-lipid/TF networks; full, displayed and class-compressed exports. |
 | 14-16 | Lipid association/class/threshold summaries, fitted objects and result tables. |
 
-Engine line references are approximately1-2720 in the frozen file, not the19-line
-public wrapper. Its old literal `results/zonation/` prefix is replaced in memory.
+Engine line references refer to the frozen file, approximately lines 1–2720.
+The adapter replaces its `results/zonation/` prefix in memory.
 
 ## Outputs under the selected root
 
@@ -85,13 +78,32 @@ public wrapper. Its old literal `results/zonation/` prefix is replaced in memory
 - `fcg05/networks/cormat_{testes_portal,testes_central,Ovaries_portal,ova_central}_{SIF,ATT}.csv`,
   the same four `_full_{SIF,ATT}.csv` pairs and `compressed_cormat_*_{SIF,ATT}.csv`.
 - Engine PCA, volcano, scatter, candidate, class and threshold PDFs under `fcg05/`.
+- Figure 5D and the explicit gene-context class panel under `fcg05/panels/`,
+  their plotted data under `fcg05/panel_source_data/`, and
+  `fcg_panel_manifest.csv` at the run root.
 - `runtime/05_zonation_analysis_versioned.R` records the exact executed adaptation.
+- `inputs/fcg/input_provenance.csv` records the hashes of the manifest, payloads
+  and generated engine CSVs when reading the transport directly. The manifest
+  retains the separate original RDS identity.
 
-The report-driver/17 science finalizer additionally writes current standalone
-panels/source data under `fcg05/panels/`, `fcg05/panel_source_data/`, the FCG panel
-manifest and patch manifest. Its retrospective mode additionally needs explicit
-historical registry roles and writes `comparisons/` and metric/replay ledgers.
-It is not an upstream requirement of a current05 fit.
+A completed `fcg05/fcg05_checkpoint.rds` marks the end of the fit and panel export
+and blocks a rerun into the same root. Files from a partial run can be rewritten.
+The retrospective report driver uses explicit historical registry roles and also
+writes old/new comparisons and metric/replay ledgers.
+
+## Paired gonadectomy mode
+
+`--cohort=gdx` reads `current_gdx_zonation_transport` and executes
+`scripts/core/zonation_update_gdx.R`. Each of the 22 mice supplies two zonal RNA
+profiles. The model fits the eight sex × surgery × zone means on the supplied
+scaled expression using limma with mouse blocking. Gene eligibility requires
+counts above zero in at least five profiles and a scaled standard deviation above
+1e−8. The gene × contrast BH families are separate for simple zonation effects,
+conditional gonadectomy effects and the three gonadectomy–zonation interactions.
+
+The mode writes `gdx_zonation/new_{results,summary,eligibility,metadata}.csv`
+and `gdx_paired_analysis.rds`. The historical comparison is available through
+the Workflow 17 audit. The published GDX directory is a supporting result.
 
 ## Contrasts and candidate semantics
 
@@ -113,8 +125,9 @@ lipid localization or causal effects.
 
 Workflow12/13 use `historical_fcg05` and historical input roles to replay the old
 two-marker Figure5 branches. They do not automatically consume this current
-expanded-marker output. Current zonal07 consumes the selected root's current
-checkpoint/networks. Preserve the mixed `Ovaries`/`ova` network filenames.
+expanded-marker output. Current zonal07 consumes the same-root FCG checkpoint
+and its adjacent networks by default. Its `--parent=` option selects a completed
+FCG run in another root. Preserve the mixed `Ovaries`/`ova` network filenames.
 
 Runtime adaptation is text/section based: engine header markers and exact literal
 substitutions form a compatibility contract. Metadata sample suffixes and the

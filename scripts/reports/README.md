@@ -1,10 +1,13 @@
 # Panel and report tools
 
-Run from the repository root. Main scientific execution is Workflow17, not a report script. Existing panels are separate files for manual figure assembly.
+Run from the repository root. The numbered entries produce the scientific
+results described in [the pipeline](../../PIPELINE.md). Existing panels are
+separate files for manual assembly.
 
 | Group | Tools | Current behavior |
 | --- | --- | --- |
-| Current scientific stages | `stage_zonation_marker_update.R`, `run_zonation_update_fcg.R`, `run_zonation_update_gdx.R`, `cf453_figure6a_layouts.R` | Called by17 with explicit versioned inputs/output |
+| Optional batch and retrospective stages | `stage_zonation_marker_update.R`, `run_zonation_update_fcg.R`, `run_zonation_update_gdx.R` | Workflow 17 stages current inputs and uses the FCG and GDX report drivers for old/new comparisons |
+| Standalone Figure 6A layouts | `cf453_figure6a_layouts.R` | Reads a saved Workflow 16 result |
 | Current tables | `prepare_zonation_update_report_sources.py --tables-only` | Public source-table copies; no manuscript required |
 | Current Figure6 delivery / visual review | `package_cf453_diet_rewiring.py`, `render_cf453_diet_rewiring.py`, `review_cf453_figure6a_layouts.py` | Defaults follow current release components; recorded manifest paths are resolved externally |
 | Optional author-facing audit | `zonation_update_manuscript_audit.py`, `build_zonation_update_report.py`, `package_zonation_marker_update.py`, `compare_cf453_zonation_update.R` | Requires historical references and, for manuscript steps, the private DOCX; explicit17 audit mode |

@@ -129,8 +129,8 @@ def render(spec, registry, tracked):
              "A shipped derived result can be consumed without rerunning its producer. Local model caches and "
              "private/external inputs must be regenerated or restored as stated. Validation flags have the exact scope "
              "shown below; none is a substitute for a scientific reproduction run.", "",
-             "**Numbering is not execution order.** Workflow17 orchestrates the current zonation/diet branch; "
-             "compatibility wrappers and external/reference scripts are not extra sequential main-pipeline steps.", "",
+             "**Numbering is not execution order.** Workflows 05 and 14 read the current zonal inputs directly. "
+             "Workflow 17 provides an optional batch run and retrospective audit.", "",
              "## Workflow index", "",
              "| ID | Role | Entry point | Detailed plan |", "| --- | --- | --- | --- |"]
     catalog, edges = [], []
